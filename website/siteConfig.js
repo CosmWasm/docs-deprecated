@@ -2,8 +2,10 @@ const siteConfig = {
   title: 'CosmWasm Documentation',
   tagline: 'Get started with mutli-chain smart contracts!',
 
-  url: "https://docs.cosmwasm.com",
-  baseUrl: "/",
+  // TODO: 1. host this without /docs, then custom url
+  // url: "https://docs.cosmwasm.com",
+  url: "https://cosmwasm.github.io",
+  baseUrl: "/docs/",
 
   cname: 'docs.cosmwasm.com',
   projectName: 'docs',
@@ -15,8 +17,8 @@ const siteConfig = {
   // },
 
   headerLinks: [
-    { href: "docs/cosmwasm-for-developers.html", label: "Docs" },
-    { href: "/blog", label: "Blog" },
+    { href: "/docs/docs/cosmwasm-for-developers.html", label: "Docs" },
+    { href: "/docs/blog", label: "Blog" },
     { href: "https://github.com/confio/cosmwasm", label: "GitHub" },
     // { search: true },
   ],
