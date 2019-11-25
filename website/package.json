@@ -1,4 +1,13 @@
 {
+  "name": "@cosmwasm/docs",
+  "version": "0.0.1",
+  "description": "Documentation for cosmwasm",
+  "homepage": "http://docs.cosmwasm.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cosmwasm/docs"
+  },
+  "license": "CC-BY-SA-4.0",
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start",
