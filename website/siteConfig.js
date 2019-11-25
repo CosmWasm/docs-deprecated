@@ -15,6 +15,8 @@ const siteConfig = {
   // },
 
   headerLinks: [
+    { href: "docs/cosmwasm-for-developers.html", label: "Docs" },
+    { href: "/blog", label: "Blog" },
     { href: "https://github.com/confio/cosmwasm", label: "GitHub" },
     // { search: true },
   ],
