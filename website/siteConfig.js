@@ -1,3 +1,5 @@
+// GIT_USER=ethanfrey USE_SSH=true yarn publish-gh-pages
+
 const siteConfig = {
   title: 'CosmWasm Documentation',
   tagline: 'Get started with mutli-chain smart contracts!',
@@ -17,8 +19,8 @@ const siteConfig = {
   // },
 
   headerLinks: [
-    { href: "/docs/docs/cosmwasm-for-developers.html", label: "Docs" },
-    { href: "/docs/blog", label: "Blog" },
+    { doc: "intro/overview", label: "Docs" },
+    { blog: true, label: "Blog" },
     { href: "https://github.com/confio/cosmwasm", label: "GitHub" },
     // { search: true },
   ],
@@ -30,8 +32,10 @@ const siteConfig = {
   favicon: 'img/favicon.ico',
 
   colors: {
-    primaryColor: '#61512b',
-    secondaryColor: '#43381e',
+    // primaryColor: '#61512b',
+    // secondaryColor: '#43381e',
+    primaryColor: '#6070dd',
+    secondaryColor: '#ff0000',
   },
 
   fonts: {

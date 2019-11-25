@@ -1,5 +1,11 @@
 {
   "docs": {
-    "Overview": ["cosmwasm-for-developers"]
+    "Intro": [
+      "intro/overview",
+      "intro/smart-contracts",
+      "intro/using-the-sdk",
+      "intro/rust-basics",
+      "intro/first-demo"
+    ]
   }
 }

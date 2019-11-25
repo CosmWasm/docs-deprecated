@@ -96,7 +96,6 @@ Now we have a running node and a prepare cli client, let's upload some contracts
 ```bash
 curl -L https://github.com/cosmwasm/wasmd/blob/master/x/wasm/internal/keeper/testdata/contract.wasm?raw=true > upload.wasm
 wasmcli tx wasm store validator upload.wasm --gas 800000
-# TODO: stops after one hit
 wasmcli query wasm list-code
 wasmcli query wasm code 1 download.wasm
 sha256sum upload.wasm download.wasm
