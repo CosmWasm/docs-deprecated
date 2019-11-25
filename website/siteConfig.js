@@ -5,9 +5,9 @@ const siteConfig = {
   tagline: 'Get started with mutli-chain smart contracts!',
 
   // TODO: 1. host this without /docs, then custom url
-  // url: "https://docs.cosmwasm.com",
-  url: "https://cosmwasm.github.io",
-  baseUrl: "/docs/",
+  url: "http://docs.cosmwasm.com",
+  // url: "https://cosmwasm.github.io",
+  baseUrl: "/",
 
   cname: 'docs.cosmwasm.com',
   projectName: 'docs',
