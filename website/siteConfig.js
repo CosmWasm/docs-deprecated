@@ -27,15 +27,14 @@ const siteConfig = {
 
   disableHeaderTitle: true,
 
-  headerIcon: 'img/favicon.ico',
-  footerIcon: false,
+  headerIcon: 'img/cosm-wasm.png',
+  footerIcon: 'img/cosm-wasm.png',
   favicon: 'img/favicon.ico',
 
   colors: {
-    // primaryColor: '#61512b',
-    // secondaryColor: '#43381e',
     primaryColor: '#6070dd',
-    secondaryColor: '#ff0000',
+    // is secondaryColor ever used? if so adjust 
+    secondaryColor: '#43381e',
   },
 
   fonts: {
