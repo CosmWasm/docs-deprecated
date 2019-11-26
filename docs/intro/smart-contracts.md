@@ -38,6 +38,44 @@ Beyond exploits (such as the reentrancy attack), another attack vector for smart
 
 Etherum is the grandfather of all blockchain smart contract platforms and has far more usage and real world experience than any other platform. We cannot discount this knowledge, but instead learn from their successed and failures to produce a more robust smart contract platform.
 
-They have compiled a list of [all known ethereum attack vectors](https://github.com/sigp/solidity-security-blog) along with mitigation strategies. We shall compare Cosmwasm against this list to see how much of this applies here:
+They have compiled a list of [all known ethereum attack vectors](https://github.com/sigp/solidity-security-blog) along with mitigation strategies. We shall compare Cosmwasm against this list to see how much of this applies here. Many of these attack vectors are closed by design. A number remain and a section is planned on avoiding the remaining such issues. **TODO**
 
-**TODO**
+1. [Reentrancy](https://github.com/sigp/solidity-security-blog#reentrancy) SAFE
+
+In cosmwasm, we return messages to execute other contracts, in the same atomic operation, but *after* the contract has finished. This is based on the actor model and avoid the possibility of reentrancy attacks - there is never volatile state when a contract is called.
+
+2. [Arithmetic under/overflows](https://github.com/sigp/solidity-security-blog#ouflow) SAFE
+
+Rust allows you to simply set `overflow-checks = true` in the [Cargo manifest](https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections) to abort the program if any overflow is detected. No way to opt-out of safe math.
+
+3. [Unexpected Ether](https://github.com/sigp/solidity-security-blog#ether) OPEN
+
+This involves a contract depending on complete control of it's balance. A design pattern that should be avoided in any contract system.
+
+4. [Delegate Call](https://github.com/sigp/solidity-security-blog#delegatecall) SAFE
+
+We don't have such Delegate Call logic in CosmWasm. You can import modules, but they are linked together at compile time, which allows them to be tested as a whole, and no subtle entry points inside of a contract's logic.
+
+5. [Default Visibilities](https://github.com/sigp/solidity-security-blog#visibility) SAFE
+
+Rather than auto-generating entry points for every function/method in your code (and worse yet, assuming public if not specified), the developer must clearly define a list of messages to be handled and dispatch them to the proper functions. It is impossible to accidentally expose a function this way.
+
+6. [Entropy Illusion](https://github.com/sigp/solidity-security-blog#entropy) OPEN
+
+The block hashes (and last digits of timestamps) are even more easily manipulated by block proposers in Tendermint, than with miners in Ethereum. They should definitely not be used for randomness. There is work planned to provide a secure random beacon, and expose this secure source of entropy to smart contracts.
+
+7. [External Contract Referencing](https://github.com/sigp/solidity-security-blog#contract-reference) OPEN
+
+**TODO** A way to look up and verify code at a remote address
+
+8. [Short Address/Parameter Attack](https://github.com/sigp/solidity-security-blog#short-address) SAFE
+
+This is an exploit that takes advantage of the RLP encoding mechanism and fixed 32-byte stack size. It does not apply to our type-checking json parser.
+
+9. [Unchecked CALL Return Values](https://github.com/sigp/solidity-security-blog#unchecked-calls) SAFE
+
+CosmWasm does not allow calling other contracts directly, but rather returning message to later be dispatched by a router. The router will check the result of all messages, and if **any** message in the chain returns an error, the entire transaction is aborted, and state changed rolled back. This allows you to safely focus on the success case when scheduling calls to other contracts, knowing all state will be rolled back if it does not go as planned.
+
+10. [Race Conditions/Front Running](https://github.com/sigp/solidity-security-blog#race-conditions) OPEN
+
+**TODO** Finish this list
