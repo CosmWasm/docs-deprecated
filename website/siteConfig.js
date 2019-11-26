@@ -28,7 +28,7 @@ const siteConfig = {
   disableHeaderTitle: true,
 
   headerIcon: 'img/cosm-wasm.png',
-  footerIcon: 'img/cosm-wasm.png',
+  footerIcon: false,
   favicon: 'img/favicon.ico',
 
   colors: {

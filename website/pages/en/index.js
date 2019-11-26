@@ -75,7 +75,10 @@ class HomeSplash extends React.Component {
 class Index extends React.Component {
   render() {
     const {config: siteConfig, language = ''} = this.props;
-    const {baseUrl} = siteConfig;
+    const {baseUrl, docsUrl} = siteConfig;
+    const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
+    const langPart = `${language ? `${language}/` : ''}`;
+    const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
 
     const Block = props => (
       <Container
@@ -94,8 +97,13 @@ class Index extends React.Component {
       <div
         className="productShowcaseSection paddingBottom"
         style={{textAlign: 'center'}}>
-        <h2>Feature Callout</h2>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
+        <h2>Key Features</h2>
+        <ul>
+          <li>Tight integration with <a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK</a> and the <a href="https://cosmos.network">Cosmos ecosystem</a>.</li>
+          <li>Mature tooling for developing and testing smart contracts.</li>
+          <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
+          <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
+        </ul>
       </div>
     );
 
@@ -147,16 +155,16 @@ class Index extends React.Component {
       <Block layout="fourColumn">
         {[
           {
-            content: 'This is the content of my feature',
-            image: `${baseUrl}img/undraw_react.svg`,
+            content: 'Mainnet-tested BFT bPOS consensus out of the box.',
+            image: `${baseUrl}img/favicon.ico`,
             imageAlign: 'top',
-            title: 'Feature One',
+            title: 'Build on the Cosmos SDK',
           },
           {
-            content: 'The content of my second feature',
-            image: `${baseUrl}img/undraw_operating_system.svg`,
+            content: 'Use a mature, safe language with great IDE integration.',
+            image: `${baseUrl}img/rust-icon.svg`,
             imageAlign: 'top',
-            title: 'Feature Two',
+            title: 'Write contracts in Rust',
           },
         ]}
       </Block>
@@ -197,8 +205,8 @@ class Index extends React.Component {
         <div className="mainContainer">
           <Features />
           <FeatureCallout />
-          <LearnHow />
-          <TryOut />
+          {/* <LearnHow />
+          <TryOut /> */}
           <Description />
           <Showcase />
         </div>
