@@ -79,25 +79,32 @@ rustup run nightly cargo test --no-default-features --features singlepass
 
 You should get the same output as above, just making sure you can run tests with gas metering.
 
-## Editing Code
+## Setting up your IDE
 
-Now that you can compile and run tests, let's try to make some changes to the code and you can see if they work. But before that, we will need a good editor to make those changes. I highly recommend plugins that help you learn syntax, especially when just starting rust.
+Know you can compile and test the code, it is time to edit it. But before that, we will need a good editor to make those changes. I highly recommend plugins that help you learn syntax, especially when just starting rust. There are two free editor environments I can recommend, choose the one that is more familiar to you.
 
-TODO
-
-### Setting up your IDE
+If you use VSCode, **TODO download link**, you just need to add the rust plugin. This is the best supported environment for RLS (Rust Language Server) that uses the rust compiler to type-check all your code on save. This does give the same error messages as the actual compiler would, and highlighted along with the line of the code, but it can be a bit slow to respond sometime (as it runs the compiler). It is quite good, and if you are used to VSCode, I highly recommend it:
 
 TODO
 
-### Some basic edits
+The other option I can recommend it Intellij IDEA Community Edition **TODO download link**, along with the Rust Plugin. This has very nice and quick support for many language features directly inline. In particular, it shows the inferred types along variables, which can be very helpful, especially when working with (nested) generics. It catches most syntax errors very quickly, but not all of them. Which means sometimes you have to look at the compile failures to find the errors. If you are coming from another Intellij product (eg. Goland), I recommend this approach:
 
-The integration tests can also use feature flags to test gas metering with singlepass - give an example
+TODO
 
-## Compiling for Production
-
-TODO: wasm-pack, twilly, cosmwasm-opt
+There are many more editors out there and some have varying degrees of rust support, at least syntax highlighting, but I would recommend trying one of the two above, especially if you are new to rust. Once you are confident in the language, you can always use another editor and customize it to your liking.
 
 ## Learn More Rust
 
+There are a number of standard references that most rust developers use. It is good to get acquainted with them, to get detailed explanations on language topics and the library APIs:
 
-TODO
+* ["The Book"](https://doc.rust-lang.org/book/)
+* [Cargo Documentation](https://doc.rust-lang.org/cargo/) - make `cargo` your friend
+* [Standard Library Documentation](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+* [Rust Docs](https://docs.rs/) - api docs for all external packages
+* [Crates.io](https://crates.io) - package registry, look for libraries you want to import
+* [Rustinomicon](https://doc.rust-lang.org/nomicon) - dig into more advanced rust topics
+
+If you want a directed training, you can start one of these paths:
+
+* [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/)
+* [Rustlings - small excercises](https://github.com/rust-lang/rustlings/) 

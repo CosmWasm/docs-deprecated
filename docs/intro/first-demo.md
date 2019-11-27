@@ -1,7 +1,7 @@
 ---
 id: first-demo
 title: Step by Step with a Sample Contract
-sidebar_label: First Demo
+sidebar_label: Deploying to Testnet
 ---
 
 **TODO: go through and clean this up**

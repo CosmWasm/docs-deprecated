@@ -5,7 +5,11 @@
       "intro/smart-contracts",
       "intro/using-the-sdk",
       "intro/rust-basics",
+      "intro/editing-escrow-contract",
       "intro/first-demo"
+    ],
+    "Namecoin": [
+      "namecoin/intro"
     ]
   }
 }
