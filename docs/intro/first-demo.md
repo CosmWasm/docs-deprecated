@@ -4,68 +4,75 @@ title: Step by Step with a Sample Contract
 sidebar_label: Deploying to Testnet
 ---
 
-**TODO: go through and clean this up**
+In this section, we will take the custom contract you have writen in the last section, and upload it to a running blockchain. Then we will show how to inspect the code, instantiate contracts, and execute them - both the standard functionality as well as the secret backdoor we just implemented [in the last section](./editing-escrow-contract).
+
+## Preparation
 
 To get this to work, you will need to first deploy a local single-node testnet. I assume you have some experience with this, if not, please refer to gaiad documentation. You will need go 1.13 installed and standard dev tooling, and `$HOME/go/bin` set to be in your `$PATH`.
 
-**WARNING** The server will only work on osx and linux. Windows support is on the roadmap (but you should be able to use a Windows client).
-
-Checkout code and compile:
+Please first follow the [setup of the blockchain described in an earlier section](./using-the-sdk). To verify this is working, try:
 
 ```
-git clone https://github.com/cosmwasm/wasmd.git
-cd wasmd
-make install
-```
-
-Set up a single-node local testnet:
-
-```bash
-cd $HOME
-wasmd init --chain-id=testing testing
-
-wasmcli keys add validator
-
-wasmd add-genesis-account $(wasmcli keys show validator -a) 1000000000stake,1000000000validatortoken
-
-wasmd gentx --name validator
-wasmd collect-gentxs
-wasmd start
-```
-
-Now, open up another window and set up your client:
-
-```bash
-wasmcli config chain-id testing
-wasmcli config trust-node true
-wasmcli config node tcp://localhost:26657
-wasmcli config output json
-wasmcli config indent true
-
-wasmcli keys add fred
-wasmcli keys add bob
 wasmcli keys list
-
-# verify initial setup
+# should show [validator, fred, bob]
+wasmcli status
+# should show some blocks
 wasmcli query account $(wasmcli keys show validator -a)
-wasmcli query wasm list-code
-wasmcli query wasm list-contracts
+# should show a valid account
+```
 
-# give some tokens to fred for later
+Now, let's set up the accounts properly. Both fred and thief will need some amount of tokens in order to submit transaction:
+
+```
+# add the thief account
+wasmcli keys add thief
+
+# fred will need some stake later to be able to submit transaction
 wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show fred -a) 98765stake
 wasmcli query account $(wasmcli keys show fred -a)
+
+# thief will need one stake to be able to submit transaction
+wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show thief -a) 1stake
+wasmcli query account $(wasmcli keys show fred -a)
+
+# bob should still be broke
 wasmcli query account $(wasmcli keys show bob -a)
 ```
 
-Now we have a running node and a prepare cli client, let's upload some contracts and let them run. First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
+## Uploading the Code
 
-```bash
-curl -L https://github.com/cosmwasm/wasmd/blob/master/x/wasm/internal/keeper/testdata/contract.wasm?raw=true > upload.wasm
-wasmcli tx wasm store validator upload.wasm --gas 800000
-wasmcli query wasm list-code
-wasmcli query wasm code 1 download.wasm
-sha256sum upload.wasm download.wasm
+Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new accout, then update the contract to reference it:
+
 ```
+# Set the THIEF variable in source code to this value
+wasmcli keys show thief -a
+
+# and recompile wasm
+docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
+```
+
+First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
+
+```
+# both should be empty
+wasmcli query wasm list-code
+wasmcli query wasm list-contracts
+
+# upload and see we create code 1
+wasmcli tx wasm store validator contract.wasm --gas 800000
+wasmcli query wasm list-code
+
+# verify this uploaded contract has the same hash as the local code
+sha256sum contract.wasm
+
+# you can also download the wasm from the chain
+wasmcli query wasm code 1 download.wasm
+diff contract.wasm download.wasm
+```
+
+## Instantiating the Contract
+
+**TODO** update from here below
 
 We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to control payout and upon release, the funds go to bob.
 
@@ -99,5 +106,5 @@ wasmcli query account $(wasmcli keys show bob -a)
 wasmcli query account $CONTRACT
 ```
 
-This is a very simple example for the [minimal demo contract](https://github.com/confio/cosmwasm/blob/master/contracts/hackatom/src/contract.rs), but it should show you what is possible, limited only by the wasm code you upload and the json messages you send.
+This is a very simple example for the escrow contract we developed, but it should show you what is possible, limited only by the wasm code you upload and the json messages you send. You can start hacking away on your own now, or try to build a contract from scratch by following along the [namecoin tutorial](../namecoin/intro).
 

@@ -181,12 +181,6 @@ Both of these cases will be explained in detail in a future tutorial. But I can 
 
 After we have our tested contract, we can run `cargo wasm` and produce a valid wasm output at `target/wasm32-unknown-unknown/release/escrow.wasm`. This works, but is 1.5 MB and huge for a blockchain transaction. Let's try to make it smaller.
 
-### Debuggable Builds
-
-If you want to try to inspect the output, and figure out where to optimize, you will want to only do the first step of the build process, using `wasm-pack`. This leaves in some symbol names and you can use `twilly` to get info on which functions are using up all the space. This is only needed if you find the contract is too big and you want to check which dependencies are responsible.
-
-TODO: link to docs
-
 ### Reproduceable builds
 
 The typical case for production is just using the [`cosmwasm-opt`](https://github.com/confio/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/confio/cosmwasm-opt/blob/master/README.md):
@@ -198,5 +192,41 @@ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
 It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`). Look at the file size now:
 
 ```
-$ du -h contract.wasm
+$ du -h contract.wasm 
+60K     contract.wasm
 ```
+
+This is something you can fit in a transaction. If you cut-paste code from the given solutions, you should have an identical sha256sum. (And if any line is different, this should be different, but consistent over multiple runs of the docker image above):
+
+```
+$ sha256sum contract.wasm 
+d17d640549616330af938a3c2a7155feb1352157230733b34816415836d11ece  contract.wasm
+```
+
+### Debuggable Builds
+
+If you want to try to inspect the output, and figure out where to optimize, you will want to only do the first step of the build process, using `wasm-pack`. This leaves in some symbol names and you can use `twilly` to get info on which functions are using up all the space. This is only needed if you find the contract is too big and you want to check which dependencies are responsible.
+
+First, follow the directions to [install wasm-pack](https://rustwasm.github.io/wasm-pack/installer/).
+
+```
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh 
+```
+
+Then you can build it and check to compiled data, which will be output to `./pkg/escrow_bg.wasm`:
+
+```
+wasm-pack build
+./pkg/escrow_bg.wasm
+```
+
+This is 76K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use `twilly` to inspect which functions are taking up space:
+
+```
+cargo install twiggy
+twiggy top pkg/escrow_bg.wasm | head -20
+twiggy garbage pkg/escrow_bg.wasm
+twiggy dominators pkg/escrow_bg.wasm | less
+```
+
+Most usage seems to be out actual business logic, as well as a contribution from serde_json_wasm (which is far, far smaller than the original serde_json library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly, this is a good place to track down where the bloat comes from and possibly remove it. This is the techniques I used to reduce the build size from 172KB down to the current 60KB, and may be useful for others, especially when pulling in many new libraries.
