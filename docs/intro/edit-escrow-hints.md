@@ -42,7 +42,7 @@ Update the `match` statement in `handle`:
 Implement `try_steal`:
 
 ```rust
-fn try_steal(params: Params, state: State, destination: String) -> Result<Response> {
+fn try_steal(params: Params, _state: State, destination: String) -> Result<Response> {
     if &params.message.signer != THIEF {
         Unauthorized {}.fail()
     } else {
@@ -50,7 +50,7 @@ fn try_steal(params: Params, state: State, destination: String) -> Result<Respon
             messages: vec![CosmosMsg::Send {
                 from_address: params.contract.address,
                 to_address: destination,
-                amount: params.contract.balance,
+                amount: params.contract.balance.unwrap_or_default(),
             }],
             log: Some("safe cracked".to_string()),
             data: None,

@@ -45,6 +45,9 @@ wasmcli config trust-node true
 wasmcli config node tcp://localhost:26657
 wasmcli config output json
 wasmcli config indent true
+# this is important, so the cli returns after the tx is in a block,
+# and subsequent queries return the proper results
+wasmcli config broadcast-mode block
 
 wasmcli keys add fred
 wasmcli keys add bob

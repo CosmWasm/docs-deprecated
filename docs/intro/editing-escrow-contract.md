@@ -193,14 +193,14 @@ It will output a file called `contract.wasm` in the project directory (same dire
 
 ```
 $ du -h contract.wasm 
-60K     contract.wasm
+68K     contract.wasm
 ```
 
 This is something you can fit in a transaction. If you cut-paste code from the given solutions, you should have an identical sha256sum. (And if any line is different, this should be different, but consistent over multiple runs of the docker image above):
 
 ```
 $ sha256sum contract.wasm 
-d17d640549616330af938a3c2a7155feb1352157230733b34816415836d11ece  contract.wasm
+1c447b7cedf32f3c6f4e2a32f01871f01af07e2290ec3a1795e24d8b2e67062a  contract.wasm
 ```
 
 ### Debuggable Builds
@@ -217,16 +217,9 @@ Then you can build it and check to compiled data, which will be output to `./pkg
 
 ```
 wasm-pack build
-./pkg/escrow_bg.wasm
+du -h ./pkg/escrow_bg.wasm
 ```
 
-This is 76K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use `twilly` to inspect which functions are taking up space:
+This is 84K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space. The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
 
-```
-cargo install twiggy
-twiggy top pkg/escrow_bg.wasm | head -20
-twiggy garbage pkg/escrow_bg.wasm
-twiggy dominators pkg/escrow_bg.wasm | less
-```
-
-Most usage seems to be out actual business logic, as well as a contribution from serde_json_wasm (which is far, far smaller than the original serde_json library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly, this is a good place to track down where the bloat comes from and possibly remove it. This is the techniques I used to reduce the build size from 172KB down to the current 60KB, and may be useful for others, especially when pulling in many new libraries.
+In the current build, most usage seems to be out actual business logic, as well as a contribution from `serde_json_wasm` (which is far, far smaller than the original `serde_json` library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly, this is a good place to track down where the bloat comes from and possibly remove it. This is the techniques I used to reduce the build size from 172kB down to the current 68kB, even while adding functionality. These techniques may be useful for others, especially when pulling in many new libraries.
