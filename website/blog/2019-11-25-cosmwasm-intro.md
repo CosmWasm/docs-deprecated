@@ -14,7 +14,7 @@ CosmWasm was originally [prototyped by Team Gaians](https://github.com/cosmos-ga
 
 CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a blockchain using the Cosmos SDK can quickly and easily add CosmWasm smart contracting support to their chain, without adjusting existing logic. We also provide a sample binary of CosmWasm integrated into the `gaiad` binary, called [wasmd](https://github.com/cosmwasm/wasmd), so you can launch a new smart-contract enabled blockchain out of the box, using documented and tested tooling and the same security model as the Cosmos Hub.
 
-To try out these commands, you should first install a local single-node testnet of `wasmd`, by [following these instructions](https://github.com/cosmwasm/wasmd/blob/master/docs/deploy-testnet.md#single-node-local-manual-testnet). Soon we aim to deploy a testnet to allow all developers to quickly test out contract development and connecting dApps.
+You will need a running blockchain to host your contracts and use them from an app. We will explain how to set up a local "dev net" [in the tutorial](https://docs.cosmwasm.com). And plan to soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo and to share their contract with others.
 
 ## Deploying and Using Contracts
 
@@ -38,104 +38,7 @@ Cosmwasm avoids this completely by preventing any contract from calling another 
 
 Sometimes we will need information from another contract, and we plan to allow queries to other contracts or the underlying Cosmos SDK modules. These Queries will only have access to a read-only database image and be unable to delegate to other modules, thus avoiding any possible re-entrancy concerns. For more detailed information, please look at the [Architecture documentation](https://github.com/confio/go-cosmwasm/blob/master/spec/Architecture.md) as well as the [API specification](https://github.com/confio/go-cosmwasm/blob/master/spec/Specification.md).
 
-### Step by Step with a Standard Contract
-
-To get this to work, you will need to first deploy a local single-node testnet. I assume you have some experience with this, if not, please refer to gaiad documentation. You will need go 1.13 installed and standard dev tooling, and `$HOME/go/bin` set to be in your `$PATH`.
-
-**WARNING** The server will only work on osx and linux. Windows support is on the roadmap (but you should be able to use a Windows client).
-
-Checkout code and compile:
-
-```bash
-git clone https://github.com/cosmwasm/wasmd.git
-cd wasmd
-make install
-```
-
-Set up a single-node local testnet:
-
-```bash
-cd $HOME
-wasmd init --chain-id=testing testing
-
-wasmcli keys add validator
-
-wasmd add-genesis-account $(wasmcli keys show validator -a) 1000000000stake,1000000000validatortoken
-
-wasmd gentx --name validator
-wasmd collect-gentxs
-wasmd start
-```
-
-Now, open up another window and set up your client:
-
-```bash
-wasmcli config chain-id testing
-wasmcli config trust-node true
-wasmcli config node tcp://localhost:26657
-wasmcli config output json
-wasmcli config indent true
-
-wasmcli keys add fred
-wasmcli keys add bob
-wasmcli keys list
-
-# verify initial setup
-wasmcli query account $(wasmcli keys show validator -a)
-wasmcli query wasm list-code
-wasmcli query wasm list-contracts
-
-# give some tokens to fred for later
-wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show fred -a) 98765stake
-wasmcli query account $(wasmcli keys show fred -a)
-wasmcli query account $(wasmcli keys show bob -a)
-```
-
-Now we have a running node and a prepare cli client, let's upload some contracts and let them run. First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
-
-```bash
-curl -L https://github.com/cosmwasm/wasmd/blob/master/x/wasm/internal/keeper/testdata/contract.wasm?raw=true > upload.wasm
-wasmcli tx wasm store validator upload.wasm --gas 800000
-wasmcli query wasm list-code
-wasmcli query wasm code 1 download.wasm
-sha256sum upload.wasm download.wasm
-```
-
-We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to control payout and upon release, the funds go to bob.
-
-```bash
-# instantiate contract and verify
-INIT="{\"verifier\":\"$(wasmcli keys show fred -a)\", \"beneficiary\":\"$(wasmcli keys show bob -a)\"}"
-wasmcli tx wasm instantiate validator 1 "$INIT" --amount=50000stake
-
-# check the contract state (and account balance)
-sleep 3
-wasmcli query wasm list-contracts
-CONTRACT=cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5
-wasmcli query wasm contract $CONTRACT
-wasmcli query wasm contract-state $CONTRACT
-wasmcli query account $CONTRACT
-```
-
-Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key that is not the verifier, then using the proper key to release:
-
-```bash
-# execute fails if wrong person
-wasmcli tx wasm execute validator $CONTRACT "{}"
-sleep 3
-wasmcli query tx <hash from above>
-wasmcli query account $(wasmcli keys show bob -a)
-
-# but succeeds when fred tries
-wasmcli tx wasm execute fred $CONTRACT "{}"
-sleep 3
-wasmcli query account $(wasmcli keys show bob -a)
-wasmcli query account $CONTRACT
-```
-
-This is a very simple example for the [minimal demo contract](https://github.com/confio/cosmwasm/blob/master/contracts/hackatom/src/contract.rs), but it should show you what is possible, limited only by the wasm code you upload and the json messages you send.
-
-## Resource Limits
+### Resource Limits
 
 Beyond exploits (such as the reentrancy attack), another attack vector for smart contracts is denial of service attacks. A malicious actor could upload a contract that ran an infinite loop to halt the chain. Or wrote tons of data to fill up the disk. Web Assembly provides a tight sandbox with no default access to the OS, so we only need to really worry about providing tight resource limits for the smart contracts. All developers should be aware of these limits.
 
@@ -145,33 +48,29 @@ Beyond exploits (such as the reentrancy attack), another attack vector for smart
 
 *Disk Usage* - All disk access is via reads and writes on the KVStore. The Cosmos SDK already [enforces gas payments for KVStore access](https://github.com/cosmos/cosmos-sdk/blob/4ffabb65a5c07dbb7010da397535d10927d298c1/store/types/gas.go#L154-L162). Since all disk access in the contracts is made via callbacks into the SDK, this is charged there. If one were to integrate CosmWasm in another runtime, you would have to make sure to charge for access there as well.
 
-## Writing Contracts (Rust)
+## Getting Started with CosmWasm
 
-Writing your own contract is quite easy if you have a working knowledge of rust.  If you don't, it should still be relatively straightforward to make minor changes to existing contracts, just picking up syntax on the fly. For the rest of this section, however, a basic knowledge of rust is assumed.
+If you are anxious to get started, you can [jump right in with our first tutorial](https://docs.cosmwasm.com/docs/intro/overview). This will walk you through modifying an existing contract, compiling it, deploying it to a local "dev net" and running the contracts via a command line tool.
 
-[Confio/cosmwasm](https://github.com/confio/cosmwasm) is a library providing all modular code needed for building a contract. And [cosmwasm-template](https://github.com/confio/cosmwasm-template) contains a starter pack to quickly set up a minimal contract along with build system and unit tests, so you can start writing custom logic directly. Both of these libraries offer deeper documentation on how to build them.
+### Writing Contracts (Rust)
 
-To get a feel of how a contract can be built, take a look at the [code for a simple escrow](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs). [State](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L30-L44) is what is persisted in the database. [InitMsg](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L9-L18) is sent once to create the contract from the generic code. This contains info on the parties to the escrow, as well as the timeouts. [HandleMsg](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L20-L28) is an enum containing all possible messages that can be sent. Rather than calling functions directly, we can match on the enum to execute the proper logic for each call. Benefits here are the easy ability to serialize the call, as well as a clear definition of which functions are public.
+Writing your own contract is quite easy if you have a working knowledge of rust.  If you don't, it should still be relatively straightforward to make minor changes to existing contracts, just picking up syntax on the fly. We do [walk you through the basics](https://docs.cosmwasm.com/docs/intro/rust-basics) and [explain editting a contract](https://docs.cosmwasm.com/docs/intro/editing-escrow-contract) in the tutorial, but if you are an advanced dev and want to jump right in with a few pointers, we explain some key points here and where to find the code.
+
+[Confio/cosmwasm](https://github.com/confio/cosmwasm) is a library providing all modular code needed for building a contract. And [cosmwasm-template](https://github.com/confio/cosmwasm-template) contains a starter pack to quickly set up a minimal contract along with build system and unit tests, so you can start writing custom logic directly. Both of these libraries offer deeper documentation on how to build them. If you want to write you own contract, follow the instructions on [cosmwasm-template](https://github.com/confio/cosmwasm-template) and just start editting `contract.rs`.
+
+To get a feel of how a contract can be built, take a look at the [code for a simple escrow](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs). [State](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L47-L54) is what is persisted in the database. [InitMsg](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L13-L22) is sent once to create the contract from the generic code. This contains info on the parties to the escrow, as well as the timeouts. [HandleMsg](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L24-L32) is an enum containing all possible messages that can be sent. Rather than calling functions directly, we can match on the enum to execute the proper logic for each call. Benefits here are the easy ability to serialize the call, as well as a clear definition of which functions are public. Finally, [QueryMsg](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L34-L38) provides an enum to allow multiple ways to query the state of the contract (each potentially executing code on a read-only store).
 
 The [entry points are defined in lib.rs](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/lib.rs#L16-L32). They handle some standard translations between rust types and the wasm external "ffi" interface, but maintain no real logic there, just allow you to work with `Vec<u8>` and `Result<Response, Error>` rather than raw pointers and manually serializing error messages over the ffi boundary. The real logic is in your `contract.rs` file. [init](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L48-L66) is the entry point to construct a new contract from this code, and should define all configuration options. [handle](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L68-L79) loads state and matches over all supported enum values to execute an action on the contract. After which we can [try_approve](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L81-L105) to release the funds to the beneficiary, or [try_refund](https://github.com/confio/cosmwasm-examples/blob/master/escrow/src/contract.rs#L107-L126) to return the funds to the original sender, if the escrow has expired.
 
-Now that we have taken a look at the code, we can try to modify a contract. In this example, adding a backdoor for the contract programmer to steal any tokens in the escrow. Just a fun example and a reminder to validate code before trusting a contract with your tokens.
+### Deeper Integration with your Chain (Go)
 
-We will add a new variant to the `HandleMsg` enum, called `Steal`, containing a recipeint address. `handle` will dispatch this message to a `try_steal` function. This function checks if the signer matches a hardcoded value (in source code) and if so releases all funds to the provided recipient - regardless of the arbiter, and regardless of expiration status. 
+Now that we have covered developing custom contracts in Rust, let us turn to the potential extensibility on the Go side for experienced Cosmos SDK developers. The provided [cosmwasm module](https://github.com/cosmwasm/wasmd/tree/master/x/wasm) is a minimal, unopinionated implementation of bindings between the sdk and the smart contract VM. It is embedded in [wasmd](https://github.com/cosmwasm/wasmd), which is a fork of `gaiad` with `x/wasmd` added. It takes care of all the implementation details, but leaves the field open for you to fork this repo and add custom business logic around it. Below are some ideas on how this could be customized:
 
-First try to do this on your own - fork the [cosmwasm-examples](https://github.com/confio/cosmwasm-examples) repo and make the changes. Once you have done that, take a look at this video below on how we add the functionality and test it, then compile it, deploy it to testnet, and execute it via the cli.
+*Add Permissioning or Fees* - Are you building a platform where anyone can upload a contract? Or do you intend to use this feature to let on-chain governance add new features without organizing a full chain upgrade process? Consider modifying the handler to deduct fees when uploading code or instantiating a contract. Or maybe just make uploading code a governance handler (proposal type). (Current implementation allows anyone to upload code and instantiate contracts for free - great for testnet, not so great for mainnet).
 
-TODO: show modifying code (backdoor to escrow), then deploy and usage
+*Add storage limits* - Current gas limits in the sdk limit how many reads and writes can be performed in one tx (or one block). However, they do nothing to limit total storage. A contract could eg. write 20 chunks of 500 bytes to disk. And next time another 20, and so on. Since you pass in the KVStore to the contract, you could wrap it with a layer to provide some limitations. Like only one write (or one write to a new key) per contract exection. Or maybe a total limit of keys stored in the contracts KVStore over all executions. Or maybe the creator needs to pre-pay for storage space (buy or rent) and this defines the limits. All this business logic can be writen in go without any changes to the underlying contracts (except preventing some that violate these limits)
 
-## Deeper Integration with your Chain (Go)
-
-Now that we have covered using existing contracts, and developing custom contracts in Rust, let us turn to the potential extensibility on the Go side for experienced Cosmos SDK developers. The provided [cosmwasm module](https://github.com/cosmwasm/modules/tree/master/incubator/wasm) is a minimal, unopinionated implementation of bindings between the sdk and the smart contract VM. It takes care of all the implementation details, but leaves the field open for you to fork this module and add custom business logic around it. Below are some ideas on how this could be customized:
-
-*Add Permissioning or Fees* - Are you building a platform where anyone can upload a contract? Or do you intend to use this feature to let on-chain governance add new features without organizing a full chain upgrade process? Consider modifying the handler to deduct fees when uploading code or instantiating a contract. Or maybe just make uploading code a governance handler (proposal type).
-
-*Add storage limits* - Current gas limits in the sdk limit how many reads and writes can be performed in one tx (or one block). However, they do nothing to limit total storage. A contract could eg. write 20 500 byte chunks to disk. And next time another 20, and so on. Since you pass in the KVStore to the contract, you could wrap it with a layer to provide some limitations. Like only one write (or one write to a new key) per contract exection. Or maybe a total limit of keys stored in the contracts KVStore over all executions. Or maybe the creator needs to pre-pay for storage space (buy or rent) and this defines the limits. All this business logic can be writen in go without any changes to the underlying contracts (except preventing some that violate these limits)
-
-*Support OpaqueMsg* - The current CosmWasm spec allows returning an `OpaqueMsg` variant. This is a message type that is never parsed or created by the smart contract code, just passed through from client to contract to sdk. You can use this for eg. multisigs, where the client proposes some message (maybe a staking issue), which must be approved to be executed with the permissions of the contract. Just as the contract then can dispatch a `SendMsg`, it can dispatch such an `OpaqueMsg` as well. This requires no changes in the VM or contracts, but a clear format that the SDK module parses out and then a router with multiple modules to dispatch it to. And then some client side support to construct (unsigned) messages in that format as part of the body of the contract calls. Is it go-amino json of an `sdk.Msg` implementation? Base64-encoded go-amino binary representation? Or some completely different encoding. As long as your module and your client agree on the format, it is totally opaque to the CosmWasm VM.
+*Support OpaqueMsg* - The current CosmWasm spec allows returning an `OpaqueMsg` variant. This is a message type that is never parsed or created by the smart contract code, just passed through from client to contract to sdk. You can use this for eg. multisigs, where the client proposes some message (maybe a staking issue), which must be approved to be executed with the permissions of the contract. Just as the contract then can dispatch a `SendMsg`, it can dispatch such an `OpaqueMsg` as well. This requires no changes in the VM or contracts, but a clear format that the SDK module parses out and then a router with multiple modules to dispatch it to. And then some client side support to construct (unsigned) messages in that format as part of the body of the contract calls. Is it go-amino json of an `sdk.Msg` implementation? Base64-encoded go-amino binary representation? Or some completely different encoding. As long as your module and your client agree on the format, it is totally opaque to the CosmWasm VM. The current implementation leaves it as a TODO, for chain developers to customize how they want.
 
 Pretty much all the crypto-economic and governance design decisions can be implemented by forking the Go module. If you have ideas, please open issue, or just fork the code and implement it. We at Confio would be happy to discuss any approaches.
 
