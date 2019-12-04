@@ -62,7 +62,7 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 ### Integration Tests
 
-Now that we have compiled the code to wasm, and tested the business logic as raw rust, we want to ensure the compiled wasm code is also correct. There is a bit extra logic parsing input and reporting errors, so it is always good to add a few tests to make sure the happy path and failure path work well in wasm as well. Luckily, there are a number of helpers for integration tests, so you can pretty much copy a unit test and change a dozen lines or so and it will just work. (Planning to make this number even smaller).
+Now that we have compiled the code to wasm, and tested the business logic as raw rust, we want to ensure the compiled wasm code is also correct. There is a bit of extra logic parsing input and reporting errors, so it is always good to add a few tests to make sure the happy path and failure path work well in wasm as well. Luckily, there are a number of helpers for integration tests, so you can pretty much copy a unit test and change a dozen lines or so and it will just work. (Planning to make this number even smaller).
 
 This is also the point where you have to check if you want to test with gas metering (and thus can measure the expected usage of your contract), or just stick with stable and test without gas. Let's first stick with stable:
 
@@ -71,7 +71,7 @@ cargo wasm
 cargo test
 ```
 
-`cargo wasm` run all unit test, then it will run integration tests against the wasm binary stored in `target/wasm32-unknown-unknown/release/escrow.wasm` (you can adjust this to test optimized builds as well). If you want to test with gas metering enabled, you need to enable nightly and add some feature flags:
+`cargo wasm` will run all unit tests, then it will run integration tests against the wasm binary stored in `target/wasm32-unknown-unknown/release/escrow.wasm` (you can adjust this to test optimized builds as well). If you want to test with gas metering enabled, you need to enable nightly and add some feature flags:
 
 ```
 rustup run nightly cargo test --no-default-features --features singlepass
@@ -81,15 +81,15 @@ You should get the same output as above, just making sure you can run tests with
 
 ## Setting up your IDE
 
-Know you can compile and test the code, it is time to edit it. But before that, we will need a good editor to make those changes. I highly recommend plugins that help you learn syntax, especially when just starting rust. There are two free editor environments I can recommend, choose the one that is more familiar to you.
+Now that you can compile and test the code, it is time to edit it. But before that, we will need a good editor to make those changes. I highly recommend plugins that help you learn syntax, especially when just starting rust. There are two free editor environments I can recommend, choose the one that is more familiar to you.
 
-If you use VSCode, **TODO download link**, you just need to add the rust plugin. This is the best supported environment for RLS (Rust Language Server) that uses the rust compiler to type-check all your code on save. This does give the same error messages as the actual compiler would, and highlighted along with the line of the code, but it can be a bit slow to respond sometime (as it runs the compiler). It is quite good, and if you are used to VSCode, I highly recommend it:
+If you use VSCode ([Download link](https://code.visualstudio.com/download)) you just need to add the rust plugin. This is the best supported environment for RLS (Rust Language Server) and uses the rust compiler to type-check all your code on save. This gives the same error messages as the actual compiler would and highlights along the line of the code, but it can be a bit slow to respond sometime (as it runs the compiler). It is quite good, and if you are used to VSCode, I highly recommend it:
 
-TODO
+[RLS for VSCode](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)  
 
-The other option I can recommend it Intellij IDEA Community Edition **TODO download link**, along with the Rust Plugin. This has very nice and quick support for many language features directly inline. In particular, it shows the inferred types along variables, which can be very helpful, especially when working with (nested) generics. It catches most syntax errors very quickly, but not all of them. Which means sometimes you have to look at the compile failures to find the errors. If you are coming from another Intellij product (eg. Goland), I recommend this approach:
+The other option I can recommend it Intellij IDEA Community Edition ([Download link](https://www.jetbrains.com/idea/download/)), along with the Rust Plugin. This has very nice and quick support for many language features directly inline. In particular, it shows the inferred types along variables, which can be very helpful, especially when working with (nested) generics. It catches most syntax errors very quickly, but not all of them. Which means sometimes you have to look at the compile failures to find the errors. If you are coming from another Intellij product (eg. Goland), I recommend this approach:
 
-TODO
+[RUST for Intellij](https://intellij-rust.github.io/)
 
 There are many more editors out there and some have varying degrees of rust support, at least syntax highlighting, but I would recommend trying one of the two above, especially if you are new to rust. Once you are confident in the language, you can always use another editor and customize it to your liking.
 
