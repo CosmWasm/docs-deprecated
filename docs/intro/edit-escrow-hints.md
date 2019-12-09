@@ -63,7 +63,6 @@ fn try_steal(params: Params, _state: State, destination: String) -> Result<Respo
 ## Test Steal
 
 ```rust
-
 #[test]
 fn handle_steal() {
     let mut store = MockStorage::new();
