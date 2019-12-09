@@ -166,11 +166,10 @@ Now, you can add the message handler. As a quick check, try running `cargo wasm`
 
 ### Writing a Test
 
-We have a number of tests that serve as a template, so let's make use of that. You can copy the `handle_refund` test and rename it to `handle_steal`. Remember to include the `#[test]` declaration on top. Now, go in an edit it to test that the THIEF can indeed steal the funds, and no one else can. Make sure our backdoor is working properly before we try to use it.
+We have a number of tests inside of `contracts.rs` that serve as templates, so let's make use of them. You can copy the `handle_refund` test and rename it to `handle_steal`. Remember to include the `#[test]` declaration on top. Now, go in and edit it to test that the THIEF can indeed steal the funds, and no one else can. Make sure our backdoor is working properly before we try to use it.
 
 Now, try running `cargo unit-test` and see if your code works as planned. If it fails, try `RUST_BACKTRACE=1 cargo unit-test` to get a full stack trace. Now, isn't that nicer than trying to test Solidity contracts?
 
-[__ I think these have to be compiled again? My test fails when I run it with my IDE integrated test ability. When I run it from the command line it only tests the previously declared tests__]
 
 [See solution here](./edit-escrow-hints#test-steal)
 
