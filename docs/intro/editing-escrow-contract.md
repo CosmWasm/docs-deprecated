@@ -89,7 +89,6 @@ You may wonder about the `clone()` in `source: params.message.signer.clone()`. T
 
 Try to remove the `.clone()` and compile. See what your IDE or compile says.
 
-[__Update: VSCode didn't like being opened to the root dir of the repo. It couldn't find the Cargo.toml file in the root (or any parent dir) so couldn't run any rust logic. I turned on a multi project setup which is experimental and got some errors showing. Everything seemed to click when I closed VSCode and re-opened just the escrow directory.__] 
 
 ### Execution Logic
 
