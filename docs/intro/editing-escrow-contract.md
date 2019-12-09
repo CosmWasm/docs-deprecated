@@ -87,7 +87,7 @@ pub fn init<T: Storage>(store: &mut T, params: Params, msg: Vec<u8>) -> Result<R
 
 You may wonder about the `clone()` in `source: params.message.signer.clone()`. This has to do with rust lifetimes. If I pass in a variable, I give "ownership" to the other structure and may no longer use it in my code. Since I need to access a reference to params later to check expiration, `state.is_expired(&params)`, I must first clone the struct. If I did not reference `params` anywhere below, I would not need the `clone`. 
 
-Try to remove the `.clone()` and compile. See what your IDE or compile says. [__Installed rls on vscode and i get no notifications from removing the clone. Do you think i need to configure the extension somehow?__] 
+Try to remove the `.clone()` and compile. See what your IDE or compile says.
 
 [__Update: VSCode didn't like being opened to the root dir of the repo. It couldn't find the Cargo.toml file in the root (or any parent dir) so couldn't run any rust logic. I turned on a multi project setup which is experimental and got some errors showing. Everything seemed to click when I closed VSCode and re-opened just the escrow directory.__] 
 
