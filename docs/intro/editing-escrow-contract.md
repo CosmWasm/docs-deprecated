@@ -145,7 +145,7 @@ fn try_approve(params: Params, state: State, quantity: Option<Vec<Coin>>) -> Res
 }
 ```
 
-Note that `Params` encodes much information from the blockchain direction, the `Context` in other terms [__I don't really understand this sentence__]. This is validated data and can be trusted to compare any messages against. Refer to [the standard cosmwasm types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L3-L36) for any references you want to add to the environment.
+Note that `Params` encodes a lot of information from the blockchain, essentially providing the `Context`. This is validated data and can be trusted to compare any messages against. Refer to [the standard cosmwasm types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L3-L36) for references to all the available types in the environment.
 
 
 ## Adding a New Message
