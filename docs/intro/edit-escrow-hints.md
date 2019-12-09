@@ -64,11 +64,9 @@ fn try_steal(params: Params, _state: State, destination: String) -> Result<Respo
 
 ```rust
 
-const THIEF: &str = "changeme";
-
 #[test]
 fn handle_steal() {
-    let mut store = mock_instance(WASM);
+    let mut store = MockStorage::new();
 
     // initialize the store
     let msg = init_msg(1000, 0);
