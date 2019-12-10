@@ -26,5 +26,4 @@ You will need a running blockchain to host your contracts and use them from an a
 
 [Deploying to Testnet](./first-demo.md) is a simple demo that builds on the above sections and walks you through, step by step, taking your custom contract, deploying it to a testnet, and executing it. This will show you not just the internals of the contract, but how to use it from the outside.
 
-[Namecoin](../namecoin/intro.md) is a simple tutorial modelled after the SDK tutorial of the same name (TODO LINK). Once you have mastered the skills for going through the first demo, it will walk you through the process of building your own custom contract from scratch.
-
+[Name Service](../name-service/intro.md) is a simple tutorial modeled after the [SDK tutorial of the same name](https://github.com/cosmos/sdk-tutorials/tree/master/nameservice). Once you have mastered the skills for going through the first demo, it will walk you through the process of building your own custom contract from scratch.
