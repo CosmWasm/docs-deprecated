@@ -2,14 +2,13 @@
 
 const siteConfig = {
   title: 'CosmWasm Documentation',
-  tagline: 'Get started with mutli-chain smart contracts!',
+  tagline: 'Get started with multi-chain smart contracts!',
 
   // TODO: 1. host this without /docs, then custom url
-  url: "http://docs.cosmwasm.com",
-  // url: "https://cosmwasm.github.io",
+  url: "http://www.cosmwasm.com",
   baseUrl: "/",
 
-  cname: 'docs.cosmwasm.com',
+  cname: 'www.cosmwasm.com',
   projectName: 'docs',
   organizationName: 'cosmwasm',
 

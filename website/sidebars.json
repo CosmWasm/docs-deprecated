@@ -8,8 +8,8 @@
       "intro/editing-escrow-contract",
       "intro/first-demo"
     ],
-    "Namecoin": [
-      "namecoin/intro"
+    "Name Service": [
+      "name-service/intro"
     ]
   }
 }
