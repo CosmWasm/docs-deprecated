@@ -12,7 +12,7 @@ To get this to work, you will need to first deploy a local single-node testnet. 
 
 Please first follow the [setup of the blockchain described in an earlier section](./using-the-sdk). To verify this is working, try:
 
-```
+```bash
 wasmcli keys list
 # should show [validator, fred, bob]
 wasmcli status
@@ -23,7 +23,7 @@ wasmcli query account $(wasmcli keys show validator -a)
 
 Now, let's set up the accounts properly. Both fred and thief will need some amount of tokens in order to submit transaction:
 
-```
+```bash
 # add the thief account
 wasmcli keys add thief
 
@@ -43,7 +43,7 @@ wasmcli query account $(wasmcli keys show bob -a)
 
 Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new accout, then update the contract to reference it:
 
-```
+```bash
 # Set the THIEF variable in source code to this value
 wasmcli keys show thief -a
 
@@ -56,7 +56,7 @@ cp contract.wasm $HOME [__Why is this necessary?__]
 
 First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
 
-```
+```bash
 # both should be empty
 wasmcli query wasm list-code
 wasmcli query wasm list-contracts
@@ -111,18 +111,17 @@ wasmcli query account $CONTRACT
 # now the thief can steal it all
 STEAL="{\"steal\":{\"destination\":\"$(wasmcli keys show thief -a)\"}}"
 wasmcli tx wasm execute thief $CONTRACT "$STEAL" -y
+# remember that you gave the thief 1 stake to start with above... so this should be 30001
 wasmcli query account $(wasmcli keys show thief -a)
 wasmcli query account $CONTRACT
 ```
 
 ## Next Steps
 
-
-This is a very simple example for the escrow contract we developed, but it should show you what is possible, limited only by the wasm code you upload and the json messages you send. If you want a guided tutorial to build a contract from start to finish, check out the [namecoin tutorial](../namecoin/intro).
+This is a very simple example for the escrow contract we developed, but it should show you what is possible, limited only by the wasm code you upload and the json messages you send. If you want a guided tutorial to build a contract from start to finish, check out the [name service tutorial](../name-service/intro).
 
 If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/confio/cosmwasm-template) and use that as a configured project to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/confio/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
 
 In either case, there is some documentation in [`go-cosmwasm`](https://github.com/confio/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/confio/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/confio/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/cosmwasm/wasmd/issues) if they have to do with the SDK integration.
 
 Happy Hacking!
-
