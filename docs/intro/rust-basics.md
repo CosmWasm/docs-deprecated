@@ -85,7 +85,8 @@ Now that you can compile and test the code, it is time to edit it. But before th
 
 If you use VSCode ([Download link](https://code.visualstudio.com/download)) you just need to add the rust plugin. This is the best supported environment for RLS (Rust Language Server) and uses the rust compiler to type-check all your code on save. This gives the same error messages as the actual compiler would and highlights along the line of the code, but it can be a bit slow to respond sometime (as it runs the compiler). It is quite good, and if you are used to VSCode, I highly recommend it:
 
-[RLS for VSCode](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)  
+[RLS for VSCode](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)
+> Note: VSCode looks for a Cargo.toml file in the root directory of your workspace. The [cosmwasm-examples](https://github.com/confio/cosmwasm-examples) repo does not have a Cargo.toml file in the root because it is located within the `escrow` directory. To make sure VSCode recognizes your project correctly you should open only the `escrow` directory.
 
 The other option I can recommend it Intellij IDEA Community Edition ([Download link](https://www.jetbrains.com/idea/download/)), along with the Rust Plugin. This has very nice and quick support for many language features directly inline. In particular, it shows the inferred types along variables, which can be very helpful, especially when working with (nested) generics. It catches most syntax errors very quickly, but not all of them. Which means sometimes you have to look at the compile failures to find the errors. If you are coming from another Intellij product (eg. Goland), I recommend this approach:
 
