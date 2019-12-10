@@ -128,10 +128,15 @@ class Index extends React.Component {
         {[
           {
             content:
-              'This is another description of how this project is useful',
+              '<ul>
+                <li>Tight integration with <a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK</a> and the <a href="https://cosmos.network">Cosmos ecosystem</a>.</li>
+                <li>Mature tooling for developing and testing smart contracts.</li>
+                <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
+                <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
+              </ul>',
             image: `${baseUrl}img/undraw_note_list.svg`,
             imageAlign: 'right',
-            title: 'Description',
+            title: 'Key Features',
           },
         ]}
       </Block>
@@ -204,8 +209,8 @@ class Index extends React.Component {
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
           <Features />
-          <FeatureCallout />
-          {/* <LearnHow />
+      {/* <FeatureCallout />
+          <LearnHow />
           <TryOut /> */}
           <Description />
           <Showcase />
