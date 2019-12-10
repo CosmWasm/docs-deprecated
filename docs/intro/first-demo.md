@@ -51,7 +51,10 @@ wasmcli keys show thief -a
 cd <path/to/rust/code>
 docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
 ls -lh contract.wasm
-cp contract.wasm $HOME [__Why is this necessary?__]
+
+# (optional) let's go back to where you were running ($HOME ?), not run inside the rust code dir
+cp contract.wasm $OLDPWD
+cd -
 ```
 
 First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:

@@ -17,7 +17,7 @@ cd cosmwasm-examples/escrow
 
 ### Data Structures
 
-There are three key data structures used in the contract - for encoding the instantiation message, for encoding the execution messages, and for storing the contract data. All of them must be prefixed with the line `#[derive(Serialize, Deserialize)]` to allow the [serde-json](https://github.com/serde-rs/json) library to de-serialize them (there is no [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) in rust). Otherwise, it should be pretty clear how the `State` defines the current conditon of a contract, and `InitMsg` will provide the initial data to configure said contract. Please note that `State` is the *only information* persisted between multiple contract calls:
+There are three key data structures used in the contract - for encoding the instantiation message, for encoding the execution messages, and for storing the contract data. All of them must be prefixed with the line `#[derive(Serialize, Deserialize)]` to allow the [`serde-json`](https://github.com/serde-rs/json) library to de-serialize them (there is no [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) in rust). Otherwise, it should be pretty clear how the `State` defines the current conditon of a contract, and `InitMsg` will provide the initial data to configure said contract. Please note that `State` is the *only information* persisted between multiple contract calls:
 
 ```rust
 #[derive(Serialize, Deserialize)]
@@ -41,7 +41,7 @@ pub struct InitMsg {
 }
 ```
 
-Moving to the `HandleMsg` type, which defines the different contract methods, we make use of a slightly more complex rust construction, the `enum`. This is also known as a union or sum type, and must take exactly one of the embedded values [__what is an embedded value?__]. We use each `variant` [__what is a variant?__] to encode a different method. For example `HandleMsg::Refund{}` is a serializable request to refund the escrow, which is only valid after a timeout.
+Moving to the `HandleMsg` type, which defines the different contract methods, we make use of a slightly more complex rust construction, the [`enum`](https://doc.rust-lang.org/stable/rust-by-example/custom_types/enum.html). This is also known as [a tagged union or sum type](https://en.wikipedia.org/wiki/Tagged_union), and contains a fixed set of defined possible data types, or `variants`, *exactly one of which must be set*. We use each `variant` to encode a different method. For example `HandleMsg::Refund{}` is a serializable request to refund the escrow, which is only valid after a timeout.
 
 ```rust
 #[derive(Serialize, Deserialize)]
@@ -57,7 +57,7 @@ pub enum HandleMsg {
 
 ### JSON Format
 
-When this is encoded [__When what is encoded? The Data Structure? The HandleMsg Type? Seems more like a Msg destined for the HsndleMsg enum, or?__], it will end up looking like `{"approve": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}` or `{"refund": {}}`. We are planning on modifying this for a stable v1 to look more like a json-rpc call format (which requires minimal code change in rust, mainly in the external format). It would then look more like: `{"method": "approve", "params": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}`.
+When a `HandleMsg` instance is encoded, it will end up looking like `{"approve": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}` or `{"refund": {}}`. This is also the format we should use client side, when submitting a message body to later be processed by `handle`. We are planning on modifying this for a stable v1 to look more like a json-rpc call format (which requires minimal code change in rust, mainly in the external format). It would then look more like: `{"method": "approve", "params": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}`. This would only affect the client-side code, and will be well documented when we start building out any client-side tooling.
 
 ### Instantiation Logic
 
@@ -89,7 +89,6 @@ You may wonder about the `clone()` in `source: params.message.signer.clone()`. T
 
 Try to remove the `.clone()` and compile. See what your IDE or compile says.
 
-
 ### Execution Logic
 
 Just as `init` is the entry point for instantiating a new contract, `handle` is the entry point for executing the code. Since `handle` takes an `enum` with multiple `variants`, we can't just jump into the business logic, but first start with parsing the message, loading the state, and dispatching the message:
@@ -109,9 +108,11 @@ pub fn handle<T: Storage>(store: &mut T, params: Params, msg: Vec<u8>) -> Result
 }
 ```
 
-Some points to note here... First the use of `context` on the errors to cast it to a definite [__?__] `cosmwasm::Error` variant. You will want to choose a reason for any error, and can look into [snafu](https://docs.rs/snafu/0.1.4/snafu/) to learn a bit more on how to use this. In general, use `ParseErr` and `SerializeErr` if this comes from the serde logic. And use `ContractErr` with a custom message for any error you raise due to the business logic.
+Some points to note here... First the use of `context` on the errors to cast it to a pre-defined `cosmwasm::Error` variant. You will want to choose a reason for any error, and can look into [`snafu`](https://docs.rs/snafu/0.1.4/snafu/) to learn a bit more on how to use this. But the short story is that you must `use snafu::ResultExt;` in your `contract.rs` file in order to attach the `.context()` method to `Result` and make use of this shorthand.
 
-You will also see the `match` statement at the end. This is a very nice Rust idiom, and allows you to `switch` over multiple patterns. Here we check the multiple variants of the `HandleMsg` enum. Note that if you don't cover all cases, the compile will refuse to proceed.
+In general, use `ParseErr` and `SerializeErr` if this comes from the serde logic. And either use a generic `Unauthorized`, or `ContractErr` / `DynContractErr` with a custom message, for any error you raise due to the business logic. You can note there is a [fixed list of pre-defined error types](https://github.com/confio/cosmwasm/blob/master/src/errors.rs) you must chose from. Those that include `source: XyzError` can only be formed from another functions returning the `XyzError`. The rest can be created by any business logic.
+
+You will also see the [`match` statement](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch06-02-match.html) at the end. This is a very nice Rust idiom, and allows you to `switch` over multiple patterns. Here we check the multiple variants of the `HandleMsg` enum. Note that if you don't cover all cases, the compile will refuse to proceed.
 
 If we now look into the `try_approve` function, we will see how we can respond to a message. We can return an `Unauthorized` error if the `signer` is not what we expect, and custom `ContractErr` if our business logic rejects the message. The `let amount =` line shows how we can use pattern matching to use the number of coins present in the msg if provided, or default to the entire balance of the contract. Mastering `match` is very useful for Rust development.
 
@@ -145,7 +146,7 @@ fn try_approve(params: Params, state: State, quantity: Option<Vec<Coin>>) -> Res
 }
 ```
 
-Note that `Params` encodes a lot of information from the blockchain, essentially providing the `Context`. This is validated data and can be trusted to compare any messages against. Refer to [the standard cosmwasm types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L3-L36) for references to all the available types in the environment.
+Note that `Params` encodes a lot of information from the blockchain, essentially providing the `Context`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L3-L36) for references to all the available types in the environment.
 
 
 ## Adding a New Message
@@ -209,7 +210,7 @@ $ sha256sum contract.wasm
 
 If you want to try to inspect the output, and figure out where to optimize, you will want to only do the first step of the build process, using `wasm-pack`. This leaves in some symbol names and you can use `twilly` to get info on which functions are using up all the space. This is only needed if you find the contract is too big and you want to check which dependencies are responsible.
 
-First, follow the directions to [install wasm-pack](https://rustwasm.github.io/wasm-pack/installer/).
+First, follow the directions to [install `wasm-pack`](https://rustwasm.github.io/wasm-pack/installer/).
 
 ```
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh 
