@@ -11,19 +11,19 @@ Assuming you have never worked with rust, you will first need to install some to
 First [install rustup](https://rustup.rs/). Once installed, make sure you have the wasm32 target, both on stable and nightly:
 
 ```bash
+rustup default stable
 rustup target list --installed
 rustup target add wasm32-unknown-unknown
 
 rustup install nightly
-rustup default nightly
-rustup target add wasm32-unknown-unknown
+rustup target add wasm32-unknown-unknown --toolchain nightly
 ```
 
 For those new to rust, the `stable` channel comes out every 6 weeks with a stable release (as of 27. Novemeber 2019 it is 1.39). The `nightly` channel is the bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose APIs may change. For compiling `wasm`, you will want to use `stable`. For running integration tests, the implementation of gas metering for the wasmer VM requires nightly, so you will want to use that, or choose to disable metering with feature flags (more below). 
 
 ## Compiling and Testing an Existing Contract
 
-To make sure all the tooling is working properly, let's start with the [cosmwasm-examples](https://github.com/confio/cosmwasm-examples) repo and try out an existing simple escrow contract. First clone the repo and try to build the wasm bundle:
+To make sure all the tooling is working properly, let's start with the [`cosmwasm-examples`](https://github.com/confio/cosmwasm-examples) repo and try out an existing simple escrow contract. First clone the repo and try to build the wasm bundle:
 
 ```bash
 # get the code
@@ -41,13 +41,13 @@ After this compiles, it should produce a file in `target/wasm32-unknown-unknown/
 
 Let's try running the unit tests:
 
-```
+```bash
 RUST_BACKTRACE=1 cargo unit-test
 ```
 
 After some compilation steps, you should see:
 
-```
+```text
 running 5 tests
 test contract::tests::proper_initialization ... ok
 test contract::tests::cannot_initialize_expired ... ok
@@ -66,14 +66,14 @@ Now that we have compiled the code to wasm, and tested the business logic as raw
 
 This is also the point where you have to check if you want to test with gas metering (and thus can measure the expected usage of your contract), or just stick with stable and test without gas. Let's first stick with stable:
 
-```
+```bash
 cargo wasm
 cargo test
 ```
 
 `cargo wasm` will run all unit tests, then it will run integration tests against the wasm binary stored in `target/wasm32-unknown-unknown/release/escrow.wasm` (you can adjust this to test optimized builds as well). If you want to test with gas metering enabled, you need to enable nightly and add some feature flags:
 
-```
+```bash
 rustup run nightly cargo test --no-default-features --features singlepass
 ```
 
@@ -86,13 +86,16 @@ Now that you can compile and test the code, it is time to edit it. But before th
 If you use VSCode ([Download link](https://code.visualstudio.com/download)) you just need to add the rust plugin. This is the best supported environment for RLS (Rust Language Server) and uses the rust compiler to type-check all your code on save. This gives the same error messages as the actual compiler would and highlights along the line of the code, but it can be a bit slow to respond sometime (as it runs the compiler). It is quite good, and if you are used to VSCode, I highly recommend it:
 
 [RLS for VSCode](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)
-> Note: VSCode looks for a Cargo.toml file in the root directory of your workspace. The [cosmwasm-examples](https://github.com/confio/cosmwasm-examples) repo does not have a Cargo.toml file in the root because it is located within the `escrow` directory. To make sure VSCode recognizes your project correctly you should open only the `escrow` directory.
 
 The other option I can recommend it Intellij IDEA Community Edition ([Download link](https://www.jetbrains.com/idea/download/)), along with the Rust Plugin. This has very nice and quick support for many language features directly inline. In particular, it shows the inferred types along variables, which can be very helpful, especially when working with (nested) generics. It catches most syntax errors very quickly, but not all of them. Which means sometimes you have to look at the compile failures to find the errors. If you are coming from another Intellij product (eg. Goland), I recommend this approach:
 
 [RUST for Intellij](https://intellij-rust.github.io/)
 
 There are many more editors out there and some have varying degrees of rust support, at least syntax highlighting, but I would recommend trying one of the two above, especially if you are new to rust. Once you are confident in the language, you can always use another editor and customize it to your liking.
+
+### Setting Root Directory
+
+Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and ony parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/confio/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as it's `Cargo.toml` file.
 
 ## Learn More Rust
 
@@ -103,7 +106,6 @@ There are a number of standard references that most rust developers use. It is g
 * [Standard Library Documentation](https://doc.rust-lang.org/std/vec/struct.Vec.html)
 * [Rust Docs](https://docs.rs/) - api docs for all external packages
 * [Crates.io](https://crates.io) - package registry, look for libraries you want to import
-* [Rustinomicon](https://doc.rust-lang.org/nomicon) - dig into more advanced rust topics
 
 If you want a directed training, you can start one of these paths:
 
