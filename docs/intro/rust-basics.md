@@ -19,7 +19,7 @@ rustup install nightly
 rustup target add wasm32-unknown-unknown --toolchain nightly
 ```
 
-For those new to rust, the `stable` channel comes out every 6 weeks with a stable release (as of 27. Novemeber 2019 it is 1.39). The `nightly` channel is the bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose APIs may change. For compiling `wasm`, you will want to use `stable`. For running integration tests, the implementation of gas metering for the wasmer VM requires nightly, so you will want to use that, or choose to disable metering with feature flags (more below). 
+For those new to rust, the `stable` channel comes out every 6 weeks with a stable release (as of 27. November 2019 it is 1.39). The `nightly` channel is the bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose APIs may change. For compiling `wasm`, you will want to use `stable`. For running integration tests, the implementation of gas metering for the [Wasmer](https://wasmer.io) VM requires nightly, so you will want to use that, or choose to disable metering with feature flags (more below).
 
 ## Compiling and Testing an Existing Contract
 
@@ -95,7 +95,7 @@ There are many more editors out there and some have varying degrees of rust supp
 
 ### Setting Root Directory
 
-Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and ony parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/confio/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as it's `Cargo.toml` file.
+Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/confio/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as it's `Cargo.toml` file.
 
 ## Learn More Rust
 
@@ -110,4 +110,4 @@ There are a number of standard references that most rust developers use. It is g
 If you want a directed training, you can start one of these paths:
 
 * [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/)
-* [Rustlings - small excercises](https://github.com/rust-lang/rustlings/) 
+* [Rustlings - small exercises](https://github.com/rust-lang/rustlings/) 

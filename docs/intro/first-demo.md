@@ -4,11 +4,11 @@ title: Step by Step with a Sample Contract
 sidebar_label: Deploying to Testnet
 ---
 
-In this section, we will take the custom contract you have writen in the last section, and upload it to a running blockchain. Then we will show how to inspect the code, instantiate contracts, and execute them - both the standard functionality as well as the secret backdoor we just implemented [in the last section](./editing-escrow-contract).
+In this section, we will take the custom contract you have written in the last section, and upload it to a running blockchain. Then we will show how to inspect the code, instantiate contracts, and execute them - both the standard functionality as well as the secret backdoor we just implemented [in the last section](./editing-escrow-contract).
 
 ## Preparation
 
-To get this to work, you will need to first deploy a local single-node testnet. I assume you have some experience with this, if not, please refer to gaiad documentation. You will need go 1.13 installed and standard dev tooling, and `$HOME/go/bin` set to be in your `$PATH`.
+To get this to work, you will need to first deploy a local single-node testnet. I assume you have some experience with this, if not, please refer to `gaiad` documentation. You will need go 1.13 installed and standard dev tooling, and `$HOME/go/bin` set to be in your `$PATH`.
 
 Please first follow the [setup of the blockchain described in an earlier section](./using-the-sdk). To verify this is working, try:
 
@@ -41,7 +41,7 @@ wasmcli query account $(wasmcli keys show bob -a)
 
 ## Uploading the Code
 
-Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new accout, then update the contract to reference it:
+Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new account, then update the contract to reference it:
 
 ```bash
 # Set the THIEF variable in source code to this value

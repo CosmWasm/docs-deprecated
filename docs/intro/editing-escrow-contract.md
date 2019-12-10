@@ -17,7 +17,7 @@ cd cosmwasm-examples/escrow
 
 ### Data Structures
 
-There are three key data structures used in the contract - for encoding the instantiation message, for encoding the execution messages, and for storing the contract data. All of them must be prefixed with the line `#[derive(Serialize, Deserialize)]` to allow the [`serde-json`](https://github.com/serde-rs/json) library to de-serialize them (there is no [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) in rust). Otherwise, it should be pretty clear how the `State` defines the current conditon of a contract, and `InitMsg` will provide the initial data to configure said contract. Please note that `State` is the *only information* persisted between multiple contract calls:
+There are three key data structures used in the contract - for encoding the instantiation message, for encoding the execution messages, and for storing the contract data. All of them must be prefixed with the line `#[derive(Serialize, Deserialize)]` to allow the [`serde-json`](https://github.com/serde-rs/json) library to de-serialize them (there is no [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) in rust). Otherwise, it should be pretty clear how the `State` defines the current condition of a contract, and `InitMsg` will provide the initial data to configure said contract. Please note that `State` is the *only information* persisted between multiple contract calls:
 
 ```rust
 #[derive(Serialize, Deserialize)]
@@ -61,7 +61,7 @@ When a `HandleMsg` instance is encoded, it will end up looking like `{"approve":
 
 ### Instantiation Logic
 
-The `init` function will be called exactly once, before the contract is executed. It is a "privledged" function in that it can set configuration that can never be modified by any other method call. If you look at this example, the first line parses the input from raw bytes into our contract-defined message. We then create the initial state, and check if it is expired already. If expired, we return a generic `ContractErr`, otherwise, we store the state and return a success code:
+The `init` function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call. If you look at this example, the first line parses the input from raw bytes into our contract-defined message. We then create the initial state, and check if it is expired already. If expired, we return a generic `ContractErr`, otherwise, we store the state and return a success code:
 
 ```rust
 pub fn init<T: Storage>(store: &mut T, params: Params, msg: Vec<u8>) -> Result<Response> {
@@ -148,12 +148,11 @@ fn try_approve(params: Params, state: State, quantity: Option<Vec<Coin>>) -> Res
 
 Note that `Params` encodes a lot of information from the blockchain, essentially providing the `Context`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L3-L36) for references to all the available types in the environment.
 
-
 ## Adding a New Message
 
-In this example, we will modify this contract to add some more functionality. In particular, let's make a backdoor to the contract. In the form of a `HandleMsg::Steal` variant that must be signed by some hardcoded `THIEF` address and will release the entire contract balance to an address included in the message. Simple?
+In this example, we will modify this contract to add some more functionality. In particular, let's make a backdoor to the contract. In the form of a `HandleMsg::Steal` variant that must be signed by some hard coded `THIEF` address and will release the entire contract balance to an address included in the message. Simple?
 
-Note that this also demontrates the need to verify the code behind a contract rather than just rely on raw wasm. Since we have a reproduceable compilation step (details below), if I show you code I claim to belong to the contract, you can compile it and compare the hash to the hash stored on the blockchain, to verify that this really is the original rust code. We will be adding tooling to automate this step and make it simpler in the coming months, but for now, this example serves to demonstrate why it is important. 
+Note that this also demonstrates the need to verify the code behind a contract rather than just rely on raw wasm. Since we have a reproducible compilation step (details below), if I show you code I claim to belong to the contract, you can compile it and compare the hash to the hash stored on the blockchain, to verify that this really is the original rust code. We will be adding tooling to automate this step and make it simpler in the coming months, but for now, this example serves to demonstrate why it is important.
 
 ### Adding the Handler
 
@@ -171,14 +170,13 @@ We have a number of tests inside of `contracts.rs` that serve as templates, so l
 
 Now, try running `cargo unit-test` and see if your code works as planned. If it fails, try `RUST_BACKTRACE=1 cargo unit-test` to get a full stack trace. Now, isn't that nicer than trying to test Solidity contracts?
 
-
 [See solution here](./edit-escrow-hints#test-steal)
 
 ### Checking Gas Usage
 
-You can port the existing test to an integration test to ensure the compiled code also works. The integration tests can also use feature flags to test gas metering with singlepass, you need to instrument the code to only run with metering enabled, and run this with rust nightly. 
+You can port the existing test to an integration test to ensure the compiled code also works. The integration tests can also use feature flags to test gas metering with the "singlepass" backend, you need to instrument the code to only run with metering enabled, and run this with rust nightly.
 
-Both of these cases will be explained in detail in a future tutorial. But I can promise you, any gas costs for computation will be negligable compared to the costs for reading/writing storage (including moving tokens).
+Both of these cases will be explained in detail in a future tutorial. But I can promise you, any gas costs for computation will be negligible compared to the costs for reading/writing storage (including moving tokens).
 
 ## Compiling for Production
 
@@ -188,20 +186,20 @@ After we have our tested contract, we can run `cargo wasm` and produce a valid w
 
 The typical case for production is just using the [`cosmwasm-opt`](https://github.com/confio/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/confio/cosmwasm-opt/blob/master/README.md):
 
-```
+```bash
 docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
 ```
 
 It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`). Look at the file size now:
 
-```
-$ du -h contract.wasm 
+```text
+$ du -h contract.wasm
 68K     contract.wasm
 ```
 
 This is something you can fit in a transaction. If you cut-paste code from the given solutions, you should have an identical sha256sum. (And if any line is different, this should be different, but consistent over multiple runs of the docker image above):
 
-```
+```text
 $ sha256sum contract.wasm 
 1c447b7cedf32f3c6f4e2a32f01871f01af07e2290ec3a1795e24d8b2e67062a  contract.wasm
 ```
@@ -212,13 +210,13 @@ If you want to try to inspect the output, and figure out where to optimize, you 
 
 First, follow the directions to [install `wasm-pack`](https://rustwasm.github.io/wasm-pack/installer/).
 
-```
+```bash
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh 
 ```
 
 Then you can build it and check to compiled data, which will be output to `./pkg/escrow_bg.wasm`:
 
-```
+```bash
 wasm-pack build
 du -h ./pkg/escrow_bg.wasm
 ```
