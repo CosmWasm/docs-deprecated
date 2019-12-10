@@ -44,17 +44,15 @@ wasmcli query account $(wasmcli keys show bob -a)
 Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new account, then update the contract to reference it:
 
 ```bash
+# for the rest of this section, we assume you are in the same path as the rust contract (Cargo.toml)
+cd <path/to/rust/code>
+
 # Set the THIEF variable in source code to this value
 wasmcli keys show thief -a
 
 # and recompile wasm
-cd <path/to/rust/code>
 docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
 ls -lh contract.wasm
-
-# (optional) let's go back to where you were running ($HOME ?), not run inside the rust code dir
-cp contract.wasm $OLDPWD
-cd -
 ```
 
 First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
