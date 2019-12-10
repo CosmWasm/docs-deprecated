@@ -35,7 +35,7 @@ wasmcli query account $(wasmcli keys show fred -a)
 wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show thief -a) 1stake -y
 wasmcli query account $(wasmcli keys show thief -a)
 
-# bob should still be broke
+# bob should still be broke (and broken showing an Error that the account does not exist)
 wasmcli query account $(wasmcli keys show bob -a)
 ```
 
@@ -50,8 +50,8 @@ wasmcli keys show thief -a
 # and recompile wasm
 cd <path/to/rust/code>
 docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
-ls -l contract.wasm
-cp contract.wasm $HOME
+ls -lh contract.wasm
+cp contract.wasm $HOME [__Why is this necessary?__]
 ```
 
 First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
@@ -68,7 +68,7 @@ wasmcli query wasm list-code
 # verify this uploaded contract has the same hash as the local code
 sha256sum contract.wasm
 
-# you can also download the wasm from the chain
+# you can also download the wasm from the chain and check that the diff between them is empty
 wasmcli query wasm code 1 download.wasm
 diff contract.wasm download.wasm
 ```
@@ -100,6 +100,7 @@ Once we have the funds in the escrow, let us try to release them. First, failing
 APPROVE='{"approve":{"quantity":[{"amount":"20000","denom":"stake"}]}}'
 wasmcli tx wasm execute validator $CONTRACT "$APPROVE" -y
 # looking at the logs should show: "execute wasm contract failed: Unauthorized"
+# and bob should still be broke (and broken showing the account does not exist Error)
 wasmcli query account $(wasmcli keys show bob -a)
 
 # but succeeds when fred tries
@@ -119,9 +120,9 @@ wasmcli query account $CONTRACT
 
 This is a very simple example for the escrow contract we developed, but it should show you what is possible, limited only by the wasm code you upload and the json messages you send. If you want a guided tutorial to build a contract from start to finish, check out the [namecoin tutorial](../namecoin/intro).
 
-If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/confio/cosmwasm-template) and use that as a configured projects to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/confio/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
+If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/confio/cosmwasm-template) and use that as a configured project to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/confio/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
 
-In either case, there is some documentation in [`go-cosmwasm`](https://github.com/confio/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/confio/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/confio/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/cosmwasm/wasmd/issues) if they have to deal with the sdk integration.
+In either case, there is some documentation in [`go-cosmwasm`](https://github.com/confio/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/confio/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/confio/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/cosmwasm/wasmd/issues) if they have to do with the SDK integration.
 
 Happy Hacking!
 
