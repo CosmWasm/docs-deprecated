@@ -69,18 +69,26 @@ fn handle_steal() {
 
     // initialize the store
     let msg = init_msg(1000, 0);
-    let params = mock_params_height("creator", &coin("1000", "earth"), &[], 400, 0);
+    let params = mock_params_height("creator", &coin("1000", "earth"), &[], 876, 0);
     let init_res = init(&mut store, params, msg).unwrap();
     assert_eq!(0, init_res.messages.len());
 
     // not just "anybody" can steal the funds
-    let msg = to_vec(&HandleMsg::Steal { destination: "bankvault".to_string()}).unwrap();
-    let params = mock_params("anybody", &[], &coin("1000", "earth"));
+    let msg = to_vec(&HandleMsg::Steal { destination: "bankvault".to_string() }).unwrap();
+    let params = mock_params_height(
+        "anybody",
+         &[],
+         &coin("1000", "earth")
+    );
     let handle_res = handle(&mut store, params, msg.clone());
     assert!(handle_res.is_err());
 
     // only the master thief
-    let params = mock_params(THIEF, &[], &coin("1000", "earth"));
+    let params = mock_params_height(
+        THIEF,
+        &[],
+        &coin("1000", "earth")
+    );
     let handle_res = handle(&mut store, params, msg.clone()).unwrap();
     assert_eq!(1, handle_res.messages.len());
     let msg = handle_res.messages.get(0).expect("no message");
