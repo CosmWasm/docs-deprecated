@@ -50,6 +50,10 @@ my-docusaurus/
 
 # Editing Content
 
+## Install a Markdown Linter
+
+The [markdownlint extension for VSCode](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) works very well linting markdown. It helps you to organize headers correct way(indented) so the right bar will look correct. Please install this (or an equivalent for your editor) before adding any PRs to make sure the markdown is nice and clean.
+
 ## Editing an existing docs page
 
 Edit docs by navigating to `docs/` and editing the corresponding document:
