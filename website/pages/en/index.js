@@ -60,7 +60,6 @@ class HomeSplash extends React.Component {
 
     return (
       <SplashContainer>
-        <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
@@ -120,7 +119,7 @@ class Index extends React.Component {
                 <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
                 <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
               </ul>`,
-            image: `${baseUrl}img/undraw_note_list.svg`,
+            image: `${baseUrl}img/undraw_project_completed.svg`,
             imageAlign: 'right',
             title: 'Key Features',
           },
@@ -148,7 +147,7 @@ class Index extends React.Component {
               worrying about the delicacy of the contract like in the Solidity world.
               </p>
               `,
-            image: `${baseUrl}img/undraw_note_list.svg`,
+            image: `${baseUrl}img/undraw_dev_productivity.svg`,
             imageAlign: 'left',
             title: 'Go beyond Ethereum Smart Contracts',
           },
