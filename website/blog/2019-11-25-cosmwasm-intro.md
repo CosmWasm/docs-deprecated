@@ -68,20 +68,22 @@ Now that we have covered developing custom contracts in Rust, let us turn to the
 
 Pretty much all the crypto-economic and governance design decisions can be implemented by forking the Go module. If you have ideas, please open issue, or just fork the code and implement it. We at Confio would be happy to discuss any approaches.
 
-## Demo
-
-TODO: add screenshare, link to transcript/tutorial
-
 ## Future Work
 
 CosmWasm, both the VM as well as the platform, is at a usable alpha-state now and we are working on refining the last issues to make it production-ready, with your feedback. Smaller fixes needed to make it ready for mainnet [are being tracked in this project](https://github.com/orgs/confio/projects/1). In addition to that, we want to build tooling around it, and iterate on new features, ideally focused on the needs of real users. Some of the main points on the current roadmap are:
 
 * Launch and maintain a public testnet, so anyone can experiment with contracts
-    * Add support for existing cosmos tools, like block explorer and wallet on this network.
-* Build collection of standard contracts to inspire development (like OpenZeppelin)
-    * With documentation and tutorials to help onboard new developers
-* Create a website to verify rust code behind wasm byte code. ([build system already built](https://github.com/cosmwasm/cosmos-sdk/issues/9))
-* Simple JS APIs to instantiate and execute contracts to enable dApp development
-    * Also add some demo dApps to go along with demo contracts
-* Feedback from community to refine additional features - like query and precompiles
-* Integrations with more standard Cosmos SDK modules as requested (eg staking)
+* Add support for existing cosmos tools, like block explorer and wallet on this network.
+* Build collection of standard contracts to inspire development (like OpenZeppelin), with documentation and tutorials to help onboard new developers
+* Create a website to verify rust code behind wasm byte code, like etherscan. The [build system already built](https://github.com/cosmwasm/cosmos-sdk/issues/9), but a web frontend is needed.
+* Set up a registry to share contracts (or provide a nice way to use [crates.io](https://crates.io))
+* Provide simple JS APIs to instantiate and execute contracts to enable dApp development, along with a demo dApp.
+* Provide integrations with IBC (when golang implementation is stable) to allow multi-chain interactions by smart contracts.
+
+We are also very eager for feedback from the community to influence some designs, like [queries](https://github.com/confio/cosmwasm/issues/72), precompiles, and even a [second language for contract development](https://github.com/confio/cosmwasm/issues/74). As well as concrete use cases and apps that would motivate deeper integrations with the standard Cosmos SDK modules.
+
+## Contact Us
+
+Please [read the docs](https://www.cosmwasm.com), and play with [our starter kit](https://github.com/confio/cosmwasm-template). If you have any questions, or if you want some advice on integrating CosmWasm with your app, or building on top of it, please don't hesitate to get in touch.
+
+You can email us at *cosmwasm@confio.tech* or join the [CosmWasm Telegram group](https://t.me/joinchat/AkZriEhk9qcRw5A5U2MapA). Also visit [confio.tech](http://confio.tech) on the web, or [follow our blog](https://medium.com/confio) to see what other projects we are up to.
