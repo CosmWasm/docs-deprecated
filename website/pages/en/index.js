@@ -86,26 +86,26 @@ class Index extends React.Component {
         id={props.id}
         background={props.background}>
         <GridBlock
-          align="center"
+          align={props.align || 'center'}
           contents={props.children}
           layout={props.layout}
         />
       </Container>
     );
 
-    const FeatureCallout = () => (
-      <div
-        className="productShowcaseSection paddingBottom"
-        style={{textAlign: 'center'}}>
-        <h2>Key Features</h2>
-        <ul>
-          <li>Tight integration with <a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK</a> and the <a href="https://cosmos.network">Cosmos ecosystem</a>.</li>
-          <li>Mature tooling for developing and testing smart contracts.</li>
-          <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
-          <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
-        </ul>
-      </div>
-    );
+    // const FeatureCallout = () => (
+    //   <div
+    //     className="productShowcaseSection alignLeft paddingBottom"
+    //     style={{textAlign: 'center'}}>
+    //     <h2>Key Features</h2>
+    //     <ul>
+    //       <li>Tight integration with <a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK</a> and the <a href="https://cosmos.network">Cosmos ecosystem</a>.</li>
+    //       <li>Mature tooling for developing and testing smart contracts.</li>
+    //       <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
+    //       <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
+    //     </ul>
+    //   </div>
+    // );
 
     const TryOut = () => (
       <Block id="try">
@@ -124,16 +124,16 @@ class Index extends React.Component {
     );
 
     const Description = () => (
-      <Block background="dark">
+      <Block background="dark" align="left">
         {[
           {
             content:
-              '<ul>
+              `<ul>
                 <li>Tight integration with <a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK</a> and the <a href="https://cosmos.network">Cosmos ecosystem</a>.</li>
                 <li>Mature tooling for developing and testing smart contracts.</li>
                 <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
                 <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
-              </ul>',
+              </ul>`,
             image: `${baseUrl}img/undraw_note_list.svg`,
             imageAlign: 'right',
             title: 'Key Features',
