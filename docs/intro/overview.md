@@ -16,7 +16,7 @@ You will need a running blockchain to host your contracts and use them from an a
 
 ## Where to Start
 
-[Smart Contracts](./smart-contracts.md) to read about design of the smart contract engine provided by CosmWasm. You will understand understand the architecture and how to design your contracts, as well as the security design of the system.
+[Smart Contracts](./smart-contracts.md) to read about design of the smart contract engine provided by CosmWasm. You will understand the architecture and how to design your contracts, as well as the security design of the system.
 
 [Using the SDK](./using-the-sdk.md) for those who have no prior experience with the Cosmos SDK will get you up and running with the basics of using a Cosmos SDK based blockchain. By the end, You will be able to compile a chain from source and launch a local devnet.
 
