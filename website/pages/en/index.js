@@ -60,7 +60,6 @@ class HomeSplash extends React.Component {
 
     return (
       <SplashContainer>
-        <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
@@ -93,20 +92,6 @@ class Index extends React.Component {
       </Container>
     );
 
-    // const FeatureCallout = () => (
-    //   <div
-    //     className="productShowcaseSection alignLeft paddingBottom"
-    //     style={{textAlign: 'center'}}>
-    //     <h2>Key Features</h2>
-    //     <ul>
-    //       <li>Tight integration with <a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK</a> and the <a href="https://cosmos.network">Cosmos ecosystem</a>.</li>
-    //       <li>Mature tooling for developing and testing smart contracts.</li>
-    //       <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
-    //       <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
-    //     </ul>
-    //   </div>
-    // );
-
     const TryOut = () => (
       <Block id="try">
         {[
@@ -123,8 +108,8 @@ class Index extends React.Component {
       </Block>
     );
 
-    const Description = () => (
-      <Block background="dark" align="left">
+    const FeatureCallout = () => (
+      <Block background="dark" align="left" id="callout">
         {[
           {
             content:
@@ -134,9 +119,37 @@ class Index extends React.Component {
                 <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
                 <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
               </ul>`,
-            image: `${baseUrl}img/undraw_note_list.svg`,
+            image: `${baseUrl}img/undraw_project_completed.svg`,
             imageAlign: 'right',
             title: 'Key Features',
+          },
+        ]}
+      </Block>
+    );
+
+    const Description = () => (
+      <Block align="left" id="description">
+        {[
+          {
+            content:
+              `<p>
+              For starters, they can run on multiple chains, making use of Cosmos's groundbreaking
+              <a href="https://cosmos.network/ibc/">InterBlockchain Communication protocol</a>.
+              </p><p>
+              Secondly, they are secure with most of the known vector attacks evidenced on <a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Ethereum closed by design</a>. 
+              CosmWasm is safe from Reentrancy, Arithmetic under/overflows, Default Visibilities, and more.
+              </p><p>
+              Finally, they can leverage the speed of wasm and power of rust, to perform any algorithm you desire.
+              Just import <a href="https://docs.rs/rust_decimal/1.0.3/rust_decimal/index.html">fixed point decimal math</a>
+              or <a href="https://docs.rs/blake2b/0.7.0/blake2b/">blake2b hashing algorithm</a>. 
+              </p><p>
+              Embrace the CosmWasm smart contracts with confidence, and build your own without 
+              worrying about the delicacy of the contract like in the Solidity world.
+              </p>
+              `,
+            image: `${baseUrl}img/undraw_dev_productivity.svg`,
+            imageAlign: 'left',
+            title: 'Go beyond Ethereum Smart Contracts',
           },
         ]}
       </Block>
@@ -209,9 +222,10 @@ class Index extends React.Component {
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
           <Features />
-      {/* <FeatureCallout />
+      {/* 
           <LearnHow />
           <TryOut /> */}
+          <FeatureCallout />
           <Description />
           <Showcase />
         </div>

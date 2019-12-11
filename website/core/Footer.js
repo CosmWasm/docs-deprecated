@@ -37,18 +37,20 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('cosmwasm-for-developers.html', this.props.language)}>
+            <a href={this.docUrl('intro/overview', this.props.language)}>
               Getting Started
             </a>
+            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
           </div>
           <div>
             <h5>Community</h5>
             <a href="https://t.me/joinchat/AkZriEhk9qcRw5A5U2MapA">Telegram</a>
+            <a href="mailto:cosmwasm@confio.tech">cosmwasm@confio.tech</a>
           </div>
           <div>
             <h5>More</h5>
-            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
             <a href="https://github.com/confio/cosmwasm">GitHub</a>
+            <a href="https://medium.com/confio">Confio Blog</a>
           </div>
         </section>
 

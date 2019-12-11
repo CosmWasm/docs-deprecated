@@ -1,8 +1,8 @@
 // GIT_USER=ethanfrey USE_SSH=true yarn publish-gh-pages
 
 const siteConfig = {
-  title: 'CosmWasm Documentation',
-  tagline: 'Get started with multi-chain smart contracts!',
+  title: 'Get started with multi-chain smart contracts!',
+  tagline: 'CosmWasm Documentation',
 
   // TODO: 1. host this without /docs, then custom url
   url: "http://www.cosmwasm.com",
