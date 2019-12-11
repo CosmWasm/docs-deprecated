@@ -89,7 +89,7 @@ wasmcli query wasm list-contracts
 # if this is the first contract in the devnet, it will have this address (otherwise, use the result from list-contracts)
 CONTRACT=cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5
 wasmcli query wasm contract $CONTRACT
-# TODO: this should take an argument to only return one key
+# this dumps full state. In the future, it should take an argument to only return one key
 wasmcli query wasm contract-state $CONTRACT
 wasmcli query account $CONTRACT
 ```
