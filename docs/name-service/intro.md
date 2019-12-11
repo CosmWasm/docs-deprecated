@@ -12,4 +12,4 @@ As in the [original tutorial](https://tutorials.cosmos.network/nameservice/tutor
 
 By the end of this tutorial you will have a functional `nameservice` application, a mapping of strings to other strings (`map[string]string`). This is similar to [Namecoin](https://namecoin.org/), [ENS](https://ens.domains/), [IOV](https://iov.one), or [Handshake](https://handshake.org/), which all model the traditional DNS systems (`map[domain]zonefile`). Users will be able to buy unused names, or sell/trade their name.
 
-TODO: build out tutorial
+**Coming Soon**
