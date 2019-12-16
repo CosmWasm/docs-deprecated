@@ -1,12 +1,15 @@
 {
   "docs": {
     "Intro": [
-      "intro/overview",
-      "intro/smart-contracts",
-      "intro/using-the-sdk",
-      "intro/rust-basics",
-      "intro/editing-escrow-contract",
-      "intro/first-demo"
+      "intro/overview"
+    ],
+    "Getting Started": [
+      "getting-started/intro",
+      "getting-started/smart-contracts",
+      "getting-started/using-the-sdk",
+      "getting-started/rust-basics",
+      "getting-started/editing-escrow-contract",
+      "getting-started/first-demo"
     ],
     "Name Service": [
       "name-service/intro"
