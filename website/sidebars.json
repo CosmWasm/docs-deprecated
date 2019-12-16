@@ -1,7 +1,9 @@
 {
   "docs": {
     "Intro": [
-      "intro/overview"
+      "intro/overview",
+      "intro/multichain",
+      "intro/actor"
     ],
     "Getting Started": [
       "getting-started/intro",
