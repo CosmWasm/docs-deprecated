@@ -4,8 +4,8 @@
       "intro/overview",
       "intro/multichain",
       "intro/actor",
-      "intro/serialization",
       "intro/addresses",
+      "intro/serialization",
       "intro/roadmap"
     ],
     "Getting Started": [
