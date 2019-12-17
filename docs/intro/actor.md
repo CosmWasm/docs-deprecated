@@ -4,8 +4,6 @@ title: Actor Model for Contract Calls
 sidebar_label: Actor Model
 ---
 
-## Actor Model Explained
-
 The [actor model](https://en.wikipedia.org/wiki/Actor_model) is a design pattern, often used in to build reliable, distributed systems. The fundamental points, in my eyes, are that each `Actor` has exclusive access to it's own internal state, and that `Actors` cannot call each other directly, only dispatch messages over some `Dispatcher` (that maintains the state of the system and can map addresses to code and storage). Fundamentally the `Actor` pattern can be encapsulated in such an interface:
 
 ```go
