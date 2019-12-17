@@ -3,7 +3,10 @@
     "Intro": [
       "intro/overview",
       "intro/multichain",
-      "intro/actor"
+      "intro/actor",
+      "intro/serialization",
+      "intro/addresses",
+      "intro/roadmap"
     ],
     "Getting Started": [
       "getting-started/intro",
