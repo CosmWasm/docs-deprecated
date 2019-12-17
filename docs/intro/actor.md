@@ -4,7 +4,7 @@ title: Actor Model for Contract Calls
 sidebar_label: Actor Model
 ---
 
-The [actor model](https://en.wikipedia.org/wiki/Actor_model) is a design pattern, often used in to build reliable, distributed systems. The fundamental points, in my eyes, are that each `Actor` has exclusive access to it's own internal state, and that `Actors` cannot call each other directly, only dispatch messages over some `Dispatcher` (that maintains the state of the system and can map addresses to code and storage). Fundamentally the `Actor` pattern can be encapsulated in such an interface:
+The [actor model](https://en.wikipedia.org/wiki/Actor_model) is a design pattern, often used in to build reliable, distributed systems. The fundamental points, in my opinion, are that each `Actor` has exclusive access to its own internal state, and that `Actors` cannot call each other directly, only dispatch messages over some `Dispatcher` (that maintains the state of the system and can map addresses to code and storage). Fundamentally the `Actor` pattern can be encapsulated in such an interface:
 
 ```go
 type Actor interface {
@@ -45,16 +45,21 @@ The aspects of **locality** and **loose coupling** mean that we don't even need 
 
 Since the Actor model doesn't attempt to make synchronous calls to another contract, but just returns a message "to be executed", it is a nice match for making cross-chain contract calls using [IBC](https://cosmos.network/ibc). The only caveat here is that the *atomic execution* guarantee we provided above no longer applies here. The other call will not be called by the same dispatcher, so we need to store an intermediate state in the contract itself. That means a state that cannot be changed until the result of the IBC call is known, then can be safely applied or reverted.
 
-For example, if we want to move tokens from chain A to chain B:
+For example, if we want to move tokens from chain A to chain B, we would first prepare a send:
 
 1. Contract A reduces token supply of sender
 2. Contract A creates a "escrow" of those tokens linked to IBC message id, sender and receiving chain.
 3. Contract A commits state and returns a message to initiate an IBC transaction to chain B.
 4. If the IBC send part fails, then the contract is atomically reverted as above.
-5. The IBC message may eventually (1) succeed on Chain B, (2) error on chain B, or (3) timeout.
-6. A receipt is returned to Chain A and a special handler is invoked on contract A
-7. Contract A validates the message came from the IBC handler (authorization) and refers to a known IBC message ID it has in escrow.
-8. If it was a success, the escrow is deleted and the escrowed tokens are placed in an account for "Chain B" (meaning that only a future IBC message from Chain B may release them).
-9. If it was an error, the escrow is deleted and the escrowed tokens are returned to the account of the original sender.
+
+After some time, a "success" or "error"/"timeout" message is returned from the IBC module to the token contract:
+
+1. Contract A validates the message came from the IBC handler (authorization) and refers to a known IBC message ID it has in escrow.
+2. If it was a success, the escrow is deleted and the escrowed tokens are placed in an account for "Chain B" (meaning that only a future IBC message from Chain B may release them).
+3. If it was an error, the escrow is deleted and the escrowed tokens are returned to the account of the original sender.
 
 You can imagine a similar scenario working for cases like moving NFT ownership, cross-chain staking, etc. We will expand on these possibilities and provide tooling to help make proper design once the IBC code in Cosmos SDK is stabilized (and included in a release), but the contract design is made with this in mind.
+
+## Credits
+
+Much thanks to [Aaron Craelius](https://github.com/aaronc), who came up with this design of using an Actor model to avoid reentrancy attacks.

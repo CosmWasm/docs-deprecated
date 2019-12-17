@@ -18,7 +18,7 @@ It is helpful to have consistency to aid client development, as well as contract
 
 Protobuf is a well-known and widely-supported binary format. It gives a stricter schema guarantees than JSON and more compact format. We considered using this optionally for encoding message, and [even did a spike on it](https://github.com/confio/cosmwasm/pull/55). It lead to larger wasm code and more gas usage, and only provided some moderate space savings in the size of the transaction. This ideas has since been placed in the icebox.
 
-# Cap'n Proto
+## Cap'n Proto
 
 [Cap'n Proto](https://capnproto.org/) is a super-lean encoding format with zero-copy reads, and no parsing needed. This has been [suggested for use in CosmWasm](https://github.com/confio/cosmwasm/issues/78) as an optional addition. This may be considered as an opt-in format for contracts desiring such efficiency or strict schema, or possibly just used for encoding internal data structures (`Params`).
 

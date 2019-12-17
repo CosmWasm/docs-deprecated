@@ -10,7 +10,7 @@ of blockchains, rather than silos. But what exactly do we mean by multichain?
 
 ## Different Chain, Same Contract
 
-Since we make little requirements of the host application, it is easy for any CosmosSDK app
+Since we make little requirements of the host application, it is easy for any Cosmos SDK app
 to embed the `wasm` module and customize the permissioning or fees as they wish. All code
 is designed to be agnostic to the details of the underlying chain, so just by writing a
 CosmWasm contract, you will soon be able to run on many different chains on the Cosmos ecosystem.
