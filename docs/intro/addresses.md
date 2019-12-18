@@ -4,7 +4,7 @@ title: Names and Addresses
 sidebar_label: Names and Addresses
 ---
 
-Blockchains (almost?) all use addresses to identify external actors via a hash of a public key, and many newer ones extended this to identify on-chain "smart contracts" with unique addresses as well. On chain, addresses are represented by a use a concise, immutable binary format, typically 20 o 32 bytes long, often derived from a hashing function. However, there are many human-readable representations of these binary addresses, which are shown to clients. For example, [Bech32](https://en.bitcoin.it/wiki/Bech32) `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9`, hex `0x8617E340B3D01FA5F11F306F4090FD50E238070D` or [checksumned hex](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed`, and even [large integers](https://research.kudelskisecurity.com/2018/01/16/blockchains-how-to-steal-millions-in-264-operations/) `3040783849904107057L`.
+Blockchains (almost?) all use addresses to identify external actors via a hash of a public key, and many newer ones extended this to identify on-chain "smart contracts" with unique addresses as well. On chain, addresses are represented by a use a concise, immutable binary format, typically 20 or 32 bytes long, often derived from a hashing function. However, there are many human-readable representations of these binary addresses, which are shown to clients. For example, [Bech32](https://en.bitcoin.it/wiki/Bech32) `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9`, hex `0x8617E340B3D01FA5F11F306F4090FD50E238070D` or [checksumned hex](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed`, and even [large integers](https://research.kudelskisecurity.com/2018/01/16/blockchains-how-to-steal-millions-in-264-operations/) `3040783849904107057L`.
 
 ## Human Addresses
 
@@ -38,7 +38,7 @@ This actual format and interfaces are still under discussion, and we are still w
 
 *Note: it will likely be quite some time before this is fully implemented. It serves as design inspiration*
 
-Let's keep imagining what is possible with *Human Names*, once we develop a solution to the name service issue. We could not just use a reference to resolve a user address, but resolve a contract as well. Maybe we could dispatch a message to an "ERC20" token contract not by it's name, but by it's *uniquely registered token ticker*. We would soon need to use some way to distinguish the scope or context of a name. This is where [Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-core/) could come in. Imagine the following message format, that could be used either by a end-client or by a smart contract "actor":
+Let's keep imagining what is possible with *Human Names*, once we develop a solution to the name service issue. We could not just use a reference to resolve a user address, but resolve a contract as well. Maybe we could dispatch a message to an "ERC20" token contract not by its name, but by its *uniquely registered token ticker*. We would soon need to use some way to distinguish the scope or context of a name. This is where [Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-core/) could come in. Imagine the following message format, that could be used either by a end-client or by a smart contract "actor":
 
 ```json
 {
