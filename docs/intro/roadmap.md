@@ -11,7 +11,7 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 ## Past Achievements
 
 **August-October 2019**:
-Core work to build out cosmwasm environment, and build system, example code, and cosmos sdk integration.
+Core work to build out CosmWasm environment, and build system, example code, and cosmos sdk integration.
 
 **November 2019**:
 Tested the whole stack integration, wrote tutorials and documentation, polished many rough edges.
@@ -33,7 +33,7 @@ Release CosmWasm 0.6:
 * Support compression of wasm bytecode in contracts [#20](https://github.com/confio/go-cosmwasm/issues/20)
 * Add some stricter checks on uploaded wasm bytecode [#50](https://github.com/confio/cosmwasm/issues/50)
 
-Launch test net:
+Launch testnet:
 
 * Unincentivized testnet run by 4+ independent validators
 * Public testbed to allow testing and sharing smart contracts
