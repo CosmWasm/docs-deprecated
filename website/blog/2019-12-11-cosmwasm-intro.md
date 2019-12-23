@@ -4,8 +4,6 @@ author: Ethan Frey
 authorURL: https://github.com/ethanfrey
 ---
 
-# CosmWasm for Developers
-
 CosmWasm is a new smart contracting platform built for the cosmos ecosystem. If you haven't yet heard of it, please [check out this intro](https://blog.cosmos.network/announcing-the-launch-of-cosmwasm-cc426ab88e12). The purpose of this article is to give a deep dive into the technology for developers who wish to try it out or integrate it into their product. Particularly, it is aimed at Go developers with experience with the Cosmos-SDK, as well as Rust developers looking for a blockchain platform.
 
 CosmWasm was originally [prototyped by Team Gaians](https://github.com/cosmos-gaians/cosmos-sdk/tree/hackatom/x/contract) at the [Berlin Hackatom 2019](https://blog.cosmos.network/cosmos-hackatom-berlin-recap-4722882e7623). In particular, [Aaron Craelius](https://github.com/aaronc) came up with the architecture, especially avoiding reentrancy, [Jehan Tremback](https://github.com/jtremback) led the rust coding, and [Ethan Frey](https://github.com/ethanfrey) led the go side of the implementation. After the successful prototype, the [Interchain Foundation](https://interchain.io/) provided a grant to [Confio](http://confio.tech) to implement a robust version that would work in an adversarial environment. This article introduces developers to the output of that grant work, and lays out possible future directions.
@@ -14,7 +12,7 @@ CosmWasm was originally [prototyped by Team Gaians](https://github.com/cosmos-ga
 
 CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a blockchain using the Cosmos SDK can quickly and easily add CosmWasm smart contracting support to their chain, without adjusting existing logic. We also provide a sample binary of CosmWasm integrated into the `gaiad` binary, called [wasmd](https://github.com/cosmwasm/wasmd), so you can launch a new smart-contract enabled blockchain out of the box, using documented and tested tooling and the same security model as the Cosmos Hub.
 
-You will need a running blockchain to host your contracts and use them from an app. We will explain how to set up a local "dev net" [in the tutorial](https://www.cosmwasm.com/docs/intro/overview). And plan to soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo and to share their contract with others.
+You will need a running blockchain to host your contracts and use them from an app. We will explain how to set up a local "dev net" [in the tutorial](https://www.cosmwasm.com/docs/getting-started/intro). And plan to soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo and to share their contract with others.
 
 Once you have a CosmWasm-enabled blockchain, you can deploy a custom contract. This is similar in principle to ethereum, but there are a number of differences in the details. Since most people are familiar with that flow, let us look at some of the main similarities and differences:
 
@@ -36,19 +34,19 @@ Code correctness is paramount in blockchain smart-contracts. As the source code 
 
 While CosmWasm development has a steeper learning curve than Solidity (it definitely takes more work to get your first sample contract running), it is designed to be more productive for devs with a couple weeks of experience who wish to produce production-ready code. And we hope to have an architecture and tooling to avoid the need for a whole industry of "CosmWasm smart contract auditors", as it should be easy to just "do the right thing".
 
-One major class of attacks in ethereum (and probably the most infamous) is reentrancy. CosmWasm was architected to [eliminate the possibility of this class of attacks](https://www.cosmwasm.com/docs/intro/smart-contracts#avoiding-reentrancy-attacks).
+One major class of attacks in ethereum (and probably the most infamous) is reentrancy. CosmWasm was architected to [eliminate the possibility of this class of attacks](https://www.cosmwasm.com/docs/getting-started/smart-contracts#avoiding-reentrancy-attacks).
 
-Much like Ethereum, we take resource usage seriously. As such, we provide [hard limits on memory usage, and gas-based limits on CPU and Storage](https://www.cosmwasm.com/docs/intro/smart-contracts#resource-limits).
+Much like Ethereum, we take resource usage seriously. As such, we provide [hard limits on memory usage, and gas-based limits on CPU and Storage](https://www.cosmwasm.com/docs/getting-started/smart-contracts#resource-limits).
 
-For those who take security very seriously, you can read a longer list of [how CosmWasm stacks up against all known ethereum attack vectors](https://www.cosmwasm.com/docs/intro/smart-contracts#lessons-learned-from-ethereum).
+For those who take security very seriously, you can read a longer list of [how CosmWasm stacks up against all known ethereum attack vectors](https://www.cosmwasm.com/docs/getting-started/smart-contracts#lessons-learned-from-ethereum).
 
 ## Getting Started with CosmWasm
 
-If you are anxious to get started, you can [jump right in with our first tutorial](https://www.cosmwasm.com/docs/intro/overview). This will walk you through modifying an existing contract, compiling it, deploying it to a local "dev net" and running the contracts via a command line tool.
+If you are anxious to get started, you can [jump right in with our first tutorial](https://www.cosmwasm.com/docs/getting-started/intro). This will walk you through modifying an existing contract, compiling it, deploying it to a local "dev net" and running the contracts via a command line tool. If you want more theoretical background, you can [read up on the architecture design](https://www.cosmwasm.com/docs/intro/overview).
 
 ### Writing Contracts (Rust)
 
-Writing your own contract is quite easy if you have a working knowledge of rust.  If you don't, it should still be relatively straightforward to make minor changes to existing contracts, just picking up syntax on the fly. We do [walk you through the basics](https://www.cosmwasm.com/docs/intro/rust-basics) and [explain editing a contract](https://www.cosmwasm.com/docs/intro/editing-escrow-contract) in the tutorial, but if you are an advanced dev and want to jump right in with a few pointers, we explain some key points here and where to find the code.
+Writing your own contract is quite easy if you have a working knowledge of rust.  If you don't, it should still be relatively straightforward to make minor changes to existing contracts, just picking up syntax on the fly. We do [walk you through the basics](https://www.cosmwasm.com/docs/getting-started/rust-basics) and [explain editing a contract](https://www.cosmwasm.com/docs/intrgetting-startedo/editing-escrow-contract) in the tutorial, but if you are an advanced dev and want to jump right in with a few pointers, we explain some key points here and where to find the code.
 
 [Confio/cosmwasm](https://github.com/confio/cosmwasm) is a library providing all modular code needed for building a contract. And [cosmwasm-template](https://github.com/confio/cosmwasm-template) contains a starter pack to quickly set up a minimal contract along with build system and unit tests, so you can start writing custom logic directly. Both of these libraries offer deeper documentation on how to build them. If you want to write you own contract, follow the instructions on [cosmwasm-template](https://github.com/confio/cosmwasm-template) and just start editing `contract.rs`.
 
