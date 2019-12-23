@@ -31,3 +31,7 @@ For others, best to go through this one first.
 [Editing a Contract](./editing-escrow-contract) will apply your (newly acquired) Rust skills to make some changes to a sample contract.
 
 [Deploying to Testnet](./first-demo) is a simple demo that builds on the above sections and walks you through, step by step, taking your custom contract, deploying it to a testnet, and executing it. This will show you not just the internals of the contract, but how to use it from the outside.
+
+## Video Version
+
+The coding sections for smart contracts are also available as a [series of videos, leading you through the code structure](https://vimeo.com/showcase/6671477).
