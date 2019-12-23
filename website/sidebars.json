@@ -5,6 +5,7 @@
       "intro/multichain",
       "intro/actor",
       "intro/addresses",
+      "intro/query",
       "intro/serialization",
       "intro/roadmap"
     ],
