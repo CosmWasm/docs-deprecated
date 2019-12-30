@@ -11,7 +11,11 @@ Now that you can compile and run tests, let's try to make some changes to the co
 ```bash
 git clone https://github.com/confio/cosmwasm-examples
 cd cosmwasm-examples/escrow
+git checkout escrow-0.1.0
 ```
+
+Note that you must check out that revision, which is a CosmWasm v0.5 compatible contract (same version as `wasmd`). Master has
+now been upgraded to a new 0.6 api, but `wasmd` is still not upgraded, so we use the old format until we can do end-to-end tests.
 
 ## A Walk-Through of the Escrow Contract
 
