@@ -138,3 +138,15 @@ cargo crev crate info hex
 ```
 
 TODO: how to get the reviews that caused pass/warn
+
+## Publishing your Web of Trust
+
+TODO
+
+```sh
+cargo crev repo publish
+```
+
+## Reviewing a Crate
+
+TODO
