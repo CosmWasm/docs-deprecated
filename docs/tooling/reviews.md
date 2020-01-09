@@ -32,7 +32,7 @@ cargo crev crate open -u cw-erc20 0.1.0 --cmd "code --wait -n" --cmd-save
 IntelliJ:
 
 ```sh 
-cargo crev crate open -u cw-erc20 0.1.0 --cmd "code --wait -n" --cmd-save
+cargo crev crate open -u cw-erc20 0.1.0 --cmd "TODO" --cmd-save
 ```
 
 *Note:* you must be in the directory of some rust project to use `cargo crev crate`
@@ -107,9 +107,45 @@ information for everyone.
 
 ## Write your review
 
+Once you have finished reviewing the code above and lodged any issues on the official repo,
+you can write up a code review to share with the world. Close the editor and go back to the
+terminal where you ran `cargo crev crate open ...`. Now, let's go write our review:
 
-### Updating the review
+```sh
+# Clean up any edits you made while testing
+cargo crev crate clean -u cw-erc20
 
+# Write a review
+cargo crev crate review -u cw-erc20
+```
+
+In particular, make sure to correctly note your `thoroughness` and `understanding`
+as `high`, `medium`, `low` or `none`. And your `rating` as `strong`, `positive`,
+`neutral`, `negative`, or `dangerous`. There is a description of the meaning at
+the bottom of the document in your editor. Please add a decent comment explaining
+your results, and you can also add a section to link to any issues you registered on github.
+
+Please be honest. If you just did a brief check, please mark thoroughness as `low`.
+This is better than no review, but if you claim a detailed review, it can be misleading.
+Honesty counts and bad reviews can get you removed or isolated on the web of trust.
+
+Here is my submission for `cw-erc20`, please note you must indent every line in the comment block:
+
+```toml
+# Package Review of cw-erc20 0.1.0
+review:
+  thoroughness: medium
+  understanding: high
+  rating: strong
+flags:
+  unmaintained: false
+comment: |-
+  Good test coverage and simple, straight-forward code. This makes a solid base for other contracts to build on.
+  Some work may be needed to enable easier reuse in other contracts, but it is very solid to run it as-is.
+```
+
+Verify this was saved properly with `cargo crev repo query review cw-erc20` and if it looks good,
+make sure to publish it.
 
 ## Publishing
 
@@ -122,3 +158,52 @@ cargo crev repo publish
 
 Then, make sure other developers can find your review, by publishing your repo and ID
 on the [list of CosmWasm developers](./verify#cosmwasm-developers).
+
+## Visibility of contract reviews
+
+The `crev` tool is largely designed to validate dependencies. That is, crates
+that are imported by the current crate. You will notice that the current crate
+always shows up as `local`, even if there are reviews. Thus, if you check out
+a contract you wish to review and run the `crate verify` command on it,
+you will not see info on the contract itself. 
+
+You can see info on any contract you wish to reuse (not import),
+by querying the reviews directly:
+
+```sh
+cargo crev repo query review cw-erc20
+```
+
+(Interestingly, these reviews do not show up via `cargo crev crate info -u cw-erc20`).
+
+One take-away of this, is that the most essential crates to review (besides anything
+you immediately intend to put on a production blockchain), are those crates which
+are imported by others. This includes libraries, such as
+[`cw-storage`](https://github.com/confio/cw-storage), as well as contracts designed
+to be imported by others and extended (which will likely be true of a future version
+of `cw-erc20`). Doing so leverages the value of the review not just for one contract,
+but for many contracts that depend on that code.
+
+## Updating your review
+
+There are two reasons to update a review. Either you found more time and did a deeper, more thorough review
+of the same version, or a new version was published, possibly in response to issues you logged in the first version.
+In either case, you can just run the same commands as above, especially `cargo crev crate review -u cw-erc20` to submit a review.
+
+If there is a new version out there, this will submit a second review for the new version.
+This preserves important information, such as `0.2.0` fixed some important security issues that were
+present in `0.1.0`. The combination of a negative and positive review on different versions is very helpful 
+for anyone looking to reuse this code. When making the second review, you should notice that the `package.version`
+in the review file is updated.
+
+If there is no new version published to [crates.io](https://crates.io), you will see a notice in the header:
+
+```toml
+# Overwriting existing proof created on 2020-01-09T12:47:39.924625388+01:00
+# Package Review of cw-erc20 0.1.0
+```
+
+This warns you that you are about to overwrite an existing proof, rather than review a new version.
+If this is not what you expect, make sure that the crate owner has published the new version of their
+crate to [crates.io](https://crates.io). Maybe the fixes are just in `master` and you will have to
+wait for an official release to add a new review on that.

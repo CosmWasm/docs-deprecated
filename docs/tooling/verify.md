@@ -188,3 +188,10 @@ Please [create a PR on `cosmwasm/docs`](https://github.com/cosmwasm/docs/pulls) 
 on this list. Anyone that has contributed to cosmwasm or published a cosmwasm-based
 contract is eligable to be on the list. It is not curated, so please make your own
 decision if you know and trust these developers.
+
+### Rust Developers
+
+You can also check out the [crev proof repository list](https://github.com/crev-dev/cargo-crev/wiki/List-of-Proof-Repositories)
+to get a list of general Rust developers who have been submitting proofs for other
+crates. If you have reviewed some general (non cosmwasm-specific) crates, you may
+also want to add yourself to that list.
