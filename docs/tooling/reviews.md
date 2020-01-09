@@ -125,28 +125,66 @@ Now that we are in the root of a rust project (in the same directory as `Cargo.t
 let's check out what reviews we find in the web of trust:
 
 ```sh
+cargo crev crate clean
 cargo crev crate verify --no-dev-dependencies
 ```
 
 You will see a few green `pass`, quite a few `none` (some with reviews, but from lower trusted devs),
 and maybe even a `warn`. When I first ran this, I found a `warn` message by `redox_syscall`
-and `smallvec`. Let's investigate further:
+and `smallvec`. Let's investigate further. You can get some general info on the crates:
 
 ```sh
 cargo crev crate info smallvec
 cargo crev crate info hex
 ```
 
-TODO: how to get the reviews that caused pass/warn
+But if you want to get the full reviews, you must use:
+
+```sh
+cargo crev repo query review hex
+cargo crev repo query review smallvec
+
+# to find negative reviews, you can also query related advisories and issues
+cargo crev repo query advisory smallvec
+cargo crev repo query issue smallvec
+```
+
+### Test your contract
+
+Go to the directory of a smart contract you created, or go to the `escrow`
+contract in [`https://github.com/confio/cosmwasm-examples`](https://github.com/confio/cosmwasm-examples)
+if you don't have your own contract. These have fewer dependencies, and I would really
+like to get all of the common dependencies reviewed in the mid-term. Due to the
+feature flags in contracts derived from [`cosmwasm-template`](https://github.com/confio/cosmwasm-template),
+you will need the following (notice extra flag on verify):
+
+```sh
+cargo crev crate clean
+cargo crev crate verify --no-dev-dependencies --no-default-features
+```
+
+My check shows a number of `pass` and no `warn`, a good start. Also, a number
+of the `none` crates, have a positive review on a slightly older version
+of the same crate, so those should be low hanging fruit to update.
 
 ## Publishing your Web of Trust
 
-TODO
+Now that you have learned some tools, feel free to add a few other developers
+to your web of trust, and then publish your key here, so we can start connecting.
 
 ```sh
 cargo crev repo publish
 ```
 
-## Reviewing a Crate
+### CosmWasm Developers
 
-TODO
+Beyond the [seeds listed above](#bootstrapping-your-web-of-trust), we can list some
+known developers working on CosmWasm. These may add relevant reviews, but only add
+them if you know them (or their work) beyond this website.
+
+**None**
+
+Please [create a PR on `cosmwasm/docs`](https://github.com/cosmwasm/docs/pulls) if you want to be
+on this list. Anyone that has contributed to cosmwasm or published a cosmwasm-based
+contract is eligable to be on the list. It is not curated, so please make your own
+decision if you know and trust these developers.
