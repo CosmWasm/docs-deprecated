@@ -1,7 +1,7 @@
 ---
-id: reviews
-title: Cryptographic Code Reviews
-sidebar_label: Code Reviews
+id: verify
+title: Verifying with Cryptographic Code Reviews
+sidebar_label: Verifying Code
 ---
 
 An essential component to creating secure, trustable smart contracts are audits
