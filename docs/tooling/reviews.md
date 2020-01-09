@@ -150,7 +150,14 @@ make sure to publish it.
 ## Publishing
 
 Once you have created a review, you will want to share it with the world.
-First, you need to publish it to your personal `crev-proofs` repo:
+You can see which updates you have not yet published, but reviewing your local
+git history:
+
+```sh
+cargo crev repo git log
+```
+
+Once you are sure these updates are ready to share, you need to publish it to your personal `crev-proofs` repo:
 
 ```sh
 cargo crev repo publish
