@@ -29,10 +29,10 @@ VSCode:
 cargo crev crate open -u cw-erc20 0.1.0 --cmd "code --wait -n" --cmd-save
 ```
 
-IntelliJ:
+IntelliJ: (only works when no IntelliJ window is currently open)
 
 ```sh 
-cargo crev crate open -u cw-erc20 0.1.0 --cmd "TODO" --cmd-save
+cargo crev crate open -u cw-erc20 0.1.0 --cmd "idea.sh" --cmd-save
 ```
 
 *Note:* you must be in the directory of some rust project to use `cargo crev crate`
