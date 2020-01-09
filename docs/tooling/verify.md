@@ -101,7 +101,9 @@ in reviews of many `cosmwasm` related packages:
 
 ```sh
 cargo crev repo fetch url https://github.com/ethanfrey/crev-proofs
+# two ids for different devices
 cargo crev id trust aXPP9kgM2ENNWug1ltY3AiHBDFP6NWoDcoaHM7b_i08
+cargo crev id trust Fa_KJe6fi4eDoak8SGkysvRCNjZP4IC03L05iw_vepI
 ```
 
 Once you have trusted one (or both) of the above seeds, you can pull in their trust graph.
