@@ -184,7 +184,9 @@ Beyond the [seeds listed above](#bootstrapping-your-web-of-trust), we can list s
 known developers working on CosmWasm. These may add relevant reviews, but only add
 them if you know them (or their work) beyond this website.
 
-**None**
+| Username / CRev Repo | CRevID |
+| -------------------- | ------ |
+| [clevinson](https://github.com/clevinson/crev-proofs) | `GfZom6m1khImklK13bD_JPI8dr4Go86U9YHVLcg5Jmg` |
 
 Please [create a PR on `cosmwasm/docs`](https://github.com/cosmwasm/docs/pulls) if you want to be
 on this list. Anyone that has contributed to cosmwasm or published a cosmwasm-based
