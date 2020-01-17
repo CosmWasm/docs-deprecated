@@ -135,6 +135,8 @@ Unlike 0.5.2, cosmwasm 0.6.x will parse the incoming json into a contract-specif
 
 You will also see the [`match` statement](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch06-02-match.html). This is another nice Rust idiom, and allows you to `switch` over multiple patterns. Here we check the multiple variants of the `HandleMsg` enum. Note that if you don't cover all cases, the compiler will refuse to proceed.
 
+We pass in `&deps.api` to give the handlers access to the "precompiles" from the runtime, which provide blockchain-specific logic. In particular, we currently use this to translate `CanonicalAddr` to `HumanAddr` in a blockchain-specific manner. 
+
 If we now look into the `try_approve` function, we will see how we can respond to a message. We can return an `unauthorized` error if the `signer` is not what we expect, and custom `contract_err` if our business logic rejects the message. The `let amount =` line shows how we can use pattern matching to use the number of coins present in the msg if provided, or default to the entire balance of the contract. Mastering `match` is very useful for Rust development.
 
 ```rust
@@ -227,10 +229,13 @@ After we have our tested contract, we can run `cargo wasm` and produce a valid w
 The typical case for production is just using the [`cosmwasm-opt`](https://github.com/confio/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/confio/cosmwasm-opt/blob/master/README.md):
 
 ```bash
-docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
+docker run --rm -v $(pwd):/code \
+  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  confio/cosmwasm-opt:0.6.1
 ```
 
-It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`). Look at the file size now:
+It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`), as well as `hash.txt` with the sah256 hash. It will also update the schemas in `schema/handle_msg.json`. To see the effect of optimization, look at the file size now:
 
 ```text
 $ du -h contract.wasm
@@ -240,8 +245,14 @@ $ du -h contract.wasm
 This is something you can fit in a transaction. If you cut-paste code from the given solutions, you should have an identical sha256sum. (And if any line is different, this should be different, but consistent over multiple runs of the docker image above):
 
 ```text
-$ sha256sum contract.wasm 
-1c447b7cedf32f3c6f4e2a32f01871f01af07e2290ec3a1795e24d8b2e67062a  contract.wasm
+$ cat hash.txt
+fc047217e848edb8a1038fe1e008b8a8243cd060021deb5f630e35deee42383d  contract.wasm
+```
+
+You should also see the definition for the `"steal"` call:
+
+```bash
+grep -A9 steal schema/handle_msg.json
 ```
 
 ### Debuggable Builds
@@ -258,9 +269,9 @@ Then you can build it and check to compiled data, which will be output to `./pkg
 
 ```bash
 wasm-pack build
-du -h ./pkg/escrow_bg.wasm
+du -h ./pkg/cw_escrow_bg.wasm
 ```
 
-This is 84K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space. The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
+This is 88K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space. The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
 
 In the current build, most usage seems to be out actual business logic, as well as a contribution from `serde_json_wasm` (which is far, far smaller than the original `serde_json` library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly, this is a good place to track down where the bloat comes from and possibly remove it. This is the technique I used to reduce the build size from 172kB down to the current 68kB, even while adding functionality. These techniques may be useful for others, especially when pulling in many new libraries.
