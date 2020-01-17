@@ -23,12 +23,20 @@ make install
 Set up a single-node local testnet:
 
 ```bash
+# if you've done this before, wipe out all data from last run
+# this may wipe out keys, make sure you know you want to do this
+rm -rf ~/.wasmd
+
 cd $HOME
 wasmd init --chain-id=testing testing
 
+# if you've done this before, check which keys are created locally first
+# wasmcli keys list
+# you can skip any "add" steps if they already exist
 wasmcli keys add validator
 
 wasmd add-genesis-account $(wasmcli keys show validator -a) 1000000000stake,1000000000validatortoken
+# You can add a few more accounts here if you wish (for experiments beyond the tutorial)
 
 wasmd gentx --name validator
 wasmd collect-gentxs
