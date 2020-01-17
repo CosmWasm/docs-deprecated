@@ -11,7 +11,7 @@ Now that you can compile and run tests, let's try to make some changes to the co
 ```bash
 git clone https://github.com/confio/cosmwasm-examples
 cd cosmwasm-examples/escrow
-git checkout escrow-0.1.0
+git checkout escrow-0.2.1
 ```
 
 Note that you must check out that revision, which is a CosmWasm v0.5 compatible contract (same version as `wasmd`). Master has
@@ -21,22 +21,28 @@ now been upgraded to a new 0.6 api, but `wasmd` is still not upgraded, so we use
 
 ### Data Structures
 
-There are three key data structures used in the contract - for encoding the instantiation message, for encoding the execution messages, and for storing the contract data. All of them must be prefixed with the line `#[derive(Serialize, Deserialize)]` to allow the [`serde-json`](https://github.com/serde-rs/json) library to de-serialize them (there is no [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) in rust). Otherwise, it should be pretty clear how the `State` defines the current condition of a contract, and `InitMsg` will provide the initial data to configure said contract. Please note that `State` is the *only information* persisted between multiple contract calls:
+There are three key data structures used in the contract - for encoding the instantiation message, for encoding the execution messages, and for storing the contract data. All of them must be prefixed with a long `derive` line to add various functionality. Otherwise, it should be pretty clear how the `State` defines the current condition of a contract, and `InitMsg` will provide the initial data to configure said contract. Please note that `State` is the *only information* persisted between multiple contract calls. Purpose of these `derive` directives:
+
+* `Serialize`, `Deserialize` generate methods so the [`serde-json`](https://github.com/serde-rs/json) library can de-serialize them (there is no [reflection](https://en.wikipedia.org/wiki/Reflection_(computer_programming)) in rust)
+* `Clone` allows you to make a copy of the object (`msg.clone()`)
+* `Debug` and `PartialEq` are very useful for testing. In particular they allow the use of `assert_eq!(expected, msg);`
+* `JsonSchema` is needed by [`schemars`](https://docs.rs/schemars/0.5.0/schemars), so we can use [`schema_for!`](https://docs.rs/schemars/0.5.0/schemars/macro.schema_for.html) to generate the json schema objects (in `schema/*.json`)
+* [`NamedType`](https://docs.rs/named_type/0.2.1/named_type/) provides a `short_type_name()` static method, which is used in [`cw-storage`](https://github.com/confio/cw-storage) to provide error messages when saving/loading objects from the backing storage
 
 ```rust
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema, NamedType)]
 pub struct State {
-    pub arbiter: String,
-    pub recipient: String,
-    pub source: String,
+    pub arbiter: CanonicalAddr,
+    pub recipient: CanonicalAddr,
+    pub source: CanonicalAddr,
     pub end_height: i64,
     pub end_time: i64,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InitMsg {
-    pub arbiter: String,
-    pub recipient: String,
+    pub arbiter: HumanAddr,
+    pub recipient: HumanAddr,
     // you can set a last time or block height the contract is valid at
     // if *either* is non-zero and below current state, the contract is considered expired
     // and will be returned to the original funder
@@ -45,10 +51,12 @@ pub struct InitMsg {
 }
 ```
 
+Note that we use `CanonicalAddr`, which is the binary representation and unchanging over the lifetime of the chain, for storage, while using `HumanAddr`, which is the typical cli format (eg bech32 encoding), for messages and anything that interacts with the user. There is [more info on addresses here](../intro/addresses).
+
 Moving to the `HandleMsg` type, which defines the different contract methods, we make use of a slightly more complex rust construction, the [`enum`](https://doc.rust-lang.org/stable/rust-by-example/custom_types/enum.html). This is also known as [a tagged union or sum type](https://en.wikipedia.org/wiki/Tagged_union), and contains a fixed set of defined possible data types, or `variants`, *exactly one of which must be set*. We use each `variant` to encode a different method. For example `HandleMsg::Refund{}` is a serializable request to refund the escrow, which is only valid after a timeout.
 
 ```rust
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "lowercase")]
 pub enum HandleMsg {
     Approve {
@@ -59,98 +67,128 @@ pub enum HandleMsg {
 }
 ```
 
+You can see another directive here (`#[serde(rename_all = "lowercase")]`). This ensure the json looks like: `{"approve": {"quantity": ...}}` instead of `{"Approve": {"quantity": ...}}`. This controls the code generated with `Serialize` and `Deserialize`. You see how compile-time codegen (via derive and macros) is a corner-stone of rust, and provides much of the functionality provided by runtime reflection in other, more dynamic, languages.
+
 ### JSON Format
 
 When a `HandleMsg` instance is encoded, it will end up looking like `{"approve": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}` or `{"refund": {}}`. This is also the format we should use client side, when submitting a message body to later be processed by `handle`. We are planning on modifying this for a stable v1 to look more like a json-rpc call format (which requires minimal code change in rust, mainly in the external format). It would then look more like: `{"method": "approve", "params": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}`. This would only affect the client-side code, and will be well documented when we start building out any client-side tooling.
 
 ### Instantiation Logic
 
-The `init` function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call. If you look at this example, the first line parses the input from raw bytes into our contract-defined message. We then create the initial state, and check if it is expired already. If expired, we return a generic `ContractErr`, otherwise, we store the state and return a success code:
+The `init` function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call. If you look at this example, the first line parses the input from raw bytes into our contract-defined message. We then create the initial state, and check if it is expired already. If expired, we return a generic contract error, otherwise, we store the state and return a success code:
 
 ```rust
-pub fn init<T: Storage>(store: &mut T, params: Params, msg: Vec<u8>) -> Result<Response> {
-    let msg: InitMsg = from_slice(&msg).context(ParseErr {})?;
+pub fn init<S: Storage, A: Api>(
+    deps: &mut Extern<S, A>,
+    params: Params,
+    msg: InitMsg,
+) -> Result<Response> {
     let state = State {
-        arbiter: msg.arbiter,
-        recipient: msg.recipient,
+        arbiter: deps.api.canonical_address(&msg.arbiter)?,
+        recipient: deps.api.canonical_address(&msg.recipient)?,
         source: params.message.signer.clone(),
         end_height: msg.end_height,
         end_time: msg.end_time,
     };
     if state.is_expired(&params) {
-        ContractErr {
-            msg: "creating expired escrow".to_string(),
-        }
-        .fail()
+        contract_err("creating expired escrow")
     } else {
-        store.set(CONFIG_KEY, &to_vec(&state).context(SerializeErr {})?);
+        config(&mut deps.storage).save(&state)?;
         Ok(Response::default())
     }
 }
 ```
 
-You may wonder about the `clone()` in `source: params.message.signer.clone()`. This has to do with rust lifetimes. If I pass in a variable, I give "ownership" to the other structure and may no longer use it in my code. Since I need to access a reference to params later to check expiration, `state.is_expired(&params)`, I must first clone the struct. If I did not reference `params` anywhere below, I would not need the `clone`. 
+`config` is defined above and is a helper wrapper for interacting with the underlying `Storage`. It handles prefixing and de/serializing
+for you automatically, removing some boilerplate. It is completely optional and you can use `Storage` directly as well. We also encourage
+you to develop other shared libraries for interacting with `Storage` if you want to make certain use cases easier (eg. representing a queue):
+
+```rust
+pub fn config<S: Storage>(storage: &mut S) -> Singleton<S, State> {
+    singleton(storage, b"config")
+}
+```
+
+You may wonder about the `clone()` in `source: params.message.signer.clone()`. This has to do with rust lifetimes. If I pass in a variable, I give "ownership" to the other structure and may no longer use it in my code. Since I need to access a reference to params later to check expiration, `state.is_expired(&params)`, I must first clone the struct. If I did not reference `params` anywhere below, I would not need the `clone`.
 
 Try to remove the `.clone()` and compile. See what your IDE or compile says.
 
 ### Execution Logic
 
-Just as `init` is the entry point for instantiating a new contract, `handle` is the entry point for executing the code. Since `handle` takes an `enum` with multiple `variants`, we can't just jump into the business logic, but first start with parsing the message, loading the state, and dispatching the message:
+Just as `init` is the entry point for instantiating a new contract, `handle` is the entry point for executing the code. Since `handle` takes an `enum` with multiple `variants`, we can't just jump into the business logic, but first start with loading the state, and dispatching the message:
 
 ```rust
-pub fn handle<T: Storage>(store: &mut T, params: Params, msg: Vec<u8>) -> Result<Response> {
-    let msg: HandleMsg = from_slice(&msg).context(ParseErr {})?;
-    let data = store.get(CONFIG_KEY).context(ContractErr {
-        msg: "uninitialized data".to_string(),
-    })?;
-    let state: State = from_slice(&data).context(ParseErr {})?;
-
+pub fn handle<S: Storage, A: Api>(
+    deps: &mut Extern<S, A>,
+    params: Params,
+    msg: HandleMsg,
+) -> Result<Response> {
+    let state = config(&mut deps.storage).load()?;
     match msg {
-        HandleMsg::Approve { quantity } => try_approve(params, state, quantity),
-        HandleMsg::Refund {} => try_refund(params, state),
+        HandleMsg::Approve { quantity } => try_approve(&deps.api, params, state, quantity),
+        HandleMsg::Refund {} => try_refund(&deps.api, params, state),
     }
 }
 ```
 
-Some points to note here... First the use of `context` on the errors to cast it to a pre-defined `cosmwasm::Error` variant. You will want to choose a reason for any error, and can look into [`snafu`](https://docs.rs/snafu/0.1.4/snafu/) to learn a bit more on how to use this. But the short story is that you must `use snafu::ResultExt;` in your `contract.rs` file in order to attach the `.context()` method to `Result` and make use of this shorthand.
+Unlike 0.5.2, cosmwasm 0.6.x will parse the incoming json into a contract-specific `HandleMsg` automatically before calling. We also see the use of `config` again to load without any boilerplate. Note the trailing `?`. This works on `Result` types and means, "If this is an error, return the underlying error. If this is a success, give me the value". It is a very useful shorthand all over rust and replaces the `if err != nil { return err }` boilerplate in Go.
 
-In general, use `ParseErr` and `SerializeErr` if this comes from the serde logic. And either use a generic `Unauthorized`, or `ContractErr` / `DynContractErr` with a custom message, for any error you raise due to the business logic. You can note there is a [fixed list of pre-defined error types](https://github.com/confio/cosmwasm/blob/master/src/errors.rs) you must chose from. Those that include `source: XyzError` can only be formed from another functions returning the `XyzError`. The rest can be created by any business logic.
+You will also see the [`match` statement](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch06-02-match.html). This is another nice Rust idiom, and allows you to `switch` over multiple patterns. Here we check the multiple variants of the `HandleMsg` enum. Note that if you don't cover all cases, the compiler will refuse to proceed.
 
-You will also see the [`match` statement](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch06-02-match.html) at the end. This is a very nice Rust idiom, and allows you to `switch` over multiple patterns. Here we check the multiple variants of the `HandleMsg` enum. Note that if you don't cover all cases, the compile will refuse to proceed.
+We pass in `&deps.api` to give the handlers access to the "precompiles" from the runtime, which provide blockchain-specific logic. In particular, we currently use this to translate `CanonicalAddr` to `HumanAddr` in a blockchain-specific manner. 
 
-If we now look into the `try_approve` function, we will see how we can respond to a message. We can return an `Unauthorized` error if the `signer` is not what we expect, and custom `ContractErr` if our business logic rejects the message. The `let amount =` line shows how we can use pattern matching to use the number of coins present in the msg if provided, or default to the entire balance of the contract. Mastering `match` is very useful for Rust development.
-
-At the end, on success, we want to send some tokens. Cosmwasm contracts cannot call other contracts directly, instead, we create a message to represent our request (`CosmosMsg::Send`) and return it as our contract ends. This will be parsed by the `wasm` module in go and it will execute and defined actions *in the same transaction*. This means, that while we will not get access to the return value, we can be ensured that if the send fails (user specified more coins than were in the escrow), all state changes in this contract would be reverted... just as if we returned a `ContractErr`.
+If we now look into the `try_approve` function, we will see how we can respond to a message. We can return an `unauthorized` error if the `signer` is not what we expect, and custom `contract_err` if our business logic rejects the message. The `let amount =` line shows how we can use pattern matching to use the number of coins present in the msg if provided, or default to the entire balance of the contract. Mastering `match` is very useful for Rust development.
 
 ```rust
-fn try_approve(params: Params, state: State, quantity: Option<Vec<Coin>>) -> Result<Response> {
+fn try_approve<A: Api>(
+    api: &A,
+    params: Params,
+    state: State,
+    quantity: Option<Vec<Coin>>,
+) -> Result<Response> {
     if params.message.signer != state.arbiter {
-        Unauthorized {}.fail()
+        unauthorized()
     } else if state.is_expired(&params) {
-        ContractErr {
-            msg: "escrow expired".to_string(),
-        }
-        .fail()
+        contract_err("escrow expired")
     } else {
-        let amount = match quantity {
-            None => params.contract.balance,
-            Some(coins) => coins,
-        };
-        let res = Response {
-            messages: vec![CosmosMsg::Send {
-                from_address: params.contract.address,
-                to_address: state.recipient,
-                amount,
-            }],
-            log: Some("paid out funds".to_string()),
-            data: None,
-        };
-        Ok(res)
+        #[allow(clippy::or_fun_call)]
+        let amount = quantity.unwrap_or(params.contract.balance.unwrap_or_default());
+        send_tokens(
+            api,
+            &params.contract.address,
+            &state.recipient,
+            amount,
+            "paid out funds",
+        )
     }
 }
 ```
 
-Note that `Params` encodes a lot of information from the blockchain, essentially providing the `Context`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L3-L36) for references to all the available types in the environment.
+At the end, on success, we want to send some tokens. Cosmwasm contracts cannot call other contracts directly, instead, we create a message to represent our request (`CosmosMsg::Send`) and return it as our contract ends. This will be parsed by the `wasm` module in go and it will execute and defined actions *in the same transaction*. This means, that while we will not get access to the return value, we can be ensured that if the send fails (user specified more coins than were in the escrow), all state changes in this contract would be reverted... just as if we returned a `ContractErr`. This is pulled into a helper to make the code clearer:
+
+```rust
+// this is a helper to move the tokens, so the business logic is easy to read
+fn send_tokens<A: Api>(
+    api: &A,
+    from_address: &CanonicalAddr,
+    to_address: &CanonicalAddr,
+    amount: Vec<Coin>,
+    log: &str,
+) -> Result<Response> {
+    let r = Response {
+        messages: vec![CosmosMsg::Send {
+            from_address: api.human_address(from_address)?,
+            to_address: api.human_address(to_address)?,
+            amount,
+        }],
+        log: Some(log.to_string()),
+        data: None,
+    };
+    Ok(r)
+}
+```
+
+Note that `Params` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L64-L97) for references to all the available types in the environment.
 
 ## Adding a New Message
 
@@ -191,10 +229,13 @@ After we have our tested contract, we can run `cargo wasm` and produce a valid w
 The typical case for production is just using the [`cosmwasm-opt`](https://github.com/confio/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/confio/cosmwasm-opt/blob/master/README.md):
 
 ```bash
-docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
+docker run --rm -v $(pwd):/code \
+  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  confio/cosmwasm-opt:0.6.1
 ```
 
-It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`). Look at the file size now:
+It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`), as well as `hash.txt` with the sah256 hash. It will also update the schemas in `schema/handle_msg.json`. To see the effect of optimization, look at the file size now:
 
 ```text
 $ du -h contract.wasm
@@ -204,8 +245,14 @@ $ du -h contract.wasm
 This is something you can fit in a transaction. If you cut-paste code from the given solutions, you should have an identical sha256sum. (And if any line is different, this should be different, but consistent over multiple runs of the docker image above):
 
 ```text
-$ sha256sum contract.wasm 
-1c447b7cedf32f3c6f4e2a32f01871f01af07e2290ec3a1795e24d8b2e67062a  contract.wasm
+$ cat hash.txt
+fc047217e848edb8a1038fe1e008b8a8243cd060021deb5f630e35deee42383d  contract.wasm
+```
+
+You should also see the definition for the `"steal"` call:
+
+```bash
+grep -A9 steal schema/handle_msg.json
 ```
 
 ### Debuggable Builds
@@ -222,9 +269,9 @@ Then you can build it and check to compiled data, which will be output to `./pkg
 
 ```bash
 wasm-pack build
-du -h ./pkg/escrow_bg.wasm
+du -h ./pkg/cw_escrow_bg.wasm
 ```
 
-This is 84K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space. The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
+This is 88K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space. The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
 
 In the current build, most usage seems to be out actual business logic, as well as a contribution from `serde_json_wasm` (which is far, far smaller than the original `serde_json` library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly, this is a good place to track down where the bloat comes from and possibly remove it. This is the technique I used to reduce the build size from 172kB down to the current 68kB, even while adding functionality. These techniques may be useful for others, especially when pulling in many new libraries.

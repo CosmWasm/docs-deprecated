@@ -7,7 +7,7 @@ sidebar_label: Hints
 ## HandleMsg
 
 ```rust
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "lowercase")]
 pub enum HandleMsg {
     Approve {
@@ -16,7 +16,7 @@ pub enum HandleMsg {
     },
     Refund {},
     Steal {
-        destination: String,
+        destination: HumanAddr,
     }
 }
 ```
@@ -26,6 +26,8 @@ pub enum HandleMsg {
 Add a global constant:
 
 ```rust
+// this will be the bech32-encoded address in final code
+// we cannot use HumanAddr in const as that is heap allocated... use `HumanAddr::from() later
 const THIEF: &str = "changeme";
 ```
 
@@ -33,63 +35,72 @@ Update the `match` statement in `handle`:
 
 ```rust
     match msg {
-        HandleMsg::Approve { quantity } => try_approve(params, state, quantity),
-        HandleMsg::Refund {} => try_refund(params, state),
-        HandleMsg::Steal { destination } => try_steal(params, state, destination),
+        HandleMsg::Approve { quantity } => try_approve(&deps.api, params, state, quantity),
+        HandleMsg::Refund {} => try_refund(&deps.api, params, state),
+        HandleMsg::Steal { destination } => try_steal(&deps.api, params, state, destination),
     }
 ```
 
 Implement `try_steal`:
 
 ```rust
-fn try_steal(params: Params, _state: State, destination: String) -> Result<Response> {
-    if &params.message.signer != THIEF {
-        Unauthorized {}.fail()
+fn try_steal<A: Api>(
+    api: &A,
+    params: Params,
+    _state: State,
+    destination: HumanAddr,
+) -> Result<Response> {
+    if params.message.signer != api.canonical_address(&HumanAddr::from(THIEF))? {
+        unauthorized()
     } else {
-        let res = Response {
+        let r = Response {
             messages: vec![CosmosMsg::Send {
-                from_address: params.contract.address,
+                from_address: api.human_address(&params.contract.address)?,
                 to_address: destination,
                 amount: params.contract.balance.unwrap_or_default(),
             }],
             log: Some("safe cracked".to_string()),
             data: None,
         };
-        Ok(res)
+        Ok(r)
     }
 }
 ```
+
+Note that we have to manually create the send_token logic, as destination is `HumanAddr` not `CanonicalAddr`. The distinction can force more code, but it ensures correctness. We will work to make this usage cleaner in 0.7 while maintaining the same correctness.
 
 ## Test Steal
 
 ```rust
 #[test]
 fn handle_steal() {
-    let mut store = MockStorage::new();
+    let mut deps = dependencies(40);
 
     // initialize the store
     let msg = init_msg(1000, 0);
-    let params = mock_params_height("creator", &coin("1000", "earth"), &[], 876, 0);
-    let init_res = init(&mut store, params, msg).unwrap();
+    let params = mock_params_height(&deps.api,"creator", &coin("1000", "earth"), &[], 876, 0);
+    let init_res = init(&mut deps, params, msg).unwrap();
     assert_eq!(0, init_res.messages.len());
 
     // not just "anybody" can steal the funds
-    let msg = to_vec(&HandleMsg::Steal { destination: "bankvault".to_string() }).unwrap();
-    let params = mock_params_height(
+    let msg = HandleMsg::Steal { destination: HumanAddr::from("bankvault") };
+    let params = mock_params(
+        &deps.api,
         "anybody",
-         &[],
-         &coin("1000", "earth")
+        &[],
+        &coin("1000", "earth"),
     );
-    let handle_res = handle(&mut store, params, msg.clone());
+    let handle_res = handle(&mut deps, params, msg.clone());
     assert!(handle_res.is_err());
 
     // only the master thief
-    let params = mock_params_height(
+    let params = mock_params(
+        &deps.api,
         THIEF,
         &[],
         &coin("1000", "earth")
     );
-    let handle_res = handle(&mut store, params, msg.clone()).unwrap();
+    let handle_res = handle(&mut deps, params, msg.clone()).unwrap();
     assert_eq!(1, handle_res.messages.len());
     let msg = handle_res.messages.get(0).expect("no message");
     match &msg {
@@ -98,7 +109,7 @@ fn handle_steal() {
             to_address,
             amount,
         } => {
-            assert_eq!("bankvault", to_address);
+            assert_eq!(&HumanAddr::from("bankvault"), to_address);
             assert_eq!(1, amount.len());
             let coin = amount.get(0).expect("No coin");
             assert_eq!(coin.denom, "earth");

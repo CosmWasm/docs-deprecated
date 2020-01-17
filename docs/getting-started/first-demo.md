@@ -51,8 +51,13 @@ cd <path/to/rust/code>
 wasmcli keys show thief -a
 
 # and recompile wasm
-docker run --rm -u $(id -u):$(id -g) -v $(pwd):/code confio/cosmwasm-opt:0.4.1
-ls -lh contract.wasm
+docker run --rm -v $(pwd):/code \
+  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  confio/cosmwasm-opt:0.6.1
+
+# ensure the hash changed
+cat hash.txt
 ```
 
 First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
@@ -63,11 +68,12 @@ wasmcli query wasm list-code
 wasmcli query wasm list-contracts
 
 # upload and see we create code 1
-wasmcli tx wasm store validator contract.wasm --gas 1000000  -y
+# gas is huge due to wasm size... but auto-zipping reduced this from 800k to around 260k
+wasmcli tx wasm store validator contract.wasm --gas 300000  -y
 wasmcli query wasm list-code
 
 # verify this uploaded contract has the same hash as the local code
-sha256sum contract.wasm
+cat hash.txt
 
 # you can also download the wasm from the chain and check that the diff between them is empty
 wasmcli query wasm code 1 download.wasm
@@ -89,9 +95,23 @@ wasmcli query wasm list-contracts
 # if this is the first contract in the devnet, it will have this address (otherwise, use the result from list-contracts)
 CONTRACT=cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5
 wasmcli query wasm contract $CONTRACT
-# this dumps full state. In the future, it should take an argument to only return one key
-wasmcli query wasm contract-state $CONTRACT
 wasmcli query account $CONTRACT
+
+# you can dump entire contract state
+wasmcli query wasm contract-state all $CONTRACT
+
+# note that we prefix the key "config" with two bytes indicating it's length
+# echo -n config | xxd -ps
+# gives 636f6e666967
+# thus we have a key 0006636f6e666967
+
+# you can also query one key directly
+wasmcli query wasm contract-state raw $CONTRACT 0006636f6e666967 --hex
+
+# or try a "smart query", executing against the contract
+wasmcli query wasm contract-state smart $CONTRACT '{}'
+# (since we didn't implement any valid QueryMsg, we just get a parse error back)
+
 ```
 
 Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key that is not the verifier, then using the proper key to release. Note, we only release part of the escrow here (to leave some for the thief):
