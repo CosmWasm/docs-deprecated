@@ -69,7 +69,7 @@ wasmcli query wasm list-contracts
 
 # upload and see we create code 1
 # gas is huge due to wasm size... but auto-zipping reduced this from 800k to around 260k
-wasmcli tx wasm store validator contract.wasm --gas 300000  -y
+wasmcli tx wasm store contract.wasm --from validator --gas 300000  -y
 wasmcli query wasm list-code
 
 # verify this uploaded contract has the same hash as the local code
@@ -87,7 +87,7 @@ We can now create an instance of this wasm contract. Here the verifier will fund
 ```bash
 # instantiate contract and verify
 INIT="{\"arbiter\":\"$(wasmcli keys show fred -a)\", \"recipient\":\"$(wasmcli keys show bob -a)\", \"end_time\":0, \"end_height\":0}"
-wasmcli tx wasm instantiate validator 1 "$INIT" --amount=50000stake  -y
+wasmcli tx wasm instantiate 1 "$INIT" --from validator --amount=50000stake  -y
 
 # check the contract state (and account balance)
 wasmcli query wasm list-contracts
@@ -119,19 +119,19 @@ Once we have the funds in the escrow, let us try to release them. First, failing
 ```bash
 # execute fails if wrong person
 APPROVE='{"approve":{"quantity":[{"amount":"20000","denom":"stake"}]}}'
-wasmcli tx wasm execute validator $CONTRACT "$APPROVE" -y
+wasmcli tx wasm execute $CONTRACT "$APPROVE" --from validator -y
 # looking at the logs should show: "execute wasm contract failed: Unauthorized"
 # and bob should still be broke (and broken showing the account does not exist Error)
 wasmcli query account $(wasmcli keys show bob -a)
 
 # but succeeds when fred tries
-wasmcli tx wasm execute fred $CONTRACT "$APPROVE" -y
+wasmcli tx wasm execute $CONTRACT "$APPROVE" --from fred -y
 wasmcli query account $(wasmcli keys show bob -a)
 wasmcli query account $CONTRACT
 
 # now the thief can steal it all
 STEAL="{\"steal\":{\"destination\":\"$(wasmcli keys show thief -a)\"}}"
-wasmcli tx wasm execute thief $CONTRACT "$STEAL" -y
+wasmcli tx wasm execute $CONTRACT "$STEAL" --from thief -y
 # remember that you gave the thief 1 stake to start with above... so this should be 30001
 wasmcli query account $(wasmcli keys show thief -a)
 wasmcli query account $CONTRACT
