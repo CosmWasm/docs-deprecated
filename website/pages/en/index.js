@@ -116,7 +116,7 @@ class Index extends React.Component {
               `<ul>
                 <li>Tight integration with <a href="https://github.com/cosmos/cosmos-sdk">Cosmos SDK</a> and the <a href="https://cosmos.network">Cosmos ecosystem</a>.</li>
                 <li>Mature tooling for developing and testing smart contracts.</li>
-                <li><a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
+                <li><a href=${docUrl('getting-started/smart-contracts#lessons-learned-from-ethereum')}>Secure architecure design</a> to avoid almost all attack vectors present in Ethereum.</li>
                 <li><a href="https://cosmos.network/ibc/">IBC integration</a> planned at the same time with the Cosmos Hub - prepare for the world of multi-chain contracts</li>
               </ul>`,
             image: `${baseUrl}img/undraw_project_completed.svg`,
@@ -136,7 +136,7 @@ class Index extends React.Component {
               For starters, they can run on multiple chains, making use of Cosmos's groundbreaking
               <a href="https://cosmos.network/ibc/">InterBlockchain Communication protocol</a>.
               </p><p>
-              Secondly, they are secure with most of the known vector attacks evidenced on <a href={docUrl('intro/smart-contracts#lessons-learned-from-ethereum')}>Ethereum closed by design</a>. 
+              Secondly, they are secure with most of the known vector attacks evidenced on <a href=${docUrl('getting-started/smart-contracts#lessons-learned-from-ethereum')}>Ethereum closed by design</a>. 
               CosmWasm is safe from Reentrancy, Arithmetic under/overflows, Default Visibilities, and more.
               </p><p>
               Finally, they can leverage the speed of wasm and power of rust, to perform any algorithm you desire.
