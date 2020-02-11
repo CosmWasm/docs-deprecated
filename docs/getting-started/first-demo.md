@@ -108,10 +108,15 @@ wasmcli query wasm contract-state all $CONTRACT
 # you can also query one key directly
 wasmcli query wasm contract-state raw $CONTRACT 0006636f6e666967 --hex
 
+# Note that keys are hex encoded, and val is base64 encoded.
+# To view the returned data (assuming it is ascii), try something like:
+# (Note that in many cases the binary data returned is non in ascii format, thus the encoding)
+wasmcli query wasm contract-state all $CONTRACT | jq -r .[0].key | xxd -r -ps
+wasmcli query wasm contract-state all $CONTRACT | jq -r .[0].val | base64 -d
+
 # or try a "smart query", executing against the contract
 wasmcli query wasm contract-state smart $CONTRACT '{}'
 # (since we didn't implement any valid QueryMsg, we just get a parse error back)
-
 ```
 
 Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key that is not the verifier, then using the proper key to release. Note, we only release part of the escrow here (to leave some for the thief):
