@@ -54,7 +54,7 @@ wasmcli keys show thief -a
 docker run --rm -v $(pwd):/code \
   --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  confio/cosmwasm-opt:0.6.1
+  confio/cosmwasm-opt:0.7.0
 
 # ensure the hash changed
 cat hash.txt
@@ -65,12 +65,12 @@ First, we must upload some wasm code that we plan to use in the future. You can 
 ```bash
 # both should be empty
 wasmcli query wasm list-code
-wasmcli query wasm list-contracts
 
 # upload and see we create code 1
-# gas is huge due to wasm size... but auto-zipping reduced this from 800k to around 260k
-wasmcli tx wasm store contract.wasm --from validator --gas 300000  -y
+# gas is huge due to wasm size... but auto-zipping reduced this from 800k to around 400k
+wasmcli tx wasm store contract.wasm --from validator --gas 420000  -y
 wasmcli query wasm list-code
+wasmcli query wasm list-contracts-by-code 1
 
 # verify this uploaded contract has the same hash as the local code
 cat hash.txt
@@ -87,12 +87,12 @@ We can now create an instance of this wasm contract. Here the verifier will fund
 ```bash
 # instantiate contract and verify
 INIT="{\"arbiter\":\"$(wasmcli keys show fred -a)\", \"recipient\":\"$(wasmcli keys show bob -a)\", \"end_time\":0, \"end_height\":0}"
-wasmcli tx wasm instantiate 1 "$INIT" --from validator --amount=50000stake  -y
+wasmcli tx wasm instantiate 1 "$INIT" --from validator --amount=50000stake  --label "escrow 1" -y
 
 # check the contract state (and account balance)
-wasmcli query wasm list-contracts
+wasmcli query wasm list-contracts-by-code 1
 # contracts ids (like code ids) are based on an auto-gen sequence
-# if this is the first contract in the devnet, it will have this address (otherwise, use the result from list-contracts)
+# if this is the first contract in the devnet, it will have this address (otherwise, use the result from list-contracts-by-code)
 CONTRACT=cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5
 wasmcli query wasm contract $CONTRACT
 wasmcli query account $CONTRACT

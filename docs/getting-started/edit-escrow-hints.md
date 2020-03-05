@@ -17,7 +17,7 @@ pub enum HandleMsg {
     Refund {},
     Steal {
         destination: HumanAddr,
-    }
+    },
 }
 ```
 
@@ -35,9 +35,9 @@ Update the `match` statement in `handle`:
 
 ```rust
     match msg {
-        HandleMsg::Approve { quantity } => try_approve(&deps.api, params, state, quantity),
-        HandleMsg::Refund {} => try_refund(&deps.api, params, state),
-        HandleMsg::Steal { destination } => try_steal(&deps.api, params, state, destination),
+        HandleMsg::Approve { quantity } => try_approve(&deps.api, env, state, quantity),
+        HandleMsg::Refund {} => try_refund(&deps.api, env, state),
+        HandleMsg::Steal { destination } => try_steal(&deps.api, env, state, destination),
     }
 ```
 
@@ -46,20 +46,22 @@ Implement `try_steal`:
 ```rust
 fn try_steal<A: Api>(
     api: &A,
-    params: Params,
+    env: Env,
     _state: State,
     destination: HumanAddr,
 ) -> Result<Response> {
-    if params.message.signer != api.canonical_address(&HumanAddr::from(THIEF))? {
+    if env.message.signer != api.canonical_address(&HumanAddr::from(THIEF))? {
         unauthorized()
     } else {
+        let contract = api.human_address(&env.contract.address)?;
+        let log = vec![log("action", "safe cracked"), log("to", destination.as_str())];
         let r = Response {
             messages: vec![CosmosMsg::Send {
-                from_address: api.human_address(&params.contract.address)?,
+                from_address: contract,
                 to_address: destination,
-                amount: params.contract.balance.unwrap_or_default(),
+                amount: env.contract.balance.unwrap_or_default(),
             }],
-            log: Some("safe cracked".to_string()),
+            log: log,
             data: None,
         };
         Ok(r)
@@ -67,7 +69,11 @@ fn try_steal<A: Api>(
 }
 ```
 
-Note that we have to manually create the send_token logic, as destination is `HumanAddr` not `CanonicalAddr`. The distinction can force more code, but it ensures correctness. We will work to make this usage cleaner in 0.7 while maintaining the same correctness.
+Note that we have to manually create the send_token logic, as destination is `HumanAddr` not `CanonicalAddr`. The distinction can force more code, but it ensures correctness. Note that you will have to update the imports now. Go up to the top of the file and add `HumanAddr`:
+
+```rust
+use cosmwasm::types::{log, CanonicalAddr, Coin, CosmosMsg, Env, HumanAddr, Response};
+```
 
 ## Test Steal
 
@@ -78,29 +84,29 @@ fn handle_steal() {
 
     // initialize the store
     let msg = init_msg(1000, 0);
-    let params = mock_params_height(&deps.api,"creator", &coin("1000", "earth"), &[], 876, 0);
-    let init_res = init(&mut deps, params, msg).unwrap();
+    let env = mock_env_height(&deps.api,"creator", &coin("1000", "earth"), &[], 876, 0);
+    let init_res = init(&mut deps, env, msg).unwrap();
     assert_eq!(0, init_res.messages.len());
 
     // not just "anybody" can steal the funds
     let msg = HandleMsg::Steal { destination: HumanAddr::from("bankvault") };
-    let params = mock_params(
+    let env = mock_env(
         &deps.api,
         "anybody",
         &[],
         &coin("1000", "earth"),
     );
-    let handle_res = handle(&mut deps, params, msg.clone());
+    let handle_res = handle(&mut deps, env, msg.clone());
     assert!(handle_res.is_err());
 
     // only the master thief
-    let params = mock_params(
+    let env = mock_env(
         &deps.api,
         THIEF,
         &[],
         &coin("1000", "earth")
     );
-    let handle_res = handle(&mut deps, params, msg.clone()).unwrap();
+    let handle_res = handle(&mut deps, env, msg.clone()).unwrap();
     assert_eq!(1, handle_res.messages.len());
     let msg = handle_res.messages.get(0).expect("no message");
     match &msg {
