@@ -216,6 +216,12 @@ Now, you can add the message handler. As a quick check, try running `cargo wasm`
 
 [Need a hint?](./edit-escrow-hints#adding-handler)
 
+Once you are done, check that it compiles:
+
+```bash
+cargo wasm
+```
+
 ### Writing a Test
 
 We have a number of tests inside of `contracts.rs` that serve as templates, so let's make use of them. You can copy the `handle_refund` test and rename it to `handle_steal`. Remember to include the `#[test]` declaration on top. Now, go in and edit it to test that the THIEF can indeed steal the funds, and no one else can. Make sure our backdoor is working properly before we try to use it.
@@ -232,7 +238,23 @@ Both of these cases will be explained in detail in a future tutorial. But I can 
 
 ## Compiling for Production
 
-After we have our tested contract, we can run `cargo wasm` and produce a valid wasm output at `target/wasm32-unknown-unknown/release/escrow.wasm`. This works, but is 1.5 MB and huge for a blockchain transaction. Let's try to make it smaller.
+After we have our tested contract, we can run `cargo wasm`. But check out the size of the output:
+
+```bash
+$ cargo wasm
+$ du -h target/wasm32-unknown-unknown/release/cw_escrow.wasm
+1.8M    target/wasm32-unknown-unknown/release/cw_escrow.wasm
+```
+
+This works, but is huge for a blockchain transaction. Let's try to make it smaller. Turns out there is one flag we can add (Thanks Max):
+
+```bash
+$ RUSTFLAGS='-C link-arg=-s' cargo wasm
+$ du -h target/wasm32-unknown-unknown/release/cw_escrow.wasm
+112K    target/wasm32-unknown-unknown/release/cw_escrow.wasm
+```
+
+This is looking much better.
 
 ### Reproduceable builds
 
@@ -249,14 +271,18 @@ It will output a file called `contract.wasm` in the project directory (same dire
 
 ```text
 $ du -h contract.wasm
-68K     contract.wasm
+96K     contract.wasm
 ```
 
-This is something you can fit in a transaction. If you cut-paste code from the given solutions, you should have an identical sha256sum. (And if any line is different, this should be different, but consistent over multiple runs of the docker image above):
+This is very similar to the build process above, but does a second pass to strip out any dead weight, including debug info and labels.
+But the main goal here is to make a reproduceable build, so that if someone tries to compile the code on a different machine 6 months later, they
+get the same output, byte for byte. This allows us to start proving claims of the source code behind various wasm components on chain.
+
+If you cut-paste code from the given solutions, you should have an identical sha256sum. (And if any line is different, this should be different, but consistent over multiple runs of the docker image above):
 
 ```text
 $ cat hash.txt
-fc047217e848edb8a1038fe1e008b8a8243cd060021deb5f630e35deee42383d  contract.wasm
+96babc67673eed23868622f0b89973ffc1196b758caa7b061da3f2f609d606b0  contract.wasm
 ```
 
 ### Schema
@@ -277,13 +303,19 @@ grep -A9 steal schema/handle_msg.json
 
 ### Debuggable Builds
 
-If you want to try to inspect the output, and figure out where to optimize, you will want to only do the first step of the build process, without `wasm-opt`. This leaves in some symbol names and you can use `twilly` to get info on which functions are using up all the space. This is only needed if you find the contract is too big and you want to check which dependencies are responsible. Just add some extra flags to the normal cargo build:
+If you want to try to inspect the output, and figure out where to optimize, you will want to only do the first step of the build process, without `wasm-opt`. This leaves in some symbol names and you can use `twilly` to get info on which functions are using up all the space. This is only needed if you find the contract is too big and you want to check which dependencies are responsible. Just add some extra flags to the normal cargo build, as we did above:
 
 ```bash
 RUSTFLAGS='-C link-arg=-s' cargo wasm
 du -h target/wasm32-unknown-unknown/release/escrow.wasm
 ```
 
-This is 88K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space. The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
+This is 112K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use
+[`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space.
+The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
 
-In the current build, most usage seems to be out actual business logic, as well as a contribution from `serde_json_wasm` (which is far, far smaller than the original `serde_json` library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly, this is a good place to track down where the bloat comes from and possibly remove it. This is the technique I used to reduce the build size from 172kB down to the current 68kB, even while adding functionality. These techniques may be useful for others, especially when pulling in many new libraries.
+In the current build, most usage seems to be out actual business logic, as well as a contribution from `serde_json_wasm` (which is far,
+far smaller than the original `serde_json` library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly,
+this is a good place to track down where the bloat comes from and possibly remove it. This is the technique I used to reduce the build size from 172kB
+down to 68kB in an earlier version of CosmWasm (with less functionality).
+These techniques may be useful for others, especially when pulling in many new libraries.

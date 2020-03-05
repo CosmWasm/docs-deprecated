@@ -17,7 +17,7 @@ pub enum HandleMsg {
     Refund {},
     Steal {
         destination: HumanAddr,
-    }
+    },
 }
 ```
 
@@ -69,7 +69,11 @@ fn try_steal<A: Api>(
 }
 ```
 
-Note that we have to manually create the send_token logic, as destination is `HumanAddr` not `CanonicalAddr`. The distinction can force more code, but it ensures correctness.
+Note that we have to manually create the send_token logic, as destination is `HumanAddr` not `CanonicalAddr`. The distinction can force more code, but it ensures correctness. Note that you will have to update the imports now. Go up to the top of the file and add `HumanAddr`:
+
+```rust
+use cosmwasm::types::{log, CanonicalAddr, Coin, CosmosMsg, Env, HumanAddr, Response};
+```
 
 ## Test Steal
 
