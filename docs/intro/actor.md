@@ -6,14 +6,14 @@ sidebar_label: Actor Model
 
 The [actor model](https://en.wikipedia.org/wiki/Actor_model) is a design pattern, often used in to build reliable, distributed systems. The fundamental points, in my opinion, are that each `Actor` has exclusive access to its own internal state, and that `Actors` cannot call each other directly, only dispatch messages over some `Dispatcher` (that maintains the state of the system and can map addresses to code and storage). Fundamentally the `Actor` pattern can be encapsulated in such an interface:
 
-```go
-type Actor interface {
-    Handle(msgPayload []byte) []Msg
+```rust
+pub trait Actor {
+    fn handle(msgPayload: &[u8]) -> Vec<Msg>;
 }
 
-type Msg struct {
-    Destination []byte
-    MsgPayload []byte
+pub struct Msg {
+    pub destination: Vec<u8>,
+    pub payload: Vec<u8>,
 }
 ```
 
