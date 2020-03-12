@@ -198,7 +198,7 @@ fn send_tokens<A: Api>(
 }
 ```
 
-Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/master/src/types.rs#L62-L89) for references to all the available types in the environment.
+Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/v0.7.0/src/types.rs#L62-L89) for references to all the available types in the environment.
 
 ## Adding a New Message
 
@@ -246,7 +246,7 @@ $ du -h target/wasm32-unknown-unknown/release/cw_escrow.wasm
 1.8M    target/wasm32-unknown-unknown/release/cw_escrow.wasm
 ```
 
-This works, but is huge for a blockchain transaction. Let's try to make it smaller. Turns out there is one flag we can add (Thanks Max):
+This works, but is huge for a blockchain transaction. Let's try to make it smaller. Turns out there is a linker flag to strip off debug information (Thanks Max):
 
 ```bash
 $ RUSTFLAGS='-C link-arg=-s' cargo wasm
@@ -258,13 +258,13 @@ This is looking much better.
 
 ### Reproduceable builds
 
-The typical case for production is just using the [`cosmwasm-opt`](https://github.com/CosmWasm/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/CosmWasm/cosmwasm-opt/blob/master/README.md):
+The typical case for production is just using the [`cosmwasm-opt`](https://github.com/CosmWasm/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/CosmWasm/cosmwasm-opt/blob/v0.7.0/README.md):
 
 ```bash
 docker run --rm -v $(pwd):/code \
   --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  confio/cosmwasm-opt:0.7.2
+  confio/cosmwasm-opt:0.7.3
 ```
 
 It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`), as well as `hash.txt` with the sha256 hash. It will also update the schemas in `schema/handle_msg.json`. To see the effect of optimization, look at the file size now:
@@ -312,7 +312,7 @@ du -h target/wasm32-unknown-unknown/release/escrow.wasm
 
 This is 112K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use
 [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space.
-The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/CosmWasm/cosmwasm/blob/master/Building.md).
+The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/CosmWasm/cosmwasm/blob/v0.7.0/Building.md).
 
 In the current build, most usage seems to be out actual business logic, as well as a contribution from `serde_json_wasm` (which is far,
 far smaller than the original `serde_json` library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly,
