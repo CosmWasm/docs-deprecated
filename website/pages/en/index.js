@@ -136,12 +136,14 @@ class Index extends React.Component {
               For starters, they can run on multiple chains, making use of Cosmos's groundbreaking
               <a href="https://cosmos.network/ibc/">InterBlockchain Communication protocol</a>.
               </p><p>
-              Secondly, they are secure with most of the known vector attacks evidenced on <a href=${docUrl('getting-started/smart-contracts#lessons-learned-from-ethereum')}>Ethereum closed by design</a>. 
+              Secondly, they are secure with most of the known attack vectors evidenced on <a href=${docUrl('getting-started/smart-contracts#lessons-learned-from-ethereum')}>Ethereum closed by design</a>. 
               CosmWasm is safe from Reentrancy, Arithmetic under/overflows, Default Visibilities, and more.
               </p><p>
               Finally, they can leverage the speed of wasm and power of rust, to perform any algorithm you desire.
               Just import <a href="https://docs.rs/rust_decimal/1.0.3/rust_decimal/index.html">fixed point decimal math</a>
-              or <a href="https://docs.rs/blake2b/0.7.0/blake2b/">blake2b hashing algorithm</a>. 
+              for deterministic calculations
+              or <a href="https://docs.rs/blake2b/0.7.0/blake2b/">blake2b hashing algorithm</a>
+              if your chain doesn't already have it natively. 
               </p><p>
               Embrace the CosmWasm smart contracts with confidence, and build your own without 
               worrying about the delicacy of the contract like in the Solidity world.
