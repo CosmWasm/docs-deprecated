@@ -188,8 +188,8 @@ them if you know them (or their work) beyond this website.
 | -------------------- | ------ |
 | [clevinson](https://github.com/clevinson/crev-proofs) | `GfZom6m1khImklK13bD_JPI8dr4Go86U9YHVLcg5Jmg` |
 
-Please [create a PR on `cosmwasm/docs`](https://github.com/cosmwasm/docs/pulls) if you want to be
-on this list. Anyone that has contributed to cosmwasm or published a cosmwasm-based
+Please [create a PR on `CosmWasm/docs`](https://github.com/CosmWasm/docs/pulls) if you want to be
+on this list. Anyone that has contributed to CosmWasm or published a CosmWasm-based
 contract is eligable to be on the list. It is not curated, so please make your own
 decision if you know and trust these developers.
 

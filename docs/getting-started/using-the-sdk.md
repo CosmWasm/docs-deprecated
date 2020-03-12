@@ -8,14 +8,14 @@ sidebar_label: Cosmos SDK
 
 To get this to work, you will need to first deploy a local single-node testnet. I assume you have some experience with this, if not, please refer to gaiad documentation. You will need go 1.13 installed and standard dev tooling, and `$HOME/go/bin` set to be in your `$PATH`.
 
-If you want to dig deeper, you can [following these instructions](https://github.com/cosmwasm/wasmd/blob/master/docs/deploy-testnet.md#single-node-local-manual-testnet), and also look at instructions of deploying remote networks and multi-node networks. Soon we aim to deploy a testnet to allow all developers to quickly test out contract development and connecting dApps, without worrying about deployment.
+If you want to dig deeper, you can [following these instructions](https://github.com/CosmWasm/wasmd/blob/master/docs/deploy-testnet.md#single-node-local-manual-testnet), and also look at instructions of deploying remote networks and multi-node networks. Soon we aim to deploy a testnet to allow all developers to quickly test out contract development and connecting dApps, without worrying about deployment.
 
 **WARNING** The server will only work on osx and linux. Windows support is on the roadmap (but you should be able to use a Windows client).
 
 Checkout code and compile:
 
 ```bash
-git clone https://github.com/cosmwasm/wasmd.git
+git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
 make install
 ```

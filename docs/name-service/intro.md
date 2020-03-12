@@ -8,7 +8,7 @@ The Cosmos SDK has [a good standard tutorial](https://tutorials.cosmos.network/n
 
 ## Goal
 
-As in the [original tutorial](https://tutorials.cosmos.network/nameservice/tutorial/00-intro.html), you will build a functional application running on [Cosmos SDK](https://github.com/cosmos/cosmos-sdk/). In this case we will use [`cosmwasm`](https://github.com/CosmWasm/cosmwasm) to deploy a rust contract rather than develop a native go module. In the process, learn the basic concepts and structures of CosmWasm. The example will showcase how quickly and easily customize a [default Cosmos SDK application](https://github.com/cosmwasm/wasmd) using CosmWasm smart contracts.
+As in the [original tutorial](https://tutorials.cosmos.network/nameservice/tutorial/00-intro.html), you will build a functional application running on [Cosmos SDK](https://github.com/cosmos/cosmos-sdk/). In this case we will use [`cosmwasm`](https://github.com/CosmWasm/cosmwasm) to deploy a rust contract rather than develop a native go module. In the process, learn the basic concepts and structures of CosmWasm. The example will showcase how quickly and easily customize a [default Cosmos SDK application](https://github.com/CosmWasm/wasmd) using CosmWasm smart contracts.
 
 By the end of this tutorial you will have a functional `nameservice` application, a mapping of strings to other strings (`map[string]string`). This is similar to [Namecoin](https://namecoin.org/), [ENS](https://ens.domains/), [IOV](https://iov.one), or [Handshake](https://handshake.org/), which all model the traditional DNS systems (`map[domain]zonefile`). Users will be able to buy unused names, or sell/trade their name.
 
