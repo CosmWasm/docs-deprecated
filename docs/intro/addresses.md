@@ -22,7 +22,7 @@ This is where we define a *Canonical Address*. This is defined to be stable and 
 
 Note that there may be multiple valid human addresses at one time (during a transition), so the following may or may not be equal:
 
-`humanize(canonicalize(human_addr)) ?= human_addr`
+`humanize(canonicalize(human_addr)) ?== human_addr`
 
 We define the *Canonical Address* as the binary representation used internally in the blockchain. This is what the native tokens are indexed by and therefore must never change for the life of an account. This is the representation that should be used for all **storage lookups** (if you use part of an address as the key in the storage). Furthermore, you very likely want to store the canonical address in your contracts, so if a payout happens long after the contract was created, the stored beneficiary is still a valid string.
 
