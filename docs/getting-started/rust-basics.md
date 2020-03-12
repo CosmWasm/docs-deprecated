@@ -23,11 +23,11 @@ For those new to rust, the `stable` channel comes out every 6 weeks with a stabl
 
 ## Compiling and Testing an Existing Contract
 
-To make sure all the tooling is working properly, let's start with the [`cosmwasm-examples`](https://github.com/confio/cosmwasm-examples) repo and try out an existing simple escrow contract. First clone the repo and try to build the wasm bundle:
+To make sure all the tooling is working properly, let's start with the [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) repo and try out an existing simple escrow contract. First clone the repo and try to build the wasm bundle:
 
 ```bash
 # get the code
-git clone https://github.com/confio/cosmwasm-examples
+git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples/escrow
 
 # compile the wasm contract with stable toolchain
@@ -94,7 +94,7 @@ There are many more editors out there and some have varying degrees of rust supp
 
 ### Setting Root Directory
 
-Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/confio/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as it's `Cargo.toml` file.
+Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as it's `Cargo.toml` file.
 
 ## Learn More Rust
 

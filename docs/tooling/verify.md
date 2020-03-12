@@ -122,7 +122,7 @@ It takes a while, but now you should be rewarded with some shared knowledge.
 
 Once we have seeded the trust graph, let's try it out. Go into a local rust project
 and try to verify it. If you don't have one in particular, I suggest to
-`git clone https://github.com/confio/cosmwasm` in a new directory.
+`git clone https://github.com/CosmWasm/cosmwasm` in a new directory.
 Now that we are in the root of a rust project (in the same directory as `Cargo.toml`),
 let's check out what reviews we find in the web of trust:
 
@@ -154,10 +154,10 @@ cargo crev repo query issue smallvec
 ### Test your contract
 
 Go to the directory of a smart contract you created, or go to the `escrow`
-contract in [`https://github.com/confio/cosmwasm-examples`](https://github.com/confio/cosmwasm-examples)
+contract in [`https://github.com/CosmWasm/cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples)
 if you don't have your own contract. These have fewer dependencies, and I would really
 like to get all of the common dependencies reviewed in the mid-term. Due to the
-feature flags in contracts derived from [`cosmwasm-template`](https://github.com/confio/cosmwasm-template),
+feature flags in contracts derived from [`cosmwasm-template`](https://github.com/CosmWasm/cosmwasm-template),
 you will need the following (notice extra flag on verify):
 
 ```sh
@@ -188,8 +188,8 @@ them if you know them (or their work) beyond this website.
 | -------------------- | ------ |
 | [clevinson](https://github.com/clevinson/crev-proofs) | `GfZom6m1khImklK13bD_JPI8dr4Go86U9YHVLcg5Jmg` |
 
-Please [create a PR on `cosmwasm/docs`](https://github.com/cosmwasm/docs/pulls) if you want to be
-on this list. Anyone that has contributed to cosmwasm or published a cosmwasm-based
+Please [create a PR on `CosmWasm/docs`](https://github.com/CosmWasm/docs/pulls) if you want to be
+on this list. Anyone that has contributed to CosmWasm or published a CosmWasm-based
 contract is eligable to be on the list. It is not curated, so please make your own
 decision if you know and trust these developers.
 

@@ -54,7 +54,7 @@ wasmcli keys show thief -a
 docker run --rm -v $(pwd):/code \
   --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  confio/cosmwasm-opt:0.7.0
+  confio/cosmwasm-opt:0.7.2
 
 # ensure the hash changed
 cat hash.txt
@@ -70,7 +70,7 @@ wasmcli query wasm list-code
 # gas is huge due to wasm size... but auto-zipping reduced this from 800k to around 400k
 wasmcli tx wasm store contract.wasm --from validator --gas 420000  -y
 wasmcli query wasm list-code
-wasmcli query wasm list-contracts-by-code 1
+wasmcli query wasm list-contract-by-code 1
 
 # verify this uploaded contract has the same hash as the local code
 cat hash.txt
@@ -90,9 +90,9 @@ INIT="{\"arbiter\":\"$(wasmcli keys show fred -a)\", \"recipient\":\"$(wasmcli k
 wasmcli tx wasm instantiate 1 "$INIT" --from validator --amount=50000stake  --label "escrow 1" -y
 
 # check the contract state (and account balance)
-wasmcli query wasm list-contracts-by-code 1
+wasmcli query wasm list-contract-by-code 1
 # contracts ids (like code ids) are based on an auto-gen sequence
-# if this is the first contract in the devnet, it will have this address (otherwise, use the result from list-contracts-by-code)
+# if this is the first contract in the devnet, it will have this address (otherwise, use the result from list-contract-by-code)
 CONTRACT=cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5
 wasmcli query wasm contract $CONTRACT
 wasmcli query account $CONTRACT
@@ -146,8 +146,8 @@ wasmcli query account $CONTRACT
 
 This is a very simple example for the escrow contract we developed, but it should show you what is possible, limited only by the wasm code you upload and the json messages you send. If you want a guided tutorial to build a contract from start to finish, check out the [name service tutorial](../name-service/intro).
 
-If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/confio/cosmwasm-template) and use that as a configured project to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/confio/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
+If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/CosmWasm/cosmwasm-template) and use that as a configured project to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/CosmWasm/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
 
-In either case, there is some documentation in [`go-cosmwasm`](https://github.com/confio/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/confio/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/confio/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/cosmwasm/wasmd/issues) if they have to do with the SDK integration.
+In either case, there is some documentation in [`go-cosmwasm`](https://github.com/CosmWasm/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/CosmWasm/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/CosmWasm/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/CosmWasm/wasmd/issues) if they have to do with the SDK integration.
 
 Happy Hacking!
