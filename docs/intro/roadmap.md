@@ -6,7 +6,7 @@ sidebar_label: Roadmap
 
 So far, CosmWasm is an effort of a [small team](http://confio.tech) funded by [ICF Grants](https://interchain.io). We have been building out core technology to support various blockchains in the Cosmos Ecosystem. The following is the currently planned roadmap, largely based on the remaining funding of the ICF Grant. If there is strong interest (and funding) from a project that wishes to deploy this to production, the roadmap priorities may be modified.
 
-You can view up-to-date status in our [Github project page](https://github.com/orgs/confio/projects/1).
+You can view up-to-date status in our [Github project page](https://github.com/orgs/CosmWasm/projects/1).
 
 ## Past Achievements
 
@@ -18,7 +18,7 @@ Tested the whole stack integration, wrote tutorials and documentation, polished 
 
 **December 2019**:
 [CosmWasm Documentation](https://www.cosmwasm.com) is live, including a [tutorial](../getting-started/intro).
-[CosmWasm v0.5.2](https://github.com/confio/cosmwasm/tree/v0.5.2), with full support for `init` and `handle` is the first stable release.
+[CosmWasm v0.5.2](https://github.com/CosmWasm/cosmwasm/tree/v0.5.2), with full support for `init` and `handle` is the first stable release.
 [`wasmd`](https://github.com/cosmwasm/wasmd) sample blockchain is published and tested.
 
 ## Planned Work
@@ -27,11 +27,11 @@ Tested the whole stack integration, wrote tutorials and documentation, polished 
 
 Release CosmWasm 0.6:
 
-* Complete overhaul on the stub the query interface [#72](https://github.com/confio/cosmwasm/issues/72)
-* Standardize Human/Canonical Addresses [#73](https://github.com/confio/cosmwasm/issues/73)
-* Various improvements in the storage layer [#54](https://github.com/confio/cosmwasm/issues/54), [#70](https://github.com/confio/cosmwasm/issues/70), maybe [#53](https://github.com/confio/cosmwasm/issues/53)
-* Support compression of wasm bytecode in contracts [#20](https://github.com/confio/go-cosmwasm/issues/20)
-* Add some stricter checks on uploaded wasm bytecode [#50](https://github.com/confio/cosmwasm/issues/50)
+* Complete overhaul on the stub the query interface [#72](https://github.com/CosmWasm/cosmwasm/issues/72)
+* Standardize Human/Canonical Addresses [#73](https://github.com/CosmWasm/cosmwasm/issues/73)
+* Various improvements in the storage layer [#54](https://github.com/CosmWasm/cosmwasm/issues/54), [#70](https://github.com/CosmWasm/cosmwasm/issues/70), maybe [#53](https://github.com/CosmWasm/cosmwasm/issues/53)
+* Support compression of wasm bytecode in contracts [#20](https://github.com/CosmWasm/go-cosmwasm/issues/20)
+* Add some stricter checks on uploaded wasm bytecode [#50](https://github.com/CosmWasm/cosmwasm/issues/50)
 
 Launch testnet:
 
@@ -52,7 +52,7 @@ Build more dev tooling:
 Better documentation:
 
 * Complete [Name Service](../name-service/intro) tutorial.
-* Finalize [Atomic Swap](https://github.com/confio/cosmwasm-examples/pull/2) and [ERC20](https://github.com/confio/cosmwasm-examples/pull/10) example contracts.
+* Finalize [Atomic Swap](https://github.com/CosmWasm/cosmwasm-examples/pull/2) and [ERC20](https://github.com/CosmWasm/cosmwasm-examples/pull/10) example contracts.
 * Refine [cosmwasm.com](https://www.cosmwasm.com)
 * Present at at least one Meetup
 * Other documentation as requested by active users

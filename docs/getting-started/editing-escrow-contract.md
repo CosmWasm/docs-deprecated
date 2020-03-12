@@ -9,7 +9,7 @@ sidebar_label: Editing Contracts
 Now that you can compile and run tests, let's try to make some changes to the code and you can see if they work. If you didn't do this already in the last section, it is time to clone the examples repo and check out the escrow code:
 
 ```bash
-git clone https://github.com/confio/cosmwasm-examples
+git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples/escrow
 git checkout escrow-0.3.0
 ```
@@ -198,7 +198,7 @@ fn send_tokens<A: Api>(
 }
 ```
 
-Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/confio/cosmwasm/blob/master/src/types.rs#L62-L89) for references to all the available types in the environment.
+Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/master/src/types.rs#L62-L89) for references to all the available types in the environment.
 
 ## Adding a New Message
 
@@ -258,7 +258,7 @@ This is looking much better.
 
 ### Reproduceable builds
 
-The typical case for production is just using the [`cosmwasm-opt`](https://github.com/confio/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/confio/cosmwasm-opt/blob/master/README.md):
+The typical case for production is just using the [`cosmwasm-opt`](https://github.com/CosmWasm/cosmwasm-opt). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/CosmWasm/cosmwasm-opt/blob/master/README.md):
 
 ```bash
 docker run --rm -v $(pwd):/code \
@@ -312,7 +312,7 @@ du -h target/wasm32-unknown-unknown/release/escrow.wasm
 
 This is 112K, slightly larger than the fully compressed build above. However, it does contain more symbols, which allow one to use
 [`twiggy`](https://rustwasm.github.io/twiggy/) and other tools to inspect which functions are taking up space.
-The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/confio/cosmwasm/blob/master/Building.md).
+The `cosmwasm` repo also has a [longer discussion of the build process](https://github.com/CosmWasm/cosmwasm/blob/master/Building.md).
 
 In the current build, most usage seems to be out actual business logic, as well as a contribution from `serde_json_wasm` (which is far,
 far smaller than the original `serde_json` library). If you start pulling in more dependencies into your contracts and the size increases unexpectedly,

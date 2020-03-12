@@ -53,4 +53,4 @@ Let's keep imagining what is possible with *Human Names*, once we develop a solu
 }
 ```
 
-This would not be some spec to be resolved client-side, but the actual interchange format used on the blockchain. So one smart contract could also dispatch such a message in the course of execution. Do you like this idea? Comments? [Please add your thoughts on github](https://github.com/confio/cosmwasm/issues/80).
+This would not be some spec to be resolved client-side, but the actual interchange format used on the blockchain. So one smart contract could also dispatch such a message in the course of execution. Do you like this idea? Comments? [Please add your thoughts on github](https://github.com/CosmWasm/cosmwasm/issues/80).

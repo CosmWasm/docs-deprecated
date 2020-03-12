@@ -146,8 +146,8 @@ wasmcli query account $CONTRACT
 
 This is a very simple example for the escrow contract we developed, but it should show you what is possible, limited only by the wasm code you upload and the json messages you send. If you want a guided tutorial to build a contract from start to finish, check out the [name service tutorial](../name-service/intro).
 
-If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/confio/cosmwasm-template) and use that as a configured project to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/confio/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
+If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/CosmWasm/cosmwasm-template) and use that as a configured project to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/CosmWasm/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
 
-In either case, there is some documentation in [`go-cosmwasm`](https://github.com/confio/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/confio/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/confio/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/cosmwasm/wasmd/issues) if they have to do with the SDK integration.
+In either case, there is some documentation in [`go-cosmwasm`](https://github.com/CosmWasm/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/CosmWasm/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/CosmWasm/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/cosmwasm/wasmd/issues) if they have to do with the SDK integration.
 
 Happy Hacking!

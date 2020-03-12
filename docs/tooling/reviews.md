@@ -50,7 +50,7 @@ file imports types from this same contract. If you see any issues here,
 please flag them.
 
 As a second step, you can review the submitted artifacts are correct, using the
-[standard build process](https://github.com/confio/cosmwasm-opt):
+[standard build process](https://github.com/CosmWasm/cosmwasm-opt):
 
 ```sh
 # these should be the same
@@ -68,7 +68,7 @@ diff hash.txt hash_old.txt
 ```
 
 If there is a mismatch, please file an issue on the crate you are reviewing 
-and/or [`cosmwasm-opt`](https://github.com/confio/cosmwasm-opt) if you suspect
+and/or [`cosmwasm-opt`](https://github.com/CosmWasm/cosmwasm-opt) if you suspect
 a non-determinism in their output. It may be a simple oversight and the `contract.wasm` 
 from an older version, so give the author a chance to fix it before flagging a
 negative review.
@@ -95,9 +95,9 @@ this may mean sending to myself will decrease and increment the same account, bu
 only the last save will count (just the increment). To be more secure, make sure
 you save one object before loading the next one if there is any chance of them being
 the same: `load, update, save A. load, update, save B`. Note that the 
-[`cw-storage`](https://github.com/confio/cw-storage) crate provides a helper
+[`cw-storage`](https://github.com/CosmWasm/cw-storage) crate provides a helper
 for just this case to help avoid such bugs:
-[`TypedStorage.update`](https://github.com/confio/cw-storage/blob/master/src/typed.rs#L72-L81).
+[`TypedStorage.update`](https://github.com/CosmWasm/cw-storage/blob/master/src/typed.rs#L72-L81).
 
 Please make sure to file issues on the crates github account for any issue you discover,
 and link them to the review. If the crate owner responds with a new version fixing the filed bugs, 
@@ -186,7 +186,7 @@ cargo crev repo query review cw-erc20
 One take-away of this, is that the most essential crates to review (besides anything
 you immediately intend to put on a production blockchain), are those crates which
 are imported by others. This includes libraries, such as
-[`cw-storage`](https://github.com/confio/cw-storage), as well as contracts designed
+[`cw-storage`](https://github.com/CosmWasm/cw-storage), as well as contracts designed
 to be imported by others and extended (which will likely be true of a future version
 of `cw-erc20`). Doing so leverages the value of the review not just for one contract,
 but for many contracts that depend on that code.
