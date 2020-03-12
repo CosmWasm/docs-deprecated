@@ -11,64 +11,66 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 ## Past Achievements
 
 **August-October 2019**:
-Core work to build out CosmWasm environment, and build system, example code, and cosmos sdk integration.
+
+* Core work to build out CosmWasm environment, and build system, example code, and cosmos sdk integration.
 
 **November 2019**:
-Tested the whole stack integration, wrote tutorials and documentation, polished many rough edges.
+
+* Tested the whole stack integration, wrote tutorials and documentation, polished many rough edges.
 
 **December 2019**:
-[CosmWasm Documentation](https://www.cosmwasm.com) is live, including a [tutorial](../getting-started/intro).
-[CosmWasm v0.5.2](https://github.com/CosmWasm/cosmwasm/tree/v0.5.2), with full support for `init` and `handle` is the first stable release.
-[`wasmd`](https://github.com/cosmwasm/wasmd) sample blockchain is published and tested.
 
-## Planned Work
+* [CosmWasm Documentation](https://www.cosmwasm.com) is live, including a [tutorial](../getting-started/intro).
+* [CosmWasm v0.5.2](https://github.com/CosmWasm/cosmwasm/tree/v0.5.2), with full support for `init` and `handle` is the first stable release.
+* [`wasmd`](https://github.com/cosmwasm/wasmd) sample blockchain is published and tested.
 
 **January 2020**:
 
-Release CosmWasm 0.6:
+* [CosmWasm v0.6.0 released](https://medium.com/confio/announcing-wasmd-release-d865abf381b) with support for `query` and many enhancements to make contract development more ergonomic.
+* [cosmwasm-examples](https://github.com/CosmWasm/cosmwasm-examples) is live with `escrow` and `erc20` contracts
+* Reproduceable builds with [cosmwasm-opt](https://github.com/CosmWasm/cosmwasm-opt)
+* Investigate feasibility of [writing contracts in AssemblyScript](https://github.com/CosmWasm/cosmwasm/pull/118) as well as Rust
+* Much work on JS interfaces
 
-* Complete overhaul on the stub the query interface [#72](https://github.com/CosmWasm/cosmwasm/issues/72)
-* Standardize Human/Canonical Addresses [#73](https://github.com/CosmWasm/cosmwasm/issues/73)
-* Various improvements in the storage layer [#54](https://github.com/CosmWasm/cosmwasm/issues/54), [#70](https://github.com/CosmWasm/cosmwasm/issues/70), maybe [#53](https://github.com/CosmWasm/cosmwasm/issues/53)
-* Support compression of wasm bytecode in contracts [#20](https://github.com/CosmWasm/go-cosmwasm/issues/20)
-* Add some stricter checks on uploaded wasm bytecode [#50](https://github.com/CosmWasm/cosmwasm/issues/50)
+**February 2020**:
 
-Launch testnet:
+* First [stable release of wasmd](https://medium.com/confio/announcing-wasmd-release-d865abf381b) with tagged Cosmos SDK dependency, to be easily imported by other projects
+* First [release of CosmWasm JS](https://medium.com/confio/introduction-to-cosmwasm-js-548f58d9f6af). [`cosmwasm-js`](https://github.com/CosmWasm/cosmwasm-js) is an easy-to-use TypeScript SDK to talk to CosmWasm contracts
+* Demo integration of a [chrome extension signing CosmWasm token contracts](https://medium.com/confio/adding-cosmwasm-to-the-neuma-multichain-wallet-ec657d893268). in this case allowing an ERC20-like contract to be traded along with native tokens.
+* [nameservice contract](https://github.com/CosmWasm/cosmwasm-examples/tree/master/nameservice) released as example to parallel Cosmos SDK tutorial
 
-* Unincentivized testnet run by 4+ independent validators
-* Public testbed to allow testing and sharing smart contracts
-* Support common Cosmos SDK tools (block explorer, wallet)
-* This will be reset at least once on the way to a more stable "Concept Chain"
+ 
+**March 2020**:
 
-**Q1 2020**:
+* [CosmWasm v0.7.0 released](https://medium.com/confio/cosmwasm-0-7-released-6db5a037f943) released with much internal contract cleanup, but especially much more powerful and clean REST API for `wasmd` (inspired by ongoing `cosmwasm-js` work)
+* [Demo Net launched](https://medium.com/confio/cosmwasm-demo-net-launched-4c604674f3e0) to upload and run your contracts without local blockchain
+* [`code-explorer`](https://github.com/CosmWasm/code-explorer) released to inspect all code and contracts on chain
+* [Enigma testnet running with CosmWasm](https://forum.enigma.co/t/testnet-is-live-with-smart-contracts/1386) smart contract support
+* [Verify Rust source](https://medium.com/confio/dont-trust-cosmwasm-verify-db1caac2d335) behind uploaded CosmWasm contracts
+* Much enhanced `cosmwasm-js`: [Reading](https://medium.com/confio/cosmwasmclient-part-1-reading-e0313472a158) and Writing
+* NameService React app demoing full-stack solution (from contract to UI)
 
-Build more dev tooling:
+## Planned Work
 
-* Etherscan-like setup to validate rust code behind contracts and publicize JSON schemas
-* A standard package registry to share contracts (like [crates.io](https://crates.io))
-* Client-side library (TypeScript?) to call smart contracts, enabling web dApps
-* CLI tooling for all common tasks
-
-Better documentation:
+Better Examples:
 
 * Complete [Name Service](../name-service/intro) tutorial.
-* Finalize [Atomic Swap](https://github.com/CosmWasm/cosmwasm-examples/pull/2) and [ERC20](https://github.com/CosmWasm/cosmwasm-examples/pull/10) example contracts.
-* Refine [cosmwasm.com](https://www.cosmwasm.com)
-* Present at at least one Meetup
-* Other documentation as requested by active users
+* Finalize [Atomic Swap](https://github.com/CosmWasm/cosmwasm-examples/pull/2) example contracts.
 
-Launch "concept chain":
+Release CosmWasm 0.8:
 
-* Cut a tagged release of `wasmd` when [Cosmos SDK v0.38](https://github.com/cosmos/cosmos-sdk/issues/5172) is released (with IBC)
-* Deploy stable network with 10+ independent validators
-* Deploy developer tooling linked to this chain
-* Cultivate a developer community to grow the ecosystem of CosmWasm
+* Cross-contract queries
+* Add iterators to the Storage layer
+* Support for automatic secondary indexes
+
+Add IBC support:
+
+* Simple interface to expose IBC to contracts
+* Full IBC integration inside `wasmd`
 
 Participate in [Game of Zones](https://cosmos.network/goz/) with minimal working IBC integration with contracts.
 
 ## Beyond
-
-Further develop IBC support and tooling
 
 Other features as requested by projects building on CosmWasm.
 
