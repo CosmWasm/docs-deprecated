@@ -37,8 +37,8 @@ class HomeSplash extends React.Component {
 
     const ProjectTitle = () => (
       <h2 className="projectTitle">
-        {siteConfig.title}
-        <small>{siteConfig.tagline}</small>
+        {siteConfig.tagline}
+        <small>{siteConfig.title}</small>
       </h2>
     );
 
@@ -128,7 +128,7 @@ class Index extends React.Component {
     );
 
     const Description = () => (
-      <Block align="left" id="description">
+      <Block align="left" id="description" background="light">
         {[
           {
             content:
@@ -206,13 +206,13 @@ class Index extends React.Component {
       const pageUrl = page => baseUrl + (language ? `${language}/` : '') + page;
 
       return (
-        <div className="productShowcaseSection paddingBottom">
+        <div className="productShowcaseSection paddingBottom" background="dark">
           <h2>Who is Using This?</h2>
-          <p>This project is used by all these people</p>
+          <p>CosmWasm is used in testnets by the following projects</p>
           <div className="logos">{showcase}</div>
           <div className="more-users">
             <a className="button" href={pageUrl('users.html')}>
-              More {siteConfig.title} Users
+              More CosmWasm Users
             </a>
           </div>
         </div>
