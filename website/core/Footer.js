@@ -44,12 +44,13 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>Community</h5>
+            <a href="https://twitter.com/CosmWasm">Twitter</a>
             <a href="https://t.me/joinchat/AkZriEhk9qcRw5A5U2MapA">Telegram</a>
             <a href="mailto:cosmwasm@confio.tech">cosmwasm@confio.tech</a>
           </div>
           <div>
             <h5>More</h5>
-            <a href="https://github.com/confio/cosmwasm">GitHub</a>
+            <a href="https://github.com/CosmWasm/cosmwasm">GitHub</a>
             <a href="https://medium.com/confio">Confio Blog</a>
           </div>
         </section>
