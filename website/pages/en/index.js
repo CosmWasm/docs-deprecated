@@ -208,7 +208,7 @@ class Index extends React.Component {
       return (
         <div className="productShowcaseSection paddingBottom" background="dark">
           <h2>Who is Using This?</h2>
-          <p>This project is used by all these people</p>
+          <p>CosmWasm is used in testnets by the following projects</p>
           <div className="logos">{showcase}</div>
           <div className="more-users">
             <a className="button" href={pageUrl('users.html')}>

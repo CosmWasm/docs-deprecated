@@ -31,6 +31,12 @@ const siteConfig = {
       image: "/img/regen-logo.jpeg",
       infoLink: "https://medium.com/regen-network/cosmwasm-kontra%C5%ADa-testnet-plan-2756490ccdf4",
       pinned: true,
+    },
+    {
+      caption: "Enigma (Testnet)",
+      image: "/img/enigma-logo.svg",
+      infoLink: "https://forum.enigma.co/t/testnet-is-live-with-smart-contracts/1386",
+      pinned: true,
     }
   ],
 
