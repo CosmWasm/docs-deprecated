@@ -34,7 +34,7 @@ const siteConfig = {
     },
     {
       caption: "Enigma (Testnet)",
-      image: "/img/enigma-logo.svg",
+      image: "/img/enigma-logo.jpg",
       infoLink: "https://forum.enigma.co/t/testnet-is-live-with-smart-contracts/1386",
       pinned: true,
     }
