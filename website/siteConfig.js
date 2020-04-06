@@ -37,7 +37,13 @@ const siteConfig = {
       image: "/img/enigma-logo.jpg",
       infoLink: "https://forum.enigma.co/t/testnet-is-live-with-smart-contracts/1386",
       pinned: true,
-    }
+    },
+    {
+      caption: "CyberCongress",
+      image: "/img/cybercongress-logo.jpg",
+      infoLink: "https://github.com/cybercongress/go-cyber",
+      pinned: true,
+    },
   ],
 
   disableHeaderTitle: true,
