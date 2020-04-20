@@ -16,7 +16,7 @@ dynamically uploaded to the blockchain at a given address. This can be added aft
 soft or hard fork to be added or modified) and will differ between different blockchains running CosmWasm.
 
 We support composition between both types, but we must look more deeply at the integration with "Native Modules", as using those can
-cause [Portability](#Portability) issues. To minimize this issue, we provide some abstractions around "Modules"
+cause [Portability](#portability) issues. To minimize this issue, we provide some abstractions around "Modules"
 
 ## Messages
 
@@ -28,13 +28,13 @@ The two fundamental transactions are:
 * `Contract` - This will call a given contract address with a given message (provided in serialized form).
 * `Opaque` (rename to `Native`?) - This will provide a message to the native blockchain to execute. It must be encoded in the blockchain native format.
 
-However, `Native` calls are very fragile due to issues with both [Portability](#Portability) and [Immutability](#Immutability), and should generally be avoided.
+However, `Native` calls are very fragile due to issues with both [Portability](#portability) and [Immutability](#immutability), and should generally be avoided.
 Thus, we provide some standard notations to call into native modules using well-defined *portable* and *immutable* interfaces. Currently, these are not very
 *Extensible* as we need to update `cosmwasm_std`, `go-cosmwasm` and `wasmd` to enable them.
 
 The two main uses of `Native` messages are (1) to allow a contract to "re-dispatch" a client created message. Such as enabling a multisig contract to
 sign and approve any message a client can create. or (2) allow developers to test out new functionality in dev mode, before the interfaces are finalized
-in a new release. In order to allow safer use of `Native` messages, we provide some standardized [Module interfaces](#Modules).
+in a new release. In order to allow safer use of `Native` messages, we provide some standardized [Module interfaces](#modules).
 
 ## Queries
 
@@ -50,7 +50,7 @@ In order to simplify this, we can provide some contract-specific type-safe wrapp
 [`query_balance`](https://github.com/CosmWasm/cosmwasm/blob/08717b4c589bbfe59f44bb8cccffb08f63696413/packages/std/src/traits.rs#L95-L105)
 method as a wrapper around the `query` implementation provided by the Trait.
 
-In order to allow safer use of `Native` queries, we provide some standardized [Module interfaces](#Modules).
+In order to allow safer use of `Native` queries, we provide some standardized [Module interfaces](#modules).
 
 ## Modules
 
@@ -137,3 +137,28 @@ impl NameService {
 Rather than storing just the `CanonicalAddr` of the other contract in our configuration, we could store `NameService`, which is
 a zero-cost "newtype" over the original address, with the same serialization format. However, it would provide us
 some type-safe helpers to make queries against the contract, as well as produce `CosmosMsg` for registration.
+
+Note that these type-safe wrappers are not tied to an *implementation* of a contract, but rather the contract's *interface*.
+Thus, we could create a small library with a list of standard/popular interfaces (like the ERCxxx specs) represented with such
+"newtypes". A contract creator could import one of these wrappers and then easily call the contract, regardless of implmentation,
+as long as it supported the proper interface
+
+#### Checking types of remote contracts
+
+This does bring up another issue, if I nicely wrap a remote contract address in the `NameService` type, but the actual contract
+supports the ERC20 interface... it will fail on the first usage. Ideally we would have a way to detect this on `init`, when setting
+the address of the remote contract.
+
+One brute force idea would be to try all supported queries and see if they give reasonable results, but that is pretty tricky to do well
+without some knowledge of what data is stored there.
+
+TODO: better ideas?
+
+### Adding Native Modules
+
+Unfortunately we cannot perform a similar trick with Native Modules, as this requires the adaptor code to be compiled into the calling
+contract, and it will just use the `CosmosMsg::Contract` type at the Wasm API boundary. The Native Modules need us to pass a standardized
+type over the API boundary, so the blockchain runtime can transform it into the proper native message / query. What we can do is make our
+type generic enough, so this is easy to extend and you just need to customize the two endpoints (contract and custom Go app).
+
+TODO: define better
