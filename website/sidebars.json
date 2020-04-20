@@ -7,6 +7,7 @@
       "intro/addresses",
       "intro/query",
       "intro/serialization",
+      "intro/composition",
       "intro/roadmap"
     ],
     "Getting Started": [
