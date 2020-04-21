@@ -5,7 +5,7 @@ sidebar_label: Contract Composition
 ---
 
 Given the [Actor model](./actor) of dispatching messages, and [synchronous queries](./query) implemented in CosmWasm v0.8, we have all the raw components
-to enable arbitrary composition of contracts with both other contracts and native modules. Here will will explain
+to enable arbitrary composition of contracts with both other contracts and native modules. Here we will explain
 how the components fit together and how they can be extended.
 
 ## Terminology
@@ -22,11 +22,11 @@ cause [Portability](#portability) issues. To minimize this issue, we provide som
 
 Both `init` and `handle` can return an arbitrary number of
 [`CosmosMsg`](https://github.com/CosmWasm/cosmwasm/blob/08717b4c589bbfe59f44bb8cccffb08f63696413/packages/std/src/init_handle.rs#L11-L31)
-objects, which will be re-dispatched in the same transaction (and thus atomic success/rollback with the contract).
-The two fundamental transactions are:
+objects, which will be re-dispatched in the same transaction (and thus atomic success/rollback with the contract execution).
+The two fundamental message types are:
 
 * `Contract` - This will call a given contract address with a given message (provided in serialized form).
-* `Opaque` (rename to `Native`?) - This will provide a message to the native blockchain to execute. It must be encoded in the blockchain native format.
+* `Native` - This will provide a message to the native blockchain to execute. It must be encoded in the blockchain native format.
 
 However, `Native` calls are very fragile due to issues with both [Portability](#portability) and [Immutability](#immutability), and should generally be avoided.
 Thus, we provide some standard notations to call into native modules using well-defined *portable* and *immutable* interfaces. Currently, these are not very
@@ -55,7 +55,7 @@ In order to allow safer use of `Native` queries, we provide some standardized [M
 ## Modules
 
 In order to enable better integrations with the native blockchain, we are providing a set of module interfaces. The most basic one
-is to the `Bank` module, which provides access to the underlying native tokens. This gives us `CosmosMsg::Send` as well as
+is to the `Bank` module, which provides access to the underlying native tokens. This gives us `BankMsg::Send` as well as
 `QueryRequest::Balance` and `QueryRequest::AllBalances` to check balances and move tokens. Beyond this, we are working with
 blockchains that have concrete use-cases.
 
@@ -112,10 +112,15 @@ If we want to call some extensions, say to `Staking` or `Swap` modules, we can c
 can support it? We want to fail on upload or instantiation of a contract, and not discover some key functionality doesn't work on this chain,
 when there is value stored in the contract.
 
-Current idea that the contract make a query call on `init` (or return in `InitResponse`) all list of module interfaces it requires to work
+One idea that the contract make a query call on `init` (or return in `InitResponse`) all list of module interfaces it requires to work
 correctly. The runtime should return an error (and abort/rollback) the contract instantiation if it doesn't support all those module interfaces.
 
-TODO: other ideas??
+Another idea is to use feature flags to configure which extra features are required by the contract and make some "ghost" imports like
+`feature_staking()`. This would only pass compatibility check if the runtime also exposed such features. The issue here is that we do not
+want to make this requirement when compiling the cosmwasm_vm (which is embedded as a dll in a blockchain app), but in the blockchain
+app itself, to make it easy to configure. Rather than forking `go-cosmwasm` and rebuilding it. Thus, we would need someway for the
+blockchain to pass in a list of enabled feature flags, which would then be used in `check_compatibility` and also exposed in the
+`Instance.context` (as no-op callbacks, but there so it will link properly).
 
 ### Type-Safe Wrappers
 
@@ -135,7 +140,8 @@ impl NameService {
 ```
 
 Rather than storing just the `CanonicalAddr` of the other contract in our configuration, we could store `NameService`, which is
-a zero-cost "newtype" over the original address, with the same serialization format. However, it would provide us
+a zero-cost ["newtype"](https://doc.rust-lang.org/stable/rust-by-example/generics/new_types.html)
+over the original address, with the same serialization format. However, it would provide us
 some type-safe helpers to make queries against the contract, as well as produce `CosmosMsg` for registration.
 
 Note that these type-safe wrappers are not tied to an *implementation* of a contract, but rather the contract's *interface*.
