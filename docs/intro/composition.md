@@ -8,6 +8,8 @@ Given the [Actor model](./actor) of dispatching messages, and [synchronous queri
 to enable arbitrary composition of contracts with both other contracts and native modules. Here we will explain
 how the components fit together and how they can be extended.
 
+**Note** the text below applies to CosmWasm 0.8, which is not yet released.
+
 ## Terminology
 
 For the remainder of this article, I will make a key distinction between "Contracts" and "Native Modules". "Contracts" are CosmWasm code that is
@@ -23,18 +25,19 @@ cause [Portability](#portability) issues. To minimize this issue, we provide som
 Both `init` and `handle` can return an arbitrary number of
 [`CosmosMsg`](https://github.com/CosmWasm/cosmwasm/blob/08717b4c589bbfe59f44bb8cccffb08f63696413/packages/std/src/init_handle.rs#L11-L31)
 objects, which will be re-dispatched in the same transaction (and thus atomic success/rollback with the contract execution).
-The two fundamental message types are:
+There are 3 classes of messages:
 
-* `Contract` - This will call a given contract address with a given message (provided in serialized form).
-* `Native` - This will provide a message to the native blockchain to execute. It must be encoded in the blockchain native format.
+* `Contract` - This will call a given contract address with a given message (provided in serialized form). It assumes the caller has access to the API format.
+* [Module interfaces](#modules) - These are standardized interfaces that can be supported by any chain to expose native modules under a *portable* interface.  
+* [`Custom`](#customization) - This encapsulates a chain-dependent extension to the message types to call into custom native modules. Ideally they should be *immutable* on the same chain over time, but they make no portability guarantees.
 
-However, `Native` calls are very fragile due to issues with both [Portability](#portability) and [Immutability](#immutability), and should generally be avoided.
+<!-- However, `Native` calls are very fragile due to issues with both [Portability](#portability) and [Immutability](#immutability), and should generally be avoided.
 Thus, we provide some standard notations to call into native modules using well-defined *portable* and *immutable* interfaces. Currently, these are not very
 *Extensible* as we need to update `cosmwasm_std`, `go-cosmwasm` and `wasmd` to enable them.
 
 The two main uses of `Native` messages are (1) to allow a contract to "re-dispatch" a client created message. Such as enabling a multisig contract to
 sign and approve any message a client can create. or (2) allow developers to test out new functionality in dev mode, before the interfaces are finalized
-in a new release. In order to allow safer use of `Native` messages, we provide some standardized [Module interfaces](#modules).
+in a new release. In order to allow safer use of `Native` messages, we provide some standardized . -->
 
 ## Queries
 
@@ -50,9 +53,15 @@ In order to simplify this, we can provide some contract-specific type-safe wrapp
 [`query_balance`](https://github.com/CosmWasm/cosmwasm/blob/08717b4c589bbfe59f44bb8cccffb08f63696413/packages/std/src/traits.rs#L95-L105)
 method as a wrapper around the `query` implementation provided by the Trait.
 
-In order to allow safer use of `Native` queries, we provide some standardized [Module interfaces](#modules).
+As with [Messages](#messages), we have three fundamental types:
+
+* `Contract` - This will query a given contract address with a given message (provided in serialized form). It assumes the caller has access to the API format.
+* [Module interfaces](#modules) - These are standardized interfaces that can be supported by any chain to expose native modules under a *portable* interface.  
+* [`Custom`](#customization) - This encapsulates a chain-dependent extension to to query custom native modules. Ideally they should be *immutable* on the same chain over time, but they make no portability guarantees.
 
 ## Modules
+
+TODO: bank and staking, cleanup
 
 In order to enable better integrations with the native blockchain, we are providing a set of module interfaces. The most basic one
 is to the `Bank` module, which provides access to the underlying native tokens. This gives us `BankMsg::Send` as well as
@@ -75,6 +84,16 @@ Note, that theoretically these modules can also be implemented by contracts. Eg.
 a UniSwap-inspired contract and register that somehow with the Go blockchain. Then the blockchain would know to take the swap message and
 dispatch it to this custom contract. (Note that this is not implemented at all, just an idea of future directions).
 
+## Customization
+
+Many chains will want to allow contracts to execute with their custom go modules, without going through all the work to try to turn it into a standardized [Module Interface](#modules) and wait for a new CosmWasm release. For this case, we introduce the `Custom` variant on both `CosmosMsg` and `QueryRequest`.
+The idea here is that the contract can define the type to be include in the `Custom` variants, and it just needs to be agreed upon by the Cosmos SDK app
+(in Golang) on the other side. All the code between the contract and the blockchain codec treats it as opaque json bytes.
+
+TODO: demo in reflect
+
+TODO: example with Terra
+
 ## Design Considerations
 
 In producing a solid design, we want the API to fulfill all these requirements (or strike a good balance if truly impossible to achieve them all):
@@ -82,7 +101,8 @@ In producing a solid design, we want the API to fulfill all these requirements (
 ### Portability
 
 The same contract should run on two distinct blockchains, with differing custom modules, different versions of the Cosmos SDK, or ideally, even
-based on different frameworks (eg. running on Substrate).
+based on different frameworks (eg. running on Substrate). This should be possible when avoiding `Custom` messages, and checking the optional features one uses.
+The features are currently `staking`, which assumes a PoS system, and `iterator`, which assumes we can do prefix scans over the storage (ie. it is a Merkle **Tree**, not a Merkle **Trie**).
 
 ### Immutability
 
@@ -99,7 +119,8 @@ call into your custom `superd` modules, then in an ideal world, you could add th
 that you can import in your contracts and add the callbacks to them in `superd` Go code. *Without any changes* in `cosmwasm-std`, `cosmwasm-vm`,
 `go-cosmwasm`, or `wasmd` repositories (which have a different release cycle than your app).
 
-We are not their yet, and only raw `Native` calls are fully extensible, but we are working towards such possibilities.
+We provide the [`Custom`](#customization) variants to `CosmosMsg` and `QueryRequest` to enable such cases. They can provide immutability but not
+portability.
 
 ## Usability
 
@@ -121,6 +142,8 @@ want to make this requirement when compiling the cosmwasm_vm (which is embedded 
 app itself, to make it easy to configure. Rather than forking `go-cosmwasm` and rebuilding it. Thus, we would need someway for the
 blockchain to pass in a list of enabled feature flags, which would then be used in `check_compatibility` and also exposed in the
 `Instance.context` (as no-op callbacks, but there so it will link properly).
+
+Note: This is currently discussed in [an open issue](https://github.com/CosmWasm/cosmwasm/issues/301) to be part of the 0.8 release.
 
 ### Type-Safe Wrappers
 
@@ -151,6 +174,10 @@ as long as it supported the proper interface
 
 #### Checking types of remote contracts
 
+When using Custom types, you will have to add some custom helpers along with the types to make them useful.
+You cannot extend the `Querier` interface as with `query_balance` (TODO: document), but you can add a method to
+the `CustomQuery` that takes a querier and does all required parsing. 
+
 This does bring up another issue, if I nicely wrap a remote contract address in the `NameService` type, but the actual contract
 supports the ERC20 interface... it will fail on the first usage. Ideally we would have a way to detect this on `init`, when setting
 the address of the remote contract.
@@ -160,11 +187,3 @@ without some knowledge of what data is stored there.
 
 TODO: better ideas?
 
-### Adding Native Modules
-
-Unfortunately we cannot perform a similar trick with Native Modules, as this requires the adaptor code to be compiled into the calling
-contract, and it will just use the `CosmosMsg::Contract` type at the Wasm API boundary. The Native Modules need us to pass a standardized
-type over the API boundary, so the blockchain runtime can transform it into the proper native message / query. What we can do is make our
-type generic enough, so this is easy to extend and you just need to customize the two endpoints (contract and custom Go app).
-
-TODO: define better
