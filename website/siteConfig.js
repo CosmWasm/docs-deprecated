@@ -27,13 +27,19 @@ const siteConfig = {
 
   users: [
     {
-      caption: "Regen Network (Testnet)",
+      caption: "Terra",
+      image: "/img/terra.svg",
+      infoLink: "https://terra.money",
+      pinned: true,
+    },
+    {
+      caption: "Regen Network",
       image: "/img/regen-logo.jpeg",
       infoLink: "https://medium.com/regen-network/cosmwasm-kontra%C5%ADa-testnet-plan-2756490ccdf4",
       pinned: true,
     },
     {
-      caption: "Enigma (Testnet)",
+      caption: "Enigma",
       image: "/img/enigma-logo.jpg",
       infoLink: "https://forum.enigma.co/t/testnet-is-live-with-smart-contracts/1386",
       pinned: true,
