@@ -7,7 +7,7 @@ sidebar_label: Contract Composition
 Given the [Actor model](./actor) of dispatching messages, and [synchronous queries](./query) implemented in CosmWasm v0.8, we have all the raw components
 to enable arbitrary composition of contracts with both other contracts and native modules. Here we will explain how the components fit together and how they can be extended.
 
-**Note** the text below applies to CosmWasm 0.8, which is not yet released.
+**Note** The text below applies to CosmWasm 0.8, release May 25, 2020. Please upgrade if you wish to take advantage of the power of composition.
 
 ## Terminology
 
@@ -132,17 +132,10 @@ If we want to call some extensions, say to the `Staking` modules, we can compile
 can support it? We want to fail on upload or instantiation of a contract, and not discover some key functionality doesn't work on this chain,
 when there is value stored in the contract.
 
-One idea that the contract make a query call on `init` (or return in `InitResponse`) all list of module interfaces it requires to work
-correctly. The runtime should return an error (and abort/rollback) the contract instantiation if it doesn't support all those module interfaces.
-
-Another idea is to use feature flags to configure which extra features are required by the contract and make some "ghost" imports like
-`feature_staking()`. This would only pass compatibility check if the runtime also exposed such features. The issue here is that we do not
-want to make this requirement when compiling the cosmwasm_vm (which is embedded as a dll in a blockchain app), but in the blockchain
-app itself, to make it easy to configure. Rather than forking `go-cosmwasm` and rebuilding it. Thus, we would need someway for the
-blockchain to pass in a list of enabled feature flags, which would then be used in `check_compatibility` and also exposed in the
-`Instance.context` (as no-op callbacks, but there so it will link properly).
-
-Note: This is currently discussed in [an open issue](https://github.com/CosmWasm/cosmwasm/issues/301) to be part of the 0.8 release.
+The design decision was to you use feature flags, exposed as wasm export functions, to configure which extra features are required by the contract.
+This lets the host chain inspect compatibility before allowing an upload. To do so, we make some "ghost" exports like
+`requires_staking()` or `requires_terra()`. This would only pass compatibility check if the runtime also exposed such features.
+When instantiating `x/wasm.NewKeeper()` you can specify which features are supported.
 
 ### Type-Safe Wrappers
 
@@ -168,5 +161,5 @@ some type-safe helpers to make queries against the contract, as well as produce 
 
 Note that these type-safe wrappers are not tied to an *implementation* of a contract, but rather the contract's *interface*.
 Thus, we could create a small library with a list of standard/popular interfaces (like the ERCxxx specs) represented with such
-"newtypes". A contract creator could import one of these wrappers and then easily call the contract, regardless of implmentation,
+"newtypes". A contract creator could import one of these wrappers and then easily call the contract, regardless of implementation,
 as long as it supported the proper interface
