@@ -27,12 +27,6 @@ const siteConfig = {
 
   users: [
     {
-      caption: "OKChain",
-      image: "/img/okchain.png",
-      infoLink: "https://www.okex.com/okchain",
-      pinned: true,
-    },
-    {
       caption: "Terra",
       image: "/img/terra.svg",
       infoLink: "https://terra.money",
@@ -42,6 +36,12 @@ const siteConfig = {
       caption: "Regen Network",
       image: "/img/regen-logo.jpeg",
       infoLink: "https://medium.com/regen-network/cosmwasm-kontra%C5%ADa-testnet-plan-2756490ccdf4",
+      pinned: true,
+    },
+    {
+      caption: "OKChain",
+      image: "/img/okchain.png",
+      infoLink: "https://www.okex.com/okchain",
       pinned: true,
     },
     {
