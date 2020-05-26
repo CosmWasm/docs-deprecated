@@ -44,7 +44,7 @@ wasmcli query account $(wasmcli keys show thief -a)
 wasmcli query account $(wasmcli keys show bob -a)
 ```
 
-## Uploading the Code
+### Uploading the Code
 
 Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new account, then update the contract to reference it:
 
@@ -84,7 +84,7 @@ wasmcli query wasm code $CODE_ID download.wasm
 diff contract.wasm download.wasm
 ```
 
-## Instantiating the Contract
+### Instantiating the Contract
 
 We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to control payout and upon release, the funds go to bob.
 
@@ -149,6 +149,144 @@ wasmcli query account $(wasmcli keys show thief -a)
 # and this is empty
 wasmcli query account $CONTRACT
 ```
+
+## Node Console
+
+If you set up the Node Console / REPL in the
+[client setup section](./using-the-sdk), you can use that
+to deploy and execute your contract.
+I think you will find that JSON manipulation and parsing
+is a bit nicer in JavaScript than in Shell Script.
+
+First, go to the cli directory and start up your console:
+
+`./bin/cosmwasm-cli --init examples/helpers.ts`
+
+Now, we make all the keys and initialize clients:
+
+```js
+const fredSeed = loadOrCreateMnemonic("fred.key");
+const {address: fredAddr, client: fredClient} = await connect(fredSeed, {});
+
+// bob doesn't have a client here as we will not
+// submit any tx with this account, just query balance
+const bobSeed = loadOrCreateMnemonic("bob.key");
+const bobAddr = await mnemonicToAddress("cosmos", bobSeed);
+
+const thiefSeed = loadOrCreateMnemonic("thief.key");
+const {address: thiefAddr, client: thiefClient} = await connect(thiefSeed, {});
+
+console.log(fredAddr, bobAddr, thiefAddr);
+```
+
+Hit the faucet it needed for fred and thief, so they
+have tokens to submit transactions:
+
+```js
+fredClient.getAccount();
+// if "undefined", do the following
+hitFaucet(defaultFaucetUrl, fredAddr, "COSM")
+fredClient.getAccount();
+
+thiefClient.getAccount();
+// if "undefined", do the following
+hitFaucet(defaultFaucetUrl, thiefAddr, "COSM")
+thiefClient.getAccount();
+
+// check bobAddr has no funds
+fredClient.getAccount(bobAddr);
+
+// we need this address to configure the contract properly
+console.log("thief", thiefAddr);
+```
+
+### Compiling the Code
+
+Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new account, then update the contract to reference it.
+Go to your IDE, set the THIEF variable properly,
+and recompile your contract:
+
+```bash
+# for the rest of this section, we assume you are in the same path as the rust contract (Cargo.toml)
+cd <path/to/rust/code>
+
+# Set the THIEF variable in source code to the value
+# we got above
+SET-THIEF-VARIABLE
+
+# and recompile wasm
+docker run --rm -v $(pwd):/code \
+  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  cosmwasm/rust-optimizer:0.8.0
+
+# ensure the hash changed
+cat hash.txt
+
+# copy it to the same
+cp contract.wasm </path/to/cosmwasm-js/packages/cli>
+```
+
+### Uploading with JS
+
+Now, we go back to the Node console and upload the
+contract and instantiate it:
+
+```js
+const wasm = fs.readFileSync('contract.wasm');
+// fake source, but this can be verified to be false
+// by any careful observer
+const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.4.0/download", builder: "cosmwasm/rust-optimizer:0.8.0"});
+
+console.log(up);
+const { codeId } = up;
+
+const initMsg = {arbiter: fredAddr, recipient: bobAddr};
+const { contractAddress } = await fredClient.instantiate(codeId, initMsg, "Escrow 1", "memo", [{denom: "ucosm", amount: "50000"}]);
+
+// check the contract is set up properly
+console.log(contractAddress);
+fredClient.getContract(contractAddress);
+fredClient.getAccount(contractAddress);
+
+// make a raw query - key length prefixed "config"
+const key = new Uint8Array([0, 6, ...toAscii("config")]);
+const raw = await fredClient.queryContractRaw(contractAddress, key2);
+JSON.parse(fromUtf8(raw))
+// note the addresses are stored in base64 internally, not bech32, but the data is there... this is why we often implement smart queries on real contracts
+```
+
+### Executing Contract with JS
+
+Once we have properly configured the contract, let's
+show how to use it, both the proper "approve" command
+as well as our backdoor "steal" command:
+
+```js
+const approve = {approve: {quantity: [{amount: "20000", denom: "ucosm"}]}};
+
+// thief cannot approve
+thiefClient.execute(contractAddress, approve)
+
+// but fred can (and moves money to bob)
+fredClient.execute(contractAddress, approve);
+fredClient.getAccount(bobAddr);
+fredClient.getAccount(contractAddress);
+
+// now the thief can steal the rest...
+const steal = {steal: {destination: thiefAddr}};
+thiefClient.execute(contractAddress, steal);
+
+// thief got some more ucosm, contract lost, and bob stays the same
+fredClient.getAccount(thiefAddr);
+fredClient.getAccount(contractAddress);
+fredClient.getAccount(bobAddr);
+```
+
+You might notice that the thief got 20k and bob as well,
+and the contract is down by 50k. What's up with that?
+
+Well, we pay configurable gas fees for all execute transactions, by default 5000ucosm for 200k gas (0.025ucosm / gas). The thief made two transactions and paid 10k ucosm in gas.
 
 ## Next Steps
 
