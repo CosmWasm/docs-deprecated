@@ -27,6 +27,12 @@ const siteConfig = {
 
   users: [
     {
+      caption: "OKChain",
+      image: "/img/okchain.png",
+      infoLink: "https://www.okex.com/okchain",
+      pinned: true,
+    },
+    {
       caption: "Terra",
       image: "/img/terra.svg",
       infoLink: "https://terra.money",
