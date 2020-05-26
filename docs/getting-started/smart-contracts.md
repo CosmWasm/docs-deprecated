@@ -22,7 +22,7 @@ Another big difference is that we avoid all reentrancy attacks by design. This p
 
 Cosmwasm avoids this completely by preventing any contract from calling another one directly. Clearly we want to allow composition, but inline function calls to malicious code creates a security nightmare. The approach taken with CosmWasm is to allow any contract to *return* a list of messages *to be executed in the same transaction*. This means that a contract can request a send to happen after it is finished (eg. release escrow), or call into other contract. If the future messages fail, then the entire transaction reverts, including updates to the contract's state. This allows to atomic composition and quite a few security guarantees, with the only real downside that you cannot view the results of executing another contract, rather you can just do "revert on error".
 
-Sometimes we will need information from another contract, and we plan to allow queries to other contracts or the underlying Cosmos SDK modules. These Queries will only have access to a read-only database image and be unable to delegate to other modules, thus avoiding any possible reentrancy concerns. For more detailed information, please look at the [Architecture documentation](https://github.com/CosmWasm/go-cosmwasm/blob/master/spec/Architecture.md) as well as the [API specification](https://github.com/CosmWasm/go-cosmwasm/blob/master/spec/Specification.md).
+Sometimes we will need information from another contract, and with the 0.8 release, we added synchronous queries to other contracts or underlying Cosmos SDK modules. These Queries only have access to a read-only database snapshot and be unable to modify state or send messages to other modules, thus avoiding any possible reentrancy concerns.
 
 ## Resource Limits
 
@@ -50,7 +50,7 @@ Rust allows you to simply set `overflow-checks = true` in the [Cargo manifest](h
 
 3. [Unexpected Ether](https://github.com/sigp/solidity-security-blog#ether) ![OPEN](/img/times.png) *Bad design pattern*
 
-This involves a contract depending on complete control of it's balance. A design pattern that should be avoided in any contract system. In CosmWasm, contracts are not called when tokens are sent to them, but the actual balance is passed in every time they are called. You can note that the [sample escrow contract](https://github.com/CosmWasm/cosmwasm-examples/blob/master/escrow/src/contract.rs) doesn't record how much was sent to it during initialization, but rather [releases the current balance](https://github.com/CosmWasm/cosmwasm-examples/blob/master/escrow/src/contract.rs#L136-L140) when a paying out or refunding the amount. This ensures no tokens get stuck.
+This involves a contract depending on complete control of it's balance. A design pattern that should be avoided in any contract system. In CosmWasm, contracts are not called when tokens are sent to them, but they can query their current balance when they are called. You can note that the [sample escrow contract](https://github.com/CosmWasm/cosmwasm-examples/blob/escrow-0.4.0/escrow/src/contract.rs) doesn't record how much was sent to it during initialization, but rather [releases the current balance](https://github.com/CosmWasm/cosmwasm-examples/blob/escrow-0.4.0/escrow/src/contract.rs#L83-L92) when a paying out or refunding the amount. This ensures no tokens get stuck.
 
 4. [Delegate Call](https://github.com/sigp/solidity-security-blog#delegatecall) ![SAFE](/img/check.png)
 
@@ -64,13 +64,16 @@ Rather than auto-generating entry points for every function/method in your code 
 
 The block hashes (and last digits of timestamps) are even more easily manipulated by block proposers in Tendermint, than with miners in Ethereum. They should definitely not be used for randomness. There is work planned to provide a secure random beacon, and expose this secure source of entropy to smart contracts.
 
-7. [External Contract Referencing](https://github.com/sigp/solidity-security-blog#contract-reference) ![OPEN](/img/times.png) *Planned Mitigation*
+7. [External Contract Referencing](https://github.com/sigp/solidity-security-blog#contract-reference) ![MITIGATED](/img/check.png) *Planned Mitigation*
 
 If you call a contract with a given `HandleMsg`, this just requires the contract has the specified API, but says nothing of the code there. I could upload malicious code with the same API as a desired contract (or a superset of the API), and ask you to call it - either directly or from a contract. This can be used to steal funds, and in fact we [demo this in the tutorial](./editing-escrow-contract).
 
 There are two mitigations here. The first is that in CosmWasm, you don't need to call out to solidity libraries at runtime to deal with size limits, but are encouraged to link all the needed code into one wasm blob. This alone removes most usage of the external contract references.
 
-The other mitigation is allowing users to quickly find verified rust source behind the wasm contract on the chain. This approach is [used by etherscan](https://medium.com/coinmonks/how-to-verify-and-publish-on-etherscan-52cf25312945#bc72), where developers can publish the original source code, and it will compile the code. If the same bytecode is on chain, we know can prove it came from this rust source. We have built the deterministic build system for rust wasm, and plan to provide a web service that can expose this functionality easily to all developers.
+The other mitigation is allowing users to quickly find verified rust source behind the wasm contract on the chain. This approach is [used by etherscan](https://medium.com/coinmonks/how-to-verify-and-publish-on-etherscan-52cf25312945#bc72), where developers can publish the original source code, and it will compile the code. If the same bytecode is on chain, we know can prove it came from this rust source. We have built the deterministic build system for rust wasm, and
+have [simple tooling to validate the original source code](https://medium.com/confio/dont-trust-cosmwasm-verify-db1caac2d335).
+We also [released a code explorer](https://demonet.wasm.glass/codes) that allows you to browse contracts and locally
+verify the source code in one command.
 
 8. [Short Address/Parameter Attack](https://github.com/sigp/solidity-security-blog#short-address) ![SAFE](/img/check.png)
 

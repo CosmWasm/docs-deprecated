@@ -4,65 +4,101 @@ title: Using Cosmos SDK
 sidebar_label: Cosmos SDK
 ---
 
-## Set Up a Single Node "Dev Net"
+## Connect to Demo Net
 
-To get this to work, you will need to first deploy a local single-node testnet. I assume you have some experience with this, if not, please refer to gaiad documentation. You will need go 1.13 installed and standard dev tooling, and `$HOME/go/bin` set to be in your `$PATH`.
+For easy testing, we have a demo net online you can use to deploy and run your contracts.
+There is a simple faucet with REST API that will release tokens to try it out.
 
-If you want to dig deeper, you can [following these instructions](https://github.com/CosmWasm/wasmd/blob/master/docs/deploy-testnet.md#single-node-local-manual-testnet), and also look at instructions of deploying remote networks and multi-node networks. Soon we aim to deploy a testnet to allow all developers to quickly test out contract development and connecting dApps, without worrying about deployment.
+To verify this is currently running, make sure the following URLs are all working for you:
 
-**WARNING** The server will only work on osx and linux. Windows support is on the roadmap (but you should be able to use a Windows client).
+* https://faucet.demo-08.cosmwasm.com/status
+* https://rpc.demo-08.cosmwasm.com/status
+* https://lcd.demo-08.cosmwasm.com/node_info
 
-Checkout code and compile:
+We have set up two native tokens - `STAKE` (`ustake`) for being a validator and 
+`COSM` (`ucosm`) for paying fees. There are also 3 "ERC20-like" tokens set initialized
+at start (you can add more): `HASH`, `ISA` and `JADE`. (TODO: link to explorer)
+
+We currently don't have any frontends (lunie, hubble, cosmostation, etc) that work with
+the demo net, but feel free to deploy one pointing to our rpc/lcd servers and we will list it.
+
+## Connecting with a Go CLI
+
+If you are used to the Cosmos SDK go tooling (eg `gaiacli`), and have a Go toolchain
+installed locally, this may be the easiest for you. If you have a JS developer toolchain
+and prefer Node REPL, check the next section.
+
+First, compile the `wasmcli` binary from source:
 
 ```bash
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
+git checkout v0.8.0
 make install
+
+# This should return "0.8.0"
+wasmcli version
 ```
 
-Set up a single-node local testnet:
-
-```bash
-# if you've done this before, wipe out all data from last run
-# this may wipe out keys, make sure you know you want to do this
-rm -rf ~/.wasmd
-
-cd $HOME
-wasmd init --chain-id=testing testing
-
-# if you've done this before, check which keys are created locally first
-# wasmcli keys list
-# you can skip any "add" steps if they already exist
-wasmcli keys add validator
-
-wasmd add-genesis-account $(wasmcli keys show validator -a) 1000000000stake,1000000000validatortoken
-# You can add a few more accounts here if you wish (for experiments beyond the tutorial)
-
-wasmd gentx --name validator
-wasmd collect-gentxs
-wasmd start
-```
-
-## Connecting with a Client
+(If you have any problems here, check your `PATH`. `make install` will copy `wasmcli` to
+`$HOME/go/bin` by default, please make sure that is set up in your `PATH` as well, which should
+be the case in general for building Go code from source.)
 
 Now, open up another window and set up your client:
 
 ```bash
 wasmcli config chain-id testing
 wasmcli config trust-node true
-wasmcli config node tcp://localhost:26657
+wasmcli config node https://rpc.demo-08.cosmwasm.com:443
 wasmcli config output json
 wasmcli config indent true
 # this is important, so the cli returns after the tx is in a block,
 # and subsequent queries return the proper results
 wasmcli config broadcast-mode block
 
+# check you can connect
+wasmcli query supply total
+wasmcli query staking validators
+wasmcli query wasm list-code
+
+# create some local accounts
 wasmcli keys add fred
 wasmcli keys add bob
 wasmcli keys list
+```
 
-# verify initial setup
-wasmcli query account $(wasmcli keys show validator -a)
+## Connecting with a Node REPL
+
+Beyond the standard CLI tooling, we have also produced a flexible TypeScript library [`cosmwasm-js`](https://github.com/CosmWasm/cosmwasm-js), which runs in Node.js as well as in modern browsers and handles queries and submitting transactions.
+Along with this library, we produced [`@cosmwasm/cli`](https://www.npmjs.com/package/@cosmwasm/cli), which is a super-charged
+Node console. It supports `await`, does type checking for helpful error messages, and preloads many `cosmwasm-js` utiities.
+If you are comfortable with the Node console, you will probably find this easier and more powerful than the CLI tooling.
+
+Full usage and installation [instructions are on the README](https://github.com/CosmWasm/cosmwasm-js/tree/master/packages/cli), but here is a short version for those who want to run from source:
+
+
+```bash
+git clone https://github.com/CosmWasm/cosmwasm-js.git
+cd cosmwasm-js
+yarn install && yarn build
+cd packages/cli
+./bin/cosmwasm-cli --init examples/helpers.ts
+```
+
+Using the REPL:
+
+```js
+// Create or load account
+const mnemonic = loadOrCreateMnemonic("fred.key");
+mnemonicToAddress("cosmos", mnemonic)
+
+const {address, client} = await connect(mnemonic, {});
+address
+
+client.getAccount();
+// if empty - this only works with CosmWasm
+hitFaucet(defaultFaucetUrl, address, "COSM")
+client.getAccount();
 ```
 
 ## Further Information on the Cosmos-SDK
