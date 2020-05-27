@@ -8,17 +8,16 @@ In this section, we will take the custom contract you have written in the last s
 
 ## Preparation
 
-To get this to work, you will need to first deploy a local single-node testnet. I assume you have some experience with this, if not, please refer to `gaiad` documentation. You will need go 1.13 installed and standard dev tooling, and `$HOME/go/bin` set to be in your `$PATH`.
+Please first review the [client setup instructions](./using-the-sdk), and configure and verify a client, either Go CLI or
+Node.JS console. Once you confirm that is working, try one of the following paths:
 
-Please first follow the [setup of the blockchain described in an earlier section](./using-the-sdk). To verify this is working, try:
+## Go CLI
 
 ```bash
 wasmcli keys list
-# should show [validator, fred, bob]
+# should show [fred, bob]
 wasmcli status
 # should show some blocks
-wasmcli query account $(wasmcli keys show validator -a)
-# should show a valid account
 ```
 
 Now, let's set up the accounts properly. Both fred and thief will need some amount of tokens in order to submit transaction:
@@ -27,19 +26,25 @@ Now, let's set up the accounts properly. Both fred and thief will need some amou
 # add the thief account
 wasmcli keys add thief
 
-# fred will need some stake later to be able to submit transaction
-wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show fred -a) 98765stake -y
+# check if fred and thief are empty (does not exist message) and hit faucet if so
+wasmcli query account $(wasmcli keys show fred -a)
+wasmcli query account $(wasmcli keys show thief -a)
+
+# fred hits the faucet (JSON manipulation in bash is odd..)
+JSON=$(jq -n --arg addr $(wasmcli keys show -a fred) '{"ticker":"COSM","address":$addr}')
+curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.demo-08.cosmwasm.com/credit
 wasmcli query account $(wasmcli keys show fred -a)
 
-# thief will need one stake to be able to submit transaction
-wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show thief -a) 1stake -y
+# thief will need some coins to be able to submit transaction
+JSON=$(jq -n --arg addr $(wasmcli keys show -a thief) '{"ticker":"COSM","address":$addr}')
+curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.demo-08.cosmwasm.com/credit
 wasmcli query account $(wasmcli keys show thief -a)
 
 # bob should still be broke (and broken showing an Error that the account does not exist)
 wasmcli query account $(wasmcli keys show bob -a)
 ```
 
-## Uploading the Code
+### Uploading the Code
 
 Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new account, then update the contract to reference it:
 
@@ -54,7 +59,7 @@ wasmcli keys show thief -a
 docker run --rm -v $(pwd):/code \
   --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  confio/cosmwasm-opt:0.7.2
+  cosmwasm/rust-optimizer:0.8.0
 
 # ensure the hash changed
 cat hash.txt
@@ -63,37 +68,36 @@ cat hash.txt
 First, we must upload some wasm code that we plan to use in the future. You can download the bytecode to verify it is proper:
 
 ```bash
-# both should be empty
+# see how many codes we have now
 wasmcli query wasm list-code
 
-# upload and see we create code 1
-# gas is huge due to wasm size... but auto-zipping reduced this from 800k to around 400k
-wasmcli tx wasm store contract.wasm --from validator --gas 420000  -y
-wasmcli query wasm list-code
-wasmcli query wasm list-contract-by-code 1
-
-# verify this uploaded contract has the same hash as the local code
-cat hash.txt
+# gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
+# you can see the code in the result
+wasmcli tx wasm store contract.wasm --from fred --gas 600000  -y
+# you can also get the code this way
+CODE_ID=$(wasmcli query wasm list-code | jq .[-1].id)
+# no contracts yet, this should return `null`
+wasmcli query wasm list-contract-by-code $CODE_ID
 
 # you can also download the wasm from the chain and check that the diff between them is empty
-wasmcli query wasm code 1 download.wasm
+wasmcli query wasm code $CODE_ID download.wasm
 diff contract.wasm download.wasm
 ```
 
-## Instantiating the Contract
+### Instantiating the Contract
 
 We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to control payout and upon release, the funds go to bob.
 
 ```bash
 # instantiate contract and verify
-INIT="{\"arbiter\":\"$(wasmcli keys show fred -a)\", \"recipient\":\"$(wasmcli keys show bob -a)\", \"end_time\":0, \"end_height\":0}"
-wasmcli tx wasm instantiate 1 "$INIT" --from validator --amount=50000stake  --label "escrow 1" -y
+INIT=$(jq -n --arg fred $(wasmcli keys show -a fred) --arg bob $(wasmcli keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
+wasmcli tx wasm instantiate $CODE_ID "$INIT" --from fred --amount=50000ucosm  --label "escrow 1" -y
 
 # check the contract state (and account balance)
-wasmcli query wasm list-contract-by-code 1
-# contracts ids (like code ids) are based on an auto-gen sequence
-# if this is the first contract in the devnet, it will have this address (otherwise, use the result from list-contract-by-code)
-CONTRACT=cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5
+wasmcli query wasm list-contract-by-code $CODE_ID
+CONTRACT=$(wasmcli query wasm list-contract-by-code $CODE_ID | jq -r .[0].address)
+echo $CONTRACT
+# we should see this contract with 50000ucosm
 wasmcli query wasm contract $CONTRACT
 wasmcli query account $CONTRACT
 
@@ -123,8 +127,8 @@ Once we have the funds in the escrow, let us try to release them. First, failing
 
 ```bash
 # execute fails if wrong person
-APPROVE='{"approve":{"quantity":[{"amount":"20000","denom":"stake"}]}}'
-wasmcli tx wasm execute $CONTRACT "$APPROVE" --from validator -y
+APPROVE='{"approve":{"quantity":[{"amount":"20000","denom":"ucosm"}]}}'
+wasmcli tx wasm execute $CONTRACT "$APPROVE" --from thief -y
 # looking at the logs should show: "execute wasm contract failed: Unauthorized"
 # and bob should still be broke (and broken showing the account does not exist Error)
 wasmcli query account $(wasmcli keys show bob -a)
@@ -134,13 +138,155 @@ wasmcli tx wasm execute $CONTRACT "$APPROVE" --from fred -y
 wasmcli query account $(wasmcli keys show bob -a)
 wasmcli query account $CONTRACT
 
-# now the thief can steal it all
-STEAL="{\"steal\":{\"destination\":\"$(wasmcli keys show thief -a)\"}}"
-wasmcli tx wasm execute $CONTRACT "$STEAL" --from thief -y
-# remember that you gave the thief 1 stake to start with above... so this should be 30001
+# check what the thief has before
 wasmcli query account $(wasmcli keys show thief -a)
+
+# now the thief can steal all that is left
+STEAL=$(jq -n --arg thief $(wasmcli keys show -a thief) '{"steal":{"destination":$thief}}')
+wasmcli tx wasm execute $CONTRACT "$STEAL" --from thief -y
+# remember we hit the faucet above, but this should raise the funds by 30000 ucosm
+wasmcli query account $(wasmcli keys show thief -a)
+# and this is empty
 wasmcli query account $CONTRACT
 ```
+
+## Node Console
+
+If you set up the Node Console / REPL in the
+[client setup section](./using-the-sdk), you can use that
+to deploy and execute your contract.
+I think you will find that JSON manipulation and parsing
+is a bit nicer in JavaScript than in Shell Script.
+
+First, go to the cli directory and start up your console:
+
+`./bin/cosmwasm-cli --init examples/helpers.ts`
+
+Now, we make all the keys and initialize clients:
+
+```js
+const fredSeed = loadOrCreateMnemonic("fred.key");
+const {address: fredAddr, client: fredClient} = await connect(fredSeed, {});
+
+// bob doesn't have a client here as we will not
+// submit any tx with this account, just query balance
+const bobSeed = loadOrCreateMnemonic("bob.key");
+const bobAddr = await mnemonicToAddress("cosmos", bobSeed);
+
+const thiefSeed = loadOrCreateMnemonic("thief.key");
+const {address: thiefAddr, client: thiefClient} = await connect(thiefSeed, {});
+
+console.log(fredAddr, bobAddr, thiefAddr);
+```
+
+Hit the faucet it needed for fred and thief, so they
+have tokens to submit transactions:
+
+```js
+fredClient.getAccount();
+// if "undefined", do the following
+hitFaucet(defaultFaucetUrl, fredAddr, "COSM")
+fredClient.getAccount();
+
+thiefClient.getAccount();
+// if "undefined", do the following
+hitFaucet(defaultFaucetUrl, thiefAddr, "COSM")
+thiefClient.getAccount();
+
+// check bobAddr has no funds
+fredClient.getAccount(bobAddr);
+
+// we need this address to configure the contract properly
+console.log("thief", thiefAddr);
+```
+
+### Compiling the Code
+
+Before we upload the code, we need to set up `THIEF` to be an address we control. First, let's make a new account, then update the contract to reference it.
+Go to your IDE, set the THIEF variable properly,
+and recompile your contract:
+
+```bash
+# for the rest of this section, we assume you are in the same path as the rust contract (Cargo.toml)
+cd <path/to/rust/code>
+
+# Set the THIEF variable in source code to the value
+# we got above
+SET-THIEF-VARIABLE
+
+# and recompile wasm
+docker run --rm -v $(pwd):/code \
+  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  cosmwasm/rust-optimizer:0.8.0
+
+# ensure the hash changed
+cat hash.txt
+
+# copy it to the same
+cp contract.wasm </path/to/cosmwasm-js/packages/cli>
+```
+
+### Uploading with JS
+
+Now, we go back to the Node console and upload the
+contract and instantiate it:
+
+```js
+const wasm = fs.readFileSync('contract.wasm');
+// fake source, but this can be verified to be false
+// by any careful observer
+const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.4.0/download", builder: "cosmwasm/rust-optimizer:0.8.0"});
+
+console.log(up);
+const { codeId } = up;
+
+const initMsg = {arbiter: fredAddr, recipient: bobAddr};
+const { contractAddress } = await fredClient.instantiate(codeId, initMsg, "Escrow 1", "memo", [{denom: "ucosm", amount: "50000"}]);
+
+// check the contract is set up properly
+console.log(contractAddress);
+fredClient.getContract(contractAddress);
+fredClient.getAccount(contractAddress);
+
+// make a raw query - key length prefixed "config"
+const key = new Uint8Array([0, 6, ...toAscii("config")]);
+const raw = await fredClient.queryContractRaw(contractAddress, key2);
+JSON.parse(fromUtf8(raw))
+// note the addresses are stored in base64 internally, not bech32, but the data is there... this is why we often implement smart queries on real contracts
+```
+
+### Executing Contract with JS
+
+Once we have properly configured the contract, let's
+show how to use it, both the proper "approve" command
+as well as our backdoor "steal" command:
+
+```js
+const approve = {approve: {quantity: [{amount: "20000", denom: "ucosm"}]}};
+
+// thief cannot approve
+thiefClient.execute(contractAddress, approve)
+
+// but fred can (and moves money to bob)
+fredClient.execute(contractAddress, approve);
+fredClient.getAccount(bobAddr);
+fredClient.getAccount(contractAddress);
+
+// now the thief can steal the rest...
+const steal = {steal: {destination: thiefAddr}};
+thiefClient.execute(contractAddress, steal);
+
+// thief got some more ucosm, contract lost, and bob stays the same
+fredClient.getAccount(thiefAddr);
+fredClient.getAccount(contractAddress);
+fredClient.getAccount(bobAddr);
+```
+
+You might notice that the thief got 20k and bob as well,
+and the contract is down by 50k. What's up with that?
+
+Well, we pay configurable gas fees for all execute transactions, by default 5000ucosm for 200k gas (0.025ucosm / gas). The thief made two transactions and paid 10k ucosm in gas.
 
 ## Next Steps
 

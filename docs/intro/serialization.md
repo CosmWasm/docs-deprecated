@@ -16,7 +16,9 @@ It is helpful to have consistency to aid client development, as well as contract
 
 ## Protobuf
 
-Protobuf is a well-known and widely-supported binary format. It gives a stricter schema guarantees than JSON and more compact format. We considered using this optionally for encoding message, and [even did a spike on it](https://github.com/CosmWasm/cosmwasm/pull/55). It lead to larger wasm code and more gas usage, and only provided some moderate space savings in the size of the transaction. This ideas has since been placed in the icebox.
+Protobuf is a well-known and widely-supported binary format. It gives a stricter schema guarantees than JSON and more compact format. We considered using this optionally for encoding message, and [even did a spike on it](https://github.com/CosmWasm/cosmwasm/pull/55). It led to larger wasm code and more gas usage, and only provided some moderate space savings in the size of the transaction. This ideas has since been placed in the icebox. However, as we kept adding features
+to our JSON lib to support better serialization of strings, binary data and serde tags, this may now be more competitive. We will revisit this when adding
+Protobuf support to wasmd as part of the 0.39 upgrade.
 
 ## Cap'n Proto
 

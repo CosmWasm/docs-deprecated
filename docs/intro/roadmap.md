@@ -50,28 +50,31 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 * Much enhanced `cosmwasm-js`: [Reading](https://medium.com/confio/cosmwasmclient-part-1-reading-e0313472a158) and Writing
 * NameService React app demoing full-stack solution (from contract to UI)
 
+**April/May 2020**:
+
+* CosmWasm 0.8 Released
+* [Cross-contract queries](./composition)
+* Add iterators to the Storage layer
+* [Customizable messages and queries](https://github.com/CosmWasm/wasmd/blob/v0.8.0/INTEGRATION.md#adding-custom-hooks)
+* Integration with staking module
+
 ## Planned Work
 
-Better Examples:
+Fullfil [Cosmos Hub Proposal](https://hubble.figment.network/cosmos/chains/cosmoshub-3/governance/proposals/25):
 
-* Complete [Name Service](../name-service/intro) tutorial.
-* Finalize [Atomic Swap](https://github.com/CosmWasm/cosmwasm-examples/pull/2) example contracts.
+* Enable contract migrations by owner
+* Enable governance control over all lifecycle of contract
+    * Opt-in when compiling binary, we provide support for both permissionless and permissioned systems
 
-Release CosmWasm 0.8:
-
-* Cross-contract queries
-* Add iterators to the Storage layer
-* Support for automatic secondary indexes
-
-Add IBC support:
+Add IBC support (based on ICF grant):
 
 * Simple interface to expose IBC to contracts
 * Full IBC integration inside `wasmd`
 
-Participate in [Game of Zones](https://cosmos.network/goz/) with minimal working IBC integration with contracts.
-
 ## Beyond
 
-Other features as requested by projects building on CosmWasm.
-
-Further developing the "concept chain"
+* Support for writing CosmWasm contracts in *AssemblyScript* or *TinyGo*
+* Stricter and more configurable gas metering
+* Support for more host platforms (Beyond Linux and OSX on i686/Amd64) 
+* Other features as requested by projects building on CosmWasm.
+* Further developing the "concept chain"
