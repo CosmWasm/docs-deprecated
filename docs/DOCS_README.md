@@ -7,4 +7,4 @@
 `npm run build`
 
 ## Deployment
-Deploy the generated static files will be in .vuepress/dist. 🚀
+Deploy the generated static files in `.vuepress/dist` 🚀
