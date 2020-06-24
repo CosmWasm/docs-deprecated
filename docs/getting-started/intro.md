@@ -1,8 +1,9 @@
 ---
-id: intro
-title: Your First Contract
-sidebar_label: First Contract
+title: First Contract
+order: 1
 ---
+
+# Your First Contract
 
 Buckle up, we will now get first-hand experience with CosmWasm,
 by starting up our own CosmWasm-enabled blockchain (just one node for now), modifying

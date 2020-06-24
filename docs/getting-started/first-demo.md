@@ -1,8 +1,9 @@
 ---
-id: first-demo
-title: Step by Step with a Sample Contract
-sidebar_label: Deploying to Testnet
+title: Deploying to Testnet
+order: 6
 ---
+
+# Step by Step with a Sample Contract
 
 In this section, we will take the custom contract you have written in the last section, and upload it to a running blockchain. Then we will show how to inspect the code, instantiate contracts, and execute them - both the standard functionality as well as the secret backdoor we just implemented [in the last section](./editing-escrow-contract).
 
