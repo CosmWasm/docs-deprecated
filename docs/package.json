@@ -1,0 +1,23 @@
+{
+  "name": "cosmwasm-docs",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "vuepress dev --no-cache",
+    "build": "vuepress build --no-cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lovincyrus/docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lovincyrus/docs/issues"
+  },
+  "homepage": "https://github.com/lovincyrus/docs#readme",
+  "dependencies": {
+    "vuepress-theme-cosmos": "^1.0.166"
+  }
+}
