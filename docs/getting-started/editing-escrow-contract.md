@@ -1,7 +1,7 @@
 ---
-id: editing-escrow-contract
+# id: editing-escrow-contract
 title: Editing the Sample Contract
-sidebar_label: Editing Contracts
+# sidebar_label: Editing Contracts
 ---
 
 ## Editing Code

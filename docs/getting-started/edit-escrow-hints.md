@@ -1,7 +1,7 @@
 ---
-id: edit-escrow-hints
+# id: edit-escrow-hints
 title: Solution to Editing Escrow Contract Section
-sidebar_label: Hints
+# sidebar_label: Hints
 ---
 
 ## HandleMsg
