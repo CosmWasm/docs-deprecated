@@ -8,16 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lovincyrus/docs.git"
+    "url": "git+https://github.com/CosmWasm/docs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lovincyrus/docs/issues"
+    "url": "https://github.com/CosmWasm/docs/issues"
   },
-  "homepage": "https://github.com/lovincyrus/docs#readme",
+  "homepage": "https://github.com/CosmWasm/docs",
   "dependencies": {
-    "vuepress-theme-cosmos": "^1.0.166"
+    "vuepress-theme-cosmos": "^1.0.167"
   }
 }
