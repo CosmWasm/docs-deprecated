@@ -24,9 +24,6 @@ You will need a running blockchain to host your contracts and use them from an a
 
 ## Further Studies
 
-There are quite a few [high level articles on medium](https://medium.com/confio) that explain the various components of
-our stack and where we are going.
-
 We provide a video of a [workshop explaining token contracts](https://www.youtube.com/watch?v=pm6VX5ueT2k&feature=youtu.be)
 along with a live coding session that you can follow along with at home.
 
@@ -36,6 +33,8 @@ And after that, you can dig into our code and start writing your own contracts:
 * Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.9.2/cosmwasm_std/)
 * Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.9.2/cosmwasm_storage/)
 
+There are quite a few [high level articles on medium](https://medium.com/confio) that explain the various components of
+our stack and where we are going.
 
 Many thanks to the [Interchain Foundation](https://interchain.io/) for funding most of the development work to bring
 CosmWasm to production.
