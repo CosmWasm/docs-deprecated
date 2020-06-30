@@ -8,7 +8,7 @@ module.exports = {
     docsRepo: "CosmWasm/docs",
     docsDir: "docs",
     logo: {
-      src: "/logo.svg",
+      src: "/cosm-wasm.png",
     },
     sidebar: {
       auto: false,
@@ -60,7 +60,7 @@ module.exports = {
       }
     },
     footer: {
-      logo: "/logo.svg",
+      logo: "/cosm-wasm.png",
       textLink: {
         text: "cosmwasm.com",
         url: "https://www.cosmwasm.com"
@@ -80,10 +80,10 @@ module.exports = {
         },
       ],
       smallprint:
-        `Copyright © ${new Date().getFullYear()} Confio UO`,
+        `Copyright © ${new Date().getFullYear()} Confio OÜ`,
       links: [
         {
-          title: "Documentation",
+          title: "Related Documentation",
           children: [
             {
               title: "Cosmos SDK",
@@ -103,16 +103,12 @@ module.exports = {
           title: "Community",
           children: [
             {
-              title: "Cosmos blog",
-              url: "https://blog.cosmos.network/"
+              title: "Confio blog",
+              url: "https://medium.com/confio"
             },
             {
-              title: "Forum",
-              url: "https://forum.cosmos.network/"
-            },
-            {
-              title: "Chat",
-              url: "https://riot.im/app/#/room/#cosmos-sdk:matrix.org"
+              title: "Telegram",
+              url: "https://t.me/joinchat/AkZriEhk9qcRw5A5U2MapA"
             }
           ]
         },
@@ -122,11 +118,11 @@ module.exports = {
             {
               title: "Contributing to the docs",
               url:
-                "https://github.com/cosmos/cosmos-sdk/blob/master/docs/DOCS_README.md"
+                "https://github.com/CosmWasm/docs/blob/master/docs/DOCS_README.md"
             },
             {
               title: "Source code on GitHub",
-              url: "https://github.com/cosmos/cosmos-sdk/"
+              url: "https://github.com/CosmWasm/cosmwasm"
             }
           ]
         }

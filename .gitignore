@@ -15,3 +15,6 @@ docs/_build
 docs/dist
 docs/.vuepress/dist
 .netlify
+
+yarn.lock
+package-lock.json
