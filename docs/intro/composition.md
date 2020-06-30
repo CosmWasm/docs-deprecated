@@ -1,8 +1,9 @@
 ---
-id: composition
 title: Contract Composition
-sidebar_label: Contract Composition
+order: 7
 ---
+
+# Contract Composition
 
 Given the [Actor model](./actor) of dispatching messages, and [synchronous queries](./query) implemented in CosmWasm v0.8, we have all the raw components
 to enable arbitrary composition of contracts with both other contracts and native modules. Here we will explain how the components fit together and how they can be extended.

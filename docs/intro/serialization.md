@@ -1,8 +1,9 @@
 ---
-id: serialization
-title: Serialization Formats
-sidebar_label: Serialization
+title: Serialization
+order: 6
 ---
+
+# Serialization Formats
 
 One of the driving forces in developing CosmWasm, besides security by design, was to include a very nice Developer UX. Key to this is the ability to inspect and debug messages sent on the blockchain, and parse results without needing complex libraries. Also not requiring downloading custom schemas and ABIs just to make a method call.
 

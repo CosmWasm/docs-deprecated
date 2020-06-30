@@ -1,0 +1,23 @@
+{
+  "name": "cosmwasm-docs",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "serve": "vuepress dev --no-cache",
+    "build": "vuepress build --no-cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CosmWasm/docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CosmWasm/docs/issues"
+  },
+  "homepage": "https://github.com/CosmWasm/docs",
+  "dependencies": {
+    "vuepress-theme-cosmos": "^1.0.167"
+  }
+}

@@ -1,8 +1,9 @@
 ---
-id: query
-title: Querying Contract State
-sidebar_label: Querying
+title: Querying
+order: 5
 ---
+
+# Querying Contract State
 
 There are many cases where you want to view the state of a contract. Both as an external client (using the cli), but also while executing a contract. For example, we discussed resolving names like "Alice" or "Bob" in the last section, which would require a query to another contract. We will first cover the two types of queries - raw and custom - then look at the semantics of querying via an *external client*, as well an *internal client* (another contract). We will pay special attention not only to how it works practically, but also the design and security issues of executing queries from one contract to another.
 

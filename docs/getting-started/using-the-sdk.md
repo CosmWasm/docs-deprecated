@@ -1,8 +1,9 @@
 ---
-id: using-the-sdk
-title: Using Cosmos SDK
-sidebar_label: Cosmos SDK
+title: Cosmos SDK
+order: 3
 ---
+
+# Using Cosmos SDK
 
 ## Connect to Demo Net
 

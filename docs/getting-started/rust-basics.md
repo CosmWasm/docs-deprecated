@@ -1,8 +1,9 @@
 ---
-id: rust-basics
 title: Rust Basics
-sidebar_label: Rust Basics
+order: 4
 ---
+
+# Rust Basics
 
 ## Installing Rust
 

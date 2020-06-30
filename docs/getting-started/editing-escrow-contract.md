@@ -1,8 +1,9 @@
 ---
-id: editing-escrow-contract
-title: Editing the Sample Contract
-sidebar_label: Editing Contracts
+title: Editing Contracts
+order: 5
 ---
+
+# Editing the Sample Contract
 
 ## Editing Code
 

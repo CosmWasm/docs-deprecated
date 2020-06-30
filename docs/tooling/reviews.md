@@ -1,8 +1,8 @@
 ---
-id: reviews
-title: Submitting a Cryptographic Code Review
-sidebar_label: Reviewing Code
+title: Reviewing Code
 ---
+
+# Submitting a Cryptographic Code Review
 
 As mentioned in [the last section](./verify), an essential component to creating secure,
 trustable smart contracts are audits and code reviews. We described how to install

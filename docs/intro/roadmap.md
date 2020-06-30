@@ -1,8 +1,9 @@
 ---
-id: roadmap
-title: Rough Roadmap
-sidebar_label: Roadmap
+title: Roadmap
+order: 8
 ---
+
+# Rough Roadmap
 
 So far, CosmWasm is an effort of a [small team](http://confio.tech) funded by [ICF Grants](https://interchain.io). We have been building out core technology to support various blockchains in the Cosmos Ecosystem. The following is the currently planned roadmap, largely based on the remaining funding of the ICF Grant. If there is strong interest (and funding) from a project that wishes to deploy this to production, the roadmap priorities may be modified.
 
