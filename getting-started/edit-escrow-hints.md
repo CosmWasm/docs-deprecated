@@ -51,7 +51,7 @@ fn try_steal<S: Storage, A: Api, Q: Querier>(
     destination: HumanAddr,
 ) -> HandleResult {
     if env.message.sender != deps.api.canonical_address(&HumanAddr::from(THIEF))? {
-        Err(unauthorized())
+        Err(StdError::unauthorized())
     } else {
         let contract_address_human = deps.api.human_address(&env.contract.address)?;
         let amount = deps.querier.query_all_balances(&contract_address_human)?;
@@ -74,9 +74,9 @@ Note that we have to manually create the send_token logic, as destination is `Hu
 
 ```rust
 use cosmwasm_std::{
-    generic_err, log, unauthorized, Api, BankMsg, Binary, CanonicalAddr, Coin, CosmosMsg, Env,
-    Extern, HandleResponse, HandleResult, HumanAddr, InitResponse, InitResult, Querier, StdResult,
-    Storage,
+    log, to_binary, Api, BankMsg, Binary, CanonicalAddr, Coin, CosmosMsg, Env, Extern,
+    HandleResponse, HandleResult, HumanAddr, InitResponse, InitResult, Querier, StdError,
+    StdResult, Storage,
 };
 ```
 
@@ -85,63 +85,47 @@ use cosmwasm_std::{
 ```rust
 #[test]
 fn handle_steal() {
-    let mut deps = dependencies(40);
+    let mut deps = mock_dependencies(20, &[]);
 
     // initialize the store
-    let msg = init_msg(1000, 0);
-    let env = mock_env_height(&deps.api,"creator", &coin("1000", "earth"), &[], 876, 0);
-    let init_res = init(&mut deps, env, msg).unwrap();
+    let init_amount = coins(1000, "earth");
+    let init_env = mock_env_height(&deps.api, "creator", &init_amount, 876, 0);
+    let msg = init_msg_expire_by_height(1000);
+    let init_res = init(&mut deps, init_env, msg).unwrap();
     assert_eq!(0, init_res.messages.len());
 
+    // balance changed in init
+    deps.querier.update_balance(MOCK_CONTRACT_ADDR, init_amount);
+
     // not just "anybody" can steal the funds
-    let msg = HandleMsg::Steal { destination: HumanAddr::from("bankvault") };
-    let env = mock_env(
-        &deps.api,
-        "anybody",
-        &[],
-        &coin("1000", "earth"),
-    );
+    let msg = HandleMsg::Steal {
+        destination: HumanAddr::from("bankvault"),
+    };
+    let env = mock_env_height(&deps.api, "anybody", &[], 900, 0);
     let handle_res = handle(&mut deps, env, msg.clone());
     assert!(handle_res.is_err());
 
-    #[test]
-    fn handle_steal() {
-        let mut deps = mock_dependencies(20, &[]);
-
-        // initialize the store
-        let init_amount = coins(1000, "earth");
-        let init_env = mock_env_height(&deps.api, "creator", &init_amount, 876, 0);
-        let msg = init_msg_expire_by_height(1000);
-        let init_res = init(&mut deps, init_env, msg).unwrap();
-        assert_eq!(0, init_res.messages.len());
-
-        // balance changed in init
-        deps.querier.update_balance(MOCK_CONTRACT_ADDR, init_amount);
-
-        // not just "anybody" can steal the funds
-        let msg = HandleMsg::Steal {
-            destination: HumanAddr::from("bankvault"),
-        };
-        let env = mock_env_height(&deps.api, "anybody", &[], 900, 0);
-        let handle_res = handle(&mut deps, env, msg.clone());
-        assert!(handle_res.is_err());
-
-        // only the master thief
-        let msg = HandleMsg::Steal {
-            destination: HumanAddr::from("hideout"),
-        };
-        let env = mock_env_height(&deps.api, THIEF, &[], 900, 0);
-        let handle_res = handle(&mut deps, env, msg.clone()).unwrap();
-        assert_eq!(1, handle_res.messages.len());
-        let msg = handle_res.messages.get(0).expect("no message");
-        assert_eq!(
-            msg,
-            &CosmosMsg::Bank(BankMsg::Send {
-                from_address: HumanAddr::from(MOCK_CONTRACT_ADDR),
-                to_address: HumanAddr::from("hideout"),
-                amount: coins(1000, "earth"),
-            })
-        );
-    }
+    // only the master thief
+    let msg = HandleMsg::Steal {
+        destination: HumanAddr::from("hideout"),
+    };
+    let env = mock_env_height(&deps.api, THIEF, &[], 900, 0);
+    let handle_res = handle(&mut deps, env, msg.clone()).unwrap();
+    assert_eq!(1, handle_res.messages.len());
+    let msg = handle_res.messages.get(0).expect("no message");
+    assert_eq!(
+        msg,
+        &CosmosMsg::Bank(BankMsg::Send {
+            from_address: HumanAddr::from(MOCK_CONTRACT_ADDR),
+            to_address: HumanAddr::from("hideout"),
+            amount: coins(1000, "earth"),
+        })
+    );
 }
+```
+
+You will also have to add `MOCK_CONTRACT_ADDR` to the test imports, like:
+
+```rust
+use cosmwasm_std::testing::{mock_dependencies, mock_env, MOCK_CONTRACT_ADDR};
 ```
