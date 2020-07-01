@@ -34,10 +34,10 @@ First, compile the `wasmcli` binary from source:
 ```bash
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-git checkout v0.9.0
+git checkout v0.9.1
 make install
 
-# This should return "0.9.0"
+# This should return "0.9.1"
 wasmcli version
 ```
 
@@ -81,7 +81,7 @@ Full usage and installation [instructions are on the README](https://github.com/
 ```bash
 git clone https://github.com/CosmWasm/cosmjs.git
 cd cosmjs
-git checkout v0.21.0
+git checkout master # or v0.21.2
 yarn install && yarn build
 cd packages/cli
 ./bin/cosmwasm-cli --init examples/helpers.ts
