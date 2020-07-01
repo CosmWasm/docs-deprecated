@@ -11,11 +11,11 @@ Now that you can compile and run tests, let's try to make some changes to the co
 
 ```bash
 git clone https://github.com/CosmWasm/cosmwasm-examples
-git checkout escrow-0.4.0
 cd cosmwasm-examples/escrow
+git checkout escrow-0.5.2
 ```
 
-Note: This guide is compatible with `CosmWasm` and `wasmd` `v0.8.x`.
+Note: This guide is compatible with `CosmWasm` and `wasmd` `v0.9.x`.
 
 ## A Walk-Through of the Escrow Contract
 
@@ -30,7 +30,7 @@ All of them must be prefixed with a long `derive` line to add various functional
 * `Debug` and `PartialEq` are very useful for testing. In particular they allow the use of `assert_eq!(expected, msg);`
 * `JsonSchema` is needed by [`schemars`](https://docs.rs/schemars/0.7.0/schemars), so we can use [`schema_for!`](https://docs.rs/schemars/0.7.0/schemars/macro.schema_for.html) to generate the json schema objects (in `schema/*.json`)
 
-From `contract.rs`:
+From `state.rs`:
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -214,7 +214,7 @@ fn send_tokens<A: Api>(
 }
 ```
 
-Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/v0.8.0/packages/std/src/types.rs#L70-L104) for references to all the available types in the environment.
+Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/v0.9.2/packages/std/src/types.rs#L76-L110) for references to all the available types in the environment.
 
 ## Adding a New Message
 

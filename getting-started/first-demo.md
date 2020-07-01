@@ -243,7 +243,7 @@ console.log(up);
 const { codeId } = up;
 
 const initMsg = {arbiter: fredAddr, recipient: bobAddr};
-const { contractAddress } = await fredClient.instantiate(codeId, initMsg, "Escrow 1", "memo", [{denom: "ucosm", amount: "50000"}]);
+const { contractAddress } = await fredClient.instantiate(codeId, initMsg, "Escrow 1", { memo: "memo", transferAmount: [{denom: "ucosm", amount: "50000"}]});
 
 // check the contract is set up properly
 console.log(contractAddress);
@@ -252,7 +252,7 @@ fredClient.getAccount(contractAddress);
 
 // make a raw query - key length prefixed "config"
 const key = new Uint8Array([0, 6, ...toAscii("config")]);
-const raw = await fredClient.queryContractRaw(contractAddress, key2);
+const raw = await fredClient.queryContractRaw(contractAddress, key);
 JSON.parse(fromUtf8(raw))
 // note the addresses are stored in base64 internally, not bech32, but the data is there... this is why we often implement smart queries on real contracts
 ```

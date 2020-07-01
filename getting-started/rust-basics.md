@@ -31,8 +31,8 @@ To make sure all the tooling is working properly, let's start with the [`cosmwas
 ```bash
 # get the code
 git clone https://github.com/CosmWasm/cosmwasm-examples
-git checkout escrow-0.4.0
 cd cosmwasm-examples/escrow
+git checkout escrow-0.5.2
 
 # compile the wasm contract with stable toolchain
 rustup default stable
@@ -61,13 +61,14 @@ RUST_BACKTRACE=1 cargo unit-test
 After some compilation steps, you should see:
 
 ```text
-running 4 tests
-test contract::tests::proper_initialization ... ok
+running 5 tests
 test contract::tests::cannot_initialize_expired ... ok
-test contract::tests::handle_approve ... ok
+test contract::tests::proper_initialization ... ok
+test contract::tests::init_and_query ... ok
 test contract::tests::handle_refund ... ok
+test contract::tests::handle_approve ... ok
 
-test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
 `RUST_BACKTRACE=1` will provide you with full stack traces on any error, which is super useful. This only works for unit tests (which test native rust code, not the compiled wasm). Also, if you want to know where `cargo wasm` and `cargo unit-test` come from, they are just aliases defined in `.cargo/config`. Take a look there to understand the cargo flags more.

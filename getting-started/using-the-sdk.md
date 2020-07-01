@@ -12,9 +12,9 @@ There is a simple faucet with REST API that will release tokens to try it out.
 
 To verify this is currently running, make sure the following URLs are all working for you:
 
-* https://faucet.demo-08.cosmwasm.com/status
-* https://rpc.demo-08.cosmwasm.com/status
-* https://lcd.demo-08.cosmwasm.com/node_info
+* https://faucet.demo-09.cosmwasm.com/status
+* https://rpc.demo-09.cosmwasm.com/status
+* https://lcd.demo-09.cosmwasm.com/node_info
 
 We have set up two native tokens - `STAKE` (`ustake`) for being a validator and 
 `COSM` (`ucosm`) for paying fees. There are also 3 "ERC20-like" tokens set initialized
@@ -34,10 +34,10 @@ First, compile the `wasmcli` binary from source:
 ```bash
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-git checkout v0.8.0
+git checkout v0.9.1
 make install
 
-# This should return "0.8.0"
+# This should return "0.9.1"
 wasmcli version
 ```
 
@@ -50,7 +50,7 @@ Now, open up another window and set up your client:
 ```bash
 wasmcli config chain-id testing
 wasmcli config trust-node true
-wasmcli config node https://rpc.demo-08.cosmwasm.com:443
+wasmcli config node https://rpc.demo-09.cosmwasm.com:443
 wasmcli config output json
 wasmcli config indent true
 # this is important, so the cli returns after the tx is in a block,
@@ -79,8 +79,9 @@ Full usage and installation [instructions are on the README](https://github.com/
 
 
 ```bash
-git clone https://github.com/CosmWasm/cosmwasm-js.git
-cd cosmwasm-js
+git clone https://github.com/CosmWasm/cosmjs.git
+cd cosmjs
+git checkout master # or v0.21.2
 yarn install && yarn build
 cd packages/cli
 ./bin/cosmwasm-cli --init examples/helpers.ts
