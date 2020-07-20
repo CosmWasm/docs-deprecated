@@ -8,7 +8,7 @@ module.exports = {
     docsRepo: "CosmWasm/docs",
     docsDir: "docs",
     logo: {
-      src: "/cosm-wasm.png",
+      src: "/logo/PNG/CosmWasm Logo.png",
     },
     sidebar: {
       auto: false,
@@ -60,7 +60,7 @@ module.exports = {
       }
     },
     footer: {
-      logo: "/cosm-wasm.png",
+      logo: "/logo/PNG/CosmWasm_Logo_Stacked.png",
       textLink: {
         text: "cosmwasm.com",
         url: "https://www.cosmwasm.com"
