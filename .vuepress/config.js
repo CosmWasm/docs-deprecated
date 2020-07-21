@@ -8,7 +8,7 @@ module.exports = {
     docsRepo: "CosmWasm/docs",
     docsDir: "docs",
     logo: {
-      src: "/cosm-wasm.png",
+      src: "/logo/SVG/CosmWasm Logo.svg",
     },
     sidebar: {
       auto: false,
@@ -45,6 +45,11 @@ module.exports = {
               path: "https://www.cosmwasm.com/blog/"
             },
             {
+              title: "Media",
+              path: "/media",
+              directory: true,
+            },
+            {
               title: "GitHub",
               path: "https://github.com/confio/cosmwasm"
             }
@@ -60,7 +65,7 @@ module.exports = {
       }
     },
     footer: {
-      logo: "/cosm-wasm.png",
+      logo: "/logo/SVG/CosmWasm_Logo_Clear_Black.svg",
       textLink: {
         text: "cosmwasm.com",
         url: "https://www.cosmwasm.com"
