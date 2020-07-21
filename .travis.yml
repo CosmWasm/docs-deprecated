@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - lts/*
+
+install:
+  - npm install
+
+script:
+  - npm run build
+  - echo 'docs.cosmwasm.com' > .vuepress/dist/CNAME
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: .vuepress/dist
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master
