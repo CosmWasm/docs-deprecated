@@ -1,6 +1,9 @@
 module.exports = {
   theme: "cosmos",
   title: "CosmWasm Documentation",
+  head: [
+    ['link', { rel: 'icon', href: '/logo/SVG/CosmWasm Favicon.svg' }]
+  ],
   themeConfig: {
     custom: true,
     editLinks: true,
