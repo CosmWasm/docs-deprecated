@@ -34,6 +34,11 @@ module.exports = {
               directory: true,
             },
             {
+              title: "Testnets",
+              path: "/testnets",
+              directory: true,
+            },
+            {
               title: "Production Tooling",
               path: "/tooling",
               directory: true,
