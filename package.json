@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "serve": "vuepress dev --no-cache",
-    "build": "vuepress build --no-cache"
+    "build": "vuepress build --no-cache",
+    "strip-markdown": "rm -rf stripped-docs/* && node scripts/strip-markdown"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,9 @@
   "homepage": "https://github.com/CosmWasm/docs",
   "dependencies": {
     "vuepress-theme-cosmos": "^1.0.167"
+  },
+  "devDependencies": {
+    "filehound": "^1.17.4",
+    "remove-markdown": "^0.3.0"
   }
 }

@@ -6,6 +6,7 @@ _build
 dist
 vuepress/dist
 .netlify
+stripped-docs
 
 yarn.lock
 package-lock.json
