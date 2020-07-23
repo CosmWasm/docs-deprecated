@@ -49,20 +49,11 @@ In order to join the network as validator, you need some staking tokens. We have
 Request some tokens from faucet:
 
 ```sh
-# copy the address and paste it to ${WALLET_ADDR} below
-wasmcli keys show -a mywallet
+JSON=$(jq -n --arg addr $(wasmcli keys show -a mywallet) '{"ticker":"COSM","address":$addr}')
+curl -X POST --header "Content-Type: application/json" --data "$JSON" https://$FAUCET/credit
 
-# get some hot stake
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"ticker":"STAKE","address":"${WALLET_ADDR}"}' \
-  https://$FAUCET/credit
-
-# get coins for paying fees
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data '{"ticker":"COSM","address":"${WALLET_ADDR}"}' \
-  https://$FAUCET/credit
+JSON=$(jq -n --arg addr $(wasmcli keys show -a mywallet) '{"ticker":"STAKE","address":$addr}')
+curl -X POST --header "Content-Type: application/json" --data "$JSON" https://$FAUCET/credit
 ```
 
 ## Run wasmd node
