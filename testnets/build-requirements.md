@@ -20,7 +20,7 @@ Use docker image, or build locally: `https://github.com/CosmWasm/wasmd/#dockeriz
 
 ### Option 1 (preferred - build static binary using docker - Linux only)
 
-Constructing a `wasmd` is a tricky process and involves using alpine linux and recompiling the rust dependencies as static libs. Using Dockerfile is suggested 
+Constructing a `wasmd` is a tricky process and involves using alpine linux and recompiling the rust dependencies as static libs. Using Dockerfile is suggested.
 
 1. Clone the project `git clone git@github.com:CosmWasm/wasmd`
 2. Checkout to testnets version `git checkout vx.x.x`
