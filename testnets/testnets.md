@@ -108,6 +108,14 @@ wasmcli tx staking create-validator \
   --from=mywallet
 ```
 
+## Run the Light Client Daemon
+
+```sh
+wasmcli rest-server
+# if the node is running on another machine use:
+wasmcli rest-server --node tcp://<host>:<port>
+```
+
 # Live Testnets
 
 Below are the active testnets you can join!
