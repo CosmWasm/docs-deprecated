@@ -3,7 +3,22 @@ title: Joining Testnet
 order: 2
 ---
 
-# Joining Testnets
+# Select Your Network
+
+Below are the active testnets you can join!
+
+## Demonet (WIP)
+
+- CHAIN_ID: **testing**
+- TESTNET_NAME: **demo-09**
+- CosmWasm version: **v0.9.1**
+- CosmJs version: **v0.21.1**
+- RPC: **rpc.demo-09.cosmwasm.com:26657**
+- SEED_NODE: **p2p.demo-09.cosmwasm.com:26656**
+- LCD: **lcd.demo-09.cosmwasm.com**
+- FAUCET: **faucet.demo-09.cosmwasm.com**
+
+# Connect Your Validator/Node
 
 In this section we will demonstrate how to roll your node and start producing blocks in live testnet environment.
 
@@ -58,8 +73,6 @@ curl -X POST --header "Content-Type: application/json" --data "$JSON" https://$F
 
 ## Run wasmd node
 
-TODO persistent peer and seed node?
-
 ```sh
 export MONIKER=new_validator
 # initialize wasmd configuration
@@ -70,7 +83,7 @@ curl https://$RPC/genesis | jq .result.genesis > ~/.wasmd/config/genesis.json
 # Either you can insert the seed addresses in $HOMEDIR/.wasmd/config/config.toml to "seeds"
 # For simplicity we will pass the seed ID and domain as argument
 # You can get the seed it using command:
-export NODE_ID=$(curl https://$RPC/status | jq .result.node_info.id | tr -d '"')
+export NODE_ID=$(curl https://$RPC/status | jq -r .result.node_info.id)
 
 ## Start wasmd
 wasmd start --p2p.seeds $NODE_ID@$SEED_NODE
@@ -78,11 +91,11 @@ wasmd start --p2p.seeds $NODE_ID@$SEED_NODE
 
 Now you should be seeing blocks being replayed and your node is catching up with the testnet. This could take a while.
 
-## Become an active validator
+## Become an active validator(optional)
 
-To start being an active validator that validates transactions, you need some coins staked to your validators address
+If you want to participate in active block building, you need some coins staked to your validators address. If you are interested in validator tech stack, [certus one blog](https://kb.certus.one/) is a good resource to begin with.
 
-TODO not sure about the values here
+**Note: make sure your validator is synced before upgrading to validator
 
 ```sh
 wasmcli tx staking create-validator \
@@ -106,17 +119,3 @@ wasmcli rest-server
 # if the node is running on another machine use:
 wasmcli rest-server --node tcp://<host>:<port>
 ```
-
-# Live Testnets
-
-Below are the active testnets you can join!
-
-## Demonet (WIP)
-
-- CHAIN_ID: **testing**
-- CosmWasm version: **v0.9.1**
-- CosmJs version: **v0.21.1**
-- RPC: rpc.demo-09.cosmwasm.com:26657
-- SEED_NODE: p2p.demo-09.cosmwasm.com:26656
-- LCD: lcd.demo-09.cosmwasm.com
-- FAUCET: faucet.demo-09.cosmwasm.com
