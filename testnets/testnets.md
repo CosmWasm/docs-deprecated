@@ -3,35 +3,29 @@ title: Joining Testnet
 order: 2
 ---
 
+In this section we will explain how to join testnets, where to find testnet configurations and some scripts to demonstrate make the process faster.
+
 # Select Your Network
 
-Below are the active testnets you can join!
-
-## Demonet (WIP)
-
-- CHAIN_ID: **testing**
-- TESTNET_NAME: **demo-09**
-- CosmWasm version: **v0.9.1**
-- CosmJs version: **v0.21.1**
-- RPC: **rpc.demo-09.cosmwasm.com:26657**
-- SEED_NODE: **p2p.demo-09.cosmwasm.com:26656**
-- LCD: **lcd.demo-09.cosmwasm.com**
-- FAUCET: **faucet.demo-09.cosmwasm.com**
+You can find active and in-active testnet information such as configs and endpoints on [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
 # Connect Your Validator/Node
 
-In this section we will demonstrate how to roll your node and start producing blocks in live testnet environment.
+Let's start rolling your node and start producing blocks in live testnet environment.
 
 ## Setup
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 
+Below is the [demonet configuration](https://github.com/CosmWasm/testnets/blob/master/demo-09/config).
+You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
+
 ```sh
 export CHAIN_ID=testing
 export TESTNET_NAME=demo-09
-export RPC=rpc.demo-09.cosmwasm.com:443
-export FAUCET=faucet.demo-09.cosmwasm.com
-export SEED_NODE=p2p.demo-09.cosmwasm.com:26656
+export RPC=https://rpc.demo-09.cosmwasm.com:443
+export FAUCET=https://faucet.demo-09.cosmwasm.com
+export SEED_NODE=26c9c79dc62b5ddc753bb9fcce022fcc98b5a8cf@p2p.demo-09.cosmwasm.com:26656
 ```
 
 Also install `jq`.
@@ -43,7 +37,7 @@ Initialize `wasmcli` and generate validator account:
 ```sh
 wasmcli config chain-id $CHAIN_ID
 wasmcli config trust-node true
-wasmcli config node https://$RPC
+wasmcli config node $RPC
 wasmcli config output json
 wasmcli config indent true
 # this is important, so the cli returns after the tx is in a block,
@@ -78,15 +72,13 @@ export MONIKER=new_validator
 # initialize wasmd configuration
 wasmd init $MONIKER
 # get the testnets genesis file
-curl https://$RPC/genesis | jq .result.genesis > ~/.wasmd/config/genesis.json
+curl $RPC/genesis | jq .result.genesis > ~/.wasmd/config/genesis.json
 # You need to configure p2p seeds
 # Either you can insert the seed addresses in $HOMEDIR/.wasmd/config/config.toml to "seeds"
 # For simplicity we will pass the seed ID and domain as argument
 # You can get the seed it using command:
-export NODE_ID=$(curl https://$RPC/status | jq -r .result.node_info.id)
-
 ## Start wasmd
-wasmd start --p2p.seeds $NODE_ID@$SEED_NODE
+wasmd start --p2p.seeds $SEED_NODE
 ```
 
 Now you should be seeing blocks being replayed and your node is catching up with the testnet. This could take a while.
