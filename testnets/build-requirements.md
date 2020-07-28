@@ -26,11 +26,14 @@ Constructing a `wasmd` is a tricky process and involves using alpine linux and r
 1. Clone the project `git clone git@github.com:CosmWasm/wasmd`
 2. Checkout to testnets version `git checkout vx.x.x`
 3. Build docker image `docker build . -t wasmd-docker`
-4. Extract the binary from docker:
+4. Extract the specific binary from docker:
 
 ```sh
 id=$(docker create wasmd-docker)
-docker cp $id:/usr/bin/wasmd - > wasmd
+docker cp $id:/usr/bin/wasmd - > wasmd 
+docker cp $id:/usr/bin/wasmcli - > wasmcli
+# docker cp $id:/usr/bin/corald - > corald 
+# docker cp $id:/usr/bin/coralcli - > coralcli
 docker rm -v $id
 ```
 
