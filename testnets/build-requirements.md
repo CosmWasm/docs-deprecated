@@ -10,13 +10,14 @@ Building code may require larger instances, especially if you want to build a st
 
 # Installation
 
+Node executable may vary between networks, and [Option 1](#option-1-preferred---build-static-binary-using-docker---linux-only) 
+might become obsolete. Please check for `wasm` executable instructions for specific networks on [CosmWasm/testnets](https://github.com/CosmWasm/testnets) 
+
 ## Simplest
 
 Use docker image, or build locally: `https://github.com/CosmWasm/wasmd/#dockerized`.
 
 ## Bare Metal
-
-// TODO ask release binary option
 
 ### Option 1 (preferred - build static binary using docker - Linux only)
 
