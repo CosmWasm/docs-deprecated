@@ -10,3 +10,4 @@ stripped-docs
 
 yarn.lock
 package-lock.json
+.idea
