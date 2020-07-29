@@ -59,10 +59,10 @@ Request some tokens from faucet:
 
 ```sh
 JSON=$(jq -n --arg addr $(wasmcli keys show -a mywallet) '{"ticker":"COSM","address":$addr}')
-curl -X POST --header "Content-Type: application/json" --data "$JSON" https://$FAUCET/credit
+curl -X POST --header "Content-Type: application/json" --data "$JSON" $FAUCET/credit
 
 JSON=$(jq -n --arg addr $(wasmcli keys show -a mywallet) '{"ticker":"STAKE","address":$addr}')
-curl -X POST --header "Content-Type: application/json" --data "$JSON" https://$FAUCET/credit
+curl -X POST --header "Content-Type: application/json" --data "$JSON" $FAUCET/credit
 ```
 
 ## Run wasmd node
