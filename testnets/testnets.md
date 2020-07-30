@@ -47,7 +47,7 @@ make build-coral # make build-gaiaflex etc...
 
 # alias wasmd and cli to executable
 alias wasmd="${CW_DIR}/wasmd/build/corald"
-alias wasmcli="${CW_DIR}/wasmd/build/coralcli"
+alias wasmcli="${CW_DIR}/wasmd/build/coral"
 ```
 
 ## Initialize your wallet
