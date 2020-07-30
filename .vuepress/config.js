@@ -13,6 +13,9 @@ module.exports = {
     logo: {
       src: "/logo/SVG/CosmWasm Logo.svg",
     },
+    topbar: {
+      banner: false
+    },
     sidebar: {
       auto: false,
       nav: [
