@@ -29,7 +29,7 @@ export SEED_NODE=26c9c79dc62b5ddc753bb9fcce022fcc98b5a8cf@p2p.demo-09.cosmwasm.c
 ```
 
 Note:
->We have setup different executables for each testnet names after network names like: `corald/coralcli`, `gaiaflexd/gaiaflexcli`
+>We have setup different executables for each testnet names after network names like: `corald/coral`, `gaiaflexd/gaiaflex`
 Replace `wasmcli` with the name of the testnet specific executable in scripts below.
 
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling: 
@@ -80,15 +80,17 @@ Here is the script you can run to handle it automatically. It uses `coral` [netw
 
 ```sh
 cd $CW_DIR
-git clone git@github.com:CosmWasm/testnets
+## Fork github.com:CosmWasm/testnets to your account and clone.
+## You cannot push directly to CosmWasm/testnets repo
+git clone git@github.com:<your-name>/testnets
 cd testnets
 git checkout -b add-gen-acc-<validator-name>
-wasmd add-genesis-account $(wasmcli keys show -a mywallet) 100000000ushell,100000000ustake
-cat $HOME/.corald/config/genesis.json | jq '.app_state.auth.accounts [0]' > /tmp/new_acc.json
-NEW_GEN=$(jq '.app_state.auth.accounts += [input]' $CW_DIR/coral/genesis.json /tmp/new_acc.json) && echo $NEW_GEN > $CW_DIR/coral/genesis.json
-git add . && git commit -m "add <myvalidator account to coral genesis"
-git push
-# open PR
+cd <testnet-name>
+## Testnets genesis is is config so if you pass <testnet-name> dir as home to command below
+## it will add your account to genesis file
+wasmd add-genesis-account --home $(pwd) $(wasmcli keys show -a mywallet) 100000000ushell,100000000ustake
+git add . && git commit -m "add <myvalidator> account to coral genesis" && git push
+# Open PR to CosmWasm/testnets:master and ping us
 ```
 
 After following the steps, you can skip requesting coins
