@@ -25,7 +25,7 @@ export CHAIN_ID=testing
 export TESTNET_NAME=demo-10
 export RPC=https://rpc.demo-10.cosmwasm.com:443
 export FAUCET=https://faucet.demo-10.cosmwasm.com
-export SEED_NODE=<WIP>@p2p.demo-10.cosmwasm.com:26656
+export SEED_NODE=1445f84f409745c554c03557e826edc9757b941a@p2p.demo-10.cosmwasm.com:26656
 ```
 
 Also install `jq`.
