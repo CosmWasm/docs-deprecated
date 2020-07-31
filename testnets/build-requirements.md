@@ -10,8 +10,8 @@ Building code may require larger instances, especially if you want to build a st
 
 # Installation
 
-Node executable may vary between networks, and [Option 1](#option-1-preferred---build-static-binary-using-docker---linux-only) 
-might become obsolete. Please check for `wasm` executable instructions for specific networks on [CosmWasm/testnets](https://github.com/CosmWasm/testnets) 
+Node executable may vary between networks, and [Option 1](#option-1-preferred-build-static-binary-using-docker-linux-only)
+might become obsolete. Please check for `wasm` executable instructions for specific networks on [CosmWasm/testnets](https://github.com/CosmWasm/testnets)
 
 ## Simplest
 
@@ -30,9 +30,9 @@ Constructing a `wasmd` is a tricky process and involves using alpine linux and r
 
 ```sh
 id=$(docker create wasmd-docker)
-docker cp $id:/usr/bin/wasmd - > wasmd 
+docker cp $id:/usr/bin/wasmd - > wasmd
 docker cp $id:/usr/bin/wasmcli - > wasmcli
-# docker cp $id:/usr/bin/corald - > corald 
+# docker cp $id:/usr/bin/corald - > corald
 # docker cp $id:/usr/bin/coralcli - > coralcli
 docker rm -v $id
 ```
@@ -45,6 +45,6 @@ docker rm -v $id
 2. Compile dev build: `make build`
 3. `ldd build/wasmd`
 4. Notice the line like: `libgo_cosmwasm.so => /home/USERNAME/go/pkg/mod/github.com/!cosm!wasm/go-cosmwasm@v0.9.1/api/libgo_cosmwasm.so`
-this file must be in the library path along with wasmd
+   this file must be in the library path along with wasmd
 5. Copy `wasmd` to any location on the target system (that will run the node)
 6. Copy `libgo_cosmwasm.so` (path above) to the target system under `/usr/lib/libgo_cosmwasm.so`
