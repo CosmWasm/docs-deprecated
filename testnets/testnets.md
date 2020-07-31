@@ -1,5 +1,5 @@
 ---
-title: Joining Testnet
+title: Joining Testnets
 order: 2
 ---
 
@@ -16,9 +16,9 @@ Let's start rolling your node and start producing blocks in live testnet environ
 ## Setup
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
+You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
 Below is the [demonet configuration](https://github.com/CosmWasm/testnets/blob/master/demo-09/config).
-You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
 ```sh
 export CHAIN_ID=testing
@@ -28,7 +28,27 @@ export FAUCET=https://faucet.demo-09.cosmwasm.com
 export SEED_NODE=26c9c79dc62b5ddc753bb9fcce022fcc98b5a8cf@p2p.demo-09.cosmwasm.com:26656
 ```
 
-Also install `jq`.
+Note:
+>We have setup different executables for each testnet names after network names like: `corald/coral`, `gaiaflexd/gaiaflex`
+Replace `wasmcli` with the name of the testnet specific executable in scripts below.
+
+For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling: 
+`mkdir CosmWasm && cd CosmWasm && export CW_DIR=$(pwd)`
+
+```shell script
+git clone
+cd $CW_DIR
+git clone git@github.com:CosmWasm/wasmd
+cd wasmd
+# Check which version to use on testnets repo
+git checkout v0.10.0
+# generate coral executables
+make build-coral # make build-gaiaflex etc...
+
+# alias wasmd and cli to executable
+alias wasmd="${CW_DIR}/wasmd/build/corald"
+alias wasmcli="${CW_DIR}/wasmd/build/coral"
+```
 
 ## Initialize your wallet
 
@@ -52,6 +72,30 @@ wasmcli query wasm list-code
 # create wallet
 wasmcli keys add mywallet
 ```
+
+# Joining to be launched testnets
+
+You need to have your address and informations defined in networks genesis file to join for not yet launched testnets.
+Here is the script you can run to handle it automatically. It uses `coral` [network specific executables](https://github.com/CosmWasm/testnets/tree/master/coral#coral-wip):
+
+```sh
+cd $CW_DIR
+## Fork github.com:CosmWasm/testnets to your account and clone.
+## You cannot push directly to CosmWasm/testnets repo
+git clone git@github.com:<your-name>/testnets
+cd testnets
+git checkout -b add-gen-acc-<validator-name>
+cd <testnet-name>
+## Testnets genesis is is config so if you pass <testnet-name> dir as home to command below
+## it will add your account to genesis file
+wasmd add-genesis-account --home $(pwd) $(wasmcli keys show -a mywallet) 100000000ushell,100000000ustake
+git add . && git commit -m "add <myvalidator> account to coral genesis" && git push
+# Open PR to CosmWasm/testnets:master and ping us
+```
+
+After following the steps, you can skip requesting coins
+
+## Joining running testnets
 
 In order to join the network as validator, you need some staking tokens. We have a faucet running for that.
 
