@@ -132,7 +132,7 @@ Now you should be seeing blocks being replayed and your node is catching up with
 
 If you want to participate in active block building, you need some coins staked to your validators address. If you are interested in validator tech stack, [certus one blog](https://kb.certus.one/) is a good resource to begin with.
 
-\*\*Note: make sure your validator is synced before upgrading to validator
+**Note**: make sure your validator is synced before upgrading to validator
 
 ```sh
 wasmcli tx staking create-validator \
