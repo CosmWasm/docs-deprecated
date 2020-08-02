@@ -12,11 +12,11 @@ There is a simple faucet with REST API that will release tokens to try it out.
 
 To verify this is currently running, make sure the following URLs are all working for you:
 
-* https://faucet.demo-09.cosmwasm.com/status
-* https://rpc.demo-09.cosmwasm.com/status
-* https://lcd.demo-09.cosmwasm.com/node_info
+- https://faucet.demo-10.cosmwasm.com/status
+- https://rpc.demo-10.cosmwasm.com/status
+- https://lcd.demo-10.cosmwasm.com/node_info
 
-We have set up two native tokens - `STAKE` (`ustake`) for being a validator and 
+We have set up two native tokens - `STAKE` (`ustake`) for being a validator and
 `COSM` (`ucosm`) for paying fees. There are also 3 "ERC20-like" tokens set initialized
 at start (you can add more): `HASH`, `ISA` and `JADE`. (TODO: link to explorer)
 
@@ -50,7 +50,7 @@ Now, open up another window and set up your client:
 ```bash
 wasmcli config chain-id testing
 wasmcli config trust-node true
-wasmcli config node https://rpc.demo-09.cosmwasm.com:443
+wasmcli config node https://rpc.demo-10.cosmwasm.com:443
 wasmcli config output json
 wasmcli config indent true
 # this is important, so the cli returns after the tx is in a block,
@@ -77,7 +77,6 @@ If you are comfortable with the Node console, you will probably find this easier
 
 Full usage and installation [instructions are on the README](https://github.com/CosmWasm/cosmwasm-js/tree/master/packages/cli), but here is a short version for those who want to run from source:
 
-
 ```bash
 git clone https://github.com/CosmWasm/cosmjs.git
 cd cosmjs
@@ -91,16 +90,16 @@ Using the REPL:
 
 ```js
 // Create or load account
-const mnemonic = loadOrCreateMnemonic("fred.key");
-mnemonicToAddress("cosmos", mnemonic)
+const mnemonic = loadOrCreateMnemonic('fred.key')
+mnemonicToAddress('cosmos', mnemonic)
 
-const {address, client} = await connect(mnemonic, {});
+const { address, client } = await connect(mnemonic, {})
 address
 
-client.getAccount();
+client.getAccount()
 // if empty - this only works with CosmWasm
-hitFaucet(defaultFaucetUrl, address, "COSM")
-client.getAccount();
+hitFaucet(defaultFaucetUrl, address, 'COSM')
+client.getAccount()
 ```
 
 ## Further Information on the Cosmos-SDK

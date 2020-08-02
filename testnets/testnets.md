@@ -18,14 +18,15 @@ Let's start rolling your node and start producing blocks in live testnet environ
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
-Below is the [demonet configuration](https://github.com/CosmWasm/testnets/blob/master/demo-09/config).
+Below is the [demonet configuration](https://github.com/CosmWasm/testnets/blob/master/demo-10/config).
+You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
 ```sh
 export CHAIN_ID=testing
-export TESTNET_NAME=demo-09
-export RPC=https://rpc.demo-09.cosmwasm.com:443
-export FAUCET=https://faucet.demo-09.cosmwasm.com
-export SEED_NODE=26c9c79dc62b5ddc753bb9fcce022fcc98b5a8cf@p2p.demo-09.cosmwasm.com:26656
+export TESTNET_NAME=demo-10
+export RPC=https://rpc.demo-10.cosmwasm.com:443
+export FAUCET=https://faucet.demo-10.cosmwasm.com
+export SEED_NODE=1445f84f409745c554c03557e826edc9757b941a@p2p.demo-10.cosmwasm.com:26656
 ```
 
 Note:
@@ -131,7 +132,7 @@ Now you should be seeing blocks being replayed and your node is catching up with
 
 If you want to participate in active block building, you need some coins staked to your validators address. If you are interested in validator tech stack, [certus one blog](https://kb.certus.one/) is a good resource to begin with.
 
-**Note: make sure your validator is synced before upgrading to validator
+**Note**: make sure your validator is synced before upgrading to validator
 
 ```sh
 wasmcli tx staking create-validator \
