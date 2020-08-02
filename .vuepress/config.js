@@ -91,6 +91,10 @@ module.exports = {
           url: "https://twitter.com/CosmWasm"
         },
         {
+          service: "discord",
+          url: "https://discord.gg/cPjEnPd"
+        },
+        {
           service: "telegram",
           url: "https://t.me/joinchat/AkZriEhk9qcRw5A5U2MapA"
         },
