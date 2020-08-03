@@ -70,20 +70,15 @@ wasmcli keys list
 
 ## Connecting with a Node REPL
 
-Beyond the standard CLI tooling, we have also produced a flexible TypeScript library [`cosmwasm-js`](https://github.com/CosmWasm/cosmwasm-js), which runs in Node.js as well as in modern browsers and handles queries and submitting transactions.
-Along with this library, we produced [`@cosmwasm/cli`](https://www.npmjs.com/package/@cosmwasm/cli), which is a super-charged
-Node console. It supports `await`, does type checking for helpful error messages, and preloads many `cosmwasm-js` utiities.
+Beyond the standard CLI tooling, we have also produced a flexible TypeScript library [CosmJS](https://github.com/CosmWasm/cosmjs), which runs in Node.js as well as in modern browsers and handles queries and submitting transactions.
+Along with this library, we produced [@cosmjs/cli](https://www.npmjs.com/package/@cosmjs/cli), which is a super-charged
+Node console. It supports `await`, does type checking for helpful error messages, and preloads many CosmJS utilities.
 If you are comfortable with the Node console, you will probably find this easier and more powerful than the CLI tooling.
 
-Full usage and installation [instructions are on the README](https://github.com/CosmWasm/cosmwasm-js/tree/master/packages/cli), but here is a short version for those who want to run from source:
+Full usage and installation [instructions are on the README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), but here is a short version for those who want to run from source:
 
-```bash
-git clone https://github.com/CosmWasm/cosmjs.git
-cd cosmjs
-git checkout master # or v0.21.2
-yarn install && yarn build
-cd packages/cli
-./bin/cosmwasm-cli --init examples/helpers.ts
+```sh
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmjs/v0.22.0/packages/cli/examples/helpers.ts
 ```
 
 Using the REPL:
