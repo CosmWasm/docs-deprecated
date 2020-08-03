@@ -92,7 +92,7 @@ module.exports = {
         },
         {
           service: "discord",
-          url: "/chat"
+          url: "https://docs.cosmwasm.com/chat"
         },
         {
           service: "telegram",
