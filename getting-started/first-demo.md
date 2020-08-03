@@ -161,7 +161,9 @@ is a bit nicer in JavaScript than in Shell Script.
 
 First, go to the cli directory and start up your console:
 
-`./bin/cosmwasm-cli --init examples/helpers.ts`
+```sh
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmjs/v0.22.0/packages/cli/examples/helpers.ts
+```
 
 Now, we make all the keys and initialize clients:
 
@@ -199,6 +201,9 @@ fredClient.getAccount(bobAddr);
 
 // we need this address to configure the contract properly
 console.log("thief", thiefAddr);
+
+// get the working directory (needed later)
+process.cwd()
 ```
 
 ### Compiling the Code
@@ -225,7 +230,7 @@ docker run --rm -v "$(pwd)":/code \
 cat hash.txt
 
 # copy it to the same
-cp contract.wasm </path/to/cosmwasm-js/packages/cli>
+cp contract.wasm /path/to/repl_session/working_directory
 ```
 
 ### Uploading with JS

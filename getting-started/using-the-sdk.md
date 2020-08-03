@@ -77,13 +77,8 @@ If you are comfortable with the Node console, you will probably find this easier
 
 Full usage and installation [instructions are on the README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), but here is a short version for those who want to run from source:
 
-```bash
-git clone https://github.com/CosmWasm/cosmjs.git
-cd cosmjs
-git checkout master # or v0.21.2
-yarn install && yarn build
-cd packages/cli
-./bin/cosmwasm-cli --init examples/helpers.ts
+```sh
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmjs/v0.22.0/packages/cli/examples/helpers.ts
 ```
 
 Using the REPL:
