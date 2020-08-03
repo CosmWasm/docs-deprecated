@@ -124,8 +124,8 @@ We also want to make it not just secure and *possible* to compose contracts into
 This applies to both the contract authors, as well as the blockchain developers integrating CosmWasm into their custom blockchain.
 And we want to make it easy to build client side applications using the contracts.
 
-We are using JSON encoding for the CosmWasm messages to make this simple and export [JSON schemas](https://github.com/CosmWasm/cosmwasm-examples/tree/master/erc20/schema) for every contract to allow auto-generation of client-side codecs. We also provide [`cosmwasm-js`](https://github.com/CosmWasm/cosmwasm-js)
-as a easy-to-use TypeScript library allowing access to all contracts (and bank module) on a CosmWasm-based chain.
+We are using JSON encoding for the CosmWasm messages to make this simple and export [JSON schemas](https://github.com/CosmWasm/cosmwasm-examples/tree/master/erc20/schema) for every contract to allow auto-generation of client-side codecs. We also provide [CosmJS](https://github.com/CosmWasm/cosmjs)
+as a easy-to-use TypeScript client library allowing access to all contracts (and bank module) on a CosmWasm-based chain.
 
 ### Checking for Support
 
