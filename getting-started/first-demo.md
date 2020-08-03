@@ -57,10 +57,10 @@ cd <path/to/rust/code>
 wasmcli keys show thief -a
 
 # and recompile wasm
-docker run --rm -v $(pwd):/code \
-  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+docker run --rm -v "$(pwd)":/code \
+  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.8.0
+  cosmwasm/rust-optimizer:0.9.0
 
 # ensure the hash changed
 cat hash.txt
@@ -216,10 +216,10 @@ cd <path/to/rust/code>
 SET-THIEF-VARIABLE
 
 # and recompile wasm
-docker run --rm -v $(pwd):/code \
-  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+docker run --rm -v "$(pwd)":/code \
+  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.8.0
+  cosmwasm/rust-optimizer:0.9.0
 
 # ensure the hash changed
 cat hash.txt
@@ -237,7 +237,7 @@ contract and instantiate it:
 const wasm = fs.readFileSync('contract.wasm');
 // fake source, but this can be verified to be false
 // by any careful observer
-const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.4.0/download", builder: "cosmwasm/rust-optimizer:0.8.0"});
+const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.4.0/download", builder: "cosmwasm/rust-optimizer:0.9.0"});
 
 console.log(up);
 const { codeId } = up;

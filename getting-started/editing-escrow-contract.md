@@ -254,13 +254,13 @@ Both of these cases will be explained in detail in a future tutorial. But I can 
 
 ## Compiling for Production
 
-The typical case for production is using the [`rust-optimizer`](https://github.com/CosmWasm/rust-optimizer). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/CosmWasm/rust-optimizer/blob/v0.8.0/README.md):
+The typical case for production is using the [`rust-optimizer`](https://github.com/CosmWasm/rust-optimizer). This requires `docker` to be installed on your system first. With that in, you can just follow the instructions on the [README](https://github.com/CosmWasm/rust-optimizer/blob/v0.9.0/README.md):
 
 ```bash
-docker run --rm -v $(pwd):/code \
-  --mount type=volume,source=$(basename $(pwd))_cache,target=/code/target \
+docker run --rm -v "$(pwd)":/code \
+  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.8.0
+  cosmwasm/rust-optimizer:0.9.0
 ```
 
 It will output a file called `contract.wasm` in the project directory (same directory as `Cargo.toml`, one above `contract.rs`), as well as `hash.txt` with the sha256 hash.
