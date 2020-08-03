@@ -23,7 +23,6 @@
   },
   "devDependencies": {
     "filehound": "^1.17.4",
-    "remove-markdown": "^0.3.0",
-    "vuepress-plugin-redirect": "^1.2.4"
+    "remove-markdown": "^0.3.0"
   }
 }
