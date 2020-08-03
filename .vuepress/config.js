@@ -92,7 +92,7 @@ module.exports = {
         },
         {
           service: "discord",
-          url: "https://discord.gg/cPjEnPd"
+          url: "/chat"
         },
         {
           service: "telegram",
