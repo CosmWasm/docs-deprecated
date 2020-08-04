@@ -14,7 +14,7 @@ to enable arbitrary composition of contracts with both other contracts and nativ
 
 For the remainder of this article, I will make a key distinction between "Contracts" and "Native Modules". "Contracts" are CosmWasm code that is
 dynamically uploaded to the blockchain at a given address. This can be added after the fact and is not tied to any runtime implementation.
-"Native Modules" are basically Go Cosmos-SDK modules, which are compiled into the blockchain binary. These are relatively static (requiring a
+"Native Modules" are basically Go Cosmos SDK modules, which are compiled into the blockchain binary. These are relatively static (requiring a
 soft or hard fork to be added or modified) and will differ between different blockchains running CosmWasm.
 
 We support composition between both types, but we must look more deeply at the integration with "Native Modules", as using those can
@@ -81,7 +81,7 @@ The idea here is that the contract can define the type to be include in the `Cus
 
 The demo "reflect" contract in the standard CosmWasm repo,
 [shows how to use `CustomMsg` and `CustomQuery`](https://github.com/CosmWasm/cosmwasm/blob/71f643f577184a23b2f1f122531c944f0de94c34/contracts/reflect/src/msg.rs#L30-L64). You can see how the contract [uses a `CustomQuery`](https://github.com/CosmWasm/cosmwasm/blob/master/contracts/reflect/src/contract.rs#L94-L101)
-to call out to some "runtime-provided" code. For unit tests, we can [mock out the runtime querier](https://github.com/CosmWasm/cosmwasm/blob/master/contracts/reflect/src/testing.rs#L20-L37), but in a deployed system, this should be provided by native Go code in your Cosmos-SDK application.
+to call out to some "runtime-provided" code. For unit tests, we can [mock out the runtime querier](https://github.com/CosmWasm/cosmwasm/blob/master/contracts/reflect/src/testing.rs#L20-L37), but in a deployed system, this should be provided by native Go code in your Cosmos SDK application.
 
 Beyond trivial cases, we are working with Terra to expose their `swap`, `oracle` and `treasury` modules to CosmWasm contracts on their chains.
 These features need to be exposed in an immutable format that will work forever on their chain, but there is no need for portability.

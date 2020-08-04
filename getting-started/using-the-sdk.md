@@ -97,6 +97,6 @@ hitFaucet(defaultFaucetUrl, address, 'COSM')
 client.getAccount()
 ```
 
-## Further Information on the Cosmos-SDK
+## Further Information on the Cosmos SDK
 
-`wasmcli` and `wasmd` are forks of `gaiacli` and `gaiad`, which are the binaries that run the Cosmos Hub ([source](https://github.com/cosmos/gaia)). These represent an instance of a blockchain that utilizes all of the stable features of the [Cosmos-SDK](https://github.com/cosmos/cosmos-sdk). As such, `wasmcli` and `wasmd` have all the same features (plus WASM smart contracts obviously). If you'd like to learn more about accessing those features take a look at the [Gaia docs](https://cosmos.network/docs/cosmos-hub/what-is-gaia.html). If you'd like to learn more about getting stared with the Cosmos-SDK in general, take a look at the series of [Tutorials](https://tutorials.cosmos.network/) that show how to build custom modules for application-specific blockchains.
+`wasmcli` and `wasmd` are forks of `gaiacli` and `gaiad`, which are the binaries that run the Cosmos Hub ([source](https://github.com/cosmos/gaia)). These represent an instance of a blockchain that utilizes all of the stable features of the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk). As such, `wasmcli` and `wasmd` have all the same features (plus WASM smart contracts obviously). If you'd like to learn more about accessing those features take a look at the [Gaia docs](https://cosmos.network/docs/cosmos-hub/what-is-gaia.html). If you'd like to learn more about getting stared with the Cosmos SDK in general, take a look at the series of [Tutorials](https://tutorials.cosmos.network/) that show how to build custom modules for application-specific blockchains.
