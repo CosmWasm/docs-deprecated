@@ -138,7 +138,7 @@ module.exports = {
             {
               title: "Contributing to the docs",
               url:
-                "https://github.com/CosmWasm/docs/blob/master/docs/DOCS_README.md"
+                "https://github.com/CosmWasm/docs2/blob/master/DOCS_README.md"
             },
             {
               title: "Source code on GitHub",
