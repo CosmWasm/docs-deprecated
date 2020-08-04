@@ -214,7 +214,7 @@ fn send_tokens<A: Api>(
 }
 ```
 
-Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from `cosmos-sdk`. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/v0.9.2/packages/std/src/types.rs#L76-L110) for references to all the available types in the environment.
+Note that `Env` encodes a lot of information from the blockchain, essentially providing the `Context` if you are coming from Cosmos SDK. This is validated data and can be trusted to compare any messages against. Refer to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/v0.9.2/packages/std/src/types.rs#L76-L110) for references to all the available types in the environment.
 
 ## Adding a New Message
 

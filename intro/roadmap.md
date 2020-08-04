@@ -13,7 +13,7 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 
 **August-October 2019**:
 
-* Core work to build out CosmWasm environment, and build system, example code, and cosmos sdk integration.
+* Core work to build out CosmWasm environment, and build system, example code, and Cosmos SDK integration.
 
 **November 2019**:
 
