@@ -62,7 +62,7 @@ module.exports = {
             },
             {
               title: "GitHub",
-              path: "https://github.com/confio/cosmwasm"
+              path: "https://github.com/CosmWasm"
             }
           ]
         }
