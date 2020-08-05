@@ -7,7 +7,7 @@ order: 1
 
 Buckle up, we will now get first-hand experience with CosmWasm,
 by starting up our own CosmWasm-enabled blockchain (just one node for now), modifying
-an existing contract, deploying it to our system, and executing it via the cli.
+an existing contract, deploying it to our system, and executing it via the cli. If you are more *research first then get your hands dirty second* person, you should go ahead to [Architecture](../architecture/multichain.md) read it first and then head back here.
 
 To make things a bit more interesting, we will demonstrate modifying the example
 escrow contract and adding a backdoor to it. It exposes an identical API to the 

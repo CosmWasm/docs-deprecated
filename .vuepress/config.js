@@ -22,13 +22,13 @@ module.exports = {
         {
           children: [
             {
-              title: "Intro",
-              path: "/intro",
+              title: "Getting Started",
+              path: "/getting-started",
               directory: true,
             },
             {
-              title: "Getting Started",
-              path: "/getting-started",
+              title: "Architecture",
+              path: "/architecture",
               directory: true,
             },
             {
