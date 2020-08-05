@@ -17,7 +17,7 @@ verifying the source code behind any contract you run.
 This is designed for programmers who are comfortable with the command-line and using
 Linux or MacOS. It is helpful to have a basic understanding
 of Rust and Go, but we will lead you through, so fast learners need no prior knowledge.
-The [next tutorial, name service](../name-service/intro) will assume knowledge of these basics.
+The [next tutorial, name service](../tutorials/name-service/intro) will assume knowledge of these basics.
 If you know Rust and have worked on a Cosmos SDK app before, you can skip right to name service.
 For others, best to go through this one first.
 

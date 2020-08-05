@@ -1,8 +1,8 @@
 ---
-title: Intro
+title: Introduction
 ---
 
-# Name Service Introduction
+# Introduction
 
 The Cosmos SDK has [a good standard tutorial](https://tutorials.cosmos.network/nameservice/tutorial/00-intro.html), which builds out a sample name service application. To provide a nice transition for existing SDK developers, we will demonstrate implementing the same application using CosmWasm. This is a useful tutorial to demonstrate basic concepts and applying the skills that you learned in the introduction. We will also be producing another tutorial for deploying and using an ERC20 contract, which may be more familiar to those coming from an Ethereum background.
 

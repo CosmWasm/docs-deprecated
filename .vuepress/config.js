@@ -32,20 +32,20 @@ module.exports = {
               directory: true,
             },
             {
-              title: "Name Service",
-              path: "/name-service",
-              directory: true,
-            },
-            {
               title: "Testnets",
               path: "/testnets",
               directory: true,
             },
+          ]
+        },
+        {
+          title: "Tutorials",
+          children: [
             {
-              title: "Production Tooling",
-              path: "/tooling",
+              title: "Name Service",
+              path: "/tutorials/name-service",
               directory: true,
-            },
+            }
           ]
         },
         {

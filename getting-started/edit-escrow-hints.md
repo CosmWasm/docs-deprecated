@@ -1,5 +1,6 @@
 ---
 title: Hints
+order: 9
 ---
 
 # Solution to Editing Escrow Contract Section

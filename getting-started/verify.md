@@ -1,5 +1,6 @@
 ---
 title: Verifying Code
+order: 7
 ---
 
 # Verifying with Cryptographic Code Reviews
