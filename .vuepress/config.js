@@ -51,18 +51,24 @@ module.exports = {
         {
           title: "Resources",
           children: [
-            {
-              title: "Blog",
-              path: "https://www.cosmwasm.com/blog/"
-            },
+            // internal links
             {
               title: "Media",
               path: "/media",
               directory: true,
             },
+            // external links
+            {
+              title: "Community chat",
+              path: "https://docs.cosmwasm.com/chat"
+            },
             {
               title: "GitHub",
-              path: "https://github.com/confio/cosmwasm"
+              path: "https://github.com/CosmWasm"
+            },
+            {
+              title: "Blog",
+              path: "https://www.cosmwasm.com/blog/"
             }
           ]
         }
@@ -138,7 +144,7 @@ module.exports = {
             {
               title: "Contributing to the docs",
               url:
-                "https://github.com/CosmWasm/docs/blob/master/docs/DOCS_README.md"
+                "https://github.com/CosmWasm/docs2/blob/master/DOCS_README.md"
             },
             {
               title: "Source code on GitHub",
