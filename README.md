@@ -1,5 +1,5 @@
 ---
-title: CosmWasm Documentation
+title: Introduction
 description: CosmWasm is a new smart contracting platform built for the cosmos ecosystem.
 footer:
   newsletter: false

@@ -1,11 +1,7 @@
 ---
-title: Smart Contracts
-order: 2
+title: Comparison with Solidity Contracts
+order: 8
 ---
-
-# Deploying and Using Contracts
-
-Once you have a CosmWasm-enabled blockchain, you can deploy a custom contract. This is similar in principle to ethereum, but there are a number of differences in the details. Since most people are familiar with that flow, let us look at some of the main similarities and differences:
 
 ## Comparison with Solidity Contracts
 
