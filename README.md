@@ -24,7 +24,7 @@ You will need a running blockchain to host your contracts and use them from an a
 
 [The Testnets section](/testnets/build-requirements.md) is a good first point if you are searching for a live network to test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined the testnets**", said no one ever 😉
 
-[The Tutorials section](/tutorials) will demonstrate developing smart contracts from zero to production with step by step explanations, code snippets, scripts and more.
+[The Learn section](/learn) will demonstrate developing smart contracts from zero to production with step by step explanations, code snippets, scripts and more.
 
 ## Further Studies
 

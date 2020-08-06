@@ -39,7 +39,7 @@ module.exports = {
           ]
         },
         {
-          title: "Tutorials",
+          title: "Learn",
           children: [
             {
               title: "Name Service",
