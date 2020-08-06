@@ -18,9 +18,13 @@ You will need a running blockchain to host your contracts and use them from an a
 
 ## Sections
 
-[The intro section](/intro/multichain.html) explains much of the high-level design and architecture of CosmWasm. Before you start designing systems, it is good to understand the mental model and capabilities of the system. If you just want to get your hands dirty with working code, you can skip this section for now and come back later when you are ready to ponder design.
+[Getting Started](/getting-started/intro.html) dives you into hands-on training. It gently leads you through modifying, deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get acquainted with all the aspects of the system, without too much hard work coding.
 
-[Getting Started](/getting-started/intro.html) will transition into hands-on training. It gently leads you through modifying, deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get acquainted with all the aspects of the system, without too much hard work coding.
+[The Architecture section](/architecture/multichain.html) explains much of the high-level design and architecture of CosmWasm. Before you start designing systems, it is good to understand the mental model and capabilities of the system. If you just want to get your hands dirty with working code, you can skip this section for now and come back later when you are ready to ponder design.
+
+[The Testnets section](/testnets/build-requirements.md) is a good first point if you are searching for a live network to test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined the testnets**", said no one ever 😉
+
+[The Learn section](/learn) will demonstrate developing smart contracts from zero to production with step by step explanations, code snippets, scripts and more.
 
 ## Further Studies
 

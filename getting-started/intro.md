@@ -7,7 +7,7 @@ order: 1
 
 Buckle up, we will now get first-hand experience with CosmWasm,
 by starting up our own CosmWasm-enabled blockchain (just one node for now), modifying
-an existing contract, deploying it to our system, and executing it via the cli.
+an existing contract, deploying it to our system, and executing it via the cli. If you are more *research first then get your hands dirty second* person, you should go ahead to [Architecture](../architecture/multichain.md) read it first and then head back here.
 
 To make things a bit more interesting, we will demonstrate modifying the example
 escrow contract and adding a backdoor to it. It exposes an identical API to the 
@@ -17,7 +17,7 @@ verifying the source code behind any contract you run.
 This is designed for programmers who are comfortable with the command-line and using
 Linux or MacOS. It is helpful to have a basic understanding
 of Rust and Go, but we will lead you through, so fast learners need no prior knowledge.
-The [next tutorial, name service](../name-service/intro) will assume knowledge of these basics.
+The [next tutorial, name service](../tutorials/name-service/intro) will assume knowledge of these basics.
 If you know Rust and have worked on a Cosmos SDK app before, you can skip right to name service.
 For others, best to go through this one first.
 

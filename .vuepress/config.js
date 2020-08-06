@@ -22,18 +22,13 @@ module.exports = {
         {
           children: [
             {
-              title: "Intro",
-              path: "/intro",
-              directory: true,
-            },
-            {
               title: "Getting Started",
               path: "/getting-started",
               directory: true,
             },
             {
-              title: "Name Service",
-              path: "/name-service",
+              title: "Architecture",
+              path: "/architecture",
               directory: true,
             },
             {
@@ -41,11 +36,16 @@ module.exports = {
               path: "/testnets",
               directory: true,
             },
+          ]
+        },
+        {
+          title: "Learn",
+          children: [
             {
-              title: "Production Tooling",
-              path: "/tooling",
+              title: "Name Service",
+              path: "/tutorials/name-service",
               directory: true,
-            },
+            }
           ]
         },
         {
