@@ -22,6 +22,11 @@ module.exports = {
         {
           children: [
             {
+              title: "Welcome",
+              path: "/introduction",
+              directory: true,
+            },
+            {
               title: "Getting Started",
               path: "/getting-started",
               directory: true,
@@ -43,7 +48,7 @@ module.exports = {
           children: [
             {
               title: "Name Service",
-              path: "/tutorials/name-service",
+              path: "/learn/name-service",
               directory: true,
             }
           ]
@@ -131,6 +136,10 @@ module.exports = {
             {
               title: "Confio blog",
               url: "https://medium.com/confio"
+            },
+            {
+              title: "CosmWasm forum",
+              url: "https://forum.cosmwasm.com"
             },
             {
               title: "Telegram",
