@@ -146,13 +146,18 @@ git checkout -b add-gen-acc-<validator-name>
 cd <testnet-name>
 
 coral keys add validator
-coral init dummy
+corald init dummy
 corald add-genesis-account $(coral keys show -a validator) 100000000ushell,100000000ureef
 cat $HOME/.corald/config/genesis.json | jq '.app_state.auth.accounts [0]' > /tmp/new_acc.json
-NEW_GEN=$(jq '.app_state.auth.accounts += [input]' ./config/genesis.json /tmp/new_acc.json) && echo "$NEW_GEN" > ./config/genesis.json
+NEW_GEN=$(jq '.app_state.auth.accounts += [input]' ./config/genesis.json /tmp/new_acc.json) && echo "$NEW_GEN" > ./config/genesis_new.json
+mv -f ./config/genesis_new.json ./config/genesis.json
+rm -f  /tmp/new_acc.json
 
-git add . && git commit -m "add <myvalidator> account to coral genesis" && git push
-# Open PR to CosmWasm/testnets:master and ping us
+git add ./config/genesis.json
+git commit -m "Add <myvalidator> account to coral genesis"
+git push
+
+# Open PR to CosmWasm/testnets:master (https://github.com/CosmWasm/testnets)
 ```
 
 After the network is launched you can follow [Joining Live Testnets](#joining-live-testnets)
