@@ -30,6 +30,29 @@ rustup target add wasm32-unknown-unknown
 For those new to rust, the `stable` channel comes out every 6 weeks with a stable release (as of 7. May 2020 it is 1.43.1 - we support 1.41+). The `nightly` channel is the bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose APIs may change. For compiling `wasm`, you will want to use `stable`. We use
 `nightly` to compile the runtime for `wasmd`, which needs it for the singlepass compiler with gas metering and more.
 
+## wasmd
+
+`wasmd` is the backbone of CosmWasm platform. It is the implementation of a Cosmoszone with wasm smart contracts enabled.
+
+This code was forked from the `cosmos/gaia` repository as a basis and then added x/wasm and cleaned up many gaia-specific files. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm module.
+
+If you intend to develop or edit contract you need wasmd.
+
+```sh
+git clone https://github.com/CosmWasm/wasmd.git
+cd wasmd
+# replate the v0.10.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.10.0
+make install
+
+# verify the installation
+wasmcli version
+```
+
+If you have any problems here, check your `PATH`. `make install` will copy `wasmcli` to
+`$HOME/go/bin` by default, please make sure that is set up in your `PATH` as well, which should
+be the case in general for building Go code from source.
+
 ## Setting up your IDE
 
 We will need a good editor to guide us through the experience. We highly recommend plugins that help you learn syntax, especially when just starting rust. There are two free editor environments we recommend, choose the one that is more familiar to you.
