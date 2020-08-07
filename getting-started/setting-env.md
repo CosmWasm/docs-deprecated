@@ -23,6 +23,7 @@ wasmcli keys add fred
   "mnemonic": "hobby bunker rotate piano satoshi planet network verify else market spring toward pledge turkey tip slim word jaguar congress thumb flag project chalk inspire"
 }
 wasmcli keys add bob
+wasmcli keys add thief
 ```
 
 ## Run Local Node (optional)
@@ -32,7 +33,7 @@ wasmcli keys add bob
 wasmd init
 # add your wallet addresses to genesis
 wasmd add-genesis-account $(wasmcli keys show -a fred) 10000000000ucosm,10000000000stake
-wasmd add-genesis-account $(wasmcli keys show -a bob) 10000000000ucosm,10000000000stake
+wasmd add-genesis-account $(wasmcli keys show -a thieft) 10000000000ucosm,10000000000stake
 # add your bojack's address as validator's address
 wasmd gentx --name bojack
 # collect gentxs to genesis
@@ -92,6 +93,7 @@ Requesting tokens from faucet:
 
 ```sh
 JSON=$(jq -n --arg addr $(wasmcli keys show -a fred) '{"ticker":"COSM","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.demo-10.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmcli keys show -a thief) '{"ticker":"COSM","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.demo-10.cosmwasm.com/credit
 ```
 
 ## Connecting with a Node REPL
