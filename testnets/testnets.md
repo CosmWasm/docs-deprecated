@@ -72,19 +72,19 @@ coral keys add mywallet
 
 ## Joining Live Testnets
 
-### Run wasmd Node
+### Run corald Node
 
 ```sh
 export MONIKER=new_validator
-# initialize wasmd configuration
+# initialize corald configuration
 corald init $MONIKER
 # get the testnets genesis file
-curl $RPC/genesis | jq .result.genesis > ~/.wasmd/config/genesis.json
+curl $RPC/genesis | jq .result.genesis > ~/.corald/config/genesis.json
 # You need to configure p2p seeds
-# Either you can insert the seed addresses in $HOMEDIR/.wasmd/config/config.toml to "seeds"
+# Either you can insert the seed addresses in $HOMEDIR/.corald/config/config.toml to "seeds"
 # For simplicity we will pass the seed ID and domain as argument
 # You can get the seed it using command:
-## Start wasmd
+## Start corald
 corald start --p2p.seeds $SEED_NODE
 ```
 
@@ -111,7 +111,7 @@ If you want to participate in active block building, you need some coins staked 
 ```sh
 coral tx staking create-validator \
   --amount=1000000ustake \
-  --pubkey=$(wasmd tendermint show-validator) \
+  --pubkey=$(corald tendermint show-validator) \
   --moniker=$MONIKER \
   --chain-id=testing \
   --commission-rate="0.10" \
