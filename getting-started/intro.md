@@ -22,21 +22,15 @@ For others, best to go through this one first.
 
 ## Sections
 
-[Smart Contracts](./smart-contracts) to read about design of the smart contract engine provided by CosmWasm. You will understand the architecture and how to design your contracts, as well as the security design of the system.
+[Installation](./installation) will show you how to setup required software tooling for CosmWasm.
 
-[Setup](./setup) will show you how to setup your local environment for CosmWasm development and deployment.
+[Setting up Environment](./setting-env) will show you how to setup client environment, interacting with faucet.
 
-[Using the SDK](./using-the-sdk) for those who have no prior experience with the Cosmos SDK will get you up and running with the basics of using a Cosmos SDK based blockchain. By the end, You will be able to compile a chain from source and launch a local devnet.
+[Download and Compile Contract](./compile-contract) will demonstrate downloading and compiling smart contract code to wasm byte code.
 
-[Rust Basics](./rust-basics) is for those with little to no prior experience with Rust. It is no crash-course in the language, but enough to get you compiling (and editing) the example contracts and pointers on where to dig deeper into the language.
+[Interact with the Contract](./interact-with-contract) will show deploying, initializing and executing smart contracts.
 
-[Editing a Contract](./editing-escrow-contract) will apply your (newly acquired) Rust skills to make some changes to a sample contract.
-
-[Deploying to Testnet](./first-demo) is a simple demo that builds on the above sections and walks you through, step by step, taking your custom contract, deploying it to a testnet, and executing it. This will show you not just the internals of the contract, but how to use it from the outside.
-
-[Verifying Contracts](./verify.md) shows how to verify smart contracts you pulled cryptographically, in a decentralised manner.
-
-[Reviewing Contracts](./reviews.md) takes the section above to one more level further: review, audit contracts and publish signatures that enables contract verification and contribute to the security and trustability of CW contracts.
+[Next Steps](./next-steps.md) is the last part of the tutorial that wraps up and sails you to next dock, meaning, new learning resources.
 
 ## Video Version
 
