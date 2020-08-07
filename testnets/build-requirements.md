@@ -42,9 +42,10 @@ docker rm -v $id
 ### Option 2: (dev-style: dynamic binary - works on Linux and OSX)
 
 1. `git clone git@github.com:CosmWasm/wasmd`
-2. Compile dev build: `make build`
-3. `ldd build/wasmd`
-4. Notice the line like: `libgo_cosmwasm.so => /home/USERNAME/go/pkg/mod/github.com/!cosm!wasm/go-cosmwasm@v0.9.1/api/libgo_cosmwasm.so`
+2. Checkout to testnets version `git checkout vx.x.x`
+3. Compile dev build: `make build` or `make build-<testnet>` for testnets
+4. `ldd build/wasmd`
+5. Notice the line like: `libgo_cosmwasm.so => /home/USERNAME/go/pkg/mod/github.com/!cosm!wasm/go-cosmwasm@v0.9.1/api/libgo_cosmwasm.so`
    this file must be in the library path along with wasmd
-5. Copy `wasmd` to any location on the target system (that will run the node)
-6. Copy `libgo_cosmwasm.so` (path above) to the target system under `/usr/lib/libgo_cosmwasm.so`
+6. Copy `wasmd` to any location on the target system (that will run the node)
+7. Copy `libgo_cosmwasm.so` (path above) to the target system under `/usr/lib/libgo_cosmwasm.so`
