@@ -96,7 +96,7 @@ JSON=$(jq -n --arg addr $(wasmcli keys show -a fred) '{"ticker":"COSM","address"
 JSON=$(jq -n --arg addr $(wasmcli keys show -a thief) '{"ticker":"COSM","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.demo-10.cosmwasm.com/credit
 ```
 
-## Connecting with a Node REPL
+### Connecting with a Node REPL
 
 Beyond the standard CLI tooling, we have also produced a flexible TypeScript library [CosmJS](https://github.com/CosmWasm/cosmjs), which runs in Node.js as well as in modern browsers and handles queries and submitting transactions.
 Along with this library, we produced [@cosmjs/cli](https://www.npmjs.com/package/@cosmjs/cli), which is a super-charged

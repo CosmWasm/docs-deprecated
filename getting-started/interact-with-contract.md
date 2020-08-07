@@ -119,6 +119,8 @@ const {address: fredAddr, client: fredClient} = await connect(fredSeed, {});
 const bobSeed = loadOrCreateMnemonic("bob.key");
 const bobAddr = await mnemonicToAddress("cosmos", bobSeed);
 
+const thiefSeed = loadOrCreateMnemonic("thief.key");
+
 const {address: thiefAddr, client: thiefClient} = await connect(thiefSeed, {});
 
 console.log(fredAddr, bobAddr, thiefAddr);
@@ -139,9 +141,6 @@ thiefClient.getAccount();
 
 // check bobAddr has no funds
 fredClient.getAccount(bobAddr);
-
-// we need this address to configure the contract properly
-console.log("thief", thiefAddr);
 
 // get the working directory (needed later)
 process.cwd()
@@ -182,7 +181,7 @@ Once we have properly configured the contract, let's
 show how to use it, both the proper "approve" command:
 
 ```js
-const approve = {approve: {quantity: [{amount: "20000", denom: "ucosm"}]}};
+const approve = {approve: {quantity: [{amount: "50000", denom: "ucosm"}]}};
 
 // thief cannot approve
 thiefClient.execute(contractAddress, approve)
@@ -194,5 +193,3 @@ fredClient.getAccount(bobAddr);
 // verify contract lost
 fredClient.getAccount(contractAddress);
 ```
-
-We have finished the first tutorial. As you've seen it's pretty easy.
