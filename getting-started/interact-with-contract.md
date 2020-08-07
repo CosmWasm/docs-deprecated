@@ -1,70 +1,13 @@
 ---
-order: 4
+order: 5
 ---
 
-# Step by Step with a Sample Contract
+# Uploading and Interacting
 
-In this section, we will download a sample contract, compile, and upload it to a running blockchain.
+We have the binary ready. Now it is time to see some wasm action.
+You can use [Go CLI](#GO-CLI) or [Node Console](#Node-Console) as you wish.
 
-Please first review the [client setup instructions](./setting-env.md), and configure and verify a client, either Go CLI or
-Node.JS console.
-
-## Compiling and Testing a Contract
-
-Let's download the repo which we collect [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) and try out an existing simple escrow contract that can hold some native tokens and gives the power to an arbiter to release them to a pre-defined beneficiary. First clone the repo and try to build the wasm bundle:
-
-```bash
-# get the code
-git clone https://github.com/CosmWasm/cosmwasm-examples
-cd cosmwasm-examples/escrow
-git checkout escrow-0.5.2
-
-# compile the wasm contract with stable toolchain
-rustup default stable
-cargo wasm
-```
-
-After this compiles, it should produce a file in `target/wasm32-unknown-unknown/release/cw_escrow.wasm`. A quick `ls -l` should show around 2MB. This is a release build, but not stripped of all unneeded code. To produce a much smaller
-version, you can run this which tells the compiler to strip all unused code out:
-
-```bash
-RUSTFLAGS='-C link-arg=-s' cargo wasm
-```
-
-This produces a file about 174kB. We use this and another optimizer to produce the final product uploaded to the blockchain.
-You don't need to worry about running this yourself (unless you are curious), but you should have an idea of the final
-size of your contract this way.
-
-### Unit Tests
-
-Let's try running the unit tests:
-
-```bash
-RUST_BACKTRACE=1 cargo unit-test
-```
-
-After some compilation steps, you should see:
-
-```text
-running 5 tests
-test contract::tests::cannot_initialize_expired ... ok
-test contract::tests::proper_initialization ... ok
-test contract::tests::init_and_query ... ok
-test contract::tests::handle_refund ... ok
-test contract::tests::handle_approve ... ok
-
-test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-```
-
-`RUST_BACKTRACE=1` will provide you with full stack traces on any error, which is super useful. This only works for unit tests (which test native rust code, not the compiled wasm). Also, if you want to know where `cargo wasm` and `cargo unit-test` come from, they are just aliases defined in `.cargo/config`. Take a look there to understand the cargo flags more.
-
-### Setting Root Directory
-
-Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as it's `Cargo.toml` file.
-
-## Uploading the Code
-
-### GO CLI
+## GO CLI
 
 Before we upload the code, we need to compile the contract to binary.
 
@@ -96,7 +39,7 @@ wasmcli query wasm code $CODE_ID download.wasm
 diff contract.wasm download.wasm
 ```
 
-#### Instantiating the Contract
+### Instantiating the Contract
 
 We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to control payout and upon release, the funds go to bob.
 
@@ -151,7 +94,7 @@ wasmcli query account $(wasmcli keys show bob -a)
 wasmcli query account $CONTRACT
 ```
 
-### Node Console
+## Node Console
 
 If you set up the Node Console / REPL in the
 [client setup section](./using-the-sdk), you can use that
@@ -204,7 +147,7 @@ console.log("thief", thiefAddr);
 process.cwd()
 ```
 
-#### Uploading with JS
+### Uploading with JS
 
 Now, we go back to the Node console and upload the
 contract and instantiate it:
@@ -233,7 +176,7 @@ JSON.parse(fromUtf8(raw))
 // note the addresses are stored in base64 internally, not bech32, but the data is there... this is why we often implement smart queries on real contracts
 ```
 
-#### Executing Contract with JS
+### Executing Contract with JS
 
 Once we have properly configured the contract, let's
 show how to use it, both the proper "approve" command:
@@ -253,13 +196,3 @@ fredClient.getAccount(contractAddress);
 ```
 
 We have finished the first tutorial. As you've seen it's pretty easy.
-
-## Next Steps
-
-This is a very simple example for the escrow contract we developed, but it should show you what is possible, limited only by the wasm code you upload and the json messages you send. If you want a guided tutorial to build a contract from start to finish, check out the [name service tutorial](../tutorials/name-service/intro).
-
-If you feel you understand enough (and have prior experience with rust), feel free to grab [`cosmwasm-template`](https://github.com/CosmWasm/cosmwasm-template) and use that as a configured project to start modifying. Do not clone the repo, but rather follow the [README](https://github.com/CosmWasm/cosmwasm-template/blob/master/README.md) on how to use `cargo-generate` to generate your skeleton.
-
-In either case, there is some documentation in [`go-cosmwasm`](https://github.com/CosmWasm/go-cosmwasm/blob/master/spec/Index.md) and [`cosmwasm`](https://github.com/CosmWasm/cosmwasm/blob/master/README.md) that may be helpful. Any issues (either bugs or just confusion), please submit them on [`cosmwasm/issues`](https://github.com/CosmWasm/cosmwasm/issues) if they deal with the smart contract, and [`wasmd/issues`](https://github.com/CosmWasm/wasmd/issues) if they have to do with the SDK integration.
-
-Happy Hacking!
