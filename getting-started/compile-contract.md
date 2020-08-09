@@ -17,7 +17,7 @@ Let's download the repo which we collect [`cosmwasm-examples`](https://github.co
 # get the code
 git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples/escrow
-git checkout escrow-0.5.2
+git checkout escrow-0.6.0
 
 # compile the wasm contract with stable toolchain
 rustup default stable
@@ -60,4 +60,4 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 ### Setting Root Directory
 
-Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as it's `Cargo.toml` file.
+Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust project, rooted in the same directory as it's `Cargo.toml` file.

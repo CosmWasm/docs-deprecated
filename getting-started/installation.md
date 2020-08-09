@@ -20,14 +20,14 @@ First [install rustup](https://rustup.rs/). Once installed, make sure you have t
 ```bash
 rustup default stable
 cargo version
-# If this is lower than 1.41, update
+# If this is lower than 1.44.1+, update
 rustup update stable
 
 rustup target list --installed
 rustup target add wasm32-unknown-unknown
 ```
 
-For those new to rust, the `stable` channel comes out every 6 weeks with a stable release (as of 7. May 2020 it is 1.43.1 - we support 1.41+). The `nightly` channel is the bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose APIs may change. For compiling `wasm`, you will want to use `stable`. We use
+For those new to rust, the `stable` channel comes out every 6 weeks with a stable release (as of 2020-08-03 it is 1.45.2 - we support 1.44.1+). The `nightly` channel is the bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose APIs may change. For compiling `wasm`, you will want to use `stable`. We use
 `nightly` to compile the runtime for `wasmd`, which needs it for the singlepass compiler with gas metering and more.
 
 ## wasmd
@@ -41,7 +41,7 @@ If you intend to develop or edit contract you need wasmd.
 ```sh
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replate the v0.10.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+# replace the v0.10.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
 git checkout v0.10.0
 make install
 
