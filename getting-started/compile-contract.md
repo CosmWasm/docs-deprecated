@@ -35,6 +35,15 @@ This produces a file about 174kB. We use this and another optimizer to produce t
 You don't need to worry about running this yourself (unless you are curious), but you should have an idea of the final
 size of your contract this way.
 
+For ease of use, you can use [cosmwasm/rust-optimizer](https://github.com/CosmWasm/rust-optimizer) that produces reproducible builds of cosmwasm smart contracts. It also does heavy optimization on the build size, using binary stripping and wasm-opt.
+
+```bash
+docker run --rm -v "$(pwd)":/code \
+  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  cosmwasm/rust-optimizer:0.9.0
+```
+
 ### Unit Tests
 
 Let's try running the unit tests:

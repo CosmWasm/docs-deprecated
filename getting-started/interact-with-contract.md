@@ -9,18 +9,7 @@ You can use [Go CLI](#GO-CLI) or [Node Console](#Node-Console) as you wish.
 
 ## GO CLI
 
-Before we upload the code, we need to compile the contract to binary.
-
-```bash
-# for the rest of this section, we assume you are in the same path as the rust contract (Cargo.toml)
-# compile wasm
-docker run --rm -v "$(pwd)":/code \
-  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
-  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.9.0
-```
-
-Then we upload the code to the blockchain. Afterwards you can download the bytecode to verify it is proper:
+We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to the blockchain. Afterwards you can download the bytecode to verify it is proper:
 
 ```bash
 # see how many codes we have now
