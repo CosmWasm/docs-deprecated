@@ -27,16 +27,14 @@ Using Dockerfile is suggested.
 1. Clone the project `git clone https://github.com/CosmWasm/wasmd.git && cd wasmd`
 2. Checkout to testnets version `git checkout vx.x.x`
 3. Build docker image `docker build . -t wasmd-docker`
-4. Extract the specific binary from docker:
+4. Extract the specific binaries from build environment:
 
    ```sh
    id=$(docker create wasmd-docker)
-   docker cp $id:/usr/bin/wasmd - > wasmd
-   docker cp $id:/usr/bin/wasmcli - > wasmcli
-   chmod +x wasmd wasmcli
-   # docker cp $id:/usr/bin/corald - > corald
-   # docker cp $id:/usr/bin/coral - > coral
-   # chmod +x corald coral
+   docker cp $id:/usr/bin/wasmd .
+   docker cp $id:/usr/bin/wasmcli .
+   # docker cp $id:/usr/bin/corald .
+   # docker cp $id:/usr/bin/coral .
    docker rm -v $id
    ```
 
