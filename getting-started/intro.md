@@ -28,7 +28,7 @@ And it will show all the development flow from 0 to production.
 
 [Interacting with Contract](./interact-with-contract) will show deploying, initializing and executing smart contracts.
 
-[Next Steps](./next-steps.md) is the last part of the tutorial that wraps up and sails you to next dock, meaning, new learning resources.
+[Next Steps](./next-steps.md) is the last part of the tutorial that wraps up and sails you to the next dock, meaning, new learning resources.
 
 ## Video Version
 
