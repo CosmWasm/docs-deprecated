@@ -80,6 +80,7 @@ wasmcli query account $(wasmcli keys show bob -a)
 # but succeeds when fred tries
 wasmcli tx wasm execute $CONTRACT "$APPROVE" --from fred -y
 wasmcli query account $(wasmcli keys show bob -a)
+# contract coins must be empty
 wasmcli query account $CONTRACT
 ```
 

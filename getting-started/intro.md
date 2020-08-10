@@ -26,9 +26,9 @@ For others, best to go through this one first.
 
 [Setting up Environment](./setting-env) will show you how to setup client environment, interacting with faucet.
 
-[Download and Compile Contract](./compile-contract) will demonstrate downloading and compiling smart contract code to wasm byte code.
+[Downloading and Compiling Contract](./compile-contract) will demonstrate downloading and compiling smart contract code to wasm byte code.
 
-[Interact with the Contract](./interact-with-contract) will show deploying, initializing and executing smart contracts.
+[Interacting with Contract](./interact-with-contract) will show deploying, initializing and executing smart contracts.
 
 [Next Steps](./next-steps.md) is the last part of the tutorial that wraps up and sails you to next dock, meaning, new learning resources.
 

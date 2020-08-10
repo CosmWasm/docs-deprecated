@@ -2,14 +2,14 @@
 order: 4
 ---
 
-# Download and Compile a Contract
+# Downloading and Compiling Contract
 
 In this section, we will download a sample contract, compile to it to wasm binary executable.
 
 Please first review the [client setup instructions](./setting-env.md), and configure and verify a client, either Go CLI or
 Node.JS console.
 
-## Compiling and Testing a Contract
+## Compiling and Testing Contract
 
 Let's download the repo which we collect [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) and try out an existing simple escrow contract that can hold some native tokens and gives the power to an arbiter to release them to a pre-defined beneficiary. First clone the repo and try to build the wasm bundle:
 
