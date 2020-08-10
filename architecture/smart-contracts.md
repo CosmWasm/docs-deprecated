@@ -69,7 +69,7 @@ The block hashes (and last digits of timestamps) are even more easily manipulate
 
 **Planned Mitigation**
 
-If you call a contract with a given `HandleMsg`, this just requires the contract has the specified API, but says nothing of the code there. I could upload malicious code with the same API as a desired contract (or a superset of the API), and ask you to call it - either directly or from a contract. This can be used to steal funds, and in fact we [demo this in the tutorial](./editing-escrow-contract).
+If you call a contract with a given `HandleMsg`, this just requires the contract has the specified API, but says nothing of the code there. I could upload malicious code with the same API as a desired contract (or a superset of the API), and ask you to call it - either directly or from a contract. This can be used to steal funds, and in fact we [demo this in the tutorial](../learn/hijack-escrow/hack-contract.md).
 
 There are two mitigations here. The first is that in CosmWasm, you don't need to call out to solidity libraries at runtime to deal with size limits, but are encouraged to link all the needed code into one wasm blob. This alone removes most usage of the external contract references.
 
