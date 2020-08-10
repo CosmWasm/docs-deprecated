@@ -35,7 +35,9 @@ This produces a file about 174kB. We use this and another optimizer to produce t
 You don't need to worry about running this yourself (unless you are curious), but you should have an idea of the final
 size of your contract this way.
 
-For ease of use, you can use [cosmwasm/rust-optimizer](https://github.com/CosmWasm/rust-optimizer) that produces reproducible builds of cosmwasm smart contracts. It also does heavy optimization on the build size, using binary stripping and wasm-opt.
+## Compiling Contract for Production Environment
+
+For production deployment, please use [cosmwasm/rust-optimizer](https://github.com/CosmWasm/rust-optimizer). **rust-optimizer** produces reproducible builds of cosmwasm smart contracts. It also does heavy optimization on the build size, using binary stripping and wasm-opt.
 
 ```bash
 docker run --rm -v "$(pwd)":/code \
@@ -44,7 +46,7 @@ docker run --rm -v "$(pwd)":/code \
   cosmwasm/rust-optimizer:0.9.0
 ```
 
-### Unit Tests
+## Unit Tests
 
 Let's try running the unit tests:
 
@@ -66,7 +68,3 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
 `RUST_BACKTRACE=1` will provide you with full stack traces on any error, which is super useful. This only works for unit tests (which test native rust code, not the compiled wasm). Also, if you want to know where `cargo wasm` and `cargo unit-test` come from, they are just aliases defined in `.cargo/config`. Take a look there to understand the cargo flags more.
-
-### Setting Root Directory
-
-Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`). The [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) repo does not have a `Cargo.toml` file, but rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open only the `escrow` directory. And in general, have one window open for one rust project, rooted in the same directory as it's `Cargo.toml` file.
