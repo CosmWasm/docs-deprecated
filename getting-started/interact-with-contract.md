@@ -9,7 +9,7 @@ You can use [Go CLI](#GO-CLI) or [Node Console](#Node-Console) as you wish.
 
 ## GO CLI
 
-We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to the blockchain. Afterwards you can download the bytecode to verify it is proper:
+We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to the blockchain. Afterwards, you can download the bytecode to verify it is proper:
 
 ```bash
 # see how many codes we have now

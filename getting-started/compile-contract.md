@@ -11,7 +11,7 @@ Node.JS console.
 
 ## Compiling and Testing Contract
 
-Let's download the repo which we collect [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) and try out an existing simple escrow contract that can hold some native tokens and gives the power to an arbiter to release them to a pre-defined beneficiary. First clone the repo and try to build the wasm bundle:
+Let's download the repo in which we collect [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) and try out an existing simple escrow contract that can hold some native tokens and gives the power to an arbiter to release them to a pre-defined beneficiary. First, clone the repo and try to build the wasm bundle:
 
 ```bash
 # get the code
