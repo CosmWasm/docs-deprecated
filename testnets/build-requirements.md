@@ -11,7 +11,7 @@ Building code may require larger instances, especially if you want to build a st
 # Installation
 
 Node executable may vary between networks, and [Option 1](#option-1-preferred-build-static-binary-using-docker-linux-only)
-might become obsolete. Please check for `wasm` executable instructions for specific networks on [CosmWasm/testnets](https://github.com/CosmWasm/testnets)
+might become obsolete. Network details, configuration and informations can be found on [CosmWasm/testnets](https://github.com/CosmWasm/testnets). Please head over to the repo and explore before starting setting up a node.
 
 ## Simplest
 
