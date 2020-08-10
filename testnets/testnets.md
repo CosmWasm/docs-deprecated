@@ -72,19 +72,19 @@ coral keys add mywallet
 
 ## Joining Live Testnets
 
-### Run wasmd Node
+### Run corald Node
 
 ```sh
 export MONIKER=new_validator
-# initialize wasmd configuration
+# initialize corald configuration
 corald init $MONIKER
 # get the testnets genesis file
-curl $RPC/genesis | jq .result.genesis > ~/.wasmd/config/genesis.json
+curl $RPC/genesis | jq .result.genesis > ~/.corald/config/genesis.json
 # You need to configure p2p seeds
-# Either you can insert the seed addresses in $HOMEDIR/.wasmd/config/config.toml to "seeds"
+# Either you can insert the seed addresses in $HOMEDIR/.corald/config/config.toml to "seeds"
 # For simplicity we will pass the seed ID and domain as argument
 # You can get the seed it using command:
-## Start wasmd
+## Start corald
 corald start --p2p.seeds $SEED_NODE
 ```
 
@@ -110,8 +110,8 @@ If you want to participate in active block building, you need some coins staked 
 
 ```sh
 coral tx staking create-validator \
-  --amount=1000000ustake \
-  --pubkey=$(wasmd tendermint show-validator) \
+  --amount=100000000ureef \
+  --pubkey=$(corald tendermint show-validator) \
   --moniker=$MONIKER \
   --chain-id=testing \
   --commission-rate="0.10" \
@@ -146,13 +146,18 @@ git checkout -b add-gen-acc-<validator-name>
 cd <testnet-name>
 
 coral keys add validator
-coral init dummy
+corald init dummy
 corald add-genesis-account $(coral keys show -a validator) 100000000ushell,100000000ureef
 cat $HOME/.corald/config/genesis.json | jq '.app_state.auth.accounts [0]' > /tmp/new_acc.json
-NEW_GEN=$(jq '.app_state.auth.accounts += [input]' ./config/genesis.json /tmp/new_acc.json) && echo "$NEW_GEN" > ./config/genesis.json
+NEW_GEN=$(jq '.app_state.auth.accounts += [input]' ./config/genesis.json /tmp/new_acc.json) && echo "$NEW_GEN" > ./config/genesis_new.json
+mv -f ./config/genesis_new.json ./config/genesis.json
+rm -f  /tmp/new_acc.json
 
-git add . && git commit -m "add <myvalidator> account to coral genesis" && git push
-# Open PR to CosmWasm/testnets:master and ping us
+git add ./config/genesis.json
+git commit -m "Add <myvalidator> account to coral genesis"
+git push
+
+# Open PR to CosmWasm/testnets:master (https://github.com/CosmWasm/testnets)
 ```
 
 After the network is launched you can follow [Joining Live Testnets](#joining-live-testnets).
@@ -160,3 +165,4 @@ After the network is launched you can follow [Joining Live Testnets](#joining-li
 ## Deploying Contracts to Testnet
 
 [Getting Started section](../getting-started/intro.md) is the best reading source that teaches you the process of compiling and deploying contracts using a basic smart contract. If you are interested in developing your own contracts, after reading getting started tutorials head to [Hijacking Escrow](../learn/hijack-escrow/intro.md) where you play around with the example escrow contract.
+
