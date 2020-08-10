@@ -4,12 +4,13 @@ order: 5
 
 # Uploading and Interacting
 
-We have the binary ready. Now it is time to see some wasm action.
-You can use [Go CLI](#GO-CLI) or [Node Console](#Node-Console) as you wish.
+We have the binary ready. Now it is time to see some wasm action. You can use [Go CLI](#GO-CLI) or
+[Node Console](#Node-Console) as you wish.
 
 ## GO CLI
 
-We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to the blockchain. Afterwards, you can download the bytecode to verify it is proper:
+We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will
+upload the code to the blockchain. Afterwards, you can download the bytecode to verify it is proper:
 
 ```bash
 # see how many codes we have now
@@ -30,7 +31,8 @@ diff contract.wasm download.wasm
 
 ### Instantiating the Contract
 
-We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to control payout and upon release, the funds go to bob.
+We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that
+will allow fred to control payout and upon release, the funds go to bob.
 
 ```bash
 # instantiate contract and verify
@@ -67,7 +69,8 @@ wasmcli query wasm contract-state smart $CONTRACT '{}'
 # (since we didn't implement any valid QueryMsg, we just get a parse error back)
 ```
 
-Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key that is not the verifier, then using the proper key to release.
+Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key
+that is not the verifier, then using the proper key to release.
 
 ```bash
 # execute fails if wrong person
@@ -86,10 +89,8 @@ wasmcli query account $CONTRACT
 
 ## Node Console
 
-If you set up the Node Console / REPL in the
-[client setup section](./using-the-sdk), you can use that
-to deploy and execute your contract.
-I think you will find that JSON manipulation and parsing
+If you set up the Node Console / REPL in the [client setup section](./using-the-sdk), you can use
+that to deploy and execute your contract. I think you will find that JSON manipulation and parsing
 is a bit nicer in JavaScript than in Shell Script.
 
 First, go to the cli directory and start up your console:
@@ -138,8 +139,7 @@ process.cwd()
 
 ### Uploading with JS
 
-Now, we go back to the Node console and upload the
-contract and instantiate it:
+Now, we go back to the Node console and upload the contract and instantiate it:
 
 ```js
 const wasm = fs.readFileSync('contract.wasm');
@@ -166,8 +166,8 @@ JSON.parse(fromUtf8(raw))
 
 ### Executing Contract with JS
 
-Once we have properly configured the contract, let's
-show how to use it, both the proper "approve" command:
+Once we have properly configured the contract, let's show how to use it, both the proper "approve"
+command:
 
 ```js
 const approve = {approve: {quantity: [{amount: "50000", denom: "ucosm"}]}};

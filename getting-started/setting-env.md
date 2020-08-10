@@ -4,8 +4,10 @@ order: 3
 
 # Setting Up Environment
 
-You need an environment to run contracts. You can either run your node locally or connect to an existing network.
-For easy testing, we have a demo net online you can use to deploy and run your contracts. If you want to setup and run against a local blockchain, [click here](#run-local-node-optional)
+You need an environment to run contracts. You can either run your node locally or connect to an
+existing network. For easy testing, we have a demo net online you can use to deploy and run your
+contracts. If you want to setup and run against a local blockchain, [click
+here](#run-local-node-optional)
 
 To verify testnet is currently running, make sure the following URLs are all working for you:
 
@@ -13,14 +15,16 @@ To verify testnet is currently running, make sure the following URLs are all wor
 - https://faucet.demo-10.cosmwasm.com/status
 - https://lcd.demo-10.cosmwasm.com/node_info
 
-We have set up two native tokens - `STAKE` (`ustake`) for being a validator and
-`COSM` (`ucosm`) for paying fees.
-We currently don't have any frontends (lunie, hubble, cosmostation, etc) that work with
+We have set up two native tokens - `STAKE` (`ustake`) for being a validator and `COSM` (`ucosm`) for
+paying fees. We currently don't have any frontends (lunie, hubble, cosmostation, etc) that work with
 the demo net, but feel free to deploy one pointing to our rpc/lcd servers and we will list it.
 
-You can find more information about other testnets: [CosmWasm/testnets](https://github.com/CosmWasm/testnets) and [Testnet section](./../testnets/testnets.md).
+You can find more information about other testnets:
+[CosmWasm/testnets](https://github.com/CosmWasm/testnets) and [Testnet
+section](./../testnets/testnets.md).
 
-When interacting with network, you can either use `wasmcli` which is a GO client or Node REPL. Depends solely on your preference.
+When interacting with network, you can either use `wasmcli` which is a GO client or Node REPL.
+Depends solely on your preference.
 
 ## Setup GO CLI
 
@@ -56,8 +60,8 @@ wasmcli keys add bob
 wasmcli keys add thief
 ```
 
-You need some tokens in your address to interact. If you are using local node you can skip this step.
-Requesting tokens from faucet:
+You need some tokens in your address to interact. If you are using local node you can skip this
+step. Requesting tokens from faucet:
 
 ```sh
 JSON=$(jq -n --arg addr $(wasmcli keys show -a fred) '{"ticker":"COSM","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.demo-10.cosmwasm.com/credit
@@ -66,12 +70,17 @@ JSON=$(jq -n --arg addr $(wasmcli keys show -a thief) '{"ticker":"COSM","address
 
 ## Setup Node REPL
 
-Beyond the standard CLI tooling, we have also produced a flexible TypeScript library [CosmJS](https://github.com/CosmWasm/cosmjs), which runs in Node.js as well as in modern browsers and handles queries and submitting transactions.
-Along with this library, we produced [@cosmjs/cli](https://www.npmjs.com/package/@cosmjs/cli), which is a super-charged
-Node console. It supports `await`, does type checking for helpful error messages, and preloads many CosmJS utilities.
-If you are comfortable with the Node console, you will probably find this easier and more powerful than the CLI tooling.
+Beyond the standard CLI tooling, we have also produced a flexible TypeScript library
+[CosmJS](https://github.com/CosmWasm/cosmjs), which runs in Node.js as well as in modern browsers
+and handles queries and submitting transactions. Along with this library, we produced
+[@cosmjs/cli](https://www.npmjs.com/package/@cosmjs/cli), which is a super-charged Node console. It
+supports `await`, does type checking for helpful error messages, and preloads many CosmJS utilities.
+If you are comfortable with the Node console, you will probably find this easier and more powerful
+than the CLI tooling.
 
-Full usage and installation [instructions are on the README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), but here is a short version for those who want to run from source:
+Full usage and installation [instructions are on the
+README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), but here is a short version
+for those who want to run from source:
 
 ```sh
 npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmjs/v0.22.0/packages/cli/examples/helpers.ts
