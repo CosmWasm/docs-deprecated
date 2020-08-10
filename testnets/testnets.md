@@ -110,7 +110,7 @@ If you want to participate in active block building, you need some coins staked 
 
 ```sh
 coral tx staking create-validator \
-  --amount=1000000ustake \
+  --amount=100000000ureef \
   --pubkey=$(corald tendermint show-validator) \
   --moniker=$MONIKER \
   --chain-id=testing \
