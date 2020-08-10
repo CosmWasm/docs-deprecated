@@ -143,9 +143,8 @@ contract and instantiate it:
 
 ```js
 const wasm = fs.readFileSync('contract.wasm');
-// fake source, but this can be verified to be false
-// by any careful observer
-const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.4.0/download", builder: "cosmwasm/rust-optimizer:0.9.0"});
+// you can add extra information to contract details such as source and builder.
+const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.6.0/download", builder: "cosmwasm/rust-optimizer:0.9.0"});
 
 console.log(up);
 const { codeId } = up;
