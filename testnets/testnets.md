@@ -14,10 +14,8 @@ You can find active and in-active testnet information such as configs and endpoi
 Let's start rolling your node and start producing blocks in testnet environment.
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
-You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
-Below is the [demonet configuration](https://github.com/CosmWasm/testnets/blob/master/demo-10/config).
-You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
+Below is the [coral network configuration](https://github.com/CosmWasm/testnets/tree/master/coral).
 
 ```sh
 export CHAIN_ID=cosmwasm-coral
