@@ -25,7 +25,6 @@ export TESTNET_NAME=coral
 export RPC=https://rpc.coralnet.cosmwasm.com:443
 export FAUCET=https://faucet.coralnet.cosmwasm.com
 export SEED_NODE=ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656
-
 ```
 
 **IMPORTANT**:
