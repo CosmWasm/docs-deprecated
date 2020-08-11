@@ -14,17 +14,15 @@ You can find active and in-active testnet information such as configs and endpoi
 Let's start rolling your node and start producing blocks in testnet environment.
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
-You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
-Below is the [demonet configuration](https://github.com/CosmWasm/testnets/blob/master/demo-10/config).
-You can find the other networks configurations at [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
+Below is the [coral network configuration](https://github.com/CosmWasm/testnets/tree/master/coral).
 
 ```sh
-export CHAIN_ID=testing
-export TESTNET_NAME=demo-10
-export RPC=https://rpc.demo-10.cosmwasm.com:443
-export FAUCET=https://faucet.demo-10.cosmwasm.com
-export SEED_NODE=1445f84f409745c554c03557e826edc9757b941a@p2p.demo-10.cosmwasm.com:26656
+export CHAIN_ID=cosmwasm-coral
+export TESTNET_NAME=coral
+export RPC=https://rpc.coralnet.cosmwasm.com:443
+export FAUCET=https://faucet.coralnet.cosmwasm.com
+export SEED_NODE=ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656
 ```
 
 **IMPORTANT**:
@@ -92,17 +90,8 @@ Now you should be seeing blocks being replayed and your node is catching up with
 
 ### Become An Active Validator(optional)
 
-In order to join the network as validator, you need some staking tokens. We have a faucet running for that.
-
-Request some tokens from faucet:
-
-```sh
-JSON=$(jq -n --arg addr $(coral keys show -a mywallet) '{"ticker":"COSM","address":$addr}')
-curl -X POST --header "Content-Type: application/json" --data "$JSON" $FAUCET/credit
-
-JSON=$(jq -n --arg addr $(coral keys show -a mywallet) '{"ticker":"STAKE","address":$addr}')
-curl -X POST --header "Content-Type: application/json" --data "$JSON" $FAUCET/credit
-```
+In order to join the network as validator, you need some staking tokens.
+Please ask some in [discord testnets channel](https://docs.cosmwasm.com/chat)
 
 If you want to participate in active block building, you need some coins staked to your validators address. If you are interested in validator tech stack, [certus one blog](https://kb.certus.one/) is a good resource to begin with.
 
@@ -165,4 +154,3 @@ After the network is launched you can follow [Joining Live Testnets](#joining-li
 ## Deploying Contracts to Testnet
 
 [Getting Started section](../getting-started/intro.md) is the best reading source that teaches you the process of compiling and deploying contracts using a basic smart contract. If you are interested in developing your own contracts, after reading getting started tutorials head to [Hijacking Escrow](../learn/hijack-escrow/intro.md) where you play around with the example escrow contract.
-
