@@ -57,14 +57,30 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 * [Customizable messages and queries](https://github.com/CosmWasm/wasmd/blob/v0.8.0/INTEGRATION.md#adding-custom-hooks)
 * Integration with staking module
 
-**July/August 2020**:
+**June 2020**:
+
+* CosmWasm 1 year(the idea was born during the Hackatom in Berlin June 2019)
+* 1st Live Workshop (Custom token) - Code with us
+* CosmJS initiative started with other projects in Cosmos
+
+**July 2020**:
 
 * Cosmwasm 0.9 and 0.10 Released
   * Enable contract migrations by owner
   * Enable governance control over all lifecycle of contract
   * Opt-in when compiling binary, we provide support for both permissionless and permissioned systems
-* Long living smart contract testing playground [coral network](https://github.com/CosmWasm/testnets/tree/master/coral) released
 * Fullfil [Cosmos Hub Proposal](https://hubble.figment.network/cosmos/chains/cosmoshub-3/governance/proposals/25):
+* Lead Launchpad initiative and contribute
+* Re-branding Confio and CosmWasm
+* Fetch.ai integrated CosmWasm
+
+**August 2020**:
+
+* CosmJS 0.22.0 release
+* Long living smart contract testing playground [coral network](https://github.com/CosmWasm/testnets/tree/master/coral) released
+* Team growth (Dev Relations/Orkun, Frontend/Abel, COO/VP of product/Martin)
+* Launched CosmWasm discord server
+* New website of Confio and CosmWasm
 
 ## Planned Work
 
