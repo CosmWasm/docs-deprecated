@@ -19,7 +19,7 @@ Below is the [coral network configuration](https://github.com/CosmWasm/testnets/
 
 ```sh
 export CHAIN_ID="cosmwasm-coral"
-export TESTNET_NAME="coral"
+export TESTNET_NAME="coralnet"
 export WASMD_VERSION="v0.10.0"
 export CONFIG_DIR=".corald"
 export BINARY="corald"
