@@ -15,18 +15,18 @@ Let's start rolling your node and start producing blocks in testnet environment.
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 
-Below is the [coral network configuration](https://github.com/CosmWasm/testnets/tree/master/coral).
+Below is the [coralnet configuration](https://github.com/CosmWasm/testnets/tree/master/coralnet).
 
 ```sh
 export CHAIN_ID="cosmwasm-coral"
-export TESTNET_NAME="coral"
+export TESTNET_NAME="coralnet"
 export WASMD_VERSION="v0.10.0"
 export CONFIG_DIR=".corald"
 export BINARY="corald"
 export CLI_BINARY="coral"
 
 export COSMJS_VERSION="v0.22.1"
-export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/coral/config/genesis.json"
+export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/config/genesis.json"
 
 export RPC="https://rpc.coralnet.cosmwasm.com:443"
 export LCD="https://lcd.coralnet.cosmwasm.com"
@@ -131,7 +131,7 @@ coral rest-server --node tcp://<host>:<port>
 ## Joining To Be Launched Testnets
 
 You need to have your address and informations defined in networks genesis file to join not yet launched testnets.
-Here is the script you can run to take care of it automatically. It uses `coral` [network specific executables](https://github.com/CosmWasm/testnets/tree/master/coral#coral-wip):
+Here is the script you can run to take care of it automatically. It uses `coral` [network specific executables](https://github.com/CosmWasm/testnets/tree/master/coralnet):
 
 ```sh
 cd $CW_DIR
