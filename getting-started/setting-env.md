@@ -79,11 +79,14 @@ If you are comfortable with the Node console, you will probably find this easier
 than the CLI tooling.
 
 Full usage and installation [instructions are on the
-README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), but here is a short version
-for those who want to run from source:
+README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), also here are the source codes prepacked with
+network configurations you can use on-the-fly:
 
 ```sh
-npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmjs/v0.22.0/packages/cli/examples/helpers.ts
+## CORALNET
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
+## DEMONET
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/demo-10/cli_helper.ts
 ```
 
 Using the REPL:
