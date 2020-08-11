@@ -110,7 +110,7 @@ coral tx staking create-validator \
   --amount=100000000ureef \
   --pubkey=$(corald tendermint show-validator) \
   --moniker=$MONIKER \
-  --chain-id=testing \
+  --chain-id=cosmwasm-coral \
   --commission-rate="0.10" \
   --commission-max-rate="0.20" \
   --commission-max-change-rate="0.01" \
