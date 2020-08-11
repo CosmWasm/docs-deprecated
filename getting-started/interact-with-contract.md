@@ -96,7 +96,14 @@ is a bit nicer in JavaScript than in Shell Script.
 First, go to the cli directory and start up your console:
 
 ```sh
-npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmjs/v0.22.0/packages/cli/examples/helpers.ts
+## This command fetches some helpers and configurations from testnets repo to get the repl started easily
+
+## CORALNET
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
+## DEMONET
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/demo-10/cli_helper.ts
+
+## local network configuration details will be added
 ```
 
 Now, we make all the keys and initialize clients:
