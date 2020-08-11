@@ -18,11 +18,20 @@ First of all make sure you followed the installation steps in [build requirement
 Below is the [coral network configuration](https://github.com/CosmWasm/testnets/tree/master/coral).
 
 ```sh
-export CHAIN_ID=cosmwasm-coral
-export TESTNET_NAME=coral
-export RPC=https://rpc.coralnet.cosmwasm.com:443
-export FAUCET=https://faucet.coralnet.cosmwasm.com
-export SEED_NODE=ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656
+export CHAIN_ID="cosmwasm-coral"
+export TESTNET_NAME="coral"
+export WASMD_VERSION="v0.10.0"
+export CONFIG_DIR=".corald"
+export BINARY="corald"
+export CLI_BINARY="coral"
+
+export COSMJS_VERSION="v0.22.1"
+export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/coral/config/genesis.json"
+
+export RPC="https://rpc.coralnet.cosmwasm.com:443"
+export LCD="https://lcd.coralnet.cosmwasm.com"
+export FAUCET="https://faucet.coralnet.cosmwasm.com"
+export SEED_NODE="ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656"
 ```
 
 **IMPORTANT**:
@@ -33,12 +42,11 @@ For running these scripts seamlessly, We recommend you to create a directory for
 `mkdir CosmWasm && cd CosmWasm && export CW_DIR=$(pwd)`
 
 ```shell script
-git clone
 cd $CW_DIR
-git clone git@github.com:CosmWasm/wasmd
+git clone https://github.com/CosmWasm/wasmd
 cd wasmd
 # Check which version to use on testnets repo
-git checkout v0.10.0
+git checkout $WASMD_VERSION
 # generate coral executables
 make build-coral # make build-gaiaflex, make build etc...
 # add the executables to path
@@ -132,15 +140,12 @@ cd $CW_DIR
 git clone git@github.com:<your-name>/testnets
 cd testnets
 git checkout -b add-gen-acc-<validator-name>
-cd <testnet-name>
+cd $TESTNET_NAME
 
 coral keys add validator
-corald init dummy
-corald add-genesis-account $(coral keys show -a validator) 100000000ushell,100000000ureef
-cat $HOME/.corald/config/genesis.json | jq '.app_state.auth.accounts [0]' > /tmp/new_acc.json
-NEW_GEN=$(jq '.app_state.auth.accounts += [input]' ./config/genesis.json /tmp/new_acc.json) && echo "$NEW_GEN" > ./config/genesis_new.json
-mv -f ./config/genesis_new.json ./config/genesis.json
-rm -f  /tmp/new_acc.json
+corald add-genesis-account --home . $(coral keys show -a validator) 100000000ushell,100000000ureef
+# please sort the genesis file, so the diff makes sense
+SORTED=$(jq -S . < ./config/genesis.json) && echo "$SORTED" > ./config/genesis.json
 
 git add ./config/genesis.json
 git commit -m "Add <myvalidator> account to coral genesis"
