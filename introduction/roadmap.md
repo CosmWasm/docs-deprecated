@@ -1,5 +1,5 @@
 ---
-title: Roadmap
+order: 2
 ---
 
 # Rough Roadmap
@@ -39,7 +39,6 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 * Demo integration of a [chrome extension signing CosmWasm token contracts](https://medium.com/confio/adding-cosmwasm-to-the-neuma-multichain-wallet-ec657d893268). in this case allowing an ERC20-like contract to be traded along with native tokens.
 * [nameservice contract](https://github.com/CosmWasm/cosmwasm-examples/tree/master/nameservice) released as example to parallel Cosmos SDK tutorial
 
- 
 **March 2020**:
 
 * [CosmWasm v0.7.0 released](https://medium.com/confio/cosmwasm-0-7-released-6db5a037f943) released with much internal contract cleanup, but especially much more powerful and clean REST API for `wasmd` (inspired by ongoing `cosmwasm-js` work)
@@ -53,18 +52,21 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 **April/May 2020**:
 
 * CosmWasm 0.8 Released
-* [Cross-contract queries](./composition)
+* [Cross-contract queries](../architecture/composition.md)
 * Add iterators to the Storage layer
 * [Customizable messages and queries](https://github.com/CosmWasm/wasmd/blob/v0.8.0/INTEGRATION.md#adding-custom-hooks)
 * Integration with staking module
 
+**July/August 2020**:
+
+* Cosmwasm 0.9 and 0.10 Released
+  * Enable contract migrations by owner
+  * Enable governance control over all lifecycle of contract
+  * Opt-in when compiling binary, we provide support for both permissionless and permissioned systems
+* Long living smart contract testing playground [coral network](https://github.com/CosmWasm/testnets/tree/master/coral) released
+* Fullfil [Cosmos Hub Proposal](https://hubble.figment.network/cosmos/chains/cosmoshub-3/governance/proposals/25):
+
 ## Planned Work
-
-Fullfil [Cosmos Hub Proposal](https://hubble.figment.network/cosmos/chains/cosmoshub-3/governance/proposals/25):
-
-* Enable contract migrations by owner
-* Enable governance control over all lifecycle of contract
-    * Opt-in when compiling binary, we provide support for both permissionless and permissioned systems
 
 Add IBC support (based on ICF grant):
 
