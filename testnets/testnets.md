@@ -101,7 +101,9 @@ Now you should be seeing blocks being replayed and your node is catching up with
 In order to join the network as validator, you need some staking tokens.
 Please ask some in [discord testnets channel](https://docs.cosmwasm.com/chat)
 
-If you want to participate in active block building, you need some coins staked to your validators address. If you are interested in validator tech stack, [certus one blog](https://kb.certus.one/) is a good resource to begin with.
+If you want to participate in active block building, you need some coins staked to your validators address.
+
+For those interested in validator stack, here is a good reading source on validator architectures: [certus one blog](https://kb.certus.one/)
 
 **Note**: make sure your validator is synced before upgrading to validator
 
@@ -115,8 +117,7 @@ coral tx staking create-validator \
   --commission-max-rate="0.20" \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1" \
-  --gas="auto" \
-  --gas-adjustment="1.1" \
+  --fees=5000ushell
   --from=mywallet
 ```
 
