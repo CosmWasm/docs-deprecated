@@ -1,5 +1,6 @@
 ---
-title: Sending CW20 Tokens
+title: Setup your Node Client
+order: 1
 ---
 
 # Introduction
@@ -12,6 +13,9 @@ wasm code can be reused to create dozens of token contracts with different symbo
 Then I will show you how to easily interact with this contract. As JSON manipulation and local variables
 are not so much fun in BASH, we use the [`@cosmjs/cli`](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli)
 tool instead of the `coral` CLI tool.
+
+But, before we get into the fun part of playing with the smart contracts, I want to make sure
+you know how to use your tools and not loose your private keys.
 
 You must have Node 10+ installed locally to run it. It has been tested on Ubuntu, and may not
 work properly on Windows (we assume a HOME environmental variable). PRs welcome.
@@ -77,5 +81,3 @@ useOptions(coralnetOptions).recoverMnemonic("1234567")
 
 Now that you feel a bit more secure about your keys (and ability to load them later), let's get into working with
 some contracts.
-
-## Uploading a contract

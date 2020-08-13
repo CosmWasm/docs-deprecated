@@ -52,9 +52,9 @@ module.exports = {
               directory: true,
             },
             {
-              title: "Sending CW20 Tokens",
-              path: "/learn/cw20",
-              directory: false,
+              title: "Using Smart Contracts",
+              path: "/learn/using-contracts",
+              directory: true,
             },
             {
               title: "Name Service",
