@@ -40,7 +40,7 @@ or worse `cannot call undefined`.
 
 Without further ado, let's get to use it, and please do read the error messages:
 
-```ts
+```js
 const client = await useOptions(coralnetOptions).setup(YOUR_PASSWORD_HERE);
 client.getAccount();
 ```
@@ -61,7 +61,7 @@ some tokens in your account to pay fees. When it returns, you should see somethi
 You can keep typing in the shell, or close it and run some sections later.
 Always start off with:
 
-```ts
+```js
 const client = await useOptions(coralnetOptions).setup(YOUR_PASSWORD_HERE);
 ```
 
@@ -75,9 +75,11 @@ password.
 If you want the mnemonic, you can recover it at anytime, as long as you still have the file and the password.
 You could use this later to recover, or use the same mnemonic to import the key into the `coral` cli tool.
 
-```ts
-useOptions(coralnetOptions).recoverMnemonic("1234567")
+```js
+useOptions(coralnetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
 ```
+
+Also, try this with a invalid password and see how it fails.
 
 Now that you feel a bit more secure about your keys (and ability to load them later), let's get into working with
 some contracts.
