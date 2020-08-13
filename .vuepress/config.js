@@ -52,6 +52,11 @@ module.exports = {
               directory: true,
             },
             {
+              title: "Sending CW20 Tokens",
+              path: "/learn/cw20",
+              directory: false,
+            },
+            {
               title: "Name Service",
               path: "/learn/name-service",
               directory: true,
