@@ -32,6 +32,7 @@ export CLI_BINARY="coral"
 
 export COSMJS_VERSION="v0.22.1"
 export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/config/genesis.json"
+export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/config/app.toml"
 
 export RPC="https://rpc.coralnet.cosmwasm.com:443"
 export LCD="https://lcd.coralnet.cosmwasm.com"
@@ -89,8 +90,13 @@ coral keys add mywallet
 export MONIKER=new_validator
 # initialize corald configuration
 corald init $MONIKER
+
 # get the testnets genesis file
-curl $RPC/genesis | jq .result.genesis > ~/.corald/config/genesis.json
+curl -sSL $GENESIS_URL > ~/.corald/config/genesis.json
+
+# get app.toml. Minimum gas prices must be 0.025ushell
+curl -sSL $APP_CONFIG_URL > ~/.corald/config/app.toml
+
 # You need to configure p2p seeds
 # Either you can insert the seed addresses in $HOMEDIR/.corald/config/config.toml to "seeds"
 # For simplicity we will pass the seed ID and domain as argument
