@@ -14,3 +14,7 @@ In this section you will learn all the knowledge required to experience smart co
 only contain smart contract uploading, proposing, voting, and execution. If you are interested in smart contract
 development, digest the [Getting Started](./../getting-started/intro.md) documentation.
 
+We will use [cw20-base](https://github.com/CosmWasm/cosmwasm-plus/tree/v0.1.1/contracts/cw20-base) contract in this
+section. Permisionless CW20 usage is already demonstrated in [Using Contracts](../learn/using-contracts/setup.md)
+section. This document will build on top of that with adding one more layer: **Smart Contract functionality through
+Governance module**
