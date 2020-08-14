@@ -36,16 +36,7 @@ You can always go look up the
 and see all the types defined there.
 
 But why switch to a browser and get distracted by something else?
-You can get all the info you need in the REPL itself.
-There is a great `.type` operator to show you this, but it is a bit finicky.
-This is not what we want:
-
-```
->> .type mine.increaseAllowance
-const mine: CW20Instance
-```
-
-But with a little work, we get all the info, without even leaving the REPL:
+There is a great `.type` operator to show you this without ever leaving the REPL:
 
 ```
 >> const _i = mine.increaseAllowance
@@ -57,6 +48,16 @@ const _i: (recipient: string, amount: string) => Promise<string>
 undefined
 >> .type _a
 const _a: (owner: string, spender: string) => Promise<string>
+```
+
+One note, `.type` is a bit finicky and stops at the first dot, so this simpler version
+doesn't work, just describes the `mine` object:
+
+```
+>> .type mine.increaseAllowance
+const mine: CW20Instance
+>> .type mine
+const mine: CW20Instance
 ```
 
 Armed with that knowledge, let's try to add an allowance and query it:
