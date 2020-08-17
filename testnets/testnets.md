@@ -142,9 +142,11 @@ coral rest-server --node tcp://<host>:<port>
 
 ## Joining To Be Launched Testnets
 
+::: tip
 You need to have your address and informations defined in networks genesis file to join not yet launched testnets.
 Here is the script you can run to take care of it automatically. It uses `coral` [network specific executables](https://github.com/CosmWasm/testnets/tree/master/coralnet):
-
+:::
+  
 ```sh
 cd $CW_DIR
 ## Fork github.com:CosmWasm/testnets to your account and clone.

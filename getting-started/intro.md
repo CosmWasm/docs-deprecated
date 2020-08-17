@@ -14,7 +14,7 @@ We will not dive into smart contract development in this section to provide an e
 introduction. Also, you can follow the steps here to test out smart contracts live on a testnet
 without drowning in smart contract development details. We will demonstrate setting up environment,
 compiling, deploying, and interacting. Then to make things a bit more interesting, we will
-demonstrate modifying the example escrow contract by adding a backdoor to it in the [Hijack Escrow
+show modifying the example escrow contract by adding a backdoor to it in the [Hijack Escrow
 tutorial](../learn/hijack-escrow/intro.md). It exposes an identical API to the original one, but has
 one hidden command added. This also shows the importance of verifying the source code behind any
 contract you run.

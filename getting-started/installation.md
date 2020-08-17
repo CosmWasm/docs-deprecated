@@ -59,14 +59,43 @@ make install
 wasmcli version
 ```
 
+::: tip
 If you have any problems here, check your `PATH`. `make install` will copy `wasmcli` to
 `$HOME/go/bin` by default, please make sure that is set up in your `PATH` as well, which should be
 the case in general for building Go code from source.
+:::
+
+## Using Testnets
+
+Long term testing network [Coralnet](https://github.com/CosmWasm/testnets/tree/master/coralnet) is launched to
+save you of the hassle of running a local network and speed up your developments. To use __coralnet__, you need to use
+`coral/corald` executables instead `wasmcli/wasmd` which are basically same executables just some extra configurations during
+compile time such as `Bech32` prefix.
+
+```sh
+# clone wasmd repo
+git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
+# check out to coral compatibile version
+git checkout v0.10.0
+
+# build coral executables
+make build-coral
+
+# executables are in `./build`, export to path them or move them to go bin
+export PATH="${PATH}:$(pwd)/build"
+
+# move to bin
+mv ./build/coral* $GOBIN
+```
 
 ## Further Information on the Cosmos SDK
 
-`wasmcli` and `wasmd` are forks of `gaiacli` and `gaiad`, which are the binaries that run the Cosmos
-Hub ([source](https://github.com/cosmos/gaia)). These represent an instance of a blockchain that
+::: tip
+`wasmcli` and `wasmd` (including `corald/gaiaflex`) are forks of `gaiacli` and `gaiad`, which are the binaries that run the Cosmos
+Hub ([source](https://github.com/cosmos/gaia)).
+:::
+
+These represent an instance of a blockchain that
 utilizes all of the stable features of the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk). As
 such, `wasmcli` and `wasmd` have all the same features (plus WASM smart contracts obviously). If
 you'd like to learn more about accessing those features take a look at the [Gaia
