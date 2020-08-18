@@ -39,8 +39,11 @@ If you run `gaiaflex tx gov submit-proposal wasm-store -h`, you will notice two 
 --instantiate-only-address string   Only this address can instantiate a contract instance from the code, optional
 ```
 
-By default the first flag is enabled. If you want only one address to be able to initiate the contract,
+By default, the first flag is enabled. If you want only one address to be able to initiate the contract,
 set the `instantiate-only-address` flag.
+
+If either of these flags are set, the voting committee should decide if that is acceptable for the given contract.
+Instantiate-everybody might make sense for a multisig (everyone makes their own), but not for creating a new token.
 
 Sending proposal tx script:
 
@@ -68,7 +71,7 @@ to initiate the contract from the code with arguments.
 
 ```shell script
 INIT='{"name":"Golden Stars","symbol":"STAR","decimals":2,"initial_balances":[{"address":"cosmos1x200a23zc2acc22mmy9pu4fuacl79w0yj4leqr","amount":"10000"},{"address":"cosmos1lj0cuh34c5useycd2wl3puqfr57lxd39hn8qcv","amount":"10000"}],"mint":{"minter":"cosmos1lj0cuh34c5useycd2wl3puqfr57lxd39hn8qcv"}}'
-gaiaflex tx gov submit-proposal instantiate-contract $PROPOSAL_ID $INIT --label "Init cw20 token" \
+gaiaflex tx gov submit-proposal instantiate-contract $PROPOSAL_ID "$INIT" --label "Init Golden Stars token" \
     --admin  \
     --run-as cosmos1lj0cuh34c5useycd2wl3puqfr57lxd39hn8qcv \
     --title instantiate --description test \
@@ -79,11 +82,13 @@ Vote: ```gaiaflex tx gov vote 2 yes --from acc --gas auto --gas-prices "0.025umu
 
 ## Execute the contract
 
-Execution of a contract same as in [CW20 tutorial](../learn/using-contracts) section. Main difference is: TODO
+Once the contracts is initiated, execution is same as in [CW20 tutorial](../learn/using-contracts) section.
 
 ## Migrating Contract
 
-**Documentation WIP**
+::: warning
+Note: this is an advanced feature, both on the contract design as well as governance, and will be demoed by the CosmWasm team
+:::
 
 Here is a code migration contract if contracts supports the feature.
 
@@ -94,6 +99,9 @@ gaiaflex tx gov submit-proposal migrate-contract $CONTRACT_ADDRESS $NEW_CODE_ID 
 ````
 
 ## Set Admin
+
+Admin is the entity that can modify the contract. If it was set during instantiation,
+you don't even need a governance vote to modify the contract (like ethereum proxy libraries).
 
 A live contract's admin can be changed later with another voting:
 
