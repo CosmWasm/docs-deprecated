@@ -81,8 +81,8 @@ You need some tokens in your address to interact. If you are using local node yo
 step. Requesting tokens from faucet:
 
 ```sh
-JSON=$(jq -n --arg addr $(coral keys show -a fred) '{"ticker":"COSM","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
-JSON=$(jq -n --arg addr $(coral keys show -a thief) '{"ticker":"COSM","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(coral keys show -a fred) '{"ticker":"SHELL","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(coral keys show -a thief) '{"ticker":"SHELL","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
 ```
 
 ## Setup Node REPL

@@ -18,7 +18,8 @@ coral query wasm list-code
 
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(coral tx wasm store contract.wasm --from fred --gas 900000 -y)
+RES=$(coral tx wasm store contract.wasm --from fred \
+    --gas-prices="0.025ushell" --gas="auto" --gas-adjustment="1.2" -y)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
@@ -40,7 +41,7 @@ will allow fred to control payout and upon release, the funds go to bob.
 # instantiate contract and verify
 INIT=$(jq -n --arg fred $(coral keys show -a fred) --arg bob $(coral keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 coral tx wasm instantiate $CODE_ID "$INIT" \
-    --from fred --amount=50000ucosm  --label "escrow 1" \
+    --from fred --amount=50000ushell  --label "escrow 1" \
     --gas-prices="0.025ushell" --gas="auto" --gas-adjustment="1.2" -y
 
 # check the contract state (and account balance)
@@ -48,7 +49,7 @@ coral query wasm list-contract-by-code $CODE_ID
 CONTRACT=$(coral query wasm list-contract-by-code $CODE_ID | jq -r '.[0].address')
 echo $CONTRACT
 
-# we should see this contract with 50000ucosm
+# we should see this contract with 50000ushell
 coral query wasm contract $CONTRACT
 coral query account $CONTRACT
 
