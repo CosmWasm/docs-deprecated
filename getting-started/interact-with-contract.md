@@ -83,7 +83,7 @@ that is not the verifier, then using the proper key to release.
 APPROVE='{"approve":{"quantity":[{"amount":"50000","denom":"ushell"}]}}'
 coral tx wasm execute $CONTRACT "$APPROVE" \
     --from thief \
-    -gas-prices="0.025ushell" --gas="auto" --gas-adjustment="1.2" -y
+    --gas-prices="0.025ushell" --gas="auto" --gas-adjustment="1.2" -y
 
 # looking at the logs should show: "execute wasm contract failed: Unauthorized"
 # and bob should still be broke (and broken showing the account does not exist Error)
@@ -92,7 +92,7 @@ coral query account $(coral keys show bob -a)
 # but succeeds when fred tries
 coral tx wasm execute $CONTRACT "$APPROVE" \
     --from fred \
-    -gas-prices="0.025ushell" --gas="auto" --gas-adjustment="1.2" -y
+    --gas-prices="0.025ushell" --gas="auto" --gas-adjustment="1.2" -y
 
 coral query account $(coral keys show bob -a)
 
