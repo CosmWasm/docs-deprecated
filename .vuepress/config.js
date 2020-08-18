@@ -41,6 +41,11 @@ module.exports = {
               path: "/testnets",
               directory: true,
             },
+            {
+              title: "GaiaFlex",
+              path: "/gaiaflex",
+              directory: true,
+            },
           ]
         },
         {
