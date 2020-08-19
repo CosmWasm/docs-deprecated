@@ -79,6 +79,11 @@ You could use this later to recover, or use the same mnemonic to import the key 
 useOptions(coralnetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
 ```
 
+::: warning
+This command saves the key to `~/.coral.key` encrypted. If you forget the password, either delete it or pass a
+`filename` along with a password to create a new key.
+:::
+
 Also, try this with a invalid password and see how it fails.
 
 Now that you feel a bit more secure about your keys (and ability to load them later), let's get into working with
