@@ -13,6 +13,11 @@ module.exports = {
     logo: {
       src: "/logo/SVG/CosmWasm Logo.svg",
     },
+    algolia: {
+      id: "BH4D9OD16A",
+      key: "c35640e5e39b1d586561c7c0097cede4",
+      index: "cosmwasm_docs"
+    },
     topbar: {
       banner: false
     },
