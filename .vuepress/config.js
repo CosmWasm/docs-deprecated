@@ -77,8 +77,17 @@ module.exports = {
           title: "Plus Contracts",
           children: [
             {
+              title: "Overview",
+              path: "/cw-plus/overview",
+            },
+            {
               title: "CW20",
               path: "/cw-plus/cw20",
+              directory: true,
+            },
+            {
+              title: "CW1",
+              path: "/cw-plus/cw1",
               directory: true,
             },
           ]
