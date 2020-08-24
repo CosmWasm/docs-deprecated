@@ -15,7 +15,7 @@ module.exports = {
     },
     algolia: {
       id: "BH4D9OD16A",
-      key: "c35640e5e39b1d586561c7c0097cede4",
+      key: "abeca9781b806ca955a7e0f1ee95d003",
       index: "cosmwasm_docs"
     },
     topbar: {
