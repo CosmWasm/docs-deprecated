@@ -1,6 +1,11 @@
 module.exports = {
   theme: "cosmos",
   title: "CosmWasm Documentation",
+  locales: {
+    "/": {
+      lang: "en-US"
+    },
+  },
   head: [
     ['link', { rel: 'icon', href: '/logo/SVG/CosmWasm Favicon.svg' }]
   ],
@@ -10,7 +15,6 @@ module.exports = {
     repo: "CosmWasm/docs2",
     docsRepo: "CosmWasm/docs2",
     docsDir: "docs",
-    base: process.env.VUEPRESS_BASE || "/",
     logo: {
       src: "/logo/SVG/CosmWasm Logo.svg",
     },
