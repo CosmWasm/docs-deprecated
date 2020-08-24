@@ -62,15 +62,20 @@ module.exports = {
               directory: true,
             },
             {
-              title: "Using Smart Contracts",
-              path: "/learn/using-contracts",
-              directory: true,
-            },
-            {
               title: "Name Service",
               path: "/learn/name-service",
               directory: true,
-            }
+            },
+          ]
+        },
+        {
+          title: "Plus Contracts",
+          children: [
+            {
+              title: "CW20",
+              path: "/cw-plus/cw20",
+              directory: true,
+            },
           ]
         },
         {
