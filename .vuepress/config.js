@@ -7,9 +7,10 @@ module.exports = {
   themeConfig: {
     custom: true,
     editLinks: true,
-    repo: "CosmWasm/docs",
-    docsRepo: "CosmWasm/docs",
+    repo: "CosmWasm/docs2",
+    docsRepo: "CosmWasm/docs2",
     docsDir: "docs",
+    base: process.env.VUEPRESS_BASE || "/",
     logo: {
       src: "/logo/SVG/CosmWasm Logo.svg",
     },
@@ -188,5 +189,11 @@ module.exports = {
         }
       ]
     }
-  }
+  },
+  plugins: [
+    "sitemap",
+    {
+      hostname: "https://docs.cosmwasm.com"
+    }
+  ]
 }
