@@ -35,10 +35,12 @@ Upload the code and the contract:
 
 ```ts
 // contract is already uploaded on coralnet: codeId -> 12
-// const codeId = await factory.upload();
 const { address } = await client.getAccount()
-// contract.contractAddress -> 'coral1267wq2zk22kt5juypdczw3k4wxhc4z47mug9fd'
 const contract = await factory.instantiate(12, { admins: [address], mutable: true}, "My Gift to a Friend")
+
+// print out contract.contractAddress for later
+contract.contractAddress
+// address -> 'coral1267wq2zk22kt5juypdczw3k4wxhc4z47mug9fd'
 ```
 
 We created a contract from a code with only `address` as admin. Update admins
@@ -69,6 +71,11 @@ contract.freeze()
 Let's give some allowance to your friends account, so he can buy a lambo:
 
 ```ts
+// lets pour some money to the account
+client.sendTokens(contractAddress, [{denom: "ushell", amount: "1000000"}])
+// verify tokens are transferred
+client.getAccount(contractAddress)
+
 contract.increaseAllowance(friendAddr, {denom: "ushell", amount: "90000"})
 contract.allowance(friendAddr)
 ```
