@@ -1,4 +1,5 @@
 ---
+title: Spec
 order: 1
 ---
 
