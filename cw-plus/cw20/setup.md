@@ -1,6 +1,6 @@
 ---
 title: Setup your Node Client
-order: 1
+order: 2
 ---
 
 # Introduction

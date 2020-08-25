@@ -1,19 +1,24 @@
 ---
-title: Advanced Usage
-order: 3
+title: Advanced Tips
+order: 2
 ---
 
-# Advanced Usage
+# Advanced REPL tips
 
-Now that you have gotten the hang of creating and using a CW20 token contract,
-and are starting to appreciate the power and ease of use of the repl over shell
-scripting, let's dig in a bit deeper of some advanced functions you can use
+::: danger
+You must read [cw20 tutorial](./cw-plus/cw20) first. This section builds on
+top of it.
+:::
+
+You got your hands dirty with Node REPL. Now let's dig in a bit deeper of some
+advanced functions you can use.
 
 ## Interactive Discovery
 
-So far you have been cut-and-pasting commands I have been telling you. But what else
-can you do with this contract? Luckily Javascript has some nice introspection. And we
-added some extra bonuses there. Just type `mine` in the REPL and see the list of methods:
+So far you have been cut-and-pasting commands in the tutorials when using
+node repl. But what else can you do with this contract? Luckily Javascript
+has some nice introspection. And, we added some extra bonuses there. Just type
+`mine` in the REPL and see the list of methods:
 
 ```
 >> mine
