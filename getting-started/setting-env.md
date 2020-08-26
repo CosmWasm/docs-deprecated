@@ -126,7 +126,7 @@ If you are interested in running your local network you can use the script below
 
 ```sh
 # initialize wasmd configuration files
-wasmd init localnet
+wasmd init localnet --chain-id localnet
 
 # setup local node
 wasmcli config chain-id localnet
