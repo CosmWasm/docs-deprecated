@@ -125,28 +125,36 @@ client.getAccount()
 If you are interested in running your local network you can use the script below:
 
 ```sh
-# initialize wasmd configuration files
-wasmd init localnet --chain-id localnet
+# default home is ~/.wasmd
+# if you want to setup multiple apps on your local make sure to change this value
+APP_HOME="~/.wasmd"
+CLI_HOME="~/.wasmcli"
 
-# setup local node
-wasmcli config chain-id localnet
-wasmcli config trust-node true
-wasmcli config node http://localhost:26657
-wasmcli config output json
+# initialize wasmd configuration files
+wasmd init localnet --chain-id localnet --home ${APP_HOME}
+
+# add minimum gas prices config to app configuration file
+sed -i -r 's/minimum-gas-prices = ""/minimum-gas-prices = "0.025ucosm"/' ${APP_HOME}/config/app.toml
+
+# setup client
+wasmcli config chain-id localnet --home ${CLI_HOME}
+wasmcli config trust-node true --home ${CLI_HOME}
+wasmcli config node http://localhost:26657 --home ${CLI_HOME}
+wasmcli config output json --home ${CLI_HOME}
 
 # add your wallet addresses to genesis
-wasmd add-genesis-account $(wasmcli keys show -a fred) 10000000000ucosm,10000000000stake
-wasmd add-genesis-account $(wasmcli keys show -a thief) 10000000000ucosm,10000000000stake
+wasmd add-genesis-account $(wasmcli keys show -a fred) 10000000000ucosm,10000000000stake --home ${APP_HOME}
+wasmd add-genesis-account $(wasmcli keys show -a thief) 10000000000ucosm,10000000000stake --home ${APP_HOME}
 
 # add fred's address as validator's address
-wasmd gentx --name fred
+wasmd gentx --name fred --home ${APP_HOME}
 
 # collect gentxs to genesis
-wasmd collect-gentxs
+wasmd collect-gentxs --home ${APP_HOME}
 
 # validate the genesis file
-wasmd validate-genesis
+wasmd validate-genesis --home ${APP_HOME}
 
 # run the node
-wasmd start
+wasmd start --home ${APP_HOME}
 ```
