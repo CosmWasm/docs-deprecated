@@ -14,7 +14,7 @@ module.exports = {
     editLinks: true,
     repo: "CosmWasm/docs2",
     docsRepo: "CosmWasm/docs2",
-    docsDir: "docs",
+    docsDir: "/",
     logo: {
       src: "/logo/SVG/CosmWasm Logo.svg",
     },
