@@ -71,6 +71,10 @@ module.exports = {
               path: "/learn/name-service",
               directory: true,
             },
+            {
+              title: "Videos and Workshops",
+              path: "/learn/videos-workshops",
+            },
           ]
         },
         {
