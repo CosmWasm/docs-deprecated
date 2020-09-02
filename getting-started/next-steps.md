@@ -11,6 +11,8 @@ put a backdoor that enables a thief to steal funds. If you want a guided tutoria
 contract from start to finish, check out the [name service
 tutorial](../tutorials/name-service/intro).
 
+We curated some video and workshop resources you can take a look at: [Videos and Workshops](../learn/videos-workshops)
+
 If you feel you understand enough (and have prior experience with rust), feel free to grab
 [`cosmwasm-template`](https://github.com/CosmWasm/cosmwasm-template) and use that as a configured
 project to start modifying. Do not clone the repo, but rather follow the
