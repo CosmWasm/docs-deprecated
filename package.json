@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CosmWasm/docs2.git"
+    "url": "git+https://github.com/CosmWasm/docs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CosmWasm/docs2/issues"
+    "url": "https://github.com/CosmWasm/docs/issues"
   },
-  "homepage": "https://github.com/CosmWasm/docs2",
+  "homepage": "https://github.com/CosmWasm/docs",
   "dependencies": {
     "vuepress-theme-cosmos": "^1.0.169"
   },

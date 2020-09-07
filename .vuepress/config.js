@@ -12,8 +12,8 @@ module.exports = {
   themeConfig: {
     custom: true,
     editLinks: true,
-    repo: "CosmWasm/docs2",
-    docsRepo: "CosmWasm/docs2",
+    repo: "CosmWasm/docs",
+    docsRepo: "CosmWasm/docs",
     docsDir: "/",
     logo: {
       src: "/logo/SVG/CosmWasm Logo.svg",
@@ -197,7 +197,7 @@ module.exports = {
             {
               title: "Contributing to the docs",
               url:
-                "https://github.com/CosmWasm/docs2/blob/master/DOCS_README.md"
+                "https://github.com/CosmWasm/docs/blob/master/DOCS_README.md"
             },
             {
               title: "Source code on GitHub",
