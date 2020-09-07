@@ -9,7 +9,7 @@ possible, limited only by the wasm code you upload and the json messages you sen
 [Hijack Escrow tutorial](../learn/hijack-escrow/intro.md) where you will edit a smart contract to
 put a backdoor that enables a thief to steal funds. If you want a guided tutorial to build a
 contract from start to finish, check out the [name service
-tutorial](../tutorials/name-service/intro).
+tutorial](../learn/name-service/intro).
 
 We curated some video and workshop resources you can take a look at: [Videos and Workshops](../learn/videos-workshops)
 

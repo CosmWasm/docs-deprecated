@@ -57,7 +57,7 @@ pub struct InitMsg {
 }
 ```
 
-Note that we use `CanonicalAddr`, which is the binary representation and unchanging over the lifetime of the chain, for storage inside `State`, while we use `HumanAddr`, which is the typical cli format (eg bech32 encoding), for messages and anything that interacts with the user. There is [more info on addresses here](../architecture/addresses).
+Note that we use `CanonicalAddr`, which is the binary representation and unchanging over the lifetime of the chain, for storage inside `State`, while we use `HumanAddr`, which is the typical cli format (eg bech32 encoding), for messages and anything that interacts with the user. There is [more info on addresses here](../../architecture/addresses).
 
 `Option<u64>` is a way of telling rust this field may be missing. It may either have a value, like `Some(123456)` or
 be `None`. This means the init message may omit those fields (or pass them as `null`) and we don't need to use some
