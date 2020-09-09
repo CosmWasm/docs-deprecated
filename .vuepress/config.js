@@ -117,7 +117,7 @@ module.exports = {
             },
             {
               title: "Blog",
-              path: "https://www.cosmwasm.com/blog/"
+              path: "https://medium.com/confio"
             }
           ]
         }
