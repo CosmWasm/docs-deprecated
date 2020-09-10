@@ -16,6 +16,11 @@ or if they try to proxy any other message type, then the attempt will be rejecte
 Admin can add an allowance for an account during init msg broadcast or after
 init.
 
+The contract consists permissioning logic that allows and disallows specified keys to execute
+specific messages. For now these messages are staking messages (covers _Delegate, Undelegate, Redelegate, Withdraw_ for now),
+but it is just few lines of code to add new message types. Allowance and permission checks works separately, meaning a subkey can have allowance to spend tokens,
+but no permissioned message execution and vice versa.
+
 ## Contract demo
 
 First, initialize node repl:
@@ -68,6 +73,8 @@ contract.updateAdmins([address])
 contract.freeze()
 ```
 
+### Allowance
+
 Let's give some allowance to your friends account, so he can buy a lambo:
 
 ```ts
@@ -100,6 +107,25 @@ contract.decreaseAllowance(randomAddress, {denom: "ushell", amount: "69999"}, { 
 After these operations he will only have _1 ushell_ to spend. The prank's
 best part is `at_height` field. After height 40000 his allowance will become
 inactive meaning he can't spend the tokens anymore.
+
+### Permissions
+
+Initially keys do not have any permission to send permissioned messages and needs to be set key basis:
+
+```ts
+let permissions: Permissions = { delegate: true, undelegate: false, redelegate: true, withdraw: true}
+
+contract.setStakingPermissions(randomAddress, permissions)
+
+let dmsg: DelegateMsg = {staking: {delegate: {validator:"coralvaloper1hf50trj7plz2sd8cmcvn7c8ruh3tjhc2uch4gp", amount:{denom:"ureef",amount:"999"}}}}
+contract.execute([dmsg])
+// will be approved
+
+let unmsg: UndelegateMsg = {staking: {undelegate: {validator:"coralvaloper1hf50trj7plz2sd8cmcvn7c8ruh3tjhc2uch4gp", amount:{denom:"ureef",amount:"999"}}}}
+contract.execute([unmsg])
+// will be rejected
+
+```
 
 ## Contribution
 
