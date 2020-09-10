@@ -29,6 +29,10 @@ First, initialize node repl:
 npx @cosmjs/cli --init  https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw1-subkeys/helpers.ts
 ```
 
+::: warning
+Helper code is compatible with cw1-subkeys smart contract version **v0.2.1**
+:::
+
 Load wallet:
 
 ```ts
