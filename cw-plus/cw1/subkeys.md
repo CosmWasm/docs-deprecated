@@ -26,7 +26,7 @@ but no permissioned message execution and vice versa.
 First, initialize node repl:
 
 ```shell script
-npx @cosmjs/cli --init  https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw1-subkeys/helpers.ts
+npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/v0.2.1/contracts/cw1-subkeys/helpers.ts
 ```
 
 ::: warning
@@ -43,6 +43,9 @@ const factory = CW1(client);
 Upload the code and the contract:
 
 ```ts
+// upload using code below
+// if the code is already uploaded use code id to initiate
+const codeId = await factory.upload()
 // contract is already uploaded on coralnet: codeId -> 12
 const { address } = await client.getAccount()
 const contract = await factory.instantiate(12, { admins: [address], mutable: true}, "My Gift to a Friend")
