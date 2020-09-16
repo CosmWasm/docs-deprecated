@@ -67,6 +67,11 @@ module.exports = {
               directory: true,
             },
             {
+              title: "Simple Option",
+              path: "/learn/simple-option",
+              directory: true,
+            },
+            {
               title: "Name Service",
               path: "/learn/name-service",
               directory: true,
