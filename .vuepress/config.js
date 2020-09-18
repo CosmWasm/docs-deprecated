@@ -62,13 +62,13 @@ module.exports = {
           title: "Learn",
           children: [
             {
-              title: "Hijack Escrow",
-              path: "/learn/hijack-escrow",
+              title: "Simple Option",
+              path: "/learn/simple-option",
               directory: true,
             },
             {
-              title: "Simple Option",
-              path: "/learn/simple-option",
+              title: "Hijack Escrow",
+              path: "/learn/hijack-escrow",
               directory: true,
             },
             {

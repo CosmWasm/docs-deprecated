@@ -55,9 +55,17 @@ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 All good.
 
-[src/lib.rs](https://github.com/CosmWasm/simple-option/blob/master/src/lib.rs) file contains wasm bindings. Wraps smart contract *(handle, init, query)* functions around rust functions. If you are not doing advanced wasm tweaking, you don't touch it.
+::: tip
+Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
+:::
+
+[src/lib.rs](https://github.com/CosmWasm/simple-option/blob/master/src/lib.rs) file contains wasm bindings. Wraps smart contract *(handle, init, query)* functions around rust functions. If you are not doing advanced wasm tweaking, don't touch it.
 
 ## Messages
+
+::: tip
+Timecode [https://vimeo.com/457702442#t=1m46s](https://vimeo.com/457702442#t=1m46s)
+:::
 
 Development begins in [src/msg.rs](https://github.com/CosmWasm/simple-option/blob/master/src/msg.rs) which contains the input data structures of the smart contract.
 
@@ -77,8 +85,10 @@ pub struct InitMsg {
 
 `#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]` implements specified traits for this structure using macros. More read [Rust docs / Derive](https://doc.rust-lang.org/stable/rust-by-example/trait/derive.html)
 
+::: warning
 * _Owner_, _creator_ and _collateral_ comes from message transaction context, meaning owner and creator is the address signed the tx and collateral is funds sent along the message. 
 * _counter_offer_ is [strike price](https://www.investopedia.com/terms/s/strikeprice.asp).
+:::
 
 ### HandleMsg
 
@@ -97,7 +107,7 @@ pub enum HandleMsg {
 }
 ```
 
-::: info
+::: tip
 Canonical and Human Addresses
 Canonical Addresses represent binary format of crypto addresses.
 Human Addresses on the other hand are great for the UI. They are always a subset of ascii text, and often contain security checks - such as chain-prefix in Bech32, e.g. cosmos1h57760w793q6vh06jsppnqdkc4ejcuyrrjxnke
@@ -120,6 +130,10 @@ pub enum QueryMsg {
 ```
 
 ## State
+
+::: tip
+Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
+:::
 
 [State](https://github.com/CosmWasm/simple-option/blob/master/src/state.rs) handles state of the database where smart contract data is stored and accessed. 
 
@@ -160,6 +174,10 @@ pub type ConfigResponse = State;
 
 
 ## Contract Handlers
+
+::: tip
+Timecode [https://vimeo.com/457702442#t=11m12s](https://vimeo.com/457702442#t=11m12s)
+:::
 
 Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind them together in [contract.rs](https://github.com/CosmWasm/simple-option/blob/master/src/contract.rs).
 
@@ -202,11 +220,15 @@ pub fn init<S: Storage, A: Api, Q: Querier>(
 ) -> StdResult<InitResponse>
 ```
 
-You will see this signature all over CosmWasm handler functions. Execution context passed in to handler using Deps, which contains Storage, API and Querier functions; Env, which contains block, message and contract info; and msg, well, no explanation needed. Makes it all simpler when testing.
+You will see this signature all over CosmWasm handler functions. Execution context passed in to handler using Deps, which contains Storage, API and Querier functions; Env, which contains block, message and contract info; and msg, well, no explanation needed.
 
 `StdResult<T>` is a type that represents either success ([`Ok`]) or failure ([`Err`]). If the execution is successful returns `T` type otherwise returns `StdError`. Useful.
 
 ### Handle
+
+::: tip
+Timecode [https://vimeo.com/457702442#t=15m55s](https://vimeo.com/457702442#t=15m55s)
+:::
 
 `handle` method routes messages to functions. It is similar to Cosmos SDK handler design.
 
@@ -322,7 +344,7 @@ pub fn handle_execute<S: Storage, A: Api, Q: Querier>(
 }
 ```
 
-#### Query
+### Query
 
 This contracts query method is very simple, only configuration query. 
 For more complex queries check [cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus/) contracts. 
@@ -397,4 +419,24 @@ docker run --rm -v "$(pwd)":/code \
   cosmwasm/rust-optimizer:0.9.0
 ```
 
-You want to use the command above when getting the code to be deployed to the chain.
+You want to use the command above before deploying to the chain.
+
+### Schema
+
+We can also generate JSON Schemas that serve as a guide for anyone trying to use the contract. This is mainly for documentation purposes, but if you click on "Open TypeScript definitions" in the code explorer, you can see how we use those to generate TypeScript bindings.
+
+```sh
+cargo schema
+```
+
+You can see the generated schemas under [simple-option/schema](https://github.com/CosmWasm/simple-option/tree/master/schema)
+
+```
+schema
+├── config_response.json
+├── handle_msg.json
+├── init_msg.json
+└── query_msg.json
+```
+
+Go ahead and explore schemas.

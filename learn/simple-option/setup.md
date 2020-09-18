@@ -4,14 +4,11 @@ order: 2
 
 # Setup
 
-<iframe src="https://player.vimeo.com/video/457486858" width="640" height="361" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<iframe src="https://player.vimeo.com/video/457712351" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 ## Coding Environment
 
 ### Rust and IDE
-
-<iframe src="https://player.vimeo.com/video/457712351" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
 This section is a summary of [Getting Started / Installation and Setting Up Environment](../../getting-started/installation). You can go to the doc, setup rust and preferred IDE then and come back here. We recommend using Intellij IDEA.
 
 ## Project Starter
