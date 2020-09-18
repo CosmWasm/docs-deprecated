@@ -97,6 +97,16 @@ pub enum HandleMsg {
 }
 ```
 
+::: info
+Canonical and Human Addresses
+Canonical Addresses represent binary format of crypto addresses.
+Human Addresses on the other hand are great for the UI. They are always a subset of ascii text, and often contain security checks - such as chain-prefix in Bech32, e.g. cosmos1h57760w793q6vh06jsppnqdkc4ejcuyrrjxnke
+
+```canonicalize(humanize(canonical_addr)) == canonical_addr```
+
+For more details: [Names and Addresses](https://docs.cosmwasm.com/architecture/addresses.html)
+:::
+
 ### QueryMsg
 
 Smart contract state querying is branched using `QueryEnum`. We will implement smart contract `Config` query later.
@@ -192,7 +202,7 @@ pub fn init<S: Storage, A: Api, Q: Querier>(
 ) -> StdResult<InitResponse>
 ```
 
-You will see this signature all over CosmWasm handler functions. Execution context passed in to handler using Deps, which contains Storage, API and Querier functions; Env, which contains block, message and contract info; and msg, well, no explanation needed.
+You will see this signature all over CosmWasm handler functions. Execution context passed in to handler using Deps, which contains Storage, API and Querier functions; Env, which contains block, message and contract info; and msg, well, no explanation needed. Makes it all simpler when testing.
 
 `StdResult<T>` is a type that represents either success ([`Ok`]) or failure ([`Err`]). If the execution is successful returns `T` type otherwise returns `StdError`. Useful.
 
@@ -311,3 +321,80 @@ pub fn handle_execute<S: Storage, A: Api, Q: Querier>(
     Ok(res.into())
 }
 ```
+
+#### Query
+
+This contracts query method is very simple, only configuration query. 
+For more complex queries check [cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus/) contracts. 
+If you are starting to learn from zero, now you have 20 minutes of cosmwasm experience. Go ahead skim plus contracts to see the simplicity. 
+
+```rs
+pub fn query<S: Storage, A: Api, Q: Querier>(
+    deps: &Extern<S, A, Q>,
+    msg: QueryMsg,
+) -> StdResult<Binary> {
+    match msg {
+        /*
+         * Client will parse binary
+         */
+        QueryMsg::Config {} => to_binary(&query_config(deps)?),
+    }
+}
+
+fn query_config<S: Storage, A: Api, Q: Querier>(
+    deps: &Extern<S, A, Q>,
+) -> StdResult<ConfigResponse> {
+    let state = config_read(&deps.storage).load()?;
+    Ok(state)
+}
+```
+
+### Build
+
+To simply build the code and see if it works:
+
+```sh
+cargo build
+```
+
+### Tooling
+
+It is good to keep the same coding style across smart contracts for readability:
+
+```sh
+cargo fmt
+```
+
+Normally Rust compiler does it's job great, leads you to the solution of errors shows warnings etc.
+But we can give the code another round of linting.
+
+```sh
+cargo clippy -- -D warnings
+```
+
+### Compile
+
+This section compiles key commands from [Compiling Contract](https://docs.cosmwasm.com/getting-started/compile-contract.html) doc. For more detailed read proceed to the documentation.
+
+Basic compilation:
+
+```sh
+cargo wasm
+```
+
+Optimized compilation:
+
+```sh
+RUSTFLAGS='-C link-arg=-s' cargo wasm
+```
+
+Reproducible and optimized compilation:
+
+```sh
+docker run --rm -v "$(pwd)":/code \
+  --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
+  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
+  cosmwasm/rust-optimizer:0.9.0
+```
+
+You want to use the command above when getting the code to be deployed to the chain.
