@@ -59,7 +59,7 @@ All good.
 Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
 :::
 
-[src/lib.rs](https://github.com/CosmWasm/simple-option/blob/master/src/lib.rs) file contains wasm bindings. Wraps smart contract *(handle, init, query)* functions around rust functions. If you are not doing advanced wasm tweaking, don't touch it.
+[src/lib.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/lib.rs) file contains wasm bindings. Wraps smart contract *(handle, init, query)* functions around rust functions. If you are not doing advanced wasm tweaking, don't touch it.
 
 ## Messages
 
@@ -67,11 +67,11 @@ Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
 Timecode [https://vimeo.com/457702442#t=1m46s](https://vimeo.com/457702442#t=1m46s)
 :::
 
-Development begins in [src/msg.rs](https://github.com/CosmWasm/simple-option/blob/master/src/msg.rs) which contains the input data structures of the smart contract.
+Development begins in [src/msg.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs) which contains the input data structures of the smart contract.
 
 ### InitMsg
 
-We will begin with [`InitMsg`](https://github.com/CosmWasm/simple-option/blob/master/src/msg.rs#L7-L12). This struct has the initial values that initializes smart contract from the code and feeds in the data required for logic setup.
+We will begin with [`InitMsg`](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs#L7-L12). This struct has the initial values that initializes smart contract from the code and feeds in the data required for logic setup.
 
 ```rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -135,7 +135,7 @@ pub enum QueryMsg {
 Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
 :::
 
-[State](https://github.com/CosmWasm/simple-option/blob/master/src/state.rs) handles state of the database where smart contract data is stored and accessed. 
+[State](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/state.rs) handles state of the database where smart contract data is stored and accessed. 
 
 You have two options when modeling state:
 1. **Singleton**: contract saves only one instance of the structure using unique db key. We will use this in this tutorial.
@@ -179,7 +179,7 @@ pub type ConfigResponse = State;
 Timecode [https://vimeo.com/457702442#t=11m12s](https://vimeo.com/457702442#t=11m12s)
 :::
 
-Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind them together in [contract.rs](https://github.com/CosmWasm/simple-option/blob/master/src/contract.rs).
+Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind them together in [contract.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs).
 
 ### Init
 
@@ -429,7 +429,7 @@ We can also generate JSON Schemas that serve as a guide for anyone trying to use
 cargo schema
 ```
 
-You can see the generated schemas under [simple-option/schema](https://github.com/CosmWasm/simple-option/tree/master/schema)
+You can see the generated schemas under [simple-option/schema](https://github.com/CosmWasm/cosmwasm-examples/tree/master/simple-option/schema)
 
 ```
 schema

@@ -16,7 +16,7 @@ mod tests {
     use cosmwasm_std::{coins, log, CosmosMsg};
 ```
 
-This is how testing in Rust begins. [Code reference](https://github.com/CosmWasm/simple-option/blob/master/src/contract.rs#L155-L159). You can keep test and code in the same or separate files.
+This is how testing in Rust begins. [Code reference](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs#L155-L159). You can keep test and code in the same or separate files.
 
 ## Test Initialization
 
