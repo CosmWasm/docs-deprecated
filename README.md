@@ -4,6 +4,7 @@ description: CosmWasm is a new smart contracting platform built for the cosmos e
 footer:
   newsletter: false
 aside: true
+order: 1
 ---
 
 # CosmWasm Documentation
@@ -14,13 +15,13 @@ CosmWasm is a new smart contracting platform built for the cosmos ecosystem. If 
 
 CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a blockchain using the Cosmos SDK can quickly and easily add CosmWasm smart contracting support to their chain, without adjusting existing logic. We also provide a sample binary of CosmWasm integrated into the `gaiad` binary, called [`wasmd`](https://github.com/CosmWasm/wasmd), so you can launch a new smart-contract enabled blockchain out of the box, using documented and tested tooling and the same security model as the Cosmos Hub.
 
-You will need a running blockchain to host your contracts and use them from an app. We will explain how to [set up a local "dev net"](../getting-started/using-the-sdk.md) in a later section. And plan to soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo and to share their contract with others.
+You will need a running blockchain to host your contracts and use them from an app. We will explain how to [connect to a testnet](/getting-started/setting-env#setting-up-environment) or [set up a local "dev net"](/getting-started/setting-env#run-local-node-optional) in a later section. And plan to soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo and to share their contract with others.
 
 ## Sections
 
-[Getting Started](/getting-started/intro.html) dives you into hands-on training. It gently leads you through modifying, deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get acquainted with all the aspects of the system, without too much hard work coding.
+[Getting Started](/getting-started/intro) dives you into hands-on training. It gently leads you through modifying, deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get acquainted with all the aspects of the system, without too much hard work coding.
 
-[The Architecture section](/architecture/multichain.html) explains much of the high-level design and architecture of CosmWasm. Before you start designing systems, it is good to understand the mental model and capabilities of the system. If you just want to get your hands dirty with working code, you can skip this section for now and come back later when you are ready to ponder design.
+[The Architecture section](/architecture/multichain) explains much of the high-level design and architecture of CosmWasm. Before you start designing systems, it is good to understand the mental model and capabilities of the system. If you just want to get your hands dirty with working code, you can skip this section for now and come back later when you are ready to ponder design.
 
 [The Testnets section](/testnets/build-requirements.md) is a good first point if you are searching for a live network to test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined the testnets**", said no one ever 😉
 

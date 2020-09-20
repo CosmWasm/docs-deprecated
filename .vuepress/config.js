@@ -212,6 +212,9 @@ module.exports = {
     "sitemap",
     {
       hostname: "https://docs.cosmwasm.com"
-    }
+    },
+    "check-md", {
+      pattern: "**/*.md"
+    },
   ]
 }

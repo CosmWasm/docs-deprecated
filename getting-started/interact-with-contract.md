@@ -4,8 +4,8 @@ order: 5
 
 # Uploading and Interacting
 
-We have the binary ready. Now it is time to see some wasm action. You can use [Go CLI](#GO-CLI) or
-[Node Console](#Node-Console) as you wish.
+We have the binary ready. Now it is time to see some wasm action. You can use [Go CLI](#go-cli) or
+[Node Console](#node-console) as you wish.
 
 ## GO CLI
 
@@ -102,7 +102,7 @@ coral query account $CONTRACT
 
 ## Node Console
 
-If you set up the Node Console / REPL in the [client setup section](./using-the-sdk), you can use
+If you set up the Node Console / REPL in the [client setup section](./setting-env#setup-node-repl), you can use
 that to deploy and execute your contract. I think you will find that JSON manipulation and parsing
 is a bit nicer in JavaScript than in Shell Script.
 
