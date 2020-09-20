@@ -82,7 +82,7 @@ Vote: ```gaiaflex tx gov vote 2 yes --from acc --gas auto --gas-prices "0.025umu
 
 ## Execute the contract
 
-Once the contracts is initiated, execution is same as in [CW20 tutorial](../learn/using-contracts) section.
+Once the contracts is initiated, execution is same as in [CW20 tutorial](../cw-plus/cw20/cw20).
 
 ## Migrating Contract
 
