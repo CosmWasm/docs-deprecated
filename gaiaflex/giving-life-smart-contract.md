@@ -24,7 +24,7 @@ response for later use:
 
 This is the signature of wasm code store submit proposal:
 
-```shell script
+```shell
 gaiaflex tx gov submit-proposal wasm-store [wasm file] \
   --source [source] --builder [builder] --title [text] \
   --description [text] --run-as [address] [flags]
@@ -47,7 +47,7 @@ Instantiate-everybody might make sense for a multisig (everyone makes their own)
 
 Sending proposal tx script:
 
-```shell script
+```shell
 export PROPOSAL_ID=$(gaiaflex tx gov submit-proposal wasm-store cw20_base.wasm \
     --source "https://crates.io/api/v1/crates/cw20-base/0.1.1/download" \
     --builder "cosmwasm/rust-optimizer:0.10.1" --deposit 100000umuon  \
@@ -60,7 +60,7 @@ export PROPOSAL_ID=$(gaiaflex tx gov submit-proposal wasm-store cw20_base.wasm \
 Now the clock is ticking for voting period to end.
 
 Vote using the command:
-```shell script
+```shell
 gaiaflex tx gov vote $PROPOSAL_ID yes --from acc
 ```
 
@@ -69,7 +69,7 @@ gaiaflex tx gov vote $PROPOSAL_ID yes --from acc
 Now the wasm code is stored to the chain after the voting period is ended and result is yes. A one more voting needs to be done
 to initiate the contract from the code with arguments.
 
-```shell script
+```shell
 INIT='{"name":"Golden Stars","symbol":"STAR","decimals":2,"initial_balances":[{"address":"cosmos1x200a23zc2acc22mmy9pu4fuacl79w0yj4leqr","amount":"10000"},{"address":"cosmos1lj0cuh34c5useycd2wl3puqfr57lxd39hn8qcv","amount":"10000"}],"mint":{"minter":"cosmos1lj0cuh34c5useycd2wl3puqfr57lxd39hn8qcv"}}'
 gaiaflex tx gov submit-proposal instantiate-contract $PROPOSAL_ID "$INIT" --label "Init Golden Stars token" \
     --admin  \
@@ -92,7 +92,7 @@ Note: this is an advanced feature, both on the contract design as well as govern
 
 Here is a code migration contract if contracts supports the feature.
 
-```shell script
+```shell
 gaiaflex tx gov submit-proposal migrate-contract $CONTRACT_ADDRESS $NEW_CODE_ID $MIGRATION_ARGS --title burner \
   --description "perform migration" --run-as $(gaiaflex keys show -a code-runner) \ --deposit 1000umuon  --from acc \
   --gas auto --gas-prices="0.025umuon"
@@ -105,7 +105,7 @@ you don't even need a governance vote to modify the contract (like ethereum prox
 
 A live contract's admin can be changed later with another voting:
 
-```shell script
+```shell
 gaiaflex tx gov submit-proposal set-contract-admin $CONTRACT_ADDRESS $NEW_ADMIN_ADDRESS --title "Update a contracts adming" \
   --description "such a description "--deposit 10000umuon --from acc --gas auto --gas-prices="0.025umuon"
 ```
@@ -114,7 +114,7 @@ gaiaflex tx gov submit-proposal set-contract-admin $CONTRACT_ADDRESS $NEW_ADMIN_
 
 And a contract can be adminless:
 
-```shell script
+```shell
 gaiaflex tx gov submit-proposal clear-contract-admin $CONTRACT_ADDRESS --title clear-admin --description "Cotnract is stable" \
   --deposit 10000umuon --from acc --gas auto --gas-prices="0.025umuon"
 ```

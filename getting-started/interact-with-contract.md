@@ -12,7 +12,7 @@ We have the binary ready. Now it is time to see some wasm action. You can use [G
 We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will
 upload the code to the blockchain. Afterwards, you can download the bytecode to verify it is proper:
 
-```bash
+```shell
 # see how many codes we have now
 coral query wasm list-code
 
@@ -37,7 +37,7 @@ diff contract.wasm download.wasm
 We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that
 will allow fred to control payout and upon release, the funds go to bob.
 
-```bash
+```shell
 # instantiate contract and verify
 INIT=$(jq -n --arg fred $(coral keys show -a fred) --arg bob $(coral keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 coral tx wasm instantiate $CODE_ID "$INIT" \
@@ -78,7 +78,7 @@ coral query wasm contract-state smart $CONTRACT '{}'
 Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key
 that is not the verifier, then using the proper key to release.
 
-```bash
+```shell
 # execute fails if wrong person
 APPROVE='{"approve":{"quantity":[{"amount":"50000","denom":"ushell"}]}}'
 coral tx wasm execute $CONTRACT "$APPROVE" \
@@ -108,7 +108,7 @@ is a bit nicer in JavaScript than in Shell Script.
 
 First, go to the cli directory and start up your console:
 
-```sh
+```shell
 npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
 ```
 

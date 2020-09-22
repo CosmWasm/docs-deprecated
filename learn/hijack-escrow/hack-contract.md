@@ -6,7 +6,7 @@ order: 2
 
 Now that you can compile and run tests, let's try to make some changes to the code and you can see if they work. If you didn't do this already in the last section, it is time to clone the examples repo and check out the escrow code:
 
-```bash
+```shell
 git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples/escrow
 git checkout escrow-0.6.0
@@ -231,7 +231,7 @@ Now, you can add the message handler. As a quick check, try running `cargo wasm`
 
 Once you are done, check that it compiles:
 
-```bash
+```shell
 cargo wasm
 ```
 

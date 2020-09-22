@@ -25,7 +25,7 @@ but no permissioned message execution and vice versa.
 
 First, initialize node repl:
 
-```shell script
+```shell
 npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/v0.2.1/contracts/cw1-subkeys/helpers.ts
 ```
 
