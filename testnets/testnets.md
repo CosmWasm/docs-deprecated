@@ -40,12 +40,18 @@ export FAUCET="https://faucet.coralnet.cosmwasm.com"
 export SEED_NODE="ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656"
 ```
 
-**IMPORTANT**:
->We have setup different executables for each testnet names after network names like: `corald/coral`, `gaiaflexd/gaiaflex`
+::: tip
+We have setup different executables for each testnet names after network names like: `corald/coral`, `gaiaflexd/gaiaflex`
+:::
+
 We will be using `coral` and `corald` network specific executables during this tutorial.
 
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
 `mkdir CosmWasm && cd CosmWasm && export CW_DIR=$(pwd)`
+
+::: warning
+Use go1.14 to compile `coral`/`corald`. Otherwise you will get prefix errors
+:::
 
 ```shell
 cd $CW_DIR
