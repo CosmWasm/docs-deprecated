@@ -29,7 +29,7 @@ Using Dockerfile is suggested.
 3. Build docker image `docker build . -t wasmd-docker`
 4. Extract the specific binaries from build environment:
 
-   ```sh
+   ```shell
    id=$(docker create wasmd-docker)
    docker cp $id:/usr/bin/wasmd .
    docker cp $id:/usr/bin/wasmcli .

@@ -38,13 +38,13 @@ Let's configure `coral` exec, point it to testnets, create wallet and ask tokens
 
 First source the coral network configurations to the shell:
 
-```sh
+```shell
 source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/defaults.env)
 ```
 
 Setup the client:
 
-```sh
+```shell
 coral config chain-id $CHAIN_ID
 coral config trust-node true
 
@@ -80,7 +80,7 @@ coral keys add thief
 You need some tokens in your address to interact. If you are using local node you can skip this
 step. Requesting tokens from faucet:
 
-```sh
+```shell
 JSON=$(jq -n --arg addr $(coral keys show -a fred) '{"ticker":"SHELL","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
 JSON=$(jq -n --arg addr $(coral keys show -a thief) '{"ticker":"SHELL","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
 ```
@@ -99,7 +99,7 @@ Full usage and installation [instructions are on the
 README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), also here are the source codes prepacked with
 network configurations you can use on-the-fly:
 
-```sh
+```shell
 ## CORALNET
 npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
 ```
@@ -124,7 +124,7 @@ client.getAccount()
 
 If you are interested in running your local network you can use the script below:
 
-```sh
+```shell
 # default home is ~/.wasmd
 # if you want to setup multiple apps on your local make sure to change this value
 APP_HOME="~/.wasmd"

@@ -22,7 +22,7 @@ First of all make sure you followed the installation steps in [build requirement
 
 Below is the [coralnet configuration](https://github.com/CosmWasm/testnets/tree/master/coralnet).
 
-```sh
+```shell
 export CHAIN_ID="cosmwasm-coral"
 export TESTNET_NAME="coralnet"
 export WASMD_VERSION="v0.10.0"
@@ -47,7 +47,7 @@ We will be using `coral` and `corald` network specific executables during this t
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
 `mkdir CosmWasm && cd CosmWasm && export CW_DIR=$(pwd)`
 
-```shell script
+```shell
 cd $CW_DIR
 git clone https://github.com/CosmWasm/wasmd
 cd wasmd
@@ -63,7 +63,7 @@ export PATH="${PATH}:$(pwd)/build"
 
 Initialize `coral` and generate validator account:
 
-```sh
+```shell
 coral config chain-id $CHAIN_ID
 coral config trust-node true
 coral config node $RPC
@@ -86,7 +86,7 @@ coral keys add mywallet
 
 ### Run corald Node
 
-```sh
+```shell
 export MONIKER=new_validator
 # initialize corald configuration
 corald init $MONIKER
@@ -118,7 +118,7 @@ For those interested in validator stack, here is a good reading source on valida
 
 **Note**: make sure your validator is synced before upgrading to validator
 
-```sh
+```shell
 coral tx staking create-validator \
   --amount=100000000ureef \
   --pubkey=$(corald tendermint show-validator) \
@@ -134,7 +134,7 @@ coral tx staking create-validator \
 
 ### Run the Light Client Daemon
 
-```sh
+```shell
 coral rest-server
 # if the node is running on another machine use:
 coral rest-server --node tcp://<host>:<port>
@@ -147,7 +147,7 @@ You need to have your address and informations defined in networks genesis file 
 Here is the script you can run to take care of it automatically. It uses `coral` [network specific executables](https://github.com/CosmWasm/testnets/tree/master/coralnet):
 :::
   
-```sh
+```shell
 cd $CW_DIR
 ## Fork github.com:CosmWasm/testnets to your account and clone.
 ## You cannot push directly to CosmWasm/testnets repo

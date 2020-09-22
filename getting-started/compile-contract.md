@@ -16,7 +16,7 @@ Let's download the repo in which we collect
 escrow contract that can hold some native tokens and gives the power to an arbiter to release them
 to a pre-defined beneficiary. First, clone the repo and try to build the wasm bundle:
 
-```bash
+```shell
 # get the code
 git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples/escrow
@@ -32,7 +32,7 @@ After this compiles, it should produce a file in
 is a release build, but not stripped of all unneeded code. To produce a much smaller version, you
 can run this which tells the compiler to strip all unused code out:
 
-```bash
+```shell
 RUSTFLAGS='-C link-arg=-s' cargo wasm
 ```
 
@@ -47,7 +47,7 @@ For production deployment, please use
 reproducible builds of cosmwasm smart contracts. It also does heavy optimization on the build size,
 using binary stripping and wasm-opt.
 
-```bash
+```shell
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
@@ -58,7 +58,7 @@ docker run --rm -v "$(pwd)":/code \
 
 Let's try running the unit tests:
 
-```bash
+```shell
 RUST_BACKTRACE=1 cargo unit-test
 ```
 

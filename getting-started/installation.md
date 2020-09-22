@@ -21,7 +21,7 @@ approach is to use `rustup` to maintain dependencies and handle updating multipl
 
 First, [install rustup](https://rustup.rs/). Once installed, make sure you have the wasm32 target:
 
-```bash
+```shell
 rustup default stable
 cargo version
 # If this is lower than 1.44.1+, update
@@ -48,7 +48,7 @@ the addition of the x/wasm module.
 
 If you intend to develop or edit a contract, you need wasmd.
 
-```sh
+```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
 # replace the v0.10.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
@@ -72,7 +72,7 @@ save you of the hassle of running a local network and speed up your developments
 `coral/corald` executables instead `wasmcli/wasmd` which are basically same executables just some extra configurations during
 compile time such as `Bech32` prefix.
 
-```sh
+```shell
 # clone wasmd repo
 git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
 # check out to coral compatibile version
