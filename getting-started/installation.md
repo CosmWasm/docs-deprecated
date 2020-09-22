@@ -72,6 +72,10 @@ save you of the hassle of running a local network and speed up your developments
 `coral/corald` executables instead `wasmcli/wasmd` which are basically same executables just some extra configurations during
 compile time such as `Bech32` prefix.
 
+::: warning
+Use go 1.14 for compiling `coral/corald` executables
+:::
+
 ```shell
 # clone wasmd repo
 git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
