@@ -8,7 +8,7 @@ order: 4
 
 At this point your code should be compling, altough we did not test if it works. You can deploy the code to the chain everytime when you make a change. But come on, your time is more valuable than that. Also good to keep the contract break-free and tested for future changes.
 
-```rs
+```rust
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -26,7 +26,7 @@ Timecode [https://vimeo.com/457705991#t=3m34s](https://vimeo.com/457705991#t=3m3
 
 For each test, test specific variables such as block time, state must be mocked. Write a function for easy setup.
 
-```rs
+```rust
 #[test]
 fn proper_initialization() {
     /*
@@ -65,7 +65,7 @@ Good we now have a test environment initializer. This is a very simple one, you 
 ### Mock Dependencies and Environment
 
 There are two important mocking tools we should improve on:
-```rs
+```rust
 /// All external requirements that can be injected for unit tests.
 /// It sets the given balance for the contract itself, nothing else
 pub fn mock_dependencies(
@@ -83,7 +83,7 @@ pub fn mock_dependencies(
 
 This sets up dependencies for testing such as storage, api, and querier.
 
-```rs
+```rust
 /// Just set sender and sent funds for the message. The rest uses defaults.
 /// The sender will be canonicalized internally to allow developers pasing in human readable senders.
 /// This is intended for use in test code only.
@@ -115,7 +115,7 @@ Timecode [https://vimeo.com/457705991#t=7m34s](https://vimeo.com/457705991#t=7m3
 
 ### Test Transfer Handler
 
-```rs
+```rust
 #[test]
 fn transfer() {
     let mut deps = mock_dependencies(20, &[]);
@@ -157,7 +157,7 @@ fn transfer() {
 Timecode [https://vimeo.com/457705991#t=14m21s](https://vimeo.com/457705991#t=14m21s)
 :::
 
-```rs
+```rust
 #[test]
 fn execute() {
     let mut deps = mock_dependencies(20, &[]);

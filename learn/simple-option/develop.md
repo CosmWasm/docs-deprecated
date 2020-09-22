@@ -73,7 +73,7 @@ Development begins in [src/msg.rs](https://github.com/CosmWasm/cosmwasm-examples
 
 We will begin with [`InitMsg`](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs#L7-L12). This struct has the initial values that initializes smart contract from the code and feeds in the data required for logic setup.
 
-```rs
+```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InitMsg {
     // owner and creator come from env
@@ -94,7 +94,7 @@ pub struct InitMsg {
 
 Contract execution is branched using `HandleMsg` enum. Each field defines a message and content of that message.
 
-```rs
+```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum HandleMsg {
@@ -121,7 +121,7 @@ For more details: [Names and Addresses](https://docs.cosmwasm.com/architecture/a
 
 Smart contract state querying is branched using `QueryEnum`. We will implement smart contract `Config` query later.
 
-```rs
+```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum QueryMsg {
@@ -141,7 +141,7 @@ You have two options when modeling state:
 1. **Singleton**: contract saves only one instance of the structure using unique db key. We will use this in this tutorial.
 2. **Structured store**: models can be structured and stored dynamically. You can form one-to-one, one-to-many and many-to-many relations with indexing and lookup functionality.
 
-```rs
+```rust
 // configuration instance key. config object will be saved under this key.
 pub static CONFIG_KEY: &[u8] = b"config";
 
@@ -186,7 +186,7 @@ Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind
 The init function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call.
 the first line parses the input from raw bytes into our contract-defined message. We then check if option is expired, then create the initial state. If expired, we return a generic contract error, otherwise, we store the state and return a success code:
 
-```rs
+```rust
 pub fn init<S: Storage, A: Api, Q: Querier>(
     deps: &mut Extern<S, A, Q>,
     env: Env,
@@ -212,7 +212,7 @@ pub fn init<S: Storage, A: Api, Q: Querier>(
 
 The function is simple as it looks. Option expiration date check, save the state, and return response.
 
-```rs
+```rust
 pub fn init<S: Storage, A: Api, Q: Querier>(
     deps: &mut Extern<S, A, Q>,
     env: Env,
@@ -232,7 +232,7 @@ Timecode [https://vimeo.com/457702442#t=15m55s](https://vimeo.com/457702442#t=15
 
 `handle` method routes messages to functions. It is similar to Cosmos SDK handler design.
 
-```rs
+```rust
 pub fn handle<S: Storage, A: Api, Q: Querier>(
     deps: &mut Extern<S, A, Q>,
     env: Env,
@@ -248,7 +248,7 @@ pub fn handle<S: Storage, A: Api, Q: Querier>(
 
 #### Transfer
 
-```rs
+```rust
 pub fn handle_transfer<S: Storage, A: Api, Q: Querier>(
     deps: &mut Extern<S, A, Q>,
     env: Env,
@@ -288,7 +288,7 @@ pub fn handle_transfer<S: Storage, A: Api, Q: Querier>(
 You will see `handle_execute` in plus and example smart contracts, but actually it is just a naming, nothing special. 
 Most of the function is same with `transfer`. Just two new things: message fund check and sdk messages in return context.
 
-```rs
+```rust
 pub fn handle_execute<S: Storage, A: Api, Q: Querier>(
     deps: &mut Extern<S, A, Q>,
     env: Env,
@@ -350,7 +350,7 @@ This contracts query method is very simple, only configuration query.
 For more complex queries check [cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus/) contracts. 
 If you are starting to learn from zero, now you have 20 minutes of cosmwasm experience. Go ahead skim plus contracts to see the simplicity. 
 
-```rs
+```rust
 pub fn query<S: Storage, A: Api, Q: Querier>(
     deps: &Extern<S, A, Q>,
     msg: QueryMsg,
