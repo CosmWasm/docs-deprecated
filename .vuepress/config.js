@@ -103,8 +103,11 @@ module.exports = {
             // internal links
             {
               title: "Media",
-              path: "/media",
-              directory: true,
+              path: "/resources/assets",
+            },
+            {
+              title: "Events Calendar",
+              path: "/resources/events",
             },
             // external links
             {
