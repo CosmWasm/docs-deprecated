@@ -13,7 +13,7 @@ order: 1
 
 You can subscribe to the events calendar using this [ICS feed link](https://ics.teamup.com/feed/ks3qwzicncjfkkeyq6/8703308.ics).
 
-Here are some articles explaining who to import ICS feeds:
+Here are some articles explaining how to import ICS feeds:
 
 Google Calendar: [https://support.google.com/calendar/thread/3231927?hl=en](https://support.google.com/calendar/thread/3231927?hl=en)\
 Microsoft Outlook Calendar: [https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-cff1429c-5af6-41ec-a5b4-74f2c278e98c](https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-cff1429c-5af6-41ec-a5b4-74f2c278e98c)
