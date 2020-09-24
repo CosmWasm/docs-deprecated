@@ -231,7 +231,7 @@ fn execute() {
 
 Now run the tests:
 
-```sh
+```shell
 cargo test
 ```
 

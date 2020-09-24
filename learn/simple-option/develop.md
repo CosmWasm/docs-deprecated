@@ -8,7 +8,7 @@ order: 3
 
 First test if the starter works, and get your eyes used to rust test results:
 
-```sh
+```shell
 cargo unit-test
    Compiling proc-macro2 v1.0.21
    Compiling unicode-xid v0.2.1
@@ -375,28 +375,27 @@ fn query_config<S: Storage, A: Api, Q: Querier>(
 
 To simply build the code and see if it works:
 
-```sh
+```shell
 cargo build
 ```
 
 ### Tooling
 
-It is good to keep the same coding style across smart contracts for readability:
+It is good to keep the same coding style across smart contracts for readability and lint it for high code quality:
 
-```sh
+```shell
+rustup update
+rustup component add clippy rustfmt
+```
+
+```shell
 cargo fmt
 ```
 
-Normally Rust compiler does its job great, leads you to the solution for the errors shows warnings etc.
-But it is good to throw some linter to the code.
+Normally Rust compiler does its job great, leads you to the solution for the errors, shows warnings etc.
+But it is always good to run linter on the code.
 
-Install clippy.
-```sh
-rustup update
-rustup component add clippy
-```
-
-```sh
+```shell
 cargo clippy -- -D warnings
 ```
 
@@ -406,19 +405,19 @@ This section compiles key commands from [Compiling Contract](https://docs.cosmwa
 
 Basic compilation:
 
-```sh
+```shell
 cargo wasm
 ```
 
 Optimized compilation:
 
-```sh
+```shell
 RUSTFLAGS='-C link-arg=-s' cargo wasm
 ```
 
 Reproducible and optimized compilation:
 
-```sh
+```shell
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
@@ -431,7 +430,7 @@ You want to use the command above before deploying to the chain.
 
 We can also generate JSON Schemas that serve as a guide for anyone trying to use the contract. This is mainly for documentation purposes, but if you click on "Open TypeScript definitions" in the code explorer, you can see how we use those to generate TypeScript bindings.
 
-```sh
+```shell
 cargo schema
 ```
 

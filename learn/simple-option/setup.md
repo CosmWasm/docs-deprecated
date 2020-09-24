@@ -28,7 +28,7 @@ Now, use it to create your new contract. Go to the folder in which you want to p
 
 Initialize git repo:
 
-```sh
+```shell
 git add .
 git commit -m "Initial generation from cosmwasm-template"
 ```
