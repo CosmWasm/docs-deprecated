@@ -8,7 +8,7 @@ order: 3
 
 First test if the starter works, and get your eyes used to rust test results:
 
-```sh 
+```sh
 cargo unit-test
    Compiling proc-macro2 v1.0.21
    Compiling unicode-xid v0.2.1
@@ -86,7 +86,7 @@ pub struct InitMsg {
 `#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]` implements specified traits for this structure using macros. More read [Rust docs / Derive](https://doc.rust-lang.org/stable/rust-by-example/trait/derive.html)
 
 ::: warning
-* _Owner_, _creator_ and _collateral_ comes from message transaction context, meaning owner and creator is the address signed the tx and collateral is funds sent along the message. 
+* _Owner_, _creator_ and _collateral_ comes from message transaction context, meaning owner and creator is the address signed the tx and collateral is funds sent along the message.
 * _counter_offer_ is [strike price](https://www.investopedia.com/terms/s/strikeprice.asp).
 :::
 
@@ -112,7 +112,7 @@ Canonical and Human Addresses
 Canonical Addresses represent binary format of crypto addresses.
 Human Addresses on the other hand are great for the UI. They are always a subset of ascii text, and often contain security checks - such as chain-prefix in Bech32, e.g. cosmos1h57760w793q6vh06jsppnqdkc4ejcuyrrjxnke
 
-```canonicalize(humanize(canonical_addr)) == canonical_addr```
+`canonicalize(humanize(canonical_addr)) == canonical_addr`
 
 For more details: [Names and Addresses](https://docs.cosmwasm.com/architecture/addresses.html)
 :::
@@ -135,7 +135,7 @@ pub enum QueryMsg {
 Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
 :::
 
-[State](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/state.rs) handles state of the database where smart contract data is stored and accessed. 
+[State](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/state.rs) handles state of the database where smart contract data is stored and accessed.
 
 You have two options when modeling state:
 1. **Singleton**: contract saves only one instance of the structure using unique db key. We will use this in this tutorial.
@@ -160,7 +160,7 @@ pub fn config<S: Storage>(storage: &mut S) -> Singleton<S, State> {
     singleton(storage, CONFIG_KEY)
 }
 
-// returns a readonly bucket only read store. 
+// returns a readonly bucket only read store.
 // Safer to use read_only when no need to write like querying.
 pub fn config_read<S: Storage>(storage: &S) -> ReadonlySingleton<S, State> {
     singleton_read(storage, CONFIG_KEY)
@@ -256,8 +256,8 @@ pub fn handle_transfer<S: Storage, A: Api, Q: Querier>(
 ) -> StdResult<HandleResponse> {
     // ensure msg sender is the owner
     let mut state = config(&mut deps.storage).load()?;
-    /* 
-     * Question (?) mark at the end is a syntactic sugar. 
+    /*
+     * Question (?) mark at the end is a syntactic sugar.
      * If the result of load is an error, return the error.
      * Otherwise set the state to the returned value.
      */
@@ -272,12 +272,12 @@ pub fn handle_transfer<S: Storage, A: Api, Q: Querier>(
     let mut res = Context::new();
     res.add_log("action", "transfer");
     res.add_log("owner", recipient);
-    /* 
-     * logs will go to the cosmos sdk event log.   
+    /*
+     * logs will go to the cosmos sdk event log.
      */
     Ok(res.into())
-    /* 
-     * res.into converts Context to HandleResponse. 
+    /*
+     * res.into converts Context to HandleResponse.
      */
 }
 ```
@@ -285,7 +285,7 @@ pub fn handle_transfer<S: Storage, A: Api, Q: Querier>(
 
 #### Execute
 
-You will see `handle_execute` in plus and example smart contracts, but actually it is just a naming, nothing special. 
+You will see `handle_execute` in plus and example smart contracts, but actually it is just a naming, nothing special.
 Most of the function is same with `transfer`. Just two new things: message fund check and sdk messages in return context.
 
 ```rust
@@ -346,9 +346,9 @@ pub fn handle_execute<S: Storage, A: Api, Q: Querier>(
 
 ### Query
 
-This contracts query method is very simple, only configuration query. 
-For more complex queries check [cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus/) contracts. 
-If you are starting to learn from zero, now you have 20 minutes of cosmwasm experience. Go ahead skim plus contracts to see the simplicity. 
+This contracts query method is very simple, only configuration query.
+For more complex queries check [cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus/) contracts.
+If you are starting to learn from zero, now you have 20 minutes of cosmwasm experience. Go ahead skim plus contracts to see the simplicity.
 
 ```rust
 pub fn query<S: Storage, A: Api, Q: Querier>(
@@ -387,8 +387,14 @@ It is good to keep the same coding style across smart contracts for readability:
 cargo fmt
 ```
 
-Normally Rust compiler does it's job great, leads you to the solution of errors shows warnings etc.
-But we can give the code another round of linting.
+Normally Rust compiler does its job great, leads you to the solution for the errors shows warnings etc.
+But it is good to throw some linter to the code.
+
+Install clippy.
+```sh
+rustup update
+rustup component add clippy
+```
 
 ```sh
 cargo clippy -- -D warnings
@@ -416,7 +422,7 @@ Reproducible and optimized compilation:
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.9.0
+  cosmwasm/rust-optimizer:0.10.3
 ```
 
 You want to use the command above before deploying to the chain.

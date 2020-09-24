@@ -34,7 +34,7 @@ fn proper_initialization() {
      * first input is canonical address length
      * and the second is the initial fund in the contract
      */
-    let mut deps = mock_dependencies(20, &[
+    let mut deps = mock_dependencies(20, &[]);
     let msg = InitMsg {
         counter_offer: coins(40, "ETH"),
         expires: 100_000,
@@ -44,11 +44,12 @@ fn proper_initialization() {
      * mock execution environment
      * first sender address, second is the funds sent in the message
      */
-    let env = mock_env("creator", &coins(1, "BTC");
+
+    let env = mock_env("creator", &coins(1, "BTC"));
 
     // we can just call .unwrap() to assert this was a success
     let res = init(&mut deps, env, msg).unwrap();
-assert_eq!(0, res.messages.len());
+    assert_eq!(0, res.messages.len());
 
     // it worked, let's query the state
     let res = query_config(&deps).unwrap();
@@ -124,7 +125,7 @@ fn transfer() {
         counter_offer: coins(40, "ETH"),
         expires: 100_000,
     };
-    let env = mock_env("creator", &coins(1, "BTC")
+    let env = mock_env("creator", &coins(1, "BTC"));
 
     // we can just call .unwrap() to assert this was a success
     let res = init(&mut deps, env, msg).unwrap();
@@ -234,4 +235,4 @@ Now run the tests:
 cargo test
 ```
 
-If all green, you can be sure it will %99 chance work on the chain.
+If all green, the code will run work on chain.

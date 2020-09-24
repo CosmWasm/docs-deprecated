@@ -20,11 +20,11 @@ Assuming you have a followed section above, then the following should get you a 
 
 First, install **cargo-generate**. Unless you did that before, run this line now:
 
-```cargo install cargo-generate --features vendored-openssl```
+`cargo install cargo-generate --features vendored-openssl`
 
 Now, use it to create your new contract. Go to the folder in which you want to place it and run:
 
-```cargo generate --git https://github.com/CosmWasm/cosmwasm-template.git --name simple-option```
+`cargo generate --git https://github.com/CosmWasm/cosmwasm-template.git --name simple-option`
 
 Initialize git repo:
 
