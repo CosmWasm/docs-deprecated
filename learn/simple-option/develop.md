@@ -71,7 +71,7 @@ Development begins in [src/msg.rs](https://github.com/CosmWasm/cosmwasm-examples
 
 ### InitMsg
 
-We will begin with [`InitMsg`](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs#L7-L12). This struct has the initial values that initializes smart contract from the code and feeds in the data required for logic setup.
+We will begin with [`InitMsg`](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs). This struct has the initial values that initializes smart contract from the code and feeds in the data required for logic setup.
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
