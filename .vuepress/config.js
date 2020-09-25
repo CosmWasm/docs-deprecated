@@ -62,6 +62,11 @@ module.exports = {
           title: "Learn",
           children: [
             {
+              title: "Simple Option",
+              path: "/learn/simple-option",
+              directory: true,
+            },
+            {
               title: "Hijack Escrow",
               path: "/learn/hijack-escrow",
               directory: true,
