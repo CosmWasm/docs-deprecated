@@ -6,7 +6,9 @@ order: 4
 
 <iframe src="https://player.vimeo.com/video/457705991" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-At this point your code should be compling, altough we did not test if it works. You can deploy the code to the chain everytime when you make a change. But come on, your time is more valuable than that. Also good to keep the contract break-free and tested for future changes.
+At this point your code should be compiling, although we did not test if it works.
+You can deploy the code to the chain everytime when you make a change. But come on, your time is more valuable than that.
+Also, good to keep the contract break-free and tested for future changes.
 
 ```rust
 #[cfg(test)]
@@ -16,7 +18,8 @@ mod tests {
     use cosmwasm_std::{coins, log, CosmosMsg};
 ```
 
-This is how testing in Rust begins. [Code reference](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs). You can keep test and code in the same or separate files.
+This is how testing in Rust begins. [Code reference](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs).
+You can keep test and code in the same or separate files.
 
 ## Test Initialization
 
@@ -61,11 +64,13 @@ fn proper_initialization() {
 }
 ```
 
-Good we now have a test environment initializer. This is a very simple one, you can pass in variables to the function and do different tweaks. Check cosmwasm-plus for more.
+Good we now have a test environment initializer. This is a very simple one, you can pass in variables to the function and do different tweaks.
+Check cosmwasm-plus for more.
 
 ### Mock Dependencies and Environment
 
 There are two important mocking tools we should improve on:
+
 ```rust
 /// All external requirements that can be injected for unit tests.
 /// It sets the given balance for the contract itself, nothing else
@@ -106,7 +111,7 @@ pub fn mock_env<U: Into<HumanAddr>>(sender: U, sent: &[Coin]) -> Env {
 }
 ```
 
-`mock_env` is for mocking transaction, block, and contract environment
+`mock_env` is for mocking transaction, block, and contract environment.
 
 ## Test Handler
 
