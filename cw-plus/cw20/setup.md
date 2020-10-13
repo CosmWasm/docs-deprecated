@@ -27,7 +27,7 @@ You will always use the following command to start up the `@cosmjs/cli` with som
 (in addition to all the general helpers it has).
 
 ```shell
-npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
+npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
 ```
 
 Once this downloads the source and starts up, you should see a bunch of yellow text (explaining what code is preloaded),
