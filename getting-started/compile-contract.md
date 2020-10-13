@@ -7,7 +7,7 @@ order: 4
 In this section, we will download a sample contract, compile to it to wasm binary executable.
 
 Please first review the [client setup instructions](./setting-env.md), and configure and verify a
-client, either Go CLI or Node.JS console.
+client, either Go CLI or Node.js console.
 
 ## Compiling and Testing Contract
 

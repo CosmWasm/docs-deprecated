@@ -7,7 +7,7 @@ order: 5
 We have the binary ready. Now it is time to see some wasm action. You can use [Go CLI](#go-cli) or
 [Node Console](#node-console) as you wish.
 
-## GO CLI
+## Go CLI
 
 We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will
 upload the code to the blockchain. Afterwards, you can download the bytecode to verify it is proper:
