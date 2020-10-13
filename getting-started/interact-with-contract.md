@@ -109,7 +109,7 @@ is a bit nicer in JavaScript than in Shell Script.
 First, go to the cli directory and start up your console:
 
 ```shell
-npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
+npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
 ```
 
 Now, we make all the keys and initialize clients:

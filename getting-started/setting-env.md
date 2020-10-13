@@ -101,7 +101,7 @@ network configurations you can use on-the-fly:
 
 ```shell
 ## CORALNET
-npx @cosmjs/cli --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
+npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
 ```
 
 Using the REPL:
