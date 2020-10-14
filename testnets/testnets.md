@@ -104,7 +104,7 @@ curl -sSL $GENESIS_URL > ~/.corald/config/genesis.json
 curl -sSL $APP_CONFIG_URL > ~/.corald/config/app.toml
 
 # You need to configure p2p seeds
-# Either you can insert the seed addresses in $HOMEDIR/.corald/config/config.toml to "seeds"
+# Either you can insert the seed addresses in $HOME/.corald/config/config.toml to "seeds"
 # For simplicity we will pass the seed ID and domain as argument
 # You can get the seed it using command:
 ## Start corald
