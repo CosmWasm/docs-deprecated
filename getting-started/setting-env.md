@@ -29,10 +29,10 @@ You can find more information about other testnets:
 [CosmWasm/testnets](https://github.com/CosmWasm/testnets) and [Testnet
 section](./../testnets/testnets.md).
 
-When interacting with network, you can either use `coral` which is a GO client or Node REPL. Altough Node REPL is
-recommended for contract operations, since JSON manipulation is not intuitive with bash/go client.
+When interacting with network, you can either use `coral` which is a Go client or Node REPL. Altough Node REPL is
+recommended for contract operations, since JSON manipulation is not intuitive with the Shell/Go client.
 
-## Setup GO CLI
+## Setup Go CLI
 
 Let's configure `coral` exec, point it to testnets, create wallet and ask tokens from faucet:
 
