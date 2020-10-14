@@ -16,7 +16,7 @@ Here are the videos, events, workshops that can feed your learning hunger for Co
 
 <iframe src="https://player.vimeo.com/video/458554938" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-#### Contract development flow w/permissions to subkey contract 
+#### Contract development flow w/permissions to subkey contract
 
 <iframe src="https://player.vimeo.com/video/458607446" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
@@ -53,7 +53,7 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 #### Deep Dive Part 3 - CW20 Staking features
 <iframe src="https://player.vimeo.com/video/453055461" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-### Building Multi-chain Smart-Contracts Using CosmWasm -  HackAtom V India Workshop 
+### Building Multi-chain Smart-Contracts Using CosmWasm -  HackAtom V India Workshop
 
 *Date: September 14, 2020*
 
@@ -72,3 +72,15 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 #### Smart Contract Testing
 
 <iframe src="https://player.vimeo.com/video/457705991" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+### State modeling & Buckets
+
+*Date: September 29, 2020*
+
+#### Part 1
+
+<iframe src="https://player.vimeo.com/video/463816459" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+#### Part 2
+
+<iframe src="https://player.vimeo.com/video/463797451" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
