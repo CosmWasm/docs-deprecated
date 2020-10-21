@@ -20,38 +20,33 @@ to use them.
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 
-Below is the [coralnet configuration](https://github.com/CosmWasm/testnets/tree/master/coralnet).
+Below is the [heldernet configuration](https://github.com/CosmWasm/testnets/tree/master/heldernet).
 
 ```shell
-export CHAIN_ID="cosmwasm-coral"
-export TESTNET_NAME="coralnet"
-export WASMD_VERSION="v0.10.0"
-export CONFIG_DIR=".corald"
-export BINARY="corald"
-export CLI_BINARY="coral"
+export CHAIN_ID="hackatom-wasm"
+export TESTNET_NAME="heldernet"
+export WASMD_VERSION="v0.11.1"
+export CONFIG_DIR=".wasmd"
+export BINARY="wasmd"
+export CLI_BINARY="wasmcli"
 
-export COSMJS_VERSION="v0.22.1"
-export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/config/genesis.json"
-export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/config/app.toml"
+export COSMJS_VERSION="v0.23.0"
+export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/config/genesis.json"
+export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/config/app.toml"
+export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/config/config.toml"
 
-export RPC="https://rpc.coralnet.cosmwasm.com:443"
-export LCD="https://lcd.coralnet.cosmwasm.com"
-export FAUCET="https://faucet.coralnet.cosmwasm.com"
-export SEED_NODE="ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656"
+export RPC="https://rpc.heldernet.cosmwasm.com:443"
+export LCD="https://lcd.heldernet.cosmwasm.com"
+export FAUCET="https://faucet.heldernet.cosmwasm.com"
+export SEED_NODE="456ac8ae0f4a1b11e6eb2ddd0ac97857e78e4353@78.47.97.169:26656"
 ```
 
 ::: tip
 We have setup different executables for each testnet names after network names like: `corald/coral`, `gaiaflexd/gaiaflex`
 :::
 
-We will be using `coral` and `corald` network specific executables during this tutorial.
-
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
 `mkdir CosmWasm && cd CosmWasm && export CW_DIR=$(pwd)`
-
-::: warning
-Use go1.14 to compile `coral`/`corald`. Otherwise you will get prefix errors
-:::
 
 ```shell
 cd $CW_DIR
@@ -60,7 +55,7 @@ cd wasmd
 # Check which version to use on testnets repo
 git checkout $WASMD_VERSION
 # generate coral executables
-make build-coral # make build-gaiaflex, make build etc...
+make build # make build-gaiaflex, make build etc...
 # add the executables to path
 export PATH="${PATH}:$(pwd)/build"
 ```
@@ -70,45 +65,45 @@ export PATH="${PATH}:$(pwd)/build"
 Initialize `coral` and generate validator account:
 
 ```shell
-coral config chain-id $CHAIN_ID
-coral config trust-node true
-coral config node $RPC
-coral config output json
-coral config indent true
+wasmcli config chain-id $CHAIN_ID
+wasmcli config trust-node true
+wasmcli config node $RPC
+wasmcli config output json
+wasmcli config indent true
 # this is important, so the cli returns after the tx is in a block,
 # and subsequent queries return the proper results
-coral config broadcast-mode block
+wasmcli config broadcast-mode block
 
 # check you can connect
-coral query supply total
-coral query staking validators
-coral query wasm list-code
+wasmcli query supply total
+wasmcli query staking validators
+wasmcli query wasm list-code
 
 # create wallet
-coral keys add mywallet
+wasmcli keys add mywallet
 ```
 
 ## Joining Live Testnets
 
-### Run corald Node
+### Run wasmd Node
 
 ```shell
 export MONIKER=new_validator
-# initialize corald configuration
-corald init $MONIKER
+# initialize wasmd configuration
+wasmd init $MONIKER
 
 # get the testnets genesis file
-curl -sSL $GENESIS_URL > ~/.corald/config/genesis.json
+curl -sSL $GENESIS_URL > ~/.wasmd/config/genesis.json
 
-# get app.toml. Minimum gas prices must be 0.025ushell
-curl -sSL $APP_CONFIG_URL > ~/.corald/config/app.toml
+# get app.toml. Minimum gas prices must be 0.025ucosm
+curl -sSL $APP_CONFIG_URL > ~/.wasmd/config/app.toml
 
 # You need to configure p2p seeds
-# Either you can insert the seed addresses in $HOME/.corald/config/config.toml to "seeds"
+# Either you can insert the seed addresses in $HOME/.wasmd/config/config.toml to "seeds"
 # For simplicity we will pass the seed ID and domain as argument
 # You can get the seed it using command:
-## Start corald
-corald start --p2p.seeds $SEED_NODE
+## Start wasmd
+wasmd start --p2p.seeds $SEED_NODE
 ```
 
 Now you should be seeing blocks being replayed and your node is catching up with the testnet. This could take a while.
@@ -125,32 +120,32 @@ For those interested in validator stack, here is a good reading source on valida
 **Note**: make sure your validator is synced before upgrading to validator
 
 ```shell
-coral tx staking create-validator \
-  --amount=100000000ureef \
-  --pubkey=$(corald tendermint show-validator) \
+wasmcli tx staking create-validator \
+  --amount=100000000stake \
+  --pubkey=$(wasmd tendermint show-validator) \
   --moniker=$MONIKER \
-  --chain-id=cosmwasm-coral \
+  --chain-id=hackatom-wasm \
   --commission-rate="0.10" \
   --commission-max-rate="0.20" \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1" \
-  --fees=5000ushell
+  --fees=5000ucosm
   --from=mywallet
 ```
 
 ### Run the Light Client Daemon
 
 ```shell
-coral rest-server
+wasmcli rest-server
 # if the node is running on another machine use:
-coral rest-server --node tcp://<host>:<port>
+wasmcli rest-server --node tcp://<host>:<port>
 ```
 
 ## Joining To Be Launched Testnets
 
 ::: tip
 You need to have your address and informations defined in networks genesis file to join not yet launched testnets.
-Here is the script you can run to take care of it automatically. It uses `coral` [network specific executables](https://github.com/CosmWasm/testnets/tree/master/coralnet):
+Here is the script you can run to take care of it automatically. It uses `wasmd` [network specific executables](https://github.com/CosmWasm/testnets/tree/master/wasmnet):
 :::
   
 ```shell
@@ -162,13 +157,13 @@ cd testnets
 git checkout -b add-gen-acc-<validator-name>
 cd $TESTNET_NAME
 
-coral keys add validator
-corald add-genesis-account --home . $(coral keys show -a validator) 100000000ushell,100000000ureef
+wasmcli keys add validator
+wasmd add-genesis-account --home . $(wasmcli keys show -a validator) 100000000ucosm,100000000stake
 # please sort the genesis file, so the diff makes sense
 SORTED=$(jq -S . < ./config/genesis.json) && echo "$SORTED" > ./config/genesis.json
 
 git add ./config/genesis.json
-git commit -m "Add <myvalidator> account to coral genesis"
+git commit -m "Add <myvalidator> account to network genesis"
 git push
 
 # Open PR to CosmWasm/testnets:master (https://github.com/CosmWasm/testnets)
