@@ -119,12 +119,12 @@ If you have admin access to the contract you can add or remove admins by running
 
 ```
 export UPDATE_ADMINS_MSG=’{“update_admins”: {“admins”:[“cosmos1u3nufc2kjslj2t3pugxhjv4zc8adw5thuwu0tm”, “cosmos1fp9qlazkm8kgq304kalev6e69pyp5kmdd5pcgj”]}}’
-gaiaflex tx wasm execute $CONTRACT_ADDRESS “$UPDATE_ADMINS_MSG” \
+wasmcli tx wasm execute $CONTRACT_ADDRESS “$UPDATE_ADMINS_MSG” \
 --from account
 ```
 
 Subkey allowances can execute send token transaction using the command:
 ```
 export SEND_MSG=’{“execute”:{“msgs”:[{“bank”:{“send”:{“amount”:[{“denom”:”umuon”,”amount”:”1000"}],”from_address”:”cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",”to_address”:”cosmos1cs63ehtq6lw86vc87t42cnhcmydtnrffzdjhkz”}}}]}}’
-gaiaflex tx wasm execute $CONTRACT_ADDRESS “$SEND_MSG” --from account
+wasmcli tx wasm execute $CONTRACT_ADDRESS “$SEND_MSG” --from account
 ```
