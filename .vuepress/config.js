@@ -51,11 +51,6 @@ module.exports = {
               path: "/testnets",
               directory: true,
             },
-            {
-              title: "GaiaFlex",
-              path: "/gaiaflex",
-              directory: true,
-            },
           ]
         },
         {
@@ -70,6 +65,10 @@ module.exports = {
               title: "Hijack Escrow",
               path: "/learn/hijack-escrow",
               directory: true,
+            },
+            {
+              title: "Smart Contracts Over Governance",
+              path: "/learn/governance",
             },
             {
               title: "Name Service",
