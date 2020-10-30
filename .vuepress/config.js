@@ -76,6 +76,11 @@ module.exports = {
               directory: true,
             },
             {
+              title: "Frontend dApp",
+              path: "/learn/frontend-dapp",
+              directory: true,
+            },
+            {
               title: "Videos and Workshops",
               path: "/learn/videos-workshops",
             },
