@@ -25,7 +25,7 @@ Below is the [musselnet configuration](https://github.com/CosmWasm/testnets/tree
 ```shell
 export CHAIN_ID="musselnet"
 export TESTNET_NAME="musselnet"
-export WASMD_VERSION="v0.12.0"
+export WASMD_VERSION="v0.12.1"
 export CONFIG_DIR=".wasmd"
 export BINARY="wasmd"
 
@@ -37,7 +37,7 @@ export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/mu
 export RPC="https://rpc.musselnet.cosmwasm.com:443"
 export LCD="https://lcd.musselnet.cosmwasm.com"
 export FAUCET="https://faucet.musselnet.cosmwasm.com"
-export SEED_NODE="ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656"
+export SEED_NODE="41f1b8a8188b071609d11f22914f279c93771c4d@78.47.158.178:26656"
 ```
 
 ::: tip
