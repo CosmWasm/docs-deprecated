@@ -25,7 +25,7 @@ Below is the [musselnet configuration](https://github.com/CosmWasm/testnets/tree
 ```shell
 export CHAIN_ID="musselnet"
 export TESTNET_NAME="musselnet"
-export WASMD_VERSION="v0.12.0"
+export WASMD_VERSION="v0.12.1"
 export CONFIG_DIR=".wasmd"
 export BINARY="wasmd"
 
