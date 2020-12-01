@@ -19,8 +19,40 @@ Assuming you have never worked with rust, you will first need to install some to
 approach is to use `rustup` to maintain dependencies and handle updating multiple versions of
 `cargo` and `rustc`, which you will be using.
 
+### Installing Rust in Linux and Mac
+
 First, [install rustup](https://rustup.rs/). Once installed, make sure you have the wasm32 target:
 
+```shell
+rustup default stable
+cargo version
+# If this is lower than 1.44.1+, update
+rustup update stable
+
+rustup target list --installed
+rustup target add wasm32-unknown-unknown
+```
+
+### Installing Rust in Windows 10
+
+First, download and execute `rustup-init.exe` from [rustup.rs](https://rustup.rs/)
+or [rust-lang.org](https://www.rust-lang.org/tools/install).
+
+If requested, manually download and install Visual C++ Build Tools 2019,
+from https://visualstudio.microsoft.com/visual-cpp-build-tools/ .
+Make sure "Windows 10 SDK" and "English language pack" are selected.
+
+Continue running `rustup-init.exe`, and proceed with the installation.
+
+Optionally:
+- Download and install [gvim](https://www.vim.org/download.php#pc), and modify the Env vars to add \<gvim folder\>
+to the PATH.
+- Download and install [git for windows](https://git-scm.com/download/win). Modify the Env vars to add <git folder>\bin
+to PATH.
+- Turn on Developer Mode (Settings -> Update and Security: For Developers) and enable Device Discovery, to be able to
+access the Windows 10 server through ssh (https://www.ctrl.blog/entry/how-to-win10-ssh-service.html#section-mssshserv-enable).
+
+Install the wasm32 target:
 ```shell
 rustup default stable
 cargo version
