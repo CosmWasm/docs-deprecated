@@ -46,7 +46,7 @@ Upload the code and the contract:
 // upload using code below
 // if the code is already uploaded use code id to initiate
 const codeId = await factory.upload()
-// contract is already uploaded on musselnet: codeId -> 430
+// contract is already uploaded on heldernet: codeId -> 430
 const { address } = await client.getAccount()
 const contract = await factory.instantiate(430, { admins: [address], mutable: true}, "My Gift to a Friend")
 
