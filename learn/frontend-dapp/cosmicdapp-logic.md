@@ -27,14 +27,14 @@ export interface AppConfig {
 }
 ```
 
-In this tutorial we'll be using configuration for Coralnet.
+In this tutorial we'll be using configuration for Heldernet.
 
 The fields are pretty self-explanatory except `coinMap`, which is a map of native coin names that will allow us to pretty print the token amounts with `nativeCoinToDisplay()`. It looks like this:
 
 ```typescript
 {
-  ushell: { denom: "SHELL", fractionalDigits: 6 },
-  ureef: { denom: "REEF", fractionalDigits: 6 },
+  ucosm: { denom: "COSM", fractionalDigits: 6 },
+  ustake: { denom: "STAKE", fractionalDigits: 6 },
 }
 ```
 
