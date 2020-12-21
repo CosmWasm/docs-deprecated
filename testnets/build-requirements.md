@@ -33,8 +33,6 @@ Using Dockerfile is suggested.
    id=$(docker create wasmd-docker)
    docker cp $id:/usr/bin/wasmd .
    docker cp $id:/usr/bin/wasmcli .
-   # docker cp $id:/usr/bin/corald .
-   # docker cp $id:/usr/bin/coral .
    docker rm -v $id
    ```
 
@@ -44,7 +42,7 @@ Using Dockerfile is suggested.
 
 1. `git clone https://github.com/CosmWasm/wasmd.git && cd wasmd`
 2. Checkout to testnets version `git checkout vx.x.x`
-3. Compile dev build: `make build` or `make build-<testnet>` for testnets
+3. Compile dev build: `make build`
 4. `ldd build/wasmd`
 5. Notice the line like: `libgo_cosmwasm.so => /home/USERNAME/go/pkg/mod/github.com/!cosm!wasm/go-cosmwasm@v0.9.1/api/libgo_cosmwasm.so`
    this file must be in the library path along with wasmd

@@ -20,7 +20,7 @@ to a pre-defined beneficiary. First, clone the repo and try to build the wasm bu
 # get the code
 git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples/escrow
-git checkout escrow-0.6.0
+git checkout escrow-0.7.0
 
 # compile the wasm contract with stable toolchain
 rustup default stable
@@ -51,7 +51,7 @@ using binary stripping and wasm-opt.
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.9.0
+  cosmwasm/rust-optimizer:0.10.7
 ```
 
 ## Unit Tests

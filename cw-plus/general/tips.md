@@ -22,7 +22,7 @@ has some nice introspection. And, we added some extra bonuses there. Just type
 
 ```
 >> mine
-{ contractAddress: 'coral13nkgqrfymug724h8pprpexqj9h629sa3yzcqfk',
+{ contractAddress: 'cosmos1jatwj0hq5qxrmd6y4qnfrg5lstmdk26akcrasl',
   balance: [AsyncFunction: balance],
   allowance: [AsyncFunction: allowance],
   tokenInfo: [AsyncFunction: tokenInfo],
@@ -78,14 +78,14 @@ mine.allowance(client.senderAddress, other)
 You know how we keep starting every session with:
 
 ```js
-const client = await useOptions(coralnetOptions).setup(YOUR_PASSWORD_HERE);
+const client = await useOptions(hackatomOptions).setup(YOUR_PASSWORD_HERE);
 ```
 
 What if I told you there was more you could do here? Don't believe me, just explore
 for yourself:
 
 ```js
-const { setup } = useOptions(coralnetOptions);
+const { setup } = useOptions(hackatomOptions);
 .type setup
 // this gives:
 const setup: (password: string, filename?: string) => Promise<SigningCosmWasmClient>
@@ -96,14 +96,14 @@ a default. It also means we could make 2 clients using different key files.
 
 ```js
 const client = await setup(YOUR_PASSWORD_HERE)
-const partner = await setup(OTHER_PASSWORD, "/home/user/.coral2.key")
+const partner = await setup(OTHER_PASSWORD, "/home/user/.test2.key")
 
 // let's make sure they are unique
 client.getAccount()
 partner.getAccount()
 
 // and move some tokens around
-partner.sendTokens(client.senderAddress, [ { denom: 'ushell', amount: '200000' }])
+partner.sendTokens(client.senderAddress, [ { denom: 'ucosm', amount: '200000' }])
 
 client.getAccount()
 partner.getAccount()

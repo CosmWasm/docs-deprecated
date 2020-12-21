@@ -7,7 +7,8 @@ order: 3
 
 For exploring the testnets, you can use big-dipper instances:
 - gaia-flex: [https://bigdipper.gaia-flex.cosmwasm.com](https://bigdipper.gaia-flex.cosmwasm.com)
-- coralnet: [https://bigdipper.coralnet.cosmwasm.com](https://bigdipper.coralnet.cosmwasm.com)
+- heldernet: [https://bigdipper.heldernet.cosmwasm.com](https://bigdipper.heldernet.cosmwasm.com)
+- musselnet: [https://bigdipper.musselnet.cosmwasm.com](https://bigdipper.musselnet.cosmwasm.com)
 
 Big-dipper provides almost complete ux for exploring the chain.
 Suit your self and take a look around the website. I am sure it will fulfull your needs.

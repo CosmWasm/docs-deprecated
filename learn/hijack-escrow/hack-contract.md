@@ -9,7 +9,7 @@ Now that you can compile and run tests, let's try to make some changes to the co
 ```shell
 git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples/escrow
-git checkout escrow-0.6.0
+git checkout escrow-0.7.0
 ```
 
 Note: This guide is compatible with `CosmWasm` and `wasmd` `v0.10.x`.
