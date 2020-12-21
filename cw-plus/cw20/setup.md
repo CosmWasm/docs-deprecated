@@ -6,7 +6,7 @@ order: 2
 # Introduction
 
 This is a simple tutorial showing you how to use of powerful node REPL to interact with
-a CW20 token contract (fungible tokens, like ERC20) on [heldernet](https://github.com/CosmWasm/testnets/tree/master/coralnet).
+a CW20 token contract (fungible tokens, like ERC20) on [heldernet](https://github.com/CosmWasm/testnets/tree/master/heldernet).
 
 I will walk you through uploading contract code and creating a concrete instance (the same `cw20-base`
 wasm code can be reused to create dozens of token contracts with different symbols and distributions).
