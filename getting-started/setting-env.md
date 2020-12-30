@@ -96,7 +96,7 @@ Using the REPL:
 ```js
 // Create or load account
 const mnemonic = loadOrCreateMnemonic('fred.key')
-mnemonicToAddress('helder', mnemonic)
+mnemonicToAddress(mnemonic)
 
 const { address, client } = await connect(mnemonic, {})
 address
