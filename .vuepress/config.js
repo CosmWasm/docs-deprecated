@@ -76,10 +76,6 @@ module.exports = {
               directory: true,
             },
             {
-              title: "Migrating Contracts",
-              path: "/learn/migrating"
-            },
-            {
               title: "Frontend dApp",
               path: "/learn/frontend-dapp",
               directory: true,
@@ -87,6 +83,14 @@ module.exports = {
             {
               title: "Videos and Workshops",
               path: "/learn/videos-workshops",
+            },
+            {
+              title: "Migrating Contracts",
+              path: "/learn/MIGRATING"
+            },
+            {
+              title: "Changelog",
+              path: "/learn/CHANGELOG"
             },
           ]
         },

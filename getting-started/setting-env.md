@@ -5,22 +5,21 @@ order: 3
 # Setting Up Environment
 
 You need an environment to run contracts. You can either run your node locally or connect to an
-existing network. For easy testing, long living coral network is online, you can use it to deploy and run your
+existing network. For easy testing, heldernet network is online, you can use it to deploy and run your
 contracts. If you want to setup and run against a local blockchain, [click
 here](#run-local-node-optional)
 
 To verify testnet is currently running, make sure the following URLs are all working for you:
 
-- [https://rpc.coralnet.cosmwasm.com/status](https://rpc.coralnet.cosmwasm.com/status)
-- [https://faucet.coralnet.cosmwasm.com/status](https://faucet.coralnet.cosmwasm.com/status)
-- [https://lcd.coralnet.cosmwasm.com/node_info](https://lcd.coralnet.cosmwasm.com/node_info)
+- [https://rpc.heldernet.cosmwasm.com/status](https://rpc.heldernet.cosmwasm.com/status)
+- [https://faucet.heldernet.cosmwasm.com/status](https://faucet.heldernet.cosmwasm.com/status)
+- [https://lcd.heldernet.cosmwasm.com/node_info](https://lcd.heldernet.cosmwasm.com/node_info)
 
-We have set up two native tokens - `REEF` (`ureef`) for being a validator and `SHELL` (`ushell`) for
+We have set up two native tokens - `STAKE` (`ustake`) for becoming a validator and `COSM` (`ucosm`) for
 paying fees.
 Available frontends:
 
-- [Big-dipper block explorer](https://bigdipper.coralnet.cosmwasm.com/)
-- [wasm.glass contract explorer](https://coralnet.wasm.glass/#)
+- [Big-dipper block explorer](https://bigdipper.heldernet.cosmwasm.com/)
 
 You can use these to explore txs, addresses, validators and contracts
 feel free to deploy one pointing to our rpc/lcd servers and we will list it.
@@ -29,63 +28,47 @@ You can find more information about other testnets:
 [CosmWasm/testnets](https://github.com/CosmWasm/testnets) and [Testnet
 section](./../testnets/testnets.md).
 
-When interacting with network, you can either use `coral` which is a Go client or Node REPL. Altough Node REPL is
+When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. Altough Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the Shell/Go client.
 
 ## Setup Go CLI
 
-Let's configure `coral` exec, point it to testnets, create wallet and ask tokens from faucet:
+Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
 
-First source the coral network configurations to the shell:
+First source the heldernet network configurations to the shell:
 
 ```shell
-source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/defaults.env)
+source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/defaults.env)
 ```
 
 Setup the client:
 
 ```shell
-coral config chain-id $CHAIN_ID
-coral config trust-node true
-
-# if connecting to local node: coral config node http://localhost:26657
-coral config node $RPC
-coral config output json
-coral config indent true
-
-# this is important, so the cli returns after the tx is in a block,
-# and subsequent queries return the proper results
-coral config broadcast-mode block
-
-# check you can connect
-coral query supply total
-coral query staking validators
-coral query wasm list-code
-
-# add more wallets for testing
-coral keys add fred
+# add wallets for testing
+wasmcli keys add fred
 >
 {
   "name": "fred",
   "type": "local",
-  "address": "coral1avdvl5aje3zt0uay40uj6l9xtqtlqhduu84nql",
-  "pubkey": "coralpub1addwnpepqvcjveqepq34x59fnmygdy58ag7zwu8gefgsprq9th38nxzptpgszc3rkve",
+  "address": "wasm13nt9rxj7v2ly096hm8qsyfjzg5pr7vn5saqd50",
+  "pubkey": "wasmpub1addwnpepqf4n9afaefugnfztg7udk50duwr4n8p7pwcjlm9tuumtlux5vud6qvfgp9g",
   "mnemonic": "hobby bunker rotate piano satoshi planet network verify else market spring toward pledge turkey tip slim word jaguar congress thumb flag project chalk inspire"
 }
 
-coral keys add bob
-coral keys add thief
+wasmcli keys add bob
+wasmcli keys add thief
 ```
 
 You need some tokens in your address to interact. If you are using local node you can skip this
 step. Requesting tokens from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(coral keys show -a fred) '{"ticker":"SHELL","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
-JSON=$(jq -n --arg addr $(coral keys show -a thief) '{"ticker":"SHELL","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.coralnet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmcli keys show -a fred) '{"denom":"ucosm","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.heldernet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmcli keys show -a thief) '{"denom":"ucosm","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.heldernet.cosmwasm.com/credit
 ```
 
 ## Setup Node REPL
+
 
 Beyond the standard CLI tooling, we have also produced a flexible TypeScript library
 [CosmJS](https://github.com/CosmWasm/cosmjs), which runs in Node.js as well as in modern browsers
@@ -99,9 +82,13 @@ Full usage and installation [instructions are on the
 README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), also here are the source codes prepacked with
 network configurations you can use on-the-fly:
 
+::: warning
+The command below is obsolete and updated soon.
+:::
+
 ```shell
-## CORALNET
-npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/coralnet/cli_helper.ts
+## heldernet
+npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/cli_helper.ts
 ```
 
 Using the REPL:
@@ -116,7 +103,7 @@ address
 
 client.getAccount()
 // if empty - this only works with CosmWasm
-hitFaucet(defaultFaucetUrl, address, 'SHELL')
+hitFaucet(defaultFaucetUrl, address, 'COSM')
 client.getAccount()
 ```
 
@@ -129,18 +116,12 @@ If you are interested in running your local network you can use the script below
 # if you want to setup multiple apps on your local make sure to change this value
 APP_HOME="~/.wasmd"
 CLI_HOME="~/.wasmcli"
-
+RPC="http://localhost:26657"
 # initialize wasmd configuration files
 wasmd init localnet --chain-id localnet --home ${APP_HOME}
 
 # add minimum gas prices config to app configuration file
 sed -i -r 's/minimum-gas-prices = ""/minimum-gas-prices = "0.025ucosm"/' ${APP_HOME}/config/app.toml
-
-# setup client
-wasmcli config chain-id localnet --home ${CLI_HOME}
-wasmcli config trust-node true --home ${CLI_HOME}
-wasmcli config node http://localhost:26657 --home ${CLI_HOME}
-wasmcli config output json --home ${CLI_HOME}
 
 # add your wallet addresses to genesis
 wasmd add-genesis-account $(wasmcli keys show -a fred) 10000000000ucosm,10000000000stake --home ${APP_HOME}

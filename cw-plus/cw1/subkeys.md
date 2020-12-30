@@ -26,17 +26,17 @@ but no permissioned message execution and vice versa.
 First, initialize node repl:
 
 ```shell
-npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/v0.2.1/contracts/cw1-subkeys/helpers.ts
+npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/v0.3.2/contracts/cw1-subkeys/helpers.ts
 ```
 
 ::: warning
-Helper code is compatible with cw1-subkeys smart contract version **v0.2.1**
+Helper code is compatible with cw1-subkeys smart contract version **v0.3.2**
 :::
 
 Load wallet:
 
 ```ts
-const client = await useOptions(coralnetOptions).setup(PASSWORD);
+const client = await useOptions(hackatomOptions).setup(PASSWORD);
 const factory = CW1(client);
 ```
 
@@ -46,13 +46,13 @@ Upload the code and the contract:
 // upload using code below
 // if the code is already uploaded use code id to initiate
 const codeId = await factory.upload()
-// contract is already uploaded on coralnet: codeId -> 12
+// contract is already uploaded on heldernet: codeId -> 430
 const { address } = await client.getAccount()
-const contract = await factory.instantiate(12, { admins: [address], mutable: true}, "My Gift to a Friend")
+const contract = await factory.instantiate(430, { admins: [address], mutable: true}, "My Gift to a Friend")
 
 // print out contract.contractAddress for later
 contract.contractAddress
-// address -> 'coral1267wq2zk22kt5juypdczw3k4wxhc4z47mug9fd'
+// address -> 'cosmos1q7kc6y94zuvr7wsekg45e6pr8nhef6ku9ugw8r'
 ```
 
 We created a contract from a code with only `address` as admin. Update admins
@@ -60,10 +60,10 @@ for demonstration.
 
 ```ts
 // Use a key you control to test out execute with subkey
-const friendAddr = "coral1xx79l5q32eqvkk3hc54k92dpq909zh652gw70v"
+const friendAddr = "cosmos1ve2n9dd4uy48hzjgx8wamkc7dp7sfdv82u585d"
 
 // generate second address if you don't have one:
-// const friendClient = await useOptions(coralnetOptions).setup(PASSWORD, KEY_FILE);
+// const friendClient = await useOptions(hackatomOptions).setup(PASSWORD, KEY_FILE);
 // const friendAddr = await friendClient.getAccount().then(x => x.address);
 
 contract.updateAdmins([address, friendAddr]);
@@ -86,32 +86,32 @@ Let's give some allowance to your friends account, so he can buy a lambo:
 
 ```ts
 // lets pour some money to the account
-client.sendTokens(contractAddress, [{denom: "ushell", amount: "1000000"}])
+client.sendTokens(contractAddress, [{denom: "ucosm", amount: "1000000"}])
 // verify tokens are transferred
 client.getAccount(contractAddress)
 
-contract.increaseAllowance(friendAddr, {denom: "ushell", amount: "90000"})
+contract.increaseAllowance(friendAddr, {denom: "ucosm", amount: "90000"})
 contract.allowance(friendAddr)
 ```
 
 Now test if he can execute the message. Open another terminal screen:
 
 ```ts
-const friendClient = await useOptions(coralnetOptions).setup(PASSWORD, KEY_FILE);
+const friendClient = await useOptions(hackatomOptions).setup(PASSWORD, KEY_FILE);
 const factory = CW1(friendClient)
-const contract = factory.use('coral1267wq2zk22kt5juypdczw3k4wxhc4z47mug9fd')
+const contract = factory.use('cosmos1q7kc6y94zuvr7wsekg45e6pr8nhef6ku9ugw8r')
 
-contract.execute([{bank: {send: {from_address: contractAddress, to_address: address, amount: [{denom: "ushell", amount: "20000"}]}}}])
+contract.execute([{bank: {send: {from_address: contractAddress, to_address: address, amount: [{denom: "ucosm", amount: "20000"}]}}}])
 ```
 
 Allowed account can spend the tokens. Lets prank your friend with decreasing
 his allowance on admin terminal:
 
 ```ts
-contract.decreaseAllowance(randomAddress, {denom: "ushell", amount: "69999"}, { at_height: { height: 40000}})
+contract.decreaseAllowance(randomAddress, {denom: "ucosm", amount: "69999"}, { at_height: { height: 40000}})
 ```
 
-After these operations he will only have _1 ushell_ to spend. The prank's
+After these operations he will only have _1 ucosm_ to spend. The prank's
 best part is `at_height` field. After height 40000 his allowance will become
 inactive meaning he can't spend the tokens anymore.
 
@@ -124,11 +124,11 @@ let permissions: Permissions = { delegate: true, undelegate: false, redelegate: 
 
 contract.setStakingPermissions(randomAddress, permissions)
 
-let dmsg: DelegateMsg = {staking: {delegate: {validator:"coralvaloper1hf50trj7plz2sd8cmcvn7c8ruh3tjhc2uch4gp", amount:{denom:"ureef",amount:"999"}}}}
+let dmsg: DelegateMsg = {staking: {delegate: {validator:"cosmosvaloper1ez03me7uljk7qerswdp935vlaa4dlu487syyhn", amount:{denom:"ureef",amount:"999"}}}}
 contract.execute([dmsg])
 // will be approved
 
-let unmsg: UndelegateMsg = {staking: {undelegate: {validator:"coralvaloper1hf50trj7plz2sd8cmcvn7c8ruh3tjhc2uch4gp", amount:{denom:"ureef",amount:"999"}}}}
+let unmsg: UndelegateMsg = {staking: {undelegate: {validator:"cosmosvaloper1ez03me7uljk7qerswdp935vlaa4dlu487syyhn", amount:{denom:"ureef",amount:"999"}}}}
 contract.execute([unmsg])
 // will be rejected
 
