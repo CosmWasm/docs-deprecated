@@ -95,6 +95,15 @@ module.exports = {
           ]
         },
         {
+          title: "Community",
+          children: [
+            {
+              title: "Hall Of Fame",
+              path: "/community/hall-of-fame"
+            },
+          ]
+        },
+        {
           title: "Plus Contracts",
           children: [
             {
