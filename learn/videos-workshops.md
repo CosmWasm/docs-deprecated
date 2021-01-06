@@ -85,6 +85,16 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 
 <iframe src="https://player.vimeo.com/video/463797451" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
+### Quadratic Funding with CosmWasm
+
+#### Part 1 QF concept & implementing logic
+
+<iframe src="https://player.vimeo.com/video/492147547" width="640" height="360" frameborder="0" allow="autoplay;fullscreen" allowfullscreen ></iframe>
+
+#### Part 2 QF Smart Contract Helper& Execution
+
+<iframe src="https://player.vimeo.com/video/493294008" width="640" height="360" frameborder="0" allow="autoplay;fullscreen" allowfullscreen ></iframe>
+
 ### CosmWasm/CosmJS dApps - Zero to Hero
 
 *Date: Oct 16, 2020*
