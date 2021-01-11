@@ -1,13 +1,14 @@
 module.exports = {
   theme: "cosmos",
   title: "CosmWasm Documentation",
+  base: process.env.VUEPRESS_BASE || "/",
   locales: {
     "/": {
       lang: "en-US"
     },
   },
   head: [
-    ['link', { rel: 'icon', href: '/logo/SVG/CosmWasm Favicon.svg' }]
+    ['link', { rel: 'icon', href: '/logo/SVG/CosmWasm_Favicon_Full.svg' }]
   ],
   themeConfig: {
     custom: true,
@@ -16,13 +17,23 @@ module.exports = {
     docsRepo: "CosmWasm/docs",
     docsDir: "/",
     logo: {
-      src: "/logo/SVG/CosmWasm Logo.svg",
+      src: "/logo/SVG/CosmWasm_Logo.svg",
     },
     algolia: {
       id: "BH4D9OD16A",
       key: "abeca9781b806ca955a7e0f1ee95d003",
       index: "cosmwasm_docs"
     },
+    versions: [
+      {
+        "label": "v0.13",
+        "key": "v0.13"
+      },
+      {
+        "label": "v0.12",
+        "key": "v0.12"
+      }
+    ],
     topbar: {
       banner: false
     },
@@ -234,13 +245,12 @@ module.exports = {
       ]
     }
   },
-  plugins: [
-    "sitemap",
-    {
-      hostname: "https://docs.cosmwasm.com"
-    },
-    "check-md", {
+  plugins: {
+    "check-md": {
       pattern: "**/*.md"
     },
-  ]
+    'sitemap': {
+      hostname: 'https://docs.cosmwasm.com'
+    },
+  }
 }
