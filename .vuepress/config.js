@@ -248,9 +248,6 @@ module.exports = {
   plugins: [
     'check-md', {
       pattern: "**/*.md"
-    },
-    'sitemap', {
-      hostname: 'https://docs.cosmwasm.com'
-    },
+    }
   ]
 }
