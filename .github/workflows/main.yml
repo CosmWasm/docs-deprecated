@@ -14,6 +14,7 @@ jobs:
 
       - name: Install and Build 🔧 
         run: |
+          npm install;
           npm run check-links;
           echo 'docs.cosmwasm.com' > CNAME;
           mkdir -p ~/output/public;
