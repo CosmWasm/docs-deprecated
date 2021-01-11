@@ -26,8 +26,8 @@ module.exports = {
     },
     versions: [
       {
-        "label": "v0.13",
-        "key": "v0.13"
+        "label": "0.13",
+        "key": "0.13"
       }
     ],
     topbar: {
