@@ -245,12 +245,12 @@ module.exports = {
       ]
     }
   },
-  plugins: {
-    "check-md": {
+  plugins: [
+    'check-md', {
       pattern: "**/*.md"
     },
-    'sitemap': {
+    'sitemap', {
       hostname: 'https://docs.cosmwasm.com'
     },
-  }
+  ]
 }
