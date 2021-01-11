@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - '0.13'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
