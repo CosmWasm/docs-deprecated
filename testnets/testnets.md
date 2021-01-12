@@ -20,25 +20,24 @@ to use them.
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 
-Below is the [heldernet configuration](https://github.com/CosmWasm/testnets/tree/master/heldernet).
+Below is the [musselnet configuration](https://github.com/CosmWasm/testnets/tree/master/musselnet).
 
 ```shell
-export CHAIN_ID="hackatom-wasm"
-export TESTNET_NAME="heldernet"
-export WASMD_VERSION="v0.11.1"
+export CHAIN_ID="musselnet"
+export TESTNET_NAME="musselnet"
+export WASMD_VERSION="v0.14.0"
 export CONFIG_DIR=".wasmd"
 export BINARY="wasmd"
-export CLI_BINARY="wasmcli"
 
-export COSMJS_VERSION="v0.23.0"
-export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/config/genesis.json"
-export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/config/app.toml"
-export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/config/config.toml"
+export COSMJS_VERSION="v0.23.2"
+export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/genesis.json"
+export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/app.toml"
+export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/config.toml"
 
-export RPC="https://rpc.heldernet.cosmwasm.com:443"
-export LCD="https://lcd.heldernet.cosmwasm.com"
-export FAUCET="https://faucet.heldernet.cosmwasm.com"
-export SEED_NODE="ec488c9215e1917e41bce5ef4b53d39ff6805166@195.201.88.9:26656"
+export RPC="https://rpc.musselnet.cosmwasm.com:443"
+export LCD="https://lcd.musselnet.cosmwasm.com"
+export FAUCET="https://faucet.musselnet.cosmwasm.com"
+export SEED_NODE="a4ef6bf25dec4402ade0ce280e614453973e6f2e@78.47.158.178:26656"
 ```
 
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
@@ -60,7 +59,7 @@ Initialize wallet using command:
 
 ```shell
 # create wallet
-wasmcli keys add mywallet
+wasmd keys add mywallet
 ```
 
 ## Joining Live Testnets
@@ -100,7 +99,7 @@ For those interested in validator stack, here is a good reading source on valida
 **Note**: make sure your validator is synced before upgrading to validator
 
 ```shell
-wasmcli tx staking create-validator \
+wasmd tx staking create-validator \
   --amount=100000000ustake \
   --pubkey=$(wasmd tendermint show-validator) \
   --moniker=$MONIKER \
@@ -116,13 +115,7 @@ wasmcli tx staking create-validator \
 
 ### Run the Light Client Daemon
 
-To run
-
-```shell
-wasmcli rest-server
-# if the node is running on another machine use:
-wasmcli rest-server --node tcp://<host>:<port>
-```
+With wasmd version v0.13 lcd client and node merged. To enable light client, change `app.toml/api` value to true.
 
 ## Joining To Be Launched Testnets
 
@@ -140,8 +133,8 @@ cd testnets
 git checkout -b add-gen-acc-<validator-name>
 cd $TESTNET_NAME
 
-wasmcli keys add validator
-wasmcli add-genesis-account --home . $(wasmcli keys show -a validator) 100000000ustake,100000000ucosm
+wasmd keys add validator
+wasmd add-genesis-account --home . $(wasmd keys show -a validator) 100000000ustake,100000000ucosm
 # please sort the genesis file, so the diff makes sense
 SORTED=$(jq -S . < ./config/genesis.json) && echo "$SORTED" > ./config/genesis.json
 
