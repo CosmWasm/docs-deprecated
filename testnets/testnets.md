@@ -74,7 +74,7 @@ wasmd init $MONIKER
 # get the testnets genesis file
 curl -sSL $GENESIS_URL > ~/.wasmd/config/genesis.json
 
-# get app.toml. Minimum gas prices must be 0.025ucosm
+# get app.toml. Minimum gas prices must be 0.025umayo
 curl -sSL $APP_CONFIG_URL > ~/.wasmd/config/app.toml
 
 # You need to configure p2p seeds
@@ -100,7 +100,7 @@ For those interested in validator stack, here is a good reading source on valida
 
 ```shell
 wasmd tx staking create-validator \
-  --amount=100000000ustake \
+  --amount=100000000ufrites \
   --pubkey=$(wasmd tendermint show-validator) \
   --moniker=$MONIKER \
   --chain-id=$CHAIN_ID \
@@ -109,7 +109,7 @@ wasmd tx staking create-validator \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1" \
   --node $RPC \
-  --fees=5000ucosm \
+  --fees=5000umayo \
   --from=mywallet
 ```
 
@@ -134,7 +134,9 @@ git checkout -b add-gen-acc-<validator-name>
 cd $TESTNET_NAME
 
 wasmd keys add validator
-wasmd add-genesis-account --home . $(wasmd keys show -a validator) 100000000ustake,100000000ucosm
+
+wasmd add-genesis-account --home . $(wasmd keys show -a validator) 100000000ufrites,100000000umayo
+
 # please sort the genesis file, so the diff makes sense
 SORTED=$(jq -S . < ./config/genesis.json) && echo "$SORTED" > ./config/genesis.json
 
