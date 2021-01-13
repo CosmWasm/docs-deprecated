@@ -47,7 +47,7 @@ Continue running `rustup-init.exe`, and proceed with the installation.
 Optionally:
 - Download and install [gvim](https://www.vim.org/download.php#pc), and modify the Env vars to add \<gvim folder\>
 to the PATH.
-- Download and install [git for windows](https://git-scm.com/download/win). Modify the Env vars to add <git folder>\bin
+- Download and install [git for windows](https://git-scm.com/download/win). Modify the Env vars to add \<git folder\>\bin
 to PATH.
 - Turn on Developer Mode (Settings -> Update and Security: For Developers) and enable Device Discovery, to be able to
 access the Windows 10 server through ssh (https://www.ctrl.blog/entry/how-to-win10-ssh-service.html#section-mssshserv-enable).
