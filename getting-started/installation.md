@@ -11,7 +11,7 @@ contracts on Cosmos SDK.
 
 You can setup golang following [official
 documentation](https://github.com/golang/go/wiki#working-with-go). The latest versions of `wasmd`
-require go version `v1.14`.
+require go version `v1.15`.
 
 ## Rust
 
@@ -26,7 +26,7 @@ First, [install rustup](https://rustup.rs/). Once installed, make sure you have 
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.44.1+, update
+# If this is lower than 1.47.0+, update
 rustup update stable
 
 rustup target list --installed
@@ -83,12 +83,12 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.13.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.13.0
+# replace the v0.14.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.14.0
 make install
 
 # verify the installation
-wasmcli version
+wasmd version
 ```
 
 ::: tip
@@ -99,19 +99,19 @@ the case in general for building Go code from source.
 
 ## Using Testnets
 
-Testing network [Heldernet](https://github.com/CosmWasm/testnets/tree/master/heldernet) is launched to
+Testing network [Musselnet](https://github.com/CosmWasm/testnets/tree/master/musselnet) is launched to
 save you of the hassle of running a local network and speed up your development.
 
 ::: warning
-Use go 1.14 for compiling `wasmd/wasmcli` executables
+Use go 1.15 for compiling `wasmd` executable
 :::
 
 ```shell
 # clone wasmd repo
 git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
 
-# heldernet runs on wasmd v0.11.1
-git checkout v0.11.1
+# wasmd runs on wasmd v0.14.0
+git checkout v0.14.0
 
 # build wasmd executable
 make install
@@ -121,9 +121,9 @@ make install
 
 These represent an instance of a blockchain that
 utilizes all of the stable features of the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk). As
-such, `wasmcli` and `wasmd` have all the same features (plus WASM smart contracts obviously). If
+such, `wasmd` have all the same features (plus WASM smart contracts obviously). If
 you'd like to learn more about accessing those features take a look at the [Gaia
-docs](https://cosmos.network/docs/cosmos-hub/what-is-gaia.html). If you'd like to learn more about
+docs](https://github.com/cosmos/gaia/tree/main/docs/gaia-tutorials). If you'd like to learn more about
 getting started with the Cosmos SDK in general, take a look at the series of
 [Tutorials](https://tutorials.cosmos.network/) that show how to build custom modules for
 application-specific blockchains.
