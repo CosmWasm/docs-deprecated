@@ -134,7 +134,9 @@ git checkout -b add-gen-acc-<validator-name>
 cd $TESTNET_NAME
 
 wasmd keys add validator
+
 wasmd add-genesis-account --home . $(wasmd keys show -a validator) 100000000ufrites,100000000umayo
+
 # please sort the genesis file, so the diff makes sense
 SORTED=$(jq -S . < ./config/genesis.json) && echo "$SORTED" > ./config/genesis.json
 
