@@ -56,7 +56,7 @@ Install the wasm32 target:
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.44.1+, update
+# If this is lower than 1.47.0, update
 rustup update stable
 
 rustup target list --installed
