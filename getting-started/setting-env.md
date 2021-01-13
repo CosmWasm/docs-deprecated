@@ -5,21 +5,21 @@ order: 3
 # Setting Up Environment
 
 You need an environment to run contracts. You can either run your node locally or connect to an
-existing network. For easy testing, heldernet network is online, you can use it to deploy and run your
+existing network. For easy testing, musselnet network is online, you can use it to deploy and run your
 contracts. If you want to setup and run against a local blockchain, [click
 here](#run-local-node-optional)
 
 To verify testnet is currently running, make sure the following URLs are all working for you:
 
-- [https://rpc.heldernet.cosmwasm.com/status](https://rpc.heldernet.cosmwasm.com/status)
-- [https://faucet.heldernet.cosmwasm.com/status](https://faucet.heldernet.cosmwasm.com/status)
-- [https://lcd.heldernet.cosmwasm.com/node_info](https://lcd.heldernet.cosmwasm.com/node_info)
+- [https://rpc.musselnet.cosmwasm.com/status](https://rpc.heldernet.cosmwasm.com/status)
+- [https://faucet.musselnet.cosmwasm.com/status](https://faucet.heldernet.cosmwasm.com/status)
+- [https://lcd.musselnet.cosmwasm.com/node_info](https://lcd.heldernet.cosmwasm.com/node_info)
 
-We have set up two native tokens - `STAKE` (`ustake`) for becoming a validator and `COSM` (`ucosm`) for
+We have set up two native tokens - `FRITES` (`ufrites`) for becoming a validator and `MAYO` (`umayo`) for
 paying fees.
 Available frontends:
 
-- [Big-dipper block explorer](https://bigdipper.heldernet.cosmwasm.com/)
+- [Big-dipper block explorer](https://bigdipper.musselnet.cosmwasm.com/)
 
 You can use these to explore txs, addresses, validators and contracts
 feel free to deploy one pointing to our rpc/lcd servers and we will list it.
@@ -35,17 +35,17 @@ recommended for contract operations, since JSON manipulation is not intuitive wi
 
 Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
 
-First source the heldernet network configurations to the shell:
+First source the musselnet network configurations to the shell:
 
 ```shell
-source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/defaults.env)
+source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/defaults.env)
 ```
 
 Setup the client:
 
 ```shell
 # add wallets for testing
-wasmcli keys add fred
+wasmd keys add fred
 >
 {
   "name": "fred",
@@ -55,16 +55,16 @@ wasmcli keys add fred
   "mnemonic": "hobby bunker rotate piano satoshi planet network verify else market spring toward pledge turkey tip slim word jaguar congress thumb flag project chalk inspire"
 }
 
-wasmcli keys add bob
-wasmcli keys add thief
+wasmd keys add bob
+wasmd keys add thief
 ```
 
 You need some tokens in your address to interact. If you are using local node you can skip this
 step. Requesting tokens from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmcli keys show -a fred) '{"denom":"ucosm","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.heldernet.cosmwasm.com/credit
-JSON=$(jq -n --arg addr $(wasmcli keys show -a thief) '{"denom":"ucosm","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.heldernet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a fred) '{"denom":"umayo","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.musselnet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"umayo","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.musselnet.cosmwasm.com/credit
 ```
 
 ## Setup Node REPL
@@ -87,8 +87,8 @@ The command below is obsolete and updated soon.
 :::
 
 ```shell
-## heldernet
-npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/cli_helper.ts
+## musselnet
+npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/cli_helper.ts
 ```
 
 Using the REPL:
@@ -103,7 +103,7 @@ address
 
 client.getAccount()
 // if empty - this only works with CosmWasm
-hitFaucet(defaultFaucetUrl, address, 'COSM')
+hitFaucet(defaultFaucetUrl, address, 'FRITES')
 client.getAccount()
 ```
 
@@ -115,17 +115,17 @@ If you are interested in running your local network you can use the script below
 # default home is ~/.wasmd
 # if you want to setup multiple apps on your local make sure to change this value
 APP_HOME="~/.wasmd"
-CLI_HOME="~/.wasmcli"
+CLI_HOME="~/.wasmd"
 RPC="http://localhost:26657"
 # initialize wasmd configuration files
 wasmd init localnet --chain-id localnet --home ${APP_HOME}
 
 # add minimum gas prices config to app configuration file
-sed -i -r 's/minimum-gas-prices = ""/minimum-gas-prices = "0.025ucosm"/' ${APP_HOME}/config/app.toml
+sed -i -r 's/minimum-gas-prices = ""/minimum-gas-prices = "0.025umayo"/' ${APP_HOME}/config/app.toml
 
 # add your wallet addresses to genesis
-wasmd add-genesis-account $(wasmcli keys show -a fred) 10000000000ucosm,10000000000stake --home ${APP_HOME}
-wasmd add-genesis-account $(wasmcli keys show -a thief) 10000000000ucosm,10000000000stake --home ${APP_HOME}
+wasmd add-genesis-account $(wasmd keys show -a fred) 10000000000umayo,10000000000stake --home ${APP_HOME}
+wasmd add-genesis-account $(wasmd keys show -a thief) 10000000000umayo,10000000000stake --home ${APP_HOME}
 
 # add fred's address as validator's address
 wasmd gentx --name fred --home ${APP_HOME}

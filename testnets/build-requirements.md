@@ -32,7 +32,6 @@ Using Dockerfile is suggested.
    ```shell
    id=$(docker create wasmd-docker)
    docker cp $id:/usr/bin/wasmd .
-   docker cp $id:/usr/bin/wasmcli .
    docker rm -v $id
    ```
 
