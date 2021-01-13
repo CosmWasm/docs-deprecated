@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - '0.13'
+      - '0.14'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
