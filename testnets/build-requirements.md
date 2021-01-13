@@ -42,8 +42,4 @@ Using Dockerfile is suggested.
 1. `git clone https://github.com/CosmWasm/wasmd.git && cd wasmd`
 2. Checkout to testnets version `git checkout vx.x.x`
 3. Compile dev build: `make build`
-4. `ldd build/wasmd`
-5. Notice the line like: `libgo_cosmwasm.so => /home/USERNAME/go/pkg/mod/github.com/!cosm!wasm/go-cosmwasm@v0.9.1/api/libgo_cosmwasm.so`
-   this file must be in the library path along with wasmd
-6. Copy `wasmd` to any location on the target system (that will run the node)
-7. Copy `libgo_cosmwasm.so` (path above) to the target system under `/usr/lib/libgo_cosmwasm.so`
+4. Copy `wasmd` to any location on the target system (that will run the node)
