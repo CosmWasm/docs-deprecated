@@ -41,7 +41,7 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 
 **March 2020**:
 
-* [CosmWasm v0.7.0 released](https://medium.com/confio/cosmwasm-0-7-released-6db5a037f943) released with much internal contract cleanup, but especially much more powerful and clean REST API for `wasmd` (inspired by ongoing `cosmwasm-js` work)
+* [CosmWasm v0.7 released](https://medium.com/confio/cosmwasm-0-7-released-6db5a037f943) released with much internal contract cleanup, but especially much more powerful and clean REST API for `wasmd` (inspired by ongoing `cosmwasm-js` work)
 * [Demo Net launched](https://medium.com/confio/cosmwasm-demo-net-launched-4c604674f3e0) to upload and run your contracts without local blockchain
 * [`code-explorer`](https://github.com/CosmWasm/code-explorer) released to inspect all code and contracts on chain
 * [Enigma testnet running with CosmWasm](https://forum.enigma.co/t/testnet-is-live-with-smart-contracts/1386) smart contract support
@@ -76,11 +76,44 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 
 **August 2020**:
 
-* CosmJS 0.22.0 release
+* CosmJS 0.22 released
 * Long living smart contract testing playground [coral network](https://github.com/CosmWasm/testnets/tree/master/coral) released
+* CosmWasm governance enabled testing network [gaiaflex](https://github.com/CosmWasm/testnets/tree/master/gaiaflex) released
 * Team growth (Dev Relations/Orkun, Frontend/Abel, COO/VP of product/Martin)
 * Launched CosmWasm discord server
 * New website of Confio and CosmWasm
+
+**September 2020**:
+
+* Governance enabled smart contracts demoed on GaiaFlex network
+* More smart contract workshops
+* CosmWasm 0.11 progress
+
+**October 2020**:
+
+* CosmWasm 0.11 released
+* CosmJS 0.23 released
+* HackAtom V support, workshops, and joined hackatom CosmWasm network - heldernet
+* Progress on Althea's Peggy
+* Keplr integration stablized
+
+**November 2020**:
+
+* CosmJS improvements such as bank, auth and signing support
+* More Recruitments! Rust Dev, and look out for more devs
+* CosmWasm 0.12 feature complete
+  * new module cache
+  * new multi-contract testing framework
+  * Wasmer reborn preperations
+* 3 awards for the teams who joined HackAtom V using CosmWasm
+* CosmWasm [random oracle](https://github.com/confio/rand) smart contract released
+
+**December 2020**:
+
+* CosmWasm 0.12 released
+* New [production grade multisig smart contracts](https://github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw3)
+* CosmWasm 0.12 supported Musselnet released
+* [CosmWasm Improvment Proposals(CWIPS)](https://github.com/CosmWasm/CWIPs) launched
 
 ## Planned Work
 
