@@ -19,7 +19,8 @@ We have set up two native tokens - `FRITES` (`ufrites`) for becoming a validator
 paying fees.
 Available frontends:
 
-- [Big-dipper block explorer](https://bigdipper.musselnet.cosmwasm.com/)
+- [Block explorer](https://musselnet.cosmwasm.aneka.io/)
+- [Code explorer](https://code-explorer.musselnet.cosmwasm.com/)
 
 You can use these to explore txs, addresses, validators and contracts
 feel free to deploy one pointing to our rpc/lcd servers and we will list it.
@@ -67,6 +68,17 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a fred) '{"denom":"umayo","address":$
 JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"umayo","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.musselnet.cosmwasm.com/credit
 ```
 
+## Export wasmd Parameters
+
+If you intend to use wasmd as client, we recommend you to setup these variables. 
+Otherwise You will have to define type in node, chain id and gas-prices details with every command you execute.
+Also for this tutorial we will use these variables. So make sure you export these before proceeding.
+
+```bash
+export NODE="--node https://rpc.musselnet.cosmwasm.com:443"
+export TXFLAG="$NODE --chain-id musselnet-2 --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3"
+```
+
 ## Setup Node REPL
 
 
@@ -88,7 +100,7 @@ The command below is obsolete and updated soon.
 
 ```shell
 ## musselnet
-npx @cosmjs/cli@^0.22 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/cli_helper.ts
+npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/cli_helper.ts
 ```
 
 Using the REPL:
@@ -107,6 +119,8 @@ hitFaucet(defaultFaucetUrl, address, 'FRITES')
 client.getAccount()
 ```
 
+
+You need to put RPC endpoint and 
 ## Run Local Node (optional)
 
 If you are interested in running your local network you can use the script below:
