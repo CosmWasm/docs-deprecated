@@ -30,8 +30,8 @@ module.exports = {
         "key": "0.13"
       },
       {
-        "label": "0.14",
-        "key": "0.14"
+        "label": "master",
+        "key": "master"
       }
     ],
     topbar: {
