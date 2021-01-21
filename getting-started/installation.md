@@ -84,7 +84,7 @@ If you intend to develop or edit a contract, you need wasmd.
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
 # replace the v0.14.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.14.0
+git checkout v0.14.1
 make install
 
 # verify the installation
@@ -110,8 +110,8 @@ Use go 1.15 for compiling `wasmd` executable
 # clone wasmd repo
 git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
 
-# wasmd runs on wasmd v0.14.0
-git checkout v0.14.0
+# wasmd runs on wasmd v0.14.1
+git checkout v0.14.1
 
 # build wasmd executable
 make install

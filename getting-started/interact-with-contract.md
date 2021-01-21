@@ -18,8 +18,7 @@ wasmd query wasm list-code
 
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(wasmd tx wasm store contract.wasm --from fred \
-    --gas-prices="0.025umayo" --gas="auto" --gas-adjustment="1.2" -y)
+RES=$(wasmd tx wasm store contract.wasm --from fred $TXFLAG -y)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
@@ -41,20 +40,19 @@ will allow fred to control payout and upon release, the funds go to bob.
 # instantiate contract and verify
 INIT=$(jq -n --arg fred $(wasmd keys show -a fred) --arg bob $(wasmd keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 wasmd tx wasm instantiate $CODE_ID "$INIT" \
-    --from fred --amount=50000umayo  --label "escrow 1" \
-    --gas-prices="0.01umayo" --gas="auto" --gas-adjustment="1.2" -y
+    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y
 
 # check the contract state (and account balance)
-wasmd query wasm list-contract-by-code $CODE_ID
-CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID | jq -r '.[0].address')
+wasmd query wasm list-contract-by-code $CODE_ID $NODE
+CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE | jq -r '.[0].address')
 echo $CONTRACT
 
 # we should see this contract with 50000umayo
-wasmd query wasm contract $CONTRACT
-wasmd query account $CONTRACT
+wasmd query wasm contract $CONTRACT $NODE
+wasmd query account $CONTRACT $NODE
 
 # you can dump entire contract state
-wasmd query wasm contract-state all $CONTRACT
+wasmd query wasm contract-state all $CONTRACT $NODE
 
 # note that we prefix the key "config" with two bytes indicating it's length
 # echo -n config | xxd -ps
@@ -62,16 +60,16 @@ wasmd query wasm contract-state all $CONTRACT
 # thus we have a key 0006636f6e666967
 
 # you can also query one key directly
-wasmd query wasm contract-state raw $CONTRACT 0006636f6e666967 --hex
+wasmd query wasm contract-state raw $CONTRACT 0006636f6e666967 $NODE --hex
 
 # Note that keys are hex encoded, and val is base64 encoded.
 # To view the returned data (assuming it is ascii), try something like:
 # (Note that in many cases the binary data returned is non in ascii format, thus the encoding)
-wasmd query wasm contract-state all $CONTRACT | jq -r '.[0].key' | xxd -r -ps
-wasmd query wasm contract-state all $CONTRACT | jq -r '.[0].val' | base64 -d
+wasmd query wasm contract-state all $CONTRACT $NODE | jq -r '.[0].key' | xxd -r -ps
+wasmd query wasm contract-state all $CONTRACT $NODE | jq -r '.[0].val' | base64 -d
 
 # or try a "smart query", executing against the contract
-wasmd query wasm contract-state smart $CONTRACT '{}'
+wasmd query wasm contract-state smart $CONTRACT '{}' $NODE
 # (since we didn't implement any valid QueryMsg, we just get a parse error back)
 ```
 
@@ -82,22 +80,20 @@ that is not the verifier, then using the proper key to release.
 # execute fails if wrong person
 APPROVE='{"approve":{"quantity":[{"amount":"50000","denom":"umayo"}]}}'
 wasmd tx wasm execute $CONTRACT "$APPROVE" \
-    --from thief \
-    --gas-prices="0.01umayo" --gas="auto" --gas-adjustment="1.2" -y
+    --from thief $TXFLAG -y
 
 # looking at the logs should show: "execute wasm contract failed: Unauthorized"
 # and bob should still be broke (and broken showing the account does not exist Error)
-wasmd query account $(wasmd keys show bob -a)
+wasmd query account $(wasmd keys show bob -a) $NODE
 
 # but succeeds when fred tries
 wasmd tx wasm execute $CONTRACT "$APPROVE" \
-    --from fred \
-    --gas-prices="0.01umayo" --gas="auto" --gas-adjustment="1.2" -y
+    --from fred $TXFLAG -y
 
-wasmd query account $(wasmd keys show bob -a)
+wasmd query account $(wasmd keys show bob -a) $NODE
 
 # contract coins must be empty
-wasmd query account $CONTRACT
+wasmd query account $CONTRACT $NODE
 ```
 
 ## Node Console
