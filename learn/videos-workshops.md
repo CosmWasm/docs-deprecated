@@ -95,6 +95,10 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 
 <iframe src="https://player.vimeo.com/video/493294008" width="640" height="360" frameborder="0" allow="autoplay;fullscreen" allowfullscreen ></iframe>
 
+### Path to IBC
+
+<iframe src="https://player.vimeo.com/video/502682471" width="640" height="360" frameborder="0" allow="autoplay;fullscreen" allowfullscreen ></iframe>
+
 ### CosmWasm/CosmJS dApps - Zero to Hero
 
 *Date: Oct 16, 2020*
