@@ -29,6 +29,7 @@ You can find the complete repo at [github/cosmwasm-examples](https://github.com/
 
 Pay attention to comments like below in code examples. The details about the code itself is in the comments.
 
+Also the video is recorded using and older version of cosmwasm, but tutorials have been updated to a recent version(0.13) so there could be minor differences.
 ```
 /*
  *

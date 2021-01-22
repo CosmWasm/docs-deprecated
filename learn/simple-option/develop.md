@@ -10,39 +10,29 @@ First test if the starter works, and get your eyes used to rust test results:
 
 ```shell
 cargo unit-test
-   Compiling proc-macro2 v1.0.21
-   Compiling unicode-xid v0.2.1
-   Compiling syn v1.0.40
-   Compiling serde_derive v1.0.116
-   Compiling serde v1.0.116
-   Compiling autocfg v1.0.1
-   Compiling ryu v1.0.5
-   Compiling libc v0.2.77
-   Compiling serde_json v1.0.57
-   Compiling itoa v0.4.6
-   Compiling adler v0.2.3
-   Compiling doc-comment v0.3.3
-   Compiling gimli v0.22.0
-   Compiling schemars v0.7.6
-   Compiling rustc-demangle v0.1.16
-   Compiling object v0.20.0
-   Compiling cfg-if v0.1.10
-   Compiling base64 v0.11.0
-   Compiling miniz_oxide v0.4.2
-   Compiling quote v1.0.7
-   Compiling addr2line v0.13.0
-   Compiling backtrace v0.3.50
-   Compiling serde_derive_internals v0.25.0
-   Compiling schemars_derive v0.7.6
-   Compiling snafu-derive v0.6.8
-   Compiling snafu v0.6.8
-   Compiling serde-json-wasm v0.2.1
-   Compiling cosmwasm-std v0.10.1
-   Compiling cosmwasm-schema v0.10.1
-   Compiling cosmwasm-storage v0.10.1
-   Compiling simple-option v0.1.0 (~/simple-option)
-    Finished test [unoptimized + debuginfo] target(s) in 1m 19s
-     Running target/debug/deps/simple_option-8ba137e113720990
+Compiling proc-macro2 v1.0.24
+  Compiling unicode-xid v0.2.1
+  Compiling syn v1.0.58
+  Compiling serde_derive v1.0.120
+  Compiling serde v1.0.120
+  Compiling ryu v1.0.5
+  Compiling serde_json v1.0.61
+  Compiling schemars v0.7.6
+  Compiling itoa v0.4.7
+  Compiling base64 v0.13.0
+  Compiling quote v1.0.8
+  Compiling serde_derive_internals v0.25.0
+  Compiling schemars_derive v0.7.6
+  Compiling thiserror-impl v1.0.23
+  Compiling cosmwasm-derive v0.13.2
+  Compiling thiserror v1.0.23
+  Compiling serde-json-wasm v0.2.3
+  Compiling cosmwasm-std v0.13.2
+  Compiling cosmwasm-schema v0.13.2
+  Compiling cosmwasm-storage v0.13.2
+  Compiling simple-option v0.8.0 (/home/orkunkl/Workspace/cosmwasm/cosmwasm-examples/simple-option)
+    Finished test [unoptimized + debuginfo] target(s) in 25.42s
+      Running target/debug/deps/simple_option-6787c8970c576a03
 
 running 4 tests
 test contract::tests::proper_initialization ... ok
@@ -51,6 +41,7 @@ test contract::tests::burn ... ok
 test contract::tests::execute ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
 ```
 
 All good.
@@ -155,21 +146,14 @@ pub struct State {
     pub expires: u64,
 }
 
-// returns a bucket to read/write to store.
-pub fn config<S: Storage>(storage: &mut S) -> Singleton<S, State> {
+pub fn config(storage: &mut dyn Storage) -> Singleton<State> {
     singleton(storage, CONFIG_KEY)
 }
 
-// returns a readonly bucket only read store.
-// Safer to use read_only when no need to write like querying.
-pub fn config_read<S: Storage>(storage: &S) -> ReadonlySingleton<S, State> {
+pub fn config_read(storage: &dyn Storage) -> ReadonlySingleton<State> {
     singleton_read(storage, CONFIG_KEY)
 }
 
-// this is optional.
-// ConfigResponse as returned as response structure to query_config.
-// good to have aliasing.
-pub type ConfigResponse = State;
 ```
 
 
@@ -187,24 +171,27 @@ The init function will be called exactly once, before the contract is executed. 
 the first line parses the input from raw bytes into our contract-defined message. We then check if option is expired, then create the initial state. If expired, we return a generic contract error, otherwise, we store the state and return a success code:
 
 ```rust
-pub fn init<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
+pub fn init(
+    deps: DepsMut,
     env: Env,
+    info: MessageInfo,
     msg: InitMsg,
-) -> StdResult<InitResponse> {
+) -> Result<InitResponse, ContractError> {
     if msg.expires <= env.block.height {
-        return Err(StdError::generic_err("Cannot create expired option"));
+        return Err(ContractError::OptionExpired {
+            expired: msg.expires,
+        });
     }
 
     let state = State {
-        creator: env.message.sender.clone(),
-        owner: env.message.sender.clone(),
-        collateral: env.message.sent_funds,
+        creator: info.sender.clone(),
+        owner: info.sender.clone(),
+        collateral: info.sent_funds,
         counter_offer: msg.counter_offer,
         expires: msg.expires,
     };
 
-    config(&mut deps.storage).save(&state)?;
+    config(deps.storage).save(&state)?;
 
     Ok(InitResponse::default())
 }
@@ -213,16 +200,17 @@ pub fn init<S: Storage, A: Api, Q: Querier>(
 The function is simple as it looks. Option expiration date check, save the state, and return response.
 
 ```rust
-pub fn init<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
+pub fn init(
+    deps: DepsMut,
     env: Env,
+    info: MessageInfo,
     msg: InitMsg,
-) -> StdResult<InitResponse>
+) -> Result<InitResponse, ContractError> {
 ```
 
 You will see this signature all over CosmWasm handler functions. Execution context passed in to handler using Deps, which contains Storage, API and Querier functions; Env, which contains block, message and contract info; and msg, well, no explanation needed.
 
-`StdResult<T>` is a type that represents either success ([`Ok`]) or failure ([`Err`]). If the execution is successful returns `T` type otherwise returns `StdError`. Useful.
+`Result<T, ContractError>` is a type that represents either success ([`Ok`]) or failure ([`Err`]). If the execution is successful returns `T` type otherwise returns `ContractError`. Useful.
 
 ### Handle
 
@@ -233,52 +221,44 @@ Timecode [https://vimeo.com/457702442#t=15m55s](https://vimeo.com/457702442#t=15
 `handle` method routes messages to functions. It is similar to Cosmos SDK handler design.
 
 ```rust
-pub fn handle<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
+pub fn handle(
+    deps: DepsMut,
     env: Env,
+    info: MessageInfo,
     msg: HandleMsg,
-) -> StdResult<HandleResponse> {
+) -> Result<HandleResponse, ContractError> {
     match msg {
-        HandleMsg::Transfer { recipient } => handle_transfer(deps, env, recipient),
-        HandleMsg::Execute {} => handle_execute(deps, env),
-        HandleMsg::Burn {} => handle_burn(deps, env),
+        HandleMsg::Transfer { recipient } => handle_transfer(deps, env, info, recipient),
+        HandleMsg::Execute {} => handle_execute(deps, env, info),
+        HandleMsg::Burn {} => handle_burn(deps, env, info),
     }
 }
+
 ```
 
 #### Transfer
 
 ```rust
-pub fn handle_transfer<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
-    env: Env,
+pub fn handle_transfer(
+    deps: DepsMut,
+    _env: Env,
+    info: MessageInfo,
     recipient: HumanAddr,
-) -> StdResult<HandleResponse> {
+) -> Result<HandleResponse, ContractError> {
     // ensure msg sender is the owner
-    let mut state = config(&mut deps.storage).load()?;
-    /*
-     * Question (?) mark at the end is a syntactic sugar.
-     * If the result of load is an error, return the error.
-     * Otherwise set the state to the returned value.
-     */
-    if env.message.sender != state.owner {
-        return Err(StdError::unauthorized());
+    let mut state = config(deps.storage).load()?;
+    if info.sender != state.owner {
+        return Err(ContractError::Unauthorized {});
     }
 
     // set new owner on state
     state.owner = recipient.clone();
-    config(&mut deps.storage).save(&state)?;
+    config(deps.storage).save(&state)?;
 
     let mut res = Context::new();
-    res.add_log("action", "transfer");
-    res.add_log("owner", recipient);
-    /*
-     * logs will go to the cosmos sdk event log.
-     */
+    res.add_attribute("action", "transfer");
+    res.add_attribute("owner", recipient);
     Ok(res.into())
-    /*
-     * res.into converts Context to HandleResponse.
-     */
 }
 ```
 
@@ -289,40 +269,34 @@ You will see `handle_execute` in plus and example smart contracts, but actually 
 Most of the function is same with `transfer`. Just two new things: message fund check and sdk messages in return context.
 
 ```rust
-pub fn handle_execute<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
+pub fn handle_execute(
+    deps: DepsMut,
     env: Env,
-) -> StdResult<HandleResponse> {
+    info: MessageInfo,
+) -> Result<HandleResponse, ContractError> {
     // ensure msg sender is the owner
-    let state = config(&mut deps.storage).load()?;
-    if env.message.sender != state.owner {
-        return Err(StdError::unauthorized());
+    let state = config(deps.storage).load()?;
+    if info.sender != state.owner {
+        return Err(ContractError::Unauthorized {});
     }
 
     // ensure not expired
     if env.block.height >= state.expires {
-        return Err(StdError::generic_err("option expired"));
+        return Err(ContractError::OptionExpired {
+            expired: state.expires,
+        });
     }
 
-    /*
-     * env.message.sent_funds is the coins sent along the tx.
-     */
     // ensure sending proper counter_offer
-    if env.message.sent_funds != state.counter_offer {
-        return Err(StdError::generic_err(format!(
-            "must send exact counter offer: {:?}",
-            state.counter_offer
-        )));
+    if info.sent_funds != state.counter_offer {
+        return Err(ContractError::CounterOfferMismatch {
+            offer: info.sent_funds,
+            counter_offer: state.counter_offer,
+        });
     }
 
     // release counter_offer to creator
     let mut res = Context::new();
-
-    /*
-     * CosmWasm smart contract cannot execute native Cosmos SDK messages
-     * such as bank send msg. Instead we return native messages in the execution context
-     * to be processed by Cosmos SDK transaction runtime.
-     */
     res.add_message(BankMsg::Send {
         from_address: env.contract.address.clone(),
         to_address: state.creator,
@@ -337,9 +311,9 @@ pub fn handle_execute<S: Storage, A: Api, Q: Querier>(
     });
 
     // delete the option
-    config(&mut deps.storage).remove();
+    config(deps.storage).remove();
 
-    res.add_log("action", "execute");
+    res.add_attribute("action", "execute");
     Ok(res.into())
 }
 ```
@@ -351,22 +325,14 @@ For more complex queries check [cosmwasm-plus](https://github.com/CosmWasm/cosmw
 If you are starting to learn from zero, now you have 20 minutes of cosmwasm experience. Go ahead skim plus contracts to see the simplicity.
 
 ```rust
-pub fn query<S: Storage, A: Api, Q: Querier>(
-    deps: &Extern<S, A, Q>,
-    msg: QueryMsg,
-) -> StdResult<Binary> {
+pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
-        /*
-         * Client will parse binary
-         */
         QueryMsg::Config {} => to_binary(&query_config(deps)?),
     }
 }
 
-fn query_config<S: Storage, A: Api, Q: Querier>(
-    deps: &Extern<S, A, Q>,
-) -> StdResult<ConfigResponse> {
-    let state = config_read(&deps.storage).load()?;
+fn query_config(deps: Deps) -> StdResult<ConfigResponse> {
+    let state = config_read(deps.storage).load()?;
     Ok(state)
 }
 ```
@@ -421,7 +387,7 @@ Reproducible and optimized compilation:
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.10.3
+  cosmwasm/rust-optimizer:0.10.7
 ```
 
 You want to use the command above before deploying to the chain.
