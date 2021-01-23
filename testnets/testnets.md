@@ -23,7 +23,7 @@ First of all make sure you followed the installation steps in [build requirement
 Below is the [musselnet configuration](https://github.com/CosmWasm/testnets/tree/master/musselnet).
 
 ```shell
-export CHAIN_ID="musselnet"
+export CHAIN_ID="musselnet-2"
 export TESTNET_NAME="musselnet"
 export WASMD_VERSION="v0.14.0"
 export CONFIG_DIR=".wasmd"
