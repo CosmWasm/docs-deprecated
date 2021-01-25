@@ -45,7 +45,8 @@ curious), but you should have an idea of the final size of your contract this wa
 For production deployment, please use
 [cosmwasm/rust-optimizer](https://github.com/CosmWasm/rust-optimizer). **rust-optimizer** produces
 reproducible builds of cosmwasm smart contracts. It also does heavy optimization on the build size,
-using binary stripping and wasm-opt.
+using binary stripping and wasm-opt. **When deploying to a testnet or mainnet, deploy the output of the command.**
+It produces much smaller wasm binary.
 
 ```shell
 docker run --rm -v "$(pwd)":/code \
