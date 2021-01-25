@@ -14,7 +14,7 @@ upload the code to the blockchain. Afterwards, you can download the bytecode to 
 
 ```shell
 # see how many codes we have now
-wasmd query wasm list-code
+wasmd query wasm list-code $NODE
 
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
@@ -24,10 +24,10 @@ RES=$(wasmd tx wasm store contract.wasm --from fred $TXFLAG -y)
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
 
 # no contracts yet, this should return `null`
-wasmd query wasm list-contract-by-code $CODE_ID
+wasmd query wasm list-contract-by-code $CODE_ID $NODE $NODE
 
 # you can also download the wasm from the chain and check that the diff between them is empty
-wasmd query wasm code $CODE_ID download.wasm
+wasmd query wasm code $CODE_ID $NODE download.wasm
 diff contract.wasm download.wasm
 ```
 
