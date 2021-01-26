@@ -70,7 +70,7 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"umayo","address":
 
 ## Export wasmd Parameters
 
-If you intend to use wasmd as client, we recommend you to setup these variables. 
+If you intend to use wasmd as client, we recommend you to setup these variables.
 Otherwise You will have to define type in node, chain id and gas-prices details with every command you execute.
 Also for this tutorial we will use these variables. So make sure you export these before proceeding.
 
@@ -119,8 +119,6 @@ hitFaucet(defaultFaucetUrl, address, 'FRITES')
 client.getAccount()
 ```
 
-
-You need to put RPC endpoint and 
 ## Run Local Node (optional)
 
 If you are interested in running your local network you can use the script below:
@@ -129,20 +127,20 @@ If you are interested in running your local network you can use the script below
 # default home is ~/.wasmd
 # if you want to setup multiple apps on your local make sure to change this value
 APP_HOME="~/.wasmd"
-CLI_HOME="~/.wasmd"
 RPC="http://localhost:26657"
+CHAIN_ID="localnet"
 # initialize wasmd configuration files
-wasmd init localnet --chain-id localnet --home ${APP_HOME}
+wasmd init localnet --chain-id ${CHAIN_ID} --home ${APP_HOME}
 
 # add minimum gas prices config to app configuration file
-sed -i -r 's/minimum-gas-prices = ""/minimum-gas-prices = "0.025umayo"/' ${APP_HOME}/config/app.toml
+sed -i -r 's/minimum-gas-prices = ""/minimum-gas-prices = "0.01ucosm"/' ${APP_HOME}/config/app.toml
 
 # add your wallet addresses to genesis
-wasmd add-genesis-account $(wasmd keys show -a fred) 10000000000umayo,10000000000stake --home ${APP_HOME}
-wasmd add-genesis-account $(wasmd keys show -a thief) 10000000000umayo,10000000000stake --home ${APP_HOME}
+wasmd add-genesis-account $(wasmd keys show -a main) 10000000000ucosm,10000000000stake --home ${APP_HOME}
+wasmd add-genesis-account $(wasmd keys show -a validator) 10000000000ucosm,10000000000stake --home ${APP_HOME}
 
 # add fred's address as validator's address
-wasmd gentx --name fred --home ${APP_HOME}
+wasmd gentx validator --home ${APP_HOME} 1000000000stake --chain-id ${CHAIN_ID}
 
 # collect gentxs to genesis
 wasmd collect-gentxs --home ${APP_HOME}
