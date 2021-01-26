@@ -70,7 +70,7 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"umayo","address":
 
 ## Export wasmd Parameters
 
-If you intend to use wasmd as client, we recommend you to setup these variables.
+If you intend to use wasmd as client, we recommend you to setup these variables. 
 Otherwise You will have to define type in node, chain id and gas-prices details with every command you execute.
 Also for this tutorial we will use these variables. So make sure you export these before proceeding.
 
@@ -119,6 +119,8 @@ hitFaucet(defaultFaucetUrl, address, 'FRITES')
 client.getAccount()
 ```
 
+
+You need to put RPC endpoint and 
 ## Run Local Node (optional)
 
 If you are interested in running your local network you can use the script below:
