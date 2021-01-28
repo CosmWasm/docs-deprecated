@@ -142,7 +142,7 @@ wasmd add-genesis-account $(wasmd keys show -a main) 10000000000ucosm,1000000000
 wasmd add-genesis-account $(wasmd keys show -a validator) 10000000000ucosm,10000000000stake --home ${APP_HOME}
 
 # add fred's address as validator's address
-wasmd gentx validator --home ${APP_HOME} 1000000000stake --chain-id ${CHAIN_ID}
+wasmd gentx validator 1000000000stake --home ${APP_HOME} --chain-id ${CHAIN_ID}
 
 # collect gentxs to genesis
 wasmd collect-gentxs --home ${APP_HOME}
