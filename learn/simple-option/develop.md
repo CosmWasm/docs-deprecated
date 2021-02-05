@@ -119,7 +119,7 @@ For more details: [Names and Addresses](https://docs.cosmwasm.com/architecture/a
 
 ### QueryMsg
 
-Smart contract state querying is branched using `QueryEnum`. We will implement smart contract `Config` query later.
+Smart contract state querying is branched using `QueryMsg` enum. We will implement a smart contract `Config` query later.
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -183,8 +183,7 @@ Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind
 
 ### Init
 
-The init function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call.
-the first line parses the input from raw bytes into our contract-defined message. We then check if option is expired, then create the initial state. If expired, we return a generic contract error, otherwise, we store the state and return a success code:
+The init function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call. The first line parses the input from raw bytes into our contract-defined message. We then check if option is expired, then create the initial state. If expired, we return a generic contract error, otherwise, we store the state and return a success code:
 
 ```rust
 pub fn init<S: Storage, A: Api, Q: Querier>(
