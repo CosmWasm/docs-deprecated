@@ -109,4 +109,4 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 
 ### CosmWasm presentation at Cosmos Ecosystem Summit (15/01/21)
 
-<iframe width="640" height="360" src="//player.bilibili.com/player.html?aid=628742117&bvid=BV12t4y1z74K&cid=284064909&page=1&t=101m45s" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+<iframe width="640" height="360" src="https://player.bilibili.com/player.html?aid=628742117&bvid=BV12t4y1z74K&cid=284064909&page=1&t=101m45s" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
