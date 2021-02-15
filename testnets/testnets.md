@@ -16,7 +16,10 @@ Let's start rolling your node and start producing blocks in testnet environment.
 **Before starting**, you can use [CosmWasm/tesnets/devops](https://github.com/CosmWasm/testnets/tree/master/devops) that contains easy setup scripts for wasmd
 node, faucet, [block explorer](https://github.com/CosmWasm/big-dipper), lcd, nginx etc. Scripts
 below does the some thing as **devops repo** in essence, just more manual and excludes nginx and system supervisor. Feel free
-to use them.
+to use them. We use [cosmovisor](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor) upgrade manager to handle network upgrades.
+Our installation scripts can help you with both setting up cosmovisor and wasmd: [wasmd w/cosmovisor setup scripts](https://github.com/CosmWasm/testnets/tree/master/devops/node/cosmovisor)g
+
+### Manual Setup
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 
