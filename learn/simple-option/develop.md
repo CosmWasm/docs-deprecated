@@ -105,7 +105,7 @@ Human Addresses on the other hand are great for the UI. They are always a subset
 
 `canonicalize(humanize(canonical_addr)) == canonical_addr`
 
-For more details: [Names and Addresses](https://docs.cosmwasm.com/architecture/addresses.html)
+For more details: [Names and Addresses](/architecture/addresses.md)
 :::
 
 ### QueryMsg
@@ -369,7 +369,7 @@ cargo clippy -- -D warnings
 
 ### Compile
 
-This section compiles key commands from [Compiling Contract](https://docs.cosmwasm.com/getting-started/compile-contract.html) doc. For more detailed read proceed to the documentation.
+This section compiles key commands from [Compiling Contract](/getting-started/compile-contract.md) doc. For more detailed read proceed to the documentation.
 
 Basic compilation:
 
