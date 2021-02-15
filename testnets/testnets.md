@@ -23,9 +23,9 @@ First of all make sure you followed the installation steps in [build requirement
 Below is the [musselnet configuration](https://github.com/CosmWasm/testnets/tree/master/musselnet).
 
 ```shell
-export CHAIN_ID="musselnet-2"
-export TESTNET_NAME="musselnet"
-export WASMD_VERSION="v0.14.0"
+export CHAIN_ID="musselnet-3"
+export TESTNET_NAME="musselnet-3"
+export WASMD_VERSION="v0.15.0"
 export CONFIG_DIR=".wasmd"
 export BINARY="wasmd"
 
@@ -37,7 +37,12 @@ export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/mu
 export RPC="https://rpc.musselnet.cosmwasm.com:443"
 export LCD="https://lcd.musselnet.cosmwasm.com"
 export FAUCET="https://faucet.musselnet.cosmwasm.com"
-export SEED_NODE="a4ef6bf25dec4402ade0ce280e614453973e6f2e@78.47.158.178:26656"
+
+export COSMOVISOR_VERSION=v0.41.0
+export COSMOVISOR_HOME=/root/.wasmd
+export COSMOVISOR_NAME=wasmd
+
+export SEED_NODE="422f88b01019a6cfdc3bef2e4119232250cb3bc3@188.34.187.55:26656"
 ```
 
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
