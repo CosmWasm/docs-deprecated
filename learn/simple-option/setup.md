@@ -9,7 +9,7 @@ order: 2
 ## Coding Environment
 
 ### Rust and IDE
-This section is a summary of [Getting Started / Installation and Setting Up Environment](../../getting-started/installation).
+This section is a summary of [Getting Started / Installation and Setting Up Environment](../../getting-started/installation.md).
 You can go to the doc, setup rust and preferred IDE then and come back here. We recommend using Intellij IDEA.
 
 ## Project Starter
