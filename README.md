@@ -27,6 +27,8 @@ You will need a running blockchain to host your contracts and use them from an a
 
 [The Learn section](/learn/) will demonstrate developing smart contracts from zero to production with step by step explanations, code snippets, scripts and more.
 
+[The Workshops](/learn/videos-workshops.md) has great collection of demonstrations and verbal explanation of CosmWasm tech stack recorded by our team in various events and organisations.
+
 ## Further Studies
 
 We provide a video of a [workshop explaining token contracts](https://www.youtube.com/watch?v=pm6VX5ueT2k&feature=youtu.be)
