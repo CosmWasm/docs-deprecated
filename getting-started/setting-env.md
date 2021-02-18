@@ -11,9 +11,9 @@ here](#run-local-node-optional)
 
 To verify testnet is currently running, make sure the following URLs are all working for you:
 
-- [https://rpc.musselnet.cosmwasm.com/status](https://rpc.heldernet.cosmwasm.com/status)
-- [https://faucet.musselnet.cosmwasm.com/status](https://faucet.heldernet.cosmwasm.com/status)
-- [https://lcd.musselnet.cosmwasm.com/node_info](https://lcd.heldernet.cosmwasm.com/node_info)
+- [https://rpc.musselnet.cosmwasm.com/status](https://rpc.musselnet.cosmwasm.com/status)
+- [https://faucet.musselnet.cosmwasm.com/status](https://faucet.musselnet.cosmwasm.com/status)
+- [https://lcd.musselnet.cosmwasm.com/node_info](https://lcd.musselnet.cosmwasm.com/node_info)
 
 We have set up two native tokens - `FRITES` (`ufrites`) for becoming a validator and `MAYO` (`umayo`) for
 paying fees.
