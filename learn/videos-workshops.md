@@ -111,6 +111,12 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 
 <iframe src="https://vimeo.com/512992499" width="640" height="360" frameborder="0" allow="autoplay;fullscreen" allowfullscreen ></iframe>
 
+### CosmWasm & IBC: Cross Chain Contracts
+
+*Date: Feb 24, 2021*
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/cG1lpAwK1sc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Presentations
 
 ### CosmWasm presentation at Cosmos Ecosystem Summit (15/01/21)
