@@ -108,7 +108,7 @@ For those interested in validator stack, here is a good reading source on valida
 
 ```shell
 wasmd tx staking create-validator \
-  --amount=100000000ufrites \
+  --amount=1000000ufrites
   --pubkey=$(wasmd tendermint show-validator) \
   --moniker=$MONIKER \
   --chain-id=$CHAIN_ID \
