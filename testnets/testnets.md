@@ -45,7 +45,7 @@ export COSMOVISOR_VERSION=v0.41.0
 export COSMOVISOR_HOME=/root/.wasmd
 export COSMOVISOR_NAME=wasmd
 
-export SEED_NODE="422f88b01019a6cfdc3bef2e4119232250cb3bc3@188.34.187.55:26656"
+export SEED_NODE="c065c5ac440d1a9ba484a9a8b25c24d264b0a1a6@49.12.67.47:26656"
 ```
 
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
