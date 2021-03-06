@@ -76,7 +76,7 @@ Also for this tutorial we will use these variables. So make sure you export thes
 
 ```bash
 export NODE="--node https://rpc.musselnet.cosmwasm.com:443"
-export TXFLAG="$NODE --chain-id musselnet-2 --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3"
+export TXFLAG=($NODE --chain-id musselnet-2 --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3)
 ```
 
 ## Setup Node REPL
