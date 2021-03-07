@@ -44,7 +44,7 @@ wasmd tx wasm instantiate $CODE_ID "$INIT" \
 
 # check the contract state (and account balance)
 wasmd query wasm list-contract-by-code $CODE_ID $NODE
-CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE | jq -r '.[0].address')
+CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output "json" | jq -r '.contract_infos[0].address')
 echo $CONTRACT
 
 # we should see this contract with 50000umayo
