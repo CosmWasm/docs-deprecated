@@ -65,8 +65,8 @@ wasmd query wasm contract-state raw $CONTRACT 0006636f6e666967 $NODE --hex
 # Note that keys are hex encoded, and val is base64 encoded.
 # To view the returned data (assuming it is ascii), try something like:
 # (Note that in many cases the binary data returned is non in ascii format, thus the encoding)
-wasmd query wasm contract-state all $CONTRACT $NODE | jq -r '.[0].key' | xxd -r -ps
-wasmd query wasm contract-state all $CONTRACT $NODE | jq -r '.[0].val' | base64 -d
+wasmd query wasm contract-state all $CONTRACT $NODE --output "json" | jq -r '.models[0].key' | xxd -r -ps
+wasmd query wasm contract-state all $CONTRACT $NODE --output "json" | jq -r '.models[0].value' | base64 -d
 
 # or try a "smart query", executing against the contract
 wasmd query wasm contract-state smart $CONTRACT '{}' $NODE
