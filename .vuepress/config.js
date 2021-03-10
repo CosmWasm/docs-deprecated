@@ -123,13 +123,33 @@ module.exports = {
               directory: true,
             },
             {
+              title: "CW1",
+              path: "/cw-plus/cw1",
+              directory: true,
+            },
+            {
+              title: "CW2",
+              path: "/cw-plus/cw2",
+              directory: true,
+            },
+            {
               title: "CW20",
               path: "/cw-plus/cw20",
               directory: true,
             },
             {
-              title: "CW1",
-              path: "/cw-plus/cw1",
+              title: "CW3",
+              path: "/cw-plus/cw3",
+              directory: true,
+            },
+            {
+              title: "CW4",
+              path: "/cw-plus/cw4",
+              directory: true,
+            },
+            {
+              title: "CW721",
+              path: "/cw-plus/cw721",
               directory: true,
             },
           ]

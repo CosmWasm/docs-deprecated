@@ -6,7 +6,7 @@ order: 2
 # Advanced REPL tips
 
 ::: danger
-You must read [cw20 tutorial](/cw-plus/cw20/cw20) first. This section builds on
+You must read [cw20 tutorial](../cw20/03-cw20-base-tutorial.md) first. This section builds on
 top of it.
 :::
 

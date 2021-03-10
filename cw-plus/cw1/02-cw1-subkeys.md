@@ -2,7 +2,7 @@
 order: 2
 ---
 
-# Subkeys
+# CW1 Subkeys
 
 [CW1 Subkeys](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw1-subkeys)
 is inspired by [Cosmos SDK feature proposal](https://forum.cosmos.network/t/proposal-adding-subkey-feature-to-cosmos-sdk-and-apply-it-to-the-hub/2358).
@@ -10,7 +10,7 @@ is inspired by [Cosmos SDK feature proposal](https://forum.cosmos.network/t/prop
 This is a basic proxy contract. Initiated contract with some tokens inside,
 allowed accounts can execute `CosmosMsg::Bank(BankMsg::Send{})` within the
 allowance(`spender, denom`) limits per account basis. Allowance logic is similar
-to [CW20](../cw20/spec). After authorization their allowance will be reduced, and
+to [CW20](../cw20/01-spec.md). After authorization their allowance will be reduced, and
 the send message will be relayed. If they don't have sufficient authorization,
 or if they try to proxy any other message type, then the attempt will be rejected.
 Admin can add an allowance for an account during init msg broadcast or after
