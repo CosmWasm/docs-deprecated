@@ -2,7 +2,7 @@
 order: 1
 ---
 
-# Spec: Fungible Tokens
+# [CW20 Spec](https://github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw20): Fungible Tokens
 
 CW20 is a specification for fungible tokens based on CosmWasm.
 The name and design is loosely based on Ethereum's ERC20 standard,
