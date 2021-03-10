@@ -5,6 +5,8 @@ order: 7
 
 # Atomic Swaps
 
+cw20-atomic-swap source code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-atomic-swap](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-atomic-swap)
+
 This is a contract that allows users to execute atomic swaps.
 It implements one side of an atomic swap. The other side can be realized
 by an equivalent contract in the same blockchain or, typically, on a different blockchain.

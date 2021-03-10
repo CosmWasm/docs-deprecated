@@ -3,7 +3,9 @@ title: cw20-bonding Spec
 order: 4
 ---
 
-# [CW20 Bonding curve](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding)
+# CW20 Bonding curve
+
+cw20-bonding-curve source code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding)
 
 This builds on the [Basic CW20 interface](01-spec.md)
 as implemented in [`cw20-base`](02-cw20-base-spec.md)

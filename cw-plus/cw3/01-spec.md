@@ -5,7 +5,7 @@ order: 1
 
 # CW3 Spec: MultiSig/Voting Contracts
 
-CW3 is a specification for voting contracts based on CosmWasm.
+[CW3](https://github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw3) is a specification for voting contracts based on CosmWasm.
 It is an extension of CW1 (which served as an immediate 1 of N multisig).
 In this case, no key can immediately execute, but only propose
 a set of messages for execution. The proposal, subsequent

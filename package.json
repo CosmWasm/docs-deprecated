@@ -21,7 +21,7 @@
   "homepage": "https://github.com/CosmWasm/docs",
   "dependencies": {
     "vuepress-plugin-sitemap": "^2.3.1",
-    "vuepress-theme-cosmos": "1.0.179"
+    "vuepress-theme-cosmos": "1.0.180"
   },
   "devDependencies": {
     "filehound": "^1.17.4",
