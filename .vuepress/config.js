@@ -142,6 +142,11 @@ module.exports = {
               path: "/cw-plus/cw3",
               directory: true,
             },
+            {
+              title: "CW4",
+              path: "/cw-plus/cw4",
+              directory: true,
+            },
           ]
         },
         {
