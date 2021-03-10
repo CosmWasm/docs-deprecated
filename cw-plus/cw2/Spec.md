@@ -2,8 +2,9 @@
 title: CW2 Spec
 ---
 
-# [CW2 Spec](https://github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw2): Contract Info for Migration
+# CW2 Spec: Contract Info for Migration
 
+Repo link: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw2](https://github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw2)
 
 Most of the CW* specs are focused on the *public interfaces*
 of the contract. The APIs used for `HandleMsg` or `QueryMsg`.
@@ -35,7 +36,7 @@ All CW2-compliant contracts must store the following data:
 pub struct ContractVersion {
     /// contract is a globally unique identifier for the contract.
     /// it should build off standard namespacing for whichever language it is in,
-    /// and prefix it with the registry we use. 
+    /// and prefix it with the registry we use.
     /// For rust we prefix with `crates.io:`, to give us eg. `crates.io:cw20-base`
     pub contract: String,
     /// version is any string that this implementation knows. It may be simple counter "1", "2".

@@ -3,7 +3,9 @@ title: cw3-fixed-multisig Spec
 order: 2
 ---
 
-# [CW3 Fixed Multisig](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw3-fixed-multisig)
+# CW3 Fixed Multisig
+
+cw3-fixed-multisig source code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw3-fixed-multisig](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw3-fixed-multisig)
 
 This is a simple implementation of the [cw3 spec](01-spec.md).
 It is a multisig with a fixed set of addresses created upon initialization.

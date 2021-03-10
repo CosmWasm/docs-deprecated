@@ -3,7 +3,9 @@ title: cw721-base Spec
 order: 2
 ---
 
-# [Cw721 Basic](https://github.com/CosmWasm/cosmwasm-plus/blob/master/contracts/cw721-base/README.md)
+# Cw721 Basic
+
+cw721-basic source code: [https://github.com/CosmWasm/cosmwasm-plus/blob/master/contracts/cw721-base/README.md](https://github.com/CosmWasm/cosmwasm-plus/blob/master/contracts/cw721-base/README.md)
 
 This is a basic implementation of a cw721 NFT contract. It implements
 the [CW721 spec](01-spec.md) and is designed to

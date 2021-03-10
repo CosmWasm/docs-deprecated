@@ -3,7 +3,9 @@ title: cw20-escrow Spec
 order: 5
 ---
 
-# [CW20 Escrow](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-escrow)
+# CW20 Escrow
+
+cw20-escrow source code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-escrow](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-escrow)
 
 This is an escrow meta-contract that allows multiple users to
 create independent escrows. Each escrow has a sender, recipient,
