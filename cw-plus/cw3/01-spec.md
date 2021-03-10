@@ -1,5 +1,5 @@
 ---
-title: CW3 Spec: MultiSig/Voting Contracts
+title: cw3 MultiSig/Voting Contracts Spec
 order: 1
 ---
 
