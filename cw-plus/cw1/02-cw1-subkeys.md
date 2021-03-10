@@ -2,7 +2,7 @@
 order: 2
 ---
 
-# Subkeys
+# CW1 Subkeys
 
 [CW1 Subkeys](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw1-subkeys)
 is inspired by [Cosmos SDK feature proposal](https://forum.cosmos.network/t/proposal-adding-subkey-feature-to-cosmos-sdk-and-apply-it-to-the-hub/2358).

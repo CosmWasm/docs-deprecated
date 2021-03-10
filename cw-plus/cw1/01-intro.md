@@ -3,9 +3,9 @@ title: Spec
 order: 1
 ---
 
-# Spec: Proxy Contracts
+# CW1 Spec: Proxy Contracts
 
-CW1 is a specification for proxy contracts based on CosmWasm.
+[CW1](https://github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw1) is a specification for proxy contracts based on CosmWasm.
 It is a very simple, but flexible interface designed for the case
 where one contract is meant to hold assets (or rights) on behalf of
 other contracts.
