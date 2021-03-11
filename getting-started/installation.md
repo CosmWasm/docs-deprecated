@@ -26,7 +26,7 @@ First, [install rustup](https://rustup.rs/). Once installed, make sure you have 
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.47.0+, update
+# If this is lower than 1.49.0+, update
 rustup update stable
 
 rustup target list --installed
@@ -56,7 +56,7 @@ Install the wasm32 target:
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.47.0, update
+# If this is lower than 1.49.0, update
 rustup update stable
 
 rustup target list --installed
@@ -83,8 +83,8 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.14.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.14.1
+# replace the v0.15.1 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.15.1
 make install
 
 # verify the installation
@@ -111,7 +111,7 @@ Use go 1.15 for compiling `wasmd` executable
 git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
 
 # wasmd runs on wasmd v0.14.1
-git checkout v0.14.1
+git checkout v0.15.1
 
 # build wasmd executable
 make install

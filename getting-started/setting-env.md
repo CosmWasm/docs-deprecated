@@ -70,13 +70,13 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"umayo","address":
 
 ## Export wasmd Parameters
 
-If you intend to use wasmd as client, we recommend you to setup these variables. 
+If you intend to use wasmd as client, we recommend you to setup these variables.
 Otherwise You will have to define type in node, chain id and gas-prices details with every command you execute.
 Also for this tutorial we will use these variables. So make sure you export these before proceeding.
 
 ```bash
 export NODE=(--node "https://rpc.musselnet.cosmwasm.com:443")
-export TXFLAG=($NODE --chain-id musselnet-2 --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3)
+export TXFLAG=($NODE --chain-id ${CHAIN_ID} --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3)
 ```
 
 ## Setup Node REPL
@@ -120,7 +120,7 @@ client.getAccount()
 ```
 
 
-You need to put RPC endpoint and 
+You need to put RPC endpoint and
 ## Run Local Node (optional)
 
 If you are interested in running your local network you can use the script below:
