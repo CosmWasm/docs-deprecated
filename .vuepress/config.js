@@ -115,6 +115,27 @@ module.exports = {
           ]
         },
         {
+          title: "IBC",
+          children: [
+            {
+              title: "Overview",
+              path: "/ibc/01-overview"
+            },
+            {
+              title: "Relayer",
+              path: "/ibc/01-relayer"
+            },
+            {
+              title: "List of Active Connections",
+              path: "/ibc/03-active-connections"
+            },
+            {
+              title: "CW20 ICS20",
+              path: "/ibc/03-active-connections"
+            },
+          ]
+        },
+        {
           title: "Plus Contracts",
           children: [
             {

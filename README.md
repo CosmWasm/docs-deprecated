@@ -19,26 +19,35 @@ You will need a running blockchain to host your contracts and use them from an a
 
 ## Sections
 
-[Getting Started](/getting-started/intro.md) dives you into hands-on training. It gently leads you through modifying, deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get acquainted with all the aspects of the system, without too much hard work coding.
+* [Getting Started](/getting-started/intro.md) dives you into hands-on training. It gently leads you through
+modifying, deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get acquainted with all the aspects of the system, without too much hard work coding.
 
-[The Architecture section](/architecture/multichain.md) explains much of the high-level design and architecture of CosmWasm. Before you start designing systems, it is good to understand the mental model and capabilities of the system. If you just want to get your hands dirty with working code, you can skip this section for now and come back later when you are ready to ponder design.
+* [Architecture](/architecture/multichain.md) explains much of the high-level design and architecture of CosmWasm.
+Before you start designing systems, it is good to understand the mental model and capabilities of the system. If you just want to get your hands dirty with working code, you can skip this section for now and come back later when you are ready to ponder design.
 
-[The Testnets section](/testnets/build-requirements.md) is a good first point if you are searching for a live network to test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined the testnets**", said no one ever 😉
+* [Testnets](/testnets/build-requirements.md) is a good first point if you are searching for a live
+network to test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined the testnets**", said no one ever 😉
 
-[The Learn section](/learn/) will demonstrate developing smart contracts from zero to production with step by step explanations, code snippets, scripts and more.
+* [Learn](/learn/README.md) will demonstrate developing smart contracts from zero to production with step by step
+explanations, code snippets, scripts and more.
 
-[The Workshops](/learn/videos-workshops.md) has great collection of demonstrations and verbal explanation of CosmWasm tech stack recorded by our team in various events and organisations.
+* [Workshops](/learn/videos-workshops.md) has great collection of demonstrations and verbal explanation of
+  CosmWasm tech stack recorded by our team in various events and organisations.
+
+* [Community](/community/hall-of-fame.md) for community interactions.
+
+* [Plus](/cw-plus/general/overview.md) is for state of art CosmWasm smart contracts.
+
+* [IBC](/ibc/01-overview.md) is for all the things related to CosmWasm and IBC. Relayers, Active Network Connections, IBC enabled
+  smart contracts and more.
 
 ## Further Studies
 
-We provide a video of a [workshop explaining token contracts](https://www.youtube.com/watch?v=pm6VX5ueT2k&feature=youtu.be)
-along with a live coding session that you can follow along with at home.
-
-And after that, you can dig into our code and start writing your own contracts:
+you can dig into our code and start writing your own contracts:
 
 * [A set of example contracts](https://github.com/CosmWasm/cosmwasm-examples) for you to fork and experiment with
-* Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.9.2/cosmwasm_std/)
-* Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.9.2/cosmwasm_storage/)
+* Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.13.1/cosmwasm_std/)
+* Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.13.1/cosmwasm_storage/)
 
 There are quite a few [high level articles on medium](https://medium.com/confio) that explain the various components of
 our stack and where we are going.
