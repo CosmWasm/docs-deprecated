@@ -43,8 +43,8 @@ wasmd tx wasm instantiate $CODE_ID "$INIT" \
     --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y
 
 # check the contract state (and account balance)
-wasmd query wasm list-contract-by-code $CODE_ID $NODE
-CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE | jq -r '.[0].address')
+wasmd query wasm list-contract-by-code $CODE_ID $NODE --output=json
+CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output=json | jq -r '.[0].address')
 echo $CONTRACT
 
 # we should see this contract with 50000umayo
