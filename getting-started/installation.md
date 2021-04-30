@@ -83,8 +83,8 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.15.1 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.15.1
+# replace the v0.16.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.16.0
 make install
 
 # verify the installation
@@ -103,14 +103,14 @@ Testing network [Musselnet](https://github.com/CosmWasm/testnets/tree/master/mus
 save you of the hassle of running a local network and speed up your development.
 
 ::: warning
-Use go 1.15 for compiling `wasmd` executable
+Use go 1.15+ for compiling `wasmd` executable
 :::
 
 ```shell
 # clone wasmd repo
 git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
 
-# wasmd runs on wasmd v0.14.1
+# musselnet runs on wasmd v0.15.1
 git checkout v0.15.1
 
 # build wasmd executable

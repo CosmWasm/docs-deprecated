@@ -23,8 +23,8 @@ RES=$(wasmd tx wasm store contract.wasm --from fred $TXFLAG -y)
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
 
-# no contracts yet, this should return `null`
-wasmd query wasm list-contract-by-code $CODE_ID $NODE $NODE
+# no contracts yet, this should return an empty list
+wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
 
 # you can also download the wasm from the chain and check that the diff between them is empty
 wasmd query wasm code $CODE_ID $NODE download.wasm
@@ -43,8 +43,8 @@ wasmd tx wasm instantiate $CODE_ID "$INIT" \
     --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y
 
 # check the contract state (and account balance)
-wasmd query wasm list-contract-by-code $CODE_ID $NODE
-CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE | jq -r '.[0].address')
+wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
+CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contracts[-1]')
 echo $CONTRACT
 
 # we should see this contract with 50000umayo
