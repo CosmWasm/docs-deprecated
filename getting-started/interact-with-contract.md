@@ -157,7 +157,7 @@ Now, we go back to the Node console and upload the contract and instantiate it:
 ```js
 const wasm = fs.readFileSync('contract.wasm');
 // you can add extra information to contract details such as source and builder.
-const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.7.0/download", builder: "cosmwasm/rust-optimizer:0.10.7"});
+const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.10.0/download", builder: "cosmwasm/rust-optimizer:0.10.7"});
 
 console.log(up);
 const { codeId } = up;

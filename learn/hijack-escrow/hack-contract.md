@@ -8,11 +8,13 @@ Now that you can compile and run tests, let's try to make some changes to the co
 
 ```shell
 git clone https://github.com/CosmWasm/cosmwasm-examples
-cd cosmwasm-examples/escrow
-git checkout escrow-0.7.0
+cd cosmwasm-examples
+git fetch --tags
+git checkout escrow-0.10.0
+cd contracts/escrow
 ```
 
-Note: This guide is compatible with `CosmWasm` and `wasmd` `v0.10.x`.
+Note: This guide is compatible with `CosmWasm v0.14.x` and `wasmd v0.16.x`.
 
 ## A Walk-Through of the Escrow Contract
 
@@ -32,9 +34,9 @@ From `state.rs`:
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct State {
-    pub arbiter: CanonicalAddr,
-    pub recipient: CanonicalAddr,
-    pub source: CanonicalAddr,
+    pub arbiter: Addr,
+    pub recipient: Addr,
+    pub source: Addr,
     pub end_height: Option<u64>,
     pub end_time: Option<u64>,
 }
@@ -44,9 +46,9 @@ From `msg.rs`:
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct InitMsg {
-    pub arbiter: HumanAddr,
-    pub recipient: HumanAddr,
+pub struct InstantiateMsg {
+    pub arbiter: String,
+    pub recipient: String,
     /// When end height set and block height exceeds this value, the escrow is expired.
     /// Once an escrow is expired, it can be returned to the original funder (via "refund").
     pub end_height: Option<u64>,
@@ -57,18 +59,18 @@ pub struct InitMsg {
 }
 ```
 
-Note that we use `CanonicalAddr`, which is the binary representation and unchanging over the lifetime of the chain, for storage inside `State`, while we use `HumanAddr`, which is the typical cli format (eg bech32 encoding), for messages and anything that interacts with the user. There is [more info on addresses here](../../architecture/addresses).
+Note that we use `Addr`, which is a validated address wrapper with some helper functions for storage inside `State`, while we use invalidated  `String` address which should be validated by developer, for messages and anything that interacts with the user. There is [more info on addresses here](../../architecture/addresses).
 
 `Option<u64>` is a way of telling rust this field may be missing. It may either have a value, like `Some(123456)` or
 be `None`. This means the init message may omit those fields (or pass them as `null`) and we don't need to use some
 special value like `0` to signify disabled.
 
-Moving to the `HandleMsg` type, which defines the different contract methods, we make use of a slightly more complex rust construction, the [`enum`](https://doc.rust-lang.org/stable/rust-by-example/custom_types/enum.html). This is also known as [a tagged union or sum type](https://en.wikipedia.org/wiki/Tagged_union), and contains a fixed set of defined possible data types, or `variants`, *exactly one of which must be set*. We use each `variant` to encode a different method. For example `HandleMsg::Refund{}` is a serializable request to refund the escrow, which is only valid after a timeout.
+Moving to the `ExecuteMsg` type, which defines the different contract methods, we make use of a slightly more complex rust construction, the [`enum`](https://doc.rust-lang.org/stable/rust-by-example/custom_types/enum.html). This is also known as [a tagged union or sum type](https://en.wikipedia.org/wiki/Tagged_union), and contains a fixed set of defined possible data types, or `variants`, *exactly one of which must be set*. We use each `variant` to encode a different method. For example `Execute::Refund{}` is a serializable request to refund the escrow, which is only valid after a timeout.
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
-pub enum HandleMsg {
+pub enum ExecuteMsg {
     Approve {
         // release some coins - if quantity is None, release all coins in balance
         quantity: Option<Vec<Coin>>,
@@ -81,31 +83,36 @@ You can see another directive here (`#[serde(rename_all = "snake_case")]`). This
 
 ### JSON Format
 
-When a `HandleMsg` instance is encoded, it will end up looking like `{"approve": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}` or `{"refund": {}}`. This is also the format we should use client side, when submitting a message body to later be processed by `handle`.
+When a `ExecuteMsg` instance is encoded, it will end up looking like `{"approve": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}` or `{"refund": {}}`. This is also the format we should use client side, when submitting a message body to later be processed by `execute`.
 
 ### Instantiation Logic
 
-The `init` function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call. If you look at this example, the first line parses the input from raw bytes into our contract-defined message. We then create the initial state, and check if it is expired already. If expired, we return a generic contract error, otherwise, we store the state and return a success code:
+The `instantiate` function will be called exactly once, before the contract is executed. It is a "privileged" function in that it can set configuration that can never be modified by any other method call. If you look at this example, the first line parses the input from raw bytes into our contract-defined message. We then create the initial state, and check if it is expired already. If expired, we return a generic contract error, otherwise, we store the state and return a success code:
 
 ```rust
-pub fn init<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
+pub fn instantiate(
+    deps: DepsMut,
     env: Env,
-    msg: InitMsg,
-) -> InitResult {
+    info: MessageInfo,
+    msg: InstantiateMsg,
+) -> Result<Response, ContractError> {
     let state = State {
-        arbiter: deps.api.canonical_address(&msg.arbiter)?,
-        recipient: deps.api.canonical_address(&msg.recipient)?,
-        source: env.message.sender.clone(),
+        arbiter: deps.api.addr_validate(&msg.arbiter)?,
+        recipient: deps.api.addr_validate(&msg.recipient)?,
+        source: info.sender,
         end_height: msg.end_height,
         end_time: msg.end_time,
     };
+
     if state.is_expired(&env) {
-        Err(generic_err("creating expired escrow"))
-    } else {
-        config(&mut deps.storage).save(&state)?;
-        Ok(InitResponse::default())
+        return Err(ContractError::Expired {
+            end_height: msg.end_height,
+            end_time: msg.end_time,
+        });
     }
+
+    config(deps.storage).save(&state)?;
+    Ok(Response::default())
 }
 ```
 
@@ -114,100 +121,88 @@ for you automatically, removing some boilerplate. It is completely optional and 
 you to develop other shared libraries for interacting with `Storage` if you want to make certain use cases easier (eg. representing a queue):
 
 ```rust
-pub fn config<S: Storage>(storage: &mut S) -> Singleton<S, State> {
+pub fn config(storage: &mut dyn Storage) -> Singleton<State> {
     singleton(storage, CONFIG_KEY)
 }
 ```
-
-You may wonder about the `clone()` in `source: env.message.sender.clone()`. This has to do with rust lifetimes. If I pass in a variable, I give "ownership" to the other structure and may no longer use it in my code. Since I need to access a reference to env later to check expiration, `state.is_expired(&env)`, I must first clone the struct. If I did not reference `env` anywhere below, I would not need the `clone`.
-
-Try to remove the `.clone()` and compile. See what your IDE or compiler says.
 
 ### Execution Logic
 
 Just as `init` is the entry point for instantiating a new contract, `handle` is the entry point for executing the code. Since `handle` takes an `enum` with multiple `variants`, we can't just jump into the business logic, but first start with loading the state, and dispatching the message:
 
 ```rust
-pub fn handle<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
+pub fn execute(
+    deps: DepsMut,
     env: Env,
-    msg: HandleMsg,
-) -> HandleResult {
-    let state = config_read(&deps.storage).load()?;
+    info: MessageInfo,
+    msg: ExecuteMsg,
+) -> Result<Response, ContractError> {
+    let state = config_read(deps.storage).load()?;
     match msg {
-        HandleMsg::Approve { quantity } => try_approve(deps, env, state, quantity),
-        HandleMsg::Refund {} => try_refund(deps, env, state),
+        ExecuteMsg::Approve { quantity } => try_approve(deps, env, state, info, quantity),
+        ExecuteMsg::Refund {} => try_refund(deps, env, info, state),
     }
 }
 ```
 
-CosmWasm parses the incoming json into a contract-specific `HandleMsg` automatically before calling, assuming a JSON-encoding message. We also see the use of `config_read` to load without any boilerplate. Note the trailing `?`. This works on `Result` types and means, "If this is an error, return the underlying error. If this is a success, give me the value". It is a very useful shorthand all over rust and replaces the `if err != nil { return err }` boilerplate in Go.
+CosmWasm parses the incoming json into a contract-specific `ExecuteMsg` automatically before calling, assuming a JSON-encoding message. We also see the use of `config_read` to load without any boilerplate. Note the trailing `?`. This works on `Result` types and means, "If this is an error, return the underlying error. If this is a success, give me the value". It is a very useful shorthand all over rust and replaces the `if err != nil { return err }` boilerplate in Go.
 
-You will also see the [`match` statement](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch06-02-match.html). This is another nice Rust idiom, and allows you to `switch` over multiple patterns. Here we check the multiple variants of the `HandleMsg` enum. Note that if you don't cover all cases, the compiler will refuse to proceed.
+You will also see the [`match` statement](https://doc.rust-lang.org/1.30.0/book/2018-edition/ch06-02-match.html). This is another nice Rust idiom, and allows you to `switch` over multiple patterns. Here we check the multiple variants of the `ExecuteMsg` enum. Note that if you don't cover all cases, the compiler will refuse to proceed.
 
-We pass in `deps` to give the handlers access to runtime callbacks, which provide blockchain-specific logic. In particular, we currently use `deps.api` to translate `CanonicalAddr` to `HumanAddr` in a blockchain-specific manner. And we also use
+We pass in `deps` to give the handlers access to runtime callbacks, which provide blockchain-specific logic. In particular, we currently use `deps.api` to validate `String` to `Addr` in a blockchain-specific manner. Or verify cryptographic signatures with `secp256k1_verify,ed25519_verify`. And we also use
 `deps.querier` to query the current balance of the contract.
 
-If we now look into the `try_approve` function, we will see how we can respond to a message. We can return an `unauthorized` error if the `signer` is not what we expect, and custom `generic_err` if our business logic rejects the message. The `let amount =` line shows how we can use pattern matching to use the number of coins present in the msg if provided, or default to the entire balance of the contract. Mastering `match` is very useful for Rust development.
+If we now look into the `try_approve` function, we will see how we can respond to a message. We can return an `unauthorized` error if the `signer` is not what we expect, and `ContractError` if our business logic rejects the message. The `let amount =` line shows how we can use pattern matching to use the number of coins present in the msg if provided, or default to the entire balance of the contract.
 
 ```rust
-fn try_approve<S: Storage, A: Api, Q: Querier>(
-    deps: &mut Extern<S, A, Q>,
+fn try_approve(
+    deps: DepsMut,
     env: Env,
     state: State,
+    info: MessageInfo,
     quantity: Option<Vec<Coin>>,
-) -> HandleResult {
-    if env.message.sender != state.arbiter {
-        Err(unauthorized())
-    } else if state.is_expired(&env) {
-        Err(generic_err("escrow expired"))
-    } else {
-        let amount = if let Some(quantity) = quantity {
-            quantity
-        } else {
-            // release everything
-            let contract_address_human = deps.api.human_address(&env.contract.address)?;
-            // Querier guarantees to returns up-to-date data, including funds sent in this handle message
-            // https://github.com/CosmWasm/wasmd/blob/master/x/wasm/internal/keeper/keeper.go#L185-L192
-            deps.querier.query_all_balances(contract_address_human)?
-        };
-
-        send_tokens(
-            &deps.api,
-            &env.contract.address,
-            &state.recipient,
-            amount,
-            "approve",
-        )
+) -> Result<Response, ContractError> {
+    if info.sender != state.arbiter {
+        return Err(ContractError::Unauthorized {});
     }
+
+    // throws error if state is expired
+    if state.is_expired(&env) {
+        return Err(ContractError::Expired {
+            end_height: state.end_height,
+            end_time: state.end_time,
+        });
+    }
+
+    let amount = if let Some(quantity) = quantity {
+        quantity
+    } else {
+        // release everything
+
+        // Querier guarantees to returns up-to-date data, including funds sent in this handle message
+        // https://github.com/CosmWasm/wasmd/blob/master/x/wasm/internal/keeper/keeper.go#L185-L192
+        deps.querier.query_all_balances(&env.contract.address)?
+    };
+
+    Ok(send_tokens(state.recipient, amount, "approve"))
 }
 ```
 
 At the end, on success, we want to send some tokens. Cosmwasm contracts cannot call other contracts directly, instead, we create a message to represent our request (`CosmosMsg::Bank(BankMsg::Send)`) and return it as our contract ends. This will be parsed by the `wasm` module in go and it will execute and defined actions *in the same transaction*. This means, that while we will not get access to the return value, we can be ensured that if the send fails (user specified more coins than were in the escrow), all state changes in this contract would be reverted... just as if we returned `unauthorized`. This is pulled into a helper to make the code clearer:
 
 ```rust
-// this is a helper to move the tokens, so the business logic is easy to read
-fn send_tokens<A: Api>(
-    api: &A,
-    from_address: &CanonicalAddr,
-    to_address: &CanonicalAddr,
-    amount: Vec<Coin>,
-    action: &str,
-) -> HandleResult {
-    let from_human = api.human_address(from_address)?;
-    let to_human = api.human_address(to_address)?;
-    let log = vec![log("action", action), log("to", to_human.as_str())];
+fn send_tokens(to_address: Addr, amount: Vec<Coin>, action: &str) -> Response {
+    let attributes = vec![attr("action", action), attr("to", to_address.clone())];
 
-    let r = HandleResponse {
+    Response {
+        submessages: vec![],
         messages: vec![CosmosMsg::Bank(BankMsg::Send {
-            from_address: from_human,
-            to_address: to_human,
+            to_address: to_address.into(),
             amount,
         })],
-        log,
         data: None,
-    };
-    Ok(r)
+        attributes,
+    }
 }
 ```
 
@@ -215,17 +210,17 @@ Note that `Env` encodes a lot of information from the blockchain, essentially pr
 
 ## Adding a New Message
 
-In this example, we will modify this contract to add some more functionality. In particular, let's make a backdoor to the contract. In the form of a `HandleMsg::Steal` variant that must be signed by some hard coded `THIEF` address and will release the entire contract balance to an address included in the message. Simple?
+In this example, we will modify this contract to add some more functionality. In particular, let's make a backdoor to the contract. In the form of a `ExecuteMsg::Steal` variant that must be signed by some hard coded `THIEF` address and will release the entire contract balance to an address included in the message. Simple?
 
 Note that this also demonstrates the need to verify the code behind a contract rather than just rely on raw wasm. Since we have a reproducible compilation step (details below), if I show you code I claim to belong to the contract, you can compile it and compare the hash to the hash stored on the blockchain, to verify that this really is the original rust code. We will be adding tooling to automate this step and make it simpler in the coming months, but for now, this example serves to demonstrate why it is important.
 
 ### Adding the Handler
 
-Open up `src/msg.rs` in your [editor of choice](./intro#setting-up-your-ide) and let's add another variant to the `HandleMsg` enum, called `Steal`. Remember, it must have a destination address:
+Open up `src/msg.rs` in your [editor of choice](./intro#setting-up-your-ide) and let's add another variant to the `ExecuteMsg` enum, called `Steal`. Remember, it must have a destination address:
 
 [Need a hint?](./edit-escrow-hints#handlemsg)
 
-Now, you can add the message handler. As a quick check, try running `cargo wasm` or look for the compile error in your IDE. Remember what I told you about `match`? Okay, now, add a function to process the `HandleMsg::Steal` variant. For the top level `THIEF`, you can use a placeholder address (we will set this to an address you own before deploying).
+Now, you can add the message handler. As a quick check, try running `cargo wasm` or look for the compile error in your IDE. Remember what I told you about `match`? Okay, now, add a function to process the `ExecuteMsg::Steal` variant. For the top level `THIEF`, you can use a placeholder address (we will set this to an address you own before deploying).
 
 [Need a hint?](./edit-escrow-hints#adding-handler)
 

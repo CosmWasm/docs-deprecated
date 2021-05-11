@@ -32,7 +32,7 @@ export WASMD_VERSION="v0.15.0"
 export CONFIG_DIR=".wasmd"
 export BINARY="wasmd"
 
-export COSMJS_VERSION="v0.23.2"
+export COSMJS_VERSION="v0.24.2"
 export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/genesis.json"
 export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/app.toml"
 export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/config.toml"

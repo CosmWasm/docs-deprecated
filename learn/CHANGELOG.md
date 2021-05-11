@@ -2,21 +2,267 @@
 title: Changelog
 ---
 
-## 0.13.0 (unreleased)
+## [0.14.0] - 2021-05-03
 
-**all**
+### Added
 
-- Drop support for Rust versions lower than 1.47.0.
+- cosmwasm-crypto: Add `ed25519_batch_verify`, EdDSA ed25519 batch signature
+  verification scheme for Tendermint signatures and public keys formats.
+  ([#788])
+- cosmwasm-crypto: Add `ed25519_verify`, EdDSA ed25519 signature verification
+  scheme for Tendermint signature and public key formats. ([#771])
+- cosmwasm-crypto: New crypto-related crate. Add `secp256k1_verify`, ECDSA
+  secp256k1 signature verification scheme for Cosmos signature and public key
+  formats. ([#780])
+- cosmwasm-vm: Add PinnedMemoryCache. ([#696])
+- cosmwasm-vm: The new `Cache::analyze` provides a static analyzis of the Wasm
+  bytecode. This is used to tell the caller if the contract exposes IBC entry
+  points. ([#736])
+- cosmwasm-vm: Added new `stargate` feature flag to enable new stargate and ibc
+  features ([#692], [#716])
+- cosmwasm-vm: (requires `stargate`) call into 6 new ibc entry points if exposed
+  by contract ([#692], [#716])
+- cosmwasm-std: Added new `stargate` feature flag to enable new stargate and ibc
+  features ([#692], [#706])
+- cosmwasm-std: (requires `stargate`) Added new `CosmosMsg::Stargate` message
+  type to dispatch protobuf-encoded message (contract must know proto schema)
+  ([#706])
+- cosmwasm-std: (requires `stargate`) Added new `QueryRequest::Stargate` message
+  type to dispatch protobuf-encoded queries (contract must know proto schema for
+  request and response) ([#706])
+- cosmwasm-std: (requires `stargate`) Added new `CosmosMsg::Ibc(IbcMsg)` message
+  type to use ibctransfer app or send raw ics packets (if contract has ibc entry
+  points) ([#692], [#710])
+- cosmwasm-std: Add mutable helper methods to `InitResponse`, `MigrateResponse`
+  and `HandleResponse` which make `Context` obsolete.
+- contracts: added new `ibc-reflect` contract that receives channels and assigns
+  each an account to redispatch. Similar idea to ICS27/Interchain Accounts (but
+  different implementation) ([#692], [#711], [#714])
+- cosmwasm-std: Added new `WasmMsg::Migrate` variant that allows one contract
+  (eg. multisig) be the admin and migrate another contract ([#768])
+- cosmwasm-std: Added optional `system` entry point that can only be called by
+  native (blockchain) modules to expose admin functionality if desired. ([#793])
+- cosmwasm-std: Add extra field `submessages` to `Response`, such that you can
+  get a callback from these messages after their execution (success or failure).
+  ([#796])
+- cosmwasm-std: Added `reply` entry point that will receive all callbacks from
+  submessages dispatched by this contract. This is only required if contract
+  returns "submessages" (above). ([#796])
+- cosmwasm-std: Implement `From<Uint128> for String`, `From<Uint128> for u128`
+  as well as `From<u{32,16,8}> for Uint128`.
+- cosmwasm-std: Create new address type `Addr`. This is human readable (like
+  `HumanAddr`) but is immutable and always contains a valid address ([#802]).
+- cosmwasm-vm: Add import `addr_validate` ([#802]).
+- cosmwasm-std: Add `BankMsg::Burn` variant when you want the tokens to
+  disappear ([#860])
+- cosmwasm-std: Create `Fraction<T>` trait to represent a fraction `p`/`q` with
+  integers `p` and `q`. `Decimal` now implements `Fraction<u128>`, which
+  provides public getters `::numerator()` and `::denominator()`.
+- cosmwasm-std: Add `Decimal::inv` that returns `1/d` for decimal `d`.
+- cosmwasm-vm: Add `Cache::metrics` to expose internal data for monitoring
+  purposes ([#763]).
+- cosmwasm-std: Implement `PartialOrd` and `Ord` for `Binary` using the same
+  lexicographical ordering as implemented by `Vec<u8>`.
+- cosmwasm-std: Implement `PartialOrd` and `Ord` for `Addr` using the same
+  lexicographical ordering as implemented by `String`.
+- cosmwasm-std: Added new `WasmMsg::UpdateAdmin` variant that allows an admin
+  contract (eg. multisig) to set another admin ([#900])
+- cosmwasm-std: Added new `WasmMsg::ClearAdmin` variant that allows an admin
+  contract (eg. multisig) to clear the admin, to prevent future migrations
+  ([#900])
+- cosmwasm-std: Implement `Display for Coin` ([#901]).
+- cosmwasm-std: Create `Uint64` analogously to `Uint128` with string
+  serialization allowing the use of the full uint64 range in JSON clients that
+  use float numbers, such as JavaScript and jq.
+- cosmwasm-std: Create const functions `Uint64::new` and `Uint128::new` to
+  create instances in a const context.
 
-**cosmwasm-std**
+[#692]: https://github.com/CosmWasm/cosmwasm/issues/692
+[#706]: https://github.com/CosmWasm/cosmwasm/pull/706
+[#710]: https://github.com/CosmWasm/cosmwasm/pull/710
+[#711]: https://github.com/CosmWasm/cosmwasm/pull/711
+[#714]: https://github.com/CosmWasm/cosmwasm/pull/714
+[#716]: https://github.com/CosmWasm/cosmwasm/pull/716
+[#763]: https://github.com/CosmWasm/cosmwasm/issues/763
+[#768]: https://github.com/CosmWasm/cosmwasm/pull/768
+[#793]: https://github.com/CosmWasm/cosmwasm/pull/793
+[#796]: https://github.com/CosmWasm/cosmwasm/pull/796
+[#802]: https://github.com/CosmWasm/cosmwasm/pull/802
+[#860]: https://github.com/CosmWasm/cosmwasm/pull/860
+[#900]: https://github.com/CosmWasm/cosmwasm/pull/900
+[#901]: https://github.com/CosmWasm/cosmwasm/pull/901
 
-- Extend binary to array support to 64 bytes.
-- Remove `cosmwasm_std::testing::MockApi::new`. Use `MockApi::default` instead.
+### Changed
 
-**cosmwasm-vm**
+- contracts: Rename `HandleMsg` to `ExecuteMsg`.
+- all: Rename `handle` entry point to `execute`.
+- all: Rename `init` entry point to `instantiate`.
+- all: Rename `system` entry point to `sudo`.
+- all: Drop support for Rust versions lower than 1.51.0.
+- all: The `query` and `execute` entry points are now optional. It is still
+  highly recommended to implement and expose them in almost any use case though.
+- all: Change the encoding of the key/value region of the `db_next` import to a
+  more generic encoding that supports an arbitrary number of sections. This
+  encoding can then be reused for other multi value regions.
+- all: Remove the `info: MessageInfo` argument from the `migrate` entry point
+  ([#690]).
+- cosmwasm-std: Remove `from_address` from `BankMsg::Send`, as it always sends
+  from the contract address, and this is consistent with other `CosmosMsg`
+  variants.
+- cosmwasm-std: Remove the previously deprecated `InitResult`, `HandleResult`,
+  `MigrateResult` and `QueryResult` in order to make error type explicit and
+  encourage migration to custom errors.
+- cosmwasm-std: Add a `data` field to `InitResponse` the same way as in
+  `MigrateResponse` and `HandleResponse`.
+- cosmwasm-std: Rename `MessageInfo::sent_funds` to `MessageInfo::funds`.
+- cosmwasm-std: Merge response types `InitResponse`, `HandleResponse` and
+  `MigrateResponse` into the new `Response`.
+- cosmwasm-std: Remove `Default` implementation from `HumanAddr`,
+  `CanonicalAddr`, `ContractInfo`, `MessageInfo`, `BlockInfo` and `Env`. If you
+  need one of those, you're probably doing something wrong.
+- cosmwasm-std: Make `label` in `WasmMsg::Instantiate` non-optional to better
+  match the Go/database format.
+- cosmwasm-std: Add new field `admin` to `WasmMsg::Instantiate` to fully support
+  `MsgInstantiateContract` from `x/wasm` ([#861]).
+- cosmwasm-std: `Binary::to_array` is now generic over the array length instead
+  of the output type. As a consequence the obsolete type `ByteArray` was
+  removed. The array length is not restricted to 0-64 anymore.
+- cosmwasm-std: Use const generics to implement `From<&[u8; LENGTH]> for Binary`
+  and `From<[u8; LENGTH]> for Binary`, such that the array length is not
+  restricted to 0-64 anymore.
+- cosmwasm-vm: Avoid serialization of Modules in `InMemoryCache`, for
+  performance. Also, remove `memory_limit` from `InstanceOptions`, and define it
+  instead at `Cache` level (same memory limit for all cached instances).
+  ([#697])
+- cosmwasm-std: Rename type `KV` to `Pair` in order to comply to naming
+  convention as enforced by clippy rule `upper_case_acronyms` from Rust 1.51.0
+  on.
+- cosmwasm-std: `ContractInfo::address` and `MessageInfo::sender` are now of
+  type `Addr`. The value of those fields is created by the host and thus valid.
+- cosmwasm-vm: Bump required marker export `cosmwasm_vm_version_4` to
+  `interface_version_5`.
+- cosmwasm-vm: Rename trait `Api` to `BackendApi` to better express this is the
+  API provided by the VM's backend (i.e. the blockchain).
+- cosmwasm-vm: Rename imports to `addr_canonicalize` and `addr_humanize`
+  ([#802]).
+- cosmwasm-vm: Replace types `HumanAddr`/`CanonicalAddr` with
+  `&str`/`String`/`&[u8]`/`Vec<u8>` in the methods of `BackendApi`. The address
+  types belong in the contract development and the backend operates on raw
+  strings and binary anyways.
+- contracts: `reflect` contract requires `stargate` feature and supports
+  redispatching `Stargate` and `IbcMsg::Transfer` messages ([#692])
+- cosmwasm-std: The arithmetic methods of `Uint128` got a huge overhaul, making
+  them more consistent with the bahaviour of the Rust primitive types. Thank you
+  [@yihuang] for bringing this up and for the great implementation. ([#853])
+  1.  `Uint128` got the new functions `checked_add`, `checked_sub`,
+      `checked_mul`, `checked_div`, `checked_div_euclid`, `checked_rem`,
+      `wrapping_add`, `wrapping_sub`, `wrapping_mul`, `wrapping_pow`,
+      `saturating_add`, `saturating_sub`, `saturating_mul` and `saturating_pow`
+      which match their equivalent in [u128] except that instead of `Option` the
+      checked methods return a `Result` with an `OverflowError` or
+      `DivideByZeroError` that carries a few debug information and can directly
+      be converted to `StdError`/`StdResult` by using the `?` operator.
+  2.  `StdError::Underflow` and `StdError::underflow` were removed in favour of
+      `StdError::Overflow`. `StdError::DivideByZeroError` was added.
+  3.  The `-` operator (`impl ops::Sub<Uint128> for Uint128`) was removed
+      because it returned a `StdResult` instead of panicking in the case of an
+      overflow. This behaviour was inconsistent with `+` and the Rust standard
+      library. Please use the explicit `*_sub` methods introduced above. In a
+      couple of releases from now, we want to introduce the operator again with
+      panicking overflow behaviour ([#858]).
+- cosmwasm-std: Replace `HumanAddr` with `String` in `BankQuery`, `StakingQuery`
+  and `WasmQuery` query requests ([#802]).
+- cosmwasm-std: In staking query response types `Delegation`, `FullDelegation`
+  and `Validator` the validator address fields were changed from `HumanAddr` to
+  `String`. The new `Addr` type cannot be used here because it only supports
+  standard account addresses via `Api::addr_*` ([#871]).
+- cosmwasm-std: Change address types in `BankMsg`, `IbcMsg` and `WasmMsg` from
+  `HumanAddr` to `String` ([#802]).
+- cosmwasm-std: `Api::addr_humanize` now returns `Addr` instead of `HumanAddr`
+  ([#802]).
+- cosmwasm-std: Hide `StakingMsg`, `CosmosMsg::Staking`,
+  `AllDelegationsResponse`, `BondedDenomResponse`, `Delegation`,
+  `FullDelegation`, `StakingQuery`, `Validator`, `ValidatorsResponse` and
+  `testing::StakingQuerier` behind the `staking` feature flag to make those only
+  available in contracts built for PoS chains.
+- cosmwasm-std: Remove `StakingMsg::Withdraw` in favour of
+  `DistributionMsg::SetWithdrawAddress` and
+  `DistributionMsg::WithdrawDelegatorReward` ([#848]).
+- cosmwasm-std: Rename `StakingQuery::Validators`, `ValidatorsResponse` and
+  `QuerierWrapper::query_validators` to `StakingQuery::AllValidators`,
+  `AllValidatorsResponse` and `QuerierWrapper.query_all_validators`. Add
+  `StakingQuery::Validator`, `ValidatorResponse` and
+  `QuerierWrapper::query_validator` to allow querying a single validator.
+  ([#879])
+- cosmwasm-schema: Make first argument non-mutable in `export_schema_with_title`
+  for consistency with `export_schema`.
+- cosmwasm-std: The block time in `BlockInfo::time` is now a `Timestamp`.
+  `BlockInfo::time_nanos` was removed.
 
-- Export method `cosmwasm_vm::Cache::stats` and response type `Stats`.
-- Remove `cosmwasm_vm::testing::MockApi::new`. Use `MockApi::default` instead.
+[#696]: https://github.com/CosmWasm/cosmwasm/issues/696
+[#697]: https://github.com/CosmWasm/cosmwasm/issues/697
+[#736]: https://github.com/CosmWasm/cosmwasm/pull/736
+[#690]: https://github.com/CosmWasm/cosmwasm/issues/690
+[@yihuang]: https://github.com/yihuang
+[#853]: https://github.com/CosmWasm/cosmwasm/pull/853
+[#858]: https://github.com/CosmWasm/cosmwasm/issues/858
+[u128]: https://doc.rust-lang.org/std/primitive.u128.html
+[#802]: https://github.com/CosmWasm/cosmwasm/pull/802
+[#871]: https://github.com/CosmWasm/cosmwasm/issues/871
+[#861]: https://github.com/CosmWasm/cosmwasm/issues/861
+[#848]: https://github.com/CosmWasm/cosmwasm/issues/848
+[#879]: https://github.com/CosmWasm/cosmwasm/pull/879
+
+### Deprecated
+
+- cosmwasm-std: `InitResponse`, `MigrateResponse` and `HandleResponse` are
+  deprecated in favour of the new `Response`.
+- cosmwasm-std: `Context` is deprecated in favour of the new mutable helpers in
+  `Response`.
+- cosmwasm-std: `HumanAddr` is not much more than an alias to `String` and it
+  does not provide significant safety advantages. With CosmWasm 0.14, we now use
+  `String` when there was `HumanAddr` before. There is also the new `Addr`,
+  which holds a validated immutable human readable address. ([#802])
+
+[#802]: https://github.com/CosmWasm/cosmwasm/pull/802
+
+## [0.13.2] - 2021-01-14
+
+## Changed
+
+- cosmwasm-vm: Update Wasmer to 1.0.1.
+
+## [0.13.1] - 2021-01-12
+
+### Added
+
+- cosmwasm-std: Add the new `#[entry_point]` macro attribute that serves as an
+  alternative implementation to `cosmwasm_std::create_entry_points!(contract)`
+  and `cosmwasm_std::create_entry_points_with_migration!(contract)`. Both ways
+  are supported in the 0.13 series.
+
+## [0.13.0] – 2021-01-06
+
+## Added
+
+- cosmwasm-std: Extend binary to array support to 64 bytes.
+
+## Changed
+
+- all: Drop support for Rust versions lower than 1.47.0.
+- cosmwasm-std: Remove `cosmwasm_std::testing::MockApi::new`. Use
+  `MockApi::default` instead.
+- cosmwasm-vm: Upgrade Wasmer to 1.0 and adapt all the internal workings
+  accordingly.
+- cosmwasm-vm: Export method `cosmwasm_vm::Cache::stats` and response type
+  `Stats`.
+- cosmwasm-vm: Remove `cosmwasm_vm::testing::MockApi::new`. Use
+  `MockApi::default` instead.
+- cosmwasm-vm: Convert field `Instance::api` to a method.
+- cosmwasm-vm: Change order of generic arguments for consistency in `Instance`,
+  `Cache` and `Backend` to always match `<A: Api, S: Storage, Q: Querier>`.
+- cosmwasm-vm: Remove `Instance::get_memory_size`. Use `Instance::memory_pages`
+  instead.
 
 ## 0.12.1 (2020-12-09)
 

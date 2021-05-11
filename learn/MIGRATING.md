@@ -8,6 +8,333 @@ This guide explains what is needed to upgrade contracts when migrating over
 major releases of `cosmwasm`. Note that you can also view the
 [complete CHANGELOG](./CHANGELOG.md) to understand the differences.
 
+## 0.13 -> 0.14
+
+- The minimum Rust supported version for 0.14 is 1.51.0. Verify your Rust
+  version is >= 1.51.0 with: `rustc --version`
+
+- Update CosmWasm and schemars dependencies in Cargo.toml (skip the ones you
+  don't use):
+
+  ```
+  [dependencies]
+  cosmwasm-std = "0.14.0"
+  cosmwasm-storage = "0.14.0"
+  schemars = "0.8.1"
+  # ...
+
+  [dev-dependencies]
+  cosmwasm-schema = "0.14.0"
+  cosmwasm-vm = "0.14.0"
+  # ...
+  ```
+
+- Rename the `init` entry point to `instantiate`. Also, rename `InitMsg` to
+  `InstantiateMsg`.
+
+- Rename the `handle` entry point to `execute`. Also, rename `HandleMsg` to
+  `ExecuteMsg`.
+
+- Rename `InitResponse`, `HandleResponse` and `MigrateResponse` to `Response`.
+  The old names are still supported (with a deprecation warning), and will be
+  removed in the next version. Also, you'll need to add the `submessages` field
+  to `Response`.
+
+- Remove `from_address` from `BankMsg::Send`, which is now automatically filled
+  with the contract address:
+
+  ```rust
+  // before
+  ctx.add_message(BankMsg::Send {
+      from_address: env.contract.address,
+      to_address: to_addr,
+      amount: balance,
+  });
+
+  // after
+  ctx.add_message(BankMsg::Send {
+      to_address: to_addr,
+      amount: balance,
+  });
+  ```
+
+- Use the new entry point system. From `lib.rs` remove
+
+  ```rust
+  #[cfg(target_arch = "wasm32")]
+  cosmwasm_std::create_entry_points!(contract);
+
+  // or
+
+  #[cfg(target_arch = "wasm32")]
+  cosmwasm_std::create_entry_points_with_migration!(contract);
+  ```
+
+  Then add the macro attribute `#[entry_point]` to your `contract.rs` as
+  follows:
+
+  ```rust
+  use cosmwasm_std::{entry_point, … };
+
+  // …
+
+  #[entry_point]
+  pub fn init(
+      _deps: DepsMut,
+      _env: Env,
+      _info: MessageInfo,
+      _msg: InitMsg,
+  ) -> StdResult<Response> {
+      // …
+  }
+
+  #[entry_point]
+  pub fn execute(
+      _deps: DepsMut,
+      _env: Env,
+      _info: MessageInfo,
+      _msg: ExecuteMsg,
+  ) -> StdResult<Response> {
+      // …
+  }
+
+  // only if you have migrate
+  #[entry_point]
+  pub fn migrate(
+      deps: DepsMut,
+      env: Env,
+      _info: MessageInfo,
+      msg: MigrateMsg,
+  ) -> StdResult<Response> {
+      // …
+  }
+
+  #[entry_point]
+  pub fn query(_deps: Deps, _env: Env, _msg: QueryMsg) -> StdResult<QueryResponse> {
+      // …
+  }
+  ```
+
+- Since `Response` contains a `data` field, converting `Context` into `Response`
+  always succeeds.
+
+  ```rust
+  // before
+  pub fn init(deps: DepsMut, env: Env, info: MessageInfo, msg: InitMsg) -> Result<InitResponse, HackError> {
+      // …
+      let mut ctx = Context::new();
+      ctx.add_attribute("Let the", "hacking begin");
+      Ok(ctx.try_into()?)
+  }
+
+  // after
+  pub fn init(deps: DepsMut, env: Env, info: MessageInfo, msg: InitMsg) -> Result<Response, HackError> {
+      // …
+      let mut ctx = Context::new();
+      ctx.add_attribute("Let the", "hacking begin");
+      Ok(ctx.into())
+  }
+  ```
+
+- Remove the `info: MessageInfo` field from the `migrate` entry point:
+
+  ```rust
+  // Before
+  pub fn migrate(
+      deps: DepsMut,
+      env: Env,
+      _info: MessageInfo,
+      msg: MigrateMsg,
+  ) -> StdResult<MigrateResponse> {
+    // ...
+  }
+
+  // After
+  pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> StdResult<Response> {
+    // ...
+  }
+  ```
+
+  `MessageInfo::funds` was always empty since [MsgMigrateContract] does not have
+  a funds field. `MessageInfo::sender` should not be needed for authentication
+  because the chain checks permissions before calling `migrate`. If the sender's
+  address is needed for anything else, this should be expressed as part of the
+  migrate message.
+
+  [msgmigratecontract]:
+    https://github.com/CosmWasm/wasmd/blob/v0.15.0/x/wasm/internal/types/tx.proto#L86-L96
+
+- Add mutating helper methods to `Response` that can be used instead of creating
+  a `Context` that is later converted to a response:
+
+  ```rust
+  // before
+  pub fn handle_impl(deps: DepsMut, env: Env, info: MessageInfo) -> Result<Response, ContractError> {
+      // ...
+
+      // release counter_offer to creator
+      let mut ctx = Context::new();
+      ctx.add_message(BankMsg::Send {
+          to_address: state.creator,
+          amount: state.counter_offer,
+      });
+
+      // release collateral to sender
+      ctx.add_message(BankMsg::Send {
+          to_address: state.owner,
+          amount: state.collateral,
+      });
+
+      // ..
+
+      ctx.add_attribute("action", "execute");
+      Ok(ctx.into())
+  }
+
+
+  // after
+  pub fn execute_impl(deps: DepsMut, env: Env, info: MessageInfo) -> Result<Response, ContractError> {
+      // ...
+
+      // release counter_offer to creator
+      let mut resp = Response::new();
+      resp.add_message(BankMsg::Send {
+          to_address: state.creator,
+          amount: state.counter_offer,
+      });
+
+      // release collateral to sender
+      resp.add_message(BankMsg::Send {
+          to_address: state.owner,
+          amount: state.collateral,
+      });
+
+      // ..
+
+      resp.add_attribute("action", "execute");
+      Ok(resp)
+  }
+  ```
+
+- Use type `Pair` instead of `KV`
+
+  ```rust
+  // before
+  use cosmwasm_std::KV;
+
+  // after
+  use cosmwasm_std::Pair;
+  ```
+
+- If necessary, add a wildcard arm to the `match` of now non-exhaustive message
+  types `BankMsg`, `BankQuery`, `WasmMsg` and `WasmQuery`.
+
+- `HumanAddr` has been deprecated in favour of simply `String`. It never added
+  any significant safety bonus over `String` and was just a marker type. The new
+  type `Addr` was created to hold validated addresses. Those can be created via
+  `Addr::unchecked`, `Api::addr_validate`, `Api::addr_humanize` and JSON
+  deserialization. In order to maintain type safety, deserialization into `Addr`
+  must only be done from trusted sources like a contract's state or a query
+  response. User inputs must be deserialized into `String`. This new `Addr` type
+  makes it easy to use human readable addresses in state:
+
+  With pre-validated `Addr` from `MessageInfo`:
+
+  ```rust
+  // before
+  pub struct State {
+      pub owner: CanonicalAddr,
+  }
+
+  let state = State {
+      owner: deps.api.canonical_address(&info.sender /* of type HumanAddr */)?,
+  };
+
+
+  // after
+  pub struct State {
+      pub owner: Addr,
+  }
+  let state = State {
+      owner: info.sender.clone() /* of type Addr */,
+  };
+  ```
+
+  With user input in `msg`:
+
+  ```rust
+  // before
+  pub struct State {
+      pub verifier: CanonicalAddr,
+      pub beneficiary: CanonicalAddr,
+      pub funder: CanonicalAddr,
+  }
+
+  deps.storage.set(
+      CONFIG_KEY,
+      &to_vec(&State {
+          verifier: deps.api.canonical_address(&msg.verifier /* of type HumanAddr */)?,
+          beneficiary: deps.api.canonical_address(&msg.beneficiary /* of type HumanAddr */)?,
+          funder: deps.api.canonical_address(&info.sender /* of type HumanAddr */)?,
+      })?,
+  );
+
+  // after
+  pub struct State {
+      pub verifier: Addr,
+      pub beneficiary: Addr,
+      pub funder: Addr,
+  }
+
+  deps.storage.set(
+      CONFIG_KEY,
+      &to_vec(&State {
+          verifier: deps.api.addr_validate(&msg.verifier /* of type String */)?,
+          beneficiary: deps.api.addr_validate(&msg.beneficiary /* of type String */)?,
+          funder: info.sender /* of type Addr */,
+      })?,
+  );
+  ```
+
+  The existing `CanonicalAddr` remains unchanged and can be used in cases in
+  which a compact binary representation is desired. For JSON state this does not
+  save much data (e.g. the bech32 address
+  cosmos1pfq05em6sfkls66ut4m2257p7qwlk448h8mysz takes 45 bytes as direct ASCII
+  and 28 bytes when its canonical representation is base64 encoded). For fixed
+  length database keys `CanonicalAddr` remains handy though.
+
+- Replace `StakingMsg::Withdraw` with `DistributionMsg::SetWithdrawAddress` and
+  `DistributionMsg::WithdrawDelegatorReward`. `StakingMsg::Withdraw` was a
+  shorthand for the two distribution messages. However, it was unintuitive
+  because it did not set the address for one withdraw only but for all following
+  withdrawls. Since withdrawls are [triggered by different
+  events][distribution docs] such as validators changing their commission rate,
+  an address that was set for a one-time withdrawl would be used for future
+  withdrawls not considered by the contract author.
+
+  If the contract never set a withdraw address other than the contract itself
+  (`env.contract.address`), you can simply replace `StakingMsg::Withdraw` with
+  `DistributionMsg::WithdrawDelegatorReward`. It is then never changed from the
+  default. Otherwise you need to carefully track what the current withdraw
+  address is. A one-time change can be implemented by emitted 3 messages:
+
+  1. `SetWithdrawAddress { address: recipient }` to temporarily change the
+     recipient
+  2. `WithdrawDelegatorReward { validator }` to do a manual withdrawl from the
+     given validator
+  3. `SetWithdrawAddress { address: env.contract.address.into() }` to change it
+     back for all future withdrawls
+
+  [distribution docs]: https://docs.cosmos.network/v0.42/modules/distribution/
+
+- The block time in `env.block.time` is now a `Timestamp` which stores
+  nanosecond precision. `env.block.time_nanos` was removed. If you need the
+  compnents as before, use
+  ```rust
+  let seconds = env.block.time.nanos() / 1_000_000_000;
+  let nsecs = env.block.time.nanos() % 1_000_000_000;
+  ```
+
 ## 0.12 -> 0.13
 
 - The minimum Rust supported version for 0.13 is 1.47.0.
