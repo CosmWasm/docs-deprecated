@@ -21,7 +21,7 @@ to a pre-defined beneficiary. First, clone the repo and try to build the wasm bu
 git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples
 git fetch --tags
-git checkout escrow-0.7.0
+git checkout escrow-0.10.0
 cd escrow
 
 # compile the wasm contract with stable toolchain
@@ -70,8 +70,8 @@ know where `cargo wasm` and `cargo unit-test` come from, they are just aliases d
 ## Optimized Compilation
 
 Smart contract binary size must be as small as possible for reduced gas cost. This will not only cost
-less on deployment, also for every single interaction. Simply, **optimize production code** using [cosmwasm/rust-optimizer](https://github.com/CosmWasm/rust-optimizer). 
-**rust-optimizer** also produces reproducible builds of cosmwasm smart contracts. 
+less on deployment, also for every single interaction. Simply, **optimize production code** using [cosmwasm/rust-optimizer](https://github.com/CosmWasm/rust-optimizer).
+**rust-optimizer** also produces reproducible builds of cosmwasm smart contracts.
 This means third parties can verify the contract is the actually the claimed code.
 
 ```shell

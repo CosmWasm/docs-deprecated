@@ -18,13 +18,13 @@ wasmd query wasm list-code $NODE
 
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(wasmd tx wasm store contract.wasm --from fred $TXFLAG -y)
+RES=$(wasmd tx wasm store contract.wasm --from fred $TXFLAG -y --output json)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
 
-# no contracts yet, this should return `null`
-wasmd query wasm list-contract-by-code $CODE_ID $NODE $NODE
+# no contracts yet, this should return an empty list
+wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
 
 # you can also download the wasm from the chain and check that the diff between them is empty
 wasmd query wasm code $CODE_ID $NODE download.wasm
@@ -40,11 +40,11 @@ will allow fred to control payout and upon release, the funds go to bob.
 # instantiate contract and verify
 INIT=$(jq -n --arg fred $(wasmd keys show -a fred) --arg bob $(wasmd keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 wasmd tx wasm instantiate $CODE_ID "$INIT" \
-    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y
+    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y --output json
 
 # check the contract state (and account balance)
-wasmd query wasm list-contract-by-code $CODE_ID $NODE
-CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE | jq -r '.[0].address')
+wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
+CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contracts[-1]')
 echo $CONTRACT
 
 # we should see this contract with 50000umayo
@@ -109,7 +109,7 @@ The command below is obsolete and updated soon.
 :::
 
 ```shell
-npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/cli_helper.ts
+npx @cosmjs/cli@^0.25 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/cli_helper.ts
 ```
 
 Now, we make all the keys and initialize clients:
