@@ -18,7 +18,7 @@ wasmd query wasm list-code $NODE
 
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(wasmd tx wasm store contract.wasm --from fred $TXFLAG -y --output json)
+RES=$(wasmd tx wasm store cw_escrow.wasm --from fred $TXFLAG -y --output json)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
@@ -28,7 +28,7 @@ wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
 
 # you can also download the wasm from the chain and check that the diff between them is empty
 wasmd query wasm code $CODE_ID $NODE download.wasm
-diff contract.wasm download.wasm
+diff cw_escrow.wasm download.wasm
 ```
 
 ### Instantiating the Contract
@@ -155,7 +155,7 @@ process.cwd()
 Now, we go back to the Node console and upload the contract and instantiate it:
 
 ```js
-const wasm = fs.readFileSync('contract.wasm');
+const wasm = fs.readFileSync('cw_escrow.wasm');
 // you can add extra information to contract details such as source and builder.
 const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.10.0/download", builder: "cosmwasm/rust-optimizer:0.10.7"});
 
