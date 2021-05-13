@@ -97,6 +97,9 @@ If you have any problems here, check your `PATH`. `make install` will copy `wasm
 the case in general for building Go code from source.
 :::
 
+## jq
+`jq` is a helpful command line utility for json used in this tutorial to help compose commands. If it is not currently installed on your machine, download and install [jq][(https://stedolan.github.io/jq/download/)
+
 ## Using Testnets
 
 Testing network [Musselnet](https://github.com/CosmWasm/testnets/tree/master/musselnet) is launched to
