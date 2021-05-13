@@ -18,7 +18,7 @@ wasmd query wasm list-code $NODE
 
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(wasmd tx wasm store cw_escrow.wasm --from fred $TXFLAG -y --output json)
+RES=$(wasmd tx wasm store cw_escrow.wasm --from fred $TXFLAG -y)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
@@ -40,7 +40,7 @@ will allow fred to control payout and upon release, the funds go to bob.
 # instantiate contract and verify
 INIT=$(jq -n --arg fred $(wasmd keys show -a fred) --arg bob $(wasmd keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 wasmd tx wasm instantiate $CODE_ID "$INIT" \
-    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y --output json
+    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y
 
 # check the contract state (and account balance)
 wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
