@@ -44,12 +44,12 @@ wasmd tx wasm instantiate $CODE_ID "$INIT" \
 
 # check the contract state (and account balance)
 wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
-CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contracts[-1]')
+CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contract_infos[-1].address')
 echo $CONTRACT
 
 # we should see this contract with 50000umayo
 wasmd query wasm contract $CONTRACT $NODE
-wasmd query account $CONTRACT $NODE
+wasmd query bank balances $CONTRACT $NODE
 
 # you can dump entire contract state
 wasmd query wasm contract-state all $CONTRACT $NODE
@@ -90,10 +90,10 @@ wasmd query account $(wasmd keys show bob -a) $NODE
 wasmd tx wasm execute $CONTRACT "$APPROVE" \
     --from fred $TXFLAG -y
 
-wasmd query account $(wasmd keys show bob -a) $NODE
+wasmd query bank balances $(wasmd keys show bob -a) $NODE
 
 # contract coins must be empty
-wasmd query account $CONTRACT $NODE
+wasmd query bank balances $CONTRACT $NODE
 ```
 
 ## Node Console
