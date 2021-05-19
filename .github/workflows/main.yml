@@ -1,8 +1,8 @@
 name: Build and Deploy
-on: 
+on:
   push:
     branches:
-      - master
+      - '0.14'
       - '0.13'
 jobs:
   build-and-deploy:
