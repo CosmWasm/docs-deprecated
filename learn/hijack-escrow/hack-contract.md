@@ -218,11 +218,11 @@ Note that this also demonstrates the need to verify the code behind a contract r
 
 Open up `src/msg.rs` in your [editor of choice](./intro#setting-up-your-ide) and let's add another variant to the `ExecuteMsg` enum, called `Steal`. Remember, it must have a destination address:
 
-[Need a hint?](./edit-escrow-hints#handlemsg)
+[Need a hint?](./edit-escrow-hints.md#executemsg)
 
 Now, you can add the message handler. As a quick check, try running `cargo wasm` or look for the compile error in your IDE. Remember what I told you about `match`? Okay, now, add a function to process the `ExecuteMsg::Steal` variant. For the top level `THIEF`, you can use a placeholder address (we will set this to an address you own before deploying).
 
-[Need a hint?](./edit-escrow-hints#adding-handler)
+[Need a hint?](./edit-escrow-hints.md#adding-handler)
 
 Once you are done, check that it compiles:
 

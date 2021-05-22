@@ -161,7 +161,7 @@ major releases of `cosmwasm`. Note that you can also view the
   address is needed for anything else, this should be expressed as part of the
   migrate message.
 
-  [msgmigratecontract]:
+  msgmigratecontract:
     https://github.com/CosmWasm/wasmd/blob/v0.15.0/x/wasm/internal/types/tx.proto#L86-L96
 
 - Add mutating helper methods to `Response` that can be used instead of creating
