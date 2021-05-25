@@ -40,7 +40,7 @@ will allow fred to control payout and upon release, the funds go to bob.
 # instantiate contract and verify
 INIT=$(jq -n --arg fred $(wasmd keys show -a fred) --arg bob $(wasmd keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 wasmd tx wasm instantiate $CODE_ID "$INIT" \
-    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y --output json
+    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y
 
 # check the contract state (and account balance)
 wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
