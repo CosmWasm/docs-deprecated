@@ -137,6 +137,9 @@ wasmd init localnet --chain-id ${CHAIN_ID} --home ${APP_HOME}
 # add minimum gas prices config to app configuration file
 sed -i -r 's/minimum-gas-prices = ""/minimum-gas-prices = "0.01ucosm"/' ${APP_HOME}/config/app.toml
 
+wasmd keys add main
+wasmd keys add validator
+
 # add your wallet addresses to genesis
 wasmd add-genesis-account $(wasmd keys show -a main) 10000000000ucosm,10000000000stake --home ${APP_HOME}
 wasmd add-genesis-account $(wasmd keys show -a validator) 10000000000ucosm,10000000000stake --home ${APP_HOME}
