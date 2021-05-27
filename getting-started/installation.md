@@ -99,7 +99,7 @@ the case in general for building Go code from source.
 
 ## Using Testnets
 
-Testing network [Musselnet](https://github.com/CosmWasm/testnets/tree/master/musselnet) is launched to
+Testing network [Oysternet](https://github.com/CosmWasm/testnets/tree/master/oysternet-1) is launched to
 save you of the hassle of running a local network and speed up your development.
 
 ::: warning

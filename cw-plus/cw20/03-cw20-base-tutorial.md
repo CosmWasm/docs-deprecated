@@ -10,7 +10,7 @@ This tutorial does not work with cosmjs 0.23. It will be fixed when 0.24 is out.
 :::
 
 This is a simple tutorial showing you how to use of powerful node REPL to interact with
-a CW20 token contract (fungible tokens, like ERC20) on [musselnet](https://github.com/CosmWasm/testnets/tree/master/musselnet).
+a CW20 token contract (fungible tokens, like ERC20) on [oysternet](https://github.com/CosmWasm/testnets/tree/master/oysternet-1).
 
 I will walk you through uploading contract code and creating a concrete instance (the same `cw20-base`
 wasm code can be reused to create dozens of token contracts with different symbols and distributions).
@@ -26,12 +26,17 @@ work properly on Windows (we assume a HOME environmental variable). PRs welcome.
 
 ## Connecting to the chain
 
+::: warning
+CosmJs helpers needs refactoring thus do not work now. It will be fixed in future, but you can see
+a reference to how it works.
+:::
+
 The first step before doing anything is ensuring we can create an account and connect to the chain.
 You will always use the following command to start up the `@cosmjs/cli` with some cw20-specific helpers preloaded
 (in addition to all the general helpers it has).
 
 ```shell
-npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
+npx @cosmjs/cli@^0.24 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
 ```
 
 Once this downloads the source and starts up, you should see a bunch of yellow text (explaining what code is preloaded),
@@ -45,7 +50,7 @@ or worse `cannot call undefined`.
 Without further ado, let's get to use it, and please do read the error messages:
 
 ```js
-const client = await useOptions(hackatomOptions).setup(YOUR_PASSWORD_HERE);
+const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
 client.getAccount();
 ```
 
@@ -53,7 +58,7 @@ This will take a few seconds as we hit the faucet the first time to ensure you h
 some tokens in your account to pay fees. When it returns, you should see something like this:
 
 ```js
-{ address: 'cosmos16hn7q0yhfrm28ta9zlk7fu46a98wss33xwfxys',
+{ address: 'wasm16hn7q0yhfrm28ta9zlk7fu46a98wss33xwfxys',
   balance: [ { denom: 'ucosm', amount: '1000000' } ],
   pubkey: undefined,
   accountNumber: 31,
@@ -66,10 +71,10 @@ You can keep typing in the shell, or close it and run some sections later.
 Always start off with:
 
 ```js
-const client = await useOptions(hackatomOptions).setup(YOUR_PASSWORD_HERE);
+const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
 ```
 
-to set up your client. `useOptions` takes the musselnet configuration from everything from
+to set up your client. `useOptions` takes the oysternet configuration from everything from
 URLs to tokens to bech32prefix. When you call `setup` with a password, it checks for
 `~/.helder.key` and creates a new key if it is not there, otherwise it loads the key from the file.
 Your private key (actually mnemonic) is stored encrypted, and you need the same password to use it again.
@@ -80,7 +85,7 @@ If you want the mnemonic, you can recover it at anytime, as long as you still ha
 You could use this later to recover, or use the same mnemonic to import the key into the `helder` cli tool.
 
 ```js
-useOptions(hackatomOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
+useOptions(oysternetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
 ```
 
 ::: warning
@@ -110,12 +115,12 @@ I will walk you though how to set up an example CW20 contract on Heldernet.
 ### Example: STAR
 
 The first contract I uploaded was STAR tokens, or "Golden Stars" to be distribute to the
-[first 3 validators](https://bigdipper.musselnet.cosmwasm.com/validators) on the network.
+[first 3 validators](https://block-explorer.oysternet.cosmwasm.com/validators) on the network.
 
 Please do not copy this verbatum, but look to see how such a contract is setup and deployed the first time.
 
 ```js
-const client = await useOptions(hackatomOptions).setup(YOUR_PASSWORD_HERE);
+const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
 
 const cw20 = CW20(client);
 const codeId = await cw20.upload();
@@ -130,9 +135,9 @@ const initMsg = {
   decimals: 2,
   // list of all validator self-delegate addresses - 100 STARs each!
   initial_balances: [
-    { address: "cosmos1ez03me7uljk7qerswdp935vlaa4dlu48mys3mq", amount: "10000"},
-    { address: "cosmos1tx7ga0lsnumd5hfsh2py0404sztnshwqaqjwy8", amount: "10000"},
-    { address: "cosmos1mvjtezrn8dpateu0435trlw5062qy76gf738n0", amount: "10000"},
+    { address: "wasm1ez03me7uljk7qerswdp935vlaa4dlu48mys3mq", amount: "10000"},
+    { address: "wasm1tx7ga0lsnumd5hfsh2py0404sztnshwqaqjwy8", amount: "10000"},
+    { address: "wasm1mvjtezrn8dpateu0435trlw5062qy76gf738n0", amount: "10000"},
   ],
   mint: {
     minter: client.senderAddress,
@@ -143,9 +148,9 @@ const initMsg = {
 
 const contract = await cw20.instantiate(codeId, initMsg, "STAR");
 console.log(`Contract: ${contract.contractAddress}`);
-// Contract: cosmos1hjzk8wr2gy9f3xnzdrtv5m9735jcxeljhm0f8u
+// Contract: wasm1hjzk8wr2gy9f3xnzdrtv5m9735jcxeljhm0f8u
 
-console.log(await contract.balance("cosmos1ez03me7uljk7qerswdp935vlaa4dlu48mys3mq"));
+console.log(await contract.balance("wasm1ez03me7uljk7qerswdp935vlaa4dlu48mys3mq"));
 // 10000
 console.log(await contract.balance());
 // 0
@@ -157,7 +162,7 @@ Now that we have that uploaded, we can easily make a second contract. This one, 
 do run through and customize the field names and token amounts before entering them.
 
 ```js
-const client = await useOptions(hackatomOptions).setup(YOUR_PASSWORD_HERE);
+const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
 const address = client.senderAddress;
 
 const cw20 = CW20(client);
@@ -181,7 +186,7 @@ const initMsg = {
 const codeId = 429;
 const mine = await cw20.instantiate(codeId, initMsg, "MINE");
 console.log(`Contract: ${mine.contractAddress}`);
-// Contract:  cosmos10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2
+// Contract:  wasm10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2
 
 // now, check the configuration
 mine.balance();
@@ -199,7 +204,7 @@ tokens (or whatever better name you invented), but if you closed it down and
 come back, here's how to re-connect:
 
 ```js
-const client = await useOptions(hackatomOptions).setup(YOUR_PASSWORD_HERE);
+const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
 const cw20 = CW20(client);
 
 // if you forgot your address, but remember your label, you can find it again
@@ -208,7 +213,7 @@ contracts
 const contractAddress = contracts.filter(x => x.label === 'MINE')[0].address;
 
 // otherwise, you can just cut and paste from before
-const contractAddress = "cosmos10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2"
+const contractAddress = "wasm10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2"
 
 // now, connect to that contract and make sure it is yours
 const mine = cw20.use(contractAddress);
@@ -223,8 +228,8 @@ that special permission on init, right?) and transfer tokens to other
 users.
 
 ```js
-const someone = "cosmos13nt9rxj7v2ly096hm8qsyfjzg5pr7vn56p3cay";
-const other = "cosmos1ve2n9dd4uy48hzjgx8wamkc7dp7sfdv82u585d";
+const someone = "wasm13nt9rxj7v2ly096hm8qsyfjzg5pr7vn56p3cay";
+const other = "wasm1ve2n9dd4uy48hzjgx8wamkc7dp7sfdv82u585d";
 
 // right now, only you have tokens
 mine.balance()

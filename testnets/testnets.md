@@ -3,6 +3,18 @@ title: Joining Testnets
 order: 2
 ---
 
+::: warning
+Oysternet validators is run by confio and not open for external validators.
+Musselnet is up as 2021/05/26 so it will become obsolote. The documentation here is for reference and will be updated
+when long living CosmWasm network is released.
+If you want to start practicing validator operation skills, join upcoming CosmWasm testnets.
+But they are very far from production environments. For near mainnet conditions, try validating in 30+ node networks,
+where network load is high.
+Try Terra: https://docs.terra.money/node/join-network.html
+Or Juno: https://github.com/CosmosContracts/testnets
+Both Terra and Juno integrates CosmWasm smart contract engine.
+:::
+
 In this section we will explain how to join testnets, where to find testnet configurations, and some scripts to make the process faster.
 
 ## Select Your Network
@@ -23,29 +35,29 @@ Our installation scripts can help you with both setting up cosmovisor and wasmd:
 
 First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md). You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 
-Below is the [musselnet configuration](https://github.com/CosmWasm/testnets/tree/master/musselnet).
+Below is the [oysternet configuration](https://github.com/CosmWasm/testnets/tree/master/oysternet-1).
 
 ```shell
-export CHAIN_ID="musselnet-4"
-export TESTNET_NAME="musselnet-4"
-export WASMD_VERSION="v0.15.0"
+export CHAIN_ID="oysternet-1"
+export TESTNET_NAME="oysternet-1"
+export WASMD_VERSION="v0.16.0"
 export CONFIG_DIR=".wasmd"
 export BINARY="wasmd"
 
-export COSMJS_VERSION="v0.24.2"
-export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/genesis.json"
-export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/app.toml"
-export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/config/config.toml"
+export COSMJS_VERSION="v0.24.0"
+export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/config/genesis.json"
+export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/config/app.toml"
+export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/config/config.toml"
 
-export RPC="https://rpc.musselnet.cosmwasm.com:443"
-export LCD="https://lcd.musselnet.cosmwasm.com"
-export FAUCET="https://faucet.musselnet.cosmwasm.com"
+export RPC="http://rpc.oysternet.cosmwasm.com:80"
+export LCD="http://lcd.oysternet.cosmwasm.com"
+export FAUCET="https://faucet.oysternet.cosmwasm.com"
 
-export COSMOVISOR_VERSION=v0.41.0
+export COSMOVISOR_VERSION=v0.42.0
 export COSMOVISOR_HOME=/root/.wasmd
 export COSMOVISOR_NAME=wasmd
 
-export SEED_NODE="c065c5ac440d1a9ba484a9a8b25c24d264b0a1a6@49.12.67.47:26656"
+# export SEED_NODE="c065c5ac440d1a9ba484a9a8b25c24d264b0a1a6@49.12.67.47:26656"
 ```
 
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
@@ -82,7 +94,7 @@ wasmd init $MONIKER
 # get the testnets genesis file
 curl -sSL $GENESIS_URL > ~/.wasmd/config/genesis.json
 
-# get app.toml. Minimum gas prices must be 0.025umayo
+# get app.toml. Minimum gas prices must be 0.025usponge
 curl -sSL $APP_CONFIG_URL > ~/.wasmd/config/app.toml
 
 # You need to configure p2p seeds
@@ -97,6 +109,10 @@ Now you should be seeing blocks being replayed and your node is catching up with
 
 ### Become A Validator(optional)
 
+::: warning
+Command below is for demonstration, oysternet is not open for external validators.
+:::
+
 In order to join the network as validator, you need some staking tokens.
 Please ask some in [discord testnets channel](https://docs.cosmwasm.com/chat)
 
@@ -108,7 +124,7 @@ For those interested in validator stack, here is a good reading source on valida
 
 ```shell
 wasmd tx staking create-validator \
-  --amount=1000000ufrites \
+  --amount=1000000ustar \
   --pubkey=$(wasmd tendermint show-validator) \
   --moniker=$MONIKER \
   --chain-id=$CHAIN_ID \
@@ -117,7 +133,7 @@ wasmd tx staking create-validator \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1" \
   --node $RPC \
-  --fees=5000umayo \
+  --fees=5000usponge \
   --from=mywallet
 ```
 
@@ -143,7 +159,7 @@ cd $TESTNET_NAME
 
 wasmd keys add validator
 
-wasmd add-genesis-account --home . $(wasmd keys show -a validator) 100000000ufrites,100000000umayo
+wasmd add-genesis-account --home . $(wasmd keys show -a validator) 100000000ustar,100000000usponge
 
 # please sort the genesis file, so the diff makes sense
 SORTED=$(jq -S . < ./config/genesis.json) && echo "$SORTED" > ./config/genesis.json

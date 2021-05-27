@@ -40,14 +40,14 @@ will allow fred to control payout and upon release, the funds go to bob.
 # instantiate contract and verify
 INIT=$(jq -n --arg fred $(wasmd keys show -a fred) --arg bob $(wasmd keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 wasmd tx wasm instantiate $CODE_ID "$INIT" \
-    --from fred --amount=50000umayo  --label "escrow 1" $TXFLAG -y
+    --from fred --amount=50000usponge  --label "escrow 1" $TXFLAG -y
 
 # check the contract state (and account balance)
 wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
 CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contracts[-1]')
 echo $CONTRACT
 
-# we should see this contract with 50000umayo
+# we should see this contract with 50000usponge
 wasmd query wasm contract $CONTRACT $NODE
 wasmd query account $CONTRACT $NODE
 
@@ -78,7 +78,7 @@ that is not the verifier, then using the proper key to release.
 
 ```shell
 # execute fails if wrong person
-APPROVE='{"approve":{"quantity":[{"amount":"50000","denom":"umayo"}]}}'
+APPROVE='{"approve":{"quantity":[{"amount":"50000","denom":"usponge"}]}}'
 wasmd tx wasm execute $CONTRACT "$APPROVE" \
     --from thief $TXFLAG -y
 
@@ -98,15 +98,16 @@ wasmd query account $CONTRACT $NODE
 
 ## Node Console
 
+::: warning
+Node console needs to be updated.  The code below is obsolete
+:::
+
 If you set up the Node Console / REPL in the [client setup section](./setting-env#setup-node-repl), you can use
 that to deploy and execute your contract. I think you will find that JSON manipulation and parsing
 is a bit nicer in JavaScript than in Shell Script.
 
 First, go to the cli directory and start up your console:
 
-::: warning
-The command below is obsolete and updated soon.
-:::
 
 ```shell
 npx @cosmjs/cli@^0.25 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/cli_helper.ts
@@ -135,12 +136,12 @@ Hit the faucet it needed for fred, so he has tokens to submit transactions:
 ```js
 fredClient.getAccount();
 // if "undefined", do the following
-hitFaucet(defaultFaucetUrl, fredAddr, "umayo")
+hitFaucet(defaultFaucetUrl, fredAddr, "usponge")
 fredClient.getAccount();
 
 thiefClient.getAccount();
 // if "undefined", do the following
-hitFaucet(defaultFaucetUrl, thiefAddr, "umayo")
+hitFaucet(defaultFaucetUrl, thiefAddr, "usponge")
 thiefClient.getAccount();
 
 // check bobAddr has no funds
@@ -163,7 +164,7 @@ console.log(up);
 const { codeId } = up;
 
 const initMsg = {arbiter: fredAddr, recipient: bobAddr};
-const { contractAddress } = await fredClient.instantiate(codeId, initMsg, "Escrow 1", { memo: "memo", transferAmount: [{denom: "umayo", amount: "50000"}]});
+const { contractAddress } = await fredClient.instantiate(codeId, initMsg, "Escrow 1", { memo: "memo", transferAmount: [{denom: "usponge", amount: "50000"}]});
 
 // check the contract is set up properly
 console.log(contractAddress);
@@ -183,7 +184,7 @@ Once we have properly configured the contract, let's show how to use it, both th
 command:
 
 ```js
-const approve = {approve: {quantity: [{amount: "50000", denom: "umayo"}]}};
+const approve = {approve: {quantity: [{amount: "50000", denom: "usponge"}]}};
 
 // thief cannot approve
 thiefClient.execute(contractAddress, approve)

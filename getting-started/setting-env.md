@@ -5,22 +5,21 @@ order: 3
 # Setting Up Environment
 
 You need an environment to run contracts. You can either run your node locally or connect to an
-existing network. For easy testing, musselnet network is online, you can use it to deploy and run your
+existing network. For easy testing, oysternet network is online, you can use it to deploy and run your
 contracts. If you want to setup and run against a local blockchain, [click
 here](#run-local-node-optional)
 
 To verify testnet is currently running, make sure the following URLs are all working for you:
 
-- [https://rpc.musselnet.cosmwasm.com/status](https://rpc.musselnet.cosmwasm.com/status)
-- [https://faucet.musselnet.cosmwasm.com/status](https://faucet.musselnet.cosmwasm.com/status)
-- [https://lcd.musselnet.cosmwasm.com/node_info](https://lcd.musselnet.cosmwasm.com/node_info)
+- [http://rpc.oysternet.cosmwasm.com/status](http://rpc.oysternet.cosmwasm.com/status)
+- [https://faucet.oysternet.cosmwasm.com/status](https://faucet.oysternet.cosmwasm.com/status)
+- [http://lcd.oysternet.cosmwasm.com/node_info](http://lcd.oysternet.cosmwasm.com/node_info)
 
-We have set up two native tokens - `FRITES` (`ufrites`) for becoming a validator and `MAYO` (`umayo`) for
+We have set up two native tokens - `STAR` (`ustar`) for becoming a validator and `SPONGE` (`usponge`) for
 paying fees.
 Available frontends:
 
-- [Block explorer](https://musselnet.cosmwasm.aneka.io/)
-- [Code explorer](https://code-explorer.musselnet.cosmwasm.com/)
+- Block Explorer: [https://block-explorer.oysternet.cosmwasm.com](https://block-explorer.oysternet.cosmwasm.com)
 
 You can use these to explore txs, addresses, validators and contracts
 feel free to deploy one pointing to our rpc/lcd servers and we will list it.
@@ -36,10 +35,10 @@ recommended for contract operations, since JSON manipulation is not intuitive wi
 
 Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
 
-First source the musselnet network configurations to the shell:
+First source the oysternet network configurations to the shell:
 
 ```shell
-source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/defaults.env)
+source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/defaults.env)
 ```
 
 Setup the client:
@@ -64,8 +63,8 @@ You need some tokens in your address to interact. If you are using local node yo
 step. Requesting tokens from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a fred) '{"denom":"umayo","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.musselnet.cosmwasm.com/credit
-JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"umayo","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.musselnet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a fred) '{"denom":"usponge","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.oysternet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"usponge","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.oysternet.cosmwasm.com/credit
 ```
 
 ## Export wasmd Parameters
@@ -73,6 +72,19 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"umayo","address":
 If you intend to use wasmd as client, we recommend you to setup these variables.
 Otherwise You will have to define type in node, chain id and gas-prices details with every command you execute.
 Also for this tutorial we will use these variables. So make sure you export these before proceeding.
+
+```bash
+export NODE="--node $RPC"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001uponge --gas auto --gas-adjustment 1.3"
+```
+
+If command above throws error, this means your shell is different.
+If no errors, try running this:
+```bash
+wasmd query bank total $NODE
+```
+
+If no errors we are all good. Otherwise, set variables with the command below:
 
 ```bash
 export NODE=(--node "https://rpc.musselnet.cosmwasm.com:443")
@@ -90,19 +102,6 @@ supports `await`, does type checking for helpful error messages, and preloads ma
 If you are comfortable with the Node console, you will probably find this easier and more powerful
 than the CLI tooling.
 
-Full usage and installation [instructions are on the
-README](https://github.com/CosmWasm/cosmjs/tree/master/packages/cli), also here are the source codes prepacked with
-network configurations you can use on-the-fly:
-
-::: warning
-The command below is obsolete and updated soon.
-:::
-
-```shell
-## musselnet
-npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/musselnet/cli_helper.ts
-```
-
 Using the REPL:
 
 ```js
@@ -115,12 +114,10 @@ address
 
 client.getAccount()
 // if empty - this only works with CosmWasm
-hitFaucet(defaultFaucetUrl, address, 'FRITES')
+hitFaucet(defaultFaucetUrl, address, 'STAR')
 client.getAccount()
 ```
 
-
-You need to put RPC endpoint and
 ## Run Local Node (optional)
 
 If you are interested in running your local network you can use the script below:
