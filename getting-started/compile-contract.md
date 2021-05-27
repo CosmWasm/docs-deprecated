@@ -38,7 +38,7 @@ can run this which tells the compiler to strip all unused code out:
 RUSTFLAGS='-C link-arg=-s' cargo wasm
 ```
 
-This produces a file about 174kB. We use this and another optimizer in the next [last section](#Optimized-Compilation) to produce the final product uploaded to the blockchain. You don't need to worry about running this yourself (unless you are
+This produces a file about 174kB. We use this and another optimizer in the next [last section](#optimized-compilation) to produce the final product uploaded to the blockchain. You don't need to worry about running this yourself (unless you are
 curious), but you should have an idea of the final size of your contract this way.
 
 ## Unit Tests
