@@ -75,3 +75,6 @@
   font-family: "Metropolis-ExtraLight";
 }
 
+.table-of-contents__link {
+  font-size: 115%;
+}
