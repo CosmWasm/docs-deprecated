@@ -47,6 +47,7 @@
   --ifm-color-primary-lightest: #b697f8;
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: 'Metropolis';
+  --ifm-navbar-height: 80px;
 }
 
 .docusaurus-highlight-code-line {
@@ -54,4 +55,9 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+.navbar__logo {
+  height: 60px;
+  width: auto;
 }
