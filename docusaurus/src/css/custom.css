@@ -6,11 +6,31 @@
  */
 
 /* You can override the default Infima variables here. */
+
+@font-face {
+  font-family: 'Metropolis-Black';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Black.woff2') format('woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Metropolis-Light';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Light.woff2') format('woff2');
+  font-weight: 200;
+}
+
 @font-face {
   font-family: 'Metropolis-ExtraLight';
   src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-ExtraLight.woff2') format('woff2');
   font-weight: 200;
 }
+
+@font-face {
+  font-family: 'Metropolis-Medium';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Medium.woff2') format('woff2');
+  font-weight: 200;
+}
+
 @font-face {
   font-family: 'Metropolis-Regular';
   src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Regular.woff2') format('woff2');
@@ -45,9 +65,10 @@
   --ifm-color-primary-light: #9c70f8;
   --ifm-color-primary-lighter: #a77ffc;
   --ifm-color-primary-lightest: #b697f8;
-  --ifm-code-font-size: 95%;
+  --ifm-code-font-size: 90%;
   --ifm-font-family-base: 'Metropolis-Regular';
   --ifm-font-family-monospace: 'JetBrains Mono';
+  --ifm-font-size-base: 100%;
   --ifm-navbar-height: 80px;
 }
 
@@ -77,4 +98,12 @@
 
 .table-of-contents__link {
   font-size: 115%;
+}
+
+.menu__link {
+  font-family: "Metropolis-Medium";
+}
+
+.menu__link--active {
+  font-family: "Metropolis-Bold";
 }
