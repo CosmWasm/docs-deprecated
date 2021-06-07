@@ -6,7 +6,7 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.png',
+  favicon: 'img/favicon.svg',
   organizationName: 'CosmWasm', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
@@ -88,6 +88,11 @@ module.exports = {
           ],
         },
       ],
+      logo: {
+        alt: 'CosmWasm Logo',
+        src: 'img/logo_stacked.png',
+        href: 'https://cosmwasm.com',
+      },
       copyright: `Copyright © ${new Date().getFullYear()} Confio OÜ`,
     },
   },
