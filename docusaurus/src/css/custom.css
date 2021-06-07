@@ -18,7 +18,7 @@
 }
 
 @font-face {
-  font-family: 'Metropolis';
+  font-family: 'Metropolis-SemiBold';
   src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-SemiBold.woff2') format('woff2');
   font-weight: 600;
 }
@@ -61,3 +61,8 @@
   height: 60px;
   width: auto;
 }
+
+.navbar__link {
+  font-family: "Metropolis-SemiBold";
+}
+

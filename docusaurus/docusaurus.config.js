@@ -1,23 +1,28 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
-  title: 'CosmWasm',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'CosmWasm Documentation',
+  tagline: 'CosmWasm documentation',
+  url: 'https://docs.cosmwasm.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.png',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'CosmWasm', // Usually your GitHub org/user name.
+  projectName: 'docs', // Usually your repo name.
   themeConfig: {
     navbar: {
       logo: {
-        alt: 'My Site Logo',
+        alt: 'CosmWasm',
         src: 'img/logo.svg',
       },
       items: [
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://cosmwasm.com',
+          label: 'Website',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/CosmWasm',
           label: 'GitHub',
           position: 'right',
         },
@@ -27,11 +32,40 @@ module.exports = {
       style: 'light',
       links: [
         {
-          title: 'Docs',
+          title: 'Related Documentation',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Cosmos SDK',
+              href: 'https://cosmos.network/docs',
+            },
+            {
+              label: 'Cosmos Hub',
+              href: 'https://hub.cosmos.network/',
+            },
+            {
+              label: 'Tendermint Core',
+              href: 'https://docs.tendermint.com/',
+            },
+          ],
+        },
+        {
+          title: 'Repositories',
+          items: [
+            {
+              label: 'CosmWasm/cosmwasm',
+              href: 'https://github.com/CosmWasm/cosmwasm',
+            },
+            {
+              label: 'CosmWasm/wasmd',
+              href: 'https://github.com/CosmWasm/wasmd',
+            },
+            {
+              label: 'CosmWasm/cosmwasm-plus',
+              href: 'https://github.com/CosmWasm/cosmwasm-plus',
+            },
+            {
+              label: 'CosmWasm/cawesome-wasm',
+              href: 'https://github.com/CosmWasm/cawesome-wasm',
             },
           ],
         },
@@ -39,34 +73,22 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Confio Blog',
+              href: 'https://medium.com/confio',
             },
             {
               label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              // TODO make this work
+              href: 'https://docs.cosmwasm.com/discord/',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://twitter.com/CosmWasm',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Confio OÜ`,
     },
   },
   presets: [
@@ -77,14 +99,8 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://github.com/CosmWasm/docs/edit/master',
           routeBasePath: '/',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
