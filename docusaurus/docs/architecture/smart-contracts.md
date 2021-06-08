@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-## Comparison with Solidity Contracts
+# Comparison with Solidity Contracts
 
 First of all, the deploy-execute process consists of 3 steps rather than 2. While Ethereum was built around the concept of many unique contracts, each possibly custom-made for any bilateral agreement, the reality seems to show that writing a bug-free contract is harder than originally thought, and a majority are copies of standard templates like OpenZepellin. With that in mind, and conscious of the overhead of uploading and validating wasm code, we define the following 3 phases of a contract:
 

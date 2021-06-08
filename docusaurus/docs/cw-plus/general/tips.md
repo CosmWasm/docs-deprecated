@@ -43,7 +43,7 @@ and see all the types defined there.
 But why switch to a browser and get distracted by something else?
 There is a great `.type` operator to show you this without ever leaving the REPL:
 
-```
+```ts
 >> const _i = mine.increaseAllowance
 undefined
 >> .type _i

@@ -13,6 +13,7 @@ Article: [https://devpost.com/software/nft-marketplace](https://devpost.com/soft
 
 Won **1st place in Galileo Awards**(Most creative dAppchain using Cosmos SDK & Tendermint, with option to use IBC) and 3rd place in Gringotts Awards.
 ![](nft_marketplace.jpeg)
+
 The NFT marketplace provides a generic platform for selling and buying CW721 tokens with CW20 tokens. People can put their tokens up for sale and buy tokens from other sellers.
 We have already seen a couple of example implementations of trading NFTs between two accounts, but all of them were on a per-contract basis. That means that for each trade, there was a separate contract which made it hard to know which tokens were actually up for sale and which token was used. This leads us to the idea of providing one central place to put tokens up for sale for maximum visibility of token sales.
 The project demonstrates CosmWasm contract interaction very well by using 3 deployed contracts on the chain. You can see how the team implemented a custom cw721 contract here. The team contributed to the NFT contract by developing a typescript helper client. Also, the project has Keplr wallet integrated.

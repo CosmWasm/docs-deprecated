@@ -14,7 +14,7 @@ One of the prospects of CosmWasm is providing a solid base to DeFi dApps.
 
 To prove this bold claim and show CosmWasm is the right path, we will demonstrate a [simple option](https://en.wikipedia.org/wiki/Option_(finance)) contract and teach you along the way.
 
-::: tip
+:::info
 Options are financial derivatives that give buyers the right, but not the obligation, to buy or sell an underlying asset at an agreed-upon price and date.
 :::
 

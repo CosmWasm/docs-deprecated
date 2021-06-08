@@ -148,7 +148,7 @@ With wasmd version v0.13 lcd client and node merged. To enable light client, cha
 
 ## Joining To Be Launched Testnets
 
-::: tip
+:::info
 You need to have your address and informations defined in networks genesis file to join not yet launched testnets.
 Here is the script you can run to take care of it automatically.
 :::

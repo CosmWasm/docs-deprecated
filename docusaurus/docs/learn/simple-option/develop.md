@@ -46,7 +46,7 @@ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 All good.
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
 :::
 
@@ -54,7 +54,7 @@ Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
 
 ## Messages
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457702442#t=1m46s](https://vimeo.com/457702442#t=1m46s)
 :::
 
@@ -98,7 +98,7 @@ pub enum HandleMsg {
 }
 ```
 
-::: tip
+:::info
 Canonical and Human Addresses
 Canonical Addresses represent binary format of crypto addresses.
 Human Addresses on the other hand are great for the UI. They are always a subset of ascii text, and often contain security checks - such as chain-prefix in Bech32, e.g. cosmos1h57760w793q6vh06jsppnqdkc4ejcuyrrjxnke
@@ -122,7 +122,7 @@ pub enum QueryMsg {
 
 ## State
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
 :::
 
@@ -159,7 +159,7 @@ pub fn config_read(storage: &dyn Storage) -> ReadonlySingleton<State> {
 
 ## Contract Handlers
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457702442#t=11m12s](https://vimeo.com/457702442#t=11m12s)
 :::
 
@@ -216,7 +216,7 @@ You will see this signature all over CosmWasm handler functions. Execution conte
 
 ### Handle
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457702442#t=15m55s](https://vimeo.com/457702442#t=15m55s)
 :::
 

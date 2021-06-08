@@ -68,7 +68,7 @@
   --ifm-code-font-size: 90%;
   --ifm-font-family-base: 'Metropolis-Regular';
   --ifm-font-family-monospace: 'JetBrains Mono';
-  --ifm-font-size-base: 100%;
+  --ifm-font-size-base: 115%;
   --ifm-navbar-height: 80px;
 }
 
@@ -98,6 +98,10 @@
 
 .table-of-contents__link {
   font-size: 115%;
+}
+
+.menu__list-item {
+  font-size: 100%;
 }
 
 .menu__link {

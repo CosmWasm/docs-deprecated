@@ -79,7 +79,7 @@ module.exports = {
             {
               label: 'Discord',
               // TODO make this work
-              href: 'https://docs.cosmwasm.com/discord/',
+              href: 'https://docs.cosmwasm.com/chat/',
             },
             {
               label: 'Twitter',
@@ -94,6 +94,9 @@ module.exports = {
         href: 'https://cosmwasm.com',
       },
       copyright: `Copyright © ${new Date().getFullYear()} Confio OÜ`,
+    },
+    prism: {
+      additionalLanguages: ['rust'],
     },
   },
   presets: [

@@ -23,7 +23,7 @@ You can keep test and code in the same or separate files.
 
 ## Test Initialization
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457705991#t=3m34s](https://vimeo.com/457705991#t=3m34s)
 :::
 
@@ -116,7 +116,7 @@ pub fn mock_info<U: Into<HumanAddr>>(sender: U, sent: &[Coin]) -> MessageInfo {
 
 ## Test Handler
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457705991#t=7m34s](https://vimeo.com/457705991#t=7m34s)
 :::
 
@@ -162,7 +162,7 @@ fn transfer() {
 
 ### Test Execute
 
-::: tip
+:::info
 Timecode [https://vimeo.com/457705991#t=14m21s](https://vimeo.com/457705991#t=14m21s)
 :::
 
