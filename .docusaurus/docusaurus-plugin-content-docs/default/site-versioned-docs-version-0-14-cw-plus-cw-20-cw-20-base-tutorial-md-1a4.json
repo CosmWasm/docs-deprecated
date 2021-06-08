@@ -1,0 +1,27 @@
+{
+  "unversionedId": "cw-plus/cw20/cw20-base-tutorial",
+  "id": "version-0.14/cw-plus/cw20/cw20-base-tutorial",
+  "isDocsHomePage": false,
+  "title": "CW20-base Tutorial",
+  "description": "This tutorial does not work with cosmjs 0.23. It will be fixed when 0.24 is out.",
+  "source": "@site/versioned_docs/version-0.14/cw-plus/cw20/cw20-base-tutorial.md",
+  "sourceDirName": "cw-plus/cw20",
+  "slug": "/cw-plus/cw20/cw20-base-tutorial",
+  "permalink": "/0.14/cw-plus/cw20/cw20-base-tutorial",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/cw-plus/cw20/cw20-base-tutorial.md",
+  "version": "0.14",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "title": "cw20-base Tutorial",
+    "sidebar_position": 3
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "CW20 Basic",
+    "permalink": "/0.14/cw-plus/cw20/cw20-base-spec"
+  },
+  "next": {
+    "title": "CW20 Bonding curve",
+    "permalink": "/0.14/cw-plus/cw20/cw20-bonding-spec"
+  }
+}

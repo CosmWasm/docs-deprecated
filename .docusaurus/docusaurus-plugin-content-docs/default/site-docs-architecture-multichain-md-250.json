@@ -1,0 +1,26 @@
+{
+  "unversionedId": "architecture/multichain",
+  "id": "architecture/multichain",
+  "isDocsHomePage": false,
+  "title": "What are Multi-Chain Contracts?",
+  "description": "CosmWasm is designed and built from the ground-up to be a multi-chain solution for smart contracts.",
+  "source": "@site/docs/architecture/multichain.md",
+  "sourceDirName": "architecture",
+  "slug": "/architecture/multichain",
+  "permalink": "/0.14/architecture/multichain",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/architecture/multichain.md",
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Next Steps",
+    "permalink": "/0.14/getting-started/next-steps"
+  },
+  "next": {
+    "title": "Actor Model for Contract Calls",
+    "permalink": "/0.14/architecture/actor"
+  }
+}

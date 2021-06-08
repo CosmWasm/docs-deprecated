@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/MIGRATING",
+  "id": "version-0.14/learn/MIGRATING",
+  "isDocsHomePage": false,
+  "title": "Migrating Contracts",
+  "description": "This guide explains what is needed to upgrade contracts when migrating over",
+  "source": "@site/versioned_docs/version-0.14/learn/MIGRATING.md",
+  "sourceDirName": "learn",
+  "slug": "/learn/MIGRATING",
+  "permalink": "/0.14/learn/MIGRATING",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/MIGRATING.md",
+  "version": "0.14",
+  "sidebarPosition": 7,
+  "frontMatter": {
+    "sidebar_position": 7
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Videos and Workshops",
+    "permalink": "/0.14/learn/videos-workshops"
+  },
+  "next": {
+    "title": "CHANGELOG",
+    "permalink": "/0.14/learn/CHANGELOG"
+  }
+}

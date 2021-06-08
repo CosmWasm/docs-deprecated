@@ -1,0 +1,26 @@
+{
+  "unversionedId": "cw-plus/cw3/cw3-flex-spec",
+  "id": "version-0.14/cw-plus/cw3/cw3-flex-spec",
+  "isDocsHomePage": false,
+  "title": "CW3 Flexible Multisig",
+  "description": "cw3-flex-multisig source code//github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw3-flex-multisig",
+  "source": "@site/versioned_docs/version-0.14/cw-plus/cw3/cw3-flex-spec.md",
+  "sourceDirName": "cw-plus/cw3",
+  "slug": "/cw-plus/cw3/cw3-flex-spec",
+  "permalink": "/0.14/cw-plus/cw3/cw3-flex-spec",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/cw-plus/cw3/cw3-flex-spec.md",
+  "version": "0.14",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "CW3 Fixed Multisig",
+    "permalink": "/0.14/cw-plus/cw3/cw3-fixed-spec"
+  },
+  "next": {
+    "title": "CW4 Spec: Group Members",
+    "permalink": "/0.14/cw-plus/cw4/spec"
+  }
+}

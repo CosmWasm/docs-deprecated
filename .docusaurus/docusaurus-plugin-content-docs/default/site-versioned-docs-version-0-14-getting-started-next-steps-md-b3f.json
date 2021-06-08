@@ -1,0 +1,26 @@
+{
+  "unversionedId": "getting-started/next-steps",
+  "id": "version-0.14/getting-started/next-steps",
+  "isDocsHomePage": false,
+  "title": "Next Steps",
+  "description": "This is a very simple example for the escrow contract we developed, but it should show you what is",
+  "source": "@site/versioned_docs/version-0.14/getting-started/next-steps.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/next-steps",
+  "permalink": "/0.14/getting-started/next-steps",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/getting-started/next-steps.md",
+  "version": "0.14",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Uploading and Interacting",
+    "permalink": "/0.14/getting-started/interact-with-contract"
+  },
+  "next": {
+    "title": "What are Multi-Chain Contracts?",
+    "permalink": "/0.14/architecture/multichain"
+  }
+}

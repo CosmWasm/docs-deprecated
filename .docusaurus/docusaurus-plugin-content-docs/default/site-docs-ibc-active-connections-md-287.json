@@ -1,0 +1,27 @@
+{
+  "unversionedId": "ibc/active-connections",
+  "id": "ibc/active-connections",
+  "isDocsHomePage": false,
+  "title": "Active IBC connections",
+  "description": "Here is the list of active IBC connections that you can use to test applications. Contact us for adding new channels.",
+  "source": "@site/docs/ibc/active-connections.md",
+  "sourceDirName": "ibc",
+  "slug": "/ibc/active-connections",
+  "permalink": "/0.14/ibc/active-connections",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/ibc/active-connections.md",
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "title": "Active IBC Connections",
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Relayer",
+    "permalink": "/0.14/ibc/relayer"
+  },
+  "next": {
+    "title": "CW20 ICS20",
+    "permalink": "/0.14/ibc/cw20-ics20"
+  }
+}

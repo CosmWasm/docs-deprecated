@@ -26,6 +26,12 @@ module.exports = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          type: 'docsVersionDropdown',
+          position: 'left',
+          dropdownActiveClassDisabled: true,
+          docsPluginId: 'default',
+        },
       ],
     },
     footer: {
@@ -109,6 +115,13 @@ module.exports = {
           editUrl:
             'https://github.com/CosmWasm/docs/edit/master',
           routeBasePath: '/',
+          lastVersion: "current",
+          versions: {
+            current: {
+              label: "0.14",
+              path: "0.14"
+            }
+          }
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

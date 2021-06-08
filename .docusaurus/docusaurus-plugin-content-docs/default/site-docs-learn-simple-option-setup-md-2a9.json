@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/simple-option/setup",
+  "id": "learn/simple-option/setup",
+  "isDocsHomePage": false,
+  "title": "Setup",
+  "description": "Coding Environment",
+  "source": "@site/docs/learn/simple-option/setup.md",
+  "sourceDirName": "learn/simple-option",
+  "slug": "/learn/simple-option/setup",
+  "permalink": "/0.14/learn/simple-option/setup",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/learn/simple-option/setup.md",
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Introduction",
+    "permalink": "/0.14/learn/simple-option/intro"
+  },
+  "next": {
+    "title": "Develop Contract",
+    "permalink": "/0.14/learn/simple-option/develop"
+  }
+}

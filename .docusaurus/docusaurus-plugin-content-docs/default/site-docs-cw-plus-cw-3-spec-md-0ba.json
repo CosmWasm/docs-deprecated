@@ -1,0 +1,26 @@
+{
+  "unversionedId": "cw-plus/cw3/spec",
+  "id": "cw-plus/cw3/spec",
+  "isDocsHomePage": false,
+  "title": "CW3 Spec: MultiSig/Voting Contracts",
+  "description": "cw3 is a specification for voting contracts based on CosmWasm.",
+  "source": "@site/docs/cw-plus/cw3/spec.md",
+  "sourceDirName": "cw-plus/cw3",
+  "slug": "/cw-plus/cw3/spec",
+  "permalink": "/0.14/cw-plus/cw3/spec",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/cw-plus/cw3/spec.md",
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "CW2 Spec: Contract Info for Migration",
+    "permalink": "/0.14/cw-plus/cw2/Spec"
+  },
+  "next": {
+    "title": "CW3 Fixed Multisig",
+    "permalink": "/0.14/cw-plus/cw3/cw3-fixed-spec"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/simple-option/intro",
+  "id": "learn/simple-option/intro",
+  "isDocsHomePage": false,
+  "title": "Introduction",
+  "description": "DeFi wave hit 2020 crypto scene with massive impact and brought excitement.",
+  "source": "@site/docs/learn/simple-option/intro.md",
+  "sourceDirName": "learn/simple-option",
+  "slug": "/learn/simple-option/intro",
+  "permalink": "/0.14/learn/simple-option/intro",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/learn/simple-option/intro.md",
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Joining Testnets",
+    "permalink": "/0.14/testnets/testnets"
+  },
+  "next": {
+    "title": "Setup",
+    "permalink": "/0.14/learn/simple-option/setup"
+  }
+}

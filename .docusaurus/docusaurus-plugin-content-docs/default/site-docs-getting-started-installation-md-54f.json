@@ -1,0 +1,26 @@
+{
+  "unversionedId": "getting-started/installation",
+  "id": "getting-started/installation",
+  "isDocsHomePage": false,
+  "title": "Installation",
+  "description": "In this section, we will gear up your workhorse for developing, deploying and, enjoying smart",
+  "source": "@site/docs/getting-started/installation.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/installation",
+  "permalink": "/0.14/getting-started/installation",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/getting-started/installation.md",
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Your First Contract",
+    "permalink": "/0.14/getting-started/intro"
+  },
+  "next": {
+    "title": "Setting Up Environment",
+    "permalink": "/0.14/getting-started/setting-env"
+  }
+}

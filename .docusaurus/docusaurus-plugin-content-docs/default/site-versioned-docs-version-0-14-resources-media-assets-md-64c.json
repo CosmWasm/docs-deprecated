@@ -1,0 +1,22 @@
+{
+  "unversionedId": "resources/media/assets",
+  "id": "version-0.14/resources/media/assets",
+  "isDocsHomePage": false,
+  "title": "Brand guidelines",
+  "description": "Guideline pdf: link",
+  "source": "@site/versioned_docs/version-0.14/resources/media/assets.md",
+  "sourceDirName": "resources/media",
+  "slug": "/resources/media/assets",
+  "permalink": "/0.14/resources/media/assets",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/resources/media/assets.md",
+  "version": "0.14",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "CW20 ICS20",
+    "permalink": "/0.14/ibc/cw20-ics20"
+  }
+}

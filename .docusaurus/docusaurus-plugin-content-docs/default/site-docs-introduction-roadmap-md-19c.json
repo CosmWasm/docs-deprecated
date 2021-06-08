@@ -1,0 +1,26 @@
+{
+  "unversionedId": "introduction/roadmap",
+  "id": "introduction/roadmap",
+  "isDocsHomePage": false,
+  "title": "Rough Roadmap",
+  "description": "So far, CosmWasm is an effort of a small team funded by ICF Grants. We have been building out core technology to support various blockchains in the Cosmos Ecosystem. The following is the currently planned roadmap, largely based on the remaining funding of the ICF Grant. If there is strong interest (and funding) from a project that wishes to deploy this to production, the roadmap priorities may be modified.",
+  "source": "@site/docs/introduction/roadmap.md",
+  "sourceDirName": "introduction",
+  "slug": "/introduction/roadmap",
+  "permalink": "/0.14/introduction/roadmap",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/introduction/roadmap.md",
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Introduction",
+    "permalink": "/0.14/"
+  },
+  "next": {
+    "title": "Your First Contract",
+    "permalink": "/0.14/getting-started/intro"
+  }
+}

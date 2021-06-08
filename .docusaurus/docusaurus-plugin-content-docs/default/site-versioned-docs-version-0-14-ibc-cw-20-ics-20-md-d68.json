@@ -1,0 +1,27 @@
+{
+  "unversionedId": "ibc/cw20-ics20",
+  "id": "version-0.14/ibc/cw20-ics20",
+  "isDocsHomePage": false,
+  "title": "CW20 ICS20",
+  "description": "Specification",
+  "source": "@site/versioned_docs/version-0.14/ibc/cw20-ics20.md",
+  "sourceDirName": "ibc",
+  "slug": "/ibc/cw20-ics20",
+  "permalink": "/0.14/ibc/cw20-ics20",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/ibc/cw20-ics20.md",
+  "version": "0.14",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "title": "CW20 ICS20",
+    "sidebar_position": 4
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Active IBC connections",
+    "permalink": "/0.14/ibc/active-connections"
+  },
+  "next": {
+    "title": "Brand guidelines",
+    "permalink": "/0.14/resources/media/assets"
+  }
+}

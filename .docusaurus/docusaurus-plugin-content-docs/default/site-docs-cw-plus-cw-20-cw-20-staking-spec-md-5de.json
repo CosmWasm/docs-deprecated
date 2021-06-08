@@ -1,0 +1,27 @@
+{
+  "unversionedId": "cw-plus/cw20/cw20-staking-spec",
+  "id": "cw-plus/cw20/cw20-staking-spec",
+  "isDocsHomePage": false,
+  "title": "CW20 Staking Derivates",
+  "description": "cw20-staking source code//github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-escrow",
+  "source": "@site/docs/cw-plus/cw20/cw20-staking-spec.md",
+  "sourceDirName": "cw-plus/cw20",
+  "slug": "/cw-plus/cw20/cw20-staking-spec",
+  "permalink": "/0.14/cw-plus/cw20/cw20-staking-spec",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/cw-plus/cw20/cw20-staking-spec.md",
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "title": "cw20-staking Spec",
+    "sidebar_position": 6
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "CW20 Escrow",
+    "permalink": "/0.14/cw-plus/cw20/cw20-escrow-spec"
+  },
+  "next": {
+    "title": "Atomic Swaps",
+    "permalink": "/0.14/cw-plus/cw20/cw20-atomic-swap-spec"
+  }
+}

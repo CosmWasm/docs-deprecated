@@ -1,0 +1,27 @@
+{
+  "unversionedId": "ibc/overview",
+  "id": "version-0.14/ibc/overview",
+  "isDocsHomePage": false,
+  "title": "IBC And CosmWasm",
+  "description": "The inter-blockchain communication protocol (IBC) is an end-to-end, connection-oriented,",
+  "source": "@site/versioned_docs/version-0.14/ibc/overview.md",
+  "sourceDirName": "ibc",
+  "slug": "/ibc/overview",
+  "permalink": "/0.14/ibc/overview",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/ibc/overview.md",
+  "version": "0.14",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "IBC And CosmWasm",
+    "sidebar_position": 1
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Advanced REPL tips",
+    "permalink": "/0.14/cw-plus/general/tips"
+  },
+  "next": {
+    "title": "Relayer",
+    "permalink": "/0.14/ibc/relayer"
+  }
+}

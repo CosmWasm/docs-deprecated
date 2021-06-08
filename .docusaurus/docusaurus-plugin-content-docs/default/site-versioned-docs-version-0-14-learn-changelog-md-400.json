@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/CHANGELOG",
+  "id": "version-0.14/learn/CHANGELOG",
+  "isDocsHomePage": false,
+  "title": "CHANGELOG",
+  "description": "[0.14.0] - 2021-05-03",
+  "source": "@site/versioned_docs/version-0.14/learn/CHANGELOG.md",
+  "sourceDirName": "learn",
+  "slug": "/learn/CHANGELOG",
+  "permalink": "/0.14/learn/CHANGELOG",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/CHANGELOG.md",
+  "version": "0.14",
+  "sidebarPosition": 8,
+  "frontMatter": {
+    "sidebar_position": 8
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Migrating Contracts",
+    "permalink": "/0.14/learn/MIGRATING"
+  },
+  "next": {
+    "title": "Hall of Fame",
+    "permalink": "/0.14/community/hall-of-fame"
+  }
+}

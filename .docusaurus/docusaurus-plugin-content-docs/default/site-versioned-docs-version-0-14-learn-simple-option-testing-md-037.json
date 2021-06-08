@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/simple-option/testing",
+  "id": "version-0.14/learn/simple-option/testing",
+  "isDocsHomePage": false,
+  "title": "Testing",
+  "description": "At this point your code should be compiling, although we did not test if it works.",
+  "source": "@site/versioned_docs/version-0.14/learn/simple-option/testing.md",
+  "sourceDirName": "learn/simple-option",
+  "slug": "/learn/simple-option/testing",
+  "permalink": "/0.14/learn/simple-option/testing",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/simple-option/testing.md",
+  "version": "0.14",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_position": 4
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Develop Contract",
+    "permalink": "/0.14/learn/simple-option/develop"
+  },
+  "next": {
+    "title": "Next Steps",
+    "permalink": "/0.14/learn/simple-option/next-steps"
+  }
+}

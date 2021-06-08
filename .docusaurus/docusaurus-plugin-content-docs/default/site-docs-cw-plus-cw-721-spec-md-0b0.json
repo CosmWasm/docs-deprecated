@@ -1,0 +1,27 @@
+{
+  "unversionedId": "cw-plus/cw721/spec",
+  "id": "cw-plus/cw721/spec",
+  "isDocsHomePage": false,
+  "title": "CW721 Spec: Non Fungible Tokens",
+  "description": "cw721 package source code//github.com/CosmWasm/cosmwasm-plus/blob/master/packages/cw721/README.md",
+  "source": "@site/docs/cw-plus/cw721/spec.md",
+  "sourceDirName": "cw-plus/cw721",
+  "slug": "/cw-plus/cw721/spec",
+  "permalink": "/0.14/cw-plus/cw721/spec",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/cw-plus/cw721/spec.md",
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "cw721 Spec",
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Atomic Swaps",
+    "permalink": "/0.14/cw-plus/cw20/cw20-atomic-swap-spec"
+  },
+  "next": {
+    "title": "Cw721 Basic",
+    "permalink": "/0.14/cw-plus/cw721/cw721-base"
+  }
+}

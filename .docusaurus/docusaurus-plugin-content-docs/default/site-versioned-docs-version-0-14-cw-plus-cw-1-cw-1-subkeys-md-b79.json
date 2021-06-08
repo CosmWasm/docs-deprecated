@@ -1,0 +1,26 @@
+{
+  "unversionedId": "cw-plus/cw1/cw1-subkeys",
+  "id": "version-0.14/cw-plus/cw1/cw1-subkeys",
+  "isDocsHomePage": false,
+  "title": "CW1 Subkeys",
+  "description": "cw1 Subkeys",
+  "source": "@site/versioned_docs/version-0.14/cw-plus/cw1/cw1-subkeys.md",
+  "sourceDirName": "cw-plus/cw1",
+  "slug": "/cw-plus/cw1/cw1-subkeys",
+  "permalink": "/0.14/cw-plus/cw1/cw1-subkeys",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/cw-plus/cw1/cw1-subkeys.md",
+  "version": "0.14",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "CW1 Spec: Proxy Contracts",
+    "permalink": "/0.14/cw-plus/cw1/intro"
+  },
+  "next": {
+    "title": "CW1 Whitelist",
+    "permalink": "/0.14/cw-plus/cw1/cw1-whitelist"
+  }
+}

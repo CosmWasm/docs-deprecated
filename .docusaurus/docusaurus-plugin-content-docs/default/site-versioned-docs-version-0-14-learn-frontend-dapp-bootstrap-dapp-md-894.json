@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/frontend-dapp/bootstrap-dapp",
+  "id": "version-0.14/learn/frontend-dapp/bootstrap-dapp",
+  "isDocsHomePage": false,
+  "title": "Bootstrap dApp",
+  "description": "There are two approaches to bootstrap a new dApp: as a lerna package in the monorepo or as a standalone app.",
+  "source": "@site/versioned_docs/version-0.14/learn/frontend-dapp/bootstrap-dapp.md",
+  "sourceDirName": "learn/frontend-dapp",
+  "slug": "/learn/frontend-dapp/bootstrap-dapp",
+  "permalink": "/0.14/learn/frontend-dapp/bootstrap-dapp",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/frontend-dapp/bootstrap-dapp.md",
+  "version": "0.14",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_position": 4
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Cosmic dApp design",
+    "permalink": "/0.14/learn/frontend-dapp/cosmicdapp-design"
+  },
+  "next": {
+    "title": "Develop dApp",
+    "permalink": "/0.14/learn/frontend-dapp/dapp-development"
+  }
+}

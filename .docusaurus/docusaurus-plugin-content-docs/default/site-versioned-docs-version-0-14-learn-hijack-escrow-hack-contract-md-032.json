@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/hijack-escrow/hack-contract",
+  "id": "version-0.14/learn/hijack-escrow/hack-contract",
+  "isDocsHomePage": false,
+  "title": "Hack the Contract",
+  "description": "Now that you can compile and run tests, let's try to make some changes to the code and you can see if they work. If you didn't do this already in the last section, it is time to clone the examples repo and check out the escrow code:",
+  "source": "@site/versioned_docs/version-0.14/learn/hijack-escrow/hack-contract.md",
+  "sourceDirName": "learn/hijack-escrow",
+  "slug": "/learn/hijack-escrow/hack-contract",
+  "permalink": "/0.14/learn/hijack-escrow/hack-contract",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/hijack-escrow/hack-contract.md",
+  "version": "0.14",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Introduction",
+    "permalink": "/0.14/learn/hijack-escrow/intro"
+  },
+  "next": {
+    "title": "Hints",
+    "permalink": "/0.14/learn/hijack-escrow/edit-escrow-hints"
+  }
+}

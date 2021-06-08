@@ -1,0 +1,27 @@
+{
+  "unversionedId": "architecture/actor",
+  "id": "version-0.14/architecture/actor",
+  "isDocsHomePage": false,
+  "title": "Actor Model for Contract Calls",
+  "description": "The actor model is a design pattern, often used in to build reliable, distributed systems. The fundamental points, in my opinion, are that each Actor has exclusive access to its own internal state, and that Actors cannot call each other directly, only dispatch messages over some Dispatcher (that maintains the state of the system and can map addresses to code and storage). Fundamentally the Actor pattern can be encapsulated in such an interface:",
+  "source": "@site/versioned_docs/version-0.14/architecture/actor.md",
+  "sourceDirName": "architecture",
+  "slug": "/architecture/actor",
+  "permalink": "/0.14/architecture/actor",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/architecture/actor.md",
+  "version": "0.14",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "title": "Actor Model",
+    "sidebar_position": 3
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "What are Multi-Chain Contracts?",
+    "permalink": "/0.14/architecture/multichain"
+  },
+  "next": {
+    "title": "Names and Addresses",
+    "permalink": "/0.14/architecture/addresses"
+  }
+}

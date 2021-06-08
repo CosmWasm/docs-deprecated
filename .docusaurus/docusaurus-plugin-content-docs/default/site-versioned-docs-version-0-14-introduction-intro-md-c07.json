@@ -1,0 +1,23 @@
+{
+  "unversionedId": "introduction/intro",
+  "id": "version-0.14/introduction/intro",
+  "isDocsHomePage": false,
+  "title": "Introduction",
+  "description": "CosmWasm is a new smart contracting platform built for the cosmos ecosystem. If you haven't yet heard of it, please check out this intro. The purpose of this documentation is to give a deep dive into the technology for developers who wish to try it out or integrate it into their product. Particularly, it is aimed at Go developers with experience with the Cosmos SDK, as well as Rust developers looking for a blockchain platform.",
+  "source": "@site/versioned_docs/version-0.14/introduction/intro.md",
+  "sourceDirName": "introduction",
+  "slug": "/",
+  "permalink": "/0.14/",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/introduction/intro.md",
+  "version": "0.14",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "slug": "/"
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "next": {
+    "title": "Rough Roadmap",
+    "permalink": "/0.14/introduction/roadmap"
+  }
+}

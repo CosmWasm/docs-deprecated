@@ -1,0 +1,26 @@
+{
+  "unversionedId": "getting-started/interact-with-contract",
+  "id": "version-0.14/getting-started/interact-with-contract",
+  "isDocsHomePage": false,
+  "title": "Uploading and Interacting",
+  "description": "We have the binary ready. Now it is time to see some wasm action. You can use Go CLI or",
+  "source": "@site/versioned_docs/version-0.14/getting-started/interact-with-contract.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/interact-with-contract",
+  "permalink": "/0.14/getting-started/interact-with-contract",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/getting-started/interact-with-contract.md",
+  "version": "0.14",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Downloading and Compiling Contract",
+    "permalink": "/0.14/getting-started/compile-contract"
+  },
+  "next": {
+    "title": "Next Steps",
+    "permalink": "/0.14/getting-started/next-steps"
+  }
+}

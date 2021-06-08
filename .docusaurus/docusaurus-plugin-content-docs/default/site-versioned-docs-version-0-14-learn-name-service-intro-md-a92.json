@@ -1,0 +1,25 @@
+{
+  "unversionedId": "learn/name-service/intro",
+  "id": "version-0.14/learn/name-service/intro",
+  "isDocsHomePage": false,
+  "title": "Introduction",
+  "description": "The Cosmos SDK has a good standard tutorial, which builds out a sample name service application. To provide a nice transition for existing SDK developers, we will demonstrate implementing the same application using CosmWasm. This is a useful tutorial to demonstrate basic concepts and applying the skills that you learned in the introduction. We will also be producing another tutorial for deploying and using an ERC20 contract, which may be more familiar to those coming from an Ethereum background.",
+  "source": "@site/versioned_docs/version-0.14/learn/name-service/intro.md",
+  "sourceDirName": "learn/name-service",
+  "slug": "/learn/name-service/intro",
+  "permalink": "/0.14/learn/name-service/intro",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/name-service/intro.md",
+  "version": "0.14",
+  "frontMatter": {
+    "title": "Introduction"
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Smart Contracts Over Governance",
+    "permalink": "/0.14/learn/governance"
+  },
+  "next": {
+    "title": "Introduction",
+    "permalink": "/0.14/learn/frontend-dapp/intro"
+  }
+}

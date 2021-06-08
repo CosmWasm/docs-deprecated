@@ -1,0 +1,27 @@
+{
+  "unversionedId": "cw-plus/general/tips",
+  "id": "cw-plus/general/tips",
+  "isDocsHomePage": false,
+  "title": "Advanced REPL tips",
+  "description": "You must read cw20 tutorial first. This section builds on",
+  "source": "@site/docs/cw-plus/general/tips.md",
+  "sourceDirName": "cw-plus/general",
+  "slug": "/cw-plus/general/tips",
+  "permalink": "/0.14/cw-plus/general/tips",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/cw-plus/general/tips.md",
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "title": "Advanced Tips",
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Plus Contracts",
+    "permalink": "/0.14/cw-plus/general/overview"
+  },
+  "next": {
+    "title": "IBC And CosmWasm",
+    "permalink": "/0.14/ibc/overview"
+  }
+}

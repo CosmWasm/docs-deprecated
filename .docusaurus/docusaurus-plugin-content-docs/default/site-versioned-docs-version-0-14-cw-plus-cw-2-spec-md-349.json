@@ -1,0 +1,25 @@
+{
+  "unversionedId": "cw-plus/cw2/Spec",
+  "id": "version-0.14/cw-plus/cw2/Spec",
+  "isDocsHomePage": false,
+  "title": "CW2 Spec: Contract Info for Migration",
+  "description": "Repo link//github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw2",
+  "source": "@site/versioned_docs/version-0.14/cw-plus/cw2/Spec.md",
+  "sourceDirName": "cw-plus/cw2",
+  "slug": "/cw-plus/cw2/Spec",
+  "permalink": "/0.14/cw-plus/cw2/Spec",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/cw-plus/cw2/Spec.md",
+  "version": "0.14",
+  "frontMatter": {
+    "title": "CW2 Spec"
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "CW1 Whitelist",
+    "permalink": "/0.14/cw-plus/cw1/cw1-whitelist"
+  },
+  "next": {
+    "title": "CW3 Spec: MultiSig/Voting Contracts",
+    "permalink": "/0.14/cw-plus/cw3/spec"
+  }
+}

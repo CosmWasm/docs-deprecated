@@ -1,0 +1,27 @@
+{
+  "unversionedId": "architecture/addresses",
+  "id": "architecture/addresses",
+  "isDocsHomePage": false,
+  "title": "Names and Addresses",
+  "description": "Blockchains (almost?) all use addresses to identify external actors via a hash of a public key, and many newer ones extended this to identify on-chain \"smart contracts\" with unique addresses as well. On chain, addresses are represented by a use a concise, immutable binary format, typically 20 or 32 bytes long, often derived from a hashing function. However, there are many human-readable representations of these binary addresses, which are shown to clients. For example, Bech32 bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9, hex 0x8617E340B3D01FA5F11F306F4090FD50E238070D or checksumned hex 0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed, and even large integers 3040783849904107057L.",
+  "source": "@site/docs/architecture/addresses.md",
+  "sourceDirName": "architecture",
+  "slug": "/architecture/addresses",
+  "permalink": "/0.14/architecture/addresses",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/architecture/addresses.md",
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "title": "Names and Addresses",
+    "sidebar_position": 4
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Actor Model for Contract Calls",
+    "permalink": "/0.14/architecture/actor"
+  },
+  "next": {
+    "title": "Querying Contract State",
+    "permalink": "/0.14/architecture/query"
+  }
+}

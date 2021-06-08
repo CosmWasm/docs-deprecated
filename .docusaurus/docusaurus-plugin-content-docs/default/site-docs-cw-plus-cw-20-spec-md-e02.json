@@ -1,0 +1,26 @@
+{
+  "unversionedId": "cw-plus/cw20/spec",
+  "id": "cw-plus/cw20/spec",
+  "isDocsHomePage": false,
+  "title": "CW20 Spec: Fungible Tokens",
+  "description": "cw20 package source code//github.com/CosmWasm/cosmwasm-plus/tree/master/packages/cw20",
+  "source": "@site/docs/cw-plus/cw20/spec.md",
+  "sourceDirName": "cw-plus/cw20",
+  "slug": "/cw-plus/cw20/spec",
+  "permalink": "/0.14/cw-plus/cw20/spec",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/cw-plus/cw20/spec.md",
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "CW4 Stake",
+    "permalink": "/0.14/cw-plus/cw4/cw4-stake-spec"
+  },
+  "next": {
+    "title": "CW20 Basic",
+    "permalink": "/0.14/cw-plus/cw20/cw20-base-spec"
+  }
+}

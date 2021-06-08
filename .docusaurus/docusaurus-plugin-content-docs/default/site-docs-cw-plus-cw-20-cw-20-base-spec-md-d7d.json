@@ -1,0 +1,27 @@
+{
+  "unversionedId": "cw-plus/cw20/cw20-base-spec",
+  "id": "cw-plus/cw20/cw20-base-spec",
+  "isDocsHomePage": false,
+  "title": "CW20 Basic",
+  "description": "This is a basic implementation of a cw20 contract. It implements",
+  "source": "@site/docs/cw-plus/cw20/cw20-base-spec.md",
+  "sourceDirName": "cw-plus/cw20",
+  "slug": "/cw-plus/cw20/cw20-base-spec",
+  "permalink": "/0.14/cw-plus/cw20/cw20-base-spec",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/cw-plus/cw20/cw20-base-spec.md",
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "title": "cw20-base Spec",
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "CW20 Spec: Fungible Tokens",
+    "permalink": "/0.14/cw-plus/cw20/spec"
+  },
+  "next": {
+    "title": "CW20-base Tutorial",
+    "permalink": "/0.14/cw-plus/cw20/cw20-base-tutorial"
+  }
+}

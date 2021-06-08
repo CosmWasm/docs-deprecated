@@ -1,0 +1,27 @@
+{
+  "unversionedId": "cw-plus/cw1/intro",
+  "id": "version-0.14/cw-plus/cw1/intro",
+  "isDocsHomePage": false,
+  "title": "CW1 Spec: Proxy Contracts",
+  "description": "cw1 is a specification for proxy contracts based on CosmWasm.",
+  "source": "@site/versioned_docs/version-0.14/cw-plus/cw1/intro.md",
+  "sourceDirName": "cw-plus/cw1",
+  "slug": "/cw-plus/cw1/intro",
+  "permalink": "/0.14/cw-plus/cw1/intro",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/cw-plus/cw1/intro.md",
+  "version": "0.14",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "title": "Spec",
+    "sidebar_position": 1
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Hall of Fame",
+    "permalink": "/0.14/community/hall-of-fame"
+  },
+  "next": {
+    "title": "CW1 Subkeys",
+    "permalink": "/0.14/cw-plus/cw1/cw1-subkeys"
+  }
+}

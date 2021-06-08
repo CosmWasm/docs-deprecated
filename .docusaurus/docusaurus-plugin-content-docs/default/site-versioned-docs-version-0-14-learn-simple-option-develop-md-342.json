@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/simple-option/develop",
+  "id": "version-0.14/learn/simple-option/develop",
+  "isDocsHomePage": false,
+  "title": "Develop Contract",
+  "description": "First test if the starter works, and get your eyes used to rust test results:",
+  "source": "@site/versioned_docs/version-0.14/learn/simple-option/develop.md",
+  "sourceDirName": "learn/simple-option",
+  "slug": "/learn/simple-option/develop",
+  "permalink": "/0.14/learn/simple-option/develop",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/simple-option/develop.md",
+  "version": "0.14",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Setup",
+    "permalink": "/0.14/learn/simple-option/setup"
+  },
+  "next": {
+    "title": "Testing",
+    "permalink": "/0.14/learn/simple-option/testing"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/videos-workshops",
+  "id": "learn/videos-workshops",
+  "isDocsHomePage": false,
+  "title": "Videos and Workshops",
+  "description": "Here are the videos, events, workshops that can feed your learning hunger for CosmWasm!",
+  "source": "@site/docs/learn/videos-workshops.md",
+  "sourceDirName": "learn",
+  "slug": "/learn/videos-workshops",
+  "permalink": "/0.14/learn/videos-workshops",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/learn/videos-workshops.md",
+  "version": "current",
+  "sidebarPosition": 6,
+  "frontMatter": {
+    "sidebar_position": 6
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Develop dApp",
+    "permalink": "/0.14/learn/frontend-dapp/dapp-development"
+  },
+  "next": {
+    "title": "Migrating Contracts",
+    "permalink": "/0.14/learn/MIGRATING"
+  }
+}

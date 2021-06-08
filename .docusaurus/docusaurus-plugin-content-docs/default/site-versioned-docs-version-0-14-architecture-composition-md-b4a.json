@@ -1,0 +1,27 @@
+{
+  "unversionedId": "architecture/composition",
+  "id": "version-0.14/architecture/composition",
+  "isDocsHomePage": false,
+  "title": "Contract Composition",
+  "description": "Given the Actor model of dispatching messages, and synchronous queries implemented in CosmWasm v0.8, we have all the raw components",
+  "source": "@site/versioned_docs/version-0.14/architecture/composition.md",
+  "sourceDirName": "architecture",
+  "slug": "/architecture/composition",
+  "permalink": "/0.14/architecture/composition",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/architecture/composition.md",
+  "version": "0.14",
+  "sidebarPosition": 7,
+  "frontMatter": {
+    "title": "Contract Composition",
+    "sidebar_position": 7
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Serialization Formats",
+    "permalink": "/0.14/architecture/serialization"
+  },
+  "next": {
+    "title": "Comparison with Solidity Contracts",
+    "permalink": "/0.14/architecture/smart-contracts"
+  }
+}

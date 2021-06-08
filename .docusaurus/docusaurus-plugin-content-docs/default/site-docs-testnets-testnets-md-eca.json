@@ -1,0 +1,26 @@
+{
+  "unversionedId": "testnets/testnets",
+  "id": "testnets/testnets",
+  "isDocsHomePage": false,
+  "title": "Joining Testnets",
+  "description": "In this section we will explain how to join testnets, where to find testnet configurations, and some scripts to make the process faster.",
+  "source": "@site/docs/testnets/testnets.md",
+  "sourceDirName": "testnets",
+  "slug": "/testnets/testnets",
+  "permalink": "/0.14/testnets/testnets",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/testnets/testnets.md",
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Build Requirements",
+    "permalink": "/0.14/testnets/build-requirements"
+  },
+  "next": {
+    "title": "Introduction",
+    "permalink": "/0.14/learn/simple-option/intro"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/simple-option/next-steps",
+  "id": "version-0.14/learn/simple-option/next-steps",
+  "isDocsHomePage": false,
+  "title": "Next Steps",
+  "description": "We covered a lot of essentials of CosmWasm in this tutorial/workshop combo. We have more reading and learning resources for you:",
+  "source": "@site/versioned_docs/version-0.14/learn/simple-option/next-steps.md",
+  "sourceDirName": "learn/simple-option",
+  "slug": "/learn/simple-option/next-steps",
+  "permalink": "/0.14/learn/simple-option/next-steps",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/simple-option/next-steps.md",
+  "version": "0.14",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Testing",
+    "permalink": "/0.14/learn/simple-option/testing"
+  },
+  "next": {
+    "title": "Introduction",
+    "permalink": "/0.14/learn/hijack-escrow/intro"
+  }
+}

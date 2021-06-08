@@ -1,0 +1,26 @@
+{
+  "unversionedId": "testnets/build-requirements",
+  "id": "testnets/build-requirements",
+  "isDocsHomePage": false,
+  "title": "Build Requirements",
+  "description": "For minimum system requirements instances with 2 processor CPU and 4GB memory is recommended.",
+  "source": "@site/docs/testnets/build-requirements.md",
+  "sourceDirName": "testnets",
+  "slug": "/testnets/build-requirements",
+  "permalink": "/0.14/testnets/build-requirements",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/testnets/build-requirements.md",
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Comparison with Solidity Contracts",
+    "permalink": "/0.14/architecture/smart-contracts"
+  },
+  "next": {
+    "title": "Joining Testnets",
+    "permalink": "/0.14/testnets/testnets"
+  }
+}

@@ -1,0 +1,328 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "0.14",
+          "isLast": true,
+          "path": "/0.14",
+          "mainDocId": "introduction/intro",
+          "docs": [
+            {
+              "id": "architecture/actor",
+              "path": "/0.14/architecture/actor",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "architecture/addresses",
+              "path": "/0.14/architecture/addresses",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "architecture/composition",
+              "path": "/0.14/architecture/composition",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "architecture/multichain",
+              "path": "/0.14/architecture/multichain",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "architecture/query",
+              "path": "/0.14/architecture/query",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "architecture/serialization",
+              "path": "/0.14/architecture/serialization",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "architecture/smart-contracts",
+              "path": "/0.14/architecture/smart-contracts",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "community/hall-of-fame",
+              "path": "/0.14/community/hall-of-fame",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw1/cw1-subkeys",
+              "path": "/0.14/cw-plus/cw1/cw1-subkeys",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw1/cw1-whitelist",
+              "path": "/0.14/cw-plus/cw1/cw1-whitelist",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw1/intro",
+              "path": "/0.14/cw-plus/cw1/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw2/Spec",
+              "path": "/0.14/cw-plus/cw2/Spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw20/cw20-atomic-swap-spec",
+              "path": "/0.14/cw-plus/cw20/cw20-atomic-swap-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw20/cw20-base-spec",
+              "path": "/0.14/cw-plus/cw20/cw20-base-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw20/cw20-base-tutorial",
+              "path": "/0.14/cw-plus/cw20/cw20-base-tutorial",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw20/cw20-bonding-spec",
+              "path": "/0.14/cw-plus/cw20/cw20-bonding-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw20/cw20-escrow-spec",
+              "path": "/0.14/cw-plus/cw20/cw20-escrow-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw20/cw20-staking-spec",
+              "path": "/0.14/cw-plus/cw20/cw20-staking-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw20/spec",
+              "path": "/0.14/cw-plus/cw20/spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw3/cw3-fixed-spec",
+              "path": "/0.14/cw-plus/cw3/cw3-fixed-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw3/cw3-flex-spec",
+              "path": "/0.14/cw-plus/cw3/cw3-flex-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw3/spec",
+              "path": "/0.14/cw-plus/cw3/spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw4/cw4-group-spec",
+              "path": "/0.14/cw-plus/cw4/cw4-group-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw4/cw4-stake-spec",
+              "path": "/0.14/cw-plus/cw4/cw4-stake-spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw4/spec",
+              "path": "/0.14/cw-plus/cw4/spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw721/cw721-base",
+              "path": "/0.14/cw-plus/cw721/cw721-base",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/cw721/spec",
+              "path": "/0.14/cw-plus/cw721/spec",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/general/overview",
+              "path": "/0.14/cw-plus/general/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "cw-plus/general/tips",
+              "path": "/0.14/cw-plus/general/tips",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/compile-contract",
+              "path": "/0.14/getting-started/compile-contract",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/installation",
+              "path": "/0.14/getting-started/installation",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/interact-with-contract",
+              "path": "/0.14/getting-started/interact-with-contract",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/intro",
+              "path": "/0.14/getting-started/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/next-steps",
+              "path": "/0.14/getting-started/next-steps",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "getting-started/setting-env",
+              "path": "/0.14/getting-started/setting-env",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "ibc/active-connections",
+              "path": "/0.14/ibc/active-connections",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "ibc/cw20-ics20",
+              "path": "/0.14/ibc/cw20-ics20",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "ibc/overview",
+              "path": "/0.14/ibc/overview",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "ibc/relayer",
+              "path": "/0.14/ibc/relayer",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "introduction/intro",
+              "path": "/0.14/",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "introduction/roadmap",
+              "path": "/0.14/introduction/roadmap",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/CHANGELOG",
+              "path": "/0.14/learn/CHANGELOG",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/frontend-dapp/bootstrap-dapp",
+              "path": "/0.14/learn/frontend-dapp/bootstrap-dapp",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/frontend-dapp/cosmicdapp-design",
+              "path": "/0.14/learn/frontend-dapp/cosmicdapp-design",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/frontend-dapp/cosmicdapp-logic",
+              "path": "/0.14/learn/frontend-dapp/cosmicdapp-logic",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/frontend-dapp/dapp-development",
+              "path": "/0.14/learn/frontend-dapp/dapp-development",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/frontend-dapp/intro",
+              "path": "/0.14/learn/frontend-dapp/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/governance",
+              "path": "/0.14/learn/governance",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/hijack-escrow/edit-escrow-hints",
+              "path": "/0.14/learn/hijack-escrow/edit-escrow-hints",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/hijack-escrow/hack-contract",
+              "path": "/0.14/learn/hijack-escrow/hack-contract",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/hijack-escrow/intro",
+              "path": "/0.14/learn/hijack-escrow/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/MIGRATING",
+              "path": "/0.14/learn/MIGRATING",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/name-service/intro",
+              "path": "/0.14/learn/name-service/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/simple-option/develop",
+              "path": "/0.14/learn/simple-option/develop",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/simple-option/intro",
+              "path": "/0.14/learn/simple-option/intro",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/simple-option/next-steps",
+              "path": "/0.14/learn/simple-option/next-steps",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/simple-option/setup",
+              "path": "/0.14/learn/simple-option/setup",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/simple-option/testing",
+              "path": "/0.14/learn/simple-option/testing",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "learn/videos-workshops",
+              "path": "/0.14/learn/videos-workshops",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "resources/media/assets",
+              "path": "/0.14/resources/media/assets",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "testnets/build-requirements",
+              "path": "/0.14/testnets/build-requirements",
+              "sidebar": "tutorialSidebar"
+            },
+            {
+              "id": "testnets/testnets",
+              "path": "/0.14/testnets/testnets",
+              "sidebar": "tutorialSidebar"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

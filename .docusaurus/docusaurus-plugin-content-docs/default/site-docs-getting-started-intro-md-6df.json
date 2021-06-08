@@ -1,0 +1,26 @@
+{
+  "unversionedId": "getting-started/intro",
+  "id": "getting-started/intro",
+  "isDocsHomePage": false,
+  "title": "Your First Contract",
+  "description": "Buckle up, we will now get first-hand experience with CosmWasm, by starting up our own",
+  "source": "@site/docs/getting-started/intro.md",
+  "sourceDirName": "getting-started",
+  "slug": "/getting-started/intro",
+  "permalink": "/0.14/getting-started/intro",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/docs/getting-started/intro.md",
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Rough Roadmap",
+    "permalink": "/0.14/introduction/roadmap"
+  },
+  "next": {
+    "title": "Installation",
+    "permalink": "/0.14/getting-started/installation"
+  }
+}

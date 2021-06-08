@@ -1,0 +1,26 @@
+{
+  "unversionedId": "learn/governance",
+  "id": "version-0.14/learn/governance",
+  "isDocsHomePage": false,
+  "title": "Smart Contracts Over Governance",
+  "description": "CsomWasm proves the potential of a smart contract container at the heart of the Cosmos Hub. {synopsis}",
+  "source": "@site/versioned_docs/version-0.14/learn/governance.md",
+  "sourceDirName": "learn",
+  "slug": "/learn/governance",
+  "permalink": "/0.14/learn/governance",
+  "editUrl": "https://github.com/CosmWasm/docs/edit/master/versioned_docs/version-0.14/learn/governance.md",
+  "version": "0.14",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "version-0.14/tutorialSidebar",
+  "previous": {
+    "title": "Hints",
+    "permalink": "/0.14/learn/hijack-escrow/edit-escrow-hints"
+  },
+  "next": {
+    "title": "Introduction",
+    "permalink": "/0.14/learn/name-service/intro"
+  }
+}
