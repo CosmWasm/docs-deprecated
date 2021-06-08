@@ -1,5 +1,4 @@
 ---
-title: Build Requirements
 sidebar_position: 1
 ---
 

@@ -29,7 +29,7 @@ First, initialize node repl:
 npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/v0.3.2/contracts/cw1-subkeys/helpers.ts
 ```
 
-::: caution
+:::caution
 Helper code is compatible with cw1-subkeys smart contract version **v0.3.2**
 :::
 

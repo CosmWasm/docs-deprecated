@@ -2,9 +2,11 @@
 sidebar_position: 2
 ---
 
+# Joining Testnets
+
 In this section we will explain how to join testnets, where to find testnet configurations, and some scripts to make the process faster.
 
-::: warning
+:::caution
 Oysternet validators is run by confio and not open for external validators.
 Musselnet is up as 2021/05/26 so it will become obsolote. The documentation here is for reference and will be updated
 when long living CosmWasm network is released.
@@ -112,7 +114,7 @@ Now you should be seeing blocks being replayed and your node is catching up with
 
 ### Become A Validator(optional)
 
-::: warning
+:::caution
 Command below is for demonstration, oysternet is not open for external validators.
 :::
 

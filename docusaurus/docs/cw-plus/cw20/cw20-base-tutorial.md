@@ -26,7 +26,7 @@ work properly on Windows (we assume a HOME environmental variable). PRs welcome.
 
 ## Connecting to the chain
 
-::: caution
+:::caution
 CosmJs helpers needs refactoring thus do not work now. It will be fixed in future, but you can see
 a reference to how it works.
 :::
@@ -88,7 +88,7 @@ You could use this later to recover, or use the same mnemonic to import the key 
 useOptions(oysternetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
 ```
 
-::: caution
+:::caution
 This command saves the key to `~/.helder.key` encrypted. If you forget the password, either delete it or pass a
 `filename` along with a password to create a new key.
 :::
