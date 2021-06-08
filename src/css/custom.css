@@ -1,0 +1,113 @@
+/* stylelint-disable docusaurus/copyright-header */
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+
+@font-face {
+  font-family: 'Metropolis-Black';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Black.woff2') format('woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Metropolis-Light';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Light.woff2') format('woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Metropolis-ExtraLight';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-ExtraLight.woff2') format('woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Metropolis-Medium';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Medium.woff2') format('woff2');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'Metropolis-Regular';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Metropolis-SemiBold';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Metropolis-Bold';
+  src: url('https://raw.githubusercontent.com/lovincyrus/Metropolis/master/Fonts/Webfonts/WOFF2/Metropolis-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
+  url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff'),
+  url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --ifm-color-primary: #8d5df9;
+  --ifm-color-primary-dark: #834ae2;
+  --ifm-color-primary-darker: #6c3dba;
+  --ifm-color-primary-light: #9c70f8;
+  --ifm-color-primary-lighter: #a77ffc;
+  --ifm-color-primary-lightest: #b697f8;
+  --ifm-code-font-size: 90%;
+  --ifm-font-family-base: 'Metropolis-Regular';
+  --ifm-font-family-monospace: 'JetBrains Mono';
+  --ifm-font-size-base: 115%;
+  --ifm-navbar-height: 80px;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgb(72, 77, 91);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+.navbar__logo {
+  height: 60px;
+  width: auto;
+}
+
+.navbar__link {
+  font-family: "Metropolis-SemiBold";
+}
+
+.menu__link {
+  font-family: "Metropolis-SemiBold";
+}
+
+.footer__link-item {
+  font-family: "Metropolis-ExtraLight";
+}
+
+.table-of-contents__link {
+  font-size: 115%;
+}
+
+.menu__list-item {
+  font-size: 100%;
+}
+
+.menu__link {
+  font-family: "Metropolis-Medium";
+}
+
+.menu__link--active {
+  font-family: "Metropolis-Bold";
+}
