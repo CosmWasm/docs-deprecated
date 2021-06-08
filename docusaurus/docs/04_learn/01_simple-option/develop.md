@@ -76,7 +76,7 @@ pub struct InitMsg {
 
 `#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]` implements specified traits for this structure using macros. More read [Rust docs / Derive](https://doc.rust-lang.org/stable/rust-by-example/trait/derive.html)
 
-::: warning
+::: caution
 * _Owner_, _creator_ and _collateral_ comes from message transaction context, meaning owner and creator is the address signed the tx and collateral is funds sent along the message.
 * _counter_offer_ is [strike price](https://www.investopedia.com/terms/s/strikeprice.asp).
 :::

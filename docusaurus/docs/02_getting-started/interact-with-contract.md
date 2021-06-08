@@ -98,7 +98,7 @@ wasmd query account $CONTRACT $NODE
 
 ## Node Console
 
-::: warning
+::: caution
 Node console needs to be updated.  The code below is obsolete
 :::
 
