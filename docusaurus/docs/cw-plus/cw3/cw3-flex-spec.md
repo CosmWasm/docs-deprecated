@@ -9,7 +9,7 @@ cw3-flex-multisig source code: [https://github.com/CosmWasm/cosmwasm-plus/tree/m
 This builds on [cw3-fixed-multisig](cw3-fixed-spec.md) with a more
 powerful implementation of the [cw3 spec](spec.md).
 It is a multisig contract that is backed by a
-[cw4 (group)](../cw4/spec.md) contract, which independently
+[cw4 (group)](/cw-plus/cw4/spec.md) contract, which independently
 maintains the voter set.
 
 This provides 2 main advantages:
@@ -31,7 +31,7 @@ signers to share signatures off chain.
 
 The first step to create such a multisig is to instantiate a cw4 contract
 with the desired member set. For now, this only is supported by
-[cw4-group](../cw4/cw4-group-spec.md), but we will add a token-weighted group contract
+[cw4-group](/cw-plus/cw4/cw4-group-spec.md), but we will add a token-weighted group contract
 (TODO).
 
 If you create a `cw4-group` contract and want a multisig to be able

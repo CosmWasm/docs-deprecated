@@ -9,7 +9,7 @@ cw4-stake source code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/co
 This is a second implementation of the [cw4 spec](spec.md).
 It fulfills all elements of the spec, including the raw query lookups,
 and is designed to be used as a backing storage for
-[cw3 compliant contracts](../cw3/spec.md).
+[cw3 compliant contracts](/cw-plus/cw3/spec.md).
 
 It provides a similar API to [`cw4-group`] (which handles elected membership),
 but rather than appointing members (by admin or multisig), their

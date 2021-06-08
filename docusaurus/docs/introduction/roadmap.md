@@ -20,7 +20,7 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 
 **December 2019**:
 
-* [CosmWasm Documentation](https://www.cosmwasm.com) is live, including a [tutorial](/docs/02_getting-started/intro).
+* [CosmWasm Documentation](https://www.cosmwasm.com) is live, including a [tutorial](/getting-started/intro).
 * [CosmWasm v0.5.2](https://github.com/CosmWasm/cosmwasm/tree/v0.5.2), with full support for `init` and `handle` is the first stable release.
 * [`wasmd`](https://github.com/CosmWasm/wasmd) sample blockchain is published and tested.
 
@@ -52,7 +52,7 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 **April/May 2020**:
 
 * CosmWasm 0.8 Released
-* [Cross-contract queries](../architecture/composition.md)
+* [Cross-contract queries](/architecture/composition.md)
 * Add iterators to the Storage layer
 * [Customizable messages and queries](https://github.com/CosmWasm/wasmd/blob/v0.8.0/INTEGRATION.md#adding-custom-hooks)
 * Integration with staking module

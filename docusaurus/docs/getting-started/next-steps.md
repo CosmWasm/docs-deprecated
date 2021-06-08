@@ -6,12 +6,12 @@ sidebar_position: 6
 
 This is a very simple example for the escrow contract we developed, but it should show you what is
 possible, limited only by the wasm code you upload and the json messages you send. The next step is
-[Hijack Escrow tutorial](../learn/hijack-escrow/intro.md) where you will edit a smart contract to
+[Hijack Escrow tutorial](/learn/hijack-escrow/intro.md) where you will edit a smart contract to
 put a backdoor that enables a thief to steal funds. If you want a guided tutorial to build a
 contract from start to finish, check out the [name service
-tutorial](../learn/name-service/intro).
+tutorial](/learn/name-service/intro.md).
 
-We curated some video and workshop resources you can take a look at: [Videos and Workshops](../learn/videos-workshops)
+We curated some video and workshop resources you can take a look at: [Videos and Workshops](/learn/videos-workshops.md)
 
 If you feel you understand enough (and have prior experience with rust), feel free to grab
 [`cosmwasm-template`](https://github.com/CosmWasm/cosmwasm-template) and use that as a configured

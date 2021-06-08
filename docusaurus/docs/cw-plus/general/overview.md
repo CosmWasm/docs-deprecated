@@ -9,8 +9,8 @@ Plus contracts are collection of production-quality CosmWasm contracts collected
 
 ## Contents
 
-- [cw20](../cw20/spec.md) is a specification for fungible tokens.
-- [cw1](../cw1/intro.md) is a specification for proxy contracts.
+- [cw20](/cw-plus/cw20/spec.md) is a specification for fungible tokens.
+- [cw1](/cw-plus/cw1/intro.md) is a specification for proxy contracts.
 
 ## Contribution
 

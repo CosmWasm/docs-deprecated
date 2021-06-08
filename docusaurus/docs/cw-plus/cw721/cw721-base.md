@@ -49,7 +49,7 @@ calls, but then use the underlying implementation for the standard cw721
 messages you want to support. The same with `QueryMsg`. You will most
 likely want to write a custom, domain-specific `init`.
 
-For now, you can look at [`cw20-staking`](../cw20/cw20-staking-spec.md)
+For now, you can look at [`cw20-staking`](/cw-plus/cw20/cw20-staking-spec.md)
 for an example of how to "inherit" cw20 functionality and combine it with custom logic.
 The process is similar for cw721.
 

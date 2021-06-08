@@ -10,7 +10,7 @@ is inspired by [Cosmos SDK feature proposal](https://forum.cosmos.network/t/prop
 This is a basic proxy contract. Initiated contract with some tokens inside,
 allowed accounts can execute `CosmosMsg::Bank(BankMsg::Send{})` within the
 allowance(`spender, denom`) limits per account basis. Allowance logic is similar
-to [cw20](../cw20/spec.md). After authorization their allowance will be reduced, and
+to [cw20](/cw-plus/cw20/spec.md). After authorization their allowance will be reduced, and
 the send message will be relayed. If they don't have sufficient authorization,
 or if they try to proxy any other message type, then the attempt will be rejected.
 Admin can add an allowance for an account during init msg broadcast or after

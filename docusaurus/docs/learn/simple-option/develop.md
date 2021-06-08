@@ -369,7 +369,7 @@ cargo clippy -- -D warnings
 
 ### Compile
 
-This section compiles key commands from [Compiling Contract](/docs/02_getting-started/compile-contract.md) doc. For more detailed read proceed to the documentation.
+This section compiles key commands from [Compiling Contract](/getting-started/compile-contract.md) doc. For more detailed read proceed to the documentation.
 
 Basic compilation:
 

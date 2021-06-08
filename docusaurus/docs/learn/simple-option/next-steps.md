@@ -6,8 +6,8 @@ sidebar_position: 5
 
 We covered a lot of essentials of CosmWasm in this tutorial/workshop combo. We have more reading and learning resources for you:
 
-- [Getting Started](/docs/02_getting-started/intro.md), best starter docs.
-- [Learn](/learn/), more tutorials.
+- [Getting Started](/getting-started/intro.md), best starter docs.
+- [Learn](/learn/simple-option/intro.md), more tutorials.
 - [cosmwasm-examples](https://github.com/CosmWasm/cosmwasm-examples/), simple smart contract examples.
 - [cosmwasm-plus](/cw-plus/general/overview.md), production grade smart contracts.
 
