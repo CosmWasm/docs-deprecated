@@ -13,19 +13,16 @@ function RedirectChat() {
         </script>
       </head>
       <body>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '50vh',
-            fontSize: '20px',
-          }}>
-          <p>Redirecting to the CosmWasm community chat …</p>
-          <p>If this doesn't work, <a href="https://discord.gg/cPjEnPd" title="CosmWasm Discord invite">click here</a>.</p>
+        <div class="main-wrapper">
+          <main class="container margin-vert--xl">
+            <div class="row">
+              <div class="col col--6 col--offset-3"><h1 class="hero__title">Redirecting to the CosmWasm community chat …</h1>
+                <p>If this doesn't work, <a href="https://discord.gg/cPjEnPd" title="CosmWasm Discord invite">click here</a>.</p>
+              </div>
+            </div>
+          </main>
         </div>
       </body>
-
     </Layout>
   );
 }
