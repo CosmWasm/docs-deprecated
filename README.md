@@ -26,4 +26,4 @@ This command generates static content into the `build` directory and can be serv
 
 ## Auto Deployment
 
-Merges to `main` branch will automatically deployed to https://docs.cosmwasm.com
+Merges to `master` branch will automatically deployed to https://docs.cosmwasm.com
