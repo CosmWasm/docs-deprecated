@@ -2109,7 +2109,13 @@
     "default": null
   },
   "docusaurus-plugin-content-pages": {
-    "default": []
+    "default": [
+      {
+        "type": "jsx",
+        "permalink": "/chat",
+        "source": "@site/src/pages/chat.js"
+      }
+    ]
   },
   "docusaurus-plugin-debug": {
     "default": null

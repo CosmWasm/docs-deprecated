@@ -38,6 +38,11 @@ export default [
   exact: true,
 },
 {
+  path: '/chat',
+  component: ComponentCreator('/chat','18d'),
+  exact: true,
+},
+{
   path: '/0.14',
   component: ComponentCreator('/0.14','717'),
   

@@ -21,6 +21,10 @@
   "/__docusaurus/debug/routes-244": {
     "component": "component---theme-debug-routes-946-699"
   },
+  "/chat-18d": {
+    "component": "component---site-src-pages-chat-jse-82-5e8",
+    "config": "config---chat-5-e-9-b86"
+  },
   "/0.14-717": {
     "component": "component---theme-doc-page-1-be-9be",
     "versionMetadata": "versionMetadata---0-14935-ffc"

@@ -1,5 +1,6 @@
 export default {
   'allContent---docusaurus-debug-content-246-9aa': [() => import(/* webpackChunkName: 'allContent---docusaurus-debug-content-246-9aa' */ "~debug/default/docusaurus-debug-all-content-673.json"), "~debug/default/docusaurus-debug-all-content-673.json", require.resolveWeak("~debug/default/docusaurus-debug-all-content-673.json")],
+  'component---site-src-pages-chat-jse-82-5e8': [() => import(/* webpackChunkName: 'component---site-src-pages-chat-jse-82-5e8' */ "@site/src/pages/chat.js"), "@site/src/pages/chat.js", require.resolveWeak("@site/src/pages/chat.js")],
   'component---theme-debug-config-23-a-2ff': [() => import(/* webpackChunkName: 'component---theme-debug-config-23-a-2ff' */ "@theme/DebugConfig"), "@theme/DebugConfig", require.resolveWeak("@theme/DebugConfig")],
   'component---theme-debug-contentba-8-ce7': [() => import(/* webpackChunkName: 'component---theme-debug-contentba-8-ce7' */ "@theme/DebugContent"), "@theme/DebugContent", require.resolveWeak("@theme/DebugContent")],
   'component---theme-debug-global-dataede-0fa': [() => import(/* webpackChunkName: 'component---theme-debug-global-dataede-0fa' */ "@theme/DebugGlobalData"), "@theme/DebugGlobalData", require.resolveWeak("@theme/DebugGlobalData")],
@@ -8,6 +9,7 @@ export default {
   'component---theme-debug-site-metadata-68-e-3d4': [() => import(/* webpackChunkName: 'component---theme-debug-site-metadata-68-e-3d4' */ "@theme/DebugSiteMetadata"), "@theme/DebugSiteMetadata", require.resolveWeak("@theme/DebugSiteMetadata")],
   'component---theme-doc-item-178-a40': [() => import(/* webpackChunkName: 'component---theme-doc-item-178-a40' */ "@theme/DocItem"), "@theme/DocItem", require.resolveWeak("@theme/DocItem")],
   'component---theme-doc-page-1-be-9be': [() => import(/* webpackChunkName: 'component---theme-doc-page-1-be-9be' */ "@theme/DocPage"), "@theme/DocPage", require.resolveWeak("@theme/DocPage")],
+  'config---chat-5-e-9-b86': [() => import(/* webpackChunkName: 'config---chat-5-e-9-b86' */ "@generated/docusaurus.config"), "@generated/docusaurus.config", require.resolveWeak("@generated/docusaurus.config")],
   'content---0-14-01-a-3c1': [() => import(/* webpackChunkName: 'content---0-14-01-a-3c1' */ "@site/docs/introduction/intro.md"), "@site/docs/introduction/intro.md", require.resolveWeak("@site/docs/introduction/intro.md")],
   'content---0-14-architecture-actor-559-7af': [() => import(/* webpackChunkName: 'content---0-14-architecture-actor-559-7af' */ "@site/docs/architecture/actor.md"), "@site/docs/architecture/actor.md", require.resolveWeak("@site/docs/architecture/actor.md")],
   'content---0-14-architecture-addresses-1-ab-58e': [() => import(/* webpackChunkName: 'content---0-14-architecture-addresses-1-ab-58e' */ "@site/docs/architecture/addresses.md"), "@site/docs/architecture/addresses.md", require.resolveWeak("@site/docs/architecture/addresses.md")],
