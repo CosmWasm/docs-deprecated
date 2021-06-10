@@ -1,5 +1,5 @@
 ---
-title: cw3-fixed-multisig Spec
+title: cw3-flex-multisig Spec
 order: 3
 ---
 
@@ -21,7 +21,6 @@ This provides 2 main advantages:
 * TODO: It allows dynamic multisig groups. Since the group can change,
   we can set one of the multisigs as the admin of the group contract,
   and the
-
 
 In addition to the dynamic voting set, the main difference with the native
 Cosmos SDK multisig, is that it aggregates the signatures on chain, with
