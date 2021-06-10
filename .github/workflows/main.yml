@@ -2,9 +2,9 @@ name: Docs Deployment
 
 on:
   pull_request:
-    branches: document
+    branches: main
   push:
-    branches: document
+    branches: main
 
 jobs:
   checks:
