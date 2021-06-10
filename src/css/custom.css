@@ -69,7 +69,8 @@
   --ifm-font-family-base: 'Metropolis-Regular';
   --ifm-font-family-monospace: 'JetBrains Mono';
   --ifm-font-size-base: 115%;
-  --ifm-navbar-height: 80px;
+  --ifm-navbar-height: 5em;
+  --ifm-navbar-padding-horizontal: 2em;
 }
 
 .docusaurus-highlight-code-line {
@@ -80,7 +81,7 @@
 }
 
 .navbar__logo {
-  height: 60px;
+  height: 3.7em;
   width: auto;
 }
 

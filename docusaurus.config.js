@@ -1,14 +1,13 @@
-/** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'CosmWasm Documentation',
   tagline: 'CosmWasm documentation',
   url: 'https://docs.cosmwasm.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.svg',
-  organizationName: 'CosmWasm', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  organizationName: 'CosmWasm',
+  projectName: 'docs',
   themeConfig: {
     navbar: {
       logo: {
@@ -84,7 +83,6 @@ module.exports = {
             },
             {
               label: 'Discord',
-              // TODO make this work
               href: 'https://docs.cosmwasm.com/chat/',
             },
             {
@@ -110,9 +108,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/CosmWasm/docs/edit/master',
+          editUrl: 'https://github.com/CosmWasm/docs/edit/master',
           routeBasePath: '/',
           lastVersion: "current",
           versions: {
@@ -133,6 +129,12 @@ module.exports = {
       '@docusaurus/plugin-client-redirects',
       {
         fromExtensions: ['html'],
+        redirects: [
+          {
+            to: '/',
+            from: '/0.14',
+          },
+        ],
       },
     ],
   ],
