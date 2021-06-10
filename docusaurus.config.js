@@ -6,7 +6,7 @@ module.exports = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.svg',
-  organizationName: 'CosmWasm',
+  organizationName: 'orkunkl',
   projectName: 'docs',
   themeConfig: {
     navbar: {
