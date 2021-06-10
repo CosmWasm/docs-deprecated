@@ -110,12 +110,12 @@ module.exports = {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/master',
           routeBasePath: '/',
-          lastVersion: "current",
+          lastVersion: "0.14",
           versions: {
-            current: {
+            "0.14": {
               label: "0.14",
               path: "0.14"
-            }
+            },
           }
         },
         theme: {
@@ -131,8 +131,8 @@ module.exports = {
         fromExtensions: ['html'],
         redirects: [
           {
-            to: '/',
-            from: '/0.14',
+            from: '/',
+            to: '/0.14',
           },
         ],
       },
