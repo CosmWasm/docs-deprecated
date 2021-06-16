@@ -2,7 +2,7 @@ module.exports = {
   title: 'CosmWasm Documentation',
   tagline: 'CosmWasm documentation',
   url: 'https://test-docs.cosmwasm.com',
-  baseUrl: '/docs',
+  baseUrl: '/docs/',
   // baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
