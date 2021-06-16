@@ -134,7 +134,7 @@ module.exports = {
           {
             from: '/docs/',
             // from: '/',
-            to: '/0.14/',
+            to: '/docs/0.14/',
           },
         ],
       },
