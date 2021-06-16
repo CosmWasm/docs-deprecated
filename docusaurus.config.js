@@ -132,7 +132,7 @@ module.exports = {
         redirects: [
           {
             from: '/',
-            to: '/0.14',
+            to: '/0.14/',
           },
         ],
       },
