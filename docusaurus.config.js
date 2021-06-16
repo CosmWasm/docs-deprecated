@@ -110,9 +110,9 @@ module.exports = {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/master',
           routeBasePath: '/',
-          lastVersion: "0.14",
+          lastVersion: "current",
           versions: {
-            "0.14": {
+            current: {
               label: "0.14",
               path: "0.14"
             },
