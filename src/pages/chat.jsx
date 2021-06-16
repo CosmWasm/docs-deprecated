@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function RedirectChat() {
   return (
@@ -27,12 +27,12 @@ function RedirectChat() {
     </Layout>
      */
 
-  <BrowserRouter>
+  <Router>
     <Route path='/chat' component={() => {
       window.location.href = 'https://discord.gg/cPjEnPd';
       return null;
     }}/>
-  </BrowserRouter>
+  </Router>
   );
 }
 
