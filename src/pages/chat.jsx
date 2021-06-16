@@ -1,8 +1,8 @@
 import React from 'react';
-import Layout from '@theme/Layout';
 
 function RedirectChat() {
   return (
+    /*
     <Layout title="Redirect">
       <head>
         <title>Redirecting to the CosmWasm community chat …</title>
@@ -24,6 +24,11 @@ function RedirectChat() {
         </div>
       </body>
     </Layout>
+     */
+  <Route path='/chat' component={() => {
+    window.location.href = 'https://discord.gg/cPjEnPd';
+    return null;
+  }}/>
   );
 }
 
