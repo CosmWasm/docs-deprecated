@@ -1,9 +1,10 @@
+/*
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function RedirectChat() {
   return (
-    /*
+    
     <Layout title="Redirect">
       <head>
         <title>Redirecting to the CosmWasm community chat …</title>
@@ -25,7 +26,7 @@ function RedirectChat() {
         </div>
       </body>
     </Layout>
-     */
+
 
   <Router>
     <Route path='/chat' component={() => {
@@ -33,7 +34,10 @@ function RedirectChat() {
       return null;
     }}/>
   </Router>
+
   );
 }
 
 export default RedirectChat;
+
+*/
