@@ -1,7 +1,7 @@
 module.exports = {
   title: 'CosmWasm Documentation',
   tagline: 'CosmWasm documentation',
-  url: 'https://docs.cosmwasm.com/',
+  url: 'https://docs.cosmwasm.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
