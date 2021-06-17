@@ -22,7 +22,7 @@ git clone https://github.com/CosmWasm/cosmwasm-examples
 cd cosmwasm-examples
 git fetch --tags
 git checkout escrow-0.10.0
-cd escrow
+cd contracts/escrow
 
 # compile the wasm contract with stable toolchain
 rustup default stable
