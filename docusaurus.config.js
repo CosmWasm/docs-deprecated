@@ -109,6 +109,12 @@ module.exports = {
       backgroundColor: '#7691FE',
       textColor: '#F5F6F7',
     },
+    algolia: {
+      apiKey: 'abeca9781b806ca955a7e0f1ee95d003',
+      indexName: 'cosmwasm_docs',
+      contextualSearch: true,
+      appId: 'BH4D9OD16A',
+    },
   },
   presets: [
     [
