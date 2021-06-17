@@ -103,6 +103,13 @@ module.exports = {
     prism: {
       additionalLanguages: ['rust'],
     },
+    announcementBar: {
+      id: 'new_docs',
+      content:
+        'New documentation is on the horizon',
+      backgroundColor: '#7691FE', // Defaults to `#fff`.
+      textColor: '#F5F6F7', // Defaults to `#000`.
+    },
   },
   presets: [
     [
