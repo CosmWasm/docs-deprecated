@@ -115,7 +115,7 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          editUrl: 'https://github.com/CosmWasm/docs/edit/master',
+          editUrl: 'https://github.com/CosmWasm/docs/edit/main',
           routeBasePath: '/',
           lastVersion: "current",
           versions: {
