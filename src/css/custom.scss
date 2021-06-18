@@ -69,7 +69,7 @@
   --ifm-font-family-base: 'Metropolis-Regular';
   --ifm-font-family-monospace: 'JetBrains Mono';
   --ifm-font-size-base: 115%;
-  --ifm-navbar-height: 5em;
+  --ifm-navbar-height: 3.4em;
   --ifm-navbar-padding-horizontal: 2em;
 }
 
@@ -80,8 +80,14 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
+/* Adjust navbar width */
+.navbar .navbar__inner {
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
 .navbar__logo {
-  height: 3.7em;
+  height: 2.8em;
   width: auto;
 }
 
@@ -129,4 +135,51 @@
   right: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Adjust main wrapper width */
+@media (min-width: 1416px) {
+  .main-wrapper {
+    max-width: 1400px;
+    width: 1400px;
+    align-self: center;
+  }
+}
+
+/* Announcement Bar */
+div[class^='announcementBarContent'] {
+  background-color: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+}
+
+div[class^='announcementBarContent'] a {
+  color: var(--ifm-link-color);
+  text-decoration: inherit;
+}
+
+div[class^='announcementBarContent'] a:hover {
+  color: var(--ifm-link-color);
+  text-decoration: underline;
+}
+
+/* Remove shadow on the left */
+:root {
+  --ifm-global-shadow-md: 0px;
+}
+
+.footer {
+  .container {
+    max-width: 900px;
+  }
+}
+
+/* Adjust footer link colors */
+
+#__docusaurus > footer > div > div.text--center > div > a {
+  color: unset;
+}
+
+#__docusaurus > footer > div > div.text--center > div > a:hover {
+  color: var(--ifm-link-color);
+  text-decoration: underline;
 }
