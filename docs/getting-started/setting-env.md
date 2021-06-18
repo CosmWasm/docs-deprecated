@@ -75,7 +75,7 @@ Also for this tutorial we will use these variables. So make sure you export thes
 
 ```bash
 export NODE="--node $RPC"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001uponge --gas auto --gas-adjustment 1.3"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001usponge --gas auto --gas-adjustment 1.3"
 ```
 
 If command above throws error, this means your shell is different.
