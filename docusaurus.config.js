@@ -9,10 +9,16 @@ module.exports = {
   organizationName: 'CosmWasm',
   projectName: 'docs',
   themeConfig: {
+    colorMode: {
+      defaultMode: 'dark',
+      respectPrefersColorScheme: true,
+    },
     navbar: {
       logo: {
         alt: 'CosmWasm',
         src: 'img/logo.svg',
+        srcDark: 'img/logo_dark.svg',
+        href: 'https://docs.cosmwasm.com/',
       },
       items: [
         {
