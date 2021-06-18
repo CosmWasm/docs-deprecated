@@ -1,6 +1,8 @@
 # CosmWasm Docs Website
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+CosmWasm is a new smart contracting platform built for the cosmos ecosystem. If you haven't yet heard of it, please check out this intro. The purpose of this documentation is to give a deep dive into the technology for developers who wish to try it out or integrate it into their product. Particularly, it is aimed at Go developers with experience with the Cosmos SDK, as well as Rust developers looking for a blockchain platform.
+
+> This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 ## Installation
 
@@ -27,4 +29,4 @@ This command generates static content into the `build` directory and can be serv
 
 ## Auto Deployment
 
-Merges to `main` branch will automatically deployed to https://docs.cosmwasm.com
+Merges to `main` branch will automatically be deployed to https://docs.cosmwasm.com
