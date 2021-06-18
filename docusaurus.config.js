@@ -78,8 +78,8 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Confio Blog',
-              href: 'https://medium.com/confio',
+              label: 'Blog',
+              href: 'https://medium.com/cosmwasm',
             },
             {
               label: 'Discord',
@@ -115,6 +115,7 @@ module.exports = {
       contextualSearch: true,
       appId: 'BH4D9OD16A',
     },
+    hideableSidebar: true
   },
   presets: [
     [
