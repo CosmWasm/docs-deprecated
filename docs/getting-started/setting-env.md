@@ -74,8 +74,13 @@ Otherwise You will have to define type in node, chain id and gas-prices details 
 Also for this tutorial we will use these variables. So make sure you export these before proceeding.
 
 ```bash
+// for bash
 export NODE="--node $RPC"
 export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001usponge --gas auto --gas-adjustment 1.3"
+
+// for zsh
+export NODE=(--node $RPC)
+export TXFLAG=($NODE --chain-id ${CHAIN_ID} --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3)
 ```
 
 If command above throws error, this means your shell is different.
