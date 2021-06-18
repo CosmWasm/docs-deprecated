@@ -108,7 +108,7 @@
 }
 
 .menu__list-item {
-  font-size: 100%;
+  font-size: 90%;
 }
 
 .menu__link {
@@ -182,4 +182,17 @@ div[class^='announcementBarContent'] a:hover {
 #__docusaurus > footer > div > div.text--center > div > a:hover {
   color: var(--ifm-link-color);
   text-decoration: underline;
+}
+
+// Don't make headers so big
+.markdown > h2,
+h3,
+h4,
+h5,
+h6 {
+  --ifm-h2-font-size: inherit !important;
+  --ifm-h3-font-size: inherit !important;
+  --ifm-h4-font-size: inherit !important;
+  --ifm-h5-font-size: inherit !important;
+  --ifm-h6-font-size: inherit !important;
 }
