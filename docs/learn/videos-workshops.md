@@ -15,22 +15,20 @@ Here are the videos, events, workshops that can feed your learning hunger for Co
 #### Basic Layout of Smart Contract
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/458554938" width="640" height="360" frameborder="0" allow=" fullscreen
-" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/458554938" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Contract development flow w/permissions to subkey contract
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/458607446" width="640" height="360" frameborder
-="0" allow="fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/458607446" frameborder
+="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Contract interaction using CosmJS and smart contract helpers
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/458690289" width="640" height="360" frameborder="0" allow="fullscreen
-" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/458690289" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ## Advanced Level
@@ -42,8 +40,8 @@ Here are the videos, events, workshops that can feed your learning hunger for Co
 Custom token workshop
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/436560781" width="640" height="360" frameborder
-="0" allow="fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/436560781" frameborder
+="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### Contract Composition Workshop - August 26, 2020
@@ -59,19 +57,19 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 #### Deep Dive Part 1 - CosmWasm template
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/453054456" width="640" height="360" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/453054456" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Deep Dive Part 2 - CW1 Subkeys
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/453055011" width="640" height="360" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/453055011" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Deep Dive Part 3 - CW20 Staking features
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/453055461" width="640" height="360" frameborder="0" allow=" fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/453055461" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### Building Multi-chain Smart-Contracts Using CosmWasm -  HackAtom V India Workshop
@@ -81,25 +79,25 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 #### Intro
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457486858" width="640" height="361" frameborder="0" allow=" fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457486858" width="640" height="361" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Setup Coding Environment
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457712351" width="640" height="360" frameborder="0" allow=" fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457712351" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Smart Contract Components and Development
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457702442" width="640" height="360" frameborder="0" allow=" fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457702442" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Smart Contract Testing
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457705991" width="640" height="360" frameborder="0" allow=" fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/457705991" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### State modeling & Buckets
@@ -109,13 +107,13 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 #### Part 1
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/463816459" width="640" height="360" frameborder="0" allow=" fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/463816459" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 #### Part 2
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/463797451" width="640" height="360" frameborder="0" allow=" fullscreen" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/463797451" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### Quadratic Funding with CosmWasm
@@ -123,20 +121,19 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 #### Part 1 QF concept & implementing logic
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/492147547" width="640" height="360" frameborder="0" allow="fullscreen
-" allowfullscreen ></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/492147547" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
 </div>
 
 #### Part 2 QF Smart Contract Helper& Execution
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/493294008" width="640" height="360" frameborder="0" allow="fullscreen" allowfullscreen ></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/493294008" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
 </div>
 
 ### Path to IBC
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/502682471" width="640" height="360" frameborder="0" allow="fullscreen" allowfullscreen ></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/502682471" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
 </div>
 
 ### CosmWasm/CosmJS dApps - Zero to Hero
@@ -144,7 +141,7 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 *Date: Oct 16, 2020*
 
 <div class="video">
-<iframe class="responsive-iframe" width="640" height="360" src="https://www.youtube.com/embed/YUsjneQptDQ" frameborder="0" allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://www.youtube.com/embed/YUsjneQptDQ" frameborder="0" allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### Multi contract testing
@@ -152,7 +149,7 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 *Date: Feb 14, 2021*
 
 <div class="video">
-<iframe class="responsive-iframe" src="https://player.vimeo.com/video/512992499" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/512992499" frameborder="0" allow="autoplay;fullscreen; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 ### CosmWasm & IBC: Cross Chain Contracts
@@ -160,7 +157,13 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 *Date: Feb 24, 2021*
 
 <div class="video">
-<iframe class="responsive-iframe" width="640" height="360" src="https://www.youtube.com/embed/cG1lpAwK1sc" frameborder="0" allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="responsive-iframe" src="https://www.youtube.com/embed/cG1lpAwK1sc" frameborder="0" allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+### CosmWasm: Submessages
+
+<div class="video">
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/554739536" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" autoplay="false"> </iframe>
 </div>
 
 ## Presentations
@@ -168,6 +171,27 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 ### CosmWasm presentation at Cosmos Ecosystem Summit (15/01/21)
 
 <div class="video">
-<iframe class="responsive-iframe" width="640" height="360" src="https://player.bilibili.com/player.html?aid=628742117&bvid=BV12t4y1z74K&cid
+<iframe class="responsive-iframe" src="https://player.bilibili.com/player.html?aid=628742117&bvid=BV12t4y1z74K&cid
 =284064909&page=1&t=101m45s" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" autoplay="false"> </iframe>
+</div>
+
+### Whiteboard Series with NEAR | Ep: 38 Ethan Frey from CosmWasm
+
+<div class="video">
+<iframe class="responsive-iframe" src="https://www.youtube.com/embed/IIMnxRU8RPY" scrolling="no" border="0
+" frameborder="no" framespacing="0" allowfullscreen="true" autoplay="false" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"> </iframe>
+</div>
+
+### Introducción al Ecosistema Cosmos, CosmWasm y presentación del Riddlethon
+
+<div class="video">
+<iframe class="responsive-iframe" src="https://www.youtube.com/embed/0I3bkJQAkjM" scrolling="no" border="0
+" frameborder="no" framespacing="0" allowfullscreen="true" autoplay="false" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"> </iframe>
+</div>
+
+### Riddlethon I: Ask Me Anything about Confio & CosmWasm
+
+<div class="video">
+<iframe class="responsive-iframe" src="https://player.vimeo.com/video/537256202" scrolling="no" border="0
+" frameborder="no" framespacing="0" allowfullscreen="true" autoplay="false" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"> </iframe>
 </div>
