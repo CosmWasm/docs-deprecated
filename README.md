@@ -14,7 +14,8 @@ yarn install
 yarn start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+This command starts a local development server and opens up a browser window. Most changes are reflected live
+ without having to restart the server.
 
 ## Build
 
@@ -26,4 +27,4 @@ This command generates static content into the `build` directory and can be serv
 
 ## Auto Deployment
 
-Merges to `master` branch will automatically deployed to https://docs.cosmwasm.com
+Merges to `main` branch will automatically deployed to https://docs.cosmwasm.com
