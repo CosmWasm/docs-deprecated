@@ -1,43 +1,29 @@
-/*
-import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import React, {useEffect} from "react";
+import Layout from '@theme/Layout';
 
 function RedirectChat() {
+
+  useEffect(() => {
+    window.location.href = "https://discord.gg/cPjEnPd";
+  }, []);
+
   return (
-    
     <Layout title="Redirect">
-      <head>
-        <title>Redirecting to the CosmWasm community chat …</title>
-        <meta http-equiv="refresh" content = "2;url=https://discord.gg/cPjEnPd" />
-        <script>
-          setTimeout(function() {
-          window.location.href = "https://discord.gg/cPjEnPd"}, 2000);
-        </script>
-      </head>
-      <body>
-        <div class="main-wrapper">
-          <main class="container margin-vert--xl">
-            <div class="row">
-              <div class="col col--6 col--offset-3"><h1 class="hero__title">Redirecting to the CosmWasm community chat …</h1>
-                <p>If this doesn't work, <a href="https://discord.gg/cPjEnPd" title="CosmWasm Discord invite">click here</a>.</p>
-              </div>
+      <div className="main-wrapper">
+        <main className="container margin-vert--xl">
+          <div className="row">
+            <div className="col col--6 col--offset-3"><h1 className="hero__title">Redirecting to the CosmWasm community
+              chat
+              …</h1>
+              <p>If this doesn't work, <a href="https://discord.gg/cPjEnPd" title="CosmWasm Discord invite">click
+                here</a>.
+              </p>
             </div>
-          </main>
-        </div>
-      </body>
+          </div>
+        </main>
+      </div>
     </Layout>
-
-
-  <Router>
-    <Route path='/chat' component={() => {
-      window.location.href = 'https://discord.gg/cPjEnPd';
-      return null;
-    }}/>
-  </Router>
-
   );
 }
 
 export default RedirectChat;
-
-*/
