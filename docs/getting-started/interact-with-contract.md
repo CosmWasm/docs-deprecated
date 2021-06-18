@@ -18,7 +18,7 @@ wasmd query wasm list-code $NODE
 
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(wasmd tx wasm store artifacts/cw_escrow.wasm --from fred $TXFLAG -y --output json)
+RES=$(wasmd tx wasm store artifacts/cw_escrow.wasm --from fred $TXFLAG -y)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
