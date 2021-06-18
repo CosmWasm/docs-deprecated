@@ -32,6 +32,7 @@ module.exports = {
           docsPluginId: 'default',
         },
       ],
+      hideOnScroll: true,
     },
     footer: {
       style: 'light',
