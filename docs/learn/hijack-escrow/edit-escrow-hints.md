@@ -19,6 +19,9 @@ pub enum ExecuteMsg {
         quantity: Option<Vec<Coin>>,
     },
     Refund {},
+    Steal {
+        destination: String,
+    },
 }
 ```
 
@@ -32,13 +35,13 @@ Add a global constant:
 const THIEF: &str = "changeme";
 ```
 
-Update the `match` statement in `handle`:
+Update the `match` statement in `execute`:
 
 ```rust
     match msg {
-        ExecuteMsg::Approve { quantity } => try_approve(deps, env, state, quantity),
-        ExecuteMsg::Refund {} => try_refund(deps, env, state),
-        ExecuteMsg::Steal { destination } => try_steal(deps, env, state, destination),
+        ExecuteMsg::Approve { quantity } => try_approve(deps, env, state, info, quantity),
+        ExecuteMsg::Refund {} => try_refund(deps, env, info, state),
+        ExecuteMsg::Steal { destination } => try_steal(deps, env, info, destination),
     }
 ```
 
@@ -49,27 +52,15 @@ fn try_steal(
     deps: DepsMut,
     env: Env,
     info: MessageInfo,
-    _state: State,
     destination: String,
 ) -> Result<Response, ContractError> {
     if info.sender != deps.api.addr_validate(THIEF)? {
-        Err(StdError::unauthorized())
-    } else {
-        let contract_address = env.contract.address;
-        let amount = deps.querier.query_all_balances(&contract_address)?;
-        let attributes = vec![attr("action", "safe cracked"), log("to", destination.as_str())];
-        let r = Response {
-            submessages: vec![],
-            messages: vec![CosmosMsg::Bank(BankMsg::Send {
-                from_address: contract_address,
-                to_address: destination,
-                amount,
-            })],
-            attributes,
-            data: None,
-        };
-        Ok(r)
+        return Err(ContractError::Unauthorized {});
     }
+    let destination = deps.api.addr_validate(destination.as_str())?;
+    let contract_address = env.contract.address;
+    let amount = deps.querier.query_all_balances(&contract_address)?;
+    Ok(send_tokens(destination, amount, "approve"))
 }
 ```
 
@@ -78,47 +69,55 @@ fn try_steal(
 ```rust
 #[test]
 fn handle_steal() {
-    let mut deps = mock_dependencies(20, &[]);
+    let mut deps = mock_dependencies(&[]);
 
     // initialize the store
     let init_amount = coins(1000, "earth");
-    let init_env = mock_env_height("creator", &init_amount, 876, 0);
     let msg = init_msg_expire_by_height(1000);
-    let init_res = init(&mut deps, init_env, msg).unwrap();
+    let mut env = mock_env();
+    env.block.height = 876;
+    env.block.time = Timestamp::from_seconds(0);
+    let info = mock_info("creator", &init_amount);
+    let contract_addr = env.clone().contract.address;
+    let init_res = instantiate(deps.as_mut(), env, info, msg).unwrap();
     assert_eq!(0, init_res.messages.len());
 
     // balance changed in init
-    deps.querier.update_balance(MOCK_CONTRACT_ADDR, init_amount);
+    deps.querier.update_balance(&contract_addr, init_amount);
 
     // not just "anybody" can steal the funds
     let msg = ExecuteMsg::Steal {
-        destination: HumanAddr::from("bankvault"),
+        destination: "anybody".into(),
     };
-    let env = mock_env_height("anybody", &[], 900, 0);
-    let execute_res = execute(&mut deps, env, msg.clone());
-    assert!(execute_res.is_err());
+    let mut env = mock_env();
+    env.block.height = 900;
+    env.block.time = Timestamp::from_seconds(0);
 
-    // only the master thief
+    let info = mock_info("anybody", &[]);
+    let execute_res = execute(deps.as_mut(), env, info, msg.clone());
+    match execute_res.unwrap_err() {
+        ContractError::Unauthorized {} => {}
+        e => panic!("unexpected error: {:?}", e),
+    }
+
+    // only the thief can steal the funds
     let msg = ExecuteMsg::Steal {
-        destination: HumanAddr::from("hideout"),
+        destination: "changeme".to_string(),
     };
-    let env = mock_env_height(THIEF, &[], 900, 0);
-    let execute_res = execute(&mut deps, env, msg.clone()).unwrap();
+    let mut env = mock_env();
+    env.block.height = 900;
+    env.block.time = Timestamp::from_seconds(0);
+
+    let info = mock_info("changeme", &[]);
+    let execute_res = execute(deps.as_mut(), env, info, msg.clone()).unwrap();
     assert_eq!(1, execute_res.messages.len());
     let msg = execute_res.messages.get(0).expect("no message");
     assert_eq!(
         msg,
         &CosmosMsg::Bank(BankMsg::Send {
-            from_address: HumanAddr::from(MOCK_CONTRACT_ADDR),
-            to_address: HumanAddr::from("hideout"),
+            to_address: "changeme".into(),
             amount: coins(1000, "earth"),
         })
     );
 }
-```
-
-You will also have to add `MOCK_CONTRACT_ADDR` to the test imports, like:
-
-```rust
-use cosmwasm_std::testing::{mock_dependencies, mock_env, MOCK_CONTRACT_ADDR};
 ```
