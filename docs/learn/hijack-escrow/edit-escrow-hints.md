@@ -76,7 +76,6 @@ fn handle_steal() {
     let msg = init_msg_expire_by_height(1000);
     let mut env = mock_env();
     env.block.height = 876;
-    env.block.time = Timestamp::from_seconds(0);
     let info = mock_info("creator", &init_amount);
     let contract_addr = env.clone().contract.address;
     let init_res = instantiate(deps.as_mut(), env, info, msg).unwrap();
@@ -91,7 +90,6 @@ fn handle_steal() {
     };
     let mut env = mock_env();
     env.block.height = 900;
-    env.block.time = Timestamp::from_seconds(0);
 
     let info = mock_info("anybody", &[]);
     let execute_res = execute(deps.as_mut(), env, info, msg.clone());
@@ -106,7 +104,6 @@ fn handle_steal() {
     };
     let mut env = mock_env();
     env.block.height = 900;
-    env.block.time = Timestamp::from_seconds(0);
 
     let info = mock_info("changeme", &[]);
     let execute_res = execute(deps.as_mut(), env, info, msg.clone()).unwrap();
