@@ -131,6 +131,12 @@ module.exports = {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
           routeBasePath: '/',
+          versions: {
+            0.14: {
+              label: "0.14",
+              path: "0.14"
+            }
+          }
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
