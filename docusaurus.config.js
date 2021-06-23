@@ -110,9 +110,9 @@ module.exports = {
       additionalLanguages: ['rust'],
     },
     announcementBar: {
-      id: 'new_docs',
+      id: 'new_release',
       content:
-        'New documentation is on the horizon',
+        'New documentation will be released with CosmWasm 1.0, follow and contribute changes at <a href="https://docs.cosmwasm.com/next">next</a>',
       backgroundColor: '#7691FE',
       textColor: '#F5F6F7',
     },
