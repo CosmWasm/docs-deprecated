@@ -131,6 +131,7 @@ module.exports = {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
           routeBasePath: '/',
+          lastVersion: "0.14",
           versions: {
             0.14: {
               label: "0.14",
