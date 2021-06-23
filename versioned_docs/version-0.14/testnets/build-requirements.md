@@ -42,3 +42,5 @@ Using Dockerfile is suggested.
 2. Checkout to testnets version `git checkout vx.x.x`
 3. Compile dev build: `make build`
 4. Move to binary to desired location
+
+Show to misang
