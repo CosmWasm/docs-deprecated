@@ -12,26 +12,26 @@ Here are the videos, events, workshops that can feed your learning hunger for Co
 
 *Date: September 12, 2020*
 
-#### Basic Layout of Smart Contract
+### Basic Layout of Smart Contract
 
 <div class="video">
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/458554938" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-#### Contract development flow w/permissions to subkey contract
+### Contract development flow w/permissions to subkey contract
 
 <div class="video">
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/458607446" frameborder
 ="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-#### Contract interaction using CosmJS and smart contract helpers
+### Contract interaction using CosmJS and smart contract helpers
 
 <div class="video">
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/458690289" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-#### Hackatom HCMC: CosmWasm/CosmJS zero to hero
+### Hackatom HCMC: CosmWasm/CosmJS zero to hero
 
 <div class="video">
 <iframe class="responsive-iframe" src="https://www.youtube.com/embed/VTjiC4wcd7k" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -60,19 +60,19 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 2) And demonstrate how to wrap it in a CW20 token
 3) Then we could use that token to interact with other contracts.
 
-#### Deep Dive Part 1 - CosmWasm template
+### Deep Dive Part 1 - CosmWasm template
 
 <div class="video">
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/453054456" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-#### Deep Dive Part 2 - CW1 Subkeys
+### Deep Dive Part 2 - CW1 Subkeys
 
 <div class="video">
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/453055011" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-#### Deep Dive Part 3 - CW20 Staking features
+### Deep Dive Part 3 - CW20 Staking features
 
 <div class="video">
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/453055461" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
