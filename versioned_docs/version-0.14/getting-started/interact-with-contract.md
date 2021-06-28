@@ -49,7 +49,7 @@ echo $CONTRACT
 
 # we should see this contract with 50000usponge
 wasmd query wasm contract $CONTRACT $NODE
-wasmd query account $CONTRACT $NODE
+wasmd query bank balances $CONTRACT $NODE
 
 # you can dump entire contract state
 wasmd query wasm contract-state all $CONTRACT $NODE
@@ -84,16 +84,16 @@ wasmd tx wasm execute $CONTRACT "$APPROVE" \
 
 # looking at the logs should show: "execute wasm contract failed: Unauthorized"
 # and bob should still be broke (and broken showing the account does not exist Error)
-wasmd query account $(wasmd keys show bob -a) $NODE
+wasmd query bank balances $(wasmd keys show bob -a) $NODE
 
 # but succeeds when fred tries
 wasmd tx wasm execute $CONTRACT "$APPROVE" \
     --from fred $TXFLAG -y
 
-wasmd query account $(wasmd keys show bob -a) $NODE
+wasmd query bank balances $(wasmd keys show bob -a) $NODE
 
 # contract coins must be empty
-wasmd query account $CONTRACT $NODE
+wasmd query bank balances $CONTRACT $NODE
 ```
 
 ## Node Console
