@@ -31,6 +31,12 @@ Here are the videos, events, workshops that can feed your learning hunger for Co
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/458690289" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
+#### Hackatom HCMC: CosmWasm/CosmJS zero to hero
+
+<div class="video">
+<iframe class="responsive-iframe" src="https://www.youtube.com/embed/VTjiC4wcd7k" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 ## Advanced Level
 
 ### Code With US
