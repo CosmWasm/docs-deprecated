@@ -37,7 +37,7 @@ Our installation scripts can help you with both setting up cosmovisor and wasmd:
 
 ### Manual Setup
 
-First of all make sure you followed the installation steps in [build requirements section](./build-requirements.md).
+First of all make sure you followed the installation steps in [build requirements section](build-requirements.md).
 You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
 
 Below is the [oysternet configuration](https://github.com/CosmWasm/testnets/tree/master/oysternet-1).
