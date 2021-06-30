@@ -109,6 +109,7 @@ module.exports = {
     prism: {
       additionalLanguages: ['rust'],
     },
+    /*
     announcementBar: {
       id: 'new_release',
       content:
@@ -116,6 +117,7 @@ module.exports = {
       backgroundColor: '#7691FE',
       textColor: '#F5F6F7',
     },
+     */
     algolia: {
       apiKey: 'abeca9781b806ca955a7e0f1ee95d003',
       indexName: 'cosmwasm_docs',
@@ -131,9 +133,9 @@ module.exports = {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
           routeBasePath: '/',
-          lastVersion: "0.14",
+          lastVersion: "current",
           versions: {
-            0.14: {
+            current: {
               label: "0.14",
               path: "0.14"
             }
