@@ -9,8 +9,8 @@ We have the binary ready. Now it is time to see some wasm action. You can use [G
 
 ## Go CLI
 
-We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will
-upload the code to the blockchain. Afterwards, you can download the bytecode to verify it is proper:
+We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to
+the blockchain. Afterwards, you can download the bytecode to verify it is proper:
 
 ```shell
 # see how many codes we have now
@@ -33,8 +33,8 @@ diff artifacts/cw_escrow.wasm download.wasm
 
 ### Instantiating the Contract
 
-We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that
-will allow fred to control payout and upon release, the funds go to bob.
+We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to
+control payout and upon release, the funds go to bob.
 
 ```shell
 # instantiate contract and verify
@@ -73,8 +73,8 @@ wasmd query wasm contract-state smart $CONTRACT '{}' $NODE
 # (since we didn't implement any valid QueryMsg, we just get a parse error back)
 ```
 
-Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key
-that is not the verifier, then using the proper key to release.
+Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key that is not the
+verifier, then using the proper key to release.
 
 ```shell
 # execute fails if wrong person
@@ -98,16 +98,14 @@ wasmd query bank balances $CONTRACT $NODE
 
 ## Node Console
 
-:::caution
-Node console needs to be updated.  The code below is obsolete
+:::caution Node console needs to be updated. The code below is obsolete
 :::
 
-If you set up the Node Console / REPL in the [client setup section](./setting-env#setup-node-repl), you can use
-that to deploy and execute your contract. I think you will find that JSON manipulation and parsing
-is a bit nicer in JavaScript than in Shell Script.
+If you set up the Node Console / REPL in the [client setup section](./setting-env#setup-node-repl), you can use that to
+deploy and execute your contract. I think you will find that JSON manipulation and parsing is a bit nicer in JavaScript
+than in Shell Script.
 
 First, go to the cli directory and start up your console:
-
 
 ```shell
 npx @cosmjs/cli@^0.25 --init https://raw.githubusercontent.com/CosmWasm/testnets/master/heldernet/cli_helper.ts
@@ -158,13 +156,19 @@ Now, we go back to the Node console and upload the contract and instantiate it:
 ```js
 const wasm = fs.readFileSync('artifacts/cw_escrow.wasm');
 // you can add extra information to contract details such as source and builder.
-const up = await fredClient.upload(wasm, { source: "https://crates.io/api/v1/crates/cw-escrow/0.10.0/download", builder: "cosmwasm/rust-optimizer:0.10.7"});
+const up = await fredClient.upload(wasm, {
+  source: "https://crates.io/api/v1/crates/cw-escrow/0.10.0/download",
+  builder: "cosmwasm/rust-optimizer:0.10.7"
+});
 
 console.log(up);
-const { codeId } = up;
+const {codeId} = up;
 
 const initMsg = {arbiter: fredAddr, recipient: bobAddr};
-const { contractAddress } = await fredClient.instantiate(codeId, initMsg, "Escrow 1", { memo: "memo", transferAmount: [{denom: "usponge", amount: "50000"}]});
+const {contractAddress} = await fredClient.instantiate(codeId, initMsg, "Escrow 1", {
+  memo: "memo",
+  transferAmount: [{denom: "usponge", amount: "50000"}]
+});
 
 // check the contract is set up properly
 console.log(contractAddress);

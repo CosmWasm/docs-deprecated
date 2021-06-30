@@ -4,13 +4,16 @@ sidebar_position: 1
 
 # Build Requirements
 
-For minimum system requirements instances with 2 processor CPU and 4GB memory is recommended.
-Building code may require larger instances, especially if you want to build a static instance (recompile Rust code).
+For minimum system requirements instances with 2 processor CPU and 4GB memory is recommended. Building code may require
+larger instances, especially if you want to build a static instance (recompile Rust code).
 
 # Installation
 
-Node executable may vary between networks, and [Option 1](#option-1-preferred-build-static-binary-using-docker-linux-only)
-might become obsolete. Network details, configuration and informations can be found on [CosmWasm/testnets](https://github.com/CosmWasm/testnets). Please head over to the repo and explore before starting setting up a node.
+Node executable may vary between networks,
+and [Option 1](#option-1-preferred-build-static-binary-using-docker-linux-only)
+might become obsolete. Network details, configuration and informations can be found
+on [CosmWasm/testnets](https://github.com/CosmWasm/testnets). Please head over to the repo and explore before starting
+setting up a node.
 
 ## Simplest
 
@@ -20,8 +23,8 @@ Use docker image, or build locally: `https://github.com/CosmWasm/wasmd/#dockeriz
 
 ### Option 1 (preferred - build static binary using docker - Linux only)
 
-Constructing a `wasmd` is a tricky process and involves using Alpine Linux as a build environment and recompiling the Rust dependencies as static libs.
-Using Dockerfile is suggested.
+Constructing a `wasmd` is a tricky process and involves using Alpine Linux as a build environment and recompiling the
+Rust dependencies as static libs. Using Dockerfile is suggested.
 
 1. Clone the project `git clone https://github.com/CosmWasm/wasmd.git && cd wasmd`
 2. Checkout to testnets version `git checkout vx.x.x`

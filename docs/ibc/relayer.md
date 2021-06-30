@@ -11,8 +11,8 @@ connections.
 
 ## Relayer Implementations
 
-- [confio/ts-relayer](https://github.com/confio/ts-relayer) TypeScript implementation of IBC Relayer. Customizable and Reliable.
-  Project state: **ALPHA**
+- [confio/ts-relayer](https://github.com/confio/ts-relayer) TypeScript implementation of IBC Relayer. Customizable and
+  Reliable. Project state: **ALPHA**
 - [cosmos/relayer](https://github.com/cosmos/relayer) The Cosmos IBC relayer package contains a basic relayer
   implementation that is meant for users wishing to relay packets/data between sets of IBC enabled chains. Project
   state: **ALPHA**
