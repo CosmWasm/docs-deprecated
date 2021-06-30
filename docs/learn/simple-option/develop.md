@@ -46,7 +46,8 @@ test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 All good.
 
-:::info Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
+:::info
+ Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
 :::
 
 [src/lib.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/lib.rs) file contains wasm
@@ -55,7 +56,8 @@ wasm tweaking, don't touch it.
 
 ## Messages
 
-:::info Timecode [https://vimeo.com/457702442#t=1m46s](https://vimeo.com/457702442#t=1m46s)
+:::info
+ Timecode [https://vimeo.com/457702442#t=1m46s](https://vimeo.com/457702442#t=1m46s)
 :::
 
 Development begins in [src/msg.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs)
@@ -104,7 +106,8 @@ pub enum HandleMsg {
 }
 ```
 
-:::info Canonical and Human Addresses Canonical Addresses represent binary format of crypto addresses. Human Addresses
+:::info
+ Canonical and Human Addresses Canonical Addresses represent binary format of crypto addresses. Human Addresses
 on the other hand are great for the UI. They are always a subset of ascii text, and often contain security checks - such
 as chain-prefix in Bech32, e.g. cosmos1h57760w793q6vh06jsppnqdkc4ejcuyrrjxnke
 
@@ -128,7 +131,8 @@ pub enum QueryMsg {
 
 ## State
 
-:::info Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
+:::info
+ Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
 :::
 
 [State](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/state.rs) handles state of the
@@ -167,7 +171,8 @@ pub fn config_read(storage: &dyn Storage) -> ReadonlySingleton<State> {
 
 ## Contract Handlers
 
-:::info Timecode [https://vimeo.com/457702442#t=11m12s](https://vimeo.com/457702442#t=11m12s)
+:::info
+ Timecode [https://vimeo.com/457702442#t=11m12s](https://vimeo.com/457702442#t=11m12s)
 :::
 
 Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind them together
@@ -227,7 +232,8 @@ successful returns `T` type otherwise returns `ContractError`. Useful.
 
 ### Handle
 
-:::info Timecode [https://vimeo.com/457702442#t=15m55s](https://vimeo.com/457702442#t=15m55s)
+:::info
+ Timecode [https://vimeo.com/457702442#t=15m55s](https://vimeo.com/457702442#t=15m55s)
 :::
 
 `handle` method routes messages to functions. It is similar to Cosmos SDK handler design.

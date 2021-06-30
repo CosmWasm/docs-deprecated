@@ -10,7 +10,8 @@ stateful protocol for reliable, ordered, and authenticated communication between
 an unknown and dynamic topology. The protocol realises this by specifying a set of data structures, abstractions, and
 semantics that can be implemented by any distributed ledger provided they satisfy a small set of requirements.
 
-:::info For inner workings of IBC, head to [cosmos/ics](https://github.com/cosmos/ics) specifications and start reading
+:::info
+ For inner workings of IBC, head to [cosmos/ics](https://github.com/cosmos/ics) specifications and start reading
 from [ics1](https://github.com/cosmos/ics/tree/master/spec/ics-001-ics-standard).
 :::
 

@@ -98,7 +98,8 @@ wasmd query bank balances $CONTRACT $NODE
 
 ## Node Console
 
-:::caution Node console needs to be updated. The code below is obsolete
+:::caution
+Node console needs to be updated. The code below is obsolete
 :::
 
 If you set up the Node Console / REPL in the [client setup section](./setting-env#setup-node-repl), you can use that to

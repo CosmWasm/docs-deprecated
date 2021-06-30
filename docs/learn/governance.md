@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Smart Contracts Over Governance
 
-CsomWasm proves the potential of a smart contract container at the heart of the Cosmos Hub. {synopsis}
+CosmWasm proves the potential of a smart contract container at the heart of the Cosmos Hub. {synopsis}
 
 One of the promises of CosmWasm is to enable flexible smart contract execution on Cosmos Hub. With CosmWasm on the Hub,
 network participants can propose to deploy smart contracts, vote in governance to enable them.

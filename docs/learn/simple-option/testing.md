@@ -24,7 +24,8 @@ can keep test and code in the same or separate files.
 
 ## Test Initialization
 
-:::info Timecode [https://vimeo.com/457705991#t=3m34s](https://vimeo.com/457705991#t=3m34s)
+:::info
+ Timecode [https://vimeo.com/457705991#t=3m34s](https://vimeo.com/457705991#t=3m34s)
 :::
 
 For each test, test specific variables such as block time, state must be mocked. Write a function for easy setup.
@@ -116,7 +117,8 @@ pub fn mock_info<U: Into<HumanAddr>>(sender: U, sent: &[Coin]) -> MessageInfo {
 
 ## Test Handler
 
-:::info Timecode [https://vimeo.com/457705991#t=7m34s](https://vimeo.com/457705991#t=7m34s)
+:::info
+ Timecode [https://vimeo.com/457705991#t=7m34s](https://vimeo.com/457705991#t=7m34s)
 :::
 
 ### Test Transfer Handler
@@ -161,7 +163,8 @@ fn transfer() {
 
 ### Test Execute
 
-:::info Timecode [https://vimeo.com/457705991#t=14m21s](https://vimeo.com/457705991#t=14m21s)
+:::info
+ Timecode [https://vimeo.com/457705991#t=14m21s](https://vimeo.com/457705991#t=14m21s)
 :::
 
 ```rust

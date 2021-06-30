@@ -7,7 +7,8 @@ sidebar_position: 2
 In this section we will explain how to join testnets, where to find testnet configurations, and some scripts to make the
 process faster.
 
-:::caution Oysternet validators is run by confio and not open for external validators. Musselnet is up as 2021/05/26 so
+:::caution
+Oysternet validators is run by confio and not open for external validators. Musselnet is up as 2021/05/26 so
 it will become obsolote. The documentation here is for reference and will be updated when long living CosmWasm network
 is released. If you want to start practicing validator operation skills, join upcoming CosmWasm testnets. But they are
 very far from production environments. For near mainnet conditions, try validating in 30+ node networks, where network
@@ -116,7 +117,8 @@ Now you should be seeing blocks being replayed and your node is catching up with
 
 ### Become A Validator(optional)
 
-:::caution Command below is for demonstration, oysternet is not open for external validators.
+:::caution
+Command below is for demonstration, oysternet is not open for external validators.
 :::
 
 In order to join the network as validator, you need some staking tokens. Please ask some
@@ -150,7 +152,9 @@ With wasmd version v0.13 lcd client and node merged. To enable light client, cha
 
 ## Joining To Be Launched Testnets
 
-:::info You need to have your address and informations defined in networks genesis file to join not yet launched
+:::info
+
+You need to have your address and informations defined in networks genesis file to join not yet launched
 testnets. Here is the script you can run to take care of it automatically.
 :::
 

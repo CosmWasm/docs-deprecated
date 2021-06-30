@@ -92,7 +92,8 @@ make install
 wasmd version
 ```
 
-:::info If you have any problems here, check your `PATH`. `make install` will copy `wasmd` to
+:::info
+ If you have any problems here, check your `PATH`. `make install` will copy `wasmd` to
 `$HOME/go/bin` by default, please make sure that is set up in your `PATH` as well, which should be the case in general
 for building Go code from source.
 :::
@@ -102,7 +103,8 @@ for building Go code from source.
 Testing network [Oysternet](https://github.com/CosmWasm/testnets/tree/master/oysternet-1) is launched to save you of the
 hassle of running a local network and speed up your development.
 
-:::caution Use go 1.15+ for compiling `wasmd` executable
+:::caution
+Use go 1.15+ for compiling `wasmd` executable
 :::
 
 ```shell
