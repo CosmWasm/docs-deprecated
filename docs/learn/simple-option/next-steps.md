@@ -4,7 +4,8 @@ sidebar_position: 5
 
 # Next Steps
 
-We covered a lot of essentials of CosmWasm in this tutorial/workshop combo. We have more reading and learning resources for you:
+We covered a lot of essentials of CosmWasm in this tutorial/workshop combo. We have more reading and learning resources
+for you:
 
 - [Getting Started](/getting-started/intro.md), best starter docs.
 - [Learn](/learn/simple-option/intro.md), more tutorials.

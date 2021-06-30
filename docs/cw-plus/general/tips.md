@@ -5,19 +5,15 @@ sidebar_position: 2
 
 # Advanced REPL tips
 
-::: danger
-You must read [cw20 tutorial](/cw-plus/cw20/cw20-base-tutorial.md) first. This section builds on
-top of it.
+::: danger You must read [cw20 tutorial](/cw-plus/cw20/cw20-base-tutorial.md) first. This section builds on top of it.
 :::
 
-You got your hands dirty with Node REPL. Now let's dig in a bit deeper of some
-advanced functions you can use.
+You got your hands dirty with Node REPL. Now let's dig in a bit deeper of some advanced functions you can use.
 
 ## Interactive Discovery
 
-So far you have been cut-and-pasting commands in the tutorials when using
-node repl. But what else can you do with this contract? Luckily Javascript
-has some nice introspection. And, we added some extra bonuses there. Just type
+So far you have been cut-and-pasting commands in the tutorials when using node repl. But what else can you do with this
+contract? Luckily Javascript has some nice introspection. And, we added some extra bonuses there. Just type
 `mine` in the REPL and see the list of methods:
 
 ```
@@ -35,28 +31,35 @@ has some nice introspection. And, we added some extra bonuses there. Just type
   transferFrom: [AsyncFunction: transferFrom] }
 ```
 
-But how do I call them? What arguments do they take?
-You can always go look up the
+But how do I call them? What arguments do they take? You can always go look up the
 [original helper file on the web](https://github.com/CosmWasm/cosmwasm-plus/blob/master/contracts/cw20-base/helpers.ts#L151-L167)
 and see all the types defined there.
 
-But why switch to a browser and get distracted by something else?
-There is a great `.type` operator to show you this without ever leaving the REPL:
+But why switch to a browser and get distracted by something else? There is a great `.type` operator to show you this
+without ever leaving the REPL:
 
 ```ts
->> const _i = mine.increaseAllowance
+>>
+const _i = mine.increaseAllowance
 undefined
->> .type _i
+>>
+.
+type
+_i
 const _i: (recipient: string, amount: string) => Promise<string>
 
->> const _a = mine.allowance
+>>
+const _a = mine.allowance
 undefined
->> .type _a
+>>
+.
+type
+_a
 const _a: (owner: string, spender: string) => Promise<string>
 ```
 
-One note, `.type` is a bit finicky and stops at the first dot, so this simpler version
-doesn't work, just describes the `mine` object:
+One note, `.type` is a bit finicky and stops at the first dot, so this simpler version doesn't work, just describes
+the `mine` object:
 
 ```
 >> .type mine.increaseAllowance
@@ -81,18 +84,23 @@ You know how we keep starting every session with:
 const client = await useOptions(hackatomOptions).setup(YOUR_PASSWORD_HERE);
 ```
 
-What if I told you there was more you could do here? Don't believe me, just explore
-for yourself:
+What if I told you there was more you could do here? Don't believe me, just explore for yourself:
 
 ```js
-const { setup } = useOptions(hackatomOptions);
-.type setup
+const {setup} = useOptions(hackatomOptions);
+.
+type
+setup
 // this gives:
-const setup: (password: string, filename?: string) => Promise<SigningCosmWasmClient>
+const setup: (password: string, filename?
+:
+string
+) =>
+Promise < SigningCosmWasmClient >
 ```
 
-Yup... it takes a second argument. You don't HAVE to store your keys in `~/.coral.key`. That's just
-a default. It also means we could make 2 clients using different key files.
+Yup... it takes a second argument. You don't HAVE to store your keys in `~/.coral.key`. That's just a default. It also
+means we could make 2 clients using different key files.
 
 ```js
 const client = await setup(YOUR_PASSWORD_HERE)
@@ -103,14 +111,13 @@ client.getAccount()
 partner.getAccount()
 
 // and move some tokens around
-partner.sendTokens(client.senderAddress, [ { denom: 'ucosm', amount: '200000' }])
+partner.sendTokens(client.senderAddress, [{denom: 'ucosm', amount: '200000'}])
 
 client.getAccount()
 partner.getAccount()
 ```
 
-This let's us then try more complex use cases with the cw20 contract.
-Sending back and forth, `transferFrom`, `burnFrom`, etc
+This let's us then try more complex use cases with the cw20 contract. Sending back and forth, `transferFrom`, `burnFrom`
+, etc
 
-That's enough hints from me.
-Time for you to go play with the contract on your own...
+That's enough hints from me. Time for you to go play with the contract on your own...

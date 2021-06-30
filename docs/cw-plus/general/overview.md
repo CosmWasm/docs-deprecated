@@ -5,7 +5,8 @@ sidebar_position: 1
 
 # Plus Contracts
 
-Plus contracts are collection of production-quality CosmWasm contracts collected at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).
+Plus contracts are collection of production-quality CosmWasm contracts collected
+at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).
 
 ## Contents
 

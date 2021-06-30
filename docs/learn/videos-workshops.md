@@ -78,7 +78,7 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 <iframe class="responsive-iframe" src="https://player.vimeo.com/video/453055461" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-### Building Multi-chain Smart-Contracts Using CosmWasm -  HackAtom V India Workshop
+### Building Multi-chain Smart-Contracts Using CosmWasm - HackAtom V India Workshop
 
 *Date: September 14, 2020*
 

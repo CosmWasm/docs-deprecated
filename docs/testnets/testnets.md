@@ -4,15 +4,14 @@ sidebar_position: 2
 
 # Joining Testnets
 
-In this section we will explain how to join testnets, where to find testnet configurations, and some scripts to make the process faster.
+In this section we will explain how to join testnets, where to find testnet configurations, and some scripts to make the
+process faster.
 
-:::caution
-Oysternet validators is run by confio and not open for external validators.
-Musselnet is up as 2021/05/26 so it will become obsolote. The documentation here is for reference and will be updated
-when long living CosmWasm network is released.
-If you want to start practicing validator operation skills, join upcoming CosmWasm testnets.
-But they are very far from production environments. For near mainnet conditions, try validating in 30+ node networks,
-where network load is high.
+:::caution Oysternet validators is run by confio and not open for external validators. Musselnet is up as 2021/05/26 so
+it will become obsolote. The documentation here is for reference and will be updated when long living CosmWasm network
+is released. If you want to start practicing validator operation skills, join upcoming CosmWasm testnets. But they are
+very far from production environments. For near mainnet conditions, try validating in 30+ node networks, where network
+load is high.
 
 Try Terra: https://docs.terra.money/node/join-network.html
 
@@ -23,22 +22,25 @@ Both Terra and Juno integrates CosmWasm smart contract engine.
 
 ## Select Your Network
 
-You can find active and in-active testnet information such as configs and endpoints on [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
+You can find active and in-active testnet information such as configs and endpoints
+on [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
 ## Setup
 
 Let's start rolling your node and start producing blocks in testnet environment.
 
-**Before starting**, you can use [CosmWasm/tesnets/devops](https://github.com/CosmWasm/testnets/tree/master/devops) that contains easy setup scripts for wasmd
-node, faucet, [block explorer](https://github.com/CosmWasm/big-dipper), lcd, nginx etc. Scripts
-below does the some thing as **devops repo** in essence, just more manual and excludes nginx and system supervisor. Feel free
-to use them. We use [cosmovisor](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor) upgrade manager to handle network upgrades.
-Our installation scripts can help you with both setting up cosmovisor and wasmd: [wasmd w/cosmovisor setup scripts](https://github.com/CosmWasm/testnets/tree/master/devops/node/cosmovisor)
+**Before starting**, you can use [CosmWasm/tesnets/devops](https://github.com/CosmWasm/testnets/tree/master/devops) that
+contains easy setup scripts for wasmd node, faucet, [block explorer](https://github.com/CosmWasm/big-dipper), lcd, nginx
+etc. Scripts below does the some thing as **devops repo** in essence, just more manual and excludes nginx and system
+supervisor. Feel free to use them. We use [cosmovisor](https://github.com/cosmos/cosmos-sdk/tree/master/cosmovisor)
+upgrade manager to handle network upgrades. Our installation scripts can help you with both setting up cosmovisor and
+wasmd: [wasmd w/cosmovisor setup scripts](https://github.com/CosmWasm/testnets/tree/master/devops/node/cosmovisor)
 
 ### Manual Setup
 
-First of all make sure you followed the installation steps in [build requirements section](build-requirements.md).
-You should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up environment variables:
+First of all make sure you followed the installation steps in [build requirements section](build-requirements.md). You
+should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up
+environment variables:
 
 Below is the [oysternet configuration](https://github.com/CosmWasm/testnets/tree/master/oysternet-1).
 
@@ -114,16 +116,16 @@ Now you should be seeing blocks being replayed and your node is catching up with
 
 ### Become A Validator(optional)
 
-:::caution
-Command below is for demonstration, oysternet is not open for external validators.
+:::caution Command below is for demonstration, oysternet is not open for external validators.
 :::
 
-In order to join the network as validator, you need some staking tokens.
-Please ask some in [discord testnets channel](https://docs.cosmwasm.com/chat)
+In order to join the network as validator, you need some staking tokens. Please ask some
+in [discord testnets channel](https://docs.cosmwasm.com/chat)
 
 If you want to participate in active block building, you need some coins staked to your validators address.
 
-For those interested in validator stack, here is a good reading source on validator architectures: [certus one blog](https://kb.certus.one/)
+For those interested in validator stack, here is a good reading source on validator
+architectures: [certus one blog](https://kb.certus.one/)
 
 **Note**: make sure your validator is synced before upgrading to validator
 
@@ -148,9 +150,8 @@ With wasmd version v0.13 lcd client and node merged. To enable light client, cha
 
 ## Joining To Be Launched Testnets
 
-:::info
-You need to have your address and informations defined in networks genesis file to join not yet launched testnets.
-Here is the script you can run to take care of it automatically.
+:::info You need to have your address and informations defined in networks genesis file to join not yet launched
+testnets. Here is the script you can run to take care of it automatically.
 :::
 
 ```shell
@@ -182,5 +183,5 @@ After the network is launched you can follow [Joining Live Testnets](#joining-li
 
 [Getting Started section](/getting-started/intro.md) is the best reading source that teaches you the process of
 compiling and deploying contracts using a basic smart contract. If you are interested in developing your own contracts,
-after reading getting started tutorials head to [Hijacking Escrow](/learn/hijack-escrow/intro.md) where you play
-around with the example escrow contract.
+after reading getting started tutorials head to [Hijacking Escrow](/learn/hijack-escrow/intro.md) where you play around
+with the example escrow contract.

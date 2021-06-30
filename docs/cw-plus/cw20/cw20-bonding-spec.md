@@ -5,7 +5,8 @@ sidebar_position: 4
 
 # CW20 Bonding curve
 
-cw20-bonding-curve source code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding)
+cw20-bonding-curve source
+code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding)
 
 This builds on the [Basic cw20 interface](spec.md)
 as implemented in [`cw20-base`](cw20-base-spec.md)
@@ -18,22 +19,19 @@ This serves three purposes:
 
 ## Design
 
-There are two variants - accepting native tokens and accepting cw20 tokens
-as the *reserve* token (this is the token that is input to the bonding curve).
+There are two variants - accepting native tokens and accepting cw20 tokens as the *reserve* token (this is the token
+that is input to the bonding curve).
 
 Minting: When the input is sent to the contract (either via `HandleMsg::Buy{}`
-with native tokens, or via `HandleMsg::Receive{}` with cw20 tokens),
-those tokens remain on the contract and it issues it's own token to the
-sender's account (known as *supply* token).
+with native tokens, or via `HandleMsg::Receive{}` with cw20 tokens), those tokens remain on the contract and it issues
+it's own token to the sender's account (known as *supply* token).
 
-Burning: We override the burn function to not only burn the requested tokens,
-but also release a proper number of the input tokens to the account that burnt
-the custom token
+Burning: We override the burn function to not only burn the requested tokens, but also release a proper number of the
+input tokens to the account that burnt the custom token
 
 Curves: `handle` specifies a bonding function, which is sent to parameterize
-`handle_fn` (which does all the work). The curve is set when compiling
-the contract. In fact many contracts can just wrap `cw20-bonding` and
-specify the custom curve parameter.
+`handle_fn` (which does all the work). The curve is set when compiling the contract. In fact many contracts can just
+wrap `cw20-bonding` and specify the custom curve parameter.
 
 Read more about [bonding curve math here](https://yos.io/2018/11/10/bonding-curves/)
 
@@ -41,15 +39,13 @@ Note: the first version only accepts native tokens as the
 
 ### Math
 
-Given a price curve `f(x)` = price of the `x`th token, we want to figure out
-how to buy into and sell from the bonding curve. In fact we can look at
-the total supply issued. let `F(x)` be the integral of `f(x)`. We have issued
+Given a price curve `f(x)` = price of the `x`th token, we want to figure out how to buy into and sell from the bonding
+curve. In fact we can look at the total supply issued. let `F(x)` be the integral of `f(x)`. We have issued
 `x` tokens for `F(x)` sent to the contract. Or, in reverse, if we send
 `x` tokens to the contract, it will mint `F^-1(x)` tokens.
 
 From this we can create some formulas. Assume we currently have issued `S`
-tokens in exchange for `N = F(S)` input tokens. If someone sends us `x` tokens,
-how much will we issue?
+tokens in exchange for `N = F(S)` input tokens. If someone sends us `x` tokens, how much will we issue?
 
 `F^-1(N+x) - F^-1(N)` = `F^-1(N+x) - S`
 
@@ -57,15 +53,17 @@ And if we sell `x` tokens, how much we will get out:
 
 `F(S) - F(S-x)` = `N - F(S-x)`
 
-Just one calculation each side. To be safe, make sure to round down and
-always check against `F(S)` when using `F^-1(S)` to estimate how much
-should be issued. This will also safely give us how many tokens to return.
+Just one calculation each side. To be safe, make sure to round down and always check against `F(S)` when using `F^-1(S)`
+to estimate how much should be issued. This will also safely give us how many tokens to return.
 
-There is built in support for safely [raising i128 to an integer power](https://doc.rust-lang.org/std/primitive.i128.html#method.checked_pow).
-There is also a crate to [provide nth-root of for all integers](https://docs.rs/num-integer/0.1.43/num_integer/trait.Roots.html).
-With these two, we can handle most math except for logs/exponents.
+There is built in support for
+safely [raising i128 to an integer power](https://doc.rust-lang.org/std/primitive.i128.html#method.checked_pow). There
+is also a crate
+to [provide nth-root of for all integers](https://docs.rs/num-integer/0.1.43/num_integer/trait.Roots.html). With these
+two, we can handle most math except for logs/exponents.
 
-Compare this to [writing it all in solidity](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/7b7ff729b82ea73ea168e495d9c94cb901ae95ce/contracts/math/Power.sol)
+Compare this
+to [writing it all in solidity](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/7b7ff729b82ea73ea168e495d9c94cb901ae95ce/contracts/math/Power.sol)
 
 Examples:
 
