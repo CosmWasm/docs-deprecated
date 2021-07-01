@@ -87,9 +87,10 @@
 }
 
 .navbar .navbar__inner {
-  width: min(100%, 919.8px);
   margin: 0 var(--ifm-spacing-horizontal);
+  font-size: 90%;
 }
+
 
 /* Better align header with content */
 @media (min-width: 1600px) {
