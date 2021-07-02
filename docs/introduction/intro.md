@@ -48,11 +48,12 @@ and to share their contract with others.
 * [Workshops](/learn/videos-workshops.md) has great collection of demonstrations and verbal explanation of CosmWasm tech
   stack recorded by our team in various events and organisations.
 
-* [Community]() for community interactions.
+* [Community](/community/hall-of-fame) for community interactions.
 
-* [Plus](/cw-plus/general/overview.md) is for state of art CosmWasm smart contracts.
+* [Plus](../cw-plus/general/overview.md) is for state of art CosmWasm smart contracts.
 
-* [IBC](/ibc/overview.md) is for all the things related to CosmWasm and IBC. Relayers, Active Network Connections, IBC
+* [IBC](../ibc/overview.md) is for all the things related to CosmWasm and IBC. Relayers, Active Network Connections,
+  IBC
   enabled smart contracts and more.
 
 ## Further Studies
