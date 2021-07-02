@@ -146,7 +146,6 @@ module.exports = {
       {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
-//          routeBasePath: 'docs',
           lastVersion: "current",
           sidebarPath: require.resolve('./sidebars.js'),
           versions: {
@@ -170,7 +169,7 @@ module.exports = {
       redirects: [
         {
           from: '/',
-          to: '/0.14/',
+          to: '/docs/0.14/',
         },
       ],
     },
