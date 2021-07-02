@@ -171,7 +171,7 @@ module.exports = {
       redirects: [
         {
           from: '/',
-          to: '/0.14/getting-started/intro',
+          to: '/0.14/introduction/intro',
         },
       ],
     },
