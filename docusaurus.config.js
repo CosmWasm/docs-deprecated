@@ -30,6 +30,13 @@ module.exports = {
         },
         {
           type: 'doc',
+          docId: 'hijack-escrow/intro',
+          position: 'left',
+          label: 'Tutorials',
+          docsPluginId: 'tutorials',
+        },
+        {
+          type: 'doc',
           docId: 'overview',
           position: 'left',
           label: 'Ecosystem',
@@ -185,6 +192,15 @@ module.exports = {
         routeBasePath: 'ecosystem',
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
       },
-    ]
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'tutorials',
+        path: 'tutorials',
+        routeBasePath: 'tutorials',
+        sidebarPath: require.resolve('./sidebarsTutorials.js'),
+      },
+    ],
   ],
 };

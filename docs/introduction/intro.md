@@ -29,7 +29,7 @@ and to share their contract with others.
 
 ## Sections
 
-* [Getting Started](/getting-started/intro.md) dives you into hands-on training. It gently leads you through modifying,
+* [Getting Started](/docs/getting-started/intro) dives you into hands-on training. It gently leads you through modifying,
   deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get
   acquainted with all the aspects of the system, without too much hard work coding.
 
@@ -42,10 +42,10 @@ and to share their contract with others.
   hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined
   the testnets**", said no one ever 😉
 
-* [Learn](/learn/simple-option/intro.md) will demonstrate developing smart contracts from zero to production with step
+* [Learn](/tutorials/simple-option/intro) will demonstrate developing smart contracts from zero to production with step
   by step explanations, code snippets, scripts and more.
 
-* [Workshops](/learn/videos-workshops.md) has great collection of demonstrations and verbal explanation of CosmWasm tech
+* [Workshops](/tutorials/videos-workshops) has great collection of demonstrations and verbal explanation of CosmWasm tech
   stack recorded by our team in various events and organisations.
 
 * [Community](/ecosystem/overview) for community interactions.

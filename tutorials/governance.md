@@ -10,7 +10,7 @@ One of the promises of CosmWasm is to enable flexible smart contract execution o
 network participants can propose to deploy smart contracts, vote in governance to enable them.
 
 In this section you will learn all the knowledge required to experience smart contract on the hub. If you are interested
-in smart contract development, digest the [Getting Started](/getting-started/intro.md) documentation.
+in smart contract development, digest the [Getting Started](/docs/getting-started/intro) documentation.
 
 ## Wasmd Authorization Settings
 
@@ -64,7 +64,7 @@ CosmWasm extends Cosmos SDK governance module to enable deployment of smart cont
 There are two options to get the sample contract:
 
 1. Download [source code](https://github.com/CosmWasm/cosmwasm-plus/tree/v0.1.1/contracts/cw20-base),
-   and [compile](/getting-started/compile-contract.md) it your self.
+   and [compile](/docs/getting-started/compile-contract) it your self.
 
 2. Download [pre-compiled binary](https://github.com/CosmWasm/cosmwasm-plus/releases/download/v0.1.1/cw20_base.wasm).
 

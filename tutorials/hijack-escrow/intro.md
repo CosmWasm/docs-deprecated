@@ -4,10 +4,10 @@ sidebar_position: 1
 
 # Introduction
 
-In [getting started section](/getting-started/intro.md) we demonstrated the essential procedure that is required to use
+In [getting started section](/docs/getting-started/intro) we demonstrated the essential procedure that is required to use
 CosmWasm smart contracts: setup, compilation, development, and interacting. We will take it once step further and edit
 the escrow contract in a way that enables a thief to hijack the funds saved in the contract. Before starting, make sure
-you read and followed the steps in [getting started](/getting-started/intro.md).
+you read and followed the steps in [getting started](/docs/getting-started/intro).
 
 ## Setting up your IDE
 

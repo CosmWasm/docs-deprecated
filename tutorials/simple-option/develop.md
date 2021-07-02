@@ -113,7 +113,7 @@ as chain-prefix in Bech32, e.g. cosmos1h57760w793q6vh06jsppnqdkc4ejcuyrrjxnke
 
 `canonicalize(humanize(canonical_addr)) == canonical_addr`
 
-For more details: [Names and Addresses](/architecture/addresses.md)
+For more details: [Names and Addresses](/docs/architecture/addresses)
 :::
 
 ### QueryMsg
@@ -385,7 +385,7 @@ cargo clippy -- -D warnings
 
 ### Compile
 
-This section compiles key commands from [Compiling Contract](/getting-started/compile-contract.md) doc. For more
+This section compiles key commands from [Compiling Contract](/docs/getting-started/compile-contract) doc. For more
 detailed read proceed to the documentation.
 
 Basic compilation:
