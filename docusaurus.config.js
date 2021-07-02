@@ -22,6 +22,26 @@ module.exports = {
       },
       items: [
         {
+          type: 'doc',
+          docId: 'introduction/intro',
+          position: 'left',
+          label: 'Docs',
+ //         docsPluginId: '',
+        },
+        {
+          type: 'doc',
+          docId: 'overview',
+          position: 'left',
+          label: 'Ecosystem',
+          docsPluginId: 'ecosystem',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+          //docsPluginId: 'docs',
+        },
+        {
           href: 'https://cosmwasm.com',
           label: 'Website',
           position: 'right',
@@ -30,12 +50,6 @@ module.exports = {
           href: 'https://github.com/CosmWasm',
           label: 'GitHub',
           position: 'right',
-        },
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-          dropdownActiveClassDisabled: true,
-          docsPluginId: 'default',
         },
       ],
       hideOnScroll: true,
@@ -132,8 +146,9 @@ module.exports = {
       {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
-          routeBasePath: '/',
           lastVersion: "current",
+          routeBasePath: '/',
+          sidebarPath: require.resolve('./sidebars.js'),
           versions: {
             current: {
               label: "0.14",
@@ -152,14 +167,26 @@ module.exports = {
     '@docusaurus/plugin-client-redirects',
     {
       fromExtensions: ['html'],
+      /*
       redirects: [
         {
           from: '/',
           to: '/0.14/',
         },
       ],
+      
+       */
     },
     ],
-    'docusaurus-plugin-sass'
+    'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'ecosystem',
+        path: 'ecosystem',
+        routeBasePath: 'ecosystem',
+        sidebarPath: require.resolve('./sidebarsCommunity.js'),
+      },
+    ]
   ],
 };
