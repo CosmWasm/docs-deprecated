@@ -29,11 +29,11 @@ module.exports = {
  //         docsPluginId: '',
         },
         {
-          type: 'docsVersion',
-          to: '/community/README',
+          type: 'doc',
+          docId: 'overview',
           position: 'left',
-          label: 'Community',
-          docsPluginId: 'community',
+          label: 'Ecosystem',
+          docsPluginId: 'ecosystem',
         },
         {
           type: 'docsVersionDropdown',
@@ -179,9 +179,9 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'community',
-        path: 'community',
-        routeBasePath: 'community',
+        id: 'ecosystem',
+        path: 'ecosystem',
+        routeBasePath: 'ecosystem',
         sidebarPath: require.resolve('./sidebarsCommunity.js'),
       },
     ]

@@ -48,7 +48,7 @@ and to share their contract with others.
 * [Workshops](/learn/videos-workshops.md) has great collection of demonstrations and verbal explanation of CosmWasm tech
   stack recorded by our team in various events and organisations.
 
-* [Community](/community/hall-of-fame) for community interactions.
+* [Community](/ecosystem/intro) for community interactions.
 
 * [Plus](../cw-plus/general/overview.md) is for state of art CosmWasm smart contracts.
 
