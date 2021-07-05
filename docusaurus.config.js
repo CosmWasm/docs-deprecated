@@ -1,5 +1,7 @@
 const versions = require('./versions.json');
 
+const lastReleasedVersion = versions[0];
+
 (module.exports = {
   title: 'CosmWasm Documentation',
   tagline: 'CosmWasm documentation',
@@ -180,7 +182,7 @@ const versions = require('./versions.json');
         redirects: [
           {
             from: '/',
-            to: '/docs/0.14/introduction/intro',
+            to: `/docs/${lastReleasedVersion}/introduction/intro`,
           },
         ],
         createRedirects: function (existingPath) {
