@@ -11,7 +11,8 @@ sidebar_position: 2
 ### Rust and IDE
 
 This section is a summary
-of [Getting Started / Installation and Setting Up Environment](/docs/getting-started/installation). You can go to the doc,
+of [Getting Started / Installation and Setting Up Environment](https://docs.cosmwasm.com/0.14/getting-started/installation).
+You can go to the doc,
 setup rust and preferred IDE then and come back here. We recommend using Intellij IDEA.
 
 ## Project Starter

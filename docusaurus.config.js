@@ -26,7 +26,7 @@ module.exports = {
           docId: 'introduction/intro',
           position: 'left',
           label: 'Docs',
- //         docsPluginId: '',
+          //         docsPluginId: '',
         },
         {
           type: 'doc',
@@ -171,17 +171,21 @@ module.exports = {
   ],
   plugins: [
     [
-    '@docusaurus/plugin-client-redirects',
-    {
-      fromExtensions: ['html'],
-
-      redirects: [
-        {
-          from: '/',
-          to: '/0.14/introduction/intro',
+      '@docusaurus/plugin-client-redirects',
+      {
+        fromExtensions: ['html'],
+        redirects: [
+          {
+            from: '/',
+            to: '/0.14/introduction/intro',
+          },
+        ],
+        createRedirects: function (existingPath) {
+          if (existingPath.startsWith('/0.14/learn')) {
+            return existingPath.replace('/0.14/learn', '/tutorials');
+          }
         },
-      ],
-    },
+      },
     ],
     'docusaurus-plugin-sass',
     [

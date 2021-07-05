@@ -23,7 +23,7 @@ You can view up-to-date status in our [Github project page](https://github.com/o
 
 **December 2019**:
 
-* [CosmWasm Documentation](https://www.cosmwasm.com) is live, including a [tutorial](../docs/getting-started/intro).
+* [CosmWasm Documentation](https://www.cosmwasm.com) is live, including a [tutorial](../getting-started/intro.md).
 * [CosmWasm v0.5.2](https://github.com/CosmWasm/cosmwasm/tree/v0.5.2), with full support for `init` and `handle` is the
   first stable release.
 * [`wasmd`](https://github.com/CosmWasm/wasmd) sample blockchain is published and tested.
