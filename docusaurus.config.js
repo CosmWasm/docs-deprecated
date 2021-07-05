@@ -161,7 +161,7 @@ const lastReleasedVersion = versions[0];
           id: 'docs',
           lastVersion: "current",
           routeBasePath: '/docs',
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebars/sidebars.js'),
           versions: {
             current: {
               label: "0.14",
@@ -200,7 +200,7 @@ const lastReleasedVersion = versions[0];
         id: 'ecosystem',
         path: 'ecosystem',
         routeBasePath: 'ecosystem',
-        sidebarPath: require.resolve('./sidebarsCommunity.js'),
+        sidebarPath: require.resolve('./sidebars/sidebarsCommunity.js'),
       },
     ],
     [
@@ -209,7 +209,16 @@ const lastReleasedVersion = versions[0];
         id: 'tutorials',
         path: 'tutorials',
         routeBasePath: 'tutorials',
-        sidebarPath: require.resolve('./sidebarsTutorials.js'),
+        sidebarPath: require.resolve('./sidebars/sidebarsTutorials.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cw-plus',
+        path: 'cw-plus',
+        routeBasePath: 'cw-plus',
+        sidebarPath: require.resolve('./sidebars/sidebarsCwPlus.js'),
       },
     ],
   ],
