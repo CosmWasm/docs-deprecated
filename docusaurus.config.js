@@ -26,7 +26,7 @@ module.exports = {
           docId: 'introduction/intro',
           position: 'left',
           label: 'Docs',
-          //         docsPluginId: '',
+          docsPluginId: 'docs',
         },
         {
           type: 'doc',
@@ -46,7 +46,7 @@ module.exports = {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,
-          //docsPluginId: 'docs',
+          docsPluginId: 'docs',
         },
         {
           href: 'https://cosmwasm.com',
@@ -153,8 +153,9 @@ module.exports = {
       {
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
+          id: 'docs',
           lastVersion: "current",
-          routeBasePath: '/',
+          routeBasePath: '/docs',
           sidebarPath: require.resolve('./sidebars.js'),
           versions: {
             current: {
@@ -177,12 +178,12 @@ module.exports = {
         redirects: [
           {
             from: '/',
-            to: '/0.14/introduction/intro',
+            to: '/docs/0.14/introduction/intro',
           },
         ],
         createRedirects: function (existingPath) {
-          if (existingPath.startsWith('/0.14/learn')) {
-            return existingPath.replace('/0.14/learn', '/tutorials');
+          if (existingPath.startsWith('/docs')) {
+            return existingPath.replace('/docs', '/0.14')
           }
         },
       },

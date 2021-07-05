@@ -44,16 +44,16 @@ and to share their contract with others.
   hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined
   the testnets**", said no one ever 😉
 
-* [Learn](../../tutorials/simple-option/intro) will demonstrate developing smart contracts from zero to production
+* [Learn](/tutorials/simple-option/intro) will demonstrate developing smart contracts from zero to production
   with
   step
   by step explanations, code snippets, scripts and more.
 
-* [Workshops](../../tutorials/videos-workshops) has great collection of demonstrations and verbal explanation of
+* [Workshops](/tutorials/videos-workshops) has great collection of demonstrations and verbal explanation of
   CosmWasm tech
   stack recorded by our team in various events and organisations.
 
-* [Ecosystem](../../ecosystem/overview) for ecosystem overview.
+* [Ecosystem](/ecosystem/overview) for ecosystem overview.
 
 * [Plus](../cw-plus/general/overview.md) is for state of art CosmWasm smart contracts.
 
