@@ -1,4 +1,6 @@
-module.exports = {
+const versions = require('./versions.json');
+
+(module.exports = {
   title: 'CosmWasm Documentation',
   tagline: 'CosmWasm documentation',
   url: 'https://docs.cosmwasm.com',
@@ -183,7 +185,7 @@ module.exports = {
         ],
         createRedirects: function (existingPath) {
           if (existingPath.startsWith('/docs')) {
-            return existingPath.replace('/docs', '/0.14')
+            versions.map((v) => {existingPath.replace('/docs', `/${v}`)})
           }
         },
       },
@@ -208,4 +210,4 @@ module.exports = {
       },
     ],
   ],
-};
+});
