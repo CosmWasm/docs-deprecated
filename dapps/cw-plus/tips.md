@@ -5,7 +5,8 @@ sidebar_position: 2
 
 # Advanced REPL tips
 
-::: danger You must read [cw20 tutorial](/cw-plus/cw20/cw20-base-tutorial.md) first. This section builds on top of it.
+:::warning
+You must read [cw20 tutorial](cw20/cw20-base-tutorial.md) first. This section builds on top of it.
 :::
 
 You got your hands dirty with Node REPL. Now let's dig in a bit deeper of some advanced functions you can use.

@@ -40,6 +40,16 @@ const lastReleasedVersion = versions[0];
           docsPluginId: 'tutorials',
         },
         {
+          label: 'dApps',
+          position: 'left',
+          items: [
+            {
+              to: 'dapps/cw-plus/overview',
+              label: 'cw-plus',
+            },
+          ],
+        },
+        {
           type: 'doc',
           docId: 'overview',
           position: 'left',
@@ -51,6 +61,12 @@ const lastReleasedVersion = versions[0];
           position: 'right',
           dropdownActiveClassDisabled: true,
           docsPluginId: 'docs',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+          docsPluginId: 'cw-plus',
         },
         {
           href: 'https://cosmwasm.com',
@@ -216,8 +232,8 @@ const lastReleasedVersion = versions[0];
       '@docusaurus/plugin-content-docs',
       {
         id: 'cw-plus',
-        path: 'cw-plus',
-        routeBasePath: 'cw-plus',
+        path: 'dapps/cw-plus',
+        routeBasePath: 'dapps/cw-plus',
         sidebarPath: require.resolve('./sidebars/sidebarsCwPlus.js'),
       },
     ],

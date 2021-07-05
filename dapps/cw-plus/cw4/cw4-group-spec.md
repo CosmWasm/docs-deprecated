@@ -9,7 +9,7 @@ code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw4-group
 
 This is a basic implementation of the [cw4 spec](spec.md). It fulfills all elements of the spec, including the raw query
 lookups, and it designed to be used as a backing storage for
-[cw3 compliant contracts](/cw-plus/cw3/spec.md).
+[cw3 compliant contracts](../cw3/spec.md).
 
 It stores a set of members along with an admin, and allows the admin to update the state. Raw queries (intended for
 cross-contract queries)
