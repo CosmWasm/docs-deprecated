@@ -70,7 +70,7 @@ pub struct InstantiateMsg {
 
 Note that we use `Addr`, which is a validated address wrapper with some helper functions for storage inside `State
 `, while we use invalidated  `String` address which should be validated by developer, for messages and anything that
-interacts with the user. There is [more info on addresses here](../../architecture/addresses.md).
+interacts with the user. There is [more info on addresses here](https://docs.cosmwasm.com/0.14/architecture/addresses).
 
 `Option<u64>` is a way of telling rust this field may be missing. It may either have a value, like `Some(123456)` or
 be `None`. This means the init message may omit those fields (or pass them as `null`) and we don't need to use some

@@ -185,7 +185,7 @@ After the network is launched you can follow [Joining Live Testnets](#joining-li
 
 ## Deploying Contracts to Testnet
 
-[Getting Started section](/getting-started/intro.md) is the best reading source that teaches you the process of
+[Getting Started section](../getting-started/intro.md) is the best reading source that teaches you the process of
 compiling and deploying contracts using a basic smart contract. If you are interested in developing your own contracts,
-after reading getting started tutorials head to [Hijacking Escrow](/learn/hijack-escrow/intro.md) where you play around
+after reading getting started tutorials head to [Hijacking Escrow](/tutorials/hijack-escrow/intro) where you play around
 with the example escrow contract.
