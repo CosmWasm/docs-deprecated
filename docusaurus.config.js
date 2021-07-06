@@ -155,6 +155,7 @@ const lastReleasedVersion = versions[0];
     [
       '@docusaurus/preset-classic',
       {
+        debug: true,
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
           id: 'docs',
