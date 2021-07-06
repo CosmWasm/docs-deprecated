@@ -188,7 +188,7 @@ const lastReleasedVersion = versions[0];
         ],
         createRedirects: function (existingPath) {
           if (existingPath.includes('/docs')) {
-            existingPath.replace('/docs', `/`)
+            return [existingPath.replace('/docs', `/`)]
           }
         },
       },
