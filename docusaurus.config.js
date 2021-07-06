@@ -187,7 +187,7 @@ const lastReleasedVersion = versions[0];
           },
         ],
         createRedirects: function (existingPath) {
-          if (existingPath.startsWith('/docs')) {
+          if (existingPath.includes('/docs')) {
             existingPath.replace('/docs', `/`)
           }
         },
