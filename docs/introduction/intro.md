@@ -55,7 +55,7 @@ and to share their contract with others.
 
 * [Ecosystem](/ecosystem/overview) for ecosystem overview.
 
-* [Plus](../cw-plus/general/overview.md) is for state of art CosmWasm smart contracts.
+* [Plus](/cw-plus/general/overview) is for state of art CosmWasm smart contracts.
 
 * [IBC](../ibc/overview.md) is for all the things related to CosmWasm and IBC. Relayers, Active Network Connections,
   IBC

@@ -38,7 +38,7 @@ Only the `admin` may execute any of these function. Thus, by omitting an
 `admin`, we end up with a similar functionality ad `cw3-fixed-multisig`. If we include one, it may often be desired to
 be a `cw3` contract that uses this group contract as a group. This leads to a bit of chicken-and-egg problem, but we
 cover how to instantiate that in
-[`cw3-flexible-multisig`](/cw-plus/cw3/cw3-flex-spec.md)
+[`cw3-flexible-multisig`](../cw3/cw3-flex-spec.md)
 
 ## Queries
 

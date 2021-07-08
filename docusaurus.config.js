@@ -1,13 +1,15 @@
-const versions = require('./versions.json');
+const docsVersions = require('./versions.json');
+const cwplusVersions = require('./cw_plus_versions.json');
 
-const lastReleasedVersion = versions[0];
+const lastReleasedDocsVersion = docsVersions[0];
+const lastReleasedCWPlusVersion = cwplusVersions[0];
 
 (module.exports = {
   title: 'CosmWasm Documentation',
   tagline: 'CosmWasm documentation',
   url: 'https://docs.cosmwasm.com',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.svg',
   organizationName: 'CosmWasm',
@@ -40,6 +42,16 @@ const lastReleasedVersion = versions[0];
           docsPluginId: 'tutorials',
         },
         {
+          label: 'dApps',
+          position: 'left',
+          items: [
+            {
+              to: `cw-plus/${lastReleasedCWPlusVersion}/overview`,
+              label: 'cw-plus',
+            },
+          ],
+        },
+        {
           type: 'doc',
           docId: 'overview',
           position: 'left',
@@ -51,6 +63,12 @@ const lastReleasedVersion = versions[0];
           position: 'right',
           dropdownActiveClassDisabled: true,
           docsPluginId: 'docs',
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+          docsPluginId: 'cw-plus',
         },
         {
           href: 'https://cosmwasm.com',
@@ -161,11 +179,11 @@ const lastReleasedVersion = versions[0];
           id: 'docs',
           lastVersion: "current",
           routeBasePath: '/docs',
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebars/sidebars.js'),
           versions: {
             current: {
-              label: "0.14",
-              path: "0.14"
+              label: lastReleasedDocsVersion,
+              path: lastReleasedDocsVersion
             }
           }
         },
@@ -183,12 +201,15 @@ const lastReleasedVersion = versions[0];
         redirects: [
           {
             from: '/',
-            to: `/docs/${lastReleasedVersion}/introduction/intro`,
+            to: `/docs/${lastReleasedDocsVersion}/introduction/intro`,
           },
         ],
         createRedirects: function (existingPath) {
           if (existingPath.includes('/docs')) {
             return [existingPath.replace('/docs', '')]
+          }
+          if (existingPath.includes('/cw-plus')) {
+            return [existingPath.replace('/cw-plus', `/cw-plus/${lastReleasedCWPlusVersion}`)]
           }
         },
       },
@@ -200,7 +221,7 @@ const lastReleasedVersion = versions[0];
         id: 'ecosystem',
         path: 'ecosystem',
         routeBasePath: 'ecosystem',
-        sidebarPath: require.resolve('./sidebarsCommunity.js'),
+        sidebarPath: require.resolve('./sidebars/sidebarsCommunity.js'),
       },
     ],
     [
@@ -209,7 +230,23 @@ const lastReleasedVersion = versions[0];
         id: 'tutorials',
         path: 'tutorials',
         routeBasePath: 'tutorials',
-        sidebarPath: require.resolve('./sidebarsTutorials.js'),
+        sidebarPath: require.resolve('./sidebars/sidebarsTutorials.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cw-plus',
+        path: 'cw-plus',
+        routeBasePath: 'cw-plus',
+        sidebarPath: require.resolve('./sidebars/sidebarsCwPlus.js'),
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: lastReleasedCWPlusVersion,
+            path: lastReleasedCWPlusVersion
+          }
+        }
       },
     ],
   ],
