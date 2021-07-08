@@ -23,7 +23,7 @@ You can use these to explore txs, addresses, validators and contracts feel free 
 servers and we will list it.
 
 You can find more information about other testnets:
-[CosmWasm/testnets](https://github.com/CosmWasm/testnets) and [Testnet section](../testnets/testnets.md).
+[CosmWasm/testnets](https://github.com/CosmWasm/testnets) and [Testnet section](/ecosystem/testnets/testnets).
 
 When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. Altough Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the Shell/Go client.

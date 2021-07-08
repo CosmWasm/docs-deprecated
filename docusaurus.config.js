@@ -205,12 +205,17 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           },
         ],
         createRedirects: function (existingPath) {
-          if (existingPath.includes('/docs')) {
-            return [existingPath.replace('/docs', '')]
+          let paths = []
+          if (existingPath.includes(`/docs/${lastReleasedDocsVersion}`)) {
+            paths.push(existingPath.replace(`/docs/${lastReleasedDocsVersion}`,'/docs'));
+          }
+          if (existingPath.includes(`/docs`)) {
+            paths.push(existingPath.replace('docs',''));
           }
           if (existingPath.includes(`/cw-plus/${lastReleasedCWPlusVersion}`)) {
-            return [existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus')]
+            paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus'));
           }
+          return paths;
         },
       },
     ],

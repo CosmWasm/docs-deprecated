@@ -39,7 +39,7 @@ and to share their contract with others.
   just want to get your hands dirty with working code, you can skip this section for now and come back later when you
   are ready to ponder design.
 
-* [Testnets](../testnets/build-requirements.md) is a good first point if you are searching for a live network to
+* [Testnets](/ecosystem/testnets/build-requirements) is a good first point if you are searching for a live network to
   test and
   hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined
   the testnets**", said no one ever 😉
