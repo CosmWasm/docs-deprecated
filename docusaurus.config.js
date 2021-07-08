@@ -1,6 +1,6 @@
-const versions = require('./versions.json');
+const docsVersions = require('./versions.json');
 
-const lastReleasedVersion = versions[0];
+const lastReleasedDocsVersion = docsVersions[0];
 
 (module.exports = {
   title: 'CosmWasm Documentation',
@@ -44,7 +44,7 @@ const lastReleasedVersion = versions[0];
           position: 'left',
           items: [
             {
-              to: 'dapps/cw-plus/overview',
+              to: 'dapps/cw-plus/0.6.2/overview',
               label: 'cw-plus',
             },
           ],
@@ -199,7 +199,7 @@ const lastReleasedVersion = versions[0];
         redirects: [
           {
             from: '/',
-            to: `/docs/${lastReleasedVersion}/introduction/intro`,
+            to: `/docs/${lastReleasedDocsVersion}/introduction/intro`,
           },
         ],
         createRedirects: function (existingPath) {
@@ -231,10 +231,17 @@ const lastReleasedVersion = versions[0];
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'cw-plus',
-        path: 'dapps/cw-plus',
+        id: 'cwplus',
+        path: 'cw-plus',
         routeBasePath: 'dapps/cw-plus',
         sidebarPath: require.resolve('./sidebars/sidebarsCwPlus.js'),
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "0.6.2",
+            path: "0.6.2"
+          }
+        }
       },
     ],
   ],
