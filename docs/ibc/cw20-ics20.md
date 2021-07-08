@@ -1,6 +1,6 @@
 ---
 title: CW20 ICS20
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # CW20 ICS20

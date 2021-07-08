@@ -26,9 +26,6 @@ protocol and scheme is defined by the contracts. Contract should specify the act
 * [Relayer](relayer.md) section explains the relayer component of IBC and demonstrates setting up one for connecting
   CosmWasm enabled chains.
 
-* [Active IBC Connections section](active-connections.md) has a list of remote testnet network connections that you can
-  use for testing and learning.
-
 * [cw20-ics](cw20-ics20.md) is a smart contract that is first of its kind. This is an IBC Enabled contract that allows
   us to send CW20 tokens from one chain over the standard ICS20 protocol to the bank module of another chain. In short,
   it let's us send our custom CW20 tokens with IBC and use them just like native tokens on other chains.
