@@ -215,6 +215,12 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           if (existingPath.includes(`/cw-plus/${lastReleasedCWPlusVersion}`)) {
             paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus'));
           }
+          if (existingPath === '/docs/0.14/testnets/build-requirements') {
+            paths.push('/ecosystem/testnets/build-requirements');
+          }
+          if (existingPath === '/docs/0.14/testnets/testnets') {
+            paths.push('/ecosystem/testnets/testnets');
+          }
           return paths;
         },
       },
