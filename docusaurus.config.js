@@ -46,7 +46,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           position: 'left',
           items: [
             {
-              to: `dapps/cw-plus/${lastReleasedCWPlusVersion}/overview`,
+              to: `cw-plus/${lastReleasedCWPlusVersion}/overview`,
               label: 'cw-plus',
             },
           ],
@@ -235,7 +235,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
       {
         id: 'cw-plus',
         path: 'cw-plus',
-        routeBasePath: 'dapps/cw-plus',
+        routeBasePath: 'cw-plus',
         sidebarPath: require.resolve('./sidebars/sidebarsCwPlus.js'),
         lastVersion: "current",
         versions: {
