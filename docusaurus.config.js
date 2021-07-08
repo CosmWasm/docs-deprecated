@@ -29,7 +29,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
       items: [
         {
           type: 'doc',
-          docId: 'introduction/intro',
+          docId: 'intro',
           position: 'left',
           label: 'Docs',
           docsPluginId: 'docs',
@@ -201,7 +201,11 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         redirects: [
           {
             from: '/',
-            to: `/docs/${lastReleasedDocsVersion}/introduction/intro`,
+            to: `/docs/${lastReleasedDocsVersion}/`,
+          },
+          {
+            from: `/docs/${lastReleasedDocsVersion}/introduction/intro`,
+            to: `/docs/${lastReleasedDocsVersion}/`,
           },
         ],
         createRedirects: function (existingPath) {

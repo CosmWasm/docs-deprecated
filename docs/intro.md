@@ -1,5 +1,6 @@
 ---
 id: intro
+slug: /
 sidebar_position: 1
 ---
 
@@ -29,12 +30,12 @@ and to share their contract with others.
 
 ## Sections
 
-* [Getting Started](../getting-started/intro.md) dives you into hands-on training. It gently leads you through
+* [Getting Started](getting-started/intro.md) dives you into hands-on training. It gently leads you through
   modifying,
   deploying, and executing a smart contract on a local blockchain. It is the ideal place to go through and get
   acquainted with all the aspects of the system, without too much hard work coding.
 
-* [Architecture](../architecture/multichain.md) explains much of the high-level design and architecture of CosmWasm.
+* [Architecture](architecture/multichain.md) explains much of the high-level design and architecture of CosmWasm.
   Before you start designing systems, it is good to understand the mental model and capabilities of the system. If you
   just want to get your hands dirty with working code, you can skip this section for now and come back later when you
   are ready to ponder design.
@@ -57,7 +58,7 @@ and to share their contract with others.
 
 * [Plus](/cw-plus/general/overview) is for state of art CosmWasm smart contracts.
 
-* [IBC](../ibc/overview.md) is for all the things related to CosmWasm and IBC. Relayers, Active Network Connections,
+* [IBC](ibc/overview.md) is for all the things related to CosmWasm and IBC. Relayers, Active Network Connections,
   IBC
   enabled smart contracts and more.
 
