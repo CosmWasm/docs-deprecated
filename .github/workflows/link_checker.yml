@@ -6,7 +6,7 @@ on:
       - main
   schedule:
     # Run Monday at 12PM
-    - cron: "0 0 12 ? * MON *"
+    - cron: "* * * * 1"
 
 jobs:
   markdown-link-check:
