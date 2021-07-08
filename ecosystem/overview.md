@@ -10,11 +10,7 @@ This section is under construction.
 
 CosmWasm community has been building and growing rapidly.
 
-Here are:
-- CosmWasm Ecosystem
-- Tooling
-- Courses
-- External Videos
+- You can find the live testnet information at [Testnets](./testnets/testnets.md)
 
 ## Ecosystem
 
