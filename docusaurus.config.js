@@ -9,7 +9,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
   tagline: 'CosmWasm documentation',
   url: 'https://docs.cosmwasm.com',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/favicon.svg',
   organizationName: 'CosmWasm',
@@ -207,6 +207,9 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         createRedirects: function (existingPath) {
           if (existingPath.includes('/docs')) {
             return [existingPath.replace('/docs', '')]
+          }
+          if (existingPath.includes('/cw-plus')) {
+            return [existingPath.replace('/cw-plus', `/cw-plus/${lastReleasedCWPlusVersion}`)]
           }
         },
       },
