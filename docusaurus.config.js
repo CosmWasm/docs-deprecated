@@ -206,21 +206,34 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         ],
         createRedirects: function (existingPath) {
           let paths = []
+
+          /*
+           * DOCS REDIRECTIONS
+           */
           if (existingPath.includes(`/docs/${lastReleasedDocsVersion}`)) {
             paths.push(existingPath.replace(`/docs/${lastReleasedDocsVersion}`,'/docs'));
           }
           if (existingPath.includes(`/docs`)) {
             paths.push(existingPath.replace('docs',''));
           }
+
+          /*
+           * CW PLUS REDIRECTIONS
+           */
           if (existingPath.includes(`/cw-plus/${lastReleasedCWPlusVersion}`)) {
             paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus'));
           }
+
+          /*
+           * TESTNET REDIRECTIONS
+           */
           if (existingPath === '/docs/0.14/testnets/build-requirements') {
             paths.push('/ecosystem/testnets/build-requirements');
           }
           if (existingPath === '/docs/0.14/testnets/testnets') {
             paths.push('/ecosystem/testnets/testnets');
           }
+          
           return paths;
         },
       },
