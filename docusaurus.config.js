@@ -214,7 +214,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
             paths.push(existingPath.replace(`/docs/${lastReleasedDocsVersion}`,'/docs'));
           }
           if (existingPath.includes(`/docs`)) {
-            paths.push(existingPath.replace('docs',''));
+            paths.push(existingPath.replace('/docs',''));
           }
 
           /*
@@ -233,7 +233,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           if (existingPath === '/docs/0.14/testnets/testnets') {
             paths.push('/ecosystem/testnets/testnets');
           }
-          
+
           return paths;
         },
       },
