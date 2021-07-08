@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 ---
 
 ## [0.14.0] - 2021-05-03
