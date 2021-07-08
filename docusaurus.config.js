@@ -208,8 +208,8 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           if (existingPath.includes('/docs')) {
             return [existingPath.replace('/docs', '')]
           }
-          if (existingPath.includes('/cw-plus')) {
-            return [existingPath.replace('/cw-plus', `/cw-plus/${lastReleasedCWPlusVersion}`)]
+          if (existingPath.includes(`/cw-plus/${lastReleasedCWPlusVersion}`)) {
+            return [existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus')]
           }
         },
       },
