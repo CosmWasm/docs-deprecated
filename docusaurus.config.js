@@ -1,4 +1,4 @@
-const docsVersions = require('./versions.json');
+chttpsonst docsVersions = require('./versions.json');
 const cwplusVersions = require('./cw_plus_versions.json');
 
 const lastReleasedDocsVersion = docsVersions[0];
@@ -147,7 +147,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         src: 'img/logo_stacked.png',
         href: 'https://cosmwasm.com',
       },
-      copyright: `Copyright © ${new Date().getFullYear()} Confio OÜ`,
+      copyright: `Copyright © ${new Date().getFullYear()} CosmWasm`,
     },
     prism: {
       additionalLanguages: ['rust'],
