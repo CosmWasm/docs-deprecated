@@ -1,4 +1,4 @@
-chttpsonst docsVersions = require('./versions.json');
+const docsVersions = require('./versions.json');
 const cwplusVersions = require('./cw_plus_versions.json');
 
 const lastReleasedDocsVersion = docsVersions[0];
