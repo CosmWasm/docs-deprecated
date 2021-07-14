@@ -20,7 +20,7 @@ these messages are staking messages (covers _Delegate, Undelegate, Redelegate, W
 lines of code to add new message types. Allowance and permission checks works separately, meaning a subkey can have
 allowance to spend tokens, but no permissioned message execution and vice versa.
 
-## Contract demo
+## Contract demo {#contract-demo}
 
 First, initialize node repl:
 
@@ -77,7 +77,7 @@ contract.updateAdmins([address])
 contract.freeze()
 ```
 
-### Allowance
+### Allowance {#allowance}
 
 Let's give some allowance to your friends account, so he can buy a lambo:
 
@@ -118,7 +118,7 @@ contract.decreaseAllowance(randomAddress, {denom: "ucosm", amount: "69999"}, {at
 After these operations he will only have _1 ucosm_ to spend. The prank's best part is `at_height` field. After height
 40000 his allowance will become inactive meaning he can't spend the tokens anymore.
 
-### Permissions
+### Permissions {#permissions}
 
 Initially keys do not have any permission to send permissioned messages and needs to be set key basis:
 
@@ -151,7 +151,7 @@ contract.execute([unmsg])
 
 ```
 
-## Contribution
+## Contribution {#contribution}
 
 This contracts logic can be improved by adding different message types, various permissions for message types, daily
 spendable amount etc. Check

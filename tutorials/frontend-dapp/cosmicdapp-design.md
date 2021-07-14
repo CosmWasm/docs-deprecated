@@ -10,7 +10,7 @@ components will give us layout primitives and reusable React components with int
 
 The example balance checker dApp will make use of some resources from this package, so let's take a look at them.
 
-## Theme
+## Theme {#theme}
 
 We'll use the exported `GlobalStyle` in order to have visual consistency with the rest of the dApps. This React
 component includes a CSS reset; spacing, colors, and fonts CSS Custom Properties; and an override for some Ant Design
@@ -30,29 +30,29 @@ export function GlobalStyle(): JSX.Element {
 }
 ```
 
-## Components
+## Components {#components}
 
-### Layout primitives
+### Layout primitives {#layout-primitives}
 
 This resource offers some primitives based on the [Every Layout](https://every-layout.dev) book.
 
-#### Stack
+#### Stack {#stack}
 
 This React component displays its children as a stack with a configurable gap between them.
 
-#### PageLayout
+#### PageLayout {#pagelayout}
 
 This React component is used as the wrapper for every view. It establishes a max width of page and centers the stacked
 children inside.
 
-### Components with logic
+### Components with logic {#components-with-logic}
 
-#### Login
+#### Login {#login}
 
 The first view of the balance checker application. It offers three options for logging in: localStorage burner wallet,
 ledger wallet, or Keplr wallet.
 
-#### YourAccount
+#### YourAccount {#youraccount}
 
 A useful component that lets the user copy their own address to clipboard, and optionally show their current native
 balance.

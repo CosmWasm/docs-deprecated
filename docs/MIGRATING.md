@@ -8,7 +8,7 @@ This guide explains what is needed to upgrade contracts when migrating over majo
 can also view the
 [complete CHANGELOG](CHANGELOG.md) to understand the differences.
 
-## 0.13 -> 0.14
+## 0.13 -> 0.14 {#013---014}
 
 - The minimum Rust supported version for 0.14 is 1.51.0. Verify your Rust version is >= 1.51.0 with: `rustc --version`
 
@@ -318,7 +318,7 @@ can also view the
   let nsecs = env.block.time.nanos() % 1_000_000_000;
   ```
 
-## 0.12 -> 0.13
+## 0.12 -> 0.13 {#012---013}
 
 - The minimum Rust supported version for 0.13 is 1.47.0.
 
@@ -342,7 +342,7 @@ can also view the
   # ...
   ```
 
-## 0.11 -> 0.12
+## 0.11 -> 0.12 {#011---012}
 
 - Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
 
@@ -408,7 +408,7 @@ can also view the
 
 - If you have any references to `ReadonlyStorage` left after the above, please replace them with `Storage`
 
-## 0.10 -> 0.11
+## 0.10 -> 0.11 {#010---011}
 
 - Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
 
@@ -665,7 +665,7 @@ can also view the
   let query_response = query(&mut deps, mock_env(), QueryMsg::Verifier {}).unwrap();
   ```
 
-## 0.9 -> 0.10
+## 0.9 -> 0.10 {#09---010}
 
 - Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
 
@@ -712,7 +712,7 @@ Contracts:
 - All code that uses `message.sender` or `contract.address` should deal with
   `HumanAddr` not `CanonicalAddr`. Many times this means you can remove a conversion step.
 
-## 0.8 -> 0.9
+## 0.8 -> 0.9 {#08---09}
 
 - Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
 
@@ -762,9 +762,9 @@ Integration tests:
   `(Option<Vec<u8>>, u64)`, where the first component is the element and the second one is the gas cost. Thus in a few
   places `.0` must be added to access the element.
 
-## 0.7.2 -> 0.8
+## 0.7.2 -> 0.8 {#072---08}
 
-### Update wasm code
+### Update wasm code {#update-wasm-code}
 
 `Cargo.toml` dependencies:
 
@@ -847,7 +847,7 @@ Contract Code:
 
 At this point `cargo wasm` should pass.
 
-### Update test code
+### Update test code {#update-test-code}
 
 Both:
 
@@ -895,7 +895,7 @@ Integration Tests:
   - `let res = handle(...).unwrap()` =>
     `let res: HandleResponse = handle(...).unwrap()`
 
-### Update schema code
+### Update schema code {#update-schema-code}
 
 All helper functions have been moved into a new `cosmwasm-schema` package.
 
@@ -906,7 +906,7 @@ All helper functions have been moved into a new `cosmwasm-schema` package.
   all the imports and type names with those you currently have.
 - Regenerate schemas with `cargo schema`
 
-### Polishing
+### Polishing {#polishing}
 
 After so many changes, remember to let the linters do their jobs.
 

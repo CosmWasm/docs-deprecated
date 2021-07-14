@@ -8,7 +8,7 @@ CosmWasm is designed and built from the ground-up to be a multi-chain solution f
 Cosmos ecosystem, it is no surprise that this is designed for networks of blockchains, rather than the traditional
 blockchain silos. But what exactly do we mean by multi-chain?
 
-## Different Chain, Same Contract
+## Different Chain, Same Contract {#different-chain-same-contract}
 
 Since we make little requirements of the host application, it is easy for any Cosmos SDK app to embed the `wasm` module
 and customize the permissioning or fees as they wish. All code is designed to be agnostic to the details of the
@@ -18,7 +18,7 @@ Cosmos ecosystem.
 [Regen Network](https://regen.network) plans to include CosmWasm support, when they launch. And a number of other chains
 are looking into adding this support.
 
-## Inter Blockchain Contracts
+## Inter Blockchain Contracts {#inter-blockchain-contracts}
 
 If you have heard anything about Cosmos, it is most likely
 about [Inter-Blockchain Communication](https://cosmos.network/ibc/). The power
@@ -34,7 +34,7 @@ attacks. As IBC stabilizes, we will be adding first class support for IBC primit
 the [CosmWasm](https://github.com/CosmWasm/cosmwasm) libraries, as well as
 the [Cosmos SDK module](https://github.com/CosmWasm/wasmd/tree/master/x/wasm) that hosts it.
 
-## Easy to Integrate
+## Easy to Integrate {#easy-to-integrate}
 
 Another design goal of CosmWasm was to be more of a library than a framework. This means it has a small surface area of
 required APIs and you can opt-in to most of the code. It is there to make life easy for you, but you can easily build it
@@ -51,7 +51,7 @@ Rust are two of the most popular languages to write blockchains, this opens the 
 unless your chain is running on top of [Tendermint](https://tendermint.com) or potentially another BFT Instant Finality
 Consensus algorithm like [Babble](https://babble.io/), the contracts will not be able to participate with IBC.
 
-## Platform to Build On
+## Platform to Build On {#platform-to-build-on}
 
 CosmWasm doesn't want to lock you to one blockchain, or even one programming language. It is designed to be adaptable to
 many environments, and *connect* blockchains. This makes it a solid platform to build on. Even if one chain doesn't pan

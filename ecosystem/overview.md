@@ -12,23 +12,23 @@ CosmWasm community has been building and growing rapidly.
 
 - You can find the live testnet information at [Testnets](./testnets/testnets.md)
 
-## Ecosystem
+## Ecosystem {#ecosystem}
 
-### Terra Network
+### Terra Network {#terra-network}
 
 website: https://www.terra.money/
 documentation: https://docs.terra.money/
 
-### Secret Network
+### Secret Network {#secret-network}
 
 website: https://scrt.network/
 documentation: https://scrt.network/developers
 
-### Regen Network
+### Regen Network {#regen-network}
 
 website: https://www.regen.network/
 
-### IRIS Network
+### IRIS Network {#iris-network}
 
 website: https://www.irisnet.org/
 documentation: https://www.irisnet.org/docs/

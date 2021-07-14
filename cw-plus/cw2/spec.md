@@ -20,7 +20,7 @@ the `migrate`
 function is called, then the new contract can read that data and see if this is an expected contract we can migrate
 from. And also contain extra version information if we support multiple migrate paths.
 
-### Data structures
+### Data structures {#data-structures}
 
 **Required**
 
@@ -53,7 +53,7 @@ Thus, an serialized example may looks like:
 }
 ```
 
-### Queries
+### Queries {#queries}
 
 Since the state is well defined, we do not need to support any "smart queries". We do provide a helper to construct a "
 raw query" to read the ContractInfo of any cw2-compliant contract.

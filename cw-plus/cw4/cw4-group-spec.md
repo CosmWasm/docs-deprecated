@@ -16,7 +16,7 @@ cross-contract queries)
 can check a given member address and the total weight. Smart queries (designed for client API) can do the same, and also
 query the admin address as well as paginate over all members.
 
-## Init
+## Init {#init}
 
 To create it, you must pass in a list of members, as well as an optional
 `admin`, if you wish it to be mutable.
@@ -40,7 +40,7 @@ defined in
 Note that 0 *is an allowed weight*. This doesn't give any voting rights, but it does define this address is part of the
 group. This could be used in e.g. a KYC whitelist to say they are allowed, but cannot participate in decision-making.
 
-## Messages
+## Messages {#messages}
 
 Basic update messages, queries, and hooks are defined by the
 [cw4 spec](spec.md). Please refer to it for more info.

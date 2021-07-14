@@ -18,7 +18,7 @@ Implements:
 - [ ] Enumerable extension (AllTokens done, but not Tokens -
   requires [#81](https://github.com/CosmWasm/cosmwasm-plus/issues/81))
 
-## Implementation
+## Implementation {#implementation}
 
 The `HandleMsg` and `QueryMsg` implementations follow the [cw721 spec](spec.md) and are described there. Beyond that, we
 make a few additions:
@@ -37,7 +37,7 @@ customize the minting behavior but not other functionality, you could extend thi
 together)
 or just create a custom contract as the owner and use that contract to Mint.
 
-## Importing this contract
+## Importing this contract {#importing-this-contract}
 
 You can also import much of the logic of this contract to build another cw721-compliant contract, such as tradable
 names, crypto kitties, or tokenized real estate.

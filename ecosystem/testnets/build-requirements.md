@@ -15,13 +15,13 @@ might become obsolete. Network details, configuration and informations can be fo
 on [CosmWasm/testnets](https://github.com/CosmWasm/testnets). Please head over to the repo and explore before starting
 setting up a node.
 
-## Simplest
+## Simplest {#simplest}
 
 Use docker image, or build locally: `https://github.com/CosmWasm/wasmd/#dockerized`.
 
-## Bare Metal
+## Bare Metal {#bare-metal}
 
-### Option 1 (preferred - build static binary using docker - Linux only)
+### Option 1 (preferred - build static binary using docker - Linux only) {#option-1-preferred---build-static-binary-using-docker---linux-only}
 
 Constructing a `wasmd` is a tricky process and involves using Alpine Linux as a build environment and recompiling the
 Rust dependencies as static libs. Using Dockerfile is suggested.
@@ -39,7 +39,7 @@ Rust dependencies as static libs. Using Dockerfile is suggested.
 
 5. Use the static binaries on any bare metal Linux box
 
-### Option 2: (dev-style: dynamic binary - works on Linux and OSX)
+### Option 2: (dev-style: dynamic binary - works on Linux and OSX) {#option-2-dev-style-dynamic-binary---works-on-linux-and-osx}
 
 1. `git clone https://github.com/CosmWasm/wasmd.git && cd wasmd`
 2. Checkout to testnets version `git checkout vx.x.x`

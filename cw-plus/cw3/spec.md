@@ -30,14 +30,14 @@ externally):
 The common denominator is that they allow you to propose arbitrary `CosmosMsg` to a contract, and allow a series of
 votes/approvals to determine if it can be executed, as well as a final step to execute any approved proposal once.
 
-## Base
+## Base {#base}
 
 The following interfaces must be implemented for all cw3 contracts. Note that updating the members of the voting
 contract is not contained here (one approach is defined in cw4). Also, how to change the threshold rules (if at all) is
 not standardized. Those are considered admin tasks, and the common API is designed for standard usage, as that is where
 we can standardize the most tooling without limiting more complex governance controls.
 
-### Messages
+### Messages {#messages}
 
 `Propose{title, description, msgs, earliest, latest}` - This accepts
 `Vec<CosmosMsg>` and creates a new proposal. This will return an auto-generated ID in the `Data` field (and the logs)
@@ -70,7 +70,7 @@ this is all reverted and can be tried again later with more gas.
 expired and insufficient votes), then the proposal is marked `Failed`. This is not strictly necessary, as it will only
 act when it is impossible the contract would ever be executed, but can be triggered to provide some better UI.
 
-### Queries
+### Queries {#queries}
 
 `Threshold{}` - This returns information on the rules needed to declare a contract a success. What percentage of the
 votes and how they are tallied.
@@ -88,7 +88,7 @@ pagination. Starts at latest proposal_id and descending. (Often this is what you
 `ListVotes{proposal_id, start_after, limit}` - Returns the same info as `Vote`, but for all votes along with pagination.
 Returns the voters sorted by the voters' address in lexographically ascending order.
 
-## Voter Info
+## Voter Info {#voter-info}
 
 Information on who can vote is contract dependent. But we will work on a common API to display some of this.
 

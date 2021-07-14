@@ -22,7 +22,7 @@ have a basic understanding of Rust and Go, but we will lead you through, so fast
 The [next tutorial, name service](/tutorials/name-service/intro)
 will assume knowledge of these basics. And it will show all the development flow from 0 to production.
 
-## Sections
+## Sections {#sections}
 
 [Installation](installation.md) will show you how to setup the required software tooling for CosmWasm.
 
@@ -36,7 +36,7 @@ to wasm byte code.
 [Next Steps](next-steps.md) is the last part of the tutorial that wraps up and sails you to the next dock, meaning new
 learning resources.
 
-## Video Version
+## Video Version {#video-version}
 
 The coding sections for smart contracts are also available as
 a [series of videos, leading you through the code structure](https://vimeo.com/showcase/6671477).

@@ -46,7 +46,7 @@ only thing that must be hard-coded is the data format to pass to such addresses.
 established (like ERC20, ERC721, ENS, etc), then we can support composability between large classes of contracts, with
 different backing code, but sharing a common API.
 
-## Security Benefits
+## Security Benefits {#security-benefits}
 
 By enforcing **private internal state**, a given contract can guarantee all valid transitions in its internal state.
 This is in contrast to the capabilities model used in Cosmos SDK, where trusted modules are passed a `StoreKey` in their
@@ -63,7 +63,7 @@ in memory in contract A from the first call (eg. deduct a balance), which are no
 use the outdated state a second time (eg. authorize sending a balance twice). By enforcing serialized execution, the
 contract will write all changes to storage before exiting, and have a proper view when the next message is processed.
 
-## Atomic Execution
+## Atomic Execution {#atomic-execution}
 
 One problem with sending messages is atomically committing a state change over two contracts. There are many cases where
 we want to ensure that all returned messages were properly processed before committing our state. There are ideas like "
@@ -84,7 +84,7 @@ While many developers may be more comfortable thinking about directly calling th
 and handling the errors, you can achieve almost all the same cases with such an *optimistic update and return* approach.
 And there is no room for making mistakes in the contract's error handling code.
 
-## Dynamically Linking Host Modules
+## Dynamically Linking Host Modules {#dynamically-linking-host-modules}
 
 The aspects of **locality** and **loose coupling** mean that we don't even need to link to other CosmWasm contracts. We
 can send messages to anything the Dispatcher has an address for. For example, we can return a `SendMsg`, which will be
@@ -92,7 +92,7 @@ processed by the native `x/supply` module in Cosmos SDK, moving native tokens. A
 composability, we can define interfaces to call into core modules (bond and unbond your stake...), and then pass in the
 address to the native module in the contract constructor.
 
-## Inter Blockchain Messaging
+## Inter Blockchain Messaging {#inter-blockchain-messaging}
 
 Since the Actor model doesn't attempt to make synchronous calls to another contract, but just returns a message "to be
 executed", it is a nice match for making cross-chain contract calls using [IBC](https://cosmos.network/ibc). The only
@@ -119,7 +119,7 @@ You can imagine a similar scenario working for cases like moving NFT ownership, 
 on these possibilities and provide tooling to help make proper design once the IBC code in Cosmos SDK is stabilized (and
 included in a release), but the contract design is made with this in mind.
 
-## Credits
+## Credits {#credits}
 
 Much thanks to [Aaron Craelius](https://github.com/aaronc), who came up with this design of using an Actor model to
 avoid reentrancy attacks.

@@ -10,7 +10,7 @@ code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-escr
 This is a sample contract that releases a minimal form of staking derivatives. This is to be used for integration tests
 and as a foundation for other to build more complex logic upon.
 
-## Functionality
+## Functionality {#functionality}
 
 On one side, this acts as a cw20 token, holding a list of balances for multiple addresses, and exposing queries and
 transfers (no allowances and "transfer from" to focus the logic on the staking stuff). However, it has no initial

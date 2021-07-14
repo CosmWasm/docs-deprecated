@@ -18,7 +18,7 @@ In this case, a cw3 contract could *read* an external group contract with no sig
 storage. However, updating that group contract (if allowed), would be an external message and charged the instantiation
 overhead for each contract.
 
-## Messages
+## Messages {#messages}
 
 We define an `InitMsg{admin, members}` to make it easy to set up a group as part of another flow. Implementations should
 work with this setup, but may add extra `Option<T>` fields for non-essential extensions to configure in the `init`
@@ -40,9 +40,9 @@ be a `cw3` contract that uses this group contract as a group. This leads to a bi
 cover how to instantiate that in
 [`cw3-flexible-multisig`](../cw3/cw3-flex-spec.md)
 
-## Queries
+## Queries {#queries}
 
-### Smart
+### Smart {#smart}
 
 `TotalWeight{}` - Returns the total weight of all current members, this is very useful if some conditions are defined on
 a "percentage of members".
@@ -56,7 +56,7 @@ included. Removed members will not.
 
 `Admin{}` - Returns the `admin` address, or `None` if unset.
 
-### Raw
+### Raw {#raw}
 
 In addition to the above "SmartQueries", which make up the public API, we define two raw queries that are designed for
 more efficiency in contract-contract calls. These use keys exported by `cw4`
@@ -66,7 +66,7 @@ more efficiency in contract-contract calls. These use keys exported by `cw4`
 `members_key()` - takes a `CanonicalAddr` and returns a key that can be used for raw query (`"\x00\x07members" || addr`)
 . This will return empty bytes if the member is not inside the group, otherwise a JSON-encoded `u64`
 
-## Hooks
+## Hooks {#hooks}
 
 One special feature of the `cw4` contracts is they allow the admin to register multiple hooks. These are special
 contracts that need to react to changes in the group membership, and this allows them stay in sync. Again, note this is

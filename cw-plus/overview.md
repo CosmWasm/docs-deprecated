@@ -9,7 +9,7 @@ sidebar_position: 1
 Plus contracts are collection of production-quality CosmWasm contracts collected
 at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).
 
-## Contents
+## Contents {#contents}
 
 - [cw1](cw1/intro.md) is a specification for proxy contracts.
 - [cw2](cw2/spec.md) is a specification for migration
@@ -18,6 +18,6 @@ at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).
 - [cw4](cw4/spec.md) is a specification for group member contracts.
 - [cw721](cw721/spec.md) is a specification for non fungible tokens.
 
-## Contribution
+## Contribution {#contribution}
 
 All contributions are welcome. You can open PRs at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).

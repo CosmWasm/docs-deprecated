@@ -14,7 +14,7 @@ from one contract to another.
 
 **Note** This has been updated for CosmWasm 0.8 with full support for cross-contract queries.
 
-## Raw Queries
+## Raw Queries {#raw-queries}
 
 The simplest query to implement is just raw read access to the key-value store. If the caller (either external client,
 or other contract) passes in the raw binary key that is used in the contract's storage, we can easily return the raw
@@ -25,7 +25,7 @@ This is implemented inside the `wasmd` runtime and circumvents the VM. As a cons
 CosmWasm contract and all contract state is visible. Such a `query_raw` function is exposed to all callers (external and
 internal).
 
-## Custom Queries
+## Custom Queries {#custom-queries}
 
 There are many cases where it is undesirable to couple tightly to *implementation*, and we would rather depend on an *
 interface*. For example, we will define a standard for "ERC20" `HandleMsg` for calling the contract and we would want to
@@ -42,7 +42,7 @@ Note that executing a contract may consume an unbounded amount gas. Whereas `que
 small, mostly fixed cost, we need to enforce a gas limit on these queries. This is done differently for external and
 internal calls and discussed below.
 
-## External Queries
+## External Queries {#external-queries}
 
 External queries are the typical way all web and cli clients work with the blockchain. They call Tendermint RPC, which
 calls into `abci_query` in the Cosmos SDK, which delegates down to the module to handle it. As far as I know, there is
@@ -62,7 +62,7 @@ specially-configured nodes.
 Note that the `abci_query` call never reads the current "in-progress" state of the modules, but uses a read-only
 snapshot of the state after the last committed block.
 
-## Internal Queries
+## Internal Queries {#internal-queries}
 
 While many interactions between contracts can easily be modelled by sending messages, there are some cases where we
 would like to synchronously query other modules, without altering their state. For example, if I want to resolve a name

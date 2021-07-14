@@ -6,19 +6,19 @@ sidebar_position: 2
 
 In this section, we will gear up your workhorse for developing, deploying and, enjoying smart contracts on Cosmos SDK.
 
-## Go
+## Go {#go}
 
 You can setup golang following [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest
 versions of `wasmd`
 require go version `v1.15`.
 
-## Rust
+## Rust {#rust}
 
 Assuming you have never worked with rust, you will first need to install some tooling. The standard approach is to
 use `rustup` to maintain dependencies and handle updating multiple versions of
 `cargo` and `rustc`, which you will be using.
 
-### Installing Rust in Linux and Mac
+### Installing Rust in Linux and Mac {#installing-rust-in-linux-and-mac}
 
 First, [install rustup](https://rustup.rs/). Once installed, make sure you have the wasm32 target:
 
@@ -32,7 +32,7 @@ rustup target list --installed
 rustup target add wasm32-unknown-unknown
 ```
 
-### Installing Rust in Windows 10
+### Installing Rust in Windows 10 {#installing-rust-in-windows-10}
 
 First, download and execute `rustup-init.exe` from [rustup.rs](https://rustup.rs/)
 or [rust-lang.org](https://www.rust-lang.org/tools/install).
@@ -70,7 +70,7 @@ bleeding edge and not only is it a version or two ahead (for testing), but it al
 APIs may change. For compiling `wasm`, you will want to use `stable`. We use `nightly` to compile the runtime
 for `wasmd`, which needs it for the singlepass compiler with gas metering and more.
 
-## wasmd
+## wasmd {#wasmd}
 
 `wasmd` is the backbone of CosmWasm platform. It is the implementation of a Cosmoszone with wasm smart contracts
 enabled.
@@ -98,7 +98,7 @@ wasmd version
 for building Go code from source.
 :::
 
-## Using Testnets
+## Using Testnets {#using-testnets}
 
 Testing network [Oysternet](https://github.com/CosmWasm/testnets/tree/master/oysternet-1) is launched to save you of the
 hassle of running a local network and speed up your development.
@@ -118,7 +118,7 @@ git checkout v0.16.0
 make install
 ```
 
-## Further Information on the Cosmos SDK
+## Further Information on the Cosmos SDK {#further-information-on-the-cosmos-sdk}
 
 These represent an instance of a blockchain that utilizes all of the stable features of
 the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk). As such, `wasmd` have all the same features (plus WASM smart
@@ -128,7 +128,7 @@ started with the Cosmos SDK in general, take a look at the series of
 [Tutorials](https://tutorials.cosmos.network/) that show how to build custom modules for application-specific
 blockchains.
 
-## Setting up your IDE
+## Setting up your IDE {#setting-up-your-ide}
 
 We will need a good editor to guide us through the experience. We highly recommend plugins that help you learn syntax,
 especially when just starting rust. There are two free editor environments we recommend, choose the one that is more

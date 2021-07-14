@@ -11,7 +11,7 @@ You must read [cw20 tutorial](cw20/cw20-base-tutorial.md) first. This section bu
 
 You got your hands dirty with Node REPL. Now let's dig in a bit deeper of some advanced functions you can use.
 
-## Interactive Discovery
+## Interactive Discovery {#interactive-discovery}
 
 So far you have been cut-and-pasting commands in the tutorials when using node repl. But what else can you do with this
 contract? Luckily Javascript has some nice introspection. And, we added some extra bonuses there. Just type
@@ -77,7 +77,7 @@ mine.allowance(client.senderAddress, other)
 '5000'
 ```
 
-## Multiple Wallets
+## Multiple Wallets {#multiple-wallets}
 
 You know how we keep starting every session with:
 

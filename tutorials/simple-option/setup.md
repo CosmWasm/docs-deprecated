@@ -6,16 +6,16 @@ sidebar_position: 2
 
 <iframe src="https://player.vimeo.com/video/457712351" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-## Coding Environment
+## Coding Environment {#coding-environment}
 
-### Rust and IDE
+### Rust and IDE {#rust-and-ide}
 
 This section is a summary
 of [Getting Started / Installation and Setting Up Environment](https://docs.cosmwasm.com/0.14/getting-started/installation).
 You can go to the doc,
 setup rust and preferred IDE then and come back here. We recommend using Intellij IDEA.
 
-## Project Starter
+## Project Starter {#project-starter}
 
 Project starter template repo is there for spinning new smart contract quickly. With one command, project layout, boiler
 plate, git, and even Circle CI for auto testing/formatting/linting will be set up. Cool huh. Here is the

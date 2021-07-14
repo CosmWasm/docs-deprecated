@@ -9,7 +9,7 @@ In this section, we will download a sample contract, compile to it to wasm binar
 Please first review the [client setup instructions](setting-env.md), and configure and verify a client, either Go CLI or
 Node.js console.
 
-## Compiling and Testing Contract
+## Compiling and Testing Contract {#compiling-and-testing-contract}
 
 Let's download the repo in which we collect
 [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) and try out an existing simple escrow contract that
@@ -42,7 +42,7 @@ This produces a file about 174kB. We use this and another optimizer in the next 
 to produce the final product uploaded to the blockchain. You don't need to worry about running this yourself (unless you
 are curious), but you should have an idea of the final size of your contract this way.
 
-## Unit Tests
+## Unit Tests {#unit-tests}
 
 Let's try running the unit tests:
 
@@ -68,7 +68,7 @@ tests (which test native rust code, not the compiled wasm). Also, if you want to
 and `cargo unit-test` come from, they are just aliases defined in
 `.cargo/config`. Take a look there to understand the cargo flags more.
 
-## Optimized Compilation
+## Optimized Compilation {#optimized-compilation}
 
 Smart contract binary size must be as small as possible for reduced gas cost. This will not only cost less on
 deployment, also for every single interaction. Simply, **optimize production code**

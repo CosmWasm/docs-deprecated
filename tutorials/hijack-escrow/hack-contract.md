@@ -17,9 +17,9 @@ cd contracts/escrow
 
 Note: This guide is compatible with `CosmWasm v0.14.x` and `wasmd v0.16.x`.
 
-## A Walk-Through of the Escrow Contract
+## A Walk-Through of the Escrow Contract {#a-walk-through-of-the-escrow-contract}
 
-### Data Structures
+### Data Structures {#data-structures}
 
 There are three key data structures used in the contract - for encoding the instantiation message, for encoding the
 execution messages, and for storing the contract data. We define all messages in `src/msg.rs`. The `State` structs are
@@ -100,13 +100,13 @@ like: `{"approve": {"quantity": ...}}` instead of `{"Approve": {"quantity": ...}
 with `Serialize` and `Deserialize`. You see how compile-time codegen (via derive and macros) is a corner-stone of rust,
 and provides much of the functionality provided by runtime reflection in other, more dynamic, languages.
 
-### JSON Format
+### JSON Format {#json-format}
 
 When a `ExecuteMsg` instance is encoded, it will end up looking
 like `{"approve": {"quantity": [{"amount": "10", "denom": "ATOM"}]}}` or `{"refund": {}}`. This is also the format we
 should use client side, when submitting a message body to later be processed by `execute`.
 
-### Instantiation Logic
+### Instantiation Logic {#instantiation-logic}
 
 The `instantiate` function will be called exactly once, before the contract is executed. It is a "privileged" function
 in that it can set configuration that can never be modified by any other method call. If you look at this example, the
@@ -152,7 +152,7 @@ pub fn config(storage: &mut dyn Storage) -> Singleton<State> {
 }
 ```
 
-### Execution Logic
+### Execution Logic {#execution-logic}
 
 Just as `init` is the entry point for instantiating a new contract, `handle` is the entry point for executing the code.
 Since `handle` takes an `enum` with multiple `variants`, we can't just jump into the business logic, but first start
@@ -254,7 +254,7 @@ from Cosmos SDK. This is validated data and can be trusted to compare any messag
 to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/v0.10.0/packages/std/src/types.rs#L7-L41)
 for references to all the available types in the environment.
 
-## Adding a New Message
+## Adding a New Message {#adding-a-new-message}
 
 In this example, we will modify this contract to add some more functionality. In particular, let's make a backdoor to
 the contract. In the form of a `ExecuteMsg::Steal` variant that must be signed by some hard coded `THIEF` address and
@@ -266,7 +266,7 @@ compile it and compare the hash to the hash stored on the blockchain, to verify 
 code. We will be adding tooling to automate this step and make it simpler in the coming months, but for now, this
 example serves to demonstrate why it is important.
 
-### Adding the Handler
+### Adding the Handler {#adding-the-handler}
 
 Open up `src/msg.rs` in your [editor of choice](./intro#setting-up-your-ide) and let's add another variant to
 the `ExecuteMsg` enum, called `Steal`. Remember, it must have a destination address:
@@ -285,7 +285,7 @@ Once you are done, check that it compiles:
 cargo wasm
 ```
 
-### Writing a Test
+### Writing a Test {#writing-a-test}
 
 We have a number of tests inside of `contracts.rs` that serve as templates, so let's make use of them. You can copy
 the `handle_refund` test and rename it to `handle_steal`. Remember to include the `#[test]` declaration on top. Now, go

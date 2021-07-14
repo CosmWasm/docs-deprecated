@@ -21,7 +21,7 @@ IBC** protocol which differs from
 coined and proposed by [Agoric](https://medium.com/agoric/the-road-to-dynamic-ibc-4a43bc964bca), and the communication
 protocol and scheme is defined by the contracts. Contract should specify the actions taken during an IBC handshake.
 
-## Index
+## Index {#index}
 
 * [Relayer](relayer.md) section explains the relayer component of IBC and demonstrates setting up one for connecting
   CosmWasm enabled chains.

@@ -17,7 +17,7 @@ This is usable as is, and probably the most secure implementation of cw3
 rules for the same group with different permissions, and even allow token-weighted voting. All through the same client
 interface.
 
-## Init
+## Init {#init}
 
 To create the multisig, you must pass in a set of `HumanAddr` with a weight for each one, as well as a required weight
 to pass a proposal. To create a 2 of 3 multisig, pass 3 voters with weight 1 and a `required_weight` of 2.
@@ -25,7 +25,7 @@ to pass a proposal. To create a 2 of 3 multisig, pass 3 voters with weight 1 and
 Note that 0 *is an allowed weight*. This doesn't give any voting rights, but it does allow that key to submit proposals
 that can later be approved by the voters. Any address not in the voter set cannot submit a proposal.
 
-## Handle Process
+## Handle Process {#handle-process}
 
 First, a registered voter must submit a proposal. This also includes the first "Yes" vote on the proposal by the
 proposer. The proposer can set an expiration time for the voting process, or it defaults to the limit provided when

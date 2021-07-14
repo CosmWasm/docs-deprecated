@@ -22,7 +22,7 @@ This is how testing in Rust
 begins. [Code reference](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs). You
 can keep test and code in the same or separate files.
 
-## Test Initialization
+## Test Initialization {#test-initialization}
 
 :::info
  Timecode [https://vimeo.com/457705991#t=3m34s](https://vimeo.com/457705991#t=3m34s)
@@ -58,7 +58,7 @@ fn proper_initialization() {
 Good we now have a test environment initializer. This is a very simple one, you can pass in variables to the function
 and do different tweaks. Check cosmwasm-plus for more.
 
-### Mock Dependencies, Environment, and Message Info
+### Mock Dependencies, Environment, and Message Info {#mock-dependencies-environment-and-message-info}
 
 There are two three mocking tools we should improve on:
 
@@ -115,13 +115,13 @@ pub fn mock_info<U: Into<HumanAddr>>(sender: U, sent: &[Coin]) -> MessageInfo {
 
 `mock_info` is for mocking transaction environment.
 
-## Test Handler
+## Test Handler {#test-handler}
 
 :::info
  Timecode [https://vimeo.com/457705991#t=7m34s](https://vimeo.com/457705991#t=7m34s)
 :::
 
-### Test Transfer Handler
+### Test Transfer Handler {#test-transfer-handler}
 
 ```rust
 #[test]
@@ -161,7 +161,7 @@ fn transfer() {
 }
 ```
 
-### Test Execute
+### Test Execute {#test-execute}
 
 :::info
  Timecode [https://vimeo.com/457705991#t=14m21s](https://vimeo.com/457705991#t=14m21s)

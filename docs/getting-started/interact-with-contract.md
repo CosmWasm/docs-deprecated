@@ -7,7 +7,7 @@ sidebar_position: 5
 We have the binary ready. Now it is time to see some wasm action. You can use [Go CLI](#go-cli) or
 [Node Console](#node-console) as you wish.
 
-## Go CLI
+## Go CLI {#go-cli}
 
 We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to
 the blockchain. Afterwards, you can download the bytecode to verify it is proper:
@@ -31,7 +31,7 @@ wasmd query wasm code $CODE_ID $NODE download.wasm
 diff artifacts/cw_escrow.wasm download.wasm
 ```
 
-### Instantiating the Contract
+### Instantiating the Contract {#instantiating-the-contract}
 
 We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to
 control payout and upon release, the funds go to bob.
@@ -96,7 +96,7 @@ wasmd query bank balances $(wasmd keys show bob -a) $NODE
 wasmd query bank balances $CONTRACT $NODE
 ```
 
-## Node Console
+## Node Console {#node-console}
 
 :::caution
 Node console needs to be updated. The code below is obsolete
@@ -150,7 +150,7 @@ fredClient.getAccount(bobAddr);
 process.cwd()
 ```
 
-### Uploading with JS
+### Uploading with JS {#uploading-with-js}
 
 Now, we go back to the Node console and upload the contract and instantiate it:
 
@@ -183,7 +183,7 @@ JSON.parse(fromUtf8(raw))
 // note the addresses are stored in base64 internally, not bech32, but the data is there... this is why we often implement smart queries on real contracts
 ```
 
-### Executing Contract with JS
+### Executing Contract with JS {#executing-contract-with-js}
 
 Once we have properly configured the contract, let's show how to use it, both the proper "approve"
 command:

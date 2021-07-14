@@ -14,7 +14,7 @@ integrate it into their product. Particularly, it is aimed at Go developers with
 as Rust developers looking for a blockchain platform.
 :::
 
-## How to use CosmWasm
+## How to use CosmWasm {#how-to-use-cosmwasm}
 
 CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a
 blockchain using the Cosmos SDK can quickly and easily add CosmWasm smart contracting support to their chain, without
@@ -28,7 +28,7 @@ or [set up a local "dev net"](/getting-started/setting-env.md#run-local-node-opt
 soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo
 and to share their contract with others.
 
-## Sections
+## Sections {#sections}
 
 * [Getting Started](getting-started/intro.md) dives you into hands-on training. It gently leads you through
   modifying,
@@ -62,7 +62,7 @@ and to share their contract with others.
   IBC
   enabled smart contracts and more.
 
-## Further Studies
+## Further Studies {#further-studies}
 
 you can dig into our code and start writing your own contracts:
 
