@@ -13,7 +13,7 @@ In this section you will learn all the knowledge required to experience smart co
 in smart contract development, digest the [Getting Started](https://docs.cosmwasm.com/0.14/getting-started/intro)
 documentation.
 
-## Wasmd Authorization Settings
+## Wasmd Authorization Settings {#wasmd-authorization-settings}
 
 CosmWasm provides on-chain smart contract deployment authorization mechanisms that can be configured many ways:
 
@@ -22,7 +22,7 @@ CosmWasm provides on-chain smart contract deployment authorization mechanisms th
 - By on-chain governance. Deployment of a contract is determined by governance votes.
 - By owner, contract by contract basis.
 
-### Enable Governance Proposals at Compile Time
+### Enable Governance Proposals at Compile Time {#enable-governance-proposals-at-compile-time}
 
 As gov proposals bypass the existing authorization policy they are disabled and require to be enabled at compile time.
 
@@ -34,7 +34,7 @@ As gov proposals bypass the existing authorization policy they are disabled and 
 If you are using `gaiaflex` binary executable you don't need to build using flags above since it is already included in
 the binary build.
 
-### Init Parameters Via Genesis
+### Init Parameters Via Genesis {#init-parameters-via-genesis}
 
 Initial authorization configuration is in genesis file:
 
@@ -51,7 +51,7 @@ Initial authorization configuration is in genesis file:
 
 These configurations in gaiaflex testnet means only governance can upload and init smart contracts.
 
-### Available configurations
+### Available configurations {#available-configurations}
 
 - `code_upload_access` - who can upload a wasm binary: `Nobody`, `Everybody`, `OnlyAddress`. Needs to be defined in the
   genesis. can be changed later by governance votes.
@@ -60,7 +60,7 @@ These configurations in gaiaflex testnet means only governance can upload and in
 
 CosmWasm extends Cosmos SDK governance module to enable deployment of smart contracts after proposals.
 
-## Get Sample cw-subkeys Contract
+## Get Sample cw-subkeys Contract {#get-sample-cw-subkeys-contract}
 
 There are two options to get the sample contract:
 
@@ -69,7 +69,7 @@ There are two options to get the sample contract:
 
 2. Download [pre-compiled binary](https://github.com/CosmWasm/cosmwasm-plus/releases/download/v0.1.1/cw20_base.wasm).
 
-## Submit Proposal
+## Submit Proposal {#submit-proposal}
 
 Deployment command is down below:
 
@@ -98,7 +98,7 @@ the `instantiate-only-address` flag.
 If either of these flags are set, the voting committee should decide if that is acceptable for the given contract.
 Instantiate-everybody might make sense for a multisig (everyone makes their own), but not for creating a new token.
 
-## Vote
+## Vote {#vote}
 
 After the proposal creation, it needs to be approved by governance voting.
 
@@ -106,7 +106,7 @@ After the proposal creation, it needs to be approved by governance voting.
 wasmcli tx gov vote [proposal-id] yes --from account
 ```
 
-## Instantiate
+## Instantiate {#instantiate}
 
 After the proposal passes the code will be deployed. Now you can instantiate the contract.
 
@@ -118,7 +118,7 @@ wasmcli tx wasm instantiate [code_id] “$INIT” \
  --from account
 ```
 
-## Interact
+## Interact {#interact}
 
 If you have admin access to the contract you can add or remove admins by running the command:
 

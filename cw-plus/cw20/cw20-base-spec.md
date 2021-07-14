@@ -14,7 +14,7 @@ Implements:
 - [x] Mintable extension
 - [x] Allowances extension
 
-## Importing this contract
+## Importing this contract {#importing-this-contract}
 
 You can also import much of the logic of this contract to build another ERC20-contract, such as a bonding curve,
 overriding or extending what you need.

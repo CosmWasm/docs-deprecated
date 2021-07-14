@@ -8,7 +8,7 @@ _**Here we present yout the CosmWasm hall of fame! Kudos the contributors for th
 projects!**_
 Let's give them the visibility and fame they deserve:
 
-## NFT Marketplace by BlockScape
+## NFT Marketplace by BlockScape {#nft-marketplace-by-blockscape}
 
 Article: [https://devpost.com/software/nft-marketplace](https://devpost.com/software/nft-marketplace)
 
@@ -29,7 +29,7 @@ Demo: [https://hackatom.blockscape.network/home](https://hackatom.blockscape.net
 
 Repo: [https://github.com/BlockscapeNetwork/hackatom_v](https://github.com/BlockscapeNetwork/hackatom_v)
 
-## Clawback Account
+## Clawback Account {#clawback-account}
 
 Article: [https://devpost.com/software/clawback-account-in-cosmwasm](https://devpost.com/software/clawback-account-in-cosmwasm)
 
@@ -47,7 +47,7 @@ Presentation: [https://docs.google.com/presentation/d/13aEcVFhjQFKo9bGjHe0V9HiHn
 
 Repo: [https://github.com/tomtau/hackatom](https://docs.google.com/presentation/d/13aEcVFhjQFKo9bGjHe0V9HiHnqbM7eGSHbDB27Psa24/edit?usp=sharing)
 
-## Random Beacon
+## Random Beacon {#random-beacon}
 
 Article: [https://medium.com/confio/when-your-blockchain-needs-to-roll-the-dice-ed9da121f590](https://medium.com/confio/when-your-blockchain-needs-to-roll-the-dice-ed9da121f590)
 
@@ -59,7 +59,7 @@ Using cross-contract queries, other contracts can then read those random values 
 
 Repo: [https://github.com/confio/rand](https://github.com/confio/rand)
 
-## Sophon
+## Sophon {#sophon}
 
 Article: [https://devpost.com/software/sophon](https://devpost.com/software/sophon)
 

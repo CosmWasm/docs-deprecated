@@ -22,7 +22,7 @@ In addition to the dynamic voting set, the main difference with the native Cosmo
 the signatures on chain, with visible proposals (like `x/gov` in the Cosmos SDK), rather than requiring signers to share
 signatures off chain.
 
-## Init
+## Init {#init}
 
 The first step to create such a multisig is to instantiate a cw4 contract with the desired member set. For now, this
 only is supported by
@@ -43,7 +43,7 @@ to script such a self-deploying contract on-chain). (TODO: document better).
 When creating the multisig, you must set the required weight to pass a vote as well as the max/default voting period. (
 TODO: allow more threshold types)
 
-## Handle Process
+## Handle Process {#handle-process}
 
 First, a registered voter must submit a proposal. This also includes the first "Yes" vote on the proposal by the
 proposer. The proposer can set an expiration time for the voting process, or it defaults to the limit provided when

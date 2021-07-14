@@ -8,7 +8,7 @@ sidebar_position: 3
 
 This sections contains solutions to previous section's questions.
 
-## ExecuteMsg
+## ExecuteMsg {#executemsg}
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -25,7 +25,7 @@ pub enum ExecuteMsg {
 }
 ```
 
-## Adding Handler
+## Adding Handler {#adding-handler}
 
 Add a global constant:
 
@@ -64,7 +64,7 @@ fn try_steal(
 }
 ```
 
-## Test Steal
+## Test Steal {#test-steal}
 
 ```rust
 #[test]

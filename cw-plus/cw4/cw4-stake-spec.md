@@ -24,7 +24,7 @@ frozen tokens can neither be used for voting, nor claimed by the original owner.
 tokens back. This liquidity loss is the "skin in the game"
 provided by staking to this contract.
 
-## Init
+## Init {#init}
 
 **TODO**
 
@@ -54,7 +54,7 @@ the total sent is less than
 `min_bond`, the stake will remain, but they will not be counted as a member. If `min_bond` is higher
 than `tokens_per_weight`, you cannot have any member with 0 weight.
 
-## Messages
+## Messages {#messages}
 
 Most messages and queries are defined by the
 [cw4 spec](spec.md). Please refer to it for more info.

@@ -23,7 +23,7 @@ tools and not loose your private keys.
 You must have Node 10+ installed locally to run it. It has been tested on Ubuntu, and may not work properly on Windows (
 we assume a HOME environmental variable). PRs welcome.
 
-## Connecting to the chain
+## Connecting to the chain {#connecting-to-the-chain}
 
 :::caution
 CosmJs helpers needs refactoring thus do not work now. It will be fixed in future, but you can see a
@@ -74,7 +74,7 @@ fees. When it returns, you should see something like this:
 }
 ```
 
-## Reloading your Wallet
+## Reloading your Wallet {#reloading-your-wallet}
 
 You can keep typing in the shell, or close it and run some sections later. Always start off with:
 
@@ -106,7 +106,7 @@ Also, try this with a invalid password and see how it fails.
 Now that you feel a bit more secure about your keys (and ability to load them later), let's get into working with some
 contracts.
 
-## Sending cw20 Tokens
+## Sending cw20 Tokens {#sending-cw20-tokens}
 
 Now that you have set up your client, let's get going and try out the
 [`cw20-base`](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-base)
@@ -116,11 +116,11 @@ token contract, which implements the
 We will show how to upload the compiled wasm code, instantiate your own contract (possibly reusing code), and then mint
 and transfer tokens on that contract.
 
-## Upload and Instantiate a Contract
+## Upload and Instantiate a Contract {#upload-and-instantiate-a-contract}
 
 I will walk you though how to set up an example cw20 contract on Heldernet.
 
-### Example: STAR
+### Example: STAR {#example-star}
 
 The first contract I uploaded was STAR tokens, or "Golden Stars" to be distribute to the
 [first 3 validators](https://block-explorer.oysternet.cosmwasm.com/validators) on the network.
@@ -166,7 +166,7 @@ console.log(await contract.balance());
 // 0
 ```
 
-### Try this at home: MINE
+### Try this at home: MINE {#try-this-at-home-mine}
 
 Now that we have that uploaded, we can easily make a second contract. This one, please do run through and customize the
 field names and token amounts before entering them.
@@ -208,7 +208,7 @@ mine.minter()
 
 Look, you're rich now! Time to share the wealth.
 
-## Using a contract
+## Using a contract {#using-a-contract}
 
 In this section, we will show you how to use your newly constructed token. You can keep typing along in the same REPL
 that you used to create the `MINE`

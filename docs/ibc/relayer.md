@@ -9,7 +9,7 @@ Interchain connections require external processes called [relayer](https://githu
 com/cosmos/ics/tree/master/spec/ics-018-relayer-algorithms). You can setup and run your own, or just use existing
 connections.
 
-## Relayer Implementations
+## Relayer Implementations {#relayer-implementations}
 
 - [confio/ts-relayer](https://github.com/confio/ts-relayer) TypeScript implementation of IBC Relayer. Customizable and
   Reliable. Project state: **ALPHA**
@@ -19,7 +19,7 @@ connections.
 - [informalsystems/ibc-rs](https://github.com/informalsystems/ibc-rs): Rust implementation of IBC. Project state:
   **ALPHA**
 
-## Setting Up a Relayer Process
+## Setting Up a Relayer Process {#setting-up-a-relayer-process}
 
 **Under Development**
 

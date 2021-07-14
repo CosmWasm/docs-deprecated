@@ -54,7 +54,7 @@ All good.
 bindings. Wraps smart contract *(handle, init, query)* functions around rust functions. If you are not doing advanced
 wasm tweaking, don't touch it.
 
-## Messages
+## Messages {#messages}
 
 :::info
  Timecode [https://vimeo.com/457702442#t=1m46s](https://vimeo.com/457702442#t=1m46s)
@@ -63,7 +63,7 @@ wasm tweaking, don't touch it.
 Development begins in [src/msg.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs)
 which contains the input data structures of the smart contract.
 
-### InitMsg
+### InitMsg {#initmsg}
 
 We will begin with [`InitMsg`](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs). This
 struct has the initial values that initializes smart contract from the code and feeds in the data required for logic
@@ -89,7 +89,7 @@ using macros. More read [Rust docs / Derive](https://doc.rust-lang.org/stable/ru
 * _counter_offer_ is [strike price](https://www.investopedia.com/terms/s/strikeprice.asp).
   :::
 
-### HandleMsg
+### HandleMsg {#handlemsg}
 
 Contract execution is branched using `HandleMsg` enum. Each field defines a message and content of that message.
 
@@ -116,7 +116,7 @@ as chain-prefix in Bech32, e.g. cosmos1h57760w793q6vh06jsppnqdkc4ejcuyrrjxnke
 For more details: [Names and Addresses](https://docs.cosmwasm.com/0.14/architecture/addresses)
 :::
 
-### QueryMsg
+### QueryMsg {#querymsg}
 
 Smart contract state querying is branched using `QueryMsg` enum. We will implement a smart contract `Config` query
 later.
@@ -129,7 +129,7 @@ pub enum QueryMsg {
 }
 ```
 
-## State
+## State {#state}
 
 :::info
  Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
@@ -169,7 +169,7 @@ pub fn config_read(storage: &dyn Storage) -> ReadonlySingleton<State> {
 
 ```
 
-## Contract Handlers
+## Contract Handlers {#contract-handlers}
 
 :::info
  Timecode [https://vimeo.com/457702442#t=11m12s](https://vimeo.com/457702442#t=11m12s)
@@ -178,7 +178,7 @@ pub fn config_read(storage: &dyn Storage) -> ReadonlySingleton<State> {
 Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind them together
 in [contract.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs).
 
-### Init
+### Init {#init}
 
 The init function will be called exactly once, before the contract is executed. It is a "privileged" function in that it
 can set configuration that can never be modified by any other method call. The first line parses the input from raw
@@ -230,7 +230,7 @@ no explanation needed.
 `Result<T, ContractError>` is a type that represents either success ([`Ok`]) or failure ([`Err`]). If the execution is
 successful returns `T` type otherwise returns `ContractError`. Useful.
 
-### Handle
+### Handle {#handle}
 
 :::info
  Timecode [https://vimeo.com/457702442#t=15m55s](https://vimeo.com/457702442#t=15m55s)
@@ -254,7 +254,7 @@ pub fn handle(
 
 ```
 
-#### Transfer
+#### Transfer {#transfer}
 
 ```rust
 pub fn handle_transfer(
@@ -280,7 +280,7 @@ pub fn handle_transfer(
 }
 ```
 
-#### Execute
+#### Execute {#execute}
 
 You will see `handle_execute` in plus and example smart contracts, but actually it is just a naming, nothing special.
 Most of the function is same with `transfer`. Just two new things: message fund check and sdk messages in return
@@ -336,7 +336,7 @@ pub fn handle_execute(
 }
 ```
 
-### Query
+### Query {#query}
 
 This contracts query method is very simple, only configuration query. For more complex queries
 check [cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus/) contracts. If you are starting to learn from zero, now
@@ -355,7 +355,7 @@ fn query_config(deps: Deps) -> StdResult<ConfigResponse> {
 }
 ```
 
-### Build
+### Build {#build}
 
 To simply build the code and see if it works:
 
@@ -363,7 +363,7 @@ To simply build the code and see if it works:
 cargo build
 ```
 
-### Tooling
+### Tooling {#tooling}
 
 It is good to keep the same coding style across smart contracts for readability and lint it for high code quality:
 
@@ -383,7 +383,7 @@ always good to run linter on the code.
 cargo clippy -- -D warnings
 ```
 
-### Compile
+### Compile {#compile}
 
 This section compiles key commands from [Compiling Contract](https://docs.cosmwasm.com/0.14/getting-started/compile-contract) doc.
 For more
@@ -412,7 +412,7 @@ docker run --rm -v "$(pwd)":/code \
 
 You want to use the command above before deploying to the chain.
 
-### Schema
+### Schema {#schema}
 
 We can also generate JSON Schemas that serve as a guide for anyone trying to use the contract. This is mainly for
 documentation purposes, but if you click on "Open TypeScript definitions" in the code explorer, you can see how we use

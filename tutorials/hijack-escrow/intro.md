@@ -11,7 +11,7 @@ CosmWasm smart contracts: setup, compilation, development, and interacting. We w
 the escrow contract in a way that enables a thief to hijack the funds saved in the contract. Before starting, make sure
 you read and followed the steps in [getting started](https://docs.cosmwasm.com/0.14/getting-started/intro).
 
-## Setting up your IDE
+## Setting up your IDE {#setting-up-your-ide}
 
 Now that you can compile and test the code, it is time to edit it. But before that, we will need a good editor to make
 those changes. I highly recommend plugins that help you learn syntax, especially when just starting rust. There are two
@@ -38,7 +38,7 @@ There are many more editors out there and some have varying degrees of rust supp
 would recommend trying one of the two above, especially if you are new to rust. Once you are confident in the language,
 you can always use another editor and customize it to your liking.
 
-### Setting Root Directory
+### Setting Root Directory {#setting-root-directory}
 
 Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust
 code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`).

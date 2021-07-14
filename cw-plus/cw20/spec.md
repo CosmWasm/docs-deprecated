@@ -18,12 +18,12 @@ implement the base.
 section and go to the [next page](cw20-base-tutorial.md)
 :::
 
-## Base
+## Base {#base}
 
 This handles balances and transfers. Note that all amounts are handled as `Uint128` (128 bit integers with JSON string
 representation). Handling decimals is left to the UI and not interpreted
 
-### Messages
+### Messages {#messages}
 
 `Transfer{recipient, amount}` - Moves `amount` tokens from the
 `env.sender` account to the `recipient` account. This is designed to send to an address controlled by a private key
@@ -37,7 +37,7 @@ will be passed to the recipient contract, along with the amount.
 `Burn{amount}` - Remove `amount` tokens from the balance of `env.sender`
 and reduce `total_supply` by the same amount.
 
-### Queries
+### Queries {#queries}
 
 `Balance{address}` - Returns the balance of the given address. Returns "0" if the address is unknown to the contract.
 Return type is `BalanceResponse{balance}`.
@@ -45,7 +45,7 @@ Return type is `BalanceResponse{balance}`.
 `TokenInfo{}` - Returns the token info of the contract. Return type is
 `TokenInfoResponse{name, symbol, decimal, total_supply}`.
 
-### Receiver
+### Receiver {#receiver}
 
 The counter-part to `Send` is `Receive`, which must be implemented by any contract that wishes to manage cw20 tokens.
 This is generally *not*
@@ -61,7 +61,7 @@ a contract-specific message. This can be empty if we have only one default actio
 to clarify the intention. For example, if I send to a uniswap contract, I can specify which token I want to swap against
 using this field.
 
-## Allowances
+## Allowances {#allowances}
 
 A contract may allow actors to delegate some of their balance to other accounts. This is not as essential as with ERC20
 as we use `Send`/`Receive`
@@ -80,7 +80,7 @@ works fine with no previous allowance.
 `DecreaseAllowance` is meant to be robust, that is if you decrease by more than the current allowance (eg. the user
 spent some in the middle), it will just round down to 0 and not make any underflow error.
 
-### Messages
+### Messages {#messages-1}
 
 `IncreaseAllowance{spender, amount, expires}` - Set or increase the allowance such that `spender` may access up
 to `amount + current_allowance` tokens from the `env.sender` account. This may optionally come with an `Expiration`
@@ -105,23 +105,23 @@ switch this?
 `BurnFrom{owner, amount}` - This works like `TransferFrom`, but burns the tokens instead of transfering them. This will
 reduce the owner's balance, `total_supply` and the caller's allowance.
 
-### Queries
+### Queries {#queries-1}
 
 `Allowance{owner, spender}` - This returns the available allowance that `spender` can access from the `owner`'s account,
 along with the expiration info. Return type is `AllowanceResponse{balance, expiration}`.
 
-## Mintable
+## Mintable {#mintable}
 
 This allows another contract to mint new tokens, possibly with a cap. There is only one minter specified here, if you
 want more complex access management, please use a multisig or other contract as the minter address and handle updating
 the ACL there.
 
-### Messages
+### Messages {#messages-2}
 
 `Mint{recipient, amount}` - If the `env.sender` is the allowed minter, this will create `amount` new tokens (updating
 total supply) and add them to the balance of `recipient`.
 
-### Queries
+### Queries {#queries-2}
 
 `Minter{}` - Returns who and how much can be minted. Return type is
 `MinterResponse {minter, cap}`. Cap may be unset.

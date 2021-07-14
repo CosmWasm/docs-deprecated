@@ -17,7 +17,7 @@ This serves three purposes:
 * A demonstration of how to extend `cw20-base` to add extra functionality
 * A demonstration of the [Receiver interface](spec.md#receiver)
 
-## Design
+## Design {#design}
 
 There are two variants - accepting native tokens and accepting cw20 tokens as the *reserve* token (this is the token
 that is input to the bonding curve).
@@ -37,7 +37,7 @@ Read more about [bonding curve math here](https://yos.io/2018/11/10/bonding-curv
 
 Note: the first version only accepts native tokens as the
 
-### Math
+### Math {#math}
 
 Given a price curve `f(x)` = price of the `x`th token, we want to figure out how to buy into and sell from the bonding
 curve. In fact we can look at the total supply issued. let `F(x)` be the integral of `f(x)`. We have issued

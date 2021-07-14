@@ -6,7 +6,7 @@ sidebar_position: 5
 
 To showcase the previously explained utilities, we'll create the balance checker dApp from the template.
 
-## Customize template
+## Customize template {#customize-template}
 
 To make the app your own, feel free to modify the `name` field in `package.json` and/or update the `README.md` file.
 
@@ -32,9 +32,9 @@ export function Login(): JSX.Element {
 
 ```
 
-## Add balance route
+## Add balance route {#add-balance-route}
 
-### Balance path
+### Balance path {#balance-path}
 
 Add the following to the `paths.ts` file:
 
@@ -42,7 +42,7 @@ Add the following to the `paths.ts` file:
 export const pathBalance = "/balance";
 ```
 
-### React component
+### React component {#react-component}
 
 Inside `routes/`, add a `Balance` directory with the following files:
 
@@ -115,7 +115,7 @@ The logic will work like this: the `TokenList` component will display the native
 address is entered in `FormCheckBalance`, which will make `TokenList` show the balance for that CW20 contract, or show
 an error if that address does not have an associated contract.
 
-### Add to ProtectedSwitch
+### Add to ProtectedSwitch {#add-to-protectedswitch}
 
 Your `ProtectedSwitch` in `App/index.tsx` should look like this:
 
@@ -128,9 +128,9 @@ Your `ProtectedSwitch` in `App/index.tsx` should look like this:
 Note that we remove `OperationResult`, both the route and the component, since we won't be making transactions in this
 dApp.
 
-## Add FormCheckBalance component
+## Add FormCheckBalance component {#add-formcheckbalance-component}
 
-### Add Search component
+### Add Search component {#add-search-component}
 
 For entering the address we'll use a custom `Search` component, it may seem hacky but does a good job
 integrating `formik` and `antd`, and is in fact inspired by `formik-antd` (but it's missing there as of now).
@@ -235,7 +235,7 @@ TypedInput.Search = React.forwardRef(
 export default TypedInput.Search;
 ```
 
-### Add contract address validation schema
+### Add contract address validation schema {#add-contract-address-validation-schema}
 
 The `formik` package we'll be using for building `FormCheckBalance` has great integration with `yup`, which allows us to
 use it to build validation schemas like the one we need for the contract address:
@@ -257,7 +257,7 @@ const addressShape = {
 export const searchValidationSchema = Yup.object().shape(addressShape);
 ```
 
-### FormCheckBalance implementation
+### FormCheckBalance implementation {#formcheckbalance-implementation}
 
 The `routes/Balance/components/FormCheckBalance.tsx` file would be this:
 
@@ -304,7 +304,7 @@ export function FormCheckBalance({setContractAddress}: FormCheckBalanceProps): J
 It uses the address validation schema defined before, and has a `setContractAddress` param to update the state of
 the `Balance` route.
 
-## Add TokenList component
+## Add TokenList component {#add-tokenlist-component}
 
 With `FormCheckBalance` working, we just need to implement `TokenList`.
 
@@ -448,7 +448,7 @@ export const TokenItem = styled.div`
 `;
 ```
 
-## Finished!
+## Finished! {#finished}
 
 Now you can check your native balances and your balance for any CW20 contract, and most importantly, you now know how to
 build a CosmJS based dApp!

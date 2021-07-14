@@ -24,6 +24,6 @@ must be the same, so the first sender can claim the funds, revealing the preimag
 See the [IOV atomic swap spec](https://github.com/iov-one/iov-core/blob/master/docs/atomic-swap-protocol-v1.md)
 for details.
 
-## Token types
+## Token types {#token-types}
 
 Currently native tokens are supported; an upcoming version will support cw20 tokens.

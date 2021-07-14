@@ -28,7 +28,7 @@ You can find more information about other testnets:
 When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. Altough Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the Shell/Go client.
 
-## Setup Go CLI
+## Setup Go CLI {#setup-go-cli}
 
 Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
 
@@ -64,7 +64,7 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a fred) '{"denom":"usponge","address"
 JSON=$(jq -n --arg addr $(wasmd keys show -a thief) '{"denom":"usponge","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.oysternet.cosmwasm.com/credit
 ```
 
-## Export wasmd Parameters
+## Export wasmd Parameters {#export-wasmd-parameters}
 
 If you intend to use wasmd as client, we recommend you to setup these variables. Otherwise You will have to define type
 in node, chain id and gas-prices details with every command you execute. Also for this tutorial we will use these
@@ -98,7 +98,7 @@ export NODE=(--node "https://rpc.musselnet.cosmwasm.com:443")
 export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3)
 ```
 
-## Setup Node REPL
+## Setup Node REPL {#setup-node-repl}
 
 Beyond the standard CLI tooling, we have also produced a flexible TypeScript library
 [CosmJS](https://github.com/CosmWasm/cosmjs), which runs in Node.js as well as in modern browsers and handles queries
@@ -123,7 +123,7 @@ hitFaucet(defaultFaucetUrl, address, 'STAR')
 client.getAccount()
 ```
 
-## Run Local Node (optional)
+## Run Local Node (optional) {#run-local-node-optional}
 
 If you are interested in running your local network you can use the script below:
 

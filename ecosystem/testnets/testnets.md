@@ -21,12 +21,12 @@ Or Juno: https://github.com/CosmosContracts/testnets
 Both Terra and Juno integrates CosmWasm smart contract engine.
 :::
 
-## Select Your Network
+## Select Your Network {#select-your-network}
 
 You can find active and in-active testnet information such as configs and endpoints
 on [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
-## Setup
+## Setup {#setup}
 
 Let's start rolling your node and start producing blocks in testnet environment.
 
@@ -37,7 +37,7 @@ supervisor. Feel free to use them. We use [cosmovisor](https://github.com/cosmos
 upgrade manager to handle network upgrades. Our installation scripts can help you with both setting up cosmovisor and
 wasmd: [wasmd w/cosmovisor setup scripts](https://github.com/CosmWasm/testnets/tree/master/devops/node/cosmovisor)
 
-### Manual Setup
+### Manual Setup {#manual-setup}
 
 First of all make sure you followed the installation steps in [build requirements section](build-requirements.md). You
 should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up
@@ -90,9 +90,9 @@ Initialize wallet using command:
 wasmd keys add mywallet
 ```
 
-## Joining Live Testnets
+## Joining Live Testnets {#joining-live-testnets}
 
-### Run wasmd Full Node
+### Run wasmd Full Node {#run-wasmd-full-node}
 
 ```shell
 export MONIKER=new_validator
@@ -115,7 +115,7 @@ wasmd start --p2p.seeds $SEED_NODE
 
 Now you should be seeing blocks being replayed and your node is catching up with the testnet. This could take a while.
 
-### Become A Validator(optional)
+### Become A Validator(optional) {#become-a-validatoroptional}
 
 :::caution
 Command below is for demonstration, oysternet is not open for external validators.
@@ -146,11 +146,11 @@ wasmd tx staking create-validator \
   --from=mywallet
 ```
 
-### Run the Light Client Daemon
+### Run the Light Client Daemon {#run-the-light-client-daemon}
 
 With wasmd version v0.13 lcd client and node merged. To enable light client, change `app.toml/api` value to true.
 
-## Joining To Be Launched Testnets
+## Joining To Be Launched Testnets {#joining-to-be-launched-testnets}
 
 :::info
 
@@ -183,7 +183,7 @@ git push
 
 After the network is launched you can follow [Joining Live Testnets](#joining-live-testnets).
 
-## Deploying Contracts to Testnet
+## Deploying Contracts to Testnet {#deploying-contracts-to-testnet}
 
 [Getting Started section](/docs/getting-started/intro) is the best reading source that teaches you the process of
 compiling and deploying contracts using a basic smart contract. If you are interested in developing your own contracts,

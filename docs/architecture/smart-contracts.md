@@ -22,7 +22,7 @@ sending tokens directly to a contract, eg. via `SendMsg`, while possible, *does 
 a clear design decision to reduce possible attack vectors. It doesn't make anything impossible, but requires all
 execution of the contract to be *explicitly requested*.
 
-## Avoiding Reentrancy Attacks
+## Avoiding Reentrancy Attacks {#avoiding-reentrancy-attacks}
 
 Another big difference is that we avoid all reentrancy attacks by design. This point deserves an article by itself, but
 in
@@ -45,7 +45,7 @@ Sometimes we will need information from another contract, and with the 0.8 relea
 other contracts or underlying Cosmos SDK modules. These Queries only have access to a read-only database snapshot and be
 unable to modify state or send messages to other modules, thus avoiding any possible reentrancy concerns.
 
-## Resource Limits
+## Resource Limits {#resource-limits}
 
 Beyond exploits (such as the reentrancy attack), another attack vector for smart contracts is denial of service attacks.
 A malicious actor could upload a contract that ran an infinite loop to halt the chain or write tons of data to fill up
@@ -69,7 +69,7 @@ already [enforces gas payments for KVStore access](https://github.com/cosmos/cos
 . Since all disk access in the contracts is made via callbacks into the SDK, this is charged there. If one were to
 integrate CosmWasm in another runtime, you would have to make sure to charge for access there as well.
 
-## Lessons Learned from Ethereum
+## Lessons Learned from Ethereum {#lessons-learned-from-ethereum}
 
 Ethereum is the grandfather of all blockchain smart contract platforms and has far more usage and real world experience
 than any other platform. We cannot discount this knowledge, but instead learn from their successes and failures to
@@ -80,19 +80,19 @@ with mitigation strategies. We shall compare Cosmwasm against this list to see h
 these attack vectors are closed by design. A number remain and a section is planned on avoiding the remaining such
 issues.
 
-### :heavy_check_mark: [Reentrancy](https://github.com/sigp/solidity-security-blog#reentrancy)
+### :heavy_check_mark: [Reentrancy](https://github.com/sigp/solidity-security-blog#reentrancy) {#heavy_check_mark-reentrancy}
 
 In cosmwasm, we return messages to execute other contracts, in the same atomic operation, but *after* the contract has
 finished. This is based on the actor model and avoid the possibility of reentrancy attacks - there is never volatile
 state when a contract is called.
 
-### :heavy_check_mark: [Arithmetic under/overflows](https://github.com/sigp/solidity-security-blog#ouflow)
+### :heavy_check_mark: [Arithmetic under/overflows](https://github.com/sigp/solidity-security-blog#ouflow) {#heavy_check_mark-arithmetic-underoverflows}
 
 Rust allows you to simply set `overflow-checks = true` in
 the [Cargo manifest](https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections) to abort the program
 if any overflow is detected. No way to opt-out of safe math.
 
-### :warning: [Unexpected Ether](https://github.com/sigp/solidity-security-blog#ether)
+### :warning: [Unexpected Ether](https://github.com/sigp/solidity-security-blog#ether) {#warning-unexpected-ether}
 
 **Bad design pattern**
 
@@ -104,18 +104,18 @@ doesn't record how much was sent to it during initialization, but
 rather [releases the current balance](https://github.com/CosmWasm/cosmwasm-examples/blob/escrow-0.4.0/escrow/src/contract.rs#L83-L92)
 when a paying out or refunding the amount. This ensures no tokens get stuck.
 
-### :heavy_check_mark: [Delegate Call](https://github.com/sigp/solidity-security-blog#delegatecall)
+### :heavy_check_mark: [Delegate Call](https://github.com/sigp/solidity-security-blog#delegatecall) {#heavy_check_mark-delegate-call}
 
 We don't have such Delegate Call logic in CosmWasm. You can import modules, but they are linked together at compile
 time, which allows them to be tested as a whole, and no subtle entry points inside of a contract's logic.
 
-### :heavy_check_mark: [Default Visibilities](https://github.com/sigp/solidity-security-blog#visibility)
+### :heavy_check_mark: [Default Visibilities](https://github.com/sigp/solidity-security-blog#visibility) {#heavy_check_mark-default-visibilities}
 
 Rather than auto-generating entry points for every function/method in your code (and worse yet, assuming public if not
 specified), the developer must clearly define a list of messages to be handled and dispatch them to the proper
 functions. It is impossible to accidentally expose a function this way.
 
-### :warning: [Entropy Illusion](https://github.com/sigp/solidity-security-blog#entropy)
+### :warning: [Entropy Illusion](https://github.com/sigp/solidity-security-blog#entropy) {#warning-entropy-illusion}
 
 **Planned Fix**
 
@@ -123,7 +123,7 @@ The block hashes (and last digits of timestamps) are even more easily manipulate
 with miners in Ethereum. They should definitely not be used for randomness. There is work planned to provide a secure
 random beacon, and expose this secure source of entropy to smart contracts.
 
-### :heavy_check_mark: [External Contract Referencing](https://github.com/sigp/solidity-security-blog#contract-reference)
+### :heavy_check_mark: [External Contract Referencing](https://github.com/sigp/solidity-security-blog#contract-reference) {#heavy_check_mark-external-contract-referencing}
 
 **Planned Mitigation**
 
@@ -144,19 +144,19 @@ have [simple tooling to validate the original source code](https://medium.com/co
 . We also [released a code explorer](https://demonet.wasm.glass/codes) that allows you to browse contracts and locally
 verify the source code in one command.
 
-### :heavy_check_mark: [Short Address/Parameter Attack](https://github.com/sigp/solidity-security-blog#short-address)
+### :heavy_check_mark: [Short Address/Parameter Attack](https://github.com/sigp/solidity-security-blog#short-address) {#heavy_check_mark-short-addressparameter-attack}
 
 This is an exploit that takes advantage of the RLP encoding mechanism and fixed 32-byte stack size. It does not apply to
 our type-checking json parser.
 
-### :heavy_check_mark: [Unchecked CALL Return Values](https://github.com/sigp/solidity-security-blog#unchecked-calls)
+### :heavy_check_mark: [Unchecked CALL Return Values](https://github.com/sigp/solidity-security-blog#unchecked-calls) {#heavy_check_mark-unchecked-call-return-values}
 
 CosmWasm does not allow calling other contracts directly, but rather returning message to later be dispatched by a
 router. The router will check the result of all messages, and if **any** message in the chain returns an error, the
 entire transaction is aborted, and state changed rolled back. This allows you to safely focus on the success case when
 scheduling calls to other contracts, knowing all state will be rolled back if it does not go as planned.
 
-### :warning: [Race Conditions/Front Running](https://github.com/sigp/solidity-security-blog#race-conditions)
+### :warning: [Race Conditions/Front Running](https://github.com/sigp/solidity-security-blog#race-conditions) {#warning-race-conditionsfront-running}
 
 This is a general problem with all blockchains. The signed message is gossiped among all nodes before a block is formed.
 A key miner/validator could create another transaction and insert it before yours (maybe delaying yours). This is often
@@ -170,7 +170,7 @@ outcome, just more pronounced in blockchain as the delays are on the order of se
 applications this is not an issue, and for decentralized exchanges, there are designs with eg. batch auctions that
 eliminate the potential of front running.
 
-### :warning: [Denial of Service](https://github.com/sigp/solidity-security-blog#dos)
+### :warning: [Denial of Service](https://github.com/sigp/solidity-security-blog#dos) {#warning-denial-of-service}
 
 **limited circumstances**
 
@@ -180,7 +180,7 @@ and cpu gas limits allow huge amounts of processing in one transaction (includin
 without a precompile). However, looping over an user-controlled number of keys in the storage will run out of gas
 quickly.
 
-### :heavy_check_mark: [Block Timestamp Manipulation](https://github.com/sigp/solidity-security-blog#block-timestamp)
+### :heavy_check_mark: [Block Timestamp Manipulation](https://github.com/sigp/solidity-security-blog#block-timestamp) {#heavy_check_mark-block-timestamp-manipulation}
 
 Tendermint
 provides [BFT Timestamps](https://github.com/tendermint/tendermint/blob/master/docs/spec/blockchain/blockchain.md#time-1)
@@ -188,19 +188,19 @@ in all the blockchain headers. This means that you need a majority of the valida
 timestamp, and it can be as trusted as the blockchain itself. (That same majority could halt the chain or work on a
 fork)
 
-### :heavy_check_mark: [Constructors with Care](https://github.com/sigp/solidity-security-blog#constructors)
+### :heavy_check_mark: [Constructors with Care](https://github.com/sigp/solidity-security-blog#constructors) {#heavy_check_mark-constructors-with-care}
 
 This is an idiosyncrasy of the solidity language with constructor naming. It is highly unlikely you would ever
 rename `init` in cosmwasm, and if you did, it would fail to compile rather than producing a backdoor.
 
-### :heavy_check_mark: [Uninitialised Storage Pointers](https://github.com/sigp/solidity-security-blog#storage)
+### :heavy_check_mark: [Uninitialised Storage Pointers](https://github.com/sigp/solidity-security-blog#storage) {#heavy_check_mark-uninitialised-storage-pointers}
 
 CosmWasm doesn't automatically fill in variables, you must explicitly load them from storage. And rust does not allow
 uninitialized variables anywhere (unless you start writing `unsafe` blocks, and make a special call to access
 uninitialized memory... but then you are asking for trouble). Making storage explicit rather than implicit removes this
 class of failures.
 
-### :heavy_check_mark: [Floating Points and Precision](https://github.com/sigp/solidity-security-blog#precision)
+### :heavy_check_mark: [Floating Points and Precision](https://github.com/sigp/solidity-security-blog#precision) {#heavy_check_mark-floating-points-and-precision}
 
 Both Solidity and CosmWasm have no support for floating point operations, due to possible non-determinism in rounding (
 which is CPU dependent). Solidity has no alternative to do integer math and many devs hand-roll integer approximations
@@ -212,7 +212,7 @@ suitable for financial calculations that require significant integral and fracti
 Or [fixed](https://docs.rs/fixed/0.5.0/fixed/) to provide fixed-point decimal math. It supports up to 128-bit numbers,
 which is enough for 18 digits before the decimal and 18 afterwards, which should be enough for any use case.
 
-### :heavy_check_mark: [Tx.Origin Authentication](https://github.com/sigp/solidity-security-blog#tx-origin)
+### :heavy_check_mark: [Tx.Origin Authentication](https://github.com/sigp/solidity-security-blog#tx-origin) {#heavy_check_mark-txorigin-authentication}
 
 CosmWasm doesn't expose `tx.origin`, but only the contract or user directly calling the contract
 as `params.message.signer`. This means it is impossible to rely on the wrong authentication, as there is only one value

@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # CW20 ICS20
 
-## Specification
+## Specification {#specification}
 
 This is an *IBC Enabled* contract that allows us to send CW20 tokens from one chain over the standard ICS20 protocol to
 the bank module of another chain. In short, it let's us send our custom CW20 tokens with IBC and use them just like
@@ -15,7 +15,7 @@ It is only designed to send tokens and redeem previously sent tokens. It will no
 originating on the foreign chain. This is different than the Golang `ibctransfer` module, but we properly implement
 ICS20 and respond with an error message... let's hope the Go side handles this correctly.
 
-### Workflow
+### Workflow {#workflow}
 
 The contract starts with minimal state. It just stores a default timeout in seconds for all packets it sends. Most
 importantly it binds a local IBC port to enable channel connections.
@@ -29,7 +29,7 @@ After there is at least one channel, you can send any CW20 token to this contrac
 message must contain the channel to send over and the remote address to send to. It may optionally include a custom
 timeout.
 
-### Messages
+### Messages {#messages}
 
 It only accepts CW20ReceiveMsg from a cw20 contract. The data sent along with that message must be a JSON-serialized
 TransferMsg:
@@ -50,7 +50,7 @@ pub struct TransferMsg {
 In addition, it supports directly sending native tokens via `ExecuteMsg::Transfer(TransferMsg)`. You must send *exactly
 one* coin denom along with the transfer message, and that amount will be transfered to the remote host.
 
-### Queries
+### Queries {#queries}
 
 Queries only make sense relative to the established channels of this contract.
 
@@ -63,7 +63,7 @@ Queries only make sense relative to the established channels of this contract.
   the list view, it returns the current outstanding balance on that channel, as well as the total amount that has ever
   been sent on the channel.
 
-### IBC Responses
+### IBC Responses {#ibc-responses}
 
 These are defined by the ICS20 spec.
 
@@ -71,6 +71,6 @@ Notably, each Channel has a balance of tokens sent over that channel. If an inco
 denom it does not know, or for a balance larger than we have sent, we will return an error in the acknowledgement
 packet.
 
-## Demonstration
+## Demonstration {#demonstration}
 
 **Under Development**

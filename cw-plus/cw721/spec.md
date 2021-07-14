@@ -15,12 +15,12 @@ contracts that call to any standard cw721 contract.
 The specification is split into multiple sections, a contract may only implement some of this functionality, but must
 implement the base.
 
-## Base
+## Base {#base}
 
 This handles ownership, transfers, and allowances. These must be supported as is by all cw721 contracts. Note that all
 tokens must have an owner, as well as an ID. The ID is an arbitrary string, unique within the contract.
 
-### Messages
+### Messages {#messages}
 
 `TransferNft{recipient, token_id}` - This transfers ownership of the token to `recipient` account. This is designed to
 send to an address controlled by a private key and *does not*
@@ -50,7 +50,7 @@ approval is tied to the owner, not the tokens and applies to any future token th
 
 `RevokeAll{operator}` - Revoke a previous `ApproveAll` permission granted to the given `operator`.
 
-### Queries
+### Queries {#queries}
 
 `OwnerOf{token_id}` - Returns the owner of the given token, as well as anyone with approval on this particular token. If
 the token is unknown, returns an error. Return type is
@@ -61,7 +61,7 @@ is `ApprovedForAllResponse`. If `include_expired` is set, show expired owners in
 
 `NumTokens{}` - Total number of tokens issued
 
-### Receiver
+### Receiver {#receiver}
 
 The counter-part to `SendNft` is `ReceiveNft`, which must be implemented by any contract that wishes to manage cw721
 tokens. This is generally *not*
@@ -76,9 +76,9 @@ The `sender` is the original account requesting to move the token and `msg` is a
 a contract-specific message. This can be empty if we have only one default action, or it may be a `ReceiveMsg` variant
 to clarify the intention. For example, if I send to an exchange, I can specify the price I want to list the token for.
 
-## Metadata
+## Metadata {#metadata}
 
-### Queries
+### Queries {#queries-1}
 
 `ContractInfo{}` - This returns top-level metadata about the contract. Namely, `name` and `symbol`.
 
@@ -88,9 +88,9 @@ JSON Schema*, but directly from the contract, not as a Uri. Only the image link 
 `AllNftInfo{token_id}` - This returns the result of both `NftInfo`
 and `OwnerOf` as one query as an optimization for clients, which may want both info to display one NFT.
 
-## Enumerable
+## Enumerable {#enumerable}
 
-### Queries
+### Queries {#queries-2}
 
 Pagination is acheived via `start_after` and `limit`. Limit is a request set by the client, if unset, the contract will
 automatically set it to

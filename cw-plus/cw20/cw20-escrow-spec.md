@@ -18,7 +18,7 @@ anyone can refund the locked tokens to the original sender.
 
 We also add a function called "top_up", which allows anyone to add more funds to the contract at any time.
 
-## Token types
+## Token types {#token-types}
 
 This contract is meant not just to be functional, but also to work as a simple example of an cw20 "Receiver". And
 demonstrate how the same calls can be fed native tokens (via typical `HandleMsg` route), or cw20 tokens (via `Receiver`

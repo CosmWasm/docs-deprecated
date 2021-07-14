@@ -9,7 +9,7 @@ One of the driving forces in developing CosmWasm, besides security by design, wa
 Key to this is the ability to inspect and debug messages sent on the blockchain, and parse results without needing
 complex libraries. Also not requiring downloading custom schemas and ABIs just to make a method call.
 
-## JSON
+## JSON {#json}
 
 The natural solution was to use JSON everywhere. It is self-describing, human-readable, and used in APIs everywhere. It
 does have some downsides, such as handling numbers over 2^53 (just use strings), no clear distinction between strings
@@ -28,19 +28,19 @@ provide client support for the format.
 
 It is helpful to have consistency to aid client development, as well as contract-contract calls.
 
-## Protobuf
+## Protobuf {#protobuf}
 
 Protobuf is a well-known and widely-supported binary format. It gives a stricter schema guarantees than JSON and more
 compact format. Protocol Buffers and GRPC support has been added with Cosmos SDK v0.39.0 upgrade.
 
-## Cap'n Proto
+## Cap'n Proto {#capn-proto}
 
 [Cap'n Proto](https://capnproto.org/) is a super-lean encoding format with zero-copy reads, and no parsing needed. This
 has been [suggested for use in CosmWasm](https://github.com/CosmWasm/cosmwasm/issues/78) as an optional addition. This
 may be considered as an opt-in format for contracts desiring such efficiency or strict schema, or possibly just used for
 encoding internal data structures (`Params`).
 
-## Credits
+## Credits {#credits}
 
 Much thanks to [Jehan Tremback](https://github.com/jtremback), who insisted on a universal, human-readable format for
 all messages.

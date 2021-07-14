@@ -2,9 +2,9 @@
 sidebar_position: 7
 ---
 
-## [0.14.0] - 2021-05-03
+## [0.14.0] - 2021-05-03 {#0140---2021-05-03}
 
-### Added
+### Added {#added}
 
 - cosmwasm-crypto: Add `ed25519_batch_verify`, EdDSA ed25519 batch signature verification scheme for Tendermint
   signatures and public keys formats.
@@ -91,7 +91,7 @@ sidebar_position: 7
 
 [#901]: https://github.com/CosmWasm/cosmwasm/pull/901
 
-### Changed
+### Changed {#changed}
 
 - contracts: Rename `HandleMsg` to `ExecuteMsg`.
 - all: Rename `handle` entry point to `execute`.
@@ -214,7 +214,7 @@ sidebar_position: 7
 
 [#879]: https://github.com/CosmWasm/cosmwasm/pull/879
 
-### Deprecated
+### Deprecated {#deprecated}
 
 - cosmwasm-std: `InitResponse`, `MigrateResponse` and `HandleResponse` are deprecated in favour of the new `Response`.
 - cosmwasm-std: `Context` is deprecated in favour of the new mutable helpers in
@@ -226,27 +226,27 @@ sidebar_position: 7
 
 [#802]: https://github.com/CosmWasm/cosmwasm/pull/802
 
-## [0.13.2] - 2021-01-14
+## [0.13.2] - 2021-01-14 {#0132---2021-01-14}
 
-## Changed
+## Changed {#changed-1}
 
 - cosmwasm-vm: Update Wasmer to 1.0.1.
 
-## [0.13.1] - 2021-01-12
+## [0.13.1] - 2021-01-12 {#0131---2021-01-12}
 
-### Added
+### Added {#added-1}
 
 - cosmwasm-std: Add the new `#[entry_point]` macro attribute that serves as an alternative implementation
   to `cosmwasm_std::create_entry_points!(contract)`
   and `cosmwasm_std::create_entry_points_with_migration!(contract)`. Both ways are supported in the 0.13 series.
 
-## [0.13.0] – 2021-01-06
+## [0.13.0] – 2021-01-06 {#0130--2021-01-06}
 
-## Added
+## Added {#added-2}
 
 - cosmwasm-std: Extend binary to array support to 64 bytes.
 
-## Changed
+## Changed {#changed-2}
 
 - all: Drop support for Rust versions lower than 1.47.0.
 - cosmwasm-std: Remove `cosmwasm_std::testing::MockApi::new`. Use
@@ -262,7 +262,7 @@ sidebar_position: 7
 - cosmwasm-vm: Remove `Instance::get_memory_size`. Use `Instance::memory_pages`
   instead.
 
-## 0.12.1 (2020-12-09)
+## 0.12.1 (2020-12-09) {#0121-2020-12-09}
 
 **cosmwasm-std**
 
@@ -271,7 +271,7 @@ sidebar_position: 7
 - Implement `Deref` for `QuerierWrapper`, such that `QuerierWrapper` behaves like a smart pointer to `Querier` allowing
   you to access `Querier` methods directly.
 
-## 0.12.0 (2020-11-19)
+## 0.12.0 (2020-11-19) {#0120-2020-11-19}
 
 **cosmwasm-std**
 
@@ -327,7 +327,7 @@ sidebar_position: 7
 - Rename `FfiError`/`FfiResult` to `BackendError`/`BackendResult` and adapt
   `VmError` accordingly.
 
-## 0.11.2 (2020-10-26)
+## 0.11.2 (2020-10-26) {#0112-2020-10-26}
 
 **cosmwasm-std**
 
@@ -340,7 +340,7 @@ sidebar_position: 7
 - Add `Binary::to_array`, which allows you to copy binary content into a fixed-length `u8` array. This is espeically
   useful for creating integers from binary data.
 
-## 0.11.1 (2020-10-12)
+## 0.11.1 (2020-10-12) {#0111-2020-10-12}
 
 **cosmwasm-std**
 
@@ -351,7 +351,7 @@ sidebar_position: 7
 - Implement `Add`, `AddAssign` and `Sub` with references on the right hand side for `Uint128`.
 - Implement `Sum<Uint128>` and `Sum<&'a Uint128>` for `Uint128`.
 
-## 0.11.0 (2020-10-08)
+## 0.11.0 (2020-10-08) {#0110-2020-10-08}
 
 **all**
 
@@ -417,14 +417,14 @@ sidebar_position: 7
   `MockApi::human_address` was changed to an unpredicatable represenation of non-standard length that aims to destroy
   most of the input structure.
 
-## 0.10.1 (2020-08-25)
+## 0.10.1 (2020-08-25) {#0101-2020-08-25}
 
 **cosmwasm-std**
 
 - Fix bug where `ExternalStorage.range()` would cause VM error if either lower or upper bound was set
   ([#508](https://github.com/CosmWasm/cosmwasm/issues/508))
 
-## 0.10.0 (2020-07-30)
+## 0.10.0 (2020-07-30) {#0100-2020-07-30}
 
 **all**
 
@@ -463,30 +463,30 @@ sidebar_position: 7
 - `Querier::raw_query` and `QuerierResult` were removed in favour of the new
   `Querier::query_raw`, which includes a gas limit parameter for the query.
 
-## 0.9.4 (2020-07-16)
+## 0.9.4 (2020-07-16) {#094-2020-07-16}
 
 **cosmwasm-vm**
 
 - Add `Instance::create_gas_report` returning a gas report including the original limit, the remaining gas and the
   internally/externally used gas.
 
-## 0.9.3 (2020-07-08)
+## 0.9.3 (2020-07-08) {#093-2020-07-08}
 
 **cosmwasm-storage**
 
 - Add `.remove()` method to `Bucket` and `Singleton`.
 
-## 0.9.2 (2020-06-29)
+## 0.9.2 (2020-06-29) {#092-2020-06-29}
 
 - Downgrade wasmer to 0.17.0.
 
-## 0.9.1 (2020-06-25)
+## 0.9.1 (2020-06-25) {#091-2020-06-25}
 
 **cosmwasm-std**
 
 - Replace type `Never` with `Empty` because enums with no cases cannot be expressed in valid JSON Schema.
 
-## 0.9.0 (2020-06-25)
+## 0.9.0 (2020-06-25) {#090-2020-06-25}
 
 Note: this version contains an API bug and should not be used (see
 https://github.com/CosmWasm/cosmwasm/issues/451).
@@ -574,7 +574,7 @@ https://github.com/CosmWasm/cosmwasm/issues/451).
   address is 0, the call succeeded.
 - Bump `cosmwasm_vm_version_1` to `cosmwasm_vm_version_2`.
 
-## 0.8.1 (2020-06-08)
+## 0.8.1 (2020-06-08) {#081-2020-06-08}
 
 **cosmwasm-std**
 
@@ -594,7 +594,7 @@ https://github.com/CosmWasm/cosmwasm/issues/451).
 - The new error case `VmError::WriteAccessDenied` is returned when a contract calls an import that potentially writes to
   storage during a query.
 
-## 0.8.0 (2020-05-25)
+## 0.8.0 (2020-05-25) {#080-2020-05-25}
 
 **all**
 
@@ -743,7 +743,7 @@ https://github.com/CosmWasm/cosmwasm/issues/451).
   `VmError::RuntimeErr`.
 - Add `Instance.with_querier` analogue to `Instance.with_storage`.
 
-## 0.7.2 (2020-03-23)
+## 0.7.2 (2020-03-23) {#072-2020-03-23}
 
 **cosmwasm**
 
@@ -756,14 +756,14 @@ https://github.com/CosmWasm/cosmwasm/issues/451).
 - Make `ExternalStorage` not `Clone`able anymore. This does not copy any data, so a clone could lead to unexpected
   results.
 
-## 0.7.1 (2020-03-11)
+## 0.7.1 (2020-03-11) {#071-2020-03-11}
 
 **cosmwasm_vm**
 
 - Avoid unnecessary panic when checking corrupted wasm file.
 - Support saving the same wasm to cache multiple times.
 
-## 0.7.0 (2020-02-26)
+## 0.7.0 (2020-02-26) {#070-2020-02-26}
 
 **cosmwasm**
 
@@ -794,7 +794,7 @@ https://github.com/CosmWasm/cosmwasm/issues/451).
   publicly be manipulated anymore.
 - Remove `take_storage`/`leave_storage` from `cosmwasm_vm::Instance`.
 
-## 0.6
+## 0.6 {#06}
 
 [Define canonical address callbacks](https://github.com/confio/cosmwasm/issues/73)
 
@@ -804,9 +804,9 @@ https://github.com/CosmWasm/cosmwasm/issues/451).
 
 - Separate out `Storage` from `ReadOnlyStorage` as separate traits
 
-## 0.5
+## 0.5 {#05}
 
-### 0.5.2
+### 0.5.2 {#052}
 
 This is the first documented and supported implementation. It contains the basic feature set. `init` and `handle`
 supported for modules and can return messages. A stub implementation of `query` is done, which is likely to be

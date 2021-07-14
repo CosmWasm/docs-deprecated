@@ -16,7 +16,7 @@ or [checksumned hex](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md
 even [large integers](https://research.kudelskisecurity.com/2018/01/16/blockchains-how-to-steal-millions-in-264-operations/) `3040783849904107057L`
 .
 
-## Addr
+## Addr {#addr}
 
 Addresses in Cosmos SDK are 20 character long strings, and contain security checks - such as chain-prefix in Bech32, and
 checksums in Bech32 and checksummed hex (EIP55). Since CosmWasm is an extension of Cosmos SDK, it follows the same
@@ -27,7 +27,7 @@ For passing address to contracts, pass it as string and then validate the input 
 [Addr](https://github.com/CosmWasm/cosmwasm/blob/v0.14.0/packages/std/src/addresses.rs#L31) is just a wrapper around
 plain string that provides useful helper functions such as string validation to an address.
 
-## Optional: Canonical Addresses
+## Optional: Canonical Addresses {#optional-canonical-addresses}
 
 There is another representation of an address that tackles the case of change of human representation, but this is rare.
 
@@ -47,7 +47,7 @@ We define the *Canonical Address* as the binary representation used internally i
 native tokens are indexed by and therefore must never change for the life of an account. This is the representation that
 can be used for all **storage lookups** (if you use part of an address as the key in the storage).
 
-## Naming
+## Naming {#naming}
 
 More and
 more, [human](https://app.ens.domains/about) [readable](https://docs.blockstack.org/core/naming/introduction.html) [names](https://iov.one)
@@ -71,7 +71,7 @@ resolution inside the contract rather than only in the client. Of course we woul
 service, and the calling contract would need to somehow know the address of the canonical name service contract to
 resolve with, which is why this feature is still under discussion.
 
-### DIDs
+### DIDs {#dids}
 
 *Note: it will likely be quite some time before this is fully implemented. It serves as design inspiration*
 
