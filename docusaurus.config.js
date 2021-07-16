@@ -236,6 +236,8 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
             let url = old_testnet.pop()
             paths.push(`/docs/0.14/testnets/${url}`);
             paths.push(`/docs/0.13/testnets/${url}`);
+            paths.push(`/0.14/testnets/${url}`);
+            paths.push(`/0.13/testnets/${url}`);
           }
 
           return paths;
