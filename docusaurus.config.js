@@ -231,11 +231,11 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           /*
            * TESTNET REDIRECTIONS
            */
-          if (existingPath === '/docs/0.14/testnets/build-requirements') {
-            paths.push('/ecosystem/testnets/build-requirements');
-          }
-          if (existingPath === '/docs/0.14/testnets/testnets') {
-            paths.push('/ecosystem/testnets/testnets');
+          if (existingPath.includes('/testnets')) {
+            let old_testnet = existingPath.split("/testnets")
+            let url = old_testnet.pop()
+            paths.push(`/docs/0.14/testnets/${url}`);
+            paths.push(`/docs/0.13/testnets/${url}`);
           }
 
           return paths;
