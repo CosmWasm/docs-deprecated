@@ -198,6 +198,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
       '@docusaurus/plugin-client-redirects',
       {
         fromExtensions: ['html'],
+        toExtensions: ['html'],
         redirects: [
           {
             from: '/',
