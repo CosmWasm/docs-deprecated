@@ -10,7 +10,7 @@ This section is under construction.
 
 CosmWasm community has been building and growing rapidly.
 
-- You can find the live testnet information at [Testnets](./testnets/testnets.md)
+- You can find the live testnet information at [Testnets](02-testnets/02-testnets.md)
 
 ## Ecosystem {#ecosystem}
 

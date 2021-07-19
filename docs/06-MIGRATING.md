@@ -1,12 +1,12 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Migrating Contracts
 
 This guide explains what is needed to upgrade contracts when migrating over major releases of `cosmwasm`. Note that you
 can also view the
-[complete CHANGELOG](CHANGELOG.md) to understand the differences.
+[complete CHANGELOG](07-CHANGELOG.md) to understand the differences.
 
 ## 0.13 -> 0.14 {#013---014}
 

@@ -8,7 +8,7 @@ id: intro
 Buckle up, we will now get first-hand experience with CosmWasm, by starting up our own CosmWasm-enabled blockchain (just
 one node for now), modifying an existing contract, deploying it to our system, and executing it via the cli. If you are
 more *research first then get your hands dirty second* person, you should go ahead
-to [Architecture](/architecture/multichain.md) read it first and then head back here.
+to [Architecture](/03-architecture/01-multichain.md) read it first and then head back here.
 
 We will not dive into smart contract development in this section to provide an easy to digest introduction. Also, you
 can follow the steps here to test out smart contracts live on a testnet without drowning in smart contract development
@@ -24,16 +24,16 @@ will assume knowledge of these basics. And it will show all the development flow
 
 ## Sections {#sections}
 
-[Installation](installation.md) will show you how to setup the required software tooling for CosmWasm.
+[Installation](02-installation.md) will show you how to setup the required software tooling for CosmWasm.
 
-[Setting up Environment](setting-env.md) will show you how to setup the client environment, interacting with faucet.
+[Setting up Environment](03-setting-env.md) will show you how to setup the client environment, interacting with faucet.
 
-[Downloading and Compiling Contract](compile-contract.md) will demonstrate downloading and compiling smart contract code
+[Downloading and Compiling Contract](04-compile-contract.md) will demonstrate downloading and compiling smart contract code
 to wasm byte code.
 
-[Interacting with Contracts](interact-with-contract.md) will show deploying, initializing and executing smart contracts.
+[Interacting with Contracts](05-interact-with-contract.md) will show deploying, initializing and executing smart contracts.
 
-[Next Steps](next-steps.md) is the last part of the tutorial that wraps up and sails you to the next dock, meaning new
+[Next Steps](06-next-steps.md) is the last part of the tutorial that wraps up and sails you to the next dock, meaning new
 learning resources.
 
 ## Video Version {#video-version}

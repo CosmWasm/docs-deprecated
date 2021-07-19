@@ -232,8 +232,8 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           /*
            * TESTNET REDIRECTIONS
            */
-          if (existingPath.includes('/testnets')) {
-            let old_testnet = existingPath.split("/testnets/")
+          if (existingPath.includes('/02-testnets')) {
+            let old_testnet = existingPath.split("/02-testnets/")
             let url = old_testnet.pop()
             paths.push(`/docs/0.14/testnets/${url}.html`);
             paths.push(`/docs/0.14/testnets/${url}`);

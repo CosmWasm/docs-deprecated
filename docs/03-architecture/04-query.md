@@ -1,6 +1,6 @@
 ---
 title: Querying
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 # Querying Contract State
@@ -66,11 +66,11 @@ snapshot of the state after the last committed block.
 
 While many interactions between contracts can easily be modelled by sending messages, there are some cases where we
 would like to synchronously query other modules, without altering their state. For example, if I want to resolve a name
-to a [Address](addresses.md), or if I want to check KYC status of some account (in another contract) before enabling
+to a [Address](03-addresses.md), or if I want to check KYC status of some account (in another contract) before enabling
 some action. One could model this as a series of messages, but it is quite complex and makes such simple use-cases
 almost unusable in the system.
 
-However, this design violates one of the basic principles of the [actor model](actor.md), namely that each contract has
+However, this design violates one of the basic principles of the [actor model](02-actor.md), namely that each contract has
 exclusive access to its own internal state. (Both `query_raw` and `query_custom` fail in this regard). Far from just
 being a theoretical issue, this may lead to concurrency and reentrancy issues if not handled correctly. We do not want
 to push such safety critical reasoning into the laps of the contract developers, but rather provide these security

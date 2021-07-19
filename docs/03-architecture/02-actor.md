@@ -1,6 +1,6 @@
 ---
 title: Actor Model
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Actor Model for Contract Calls
