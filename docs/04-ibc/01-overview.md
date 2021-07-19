@@ -23,9 +23,9 @@ protocol and scheme is defined by the contracts. Contract should specify the act
 
 ## Index {#index}
 
-* [Relayer](relayer.md) section explains the relayer component of IBC and demonstrates setting up one for connecting
+* [Relayer](02-relayer.md) section explains the relayer component of IBC and demonstrates setting up one for connecting
   CosmWasm enabled chains.
 
-* [cw20-ics](cw20-ics20.md) is a smart contract that is first of its kind. This is an IBC Enabled contract that allows
+* [cw20-ics](03-cw20-ics20.md) is a smart contract that is first of its kind. This is an IBC Enabled contract that allows
   us to send CW20 tokens from one chain over the standard ICS20 protocol to the bank module of another chain. In short,
   it let's us send our custom CW20 tokens with IBC and use them just like native tokens on other chains.

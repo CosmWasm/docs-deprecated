@@ -1,6 +1,6 @@
 ---
 title: Names and Addresses
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Names and Addresses

@@ -277,7 +277,7 @@ sidebar_position: 7
 
 - Remove the previously deprecated `StdError::Unauthorized`. Contract specific errors should be implemented using custom
   error types now (see
-  [migration guide](MIGRATING.md) 0.10 -> 0.11).
+  [migration guide](06-MIGRATING.md) 0.10 -> 0.11).
 - Use dependency `thiserror` instead of `snafu` to implement `StdError`. Along with this change, the `backtraces`
   feature now requires Rust nightly.
 - Rename `StdError::ParseErr::source` to `StdError::ParseErr::source_type` and
