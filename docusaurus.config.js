@@ -1,4 +1,4 @@
-const docsVersions = require('./versions.json');
+const docsVersions = require('./docs_versions.json');
 const cwplusVersions = require('./cw_plus_versions.json');
 
 const lastReleasedDocsVersion = docsVersions[0];
@@ -177,13 +177,17 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
           id: 'docs',
-          lastVersion: "current",
+          lastVersion: '0.14',
           routeBasePath: '/docs',
           sidebarPath: require.resolve('./sidebars/sidebars.js'),
           versions: {
             current: {
-              label: lastReleasedDocsVersion,
-              path: lastReleasedDocsVersion
+              label: "1.0",
+              path: "1.0"
+            },
+            0.14: {
+              label: "0.14",
+              path: "0.14"
             }
           }
         },
