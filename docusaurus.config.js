@@ -260,6 +260,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         id: 'ecosystem',
         path: 'ecosystem',
         routeBasePath: 'ecosystem',
+        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsCommunity.js'),
       },
     ],
@@ -269,6 +270,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         id: 'tutorials',
         path: 'tutorials',
         routeBasePath: 'tutorials',
+        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsTutorials.js'),
       },
     ],
@@ -278,6 +280,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         id: 'cw-plus',
         path: 'cw-plus',
         routeBasePath: 'cw-plus',
+        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsCwPlus.js'),
         lastVersion: "current",
         versions: {
