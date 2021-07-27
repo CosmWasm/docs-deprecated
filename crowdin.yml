@@ -1,0 +1,30 @@
+project_id: '467072'
+api_token_env: 'CROWDIN_PERSONAL_TOKEN'
+preserve_hierarchy: true
+files: [
+  # JSON translation files
+  {
+    source: '/i18n/en/**/*',
+    translation: '/i18n/%two_letters_code%/**/%original_file_name%',
+  },
+  # Docs Markdown files
+  {
+    source: '/docs/**/*',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%',
+  },
+  # Tutorials Markdown files
+  {
+    source: '/tutorials/**/*',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-tutorials/**/%original_file_name%',
+  },
+  # Ecosystem Markdown files
+  {
+    source: '/ecosystem/**/*',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-ecosystem/**/%original_file_name%',
+  },
+  # CWPLUS Markdown files
+  {
+    source: '/cw-plus/**/*',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-cw-plus/**/%original_file_name%',
+  },
+]
