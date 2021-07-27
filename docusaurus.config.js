@@ -71,14 +71,8 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           docsPluginId: 'cw-plus',
         },
         {
-          href: 'https://cosmwasm.com',
-          label: 'Website',
-          position: 'right',
-        },
-        {
-          href: 'https://github.com/CosmWasm',
-          label: 'GitHub',
-          position: 'right',
+          type: 'localeDropdown',
+          position: 'left',
         },
       ],
       hideOnScroll: true,
@@ -292,4 +286,8 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
       },
     ],
   ],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr'],
+  },
 });

@@ -38,14 +38,14 @@ pub const ADMIN_INDEX: Map<(&Addr, U8Key), &[u8]> = Map::new("admin_tokenpk");
 Now tokens are easily accessible by **admin** information. On every state change to `TOKENS`,
 `ADMIN` must be modified accordingly.
 
-## Plus-storage Indexing
+## Plus-storage Indexing {#plus-storage-indexing}
 
 Solution above would work but not beautiful...
 This is where [plus-storage/IndexedMap](https://github.com/CosmWasm/cosmwasm-plus/blob/main/packages/storage-plus/src/indexed_map.rs)
 comes in to the play. `IndexedMap` is a storage handler that indexes internally. Code below contains indexing code,
 also some boilerplate.
 
-### Composite Indexes
+### Composite Indexes {#composite-indexes}
 
 ```rust
 pub struct TokenIndexes<'a> {
@@ -116,7 +116,7 @@ fn test_tokens() {
 }
 ```
 
-### Unique Indexes
+### Unique Indexes {#unique-indexes}
 
 Above example covers the case which one admin can own multiple tokens.
 What if we want to ensure data is unique for a value? This is a common case.
