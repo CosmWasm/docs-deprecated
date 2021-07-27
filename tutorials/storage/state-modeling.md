@@ -29,7 +29,7 @@ Business Case as follows:
 - Group can contain multiple member person
 - Member can have role in a group: admin, super-admin, regular...
 
-## Naive Implementation
+## Naive Implementation {#naive-implementation}
 
 Here is any-to-any relation design with saving data using IDs.
 
@@ -83,7 +83,7 @@ pub struct MembershipStatus {
 pub const MEMBERSHIP_STATUSES: Map<&[u8], MembershipStatus> = Map::new("membership_statuses");
 ```
 
-## Optimized Implementation
+## Optimized Implementation {#optimized-implementation}
 
 Firstly, using ID for identifying persons might seem intuitive, but it creates redundancy.
 ID is just a value for identifying a user but users already identified by a unique value: `Address`.
@@ -147,7 +147,7 @@ What exactly we want?
 
 This could be done by building secondary indexes.
 
-## Back To Business Case
+## Back To Business Case {#back-to-business-case}
 
 
 
