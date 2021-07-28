@@ -37,10 +37,10 @@ pub const OWNER_INDEX: Map<(&Addr, U8Key), &[u8]> = Map::new("owner_tokenpk");
 Now tokens are easily accessible by **owner** information. On every state change to `TOKENS`,
 `owner` must be modified accordingly.
 
-## Plus-storage Indexing {#plus-storage-indexing}
+## storage-plus indexing {#storage-plus-indexing}
 
 Solution above will do the work but not optimal. Too much code complexity and manuel work. This is
-where [plus-storage/IndexedMap](https://github.com/CosmWasm/cosmwasm-plus/blob/main/packages/storage-plus/src/indexed_map.rs)
+where [storage-plus/IndexedMap](https://github.com/CosmWasm/cosmwasm-plus/blob/main/packages/storage-plus/src/indexed_map.rs)
 comes in to the play. `IndexedMap` is a storage handler that indexes internally. Two types of indexes
 available: [Unique Indexes](#unique-indexes) and [Multi Indexes](#multi-indexes)
 
