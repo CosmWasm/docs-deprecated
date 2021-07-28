@@ -6,7 +6,7 @@ export default function NavbarItem(props) {
   const { docsPluginId, type } = props
   const { pathname } = useLocation()
 
-  if (type === 'docsVersionDropdown' && pathname.search(new RegExp(`^/${docsPluginId}/`, 'g')) === -1) {
+  if (type === 'docsVersionDropdown' && pathname.search(new RegExp(`/${docsPluginId}/`, 'g')) === -1) {
     return null
   }
 
