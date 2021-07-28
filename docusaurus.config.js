@@ -72,7 +72,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         },
         {
           type: 'localeDropdown',
-          position: 'left',
+          position: 'right',
         },
       ],
       hideOnScroll: true,
