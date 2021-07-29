@@ -17,8 +17,8 @@ struct Token {
 }
 ```
 
-Tokens can be identified an auto incremented key, and this integer will be used as primary key. Let's use ticker as key,
-this will make each token unique.
+Tokens can be identified an auto incremented key, and this integer will be used as primary key. This will make each
+token unique.
 
 `(TokenPK) -> Token`
 
