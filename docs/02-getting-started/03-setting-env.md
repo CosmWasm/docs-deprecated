@@ -86,18 +86,6 @@ If command above throws error, this means your shell is different. If no errors,
 wasmd query bank total $NODE
 ```
 
-If no errors we are all good. Otherwise, set variables with the command below:
-
-```bash
-# bash
-export NODE="--node https://rpc.musselnet.cosmwasm.com:443"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3"
-
-# zsh
-export NODE=(--node "https://rpc.musselnet.cosmwasm.com:443")
-export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.01umayo --gas auto --gas-adjustment 1.3)
-```
-
 ## Setup Node REPL {#setup-node-repl}
 
 Beyond the standard CLI tooling, we have also produced a flexible TypeScript library
