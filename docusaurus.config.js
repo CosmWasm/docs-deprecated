@@ -35,11 +35,18 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           docsPluginId: 'docs',
         },
         {
-          type: 'doc',
-          docId: 'hijack-escrow/intro',
+          label: 'Learn',
           position: 'left',
-          label: 'Tutorials',
-          docsPluginId: 'tutorials',
+          items: [
+            {
+              to: 'dev-academy/intro',
+              label: 'Dev Academy',
+            },
+            {
+              to: 'tutorials/hijack-escrow/intro',
+              label: 'Tutorials',
+            },
+          ],
         },
         {
           label: 'dApps',
@@ -269,6 +276,16 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         routeBasePath: 'tutorials',
         editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsTutorials.js'),
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'dev-academy',
+        path: 'dev-academy',
+        routeBasePath: 'dev-academy',
+        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
+        sidebarPath: require.resolve('./sidebars/sidebarsDevAcademy.js'),
       },
     ],
     [
