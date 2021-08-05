@@ -174,10 +174,15 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           lastVersion: '0.14',
           routeBasePath: '/docs',
           sidebarPath: require.resolve('./sidebars/sidebars.js'),
+          onlyIncludeVersions: ['current', '0.14'],
           versions: {
             current: {
               label: "1.0",
               path: "1.0"
+            },
+            0.15: {
+              label: "0.15",
+              path: "0.15"
             },
             0.14: {
               label: "0.14",
