@@ -1,7 +1,8 @@
 const docsVersions = require('./docs_versions.json');
 const cwplusVersions = require('./cw_plus_versions.json');
 
-const lastReleasedDocsVersion = docsVersions[0];
+// const lastReleasedDocsVersion = docsVersions[0];
+const lastReleasedDocsVersion = "0.14";
 const lastReleasedCWPlusVersion = cwplusVersions[0];
 
 (module.exports = {
