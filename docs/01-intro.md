@@ -59,17 +59,13 @@ and to share their contract with others.
 
 * [Plus](/cw-plus/general/overview) is for state of art CosmWasm smart contracts.
 
-* [IBC](04-ibc/01-overview.md) is for all the things related to CosmWasm and IBC. Relayers, Active Network Connections,
-  IBC
-  enabled smart contracts and more.
-
 ## Further Studies {#further-studies}
 
 you can dig into our code and start writing your own contracts:
 
 * [A set of example contracts](https://github.com/CosmWasm/cosmwasm-examples) for you to fork and experiment with
-* Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.13.1/cosmwasm_std/)
-* Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.13.1/cosmwasm_storage/)
+* Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.14.0/cosmwasm_std/)
+* Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.14.0/cosmwasm_storage/)
 
 There are quite a few [high level articles on medium](https://medium.com/confio) that explain the various components of
 our stack and where we are going.
