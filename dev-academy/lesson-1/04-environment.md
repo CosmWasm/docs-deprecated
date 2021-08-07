@@ -66,7 +66,7 @@ If you have any problems here, check your `PATH`. `make install` will copy `wasm
 for building Go code from source.
 :::
 
-## Setup wasmd and Wallet
+## Setup wasmd and Wallet {#setup-wasmd-and-wallet}
 
 Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
 

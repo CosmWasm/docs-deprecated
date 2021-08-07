@@ -14,7 +14,7 @@ It provides a modular and step-by-step learning content.
 
 You can follow each folder carefully, and at the end you will have good knowledge of CosmWasm.
 
-## Content
+## Content {#content}
 
 - [Lesson 1](lesson-1)
   - [What Is Blockchain](lesson-1/01-what-is-blockchain.md)

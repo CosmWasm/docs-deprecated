@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Basics of Cosmos SDK and CosmWasm
 
-## Cosmos SDK
+## Cosmos SDK {#cosmos-sdk}
 
 > From [Cosmos SDK docs](https://docs.cosmos.network/v0.43/intro/overview.html)
 
@@ -32,7 +32,7 @@ Please read through Cosmos SDK overview documentation:
 - [Cosmos SDK Basics](https://docs.cosmos.network/v0.43/basics) covers basic concepts of cosmos sdk that is required
   for developing on cosmwasm without much cosmos-sdk knowledge.
 
-## CosmWasm
+## CosmWasm {#cosmwasm}
 
 :::info
 CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a
@@ -45,7 +45,7 @@ tooling and the same security model as the Cosmos Hub.
 In short, CosmWasm is a smart contract module that can be used with Cosmos SDK. For now it supports smart contracts
 written in Rust.
 
-## Differences?
+## Differences? {#differences}
 
 - Cosmos SDK is the underlying native application, modules are developed using go.
 - CosmWasm is an engine running on Cosmos SDK. Smart contracts are in rust for now.
