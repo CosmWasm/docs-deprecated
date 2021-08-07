@@ -44,7 +44,7 @@ where [storage-plus/IndexedMap](https://github.com/CosmWasm/cosmwasm-plus/blob/m
 comes in to the play. `IndexedMap` is a storage handler that indexes internally. Two types of indexes
 available: [Unique Indexes](#unique-indexes) and [Multi Indexes](#multi-indexes)
 
-### Unique Indexes
+### Unique Indexes {#unique-indexes}
 
 Uniqueness of data field in database is a quite common case.
 [UniqueIndex](https://github.com/CosmWasm/cosmwasm-plus/blob/v0.7.0/packages/storage-plus/src/indexes.rs) is an indexing
@@ -172,7 +172,7 @@ thread 'state::test::test_tokens' panicked at 'called `Result::unwrap()` on an `
 stack backtrace:
 ```
 
-### Multi Indexes
+### Multi Indexes {#multi-indexes}
 
 Multi indexes used when structure indexed by non-unique values. Here is a case from cw721 smart contract:
 
@@ -302,7 +302,7 @@ fn test_tokens() {
 }
 ```
 
-### Composite Multi Indexing
+### Composite Multi Indexing {#composite-multi-indexing}
 
 Imagine the following situation:
 we have a number of batches, each stored by its (numeric) batch id, than can change
