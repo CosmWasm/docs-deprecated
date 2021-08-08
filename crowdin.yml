@@ -27,4 +27,9 @@ files: [
     source: '/cw-plus/**/*',
     translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-cw-plus/**/%original_file_name%',
   },
+  # Dev Academy Markdown files
+  {
+    source: '/dev-academy/**/*',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-dev-academy/**/%original_file_name%',
+  },
 ]
