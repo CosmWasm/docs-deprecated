@@ -10,26 +10,26 @@ files: [
   # Docs Markdown files
   {
     source: '/docs/**/*',
-    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-docs/current/**/%original_file_name%',
   },
   # Tutorials Markdown files
   {
     source: '/tutorials/**/*',
-    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-tutorials/**/%original_file_name%',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-tutorials/**/%original_file_name%',
   },
   # Ecosystem Markdown files
   {
     source: '/ecosystem/**/*',
-    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-ecosystem/**/%original_file_name%',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-ecosystem/**/%original_file_name%',
   },
   # CWPLUS Markdown files
   {
     source: '/cw-plus/**/*',
-    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-cw-plus/**/%original_file_name%',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-cw-plus/**/%original_file_name%',
   },
   # Dev Academy Markdown files
   {
     source: '/dev-academy/**/*',
-    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-dev-academy/**/%original_file_name%',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-dev-academy/**/%original_file_name%',
   },
 ]
