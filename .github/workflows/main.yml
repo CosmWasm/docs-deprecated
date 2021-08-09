@@ -24,6 +24,7 @@ jobs:
           else
           npm i
           fi
+          npm run crowdin:sync
           npm run build
 
   gh-release:
@@ -54,5 +55,4 @@ jobs:
           npm i
           fi
           # translate
-          npm run crowdin:sync
           npm run deploy
