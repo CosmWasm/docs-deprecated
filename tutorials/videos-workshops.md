@@ -190,6 +190,7 @@ In this workshop, we chose the topic ¨Contract composition deep dive¨ as per o
 
 ### Introducción al Ecosistema Cosmos, CosmWasm y presentación del Riddlethon
 
+
 <div class="video">
 <iframe class="responsive-iframe" src="https://www.youtube.com/embed/0I3bkJQAkjM" scrolling="no" border="0
 " frameborder="no" framespacing="0" allowfullscreen="true" autoplay="false" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"> </iframe>
