@@ -30,6 +30,6 @@ files: [
   # Dev Academy Markdown files
   {
     source: '/dev-academy/**/*',
-    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-dev-academy/**/%original_file_name%',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-dev-academy/current/**/%original_file_name%',
   },
 ]
