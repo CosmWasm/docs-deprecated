@@ -1,6 +1,8 @@
 const docsVersions = require('./docs_versions.json');
 const cwplusVersions = require('./cw_plus_versions.json');
 
+const DefaultLocale = 'en';
+
 // const lastReleasedDocsVersion = docsVersions[0];
 const lastReleasedDocsVersion = "0.14";
 const lastReleasedCWPlusVersion = cwplusVersions[0];
@@ -290,7 +292,12 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         id: 'dev-academy',
         path: 'dev-academy',
         routeBasePath: 'dev-academy',
-        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
+        editUrl: ({locale, versionDocsDirPath, docPath}) => {
+          if (locale !== DefaultLocale) {
+            return `https://crowdin.com/project/cosmwasm-docs/${locale}`;
+          }
+          return `https://github.com/CosmWasm/docs/edit/main/${versionDocsDirPath}/${docPath}`;
+        },
         sidebarPath: require.resolve('./sidebars/sidebarsDevAcademy.js'),
       },
     ],
