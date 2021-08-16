@@ -31,7 +31,9 @@ Merges to `main` branch will automatically be deployed at https://docs.cosmwasm.
 
 ## Adding New Page
 
-- [/docs](docs) contains versioned CosmWasm documentation. Version follows cosmwasm-std.
+- [/docs](docs) contains next CosmWasm documentation. Version follows cosmwasm-std.
+- [/docs_versioned_docs](docs_versioned_docs) contains old and current versions CosmWasm documentation. Version follows
+  cosmwasm-std.
 - [/tutorials](tutorials) contains unversioned cosmwasm tutorials.
 - [/cw-plus](cw-plus) contains cosmwasm-plus documentation. It is listed under dApps.
 
