@@ -4,8 +4,8 @@ sidebar_position: 3
 
 # Cosmic dApp design
 
-The [`@cosmicdapp/design`](https://github.com/CosmWasm/dApps/tree/master/packages/design) package provides two kinds of
-resources: theme and components. The theme provides global styles for visual consistency across the dApps, whereas the
+The [`CosmWasm/dApps [Design]`](https://github.com/CosmWasm/dApps/tree/master/packages/design) package provides two kinds of
+resources: *theme* and *components*. The theme provides global styles for visual consistency across the dApps, whereas the
 components will give us layout primitives and reusable React components with internal logic.
 
 The example balance checker dApp will make use of some resources from this package, so let's take a look at them.

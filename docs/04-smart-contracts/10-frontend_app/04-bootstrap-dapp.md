@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Bootstrap dApp
 
-There are two approaches to bootstrap a new dApp: as a lerna package in the monorepo or as a standalone app.
+There are two approaches to bootstrap a new dApp: as a [Lerna](https://lerna.js.org/) package in the monorepo or as a standalone app.
 
 ## Monorepo template {#monorepo-template}
 

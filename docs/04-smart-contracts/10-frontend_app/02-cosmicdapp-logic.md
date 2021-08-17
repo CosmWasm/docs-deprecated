@@ -4,8 +4,8 @@ sidebar_position: 2
 
 # Cosmic dApp logic
 
-The [`@cosmicdapp/logic`](https://github.com/CosmWasm/dApps/tree/master/packages/logic) package provides three kinds of
-resources that will make it easier to develop CosmJS based dApps: config, utils, and service. In order to better
+The [`CosmWasm/dApps [Logic]`](https://github.com/CosmWasm/dApps/tree/master/packages/logic) package provides three kinds of
+resources that will make it easier to develop CosmJS based dApps: *[config](#config)*, *[utils](#utils)*, and *[service](#service)*. In order to better
 understand the example balance checker dApp that we'll be developing, we'll go over those utilities that will be used in
 the app.
 
@@ -58,14 +58,14 @@ Here you can find the definition for a `CoinMap` like the one above, which will 
 config file.
 
 There are also several utility functions for working with errors and currencies. In this tutorial we'll only be
-using `nativeCoinToDisplay()`, which takes two parameters: a `@cosmjs/launchpad` `Coin` and a `CoinMap`.
+using `nativeCoinToDisplay()`, which takes two parameters: a `[@cosmjs/launchpad](https://github.com/cosmos/cosmjs/tree/main/packages/launchpad)` `Coin` and a `CoinMap`.
 
-It makes use of those parameters and the `Decimal` class from `@cosmjs/math` to return a `Coin` with a more user
+It makes use of those parameters and the `Decimal` class from `[@cosmjs/math](https://github.com/cosmos/cosmjs/tree/main/packages/math)` to return a `Coin` with a more user
 friendly `amount` field, that will be used for printing native coins in the balance checker.
 
 ## Service {#service}
 
-This resource offers several React context providers, some utility functions, and a `ProtectedSwitch` React component.
+This resource offers several [React](https://reactjs.org/) context providers, some utility functions, and a `[ProtectedSwitch](#protectedswitch)` React component.
 
 ### Sdk provider {#sdk-provider}
 
