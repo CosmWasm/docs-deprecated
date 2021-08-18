@@ -6,7 +6,7 @@ sidebar_position: 2
 # Cw721 Basic
 
 cw721-basic source
-code: [https://github.com/CosmWasm/cosmwasm-plus/blob/master/contracts/cw721-base/README.md](https://github.com/CosmWasm/cosmwasm-plus/blob/master/contracts/cw721-base/README.md)
+code: [https://github.com/CosmWasm/cw-plus/blob/master/contracts/cw721-base/README.md](https://github.com/CosmWasm/cw-plus/blob/master/contracts/cw721-base/README.md)
 
 This is a basic implementation of a cw721 NFT contract. It implements the [cw721 spec](spec.md) and is designed to be
 deployed as is, or imported into other contracts to easily build cw721-compatible NFTs with custom logic.
@@ -16,7 +16,7 @@ Implements:
 - [x] cw721 Base
 - [x] Metadata extension
 - [ ] Enumerable extension (AllTokens done, but not Tokens -
-  requires [#81](https://github.com/CosmWasm/cosmwasm-plus/issues/81))
+  requires [#81](https://github.com/CosmWasm/cw-plus/issues/81))
 
 ## Implementation {#implementation}
 

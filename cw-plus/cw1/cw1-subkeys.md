@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # CW1 Subkeys
 
-[cw1 Subkeys](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw1-subkeys)
+[cw1 Subkeys](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw1-subkeys)
 is inspired
 by [Cosmos SDK feature proposal](https://forum.cosmos.network/t/proposal-adding-subkey-feature-to-cosmos-sdk-and-apply-it-to-the-hub/2358)
 .
@@ -25,7 +25,7 @@ allowance to spend tokens, but no permissioned message execution and vice versa.
 First, initialize node repl:
 
 ```shell
-npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/v0.3.2/contracts/cw1-subkeys/helpers.ts
+npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/v0.3.2/contracts/cw1-subkeys/helpers.ts
 ```
 
 :::caution

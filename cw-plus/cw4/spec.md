@@ -5,7 +5,7 @@ sidebar_position: 1
 # CW4 Spec: Group Members
 
 cw4 package source
-code: [https://github.com/CosmWasm/cosmwasm-plus/blob/master/packages/cw4/README.md](https://github.com/CosmWasm/cosmwasm-plus/blob/master/packages/cw4/README.md)
+code: [https://github.com/CosmWasm/cw-plus/blob/master/packages/cw4/README.md](https://github.com/CosmWasm/cw-plus/blob/master/packages/cw4/README.md)
 
 cw4 is a spec for storing group membership, which can be combined with cw3 multisigs. The purpose is to store a set of
 members/voters that can be accessed to determine permissions in another section.
@@ -91,7 +91,7 @@ call with the following format:
 }
 ```
 
-See [hook.rs](https://github.com/CosmWasm/cosmwasm-plus/blob/master/packages/cw4/src/hook.rs) for full details. Note
+See [hook.rs](https://github.com/CosmWasm/cw-plus/blob/master/packages/cw4/src/hook.rs) for full details. Note
 that this example shows an update or an existing member. `old_weight` will be missing if the address was added for the
 first time. And
 `new_weight` will be missing if the address was removed.

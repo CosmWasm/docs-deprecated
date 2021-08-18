@@ -7,7 +7,7 @@ sidebar_position: 1
 # Plus Contracts
 
 Plus contracts are collection of production-quality CosmWasm contracts collected
-at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).
+at [CosmWasm/cw-plus](https://github.com/CosmWasm/cw-plus).
 
 ## Contents {#contents}
 
@@ -20,4 +20,4 @@ at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).
 
 ## Contribution {#contribution}
 
-All contributions are welcome. You can open PRs at [CosmWasm/cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus).
+All contributions are welcome. You can open PRs at [CosmWasm/cw-plus](https://github.com/CosmWasm/cw-plus).

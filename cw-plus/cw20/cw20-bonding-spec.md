@@ -6,7 +6,7 @@ sidebar_position: 4
 # CW20 Bonding curve
 
 cw20-bonding-curve source
-code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-bonding)
+code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-bonding](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-bonding)
 
 This builds on the [Basic cw20 interface](spec.md)
 as implemented in [`cw20-base`](cw20-base-spec.md)

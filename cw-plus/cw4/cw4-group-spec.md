@@ -5,7 +5,7 @@ sidebar_position: 2
 # CW4 Group
 
 cw4-group source
-code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw4-group](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw4-group)
+code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw4-group](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw4-group)
 
 This is a basic implementation of the [cw4 spec](spec.md). It fulfills all elements of the spec, including the raw query
 lookups, and it designed to be used as a backing storage for
