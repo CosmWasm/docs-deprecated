@@ -339,7 +339,7 @@ pub fn handle_execute(
 ### Query {#query}
 
 This contracts query method is very simple, only configuration query. For more complex queries
-check [cosmwasm-plus](https://github.com/CosmWasm/cosmwasm-plus/) contracts. If you are starting to learn from zero, now
+check [cosmwasm-plus](https://github.com/CosmWasm/cw-plus/) contracts. If you are starting to learn from zero, now
 you have 20 minutes of cosmwasm experience. Go ahead skim plus contracts to see the simplicity.
 
 ```rust

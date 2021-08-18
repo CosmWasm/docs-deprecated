@@ -35,7 +35,7 @@ the following command to start up the `@cosmjs/cli` with some cw20-specific help
 (in addition to all the general helpers it has).
 
 ```shell
-npx @cosmjs/cli@^0.24 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
+npx @cosmjs/cli@^0.24 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/master/contracts/cw20-base/helpers.ts
 ```
 
 Once this downloads the source and starts up, you should see a bunch of yellow text (explaining what code is preloaded),
@@ -109,9 +109,9 @@ contracts.
 ## Sending cw20 Tokens {#sending-cw20-tokens}
 
 Now that you have set up your client, let's get going and try out the
-[`cw20-base`](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-base)
+[`cw20-base`](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-base)
 token contract, which implements the
-[`cw20` spec](https://github.com/CosmWasm/cosmwasm-plus/blob/master/packages/cw20/README.md).
+[`cw20` spec](https://github.com/CosmWasm/cw-plus/blob/master/packages/cw20/README.md).
 
 We will show how to upload the compiled wasm code, instantiate your own contract (possibly reusing code), and then mint
 and transfer tokens on that contract.

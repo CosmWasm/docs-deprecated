@@ -64,10 +64,10 @@ CosmWasm extends Cosmos SDK governance module to enable deployment of smart cont
 
 There are two options to get the sample contract:
 
-1. Download [source code](https://github.com/CosmWasm/cosmwasm-plus/tree/v0.1.1/contracts/cw20-base),
+1. Download [source code](https://github.com/CosmWasm/cw-plus/tree/v0.1.1/contracts/cw20-base),
    and [compile](https://docs.cosmwasm.com/getting-started/compile-contract) it your self.
 
-2. Download [pre-compiled binary](https://github.com/CosmWasm/cosmwasm-plus/releases/download/v0.1.1/cw20_base.wasm).
+2. Download [pre-compiled binary](https://github.com/CosmWasm/cw-plus/releases/download/v0.1.1/cw20_base.wasm).
 
 ## Submit Proposal {#submit-proposal}
 
@@ -75,7 +75,7 @@ Deployment command is down below:
 
 ```shell
 wasmcli tx gov submit-proposal wasm-store cw1-subkeys.wasm \
- --source “https://github.com/CosmWasm/cosmwasm-plus" \
+ --source “https://github.com/CosmWasm/cw-plus" \
  —-builder “cosmwasm/workspace-optimizer:0.10.3” \
  —-title “Enable cw1-subkeys functionality” \
  —-description “DAO and DSOs need this!” \

@@ -40,14 +40,14 @@ Now tokens are easily accessible by **owner** information. On every state change
 ## storage-plus indexing {#storage-plus-indexing}
 
 Solution above will do the work but not optimal. Too much code complexity and manuel work. This is
-where [storage-plus/IndexedMap](https://github.com/CosmWasm/cosmwasm-plus/blob/main/packages/storage-plus/src/indexed_map.rs)
+where [storage-plus/IndexedMap](https://github.com/CosmWasm/cw-plus/blob/main/packages/storage-plus/src/indexed_map.rs)
 comes in to the play. `IndexedMap` is a storage handler that indexes internally. Two types of indexes
 available: [Unique Indexes](#unique-indexes) and [Multi Indexes](#multi-indexes)
 
 ### Unique Indexes {#unique-indexes}
 
 Uniqueness of data field in database is a quite common case.
-[UniqueIndex](https://github.com/CosmWasm/cosmwasm-plus/blob/v0.7.0/packages/storage-plus/src/indexes.rs) is an indexing
+[UniqueIndex](https://github.com/CosmWasm/cw-plus/blob/v0.7.0/packages/storage-plus/src/indexes.rs) is an indexing
 helper for achieving this functionality.
 
 ```rust

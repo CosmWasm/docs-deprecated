@@ -5,7 +5,7 @@ sidebar_position: 2
 # CW3 Fixed Multisig
 
 cw3-fixed-multisig source
-code: [https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw3-fixed-multisig](https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw3-fixed-multisig)
+code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw3-fixed-multisig](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw3-fixed-multisig)
 
 This is a simple implementation of the [cw3 spec](spec.md). It is a multisig with a fixed set of addresses created upon
 initialization. Each address may have the same weight (K of N), or some may have extra voting power. This works much
