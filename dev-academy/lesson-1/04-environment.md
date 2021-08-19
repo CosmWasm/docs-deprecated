@@ -12,6 +12,14 @@ recommended for contract operations, since JSON manipulation is not intuitive wi
 
 For the whole course, we will be using a public testnet to make things simpler.
 
+## Gitpod
+
+[Gitpod](https://www.gitpod.io/) is an online development environment. We have a gitpod image that you can base your
+projects on that contains all the requirements below. Gitpod is recommended if you have stable internet connection.
+Add [.gitpod.yml](https://github.com/CosmWasm/cosmwasm-template/blob/master/.gitpod.yml) file to your project's root
+then push it to GitHub. After installing [gitpod extension](https://www.gitpod.io/extension-activation/), on github
+project repo, there will be `Gitpod` button which will create a workspace for you to work on.
+
 ## Go {#go}
 
 You can setup golang following [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest
@@ -21,7 +29,7 @@ require go version `v1.15`.
 ## Rust {#rust}
 
 Assuming you have never worked with rust, you will first need to install some tooling. The standard approach is to
-use `rustup` to maintain dependencies and handle updating multiple versions of
+use `rustup` to wallettain dependencies and handle updating multiple versions of
 `cargo` and `rustc`, which you will be using.
 
 ### Installing Rust in Linux and Mac {#installing-rust-in-linux-and-mac}
@@ -52,8 +60,8 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.16.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.16.0
+# replace the v0.18.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.18.0
 make install
 
 # verify the installation
@@ -80,10 +88,10 @@ Setup the client:
 
 ```shell
 # add wallets for testing
-wasmd keys add main
+wasmd keys add wallet
 >
 {
-  "name": "main",
+  "name": "wallet",
   "type": "local",
   "address": "wasm13nt9rxj7v2ly096hm8qsyfjzg5pr7vn5saqd50",
   "pubkey": "wasmpub1addwnpepqf4n9afaefugnfztg7udk50duwr4n8p7pwcjlm9tuumtlux5vud6qvfgp9g",
@@ -96,7 +104,7 @@ You need some tokens in your address to interact. If you are using local node yo
 from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a main) '{"denom":"usponge","address":$addr}') && curl -X POST --header
+JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"usponge","address":$addr}') && curl -X POST --header
 "Content-Type: application/json" --data "$JSON" https://faucet.oysternet.cosmwasm.com/credit
 ```
 
@@ -122,6 +130,46 @@ If command above throws error, this means your shell is different. If no errors,
 ```bash
 wasmd query bank total $NODE
 ```
+
+## Setup linux tools
+
+We will be using few linux tools extensively:
+```shell
+apt install jq curl
+```
+
+## Setup JS CLI client
+
+Other way to use and interact with on-chain contracts is CosmJS interactive client
+[@cosmjs/cli](https://github.com/cosmos/cosmjs/tree/main/packages/cli)
+
+To use it, install [node.js 12+](https://nodejs.org/en/download/) and [npx](https://www.npmjs.com/package/npx)
+
+```shell
+npx @cosmjs/cli@^0.25 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
+```
+
+Now you will see an interactive shell popped up.
+
+Code below setups a client that speaks to pebblenet, generates and address and then requests tokens from faucet.
+"password" is the password of the key file.
+This key is different from wasmd key generated above
+
+```typescript
+const [addr, client] = await useOptions(pebblenetOptions).setup("password");
+client.getAccount(addr);
+```
+
+You should see something similar to:
+```json
+{
+  address: 'wasm1kfaqnxcsz6pwxyv0h468594g6g2drwxfrrwslv',
+  pubkey: null,
+  accountNumber: 326,
+  sequence: 0
+}
+```
+
 
 ## Setting up your IDE {#setting-up-your-ide}
 
