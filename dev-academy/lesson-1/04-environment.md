@@ -29,7 +29,7 @@ require go version `v1.15`.
 ## Rust {#rust}
 
 Assuming you have never worked with rust, you will first need to install some tooling. The standard approach is to
-use `rustup` to wallettain dependencies and handle updating multiple versions of
+use `rustup` to download dependencies and handle updating multiple versions of
 `cargo` and `rustc`, which you will be using.
 
 ### Installing Rust in Linux and Mac {#installing-rust-in-linux-and-mac}
