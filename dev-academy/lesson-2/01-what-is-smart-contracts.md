@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# What Is Smart Contracts?
+# What are Smart Contracts?
 
 :::note Wikipedia
 A smart contract is a computer program or a transaction protocol which is intended to automatically execute, control
@@ -25,9 +25,9 @@ allowfullscreen></iframe>
 This channel is a first stop for blockchain learners. I highly recommend you to explore other videos.
 
 In our context, CosmWasm is the framework provides code and tooling to develop smart contracts and infrastructure to
-run it on chain. For now smart contracts written using Rust.
+run it on chain. For now smart contracts are written using Rust.
 
-Here is a small code smart contract execution logic to help to understand.
+Here is a short code showing the smart contract execution logic to help to understand.
 
 ```rust
 /// This logic is used to transfer tokens/cash from one account to another
@@ -69,7 +69,7 @@ pub fn execute_transfer(
 }
 ```
 
-As you can see smart contracts are now magic and very similar to any other programmed logic.
+As you can see smart contracts are not magic and very similar to any other programmed logic.
 
 Differences from any backend development are new concepts from cryptography and other disciplines:
   - [hash](https://www.investopedia.com/terms/h/hash.asp)
