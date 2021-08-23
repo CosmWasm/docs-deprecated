@@ -73,7 +73,7 @@ This message contains initial state of the contract.
 ```shell
 INIT=$(jq -n --arg wallet $(wasmd keys show -a wallet) '{"name":"Golden Stars","symbol":"STAR","decimals":2,"initial_balances":[{"address":"wasm1n8aqd9jq9glhj87cn0nkmd5mslz3df8zm86hrh","amount":"10000"},{"address":"wasm13y4tpsgxza44yq76qvj69sakq4jmeyqudwgwpk","amount":"10000"},{"address":$wallet,"amount":"10000"}],"mint":{"minter":$wallet}}')
 
-wasmd tx wasm instantiate 135 "$INIT" --from wallet $TXFLAG --label "first cw20"
+wasmd tx wasm instantiate $CODE_ID "$INIT" --from wallet $TXFLAG --label "first cw20"
 ```
 
 You will see this output indicating that instantiation transaction is success:
