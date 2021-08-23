@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Smart Contract Interaction
+# Basics of Smart Contract Interactions
 
 As mentioned before smart contracts are executable codes.
 In the next lessons, we will learn how to write one. Until then best to use already written to keep things simple.
