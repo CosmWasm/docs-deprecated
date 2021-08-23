@@ -21,15 +21,15 @@ You will see a list of available contracts on the repository page.
 Go click **Releases** button to see tagged binary executables. You can download binaries and deploy to
 compatible blockchains.
 
-Let's download cw20-base binary code here
-[cw20-base](https://github.com/CosmWasm/cw-plus/releases/download/v0.8.0/cw20_base.wasm)
+We will use cw20 prebuilt binary for this course: [cw20-base](https://github.com/CosmWasm/cw-plus/releases/download/v0.8.0/cw20_base.wasm)
 
-Please don't pay attention to cw20-base details, just focus on getting a contract out there.
+Please don't pay attention to cw20-base details, just focus on getting a contract on a testnet.
 
 ## Store
 
 We will deploy the code using `wasmd` CLI we installed earlier.
 ```sh
+curl -LJO https://github.com/CosmWasm/cw-plus/releases/download/v0.8.0/cw20_base.wasm
 RES=$(wasmd tx wasm store cw20_base.wasm --from wallet $TXFLAG -y)
 
 # get code id
