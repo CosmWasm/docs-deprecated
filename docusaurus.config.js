@@ -4,7 +4,7 @@ const cwplusVersions = require('./cw_plus_versions.json');
 const DefaultLocale = 'en';
 
 // const lastReleasedDocsVersion = docsVersions[0];
-const lastReleasedDocsVersion = "0.14";
+const lastReleasedDocsVersion = "0.16";
 const lastReleasedCWPlusVersion = cwplusVersions[0];
 
 (module.exports = {
@@ -181,18 +181,18 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         docs: {
           editUrl: 'https://github.com/CosmWasm/docs/edit/main',
           id: 'docs',
-          lastVersion: '0.14',
+          lastVersion: lastReleasedDocsVersion,
           routeBasePath: '/docs',
           sidebarPath: require.resolve('./sidebars/sidebars.js'),
-          onlyIncludeVersions: ['current', '0.14'],
+          onlyIncludeVersions: ['current', '0.14', '0.16'],
           versions: {
             current: {
               label: "1.0",
               path: "1.0"
             },
-            0.15: {
-              label: "0.15",
-              path: "0.15"
+            0.16: {
+              label: "0.16",
+              path: "0.16"
             },
             0.14: {
               label: "0.14",
