@@ -4,18 +4,17 @@ sidebar_position: 5
 
 # Uploading and Interacting
 
-We have the binary ready. Now it is time to see some wasm action. You can use [Go CLI](#go-cli) or
-[Node Console](#node-console) as you wish.
+We have the binary ready. Now it is time to see some wasm action. You can use [Go CLI](#go-cli) or [Node Console](#node-console).
 
 ## Go CLI {#go-cli}
 
-We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to
-the blockchain. Afterwards, you can download the bytecode to verify it is proper:
+We generated a wasm binary executable in the previous chapter. Let's upload the code to the blockchain. Once that is complete, you can download the bytecode to verify it.
 
 ```shell
-# see how many codes we have now
+# see how many contracts we have now
 wasmd query wasm list-code $NODE
 
+# now we store the bytecode on chain
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
 RES=$(wasmd tx wasm store artifacts/cw_escrow.wasm --from fred $TXFLAG -y)
@@ -33,11 +32,11 @@ diff artifacts/cw_escrow.wasm download.wasm
 
 ### Instantiating the Contract {#instantiating-the-contract}
 
-We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to
-control payout and upon release, the funds go to bob.
+We can now create an instance of this wasm contract. Here the verifier will fund an escrow, that will allow fred to control payout and upon release, the funds go to bob.
 
 ```shell
 # instantiate contract and verify
+# the --amount flag sets the amount the contract has control over
 INIT=$(jq -n --arg fred $(wasmd keys show -a fred) --arg bob $(wasmd keys show -a bob) '{"arbiter":$fred,"recipient":$bob}')
 wasmd tx wasm instantiate $CODE_ID "$INIT" \
     --from fred --amount=50000usponge  --label "escrow 1" $TXFLAG -y
@@ -54,7 +53,7 @@ wasmd query bank balances $CONTRACT $NODE
 # you can dump entire contract state
 wasmd query wasm contract-state all $CONTRACT $NODE
 
-# note that we prefix the key "config" with two bytes indicating it's length
+# note that we prefix the key "config" with two bytes indicating its length
 # echo -n config | xxd -ps
 # gives 636f6e666967
 # thus we have a key 0006636f6e666967
@@ -73,8 +72,7 @@ wasmd query wasm contract-state smart $CONTRACT '{}' $NODE
 # (since we didn't implement any valid QueryMsg, we just get a parse error back)
 ```
 
-Once we have the funds in the escrow, let us try to release them. First, failing to do so with a key that is not the
-verifier, then using the proper key to release.
+Once we have the funds in the escrow, we can try to release them. If we try with a key that's not the arbiter it should fail. If we use the correct key, the funds will be released.
 
 ```shell
 # execute fails if wrong person
@@ -102,9 +100,7 @@ wasmd query bank balances $CONTRACT $NODE
 Node console needs to be updated. The code below is obsolete
 :::
 
-If you set up the Node Console / REPL in the [client setup section](./setting-env#setup-node-repl), you can use that to
-deploy and execute your contract. I think you will find that JSON manipulation and parsing is a bit nicer in JavaScript
-than in Shell Script.
+If you set up the Node Console / REPL in the [client setup section](./setting-env#setup-node-repl), you can use that to deploy and execute your contract. I think you will find that JSON manipulation and parsing is a bit nicer in JavaScript than in Shell Script.
 
 First, go to the cli directory and start up your console:
 
@@ -185,8 +181,7 @@ JSON.parse(fromUtf8(raw))
 
 ### Executing Contract with JS {#executing-contract-with-js}
 
-Once we have properly configured the contract, let's show how to use it, both the proper "approve"
-command:
+Once we have properly configured the contract, let's show how to use it, both the proper "approve" command:
 
 ```js
 const approve = {approve: {quantity: [{amount: "50000", denom: "usponge"}]}};
