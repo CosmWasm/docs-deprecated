@@ -7,7 +7,7 @@ sidebar_position: 1
 # Introduction
 
 :::note Synopsis
-CosmWasm is a new smart contracting platform built for the cosmos ecosystem. If you haven't yet heard
+CosmWasm is a new smart contracting platform built for the Cosmos ecosystem. If you haven't yet heard
 of it, please [check out this intro](https://blog.cosmos.network/announcing-the-launch-of-cosmwasm-cc426ab88e12). The
 purpose of this documentation is to give a deep dive into the technology for developers who wish to try it out or
 integrate it into their product. Particularly, it is aimed at Go developers with experience with the Cosmos SDK, as well
@@ -43,7 +43,7 @@ and to share their contract with others.
 
 * [Testnets](/ecosystem/testnets/build-requirements) is a good first point if you are searching for a live network to
   test and
-  hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joined
+  hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators joining
   the testnets**", said no one ever 😉
 
 * [Learn](/tutorials/simple-option/intro) will demonstrate developing smart contracts from zero to production
@@ -55,9 +55,9 @@ and to share their contract with others.
   CosmWasm tech
   stack recorded by our team in various events and organisations.
 
-* [Ecosystem](/ecosystem/overview) for ecosystem overview.
+* [Ecosystem](/ecosystem/overview) provides an ecosystem overview.
 
-* [Plus](/cw-plus/general/overview) is for state of art CosmWasm smart contracts.
+* [Plus](/cw-plus/general/overview) is for state-of-the-art, production ready CosmWasm smart contracts.
 
 ## Further Studies {#further-studies}
 
