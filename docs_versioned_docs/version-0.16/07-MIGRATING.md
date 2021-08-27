@@ -6,7 +6,7 @@ sidebar_position: 7
 
 This guide explains what is needed to upgrade contracts when migrating over major releases of `cosmwasm`. Note that you
 can also view the
-[complete CHANGELOG](07-CHANGELOG.md) to understand the differences.
+[complete CHANGELOG](08-CHANGELOG.md) to understand the differences.
 ## 0.15 -> 0.16
 
 - Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
