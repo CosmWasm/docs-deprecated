@@ -5,7 +5,7 @@ sidebar_position: 3
 # Environment Setup
 
 You need an environment to run contracts. You can either run your node locally or connect to an existing network. For
-easy testing, oysternet network is online, you can use it to deploy and run your contracts.
+easy testing, pebblenet network is online, you can use it to deploy and run your contracts.
 
 When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. Although Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the Shell/Go client.
@@ -39,7 +39,7 @@ First, [install rustup](https://rustup.rs/). Once installed, make sure you have 
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.50.0+, update
+# If this is lower than 1.51.0+, update
 rustup update stable
 
 rustup target list --installed
@@ -78,10 +78,10 @@ for building Go code from source.
 
 Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
 
-First source the oysternet cosmwasm public network configurations to the shell:
+First source the pebblenet cosmwasm public network configurations to the shell:
 
 ```shell
-source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/defaults.env)
+source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/pebblenet-1/defaults.env)
 ```
 
 Setup the client:
@@ -104,8 +104,10 @@ You need some tokens in your address to interact. If you are using local node yo
 from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"usponge","address":$addr}') && curl -X POST --header
-"Content-Type: application/json" --data "$JSON" https://faucet.oysternet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble
+
+","address":$addr}') && curl -X POST --header
+"Content-Type: application/json" --data "$JSON" https://faucet.pebblenet.cosmwasm.com/credit
 ```
 
 ## Export wasmd Parameters {#export-wasmd-parameters}
@@ -118,11 +120,11 @@ Best way to configure `wasmd` is by setting up environment variables below:
 ```bash
 # bash
 export NODE="--node $RPC"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001usponge --gas auto --gas-adjustment 1.3"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3"
 
 # zsh
 export NODE=(--node $RPC)
-export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001usponge --gas auto --gas-adjustment 1.3)
+export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3)
 ```
 
 If command above throws error, this means your shell is different. If no errors, try running this:
