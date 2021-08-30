@@ -8,7 +8,7 @@ Querying is the other half of the coin to messages. You can think of queries as 
 
 Generally you will find the available query messages in `msg.rs` or `query.rs`, depending on how the contract author has structured the code.
 
-You can query via an external client (over API or via CLI), or an internal client (within a contract, to another contract). Some of the finer details of how this works can be found in the [Querying Architecture section](/03-architecture/01-query.md).
+You can query via an external client (over API or via CLI), or an internal client (within a contract, to another contract). Some of the finer details of how this works can be found in the [Querying Architecture section](/03-architecture/04-query.md).
 
 Most queries you use will be custom queries. These access the contract's data store in read-only mode. These queries can look up data and perform additional computation or processing as needed. As a result, a gas limit is enforced on these queries.
 

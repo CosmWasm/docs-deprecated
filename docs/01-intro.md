@@ -16,18 +16,9 @@ as Rust developers looking for a blockchain platform.
 
 ## How to use CosmWasm {#how-to-use-cosmwasm}
 
-CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a
-blockchain using the Cosmos SDK can quickly and easily add CosmWasm smart contracting support to their chain, without
-adjusting existing logic. We also provide a sample binary of CosmWasm integrated into the `gaiad` binary,
-called [`wasmd`](https://github.com/CosmWasm/wasmd), so you can launch a new smart-contract enabled blockchain out of
-the box, using documented and tested tooling and the same security model as the Cosmos Hub.
+CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a blockchain using the Cosmos SDK can quickly and easily add CosmWasm smart contracting support to their chain, without adjusting existing logic. We also provide a sample binary of CosmWasm integrated into the `gaiad` binary, called [`wasmd`](https://github.com/CosmWasm/wasmd), so you can launch a new smart-contract enabled blockchain out of the box, using documented and tested tooling and the same security model as the Cosmos Hub.
 
-You will need a running blockchain to host your contracts and use them from an app. We will explain how
-to [connect to a testnet](/02-getting-started/03-setting-env.md#setting-up-environment)
-or [set up a local "dev net"](/02-getting-started/03-setting-env.md#run-local-node-optional) in a later section. And
-plan to
-soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo
-and to share their contract with others.
+You will need a running blockchain to host your contracts and use them from an app. We will explain how to [connect to a testnet](/02-getting-started/03-setting-env.md#setting-up-environment) or [set up a local "dev net"](/02-getting-started/03-setting-env.md#run-local-node-optional) in a later section. And plan to soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo and to share their contract with others.
 
 ## Sections {#sections}
 
@@ -67,8 +58,6 @@ you can dig into our code and start writing your own contracts:
 * Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.14.0/cosmwasm_std/)
 * Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.14.0/cosmwasm_storage/)
 
-There are quite a few [high level articles on medium](https://medium.com/confio) that explain the various components of
-our stack and where we are going.
+There are quite a few [high level articles on medium](https://medium.com/confio) that explain the various components of our stack and where we are going.
 
-Many thanks to the [Interchain Foundation](https://interchain.io/) for funding most of the development work to bring
-CosmWasm to production.
+Many thanks to the [Interchain Foundation](https://interchain.io/) for funding most of the development work to bring CosmWasm to production.
