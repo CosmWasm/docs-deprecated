@@ -132,6 +132,15 @@ If command above throws error, this means your shell is different. If no errors,
 ```bash
 wasmd query bank total $NODE
 ```
+It means that you can now interact with the node you have configured. You can check that your faucet request has been successful by thecking the balance of your wallet bank account by trying the command:
+```bash
+wasmd query bank balances $(wasmd keys show -a wallet) $NODE
+```
+and you can look at the various commands by exploring
+```bash
+wasmd help
+```
+
 
 ## Setup linux tools
 
