@@ -121,7 +121,9 @@ Best way to configure `wasmd` is by setting up environment variables below:
 # bash
 export NODE="--node $RPC"
 export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3"
-
+```
+or
+```bash
 # zsh
 export NODE=(--node $RPC)
 export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3)
