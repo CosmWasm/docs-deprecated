@@ -104,10 +104,7 @@ You need some tokens in your address to interact. If you are using local node yo
 from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble
-
-","address":$addr}') && curl -X POST --header
-"Content-Type: application/json" --data "$JSON" https://faucet.pebblenet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.pebblenet.cosmwasm.com/credit
 ```
 
 ## Export wasmd Parameters {#export-wasmd-parameters}
