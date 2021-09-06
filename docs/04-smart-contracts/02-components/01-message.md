@@ -26,7 +26,7 @@ pub enum ExecuteMsg {
 }
 ```
 
-The context of this code is [here](https://github.com/CosmWasm/cosmwasm-examples/blob/main/contracts/nameservice/src/msg.rs#L13).
+The context of this code is [here](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/msg.rs#L13).
 
 This can then be worked with in `contract.rs`. Each of these will be handled in the `execute` function like so:
 
@@ -45,4 +45,4 @@ pub fn execute(
 }
 ```
 
-The source code for the [execute function](https://github.com/CosmWasm/cosmwasm-examples/blob/main/contracts/nameservice/src/contract.rs#L31).
+The source code for the [execute function](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/contract.rs#L31).

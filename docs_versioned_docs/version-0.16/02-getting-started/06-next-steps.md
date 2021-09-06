@@ -19,7 +19,7 @@ enables a thief to steal funds.
 - [cosmwasm/cw-plus](https://github.com/CosmWasm/cw-plus): Production grade, ready to secure billions, smart
   contracts. Maintained and developed actively by Confio. Community made high quality smart contracts are hosted
   here.
-- [cosmwasm/cw-examples](https://github.com/CosmWasm/cosmwasm-examples): Community made smart contracts.
+- [cosmwasm/cw-examples](https://github.com/CosmWasm/cw-examples): Community made smart contracts.
   Contributions are welcome.
 - [InterWasm DAO](https://github.com/CosmWasm/InterWasmDAO): DAO for CosmWasm. If you have a great community
   good project and require funds or help, create an [IWP](https://github.com/CosmWasm/InterWasmDAO#interwasm-proposalsiwps)

@@ -12,14 +12,14 @@ Node.js console.
 ## Compiling and Testing Contract {#compiling-and-testing-contract}
 
 Let's download the repo in which we collect
-[`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) and try out an existing simple name service
+[`cw-examples`](https://github.com/CosmWasm/cw-examples) and try out an existing simple name service
 contract where mimics a name service marketplace. Also this tutorials is the defacto cosmos-sdk entrance tutorial.
 First, clone the repo and try to build the wasm bundle:
 
 ```shell
 # get the code
-git clone https://github.com/CosmWasm/cosmwasm-examples
-cd cosmwasm-examples
+git clone https://github.com/CosmWasm/cw-examples
+cd cw-examples
 git fetch --tags
 git checkout nameservice-0.11.0
 cd nameservice

@@ -67,7 +67,7 @@ and to share their contract with others.
 
 you can dig into our code and start writing your own contracts:
 
-* [A set of example contracts](https://github.com/CosmWasm/cosmwasm-examples) for you to fork and experiment with
+* [A set of example contracts](https://github.com/CosmWasm/cw-examples) for you to fork and experiment with
 * Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.13.1/cosmwasm_std/)
 * Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.13.1/cosmwasm_storage/)
 
