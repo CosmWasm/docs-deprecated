@@ -30,7 +30,7 @@ Compiling proc-macro2 v1.0.24
   Compiling cosmwasm-std v0.13.2
   Compiling cosmwasm-schema v0.13.2
   Compiling cosmwasm-storage v0.13.2
-  Compiling simple-option v0.8.0 (/home/orkunkl/Workspace/cosmwasm/cosmwasm-examples/simple-option)
+  Compiling simple-option v0.8.0 (/home/orkunkl/Workspace/cosmwasm/cw-examples/simple-option)
     Finished test [unoptimized + debuginfo] target(s) in 25.42s
       Running target/debug/deps/simple_option-6787c8970c576a03
 
@@ -50,7 +50,7 @@ All good.
  Timecode [https://vimeo.com/457702442#t=39s](https://vimeo.com/457702442#t=39s)
 :::
 
-[src/lib.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/lib.rs) file contains wasm
+[src/lib.rs](https://github.com/CosmWasm/cw-examples/blob/master/simple-option/src/lib.rs) file contains wasm
 bindings. Wraps smart contract *(handle, init, query)* functions around rust functions. If you are not doing advanced
 wasm tweaking, don't touch it.
 
@@ -60,12 +60,12 @@ wasm tweaking, don't touch it.
  Timecode [https://vimeo.com/457702442#t=1m46s](https://vimeo.com/457702442#t=1m46s)
 :::
 
-Development begins in [src/msg.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs)
+Development begins in [src/msg.rs](https://github.com/CosmWasm/cw-examples/blob/master/simple-option/src/msg.rs)
 which contains the input data structures of the smart contract.
 
 ### InitMsg {#initmsg}
 
-We will begin with [`InitMsg`](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/msg.rs). This
+We will begin with [`InitMsg`](https://github.com/CosmWasm/cw-examples/blob/master/simple-option/src/msg.rs). This
 struct has the initial values that initializes smart contract from the code and feeds in the data required for logic
 setup.
 
@@ -135,7 +135,7 @@ pub enum QueryMsg {
  Timecode [https://vimeo.com/457702442#t=7m36s](https://vimeo.com/457702442#t=7m36s)
 :::
 
-[State](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/state.rs) handles state of the
+[State](https://github.com/CosmWasm/cw-examples/blob/master/simple-option/src/state.rs) handles state of the
 database where smart contract data is stored and accessed.
 
 You have two options when modeling state:
@@ -176,7 +176,7 @@ pub fn config_read(storage: &dyn Storage) -> ReadonlySingleton<State> {
 :::
 
 Lego bricks **msgs**, **handler** and **state** are defined. Now we need to bind them together
-in [contract.rs](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs).
+in [contract.rs](https://github.com/CosmWasm/cw-examples/blob/master/simple-option/src/contract.rs).
 
 ### Init {#init}
 
@@ -423,7 +423,7 @@ cargo schema
 ```
 
 You can see the generated schemas
-under [simple-option/schema](https://github.com/CosmWasm/cosmwasm-examples/tree/master/simple-option/schema)
+under [simple-option/schema](https://github.com/CosmWasm/cw-examples/tree/master/simple-option/schema)
 
 ```
 schema

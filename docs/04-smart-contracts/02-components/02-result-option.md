@@ -84,7 +84,7 @@ pub fn execute_transfer(
 
 It's also worth being aware of `StdResult`. This is used often in `query` handlers and functions that are called from them.
 
-For example, in the [nameservice contract](https://github.com/CosmWasm/cosmwasm-examples/blob/main/contracts/nameservice/src/contract.rs#L95) you can see the `StdResult`, which is like `Result`, except without a defined error branch:
+For example, in the [nameservice contract](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/contract.rs#L95) you can see the `StdResult`, which is like `Result`, except without a defined error branch:
 
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
@@ -133,7 +133,7 @@ pub struct Config {
 }
 ```
 
-The source is [here](https://github.com/CosmWasm/cosmwasm-examples/blob/main/contracts/nameservice/src/state.rs#L13). We can see why this might be - these values come from [instantiation](https://github.com/CosmWasm/cosmwasm-examples/blob/main/contracts/nameservice/src/msg.rs#L6), where the values are also `Option`:
+The source is [here](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/state.rs#L13). We can see why this might be - these values come from [instantiation](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/msg.rs#L6), where the values are also `Option`:
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]

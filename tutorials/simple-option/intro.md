@@ -29,7 +29,7 @@ we start from boiler plate code and build on top of it. In this tutorial you be 
 recommend you to launch a project from template and develop along Ethan's workshop video, you will learn such as
 development flow and possible errors which you can't learn just by reading a written tutorial.
 
-You can find the complete repo at [github/cosmwasm-examples](https://github.com/CosmWasm/cosmwasm-examples).
+You can find the complete repo at [github/cw-examples](https://github.com/CosmWasm/cw-examples).
 
 Pay attention to comments like below in code examples. The details about the code itself is in the comments.
 

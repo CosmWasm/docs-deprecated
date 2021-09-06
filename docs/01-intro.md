@@ -57,13 +57,13 @@ and to share their contract with others.
 
 * [Ecosystem](/ecosystem/overview) for ecosystem overview.
 
-* [Plus](/cw-plus/general/overview) is for state of art CosmWasm smart contracts.
+* [Plus](/cw-plus/overview) is for state of art CosmWasm smart contracts.
 
 ## Further Studies {#further-studies}
 
 you can dig into our code and start writing your own contracts:
 
-* [A set of example contracts](https://github.com/CosmWasm/cosmwasm-examples) for you to fork and experiment with
+* [A set of example contracts](https://github.com/CosmWasm/cw-examples) for you to fork and experiment with
 * Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.14.0/cosmwasm_std/)
 * Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.14.0/cosmwasm_storage/)
 

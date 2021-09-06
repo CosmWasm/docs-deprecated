@@ -9,8 +9,8 @@ for you:
 
 - [Getting Started](https://docs.cosmwasm.com/0.14/getting-started/intro), best starter docs.
 - [Learn](tutorials/simple-option/intro), more tutorials.
-- [cosmwasm-examples](https://github.com/CosmWasm/cosmwasm-examples/), simple smart contract examples.
-- [cosmwasm-plus](https://docs.cosmwasm.com/0.14/cw-plus/general/overview), production grade smart contracts.
+- [cw-examples](https://github.com/CosmWasm/cw-examples/), simple smart contract examples.
+- [cosmwasm-plus](https://docs.cosmwasm.com/0.14/cw-plus/overview), production grade smart contracts.
 
 And don't forget to join the [CosmWasm Discord](https://docs.cosmwasm.com/chat).
 
