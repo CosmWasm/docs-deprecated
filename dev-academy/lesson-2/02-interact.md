@@ -33,7 +33,7 @@ curl -LJO https://github.com/CosmWasm/cw-plus/releases/download/v0.8.0/cw20_base
 RES=$(wasmd tx wasm store cw20_base.wasm --from wallet $TXFLAG -y)
 
 # get code id
-CODE_ID=$(echo $RES | jq -r '.logs[0].events[0].attributes[-1].value')
+CODE_ID=$(echo $RES | jq -r '.logs[0].events[1].attributes[0].value')
 
 # print code id
 echo $CODE_ID
