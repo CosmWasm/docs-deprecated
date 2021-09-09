@@ -12,10 +12,7 @@ to [Architecture](/03-architecture/01-multichain.md) read it first and then head
 
 We will not dive into smart contract development in this section to provide an easy to digest introduction. Also, you
 can follow the steps here to test out smart contracts live on a testnet without drowning in smart contract development
-details. We will demonstrate setting up environment, compiling, deploying, and interacting. Then to make things a bit
-more interesting, we will show modifying the example escrow contract by adding a backdoor to it in
-the [Hijack Escrow tutorial](/tutorials/hijack-escrow/intro). It exposes an identical API to the original one, but has
-one hidden command added. This also shows the importance of verifying the source code behind any contract you run.
+details. We will demonstrate setting up environment, compiling, deploying, and interacting.
 
 This is designed for programmers who are comfortable with the command-line and using Linux or MacOS. It is helpful to
 have a basic understanding of Rust and Go, but we will lead you through, so fast learners need no prior knowledge.
