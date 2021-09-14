@@ -6,17 +6,19 @@ sidebar_position: 2
 
 ## Hint 1
 
-Reward vouchers are 16 digit numbers.
+Reward vouchers are 16 digit numbers (like `c0ad2205922223b2`).
 
-## Hint 2: endpoints
+## Hint 2: Endpoints
 
 RPC: https://rpc.pebblenet.cosmwasm.com:443
+
 Faucet: https://faucet.pebblenet.cosmwasm.com
+
 Explorer: https://block-explorer.pebblenet.cosmwasm.com
 
-## Hint 3
+## Hint 3: Formats
 
-### Addresses, Transactions, Blocks, Height
+### Transactions, Addresses, Block Heights
 
 In this event you will see strings like: `8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C`
 This is 32 bytes, hexadecimal string. Tendermint/cosmos-sdk hashes the txs and blocks in this format.
@@ -35,6 +37,8 @@ From Wikipedia: Base64 is a group of binary-to-text encoding schemes that repres
 
 Basically if you see a string like this: `aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2hcP3ZcPU5VWXZiVDZ2VFBzCg==` this is a base64 encoded string.
 To decode `echo “aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2hcP3ZcPU5VWXZiVDZ2VFBzCg==” | base64 -d`
+
+## Hint 4: Queries
 
 Querying on chain data
 
@@ -55,7 +59,7 @@ wasmd query tx 8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C 
 
 ### Smart Query
 
-Smart Query interface defined by the contract itself thus you can run complex queries.
+Smart Query interface is defined by the contract itself thus you can run complex queries.
 
 Sample cw20 query:
 
@@ -64,25 +68,14 @@ QUERY='{“token_info”:{}}’
 wasmd query wasm contract-state smart [bech32_address] ‘$QUERY’
 ```
 
-### Recovering Mnemonic
-
-Mnemonic seed phrase the only access to a wallet. You can retain access to an account if you have mnemonic to the wallet.
-
-You can recover an account using mnemonic with this command below:
-```bash
-wasmd keys add show --recover
-> Enter your bip39 mnemonic
-chef sense chicken net around sting course someone question badge hand also nation siren remember famous bird eagle phrase kidney devote damp sugar throw
-```
-
 ### Json Schema
 
-Smart contract execute or query interface is defined by Json Schema that could be found in the smart contract repo.
+Smart contract execute or query interface is defined by Json Schema that is found in the smart contract repo.
 Smart contract developer should provide schema to the users: https://github.com/CosmWasm/cosmwasm-plus/tree/master/contracts/cw20-base/schema
 
 ### Execute Smart Contract
 
-You can execute smart contracts using cli. Some riddles needs this skill for the solution
+You can execute smart contracts using cli. Some riddles needs this skill for the solution:
 
 Sending tokens from cw20
 
@@ -93,9 +86,23 @@ SEND_MSG='{“transfer”: {“amount”:”1000″, “recipient”:”wasm170n
 wasmd tx wasm execute $CONTRACT_ADDR “$SEND_MSG” –from wallet
 ```
 
+## Hint 5: Recovery and Signing
+
+### Recovering Mnemonic
+
+The mnemonic seed phrase is the only access to a wallet. You can recover access to an account if you have the mnemonic of the wallet.
+
+You can recover an account using mnemonic with this command below:
+```bash
+wasmd keys add show --recover
+> Enter your bip39 mnemonic
+chef sense chicken net around sting course someone question badge hand also nation siren remember famous bird eagle phrase kidney devote damp sugar throw
+```
+
 ### Signing offline transactions
 
-Offline signing is a cool functionality. It is like delayed payment. One use case: create a transaction that will send
+Offline signing is a cool functionality. It is like a delayed payment, where you sign a transaction and only submit it later to the network. 
+One use case: create a transaction that will send
 from account A to B and send the unsigned tx to the account A owner to approve and sign the transaction then broadcast to the chain
 
 ```bash
