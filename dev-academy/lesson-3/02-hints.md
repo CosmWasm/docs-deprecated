@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## Hint 1
 
-Reward vouchers are 16 digit numbers.
+Reward vouchers are 16 character hexadecimal number.
 
 ## Hint 2: endpoints
 
