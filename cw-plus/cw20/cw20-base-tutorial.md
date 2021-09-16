@@ -5,11 +5,9 @@ sidebar_position: 3
 
 # CW20-base Tutorial
 
-:::warning This tutorial does not work with cosmjs 0.23. It will be fixed when 0.24 is out.
-:::
 
 This is a simple tutorial showing you how to use of powerful node REPL to interact with a cw20 token contract (fungible
-tokens, like ERC20) on [oysternet](https://github.com/CosmWasm/testnets/tree/master/oysternet-1).
+tokens, like ERC20).
 
 I will walk you through uploading contract code and creating a concrete instance (the same `cw20-base`
 wasm code can be reused to create dozens of token contracts with different symbols and distributions). Then I will show
@@ -25,17 +23,12 @@ we assume a HOME environmental variable). PRs welcome.
 
 ## Connecting to the chain {#connecting-to-the-chain}
 
-:::caution
-CosmJs helpers needs refactoring thus do not work now. It will be fixed in future, but you can see a
-reference to how it works.
-:::
-
 The first step before doing anything is ensuring we can create an account and connect to the chain. You will always use
 the following command to start up the `@cosmjs/cli` with some cw20-specific helpers preloaded
 (in addition to all the general helpers it has).
 
 ```shell
-npx @cosmjs/cli@^0.24 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/master/contracts/cw20-base/helpers.ts
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/v0.9.0/contracts/cw20-base/helpers.ts
 ```
 
 Once this downloads the source and starts up, you should see a bunch of yellow text (explaining what code is preloaded),
@@ -49,28 +42,22 @@ or worse `cannot call undefined`.
 Without further ado, let's get to use it, and please do read the error messages:
 
 ```js
-const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
-client.getAccount();
+const [addr, client] = await useOptions(pebblenetOptions).setup('password');
+client.getAccount(addr);
 ```
 
 This will take a few seconds as we hit the faucet the first time to ensure you have some tokens in your account to pay
 fees. When it returns, you should see something like this:
 
-```js
+```json
 {
-  address: 'wasm16hn7q0yhfrm28ta9zlk7fu46a98wss33xwfxys',
-    balance
-:
-  [{denom: 'ucosm', amount: '1000000'}],
-    pubkey
-:
-  undefined,
-    accountNumber
-:
-  31,
-    sequence
-:
-  0
+  address: 'wasm1w740h56j9nhudykkm80j5rf6ms25nhe9huuvgp',
+  pubkey: {
+    type: 'tendermint/PubKeySecp256k1',
+    value: 'AkjSrJA0XT612qHvnHieHAebZ+cIA2jq3LRj0g4V/lOF'
+  },
+  accountNumber: 323,
+  sequence: 4
 }
 ```
 
@@ -79,24 +66,24 @@ fees. When it returns, you should see something like this:
 You can keep typing in the shell, or close it and run some sections later. Always start off with:
 
 ```js
-const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
+const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
 ```
 
-to set up your client. `useOptions` takes the oysternet configuration from everything from URLs to tokens to
+to set up your client. `useOptions` takes the pebblenet configuration from everything from URLs to tokens to
 bech32prefix. When you call `setup` with a password, it checks for
-`~/.helder.key` and creates a new key if it is not there, otherwise it loads the key from the file. Your private key (
-actually mnemonic) is stored encrypted, and you need the same password to use it again. Try `cat ~/.helder.key` to prove
+`~/.pebblenet.key` and creates a new key if it is not there, otherwise it loads the key from the file. Your private key (
+actually mnemonic) is stored encrypted, and you need the same password to use it again. Try `cat ~/.pebblenet.key` to prove
 to yourself that it is indeed encrypted, or try reloading with a different password.
 
 If you want the mnemonic, you can recover it at anytime, as long as you still have the file and the password. You could
-use this later to recover, or use the same mnemonic to import the key into the `helder` cli tool.
+use this later to recover, or use the same mnemonic to import the key into the `pebblenet` cli tool.
 
 ```js
-useOptions(oysternetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
+useOptions(pebblenetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
 ```
 
 :::caution
-This command saves the key to `~/.helder.key` encrypted. If you forget the password, either delete it or pass
+This command saves the key to `~/.pebblenet.key` encrypted. If you forget the password, either delete it or pass
 a
 `filename` along with a password to create a new key.
 :::
@@ -123,44 +110,43 @@ I will walk you though how to set up an example cw20 contract on Heldernet.
 ### Example: STAR {#example-star}
 
 The first contract I uploaded was STAR tokens, or "Golden Stars" to be distribute to the
-[first 3 validators](https://block-explorer.oysternet.cosmwasm.com/validators) on the network.
+[first 3 validators](https://block-explorer.pebblenet.cosmwasm.com/validators) on the network.
 
 Please do not copy this verbatum, but look to see how such a contract is setup and deployed the first time.
 
 ```js
-const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
+const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
 
-const cw20 = cw20(client);
-const codeId = await cw20.upload();
+const cw20 = CW20(client, pebblenetOptions.fees);
+const codeId = await cw20.upload(addr);
 console.log(`CodeId: ${codeId}`);
-// output: 429
+// output: 55
 
 // enable REPL editor mode to edit multiline code then execute
-.
-editor
+.editor
 const initMsg = {
   name: "Golden Stars",
   symbol: "STAR",
   decimals: 2,
   // list of all validator self-delegate addresses - 100 STARs each!
   initial_balances: [
-    {address: "wasm1ez03me7uljk7qerswdp935vlaa4dlu48mys3mq", amount: "10000"},
-    {address: "wasm1tx7ga0lsnumd5hfsh2py0404sztnshwqaqjwy8", amount: "10000"},
-    {address: "wasm1mvjtezrn8dpateu0435trlw5062qy76gf738n0", amount: "10000"},
+    {address: "wasm13krn38qhu83y5xvmjgydnk5vjau2u3c0tv5jsu", amount: "10000"},
+    {address: "wasm1ppgpwep3yzh8w3d89xlzlens3420j5vs5q3p4j", amount: "10000"},
+    {address: "wasm1fnx5jzqsdkntlq2nspjgswtezf45u5ug3kq9sw", amount: "10000"},
   ],
   mint: {
-    minter: client.senderAddress,
+    minter: addr,
   },
 };
 // exit editor using `^D` and execute entered code
 ^
 D
 
-const contract = await cw20.instantiate(codeId, initMsg, "STAR");
+const contract = await cw20.instantiate(addr, codeId, initMsg, "STAR");
 console.log(`Contract: ${contract.contractAddress}`);
-// Contract: wasm1hjzk8wr2gy9f3xnzdrtv5m9735jcxeljhm0f8u
+// Contract: wasm14wm5jvsm6r896tcqsx9dlxc8h0w2mg5de39dsm
 
-console.log(await contract.balance("wasm1ez03me7uljk7qerswdp935vlaa4dlu48mys3mq"));
+console.log(await contract.balance("wasm13krn38qhu83y5xvmjgydnk5vjau2u3c0tv5jsu"));
 // 10000
 console.log(await contract.balance());
 // 0
@@ -172,13 +158,10 @@ Now that we have that uploaded, we can easily make a second contract. This one, 
 field names and token amounts before entering them.
 
 ```js
-const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
-const address = client.senderAddress;
+const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
+const cw20 = CW20(client, pebblenetOptions.fees);
 
-const cw20 = cw20(client);
-
-.
-editor
+.editor
 const initMsg = {
   name: "My Coin",
   symbol: "MINE",
@@ -198,7 +181,7 @@ D
 const codeId = 429;
 const mine = await cw20.instantiate(codeId, initMsg, "MINE");
 console.log(`Contract: ${mine.contractAddress}`);
-// Contract:  wasm10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2
+// Contract: wasm10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2
 
 // now, check the configuration
 mine.balance();
@@ -215,16 +198,16 @@ that you used to create the `MINE`
 tokens (or whatever better name you invented), but if you closed it down and come back, here's how to re-connect:
 
 ```js
-const client = await useOptions(oysternetOptions).setup(YOUR_PASSWORD_HERE);
-const cw20 = cw20(client);
+const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
+const cw20 = CW20(client, pebblenetOptions.fees);
 
 // if you forgot your address, but remember your label, you can find it again
-const contracts = await client.getContracts(4)
+const contracts = await client.getContracts(55)
 contracts
 const contractAddress = contracts.filter(x => x.label === 'MINE')[0].address;
 
 // otherwise, you can just cut and paste from before
-const contractAddress = "wasm10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2"
+const contractAddress = "wasm14wm5jvsm6r896tcqsx9dlxc8h0w2mg5de39dsm"
 
 // now, connect to that contract and make sure it is yours
 const mine = cw20.use(contractAddress);
@@ -264,5 +247,3 @@ mine.transfer(other, "4567000");
 mine.balance(other)
 mine.balance()
 ```
-
-Great, you are moving stuff around and see it in your queries and in the block explorer. Time to act like a pro.
