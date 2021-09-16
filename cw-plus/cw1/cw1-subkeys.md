@@ -2,6 +2,10 @@
 sidebar_position: 2
 ---
 
+:::warning
+this document is out of date
+:::
+
 # CW1 Subkeys
 
 [cw1 Subkeys](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw1-subkeys)
