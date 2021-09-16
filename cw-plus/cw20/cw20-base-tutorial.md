@@ -178,8 +178,8 @@ const initMsg = {
 ^
 D
 
-const codeId = 429;
-const mine = await cw20.instantiate(codeId, initMsg, "MINE");
+const codeId = 55;
+const mine = await cw20.instantiate(addr, codeId, initMsg, "MINE");
 console.log(`Contract: ${mine.contractAddress}`);
 // Contract: wasm10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2
 
@@ -231,7 +231,7 @@ mine.balance(other)
 mine.tokenInfo()
 
 // let's mint some tokens for someone
-mine.mint(someone, "999888000")
+mine.mint(addr, someone, "999888000")
 // Bonus, take the tx hash printed out and cut-paste that into https://bigdipper.wasmnet.cosmwasm.com
 // eg 26D5514CF437EE584793768B56CB4E605F1F6E61FC0123030DC64E08E2EE97FA
 
@@ -242,7 +242,7 @@ mine.balance()
 mine.tokenInfo()
 
 // Okay, now let's transfer some tokens... that is the more normal one, right?
-mine.transfer(other, "4567000");
+mine.transfer(addr, other, "4567000");
 // eg. 4A76EFFEB09C82D0FEB97C3B5A9D5BADB6E9BD71F4EF248A3EF8B232C2F7262A
 mine.balance(other)
 mine.balance()
