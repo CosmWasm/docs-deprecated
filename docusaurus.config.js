@@ -245,7 +245,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
             paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus'));
           }
           if (existingPath.includes(`/cw-plus/0.6.2`)) {
-            paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus'));
+            paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus/0.6.2'));
           }
 
           /*
