@@ -39,7 +39,7 @@ Now tokens are easily accessible by **owner** information. On every state change
 
 ## storage-plus indexing {#storage-plus-indexing}
 
-Solution above will do the work but not optimal. Too much code complexity and manuel work. This is
+Solution above will do the work but not optimal. Too much code complexity and manual work. This is
 where [storage-plus/IndexedMap](https://github.com/CosmWasm/cw-plus/blob/main/packages/storage-plus/src/indexed_map.rs)
 comes in to the play. `IndexedMap` is a storage handler that indexes internally. Two types of indexes
 available: [Unique Indexes](#unique-indexes) and [Multi Indexes](#multi-indexes)
@@ -242,12 +242,11 @@ PrimaryKey trait. You can see that both the `2-tuple (_, _)` and `Vec<u8>` do im
 During index creation, we must supply an index function per index.
 
 ```rust
- owner: MultiIndex::new(
-| d, k| (Vec::from(d.owner.as_ref()), k),
+ owner: MultiIndex::new(|d, k| (Vec::from(d.owner.as_ref()), k),
 ```
 
 which is the one that will take the value, and the primary key (always in `Vec<u8>` form) of the original map, and
-create the index key from them. Of course, this requires that the elements required for the index key are present in the
+create the index key from them. Of course, this mandates that the elements required for the index key are present in the
 value (which makes sense).
 
 Besides the index function, we must also supply the namespace of the pk, and the one for the new index.
@@ -256,11 +255,11 @@ Besides the index function, we must also supply the namespace of the pk, and the
  IndexedMap::new("tokens", indexes)
 ```
 
-Here of course, the namespace of the pk must match the one used during index(es) creation. And, we pass our
-TokenIndexes(as a IndexList-type parameter) as second argument. Connecting in this way the underlying Map for the pk,
+Here of course, the namespace of the pk must match the one used during index(es) creation. And we pass our
+TokenIndexes (as a IndexList-type parameter) as second argument, connecting in this way the underlying Map with the pk,
 with the defined indexes.
 
-o, IndexedMap (and the other Indexed* types) is just a wrapper / extension around Map, that provides a number of index
+IndexedMap (and the other Indexed* types) is just a wrapper / extension around Map, that provides a number of index
 functions and namespaces to create indexes over the original Map data. It also implements calling these index functions
 during value storage / modification / removal, so that you can forget about it and just use the indexed data.
 
@@ -305,14 +304,15 @@ fn test_tokens() {
 ### Composite Multi Indexing {#composite-multi-indexing}
 
 Imagine the following situation:
-we have a number of batches, each stored by its (numeric) batch id, than can change
+we have a number of batches, each stored by its (numeric) batch id, that can change
 after which they must be automatically promoted. Now imagine that we want to process all the pending batches at any
 status from **Pending** to **Promoted**, depending on interactions over them. The batches also have an associated
-expiration,
-given time. Of course, we are only interested in the pending ones that have already expired (so that we can promote
+expiration, given time. Of course, we are only interested in the pending ones that have already expired (so that we can promote
 them). So, we can build an index over the batches, with a composite key composed of the batch status, and their
 expiration timestamp. Using the composite key, we'll be discarding both, the already promoted batches, and the pending
-but not yet expired ones. So, we build the index, generate the composite key, and iterate over all pending batches that
+but not yet expired ones.
+
+So, we build the index, generate the composite key, and iterate over all pending batches that
 have an expiration timestamp that is less than the current time.
 
 Here's a code example on how to do this:
