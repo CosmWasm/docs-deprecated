@@ -25,13 +25,13 @@ execution of the contract to be *explicitly requested*.
 ## Avoiding Reentrancy Attacks {#avoiding-reentrancy-attacks}
 
 Another big difference is that we avoid all reentrancy attacks by design. This point deserves an article by itself, but
-in
-short [a large class of exploits in Ethereum is based on this trick](https://consensys.github.io/smart-contract-best-practices/known_attacks/)
-. The idea is that in the middle of execution of a function on Contract A, it calls a second contract (explicitly or
-implicitly via send). This transfers control to contract B, which can now execute code, and call into Contract A again.
-Now there are two copies of Contract A running, and unless you are very, very careful about managing state before
-executing any remote contract or make very strict gas limits in sub-calls, this can trigger undefined behavior in
-Contract A, and a clever hacker can reentrancy this as a basis for exploits, such as the DAO hack.
+in short [a large class of exploits in Ethereum is based on this
+trick](https://consensys.github.io/smart-contract-best-practices/known_attacks/) . The idea is that in the middle of
+execution of a function on Contract A, it calls a second contract (explicitly or implicitly via send). This transfers
+control to contract B, which can now execute code, and call into Contract A again. Now there are two copies of Contract
+A running, and unless you are very, very careful about managing state before executing any remote contract or make very
+strict gas limits in sub-calls, this can trigger undefined behavior in Contract A, and a clever hacker can reentrancy
+this as a basis for exploits, such as the DAO hack.
 
 Cosmwasm avoids this completely by preventing any contract from calling another one directly. Clearly we want to allow
 composition, but inline function calls to malicious code creates a security nightmare. The approach taken with CosmWasm
@@ -64,8 +64,9 @@ Before executing a contract, a wasm gas limit is set based on remaining Cosmos S
 the contract (there is a constant multiplier to convert, currently 100 wasm gas to 1 sdk gas). This puts a hard limit on
 any CPU computations as you must pay for the cycles used.
 
-*Disk Usage* - All disk access is via reads and writes on the KVStore. The Cosmos SDK
-already [enforces gas payments for KVStore access](https://github.com/cosmos/cosmos-sdk/blob/4ffabb65a5c07dbb7010da397535d10927d298c1/store/types/gas.go#L154-L162)
+*Disk Usage* - All disk access is via reads and writes on the KVStore. The Cosmos SDK already [enforces gas payments for
+KVStore
+access](https://github.com/cosmos/cosmos-sdk/blob/4ffabb65a5c07dbb7010da397535d10927d298c1/store/types/gas.go#L154-L162)
 . Since all disk access in the contracts is made via callbacks into the SDK, this is charged there. If one were to
 integrate CosmWasm in another runtime, you would have to make sure to charge for access there as well.
 
@@ -88,9 +89,9 @@ state when a contract is called.
 
 ### :heavy_check_mark: [Arithmetic under/overflows](https://github.com/sigp/solidity-security-blog#ouflow) {#heavy_check_mark-arithmetic-underoverflows}
 
-Rust allows you to simply set `overflow-checks = true` in
-the [Cargo manifest](https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections) to abort the program
-if any overflow is detected. No way to opt-out of safe math.
+Rust allows you to simply set `overflow-checks = true` in the [Cargo
+manifest](https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections) to abort the program if any
+overflow is detected. No way to opt-out of safe math.
 
 ### :warning: [Unexpected Ether](https://github.com/sigp/solidity-security-blog#ether) {#warning-unexpected-ether}
 
@@ -98,11 +99,11 @@ if any overflow is detected. No way to opt-out of safe math.
 
 This involves a contract depending on complete control of it's balance. A design pattern that should be avoided in any
 contract system. In CosmWasm, contracts are not called when tokens are sent to them, but they can query their current
-balance when they are called. You can note that
-the [sample escrow contract](https://github.com/CosmWasm/cw-examples/blob/escrow-0.4.0/escrow/src/contract.rs)
-doesn't record how much was sent to it during initialization, but
-rather [releases the current balance](https://github.com/CosmWasm/cw-examples/blob/escrow-0.4.0/escrow/src/contract.rs#L83-L92)
-when a paying out or refunding the amount. This ensures no tokens get stuck.
+balance when they are called. You can note that the [sample escrow
+contract](https://github.com/CosmWasm/cw-examples/blob/escrow-0.4.0/escrow/src/contract.rs) doesn't record how much was
+sent to it during initialization, but rather [releases the current
+balance](https://github.com/CosmWasm/cw-examples/blob/escrow-0.4.0/escrow/src/contract.rs#L83-L92) when a paying out or
+refunding the amount. This ensures no tokens get stuck.
 
 ### :heavy_check_mark: [Delegate Call](https://github.com/sigp/solidity-security-blog#delegatecall) {#heavy_check_mark-delegate-call}
 
@@ -129,8 +130,8 @@ random beacon, and expose this secure source of entropy to smart contracts.
 
 If you call a contract with a given `HandleMsg`, this just requires the contract has the specified API, but says nothing
 of the code there. I could upload malicious code with the same API as a desired contract (or a superset of the API), and
-ask you to call it - either directly or from a contract. This can be used to steal funds, and in fact
-we [demo this in the tutorial](/tutorials/hijack-escrow/hack-contract).
+ask you to call it - either directly or from a contract. This can be used to steal funds, and in fact we [demo this in
+the tutorial](/tutorials/hijack-escrow/hack-contract).
 
 There are two mitigations here. The first is that in CosmWasm, you don't need to call out to solidity libraries at
 runtime to deal with size limits, but are encouraged to link all the needed code into one wasm blob. This alone removes
@@ -139,8 +140,8 @@ most usage of the external contract references.
 The other mitigation is allowing users to quickly find verified rust source behind the wasm contract on the chain. This
 approach is [used by etherscan](https://medium.com/coinmonks/how-to-verify-and-publish-on-etherscan-52cf25312945#bc72),
 where developers can publish the original source code, and it will compile the code. If the same bytecode is on chain,
-we know can prove it came from this rust source. We have built the deterministic build system for rust wasm, and
-have [simple tooling to validate the original source code](https://medium.com/confio/dont-trust-cosmwasm-verify-db1caac2d335)
+we know can prove it came from this rust source. We have built the deterministic build system for rust wasm, and have
+[simple tooling to validate the original source code](https://medium.com/confio/dont-trust-cosmwasm-verify-db1caac2d335)
 . We also [released a code explorer](https://demonet.wasm.glass/codes) that allows you to browse contracts and locally
 verify the source code in one command.
 
@@ -182,16 +183,15 @@ quickly.
 
 ### :heavy_check_mark: [Block Timestamp Manipulation](https://github.com/sigp/solidity-security-blog#block-timestamp) {#heavy_check_mark-block-timestamp-manipulation}
 
-Tendermint
-provides [BFT Timestamps](https://github.com/tendermint/tendermint/blob/master/docs/spec/blockchain/blockchain.md#time-1)
-in all the blockchain headers. This means that you need a majority of the validators to collude to manipulate the
-timestamp, and it can be as trusted as the blockchain itself. (That same majority could halt the chain or work on a
-fork)
+Tendermint provides [BFT
+Timestamps](https://github.com/tendermint/tendermint/blob/master/docs/spec/blockchain/blockchain.md#time-1) in all the
+blockchain headers. This means that you need a majority of the validators to collude to manipulate the timestamp, and it
+can be as trusted as the blockchain itself. (That same majority could halt the chain or work on a fork)
 
 ### :heavy_check_mark: [Constructors with Care](https://github.com/sigp/solidity-security-blog#constructors) {#heavy_check_mark-constructors-with-care}
 
-This is an idiosyncrasy of the solidity language with constructor naming. It is highly unlikely you would ever
-rename `init` in cosmwasm, and if you did, it would fail to compile rather than producing a backdoor.
+This is an idiosyncrasy of the solidity language with constructor naming. It is highly unlikely you would ever rename
+`init` in cosmwasm, and if you did, it would fail to compile rather than producing a backdoor.
 
 ### :heavy_check_mark: [Uninitialised Storage Pointers](https://github.com/sigp/solidity-security-blog#storage) {#heavy_check_mark-uninitialised-storage-pointers}
 
@@ -202,18 +202,18 @@ class of failures.
 
 ### :heavy_check_mark: [Floating Points and Precision](https://github.com/sigp/solidity-security-blog#precision) {#heavy_check_mark-floating-points-and-precision}
 
-Both Solidity and CosmWasm have no support for floating point operations, due to possible non-determinism in rounding (
-which is CPU dependent). Solidity has no alternative to do integer math and many devs hand-roll integer approximations
+Both Solidity and CosmWasm have no support for floating point operations, due to possible non-determinism in rounding
+(which is CPU dependent). Solidity has no alternative to do integer math and many devs hand-roll integer approximations
 to decimal numbers, which may introduce rounding errors.
 
-In CosmWasm, You can import any rust package, and simply pick an appropriate package and use it internally.
-Like [rust_decimal](https://docs.rs/rust_decimal/1.0.3/rust_decimal/), "a Decimal implementation written in pure Rust
+In CosmWasm, You can import any rust package, and simply pick an appropriate package and use it internally. Like
+[rust_decimal](https://docs.rs/rust_decimal/1.0.3/rust_decimal/), "a Decimal implementation written in pure Rust
 suitable for financial calculations that require significant integral and fractional digits with no round-off errors.".
 Or [fixed](https://docs.rs/fixed/0.5.0/fixed/) to provide fixed-point decimal math. It supports up to 128-bit numbers,
 which is enough for 18 digits before the decimal and 18 afterwards, which should be enough for any use case.
 
 ### :heavy_check_mark: [Tx.Origin Authentication](https://github.com/sigp/solidity-security-blog#tx-origin) {#heavy_check_mark-txorigin-authentication}
 
-CosmWasm doesn't expose `tx.origin`, but only the contract or user directly calling the contract
-as `params.message.signer`. This means it is impossible to rely on the wrong authentication, as there is only one value
-to compare.
+CosmWasm doesn't expose `tx.origin`, but only the contract or user directly calling the contract as
+`params.message.signer`. This means it is impossible to rely on the wrong authentication, as there is only one value to
+compare.
