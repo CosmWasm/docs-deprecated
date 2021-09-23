@@ -4,27 +4,23 @@ sidebar_position: 1
 
 # Messages
 
-Messages are how you interact with a CosmWasm smart contract. If you look inside
-most contracts, there will be a `msg.rs` file that defines the messages.
+Messages are how you interact with a CosmWasm smart contract. If you look inside most contracts, there will be a
+`msg.rs` file that defines the messages.
 
-An instantiate message is usually different in that it is defined separately in
-`msg.rs` as `InstantiateMsg` and then handled by a `instantiate` fn in the main
-`contract.rs`.
+An instantiate message is usually different in that it is defined separately in `msg.rs` as `InstantiateMsg` and then
+handled by a `instantiate` fn in the main `contract.rs`.
 
-The examples we are using here are very simple, however if you are confused
-about what arguments can be passed, you can look in the contract's `schema`
-folder. In here you will see at least two relevant files:
+The examples we are using here are very simple, however if you are confused about what arguments can be passed, you can
+look in the contract's `schema` folder. In here you will see at least two relevant files:
 
-- `instantiate_msg.json` - the expected shape and and types for the instantiate
-  message
-- `execute_msg.json` - the expected shape and types for each of the messages
-  that the contract can use to execute an action
+- `instantiate_msg.json` - the expected shape and and types for the instantiate message
+- `execute_msg.json` - the expected shape and types for each of the messages that the contract can use to execute an
+  action
 
-Some contracts with large API areas have many more schema files, so explore them
-to find the message or command you're looking for.
+Some contracts with large API areas have many more schema files, so explore them to find the message or command you're
+looking for.
 
-In the namespace example contract, there are only two valid messages once the
-contract has been instantiated:
+In the namespace example contract, there are only two valid messages once the contract has been instantiated:
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -38,8 +34,7 @@ pub enum ExecuteMsg {
 The context of this code is
 [here](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/msg.rs#L13).
 
-This can then be worked with in `contract.rs`. Each of these will be handled in
-the `execute` function like so:
+This can then be worked with in `contract.rs`. Each of these will be handled in the `execute` function like so:
 
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
