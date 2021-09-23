@@ -10,12 +10,12 @@ Please first review the [client setup instructions](03-setting-env.md), and conf
 
 ## Compiling and Testing Contract {#compiling-and-testing-contract}
 
-Let's download the repo in which we collect [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples). We're going to try out a simple escrow contract. This contract can hold native tokens, and allows an arbiter to release them to a pre-defined beneficiary. First, clone the repo and try to build the wasm bundle:
+Let's download the repo in which we collect [`cosmwasm-examples`](https://github.com/CosmWasm/cw-examples). We're going to try out a simple escrow contract. This contract can hold native tokens, and allows an arbiter to release them to a pre-defined beneficiary. First, clone the repo and try to build the wasm bundle:
 
 ```shell
 # get the code
-git clone https://github.com/CosmWasm/cosmwasm-examples
-cd cosmwasm-examples
+git clone https://github.com/CosmWasm/cw-examples
+cd cw-examples
 git fetch --tags
 git checkout escrow-0.10.0
 cd escrow

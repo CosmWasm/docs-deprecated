@@ -4,7 +4,7 @@ const cwplusVersions = require('./cw_plus_versions.json');
 const DefaultLocale = 'en';
 
 // const lastReleasedDocsVersion = docsVersions[0];
-const lastReleasedDocsVersion = "0.14";
+const lastReleasedDocsVersion = "0.16";
 const lastReleasedCWPlusVersion = cwplusVersions[0];
 
 (module.exports = {
@@ -179,20 +179,20 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
       {
         debug: true,
         docs: {
-          editUrl: 'https://github.com/CosmWasm/docs/edit/main',
+          editUrl: 'https://github.com/InterWasm/docs/edit/main',
           id: 'docs',
-          lastVersion: '0.14',
+          lastVersion: lastReleasedDocsVersion,
           routeBasePath: '/docs',
           sidebarPath: require.resolve('./sidebars/sidebars.js'),
-          onlyIncludeVersions: ['current', '0.14'],
+          onlyIncludeVersions: ['current', '0.14', '0.16'],
           versions: {
             current: {
               label: "1.0",
               path: "1.0"
             },
-            0.15: {
-              label: "0.15",
-              path: "0.15"
+            0.16: {
+              label: "0.16",
+              path: "0.16"
             },
             0.14: {
               label: "0.14",
@@ -244,6 +244,9 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           if (existingPath.includes(`/cw-plus/${lastReleasedCWPlusVersion}`)) {
             paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus'));
           }
+          if (existingPath.includes(`/cw-plus/0.6.2`)) {
+            paths.push(existingPath.replace(`/cw-plus/${lastReleasedCWPlusVersion}`,'/cw-plus/0.6.2'));
+          }
 
           /*
            * TESTNET REDIRECTIONS
@@ -272,7 +275,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         id: 'ecosystem',
         path: 'ecosystem',
         routeBasePath: 'ecosystem',
-        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
+        editUrl: 'https://github.com/InterWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsCommunity.js'),
       },
     ],
@@ -282,7 +285,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         id: 'tutorials',
         path: 'tutorials',
         routeBasePath: 'tutorials',
-        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
+        editUrl: 'https://github.com/InterWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsTutorials.js'),
       },
     ],
@@ -296,7 +299,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           if (locale !== DefaultLocale) {
             return `https://crowdin.com/project/cosmwasm-docs/${locale}`;
           }
-          return `https://github.com/CosmWasm/docs/edit/main/${versionDocsDirPath}/${docPath}`;
+          return `https://github.com/InterWasm/docs/edit/main/${versionDocsDirPath}/${docPath}`;
         },
         sidebarPath: require.resolve('./sidebars/sidebarsDevAcademy.js'),
       },
@@ -307,7 +310,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         id: 'cw-plus',
         path: 'cw-plus',
         routeBasePath: 'cw-plus',
-        editUrl: 'https://github.com/CosmWasm/docs/edit/main/',
+        editUrl: 'https://github.com/InterWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsCwPlus.js'),
         lastVersion: "current",
         versions: {

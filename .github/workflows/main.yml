@@ -54,5 +54,4 @@ jobs:
           npm i
           fi
           # translate
-          npm run crowdin:sync
           npm run deploy

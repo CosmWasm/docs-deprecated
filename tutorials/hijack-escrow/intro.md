@@ -42,7 +42,7 @@ you can always use another editor and customize it to your liking.
 
 Both of the above extensions look for a Cargo.toml file in the root directory of your workspace, and only parse rust
 code referenced by this Cargo.toml file (listed as a workspace, or imported by `src/lib.rs`).
-The [`cosmwasm-examples`](https://github.com/CosmWasm/cosmwasm-examples) repo does not have a `Cargo.toml` file, but
+The [`cw-examples`](https://github.com/CosmWasm/cw-examples) repo does not have a `Cargo.toml` file, but
 rather one in each example sub-directory. To ensure proper IDE support when working on this example, you should open
 only the `escrow` directory. And in general, have one window open for one rust projects, rooted in the same directory as
 it's `Cargo.toml` file.

@@ -8,8 +8,8 @@ Now that you can compile and run tests, let's try to make some changes to the co
 didn't do this already in the last section, it is time to clone the examples repo and check out the escrow code:
 
 ```shell
-git clone https://github.com/CosmWasm/cosmwasm-examples
-cd cosmwasm-examples
+git clone https://github.com/CosmWasm/cw-examples
+cd cw-examples
 git fetch --tags
 git checkout escrow-0.10.0
 cd contracts/escrow

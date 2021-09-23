@@ -48,13 +48,13 @@ You will need a running blockchain to host your contracts and use them from an a
 
 * [Ecosystem](/ecosystem/overview) provides an ecosystem overview.
 
-* [Plus](/cw-plus/general/overview) is for state-of-the-art, production ready CosmWasm smart contracts.
+* [Plus](/cw-plus/0.9.0/overview) is for state-of-the-art, production ready CosmWasm smart contracts.
 
 ## Further Studies {#further-studies}
 
 you can dig into our code and start writing your own contracts:
 
-* [A set of example contracts](https://github.com/CosmWasm/cosmwasm-examples) for you to fork and experiment with
+* [A set of example contracts](https://github.com/CosmWasm/cw-examples) for you to fork and experiment with
 * Rustdoc for the [core contract libs](https://docs.rs/cosmwasm-std/0.14.0/cosmwasm_std/)
 * Rustdoc for the [storage helpers](https://docs.rs/cosmwasm-storage/0.14.0/cosmwasm_storage/)
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Compatibility
@@ -10,6 +10,7 @@ compatibility list:
 
 | cosmwasm-std | cosmwasm-vm | x/wasm    | @cosmjs/cosmwasm-stargate |
 |--------------|-------------|-----------|---------------------------|
+| 0.16         | 0.16        | 0.18      | ^0.26.0                   |
 | 0.15         | 0.15        | 0.18      | ^0.25.0                   |
 | 0.14         | 0.14        | 0.16-0.17 | ^0.25.0                   |
 | 0.13         | 0.13        | 0.16      | ^0.24.0                   |

@@ -19,7 +19,7 @@ mod tests {
 ```
 
 This is how testing in Rust
-begins. [Code reference](https://github.com/CosmWasm/cosmwasm-examples/blob/master/simple-option/src/contract.rs). You
+begins. [Code reference](https://github.com/CosmWasm/cw-examples/blob/master/simple-option/src/contract.rs). You
 can keep test and code in the same or separate files.
 
 ## Test Initialization {#test-initialization}

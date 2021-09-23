@@ -1,12 +1,389 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Migrating Contracts
 
 This guide explains what is needed to upgrade contracts when migrating over major releases of `cosmwasm`. Note that you
 can also view the
-[complete CHANGELOG](07-CHANGELOG.md) to understand the differences.
+[complete CHANGELOG](08-CHANGELOG.md) to understand the differences.
+## 0.15 -> 0.16
+
+- Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
+
+  ```
+  [dependencies]
+  cosmwasm-std = "0.16.0"
+  cosmwasm-storage = "0.16.0"
+  # ...
+
+  [dev-dependencies]
+  cosmwasm-schema = "0.16.0"
+  cosmwasm-vm = "0.16.0"
+  # ...
+  ```
+
+- The `attr` function now accepts arguments that implement `Into<String>` rather
+  than `ToString`. This means that "stringly" types like `&str` are still
+  accepted, but others (like numbers or booleans) have to be explicitly
+  converted to strings; you can use the `to_string` method (from the
+  `std::string::ToString` trait) for that.
+
+  ```diff
+    let steal_funds = true;
+  - attr("steal_funds", steal_funds),
+  + attr("steal_funds", steal_funds.to_string()),
+  ```
+
+  It also means that `&&str` is no longer accepted.
+
+- The `iterator` feature in `cosmwasm-std`, `cosmwasm-vm` and `cosmwasm-storage`
+  is now enabled by default. If you want to use it, you don't have to explicitly
+  enable it anymore.
+
+  If you don't want to use it, you **have to** disable default features when
+  depending on `cosmwasm-std`. Example:
+
+  ```diff
+  - cosmwasm-std = { version = "0.15.0" }
+  + cosmwasm-std = { version = "0.16.0", default-features = false }
+  ```
+
+- The `Event::attr` setter has been renamed to `Event::add_attribute` - this is
+  for consistency with other types, like `Response`.
+
+  ```diff
+  - let event = Event::new("ibc").attr("channel", "connect");
+  + let event = Event::new("ibc").add_attribute("channel", "connect");
+  ```
+
+- `Response` can no longer be built using a struct literal. Please use
+  `Response::new` as well as relevant
+  [builder-style setters](https://github.com/CosmWasm/cosmwasm/blob/402e3281ff5bc1cd7b4b3e36c2bb9914f07eaaf6/packages/std/src/results/response.rs#L103-L167)
+  to set the data.
+
+  This is a step toward better API stability.
+
+  ```diff
+    #[entry_point]
+    pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> StdResult<Response> {
+        // ...
+
+        let send = BankMsg::Send {
+            to_address: msg.payout.clone(),
+            amount: balance,
+        };
+        let data_msg = format!("burnt {} keys", count).into_bytes();
+
+  -     Ok(Response {
+  -         messages: vec![SubMsg::new(send)],
+  -         attributes: vec![attr("action", "burn"), attr("payout", msg.payout)],
+  -         events: vec![],
+  -         data: Some(data_msg.into()),
+  -     })
+  +     Ok(Response::new()
+  +         .add_message(send)
+  +         .add_attribute("action", "burn")
+  +         .add_attribute("payout", msg.payout)
+  +         .set_data(data_msg))
+    }
+  ```
+
+  ```diff
+  - Ok(Response {
+  -     data: Some((old_size as u32).to_be_bytes().into()),
+  -     ..Response::default()
+  - })
+  + Ok(Response::new().set_data((old_size as u32).to_be_bytes()))
+  ```
+
+  ```diff
+  - let res = Response {
+  -     messages: msgs,
+  -     attributes: vec![attr("action", "reflect_subcall")],
+  -     events: vec![],
+  -     data: None,
+  - };
+  - Ok(res)
+  + Ok(Response::new()
+  +     .add_attribute("action", "reflect_subcall")
+  +     .add_submessages(msgs))
+  ```
+
+- For IBC-enabled contracts only: constructing `IbcReceiveResponse` and
+  `IbcBasicResponse` follows the same principles now as `Response` above.
+
+  ```diff
+    pub fn ibc_packet_receive(
+        deps: DepsMut,
+        env: Env,
+        msg: IbcPacketReceiveMsg,
+    ) -> StdResult<IbcReceiveResponse> {
+        // ...
+
+  -     Ok(IbcReceiveResponse {
+  -         acknowledgement,
+  -         messages: vec![],
+  -         attributes: vec![],
+  -         events: vec![Event::new("ibc").attr("packet", "receive")],
+  -     })
+  +     Ok(IbcReceiveResponse::new()
+  +         .set_ack(acknowledgement)
+  +         .add_event(Event::new("ibc").add_attribute("packet", "receive")))
+    }
+  ```
+
+- For IBC-enabled contracts only: IBC entry points have different signatures.
+  Instead of accepting bare packets, channels and acknowledgements, all of those
+  are wrapped in a `Msg` type specific to the given entry point. Channels,
+  packets and acknowledgements have to be unpacked from those.
+
+  ```diff
+    #[entry_point]
+  - pub fn ibc_channel_open(_deps: DepsMut, _env: Env, channel: IbcChannel) -> StdResult<()> {
+  + pub fn ibc_channel_open(_deps: DepsMut, _env: Env, msg: IbcChannelOpenMsg) -> StdResult<()> {
+  +     let channel = msg.channel();
+
+        // do things
+    }
+  ```
+
+  ```diff
+    #[entry_point]
+    pub fn ibc_channel_connect(
+        deps: DepsMut,
+        env: Env,
+  -     channel: IbcChannel,
+  +     msg: IbcChannelConnectMsg,
+    ) -> StdResult<IbcBasicResponse> {
+  +     let channel = msg.channel();
+
+        // do things
+    }
+  ```
+
+  ```diff
+    #[entry_point]
+    pub fn ibc_channel_close(
+        deps: DepsMut,
+        env: Env,
+  -     channel: IbcChannel,
+  +     msg: IbcChannelCloseMsg,
+    ) -> StdResult<IbcBasicResponse> {
+  +     let channel = msg.channel();
+
+        // do things
+    }
+  ```
+
+  ```diff
+    #[entry_point]
+    pub fn ibc_packet_receive(
+        deps: DepsMut,
+        env: Env,
+  -     packet: IbcPacket,
+  +     msg: IbcPacketReceiveMsg,
+    ) -> StdResult<IbcReceiveResponse> {
+  +     let packet = msg.packet;
+
+        // do things
+    }
+  ```
+
+  ```diff
+    #[entry_point]
+    pub fn ibc_packet_receive(
+        deps: DepsMut,
+        env: Env,
+  -     ack: IbcAcknowledgementWithPacket,
+  +     msg: IbcPacketReceiveMsg,
+    ) -> StdResult<IbcBasicResponse> {
+        // They are the same struct just a different name
+        let ack = msg;
+
+        // do things
+    }
+  ```
+
+  ```diff
+    #[entry_point]
+    pub fn ibc_packet_timeout(
+        deps: DepsMut,
+        env: Env,
+  -     packet: IbcPacket,
+  +     msg: IbcPacketTimeoutMsg,
+    ) -> StdResult<IbcBasicResponse> {
+  +     let packet = msg.packet;
+
+        // do things
+    }
+  ```
+
+## 0.14 -> 0.15
+
+- Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
+
+  ```
+  [dependencies]
+  cosmwasm-std = "0.15.0"
+  cosmwasm-storage = "0.15.0"
+  # ...
+
+  [dev-dependencies]
+  cosmwasm-schema = "0.15.0"
+  cosmwasm-vm = "0.15.0"
+  # ...
+  ```
+
+- Combine `messages` and `submessages` on the `Response` object. The new format
+  uses `messages: Vec<SubMsg<T>>`, so copy `submessages` content, and wrap old
+  messages using `SubMsg::new`. Here is how to change messages:
+
+  ```rust
+  let send = BankMsg::Send { to_address, amount };
+
+  // before
+  let res = Response {
+    messages: vec![send.into()],
+    ..Response::default()
+  }
+
+  // after
+  let res = Response {
+    messages: vec![SubMsg::new(send)],
+    ..Response::default()
+  }
+
+  // alternate approach
+  let mut res = Response::new();
+  res.add_message(send);
+  ```
+
+  And here is how to change submessages:
+
+  ```rust
+  // before
+  let sub_msg = SubMsg {
+    id: INIT_CALLBACK_ID,
+    msg: msg.into(),
+    gas_limit: None,
+    reply_on: ReplyOn::Success,
+  };
+  let res = Response {
+    submessages: vec![sub_msg],
+    ..Response::default()
+  };
+
+  // after
+  let msg = SubMsg::reply_on_success(msg, INIT_CALLBACK_ID);
+  let res = Response {
+    messages: vec![msg],
+    ..Response::default()
+  };
+
+  // alternate approach
+  let msg = SubMsg::reply_on_success(msg, INIT_CALLBACK_ID);
+  let mut res = Response::new();
+  res.add_submessage(msg);
+  ```
+
+  Note that this means you can mix "messages" and "submessages" in any execution
+  order. You are no more restricted to doing "submessages" first.
+
+- Rename the `send` field to `funds` whenever constructing a `WasmMsg::Execute`
+  or `WasmMsg::Instantiate` value.
+
+  ```diff
+    let exec = WasmMsg::Execute {
+        contract_addr: coin.address.into(),
+        msg: to_binary(&msg)?,
+  -     send: vec![],
+  +     funds: vec![],
+    };
+  ```
+
+- `Uint128` field can no longer be constructed using a struct literal. Call
+  `Uint128::new` (or `Uint128::zero`) instead.
+
+  ```diff
+  - const TOKENS_PER_WEIGHT: Uint128 = Uint128(1_000);
+  - const MIN_BOND: Uint128 = Uint128(5_000);
+  + const TOKENS_PER_WEIGHT: Uint128 = Uint128::new(1_000);
+  + const MIN_BOND: Uint128 = Uint128::new(5_000);
+  ```
+
+  ```diff
+  - assert_eq!(escrow_balance, Uint128(0));
+  + assert_eq!(escrow_balance, Uint128::zero());
+  ```
+
+- If constructing a `Response` using struct literal syntax, add the `events`
+  field.
+
+  ```diff
+    Ok(Response {
+        messages: vec![],
+        attributes,
+  +     events: vec![],
+        data: None,
+    })
+  ```
+
+- For IBC-enabled contracts only: You need to adapt to the new
+  `IbcAcknowledgementWithPacket` structure and use the embedded `data` field:
+
+  ```rust
+  // before
+  pub fn ibc_packet_ack(
+    deps: DepsMut,
+    env: Env,
+    ack: IbcAcknowledgement,
+  ) -> StdResult<Response> {
+    let res: AcknowledgementMsg = from_slice(&ack.acknowledgement)?;
+    // ...
+  }
+
+  // after
+  pub fn ibc_packet_ack(
+    deps: DepsMut,
+    env: Env,
+    ack: IbcAcknowledgementWithPacket,
+  ) -> StdResult<Response> {
+    let res: AcknowledgementMsg = from_slice(&ack.acknowledgement.data)?;
+    // ...
+  }
+  ```
+
+  You also need to update the constructors in test code. Below we show how to do
+  so both for JSON data as well as any custom binary format:
+
+  ```rust
+  // before (JSON)
+  let ack = IbcAcknowledgement {
+    acknowledgement: to_binary(&AcknowledgementMsg::Ok(())).unwrap()
+    original_packet: packet,
+  };
+
+  // after (JSON)
+  let ack = IbcAcknowledgementWithPacket {
+      acknowledgement: IbcAcknowledgement::encode_json(&AcknowledgementMsg::Ok(())).unwrap(),
+      original_packet: packet,
+  };
+
+  // before (Custom binary data)
+  let acknowledgement = vec![12, 56, 78];
+  let ack = IbcAcknowledgement {
+    acknowledgement: Binary(acknowledgement),
+    original_packet: packet,
+  };
+
+  // after (Custom binary data)
+  let acknowledgement = vec![12, 56, 78];
+  let ack = IbcAcknowledgement {
+    acknowledgement: IbcAcknowledgement::new(acknowledgement),
+    original_packet: packet,
+  };
+  ```
 
 ## 0.13 -> 0.14 {#013---014}
 
