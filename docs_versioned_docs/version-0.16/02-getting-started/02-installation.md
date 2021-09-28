@@ -10,7 +10,7 @@ In this section, we will gear up your workhorse for developing, deploying and, e
 
 You can setup golang following [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest
 versions of `wasmd`
-require go version `v1.15`.
+require go version `v1.16.8+`.
 
 ## Rust {#rust}
 
