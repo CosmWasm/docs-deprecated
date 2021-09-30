@@ -53,5 +53,5 @@ jobs:
           else
           npm i
           fi
-          # translate
+          npm run crowdin:sync
           npm run deploy
