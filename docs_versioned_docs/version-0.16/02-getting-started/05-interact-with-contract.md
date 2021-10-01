@@ -77,11 +77,11 @@ NAME_QUERY='{"resolve_record": {"name": "fred"}}'
 wasmd query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output json
 # {"data":{"address":"wasm1av9uhya7ltnusvunyqay3xcv9x0nyc872cheu5"}}
 
-# buy and transfer name record to wallet2
+# buy and transfer name record to wallet2 address 
 TRANSFER='{"transfer":{"name":"fred","to":"wasm1um2e88neq8sxzuuem5ztt9d0em033rpr5ps9tv"}}'
 wasmd tx wasm execute $CONTRACT "$TRANSFER" \
     --amount 999upebble \
-    --from wallet2 $TXFLAG -y
+    --from wallet $TXFLAG -y
 ```
 
 Query record to see the new owner address:
