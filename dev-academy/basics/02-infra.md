@@ -14,8 +14,6 @@ Here is an illustration for explaining:
 Frontend either speaks directly to blockchain network,
 Or interacts with backend which is in connection with blockchain network.
 
-![network](network.jpeg)
-
 Blockchain network contains nodes which are connected and building blocks, verifies transactions.
 Whole operation rely on the blockchain in the middle, other services are built around that.
 For example, backend infra can save information to an external database to serve complex queries.

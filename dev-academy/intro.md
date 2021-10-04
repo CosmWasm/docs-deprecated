@@ -16,9 +16,9 @@ You can follow each folder carefully, and at the end you will have good knowledg
 
 ## Content {#content}
 
-- [Lesson 1](lesson-1)
-  - [What Is Blockchain](lesson-1/01-what-is-blockchain.md)
-  - [Blockchain Infrasturcture](lesson-1/02-infra.md)
-  - [Cosmos SDK and CosmWasm Basics](lesson-1/03-cosmos-sdk-cw.md)
-  - [Setting Up Environment](lesson-1/04-environment.md)
-  - [Lesson Challenge](lesson-1/05-challenge.md)
+- [Lesson 1](basics)
+  - [What Is Blockchain](basics/01-what-is-blockchain.md)
+  - [Blockchain Infrasturcture](basics/02-infra.md)
+  - [Cosmos SDK and CosmWasm Basics](basics/03-cosmos-sdk-cw.md)
+  - [Setting Up Environment](basics/04-environment.md)
+  - [Lesson Challenge](basics/05-challenge.md)
