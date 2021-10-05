@@ -26,6 +26,8 @@ cargo generate --git https://github.com/CosmWasm/cosmwasm-template.git --name my
 cd my-first-contract
 ```
 
+For the command `generate`to be recognized by `cargo`, you need to have installed `cargo`(which comes with rust) and then `cargo-generate` by running `cargo install cargo-generate`.
+
 This helps get you started by providing the basic boilerplate and structure for a smart contract. You'll find in
 the `src/lib.rs` file that the standard CosmWasm entry points `instantiate()`, `execute()`, and `query()` are
 properly exposed and hooked up.
