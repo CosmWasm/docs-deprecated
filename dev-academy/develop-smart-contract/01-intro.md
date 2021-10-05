@@ -19,7 +19,11 @@ In this section, we'll define our expected messages alongside their implementati
 ## Start with a template
 
 In your working directory, you'll want to use `cargo-generate` to start your smart contract with the recommended folder
-structure and build options:
+structure and build options. First make sure that you have `cargo` (coming with `rust`) and `cargo-generate` installed 
+```sh
+cargo install cargo-generate --features vendored-openssl:
+```
+and then generate the cosmwasm template:
 
 ```sh
 cargo generate --git https://github.com/CosmWasm/cosmwasm-template.git --name my-first-contract
