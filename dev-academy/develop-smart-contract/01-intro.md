@@ -244,8 +244,7 @@ In this example, the default `Response` for simplicity. However, the `Response` 
 provide the following information:
 
 - `messages`: a list of messages. This is where smart contracts execute other smart contracts or use native modules.
-- `attributes`: a list of key-value pairs to define emitted SDK events that can be subscribed to by clients and
-- parsed by block
+- `attributes`: a list of key-value pairs to define emitted SDK events that can be subscribed to by clients and parsed by block.
 - `events`: Extra, custom events separate from the main `wasm` one. These will have `wasm-` prepended to the type.
 Explorers and applications to report important events or state changes that occurred during the execution.
 - `data`: additional data that the contract return to client.
