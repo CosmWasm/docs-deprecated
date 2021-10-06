@@ -11,7 +11,7 @@ sending a request formatted as a JSON message.
 As a smart contract writer, your job is to define 3 functions that define your smart contract's interface:
 
 - `instantiate()`: a constructor which is called during contract instantiation to provide initial state
-- `exectute()`: gets called when a user wants to invoke a method on the smart contract
+- `execute()`: gets called when a user wants to invoke a method on the smart contract
 - `query()`: gets called when a user wants to get data out of a smart contract
 
 In this section, we'll define our expected messages alongside their implementation.
