@@ -240,7 +240,7 @@ the `src/state.rs`. We then update the present state's count by returning an `Ok
 terminate the contract's execution with an acknowledgement of success by returning an `Ok` result with the
 default `Response`.
 
-In this example, the default `Response` for simplicity. However, the `Response` can be manually created to
+In this example, the default `Response` is used for simplicity. However, the `Response` can be manually created to
 provide the following information:
 
 - `messages`: a list of messages. This is where smart contracts execute other smart contracts or use native modules.
