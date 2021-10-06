@@ -4,13 +4,13 @@ sidebar_position: 2
 
 # Develop Contract
 
-In this session, we will build on top of template we generated on previous [page](01-intro.md).
+In this session, we will build on top of the template we generated on the previous [page](01-intro.md).
 
 Here is the application logic we want:
 
-- Collected tokens in smart contract's balance is released to a target address after
-token amount exceeds a specified amount.
-- Contract accepts cw20 token that is by predefined by thw admin.
+- Collected tokens in smart contract's balance are released to a target address after
+  the token amount exceeds a specified amount.
+- Contract accepts cw20 token that is predefined by the admin.
 
 
 :::warning
@@ -52,7 +52,7 @@ pub struct InstantiateMsg {
 ```
 
 `admin` is defined as `Option` because if `None`, `info.sender` will be set as admin.
-Accepted cw20 address is set here.
+The accepted cw20 address is set here.
 
 ### Execute
 
@@ -88,7 +88,7 @@ pub fn instantiate(
 }
 ```
 
-The logic above is for if owner is `Some` validate, if not use `info.sender` and store configuration,
+The logic above is for if the owner is `Some` validate, if not use `info.sender` and store configuration,
 then return `Response` with attributes.
 
 ```rust
@@ -97,12 +97,12 @@ let owner = msg.admin
     .unwrap_or(info.sender);
 ```
 
-Example above is a great one to understand method chaining.
+The example above is a great one to understand method chaining.
 Great read: [Rust Combinator](https://doc.rust-lang.org/rust-by-example/error/option_unwrap/and_then.html)
 
 ### Tests
 
-I leave this part to you as challenge ;)
+I leave this part to you as a challenge ;)
 
 ## Create Pot
 
@@ -127,7 +127,7 @@ pub const POT_SEQ: Item<Uint128> = Item::new("pot_seq");
 pub const POTS: Map<U128Key, Pot> = Map::new("pot");
 ```
 
-We can use an `save_pot` helper to auto increment seq and use it as index for pot.
+We can use a `save_pot` helper to auto-increment seq and use it as an index for pot.
 
 ```rust
 pub fn save_pot(deps: DepsMut, pot: &Pot) -> StdResult<()> {
@@ -198,11 +198,11 @@ The smart contract will collect cw20 tokens. After cw20 token is sent, this cont
 
 But how?
 
-CosmWasm smart contracts works as message sending actors. Each contract execute each other via sending a message
+CosmWasm smart contracts work as message-sending actors. Each contract execute other via sending a message
 back to the context.
 
-User can transfer tokens from his account to the smart contract, then execute the smart contract to save this token
-allocation in the next TX. But the problem here is how to verify this token is really sent from this user?
+Users can transfer tokens from their account to the smart contract, then execute the smart contract to save this token
+allocation in the next TX. But the problem here is how to verify this token is sent from this user?
 
 One way to achieve this:
 1. User [increases token allowance](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw20#allowances) of the cw20-pot smart contract address.
@@ -212,7 +212,7 @@ This operation requires two transactions.
 
 There is a better and elegant way: [cw20 Receiver Interface](https://github. com/CosmWasm/cw-plus/tree/main/packages/cw20#receiver).
 
-Works like this, user creates a message for sending cw20 tokens to cw20-pot contract with an embedded message inside
+Works like this, the user creates a message for sending cw20 tokens to cw20-pot contract with an embedded message inside
 to trigger cw20-pot execution.
 
 If you check [cw20-base/contracts.rs#execute_send](https://github.com/CosmWasm/cw-plus/blob/main/contracts/cw20-base/src/contract.rs#L318)
@@ -228,8 +228,8 @@ pub fn execute_send(
 ) -> Result<Response, ContractError> {
 ```
 
-In the signature you will notice `contract`, `amount` and `msg`. `contract` is the receipent of the token and also
-address of the next execution, `amount` is the amount of tokens and `msg` is `base64` external message.
+In the signature, you will notice `contract`, `amount` and `msg`. `contract` is the recipient of the token and also
+address of the next execution, `amount` is the number of tokens and `msg` is `base64` external message.
 
 At the end of `execute_send`, you will see a `Response` with an embedded message sent back to the chain.
 ```rust
@@ -271,7 +271,7 @@ pub fn execute_receive(
 }
 ```
 
-On this line, contract defined embed receive msg is parsed from base64 binary.
+On this line, contract-defined embed receive msg is parsed from base64 binary.
 ```rust
   let msg: ReceiveMsg = from_binary(&wrapped.msg)?;
 ```
@@ -338,14 +338,14 @@ pub fn receive_send(
     }
 ```
 
-After the execution, if threshold is passed, collected amount is sent to target.
+After the execution, if the threshold is passed, the collected amount is sent to the target.
 
 ## Summary
 
-In this section we showed you contract to contract interaction and cw20 contract interaction.
-This should give you some insight to message passing, Actor model, and contract development,.
+In this section, we showed you contract to contract interaction and cw20 contract interaction.
+This should give you some insight to message passing, Actor model, and contract development.
 
 ## Challenge
 
 As a challenge, you can try to implement a contract that extends [cw-plus](https://github.com/CosmWasm/cosmwasm-plus/)
-or [cw-nfts](https://github.com/CosmWasm/cw-nfts)
+or [cw-nfts](https://github.com/CosmWasm/cw-nfts).
