@@ -38,12 +38,9 @@ their contract with others.
   system. If you just want to get your hands dirty with working code, you can skip this section for now and come back
   later when you are ready to ponder design.
 
-* [Testnets](/ecosystem/testnets/build-requirements) is a good first point if you are searching for a live network to
-  test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators
-  joining the testnets**", said no one ever 😉
-
 * [Learn](/tutorials/simple-option/intro) will demonstrate developing smart contracts from zero to production with step
   by step explanations, code snippets, scripts and more.
+  * [Dev Academy](/dev-academy/intro) provides structured learning content for CosmWasm smart contracts and clients.
 
 * [Workshops](/tutorials/videos-workshops) has great collection of demonstrations and verbal explanation of CosmWasm
   tech stack recorded by our team in various events and organisations.
@@ -51,6 +48,11 @@ their contract with others.
 * [Ecosystem](/ecosystem/overview) provides an ecosystem overview.
 
 * [Plus](/cw-plus/0.9.0/overview) is for state-of-the-art, production ready CosmWasm smart contracts.
+
+* [Testnets](/ecosystem/testnets/build-requirements) is a good first point if you are searching for a live network to
+  test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators
+  joining the testnets**", said no one ever 😉
+
 
 ## Further Studies {#further-studies}
 
