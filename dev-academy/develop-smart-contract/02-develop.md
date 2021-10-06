@@ -18,7 +18,7 @@ We recommend deleting boilerplate code during implementation to help with copyin
 :::
 
 :::info
-You can find the full version of this contract at []
+You can find the full version of this contract at [cw-contracts/cw20-pot](https://github.com/InterWasm/cw-contracts/tree/main/contracts)
 :::
 
 ## Config
