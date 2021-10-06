@@ -22,6 +22,8 @@ In your working directory, you'll want to use `cargo-generate` to start your sma
 structure and build options:
 
 ```sh
+# install cargo-generate
+cargo install cargo-generate --features vendored-openssl
 cargo generate --git https://github.com/CosmWasm/cosmwasm-template.git --name my-first-contract
 cd my-first-contract
 ```
