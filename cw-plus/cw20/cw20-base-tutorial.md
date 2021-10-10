@@ -105,7 +105,7 @@ and transfer tokens on that contract.
 
 ## Upload and Instantiate a Contract {#upload-and-instantiate-a-contract}
 
-I will walk you though how to set up an example cw20 contract on Heldernet.
+I will walk you though how to set up an example cw20 contract on Pebblenet.
 
 ### Example: STAR {#example-star}
 
