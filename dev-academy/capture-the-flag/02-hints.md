@@ -55,7 +55,7 @@ Query tx:
 
 ```bash
 wasmd query tx 8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C --node https://rpc.pebblenet.cosmwasm.com
-````
+```
 
 ### Smart Query
 
