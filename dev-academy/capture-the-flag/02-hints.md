@@ -112,4 +112,4 @@ wasmd tx bank send wasm134rsdpu5xfhegdclxmdeqxn0j6gmenkmcdmpuz wasm103hx72nfk0my
 
 # signs the tx and posts it to the chain
 wasmd tx sign unsigned_tx.json --from wasm134rsdpu5xfhegdclxmdeqxn0j6gmenkmcdmpuz --chain-id pebblenet-1
-````
+```
