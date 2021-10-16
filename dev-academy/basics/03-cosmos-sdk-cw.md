@@ -22,11 +22,9 @@ What's more, the Cosmos SDK is a capabilities-based system, which allows develop
 of interactions between modules.
 :::
 
-In short, Cosmos SDK is an easy-to-use blockchain framework that enables business to develop quickly without delving
-into
-blockchain details.
+In short, Cosmos SDK is an easy-to-use blockchain framework that enables developers to build application-specific blockchains without delving into the implementation details of low-level blockchain infrastructure (like byzantine fault tolerance).
 
-Please read through Cosmos SDK overview documentation:
+You can read through Cosmos SDK overview documentation for more information:
 
 - [Cosmos SDK Intro](https://docs.cosmos.network/v0.43/intro) gives a great introduction to the framework.
 - [Cosmos SDK Basics](https://docs.cosmos.network/v0.43/basics) covers basic concepts of cosmos sdk that is required
@@ -42,14 +40,95 @@ called `wasmd`, so you can launch a new smart-contract enabled blockchain out of
 tooling and the same security model as the Cosmos Hub.
 :::
 
-In short, CosmWasm is a smart contract module that can be used with Cosmos SDK. For now it supports smart contracts
-written in Rust.
+In short, CosmWasm is a smart contract module that can be used with Cosmos SDK.
+It runs the [Web Assembly](https://webassembly.org/) (or Wasm) virtual machine, allowing
+developers to create smart contracts in various languages. Currently, it supports
+smart contracts written in Rust.
 
-## Differences? {#differences}
+## How do the Cosmos SDK, CosmWasm, and Tendermint fit togheter?
 
-- Cosmos SDK is the underlying native application, modules are developed using go.
-- CosmWasm is an engine running on Cosmos SDK. Smart contracts are in rust for now.
-- Cosmos SDK native modules are slightly faster compare to smart contracts.
-- Smart contracts can be swapped when chain is running, on the other hand for making changes to native modules chain
-  restarts required. This process done by validators coordinating on a restart procedure.
+
+```
+
+                ^  +-------------------------------+  ^
+                |  |                               |  |
+                |  |  State-machine = Application  |  |
+                |  |                               |  |   Built with Cosmos SDK
+                |  |            ^      +           |  |
+                |  +----------- | ABCI | ----------+  v
+                |  |            +      v           |  ^
+                |  |                               |  |
+Blockchain Node |  |           Consensus           |  |
+                |  |                               |  |
+                |  +-------------------------------+  |   Tendermint Core
+                |  |                               |  |
+                |  |           Networking          |  |
+                |  |                               |  |
+                v  +-------------------------------+  v
+
+```
+
+The Cosmos SDK is built ontop of [Tendermint
+Core](https://docs.tendermint.com/), which handles the low-level infrastructure
+of maintaing a blockchain (e.g., transacting, consensus). It interacts with the
+Cosmos SDK via the ABCI, or Application Blockchain Interface. Blockchain
+full-nodes run this entire Cosmos SDK and Tendermint "stack" to replicate the
+blockchain and validate transactions.
+
+```
+
+                                      +
+                                      |
+                                      |  Transaction relayed from the full-node's
+                                      |  Tendermint engine to the node's application
+                                      |  via DeliverTx
+                                      |
+                                      |
+                +---------------------v--------------------------+
+                |                 APPLICATION                    |
+                |                                                |
+                |     Using baseapp's methods: Decode the Tx,    |
+                |     extract and route the message(s)           |
+                |                                                |
+                +---------------------+--------------------------+
+                                      |
+                                      |
+                                      |
+                                      +---------------------------+
+                                                                  |
+                                                                  |
+                                                                  |  Message routed to
+                                                                  |  the correct module
+                                                                  |  to be processed
+                                                                  |
+                                                                  |
++----------------+  +---------------+  +----------------+  +------v----------+
+|                |  |               |  |                |  |                 |
+|  AUTH MODULE   |  |  BANK MODULE  |  | STAKING MODULE |  |   CosmWasm      |
+|                |  |               |  |                |  |                 |
+|                |  |               |  |                |  | Executes smart  |
+|                |  |               |  |                |  | contract code   |
+|                |  |               |  |                |  |                 |
++----------------+  +---------------+  +----------------+  +------+----------+
+                                                                  |
+                                                                  |
+                                                                  |
+                                                                  |
+                                       +--------------------------+
+                                       |
+                                       | Return result to Tendermint
+                                       | (0=Ok, 1=Err)
+                                       v
+
+
+```
+
+Transactions are passed from the ABCI to the application, which in turn routes them to *modules* responsible for performing application logic. CosmWasm is a module running the WebAssembly virtual machine.
+
+Compared to CosmWasm smart contracts, Cosmos SDK native modules are slightly
+faster due to the lack of virtualization. However, virtualization comes with its
+own benefits. Smart contracts can be swapped when chain is running, whereas
+restarts are requried for native modules. Also, thanks to the flexible Wasm
+virtual machine, CosmWasm contracts can be written in Rust (and someday other
+languages as well).
 

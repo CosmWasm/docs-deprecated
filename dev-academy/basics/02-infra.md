@@ -4,16 +4,18 @@ sidebar_position: 2
 
 # Blockchain Infrastructure
 
-Blockchain infrastructure is different from traditional systems.
-In traditional web services it usually follows this: Frontend application interacts with Backend.
+In traditional web services, a frontend application (like a webpage or an app)
+interacts with a backend application (like APIs or a Postgres server).
 
-Blockchain infra is similar to this but has different aspects and components integrated.
+In blockchain infrastructure, a frontend speaks directly with the blockchain
+network, visualizing the state of the chain. A blockchain network contains
+nodes, which validate transactions and add them to blocks. This decentralized
+network of nodes takes the place of the database and APIs in a traditional web
+service. The blockchain itself serves as a data store, and the application (or
+state machine) that the nodes run take the place of its APIs (by ingesting
+transactions and defining transitions between states).
 
-Here is an illustration for explaining:
-
-Frontend either speaks directly to blockchain network,
-Or interacts with backend which is in connection with blockchain network.
-
-Blockchain network contains nodes which are connected and building blocks, verifies transactions.
-Whole operation rely on the blockchain in the middle, other services are built around that.
-For example, backend infra can save information to an external database to serve complex queries.
+*Note*: In some cases, blockchain applications can also interact with a backend which in
+turn connects to the blockchain. For example, backend infrastructure can save
+information to an external database to serve complex queries that would be
+expensive to perform on the chain itself.

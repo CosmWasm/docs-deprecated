@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Introduction
 
-One of the promising aspect of Blockchain technology is novel **Governance** mechanisms.
+One of the promising aspect of Blockchain technology is novel **governance** mechanisms.
 
 :::info [wikipedia](https://en.wikipedia.org/wiki/Decentralized_autonomous_organization)
 A decentralized autonomous organization (DAO), sometimes called a decentralized autonomous corporation (DAC), is an
@@ -15,12 +15,18 @@ A DAO's financial transaction record and program rules are
 maintained on a blockchain.
 :::
 
-DAOs and Governance are going to be game changer concept in the 21st century. It will change the way we think about
-organisations. This concept has huge potential because it enables groups or organisations to cooperate and execute
-actions on blockchains without need the of a trusted authority. Every voting and execution takes place on chain. This
-means that the decision execution made by DAOs are unstoppable. Other aspect is transparency. Due to the nature of a
-blockchain, DAO members have stake in the game and their cards are more transparent compared to traditional governance
-systems.
+You can think of a DAO like a corporation. Corporations have a board that makes
+decisions. In DAOs, these decisions are stored on the blockchain, and the rules
+for making them are embedded in the application logic of smart contracts.
+
+DAOs have enormous potential to shape the way we organize and collaborate. They
+enable groups or organisations to cooperate and execute actions on blockchains
+without need the of a trusted authority. Every voting and execution takes place
+on chain. This means that the decision execution made by DAOs are uncensorable.
+
+Another compelling aspects of DAOs is their transparency. Where it can take
+years to audit the finances of a traditional corporations, understanding the
+state of the DAO is as simple as querying its blockchian.
 
 ## CosmWasm and Governance
 
@@ -43,7 +49,7 @@ There are contracts in [cw-plus](https://github.com/CosmWasm/cw-plus/) that you 
     to [cw4-group] (which handles elected membership), but rather than appointing members (by admin or multisig), their
     membership and weight are based on the number of tokens they have staked. This is similar to many DAOs.
 
-There are other DAO projects that are developed in the community. But we will stick to these for the simplicity for now.
+There are other DAO projects that are developed in the community. For now, we will stick to these for simplicity.
 
 ## DAO Governed Smart Contracts
 

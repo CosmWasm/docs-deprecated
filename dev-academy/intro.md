@@ -5,14 +5,10 @@ title: Introduction
 
 # Welcome to Dev Academy
 
-CosmWasm Dev Academy is a set of learning contents designed to be used as learning content.
+CosmWasm Dev Academy is a set of modular, step-by-step tutorials that can be used at 
+workshops, in university courses, and at home.
 
-
-Dev Academy content can be used at workshops, university courses and at home.
-It provides a modular and step-by-step learning content.
-
-
-You can follow each folder carefully, and at the end you will have good knowledge of CosmWasm.
+Follow each folder carefully. By the end, you will have a good understanding of CosmWasm.
 
 ## Content {#content}
 
