@@ -22,14 +22,14 @@ What's more, the Cosmos SDK is a capabilities-based system, which allows develop
 of interactions between modules.
 :::
 
-In short, Cosmos SDK is an easy-to-use blockchain framework that enables business to develop quickly without delving
+In short, Cosmos SDK is an easy-to-use blockchain framework that enables businesses, communities and individuals to develop quickly without delving
 into
 blockchain details.
 
 Please read through Cosmos SDK overview documentation:
 
-- [Cosmos SDK Intro](https://docs.cosmos.network/v0.43/intro) gives a great introduction to the framework.
-- [Cosmos SDK Basics](https://docs.cosmos.network/v0.43/basics) covers basic concepts of cosmos sdk that is required
+- [Cosmos SDK Intro](https://docs.cosmos.network/master/intro) gives a great introduction to the framework.
+- [Cosmos SDK Basics](https://docs.cosmos.network/master/basics) covers basic concepts of cosmos sdk that are required
   for developing on cosmwasm without much cosmos-sdk knowledge.
 
 ## CosmWasm {#cosmwasm}
@@ -49,7 +49,7 @@ written in Rust.
 
 - Cosmos SDK is the underlying native application, modules are developed using go.
 - CosmWasm is an engine running on Cosmos SDK. Smart contracts are in rust for now.
-- Cosmos SDK native modules are slightly faster compare to smart contracts.
+- Cosmos SDK native modules are slightly faster compared to smart contracts.
 - Smart contracts can be swapped when chain is running, on the other hand for making changes to native modules chain
-  restarts required. This process done by validators coordinating on a restart procedure.
+  restarts are required. This process is done by validators coordinating on a restart procedure.
 

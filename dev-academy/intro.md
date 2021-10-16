@@ -5,14 +5,14 @@ title: Introduction
 
 # Welcome to Dev Academy
 
-CosmWasm Dev Academy is a set of learning contents designed to be used as learning content.
+CosmWasm Dev Academy is a set of educational materials designed to provide a quick start for anyone who wants to learn and get started with concepts like blockchain, smart contracts, DAOs and more.
 
 
-Dev Academy content can be used at workshops, university courses and at home.
-It provides a modular and step-by-step learning content.
+Dev Academy content can be used at workshops, university courses or at home.
+It provides a modular and step-by-step learning structure.
 
 
-You can follow each folder carefully, and at the end you will have good knowledge of CosmWasm.
+By the end of each section, you will have a good understanding of many interesting topics including CosmWasm.
 
 ## Content {#content}
 
