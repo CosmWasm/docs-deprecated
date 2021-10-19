@@ -4,10 +4,10 @@ sidebar_position: 2
 
 # Indexes
 
-Indexes are key structures that enables iteration over primary keys using value information. Here is an example for
-understanding it.
+Indexes are key structures that enable iteration over primary keys using value information. Here is an example for
+understanding them.
 
-Let's assume a model: there are multiple tokens in the system, each token has unique owner. An owner must be related to
+Let's assume a model: there are multiple tokens in the system, each token has a unique owner. An owner must be related to
 a token. Tokens must be queryable by owner.
 
 ```rust
@@ -17,15 +17,15 @@ struct Token {
 }
 ```
 
-Tokens can be identified an auto incremented key, and this integer will be used as primary key. This will make each
+Tokens can be identified by an auto incremented key, and this integer will be used as primary key. This will make each
 token unique.
 
 `(TokenPK) -> Token`
 
 Here is the fun part, owner index:
-`(owner, TokenPK) -> TokenPK`
+`(owner, TokenPK) -> Token`
 
-TokenPK points to a Token data, and `owner:TokenPK` key points to `TokenPK`. With two database hits, Token data is
+TokenPK points to a Token data, and `owner:TokenPK` key points to `Token`. With two database hits, Token data is
 accessible. Now to retrieve all the tokens an owner manages, we run prefix range like we have shown above.
 
 ```rust
@@ -39,14 +39,14 @@ Now tokens are easily accessible by **owner** information. On every state change
 
 ## storage-plus indexing {#storage-plus-indexing}
 
-Solution above will do the work but not optimal. Too much code complexity and manual work. This is
+The solution above will work but is not optimal. Too much code complexity and manual work. This is
 where [storage-plus/IndexedMap](https://github.com/CosmWasm/cw-plus/blob/main/packages/storage-plus/src/indexed_map.rs)
-comes in to the play. `IndexedMap` is a storage handler that indexes internally. Two types of indexes
-available: [Unique Indexes](#unique-indexes) and [Multi Indexes](#multi-indexes)
+comes into play. `IndexedMap` is a storage handler that indexes internally. Two types of indexes
+are available: [Unique Indexes](#unique-indexes) and [Multi Indexes](#multi-indexes)
 
 ### Unique Indexes {#unique-indexes}
 
-Uniqueness of data field in database is a quite common case.
+Uniqueness of a data field in a database is quite a common need.
 [UniqueIndex](https://github.com/CosmWasm/cw-plus/blob/v0.7.0/packages/storage-plus/src/indexes.rs) is an indexing
 helper for achieving this functionality.
 
@@ -64,7 +64,7 @@ pub struct TokenIndexes<'a> {
   pub identifier: UniqueIndex<'a, U8Key, Token>,
 }
 
-// IndexList is just a boiler plate code for fetching structs indexes
+// IndexList is just boilerplate code for fetching a struct's indexes
 impl<'a> IndexList<Token> for TokenIndexes<'a> {
   fn get_indexes(&'_ self) -> Box<dyn Iterator<Item=&'_ dyn Index<Token>> + '_> {
     let v: Vec<&dyn Index<Token>> = vec![&self.identifier];
@@ -92,7 +92,7 @@ pub struct Token {
 }
 ```
 
-Token has few values and `identifier` is a unique value token has.
+Token has a few values and `identifier` is a unique value the token has.
 
 ```rust
 // TokenIndexes structs keeps a list of indexers
@@ -130,10 +130,10 @@ pub fn tokens<'a>() -> IndexedMap<'a, &'a [u8], Token, TokenIndexes<'a>> {
     identifier: UniqueIndex::new( | d| U8Key::new(d.identifier), "token_identifier"),
 ```
 
-Above code is indexes builder function. It builds composite key with given function, and accepts a key to identify the
+The above code is an index builder function. It builds composite keys with the given function, and accepts a key to identify the
 index bucket.
 
-Here is test code:
+Here is some test code:
 
 ```rust
 #[test]
@@ -159,12 +159,12 @@ fn test_tokens() {
   };
 
   let token_id = increment_tokens(store.borrow_mut()).unwrap();
-  // identifier clashes, must throw error
+  // identifier clashes, must return error
   tokens().save(store.borrow_mut(), &U64Key::from(token_id).joined_key(), &token1).unwrap();
 }
 ```
 
-Last line will crash with error:
+The last line will crash with an error:
 
 ```
 called `Result::unwrap()` on an `Err` value: GenericErr { msg: "Violates unique constraint on index" }
@@ -174,16 +174,16 @@ stack backtrace:
 
 ### Multi Indexes {#multi-indexes}
 
-Multi indexes used when structure indexed by non-unique values. Here is a case from cw721 smart contract:
+Multi indexes are used when the structure is indexed by non-unique values. Here is a case from the `cw721` smart contract:
 
 ```rust
 pub struct TokenIndexes<'a> {
-  // secondary indexed by owner address
-  // last U64Key is the primary key which is auto incremented token counter
+  // secondary index by owner address
+  // the last U64Key is the primary key which is an auto incremented token counter
   pub owner: MultiIndex<'a, (Vec<u8>, Vec<u8>), Token>,
 }
 
-// this may become macro, not important just boilerplate, builds the list of indexes for later use
+// this may become a macro, not important just boilerplate, builds the list of indexes for later use
 impl<'a> IndexList<Token> for TokenIndexes<'a> {
   fn get_indexes(&'_ self) -> Box<dyn Iterator<Item=&'_ dyn Index<Token>> + '_> {
     let v: Vec<&dyn Index<Token>> = vec![&self.owner];
@@ -206,7 +206,7 @@ pub fn tokens<'a>() -> IndexedMap<'a, &'a [u8], Token, TokenIndexes<'a>> {
 ```
 
 We see that the owner index is a `MultiIndex`. A multi-index can have repeated values as keys. That's why the primary key
-added as the last element of the multi-index key. Like the name implies, this is an index over tokens, by owner. Given
+is added as the last element of the multi-index key. Like the name implies, this is an index over tokens, by owner. Given
 that an owner can have multiple tokens, we need a `MultiIndex` to be able to list / iterate over all the tokens a given
 owner has.
 
