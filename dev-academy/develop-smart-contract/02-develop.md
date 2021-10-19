@@ -312,21 +312,6 @@ pub fn receive_send(
 
     // if collected exceeds threshold prepare a cw20 message
     if pot.collected >= pot.threshold {
-        let cw20 = Cw20Contract(cw20_addr);
-        let msg = cw20.call(Cw20ExecuteMsg::Transfer {
-            recipient: pot.target_addr.into_string(),
-            amount: pot.collected,
-        })?;
-        res = res.add_message(msg);
-    }
-
-    Ok(res)
-}
-```
-
-```rust
-    // if collected exceeds threshold prepare a cw20 message
-    if pot.collected >= pot.threshold {
         // Cw20Contract is a function helper that provides several queries and message builder.
         let cw20 = Cw20Contract(cw20_addr);
         // Build a cw20 transfer send msg, that send collected funds to target address
@@ -336,6 +321,9 @@ pub fn receive_send(
         })?;
         res = res.add_message(msg);
     }
+
+    Ok(res)
+}
 ```
 
 After the execution, if the threshold is passed, the collected amount is sent to the target.
