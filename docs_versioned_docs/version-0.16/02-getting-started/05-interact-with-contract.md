@@ -81,7 +81,7 @@ wasmd query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output jso
 TRANSFER='{"transfer":{"name":"fred","to":"wasm1um2e88neq8sxzuuem5ztt9d0em033rpr5ps9tv"}}'
 wasmd tx wasm execute $CONTRACT "$TRANSFER" \
     --amount 999upebble \
-    --from wallet2 $TXFLAG -y
+    --from wallet $TXFLAG -y
 ```
 
 Query record to see the new owner address:
