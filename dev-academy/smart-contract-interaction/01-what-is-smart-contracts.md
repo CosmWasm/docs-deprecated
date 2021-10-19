@@ -22,7 +22,7 @@ Here is a great video explanation:
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 allowfullscreen></iframe>
 
-This channel is a first stop for blockchain learners. I highly recommend you to explore other videos.
+This channel is a first stop for blockchain learners. I highly recommend you explore other videos.
 
 In our context, CosmWasm is the framework provides code and tooling to develop smart contracts and infrastructure to
 run it on chain. For now smart contracts are written using Rust.
@@ -69,7 +69,7 @@ pub fn execute_transfer(
 }
 ```
 
-As you can see smart contracts are not magic and very similar to any other programmed logic.
+As you can see smart contracts are not magic. They are very similar to any other programmed logic.
 
 Differences from any backend development are new concepts from cryptography and other disciplines:
   - [hash](https://www.investopedia.com/terms/h/hash.asp)
@@ -77,5 +77,5 @@ Differences from any backend development are new concepts from cryptography and 
   - [merkle root](https://www.investopedia.com/terms/m/merkle-root-cryptocurrency.asp)
   - [key-value database](https://www.wikiwand.com/en/Key%E2%80%93value_database)
 
-Of course there are other concepts like: consensus, network security, message propagation, but these are advanced topics
-and will not be covered here.
+Of course, there are other concepts: consensus, network security, message
+propagation. But these are advanced topics and will not be covered here.

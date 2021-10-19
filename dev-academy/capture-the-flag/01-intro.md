@@ -4,15 +4,13 @@ sidebar_position: 1
 
 # Riddles
 
-In the past two documents, we saw interaction with a smart contract, now we will dive into mastery of Cosmos SDK
-client usage.
+In the past two documents, we saw interaction with a smart contract. Now, we will
+dive into mastery of Cosmos SDK client usage.
+You will solve some puzzles using CosmWasm and Cosmos SDK.
 
-This part will be more about you learning to find your way around in code, discord rather than me telling you what
-to do.
+This part will be more about you learning to find your own way around (using the code and the discord).
 
-You will solve puzzles using CosmWasm and Cosmos SDK client skills.
-
-Down below, you will see cues. These will lead you to a voucher code at the end that proves you solved the riddle.
+Down below, you will see clues. These clues will lead you to a "voucher code" at the end that proves you solved the riddle.
 
 You can find hints for solving these riddles on the next [page](02-hints.md).
 

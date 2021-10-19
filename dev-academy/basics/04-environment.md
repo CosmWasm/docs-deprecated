@@ -5,12 +5,12 @@ sidebar_position: 3
 # Environment Setup
 
 You need an environment to run contracts. You can either run your node locally or connect to an existing network. For
-easy testing, pebblenet network is online, you can use it to deploy and run your contracts.
+easy testing, you can use the public testnet (pebblenet) to deploy and run your contracts.
 
-When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. Although Node REPL is
-recommended for contract operations, since JSON manipulation is not intuitive with the Shell/Go client.
+When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. The Node REPL is
+recommended for contract operations, since JSON manipulation is not intuitive with the shell/Go client.
 
-For the whole course, we will be using a public testnet to make things simpler.
+For this course, we will be using the public testnet to make things simpler.
 
 ## Gitpod
 

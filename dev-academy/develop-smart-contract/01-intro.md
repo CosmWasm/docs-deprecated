@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Anatomy of A Smart Contract
+# Anatomy of a Smart Contract
 
 A smart contract can be considered an instance of a singleton object whose internal state is persisted on the
 blockchain. Users can trigger state changes through sending it JSON messages, and users can also query its state through
@@ -64,7 +64,7 @@ retrieved.
 pub const STATE: Item<State> = Item::new("state");
 ```
 
-Example above key `"state"` is used as prefix.
+In the example above, the key `"state"` is used as prefix.
 
 Data can only be persisted as raw bytes, so any notion of structure or data type must be expressed as a pair of
 serializing and deserializing functions. For instance, objects must be stored as bytes, so you must supply both the

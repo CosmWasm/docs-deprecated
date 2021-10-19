@@ -4,19 +4,15 @@ sidebar_position: 1
 
 # What is Blockchain?
 
-The answer to this question is pretty long complicated, but here are few key points:
+Blockchains are a specific type of database made up of *blocks* of data, concatenated together to form a *chain*.
 
-- Blockchain is a specific type of database.
-- It differs from a typical database in the way it stores information; blockchains store data in blocks that are then
-  chained together.
-- As new data comes in it is entered into a fresh block. Once the block is filled with data it is chained onto the
-  previous block, which makes the data chained together in chronological order.
-- Different types of information can be stored on a blockchain but the most common use so far has been as a ledger
-  for transactions.
- In Bitcoin’s case, blockchain is used in a decentralized way so that no single person or group has control—rather,
-  all users collectively retain control.
-- Decentralized blockchains are immutable, which means that the data entered is irreversible. For Bitcoin, this means
-  that transactions are permanently recorded and viewable to anyone.
+Specifically, new data comes in piece by piece in the form of *transactions*.
+Each transaction is added to a block. Each blocks is chained to the previous
+block, creating a chronological ordering of data.
+
+While blockchains can store any type of data, the most common use is to produce a *ledger*: an append-only list of transactions. For example, Bitcion's blockchain stores all the transactions from one *wallet* (account) to every other. The balance of each account is a reduce over these transactions.
+
+Blockchains use cryptography and distributed computing algorithms to provide immutability, meaning that data entered cannot be changed after the fact. For Bitcoin, this means that transactions are permanently recorded and viewable to anyone.
 
 ## Sources {#sources}
 
