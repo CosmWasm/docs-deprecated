@@ -210,7 +210,7 @@ One way to achieve this:
 
 This operation requires two transactions.
 
-There is a better and elegant way: [cw20 Receiver Interface](https://github. com/CosmWasm/cw-plus/tree/main/packages/cw20#receiver).
+There is a better and elegant way: [cw20 Receiver Interface](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw20#receiver).
 
 Works like this, the user creates a message for sending cw20 tokens to cw20-pot contract with an embedded message inside
 to trigger cw20-pot execution.
