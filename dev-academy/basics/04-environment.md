@@ -15,7 +15,7 @@ For this course, we will be using the public testnet to make things simpler.
 ## Gitpod
 
 [Gitpod](https://www.gitpod.io/) is an online development environment. We have a gitpod image that you can base your
-projects on that contains all the requirements below. Gitpod is recommended if you have stable internet connection.
+projects on. The image contains all the requirements below. Gitpod is recommended if you have a stable internet connection.
 Add [.gitpod.yml](https://github.com/CosmWasm/cosmwasm-template/blob/master/.gitpod.yml) file to your project's root
 then push it to GitHub. After installing [gitpod extension](https://www.gitpod.io/extension-activation/), on github
 project repo, there will be `Gitpod` button which will create a workspace for you to work on.
@@ -24,7 +24,7 @@ project repo, there will be `Gitpod` button which will create a workspace for yo
 
 You can setup golang following [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest
 versions of `wasmd`
-require go version `v1.15`.
+require go version `1.16.8+`.
 
 ## Rust {#rust}
 
@@ -60,8 +60,8 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.18.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.18.0
+# replace the v0.20.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.20.0
 make install
 
 # verify the installation
@@ -156,7 +156,7 @@ Other way to use and interact with on-chain contracts is CosmJS interactive clie
 To use it, install [node.js 12+](https://nodejs.org/en/download/) and [npx](https://www.npmjs.com/package/npx)
 
 ```shell
-npx @cosmjs/cli@^0.25 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/CosmWasm/cosmwasm-plus/master/contracts/cw20-base/helpers.ts
 ```
 
 Now you will see an interactive shell popped up.
