@@ -4,9 +4,9 @@ sidebar_position: 2
 
 # Basics of Smart Contract Interactions
 
-As mentioned before smart contracts are executable codes.
-In the next lessons, we will learn how to write one. Until then best to use already written to keep things simple.
-We will dive in to two options to deploy and interact with contracts: `wasmd` and `CosmJS`
+As mentioned before, smart contracts are executable codes.
+In the next lessons, we will learn how to write one. Until then, it's best to use what's already written to keep things simple. 
+We will dive into two options for deploying and interacting with contracts: `wasmd` and `CosmJS`
 
 ## Where to find smart contracts?
 
@@ -17,14 +17,14 @@ Now we will just download a precompiled one by cosmwasm team.
 
 We provide smart contract binary executable
 at [cw-plus](https://github.com/CosmWasm/cw-plus/) repo alongside the code.
-cw-plus repository is a collection of production grade smart contracts that has been heavily testes on real mainnets.
+cw-plus repository is a collection of production-grade smart contracts that has been heavily tested on real mainnets.
 You will see a list of available contracts on the repository page.
 Go click **Releases** button to see tagged binary executables. You can download binaries and deploy to
 compatible blockchains.
 
 We will use cw20 prebuilt binary for this course: [cw20-base](https://github.com/CosmWasm/cw-plus/releases/download/v0.8.0/cw20_base.wasm)
 
-Please don't pay attention to cw20-base details, just focus on getting a contract on a testnet.
+Please don't pay attention to cw20-base details for now, just focus on getting a contract on a testnet.
 
 ## wasmd
 
@@ -132,8 +132,21 @@ You will see this output indicating that instantiation transaction is success:
 }
 ```
 
+This command from before should now output the instantiated contract address.
+```sh
+wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
+```
+```json
+{
+  "contracts": [
+    "wasm1peztgl9vagwh4k5tgwe6n6tu9s8hjwyqmlmrhk"
+  ],
+  "pagination": {}
+}
+```
+
 Now we have a ready to use instantiated contract. As you can see, you need a lot of shell JSON manipulation for
-terminal interaction. This is just dirty work... Luckily we have a better option.
+command line interaction. This is just dirty work... Luckily we have a better option.
 
 ## CosmJS
 
@@ -215,7 +228,7 @@ contracts.
 The first contract I uploaded was STAR tokens, or "Golden Stars" to be distribute to the
 [first 3 validators](https://block-explorer.pebblenet.cosmwasm.com/validators) on the network.
 
-Please do not copy this verbatum, but look to see how such a contract is setup and deployed the first time.
+Please do not copy this verbatim, but look to see how such a contract is set up and deployed the first time.
 
 ```js
 const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
@@ -269,7 +282,6 @@ const initMsg = {
   name: "My Coin",
   symbol: "MINE",
   decimals: 6,
-  // list of all validator self-delegate addresses - 100 STARs each!
   initial_balances: [
     {address, amount: "12345678000"},
   ],
