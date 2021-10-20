@@ -4,9 +4,7 @@ sidebar_position: 2
 
 # DAO Smart Contract
 
-DAOs are social constructs that consist of more than one entity. Ideally,
-collect your friends' and colleagues' blockchain addresses for this course. Or
-set up several keys like we will do for this course like we will do right now.
+DAOs are social constructs that consist of more than one entity. Ideally, collect your friends' and colleagues' blockchain addresses for this course. Or set up several keys like we will do right now.
 
 ## Environment Setup
 
