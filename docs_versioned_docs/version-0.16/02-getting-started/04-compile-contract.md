@@ -18,8 +18,8 @@ First, clone the repo and try to build the wasm bundle:
 
 ```shell
 # get the code
-git clone https://github.com/CosmWasm/cw-examples
-cd cw-examples
+git clone https://github.com/InterWasm/cw-contracts
+cd cw-contracts
 git fetch --tags
 git checkout nameservice-0.11.0
 cd nameservice
