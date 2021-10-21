@@ -264,7 +264,7 @@ console.log(`Contract: ${contract.contractAddress}`);
 
 console.log(await contract.balance("wasm13krn38qhu83y5xvmjgydnk5vjau2u3c0tv5jsu"));
 // 10000
-console.log(await contract.balance());
+console.log(await contract.balance(contract.contractAddress));
 // 0
 ```
 
@@ -283,10 +283,10 @@ const initMsg = {
   symbol: "MINE",
   decimals: 6,
   initial_balances: [
-    {address, amount: "12345678000"},
+    {address: addr, amount: "12345678000"},
   ],
   mint: {
-    minter: address,
+    minter: addr,
     cap: "99900000000"
   },
 };
@@ -299,7 +299,7 @@ console.log(`Contract: ${mine.contractAddress}`);
 // Contract: wasm10ajume5hphs9gcrpl9mw2m96fv7qu0q7esznj2
 
 // now, check the configuration
-mine.balance();
+mine.balance(addr);
 mine.tokenInfo()
 mine.minter()
 ```
@@ -328,7 +328,7 @@ const contractAddress = "wasm14wm5jvsm6r896tcqsx9dlxc8h0w2mg5de39dsm"
 const mine = cw20.use(contractAddress);
 mine.tokenInfo()
 mine.minter()
-mine.balance()
+mine.balance(addr)
 ```
 
 Okay, you are connected to your contract. Let's see what cw20 is capable of. Here I will show you how you can mint
@@ -339,7 +339,7 @@ const someone = "wasm13nt9rxj7v2ly096hm8qsyfjzg5pr7vn56p3cay";
 const other = "wasm1ve2n9dd4uy48hzjgx8wamkc7dp7sfdv82u585d";
 
 // right now, only you have tokens
-mine.balance()
+mine.balance(addr)
 mine.balance(someone)
 mine.balance(other)
 // and watch the total
@@ -352,7 +352,7 @@ mine.mint(addr, someone, "999888000")
 
 // See balances updated
 mine.balance(someone)
-mine.balance()
+mine.balance(addr)
 // and the supply goes up
 mine.tokenInfo()
 
@@ -360,5 +360,5 @@ mine.tokenInfo()
 mine.transfer(addr, other, "4567000");
 // eg. 4A76EFFEB09C82D0FEB97C3B5A9D5BADB6E9BD71F4EF248A3EF8B232C2F7262A
 mine.balance(other)
-mine.balance()
+mine.balance(addr)
 ```
