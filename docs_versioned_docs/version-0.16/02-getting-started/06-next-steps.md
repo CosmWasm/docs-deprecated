@@ -12,7 +12,7 @@ enables a thief to steal funds.
 
 - [Videos and Workshops](/tutorials/videos-workshops): We curated some video and workshop resources you can take a
   look at
-- [Terra Academy](https://academy.terra.money/courses/cosmwasm-smart-contracts-i) is a great tutorial series apart from here.
+- [Terra Academy](https://academy.terra.money/courses/cosmwasm-smart-contracts-i): is a great tutorial series apart from here.
 - [cosmwasm/cawesome-wasm](https://github.com/CosmWasm/cawesome-wasm): Curated CosmWasm resources
 - [cosmwasm-template](https://github.com/CosmWasm/cosmwasm-template): CosmWasm starter project. Do not clone the repo,
   but rather follow the [README](https://github.com/CosmWasm/cosmwasm-template/blob/master/README.md) on how to use
