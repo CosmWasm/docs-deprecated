@@ -5,10 +5,11 @@ title: Introduction
 
 # Welcome to Dev Academy
 
-CosmWasm Dev Academy is a set of modular, step-by-step tutorials that can be used at 
-workshops, in university courses, and at home.
+CosmWasm Dev Academy is a set of modular and step-by-step educational materials designed to provide a quick start for anyone who wants to learn and get started with concepts like blockchain, smart contracts, DAOs and more.
 
-Follow each folder carefully. By the end, you will have a good understanding of CosmWasm.
+Dev Academy content can be used at workshops, university courses or at home.
+
+Follow each section carefully. By the end, you will have a good understanding of many interesting topics including CosmWasm.
 
 ## Content {#content}
 
