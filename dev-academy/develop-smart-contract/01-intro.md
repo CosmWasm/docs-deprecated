@@ -73,7 +73,7 @@ back into data types that your contract logic can understand. The choice of byte
 it provides a clean, bi-directional mapping.
 
 Fortunately, the CosmWasm team have provided utility crates such
-as [cosmwasm_storage](https://github.com/CosmWasm/cosmwasm/tree/master/packages/storage), which provides convenient
+as [cosmwasm_storage](https://github.com/CosmWasm/cosmwasm/tree/main/packages/storage), which provides convenient
 high-level abstractions for data containers such as a "singleton" and "bucket", which automatically provide
 serialization and deserialization for commonly-used types such as structs and Rust numbers.
 

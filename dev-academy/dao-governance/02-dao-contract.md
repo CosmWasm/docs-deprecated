@@ -4,9 +4,7 @@ sidebar_position: 2
 
 # DAO Smart Contract
 
-DAOs are social constructs that consist of more than one entity. Ideally,
-collect your friends' and colleagues' blockchain addresses for this course. Or
-set up several keys like we will do for this course like we will do right now.
+DAOs are social constructs that consist of more than one entity. Ideally, collect your friends' and colleagues' blockchain addresses for this course. Or set up several keys like we will do right now.
 
 ## Environment Setup
 
@@ -80,21 +78,44 @@ const instance = await contract.instantiate(addr, codeId, initMsg, 'Council');
 }
 ```
 
-Copy and save `contractAddress`.
+Copy and save `contractAddress` and `codeId`.
 
 ## cw3-flex-multisig Setup
 
 Now go to the second tab. And on the first tab run these commands:
 
+```shell
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/cw3-helper/contracts/cw3-flex-multisig/helpers.ts
+```
+
 ```typescript
 const [addr, client] = await useOptions(pebblenetOptions).setup('password', '.account4.key');
 const contract = CW3Flex(client, pebblenetOptions.fees);
+const codeId = <CODE_ID_HERE>
 
 // .editor
 const initMsg = {
     group_addr: "wasm1p9c7e9hutpnlsk6twhwc3ehlx3fp00fusk9e8c",
     threshold: { absolute_percentage: { percentage: "0.5" }},
-    max_voting_period: {time: 300}
+    max_voting_period: {time: 300},
+    members: [
+        {
+            addr: "wasm19pxmaaq8v6zgs5umtz8eqtpwcfgdj2nlhqhff3",
+            weight: 10, // weight is the voting power an address has
+        },
+        {
+            addr: "wasm1zmtuez3qsquumcsn0tlees2mcpjfr4360vg63y",
+            weight: 10,
+        },
+        {
+            addr: "wasm16ycd7qpmdr0p7lj7x2peah8q8yjzfdt7zcmmy3",
+            weight: 10,
+        },
+        {
+            addr: "wasm1qzzafwky7hjzkaa7r9ldv2urdjn8333v8scwdn",
+            weight: 10,
+        },
+    ]
 };
 // ^D
 
