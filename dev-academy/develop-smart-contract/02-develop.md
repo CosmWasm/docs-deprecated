@@ -27,6 +27,7 @@ You can find the full version of this contract at [cw-contracts/cw20-pot](https:
 storage during each execution. We will save this information to the storage on `Instantiate` phase.
 
 ```rust
+// state.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Config {
   pub admin: Addr,
@@ -43,6 +44,7 @@ pub const CONFIG: Item<Config> = Item::new("config");
 ### Msg
 
 ```rust
+// msg.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InstantiateMsg {
     pub admin: Option<String>,
@@ -54,9 +56,10 @@ pub struct InstantiateMsg {
 `admin` is defined as `Option` because if `None`, `info.sender` will be set as admin.
 The accepted cw20 address is set here.
 
-### Execute
+### Instantiate
 
 ```rust
+//contract.rs
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn instantiate(
     deps: DepsMut,
@@ -111,6 +114,7 @@ I leave this part to you as a challenge ;)
 ### State
 
 ```rust
+// state.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Pot {
   /// target_addr is the address that will receive the pot
@@ -130,6 +134,7 @@ pub const POTS: Map<U128Key, Pot> = Map::new("pot");
 We can use a `save_pot` helper to auto-increment seq and use it as an index for pot.
 
 ```rust
+// state.rs
 pub fn save_pot(deps: DepsMut, pot: &Pot) -> StdResult<()> {
   // increment id if exists, or return 1
   let id = POT_SEQ.load(deps.storage)?;
@@ -147,6 +152,7 @@ pub fn save_pot(deps: DepsMut, pot: &Pot) -> StdResult<()> {
 `ExecuteMsg` becomes this:
 
 ```rust
+// msg.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum ExecuteMsg {
@@ -158,12 +164,51 @@ pub enum ExecuteMsg {
     },
 }
 ```
-
 ### Execute
 
-`Execute` becomes this:
+Depending on the message that is recieved `Execute` will either `CreatePot` or `Recieve`:
 
 ```rust
+// contract.rs
+#[cfg_attr(not(feature = "library"), entry_point)]
+pub fn execute(
+    deps: DepsMut,
+    _env: Env,
+    info: MessageInfo,
+    msg: ExecuteMsg,
+) -> Result<Response, ContractError> {
+    match msg {
+        ExecuteMsg::CreatePot {
+            target_addr,
+            threshold,
+        } => execute_create_pot(deps, info, target_addr, threshold),
+        ExecuteMsg::Receive(msg) => execute_receive(deps, info, msg),
+    }
+}
+```
+The example above is a great one to understand the [match](https://doc.rust-lang.org/rust-by-example/flow_control/match.html) operator.
+Now that we have added additional options to `ExecuteMsg` we will go back and update the enum.
+
+```rust
+//msg.rs
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum ExecuteMsg {
+    CreatePot {
+        /// target_addr will receive tokens when token amount threshold is met.
+        target_addr: String,
+        /// threshold is the token amount for releasing tokens.
+        threshold: Uint128,
+    },
+    /// Receive forwards received cw20 tokens to an execution logic
+    Receive(Cw20ReceiveMsg),
+}
+
+```
+Now that we have updated `ExecuteMsg`, we must create `execute_create_pot` which is called by the contract's `Execute` function.
+
+```rust
+// contract.rs
 pub fn execute_create_pot(
     deps: DepsMut,
     info: MessageInfo,
@@ -180,7 +225,6 @@ pub fn execute_create_pot(
         target_addr: deps.api.addr_validate(target_addr.as_str())?,
         threshold,
         collected: Uint128::zero(),
-        ready: false,
     };
     save_pot(deps, &pot)?;
 
