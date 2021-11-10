@@ -12,9 +12,9 @@ the Node.js REPL or Go CLI will work.
 ## Compiling and Testing Contract {#compiling-and-testing-contract}
 
 Let's download the repo in which we collect
-[`cw-examples`](https://github.com/CosmWasm/cw-examples) and try out an existing simple name service
-contract where mimics a name service marketplace. Also this tutorials is the defacto cosmos-sdk entrance tutorial.
-First, clone the repo and try to build the wasm bundle:
+[`cw-examples`](https://github.com/CosmWasm/cw-examples) and try out an existing simple name service contract where
+mimics a name service marketplace. Also this tutorials is the defacto cosmos-sdk entrance tutorial. First, clone the
+repo and try to build the wasm bundle:
 
 ```shell
 # get the code
@@ -30,10 +30,9 @@ cargo wasm
 ```
 
 After this compiles, it should produce a file in
-`target/wasm32-unknown-unknown/release/cw_nameservice.wasm`. A quick `ls -lh` should show around 1.7MB. This is a release
-build,
-but not stripped of all unneeded code. To produce a much smaller version, you can run this which tells the compiler to
-strip all unused code out:
+`target/wasm32-unknown-unknown/release/cw_nameservice.wasm`. A quick `ls -lh` should show around 1.7MB. This is a
+release build, but not stripped of all unneeded code. To produce a much smaller version, you can run this which tells
+the compiler to strip all unused code out:
 
 ```shell
 RUSTFLAGS='-C link-arg=-s' cargo wasm
@@ -65,9 +64,9 @@ test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
 `RUST_BACKTRACE=1` will provide you with full stack traces on any error, which is super useful. This only works for unit
-tests (which test native rust code, not the compiled wasm). Also, if you want to know where `cargo wasm` and `cargo
-unit-test` come from, they are just aliases defined in `.cargo/config`. Take a look there to understand the cargo flags
-better.
+tests (which test native rust code, not the compiled wasm). Also, if you want to know where `cargo wasm`
+and `cargo unit-test` come from, they are just aliases defined in `.cargo/config`. Take a look there to understand the
+cargo flags better.
 
 ## Optimized Compilation {#optimized-compilation}
 

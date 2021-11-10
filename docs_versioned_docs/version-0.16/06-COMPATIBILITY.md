@@ -4,9 +4,8 @@ sidebar_position: 6
 
 # Compatibility
 
-Wasm VM can support one or more contract-VM interface versions. The interface
-version is communicated by the contract via a Wasm export. This is the current
-compatibility list:
+Wasm VM can support one or more contract-VM interface versions. The interface version is communicated by the contract
+via a Wasm export. This is the current compatibility list:
 
 | cosmwasm-std | cosmwasm-vm | x/wasm    | @cosmjs/cosmwasm-stargate |
 |--------------|-------------|-----------|---------------------------|

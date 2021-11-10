@@ -70,8 +70,8 @@ to a [Address](03-addresses.md), or if I want to check KYC status of some accoun
 some action. One could model this as a series of messages, but it is quite complex and makes such simple use-cases
 almost unusable in the system.
 
-However, this design violates one of the basic principles of the [actor model](02-actor.md), namely that each contract has
-exclusive access to its own internal state. (Both `query_raw` and `query_custom` fail in this regard). Far from just
+However, this design violates one of the basic principles of the [actor model](02-actor.md), namely that each contract
+has exclusive access to its own internal state. (Both `query_raw` and `query_custom` fail in this regard). Far from just
 being a theoretical issue, this may lead to concurrency and reentrancy issues if not handled correctly. We do not want
 to push such safety critical reasoning into the laps of the contract developers, but rather provide these security
 guarantees in the platform. However, providing old data also leads to many possible errors and bugs, especially since we

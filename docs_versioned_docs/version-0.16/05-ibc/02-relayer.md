@@ -1,6 +1,5 @@
 ---
-title: IBC Relayer
-sidebar_position: 2
+title: IBC Relayer sidebar_position: 2
 ---
 
 # Relayer

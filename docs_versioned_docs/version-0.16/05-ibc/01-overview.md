@@ -11,7 +11,7 @@ an unknown and dynamic topology. The protocol realises this by specifying a set 
 semantics that can be implemented by any distributed ledger provided they satisfy a small set of requirements.
 
 :::info
- For inner workings of IBC, head to [cosmos/ics](https://github.com/cosmos/ics) specifications and start reading
+For inner workings of IBC, head to [cosmos/ics](https://github.com/cosmos/ics) specifications and start reading
 from [ics1](https://github.com/cosmos/ics/tree/master/spec/ics-001-ics-standard).
 :::
 
@@ -26,6 +26,6 @@ protocol and scheme is defined by the contracts. Contract should specify the act
 * [Relayer](02-relayer.md) section explains the relayer component of IBC and demonstrates setting up one for connecting
   CosmWasm enabled chains.
 
-* [cw20-ics](03-cw20-ics20.md) is a smart contract that is first of its kind. This is an IBC Enabled contract that allows
-  us to send CW20 tokens from one chain over the standard ICS20 protocol to the bank module of another chain. In short,
-  it let's us send our custom CW20 tokens with IBC and use them just like native tokens on other chains.
+* [cw20-ics](03-cw20-ics20.md) is a smart contract that is first of its kind. This is an IBC Enabled contract that
+  allows us to send CW20 tokens from one chain over the standard ICS20 protocol to the bank module of another chain. In
+  short, it let's us send our custom CW20 tokens with IBC and use them just like native tokens on other chains.
