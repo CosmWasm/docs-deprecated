@@ -8,11 +8,14 @@ In this section, we will set up your machine for developing, deploying and, hope
 
 ## Go {#go}
 
-You can set up golang following the [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest versions of `wasmd` require go version `v1.15`.
+You can set up golang following the [official documentation](https://github.com/golang/go/wiki#working-with-go). The
+latest versions of `wasmd` require go version `v1.16.8`.
 
 ## Rust {#rust}
 
-Assuming you have never worked with rust, you will first need to install some tooling. The standard approach is to use `rustup` to maintain dependencies and handle updating multiple versions of `cargo` and `rustc`, which you will be using.
+Assuming you have never worked with rust, you will first need to install some tooling. The standard approach is to
+use `rustup` to maintain dependencies and handle updating multiple versions of
+`cargo` and `rustc`, which you will be using.
 
 ### Installing Rust in Linux and Mac {#installing-rust-in-linux-and-mac}
 
@@ -21,7 +24,7 @@ First, [install rustup](https://rustup.rs/). Once installed, make sure you have 
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.50.0+, update
+# If this is lower than 1.51.0+, update
 rustup update stable
 
 rustup target list --installed
@@ -30,9 +33,12 @@ rustup target add wasm32-unknown-unknown
 
 ### Installing Rust in Windows 10 {#installing-rust-in-windows-10}
 
-First, download and execute `rustup-init.exe` from [rustup.rs](https://rustup.rs/) or [rust-lang.org](https://www.rust-lang.org/tools/install).
+First, download and execute `rustup-init.exe` from [rustup.rs](https://rustup.rs/)
+or [rust-lang.org](https://www.rust-lang.org/tools/install).
 
-If requested, manually download and install [Visual C++ Build Tools 2019](https://visualstudio.microsoft.com/visual-cpp-build-tools/). Make sure "Windows 10 SDK" and "English language pack" are selected.
+If requested, manually download and install Visual C++ Build Tools 2019,
+from https://visualstudio.microsoft.com/visual-cpp-build-tools/ . Make sure "Windows 10 SDK" and "English language pack"
+are selected.
 
 Continue running `rustup-init.exe`, and proceed with the installation.
 
@@ -51,28 +57,34 @@ Install the wasm32 target:
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.51.0, update
+# If this is lower than 1.53.0, update
 rustup update stable
 
 rustup target list --installed
 rustup target add wasm32-unknown-unknown
 ```
 
-For those new to rust, the `stable` channel comes out every 6 weeks with a stable release. The `nightly` channel is the bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose APIs may change. For compiling `wasm`, you will want to use `stable`. We use `nightly` to compile the runtime for `wasmd`, which needs it for the singlepass compiler with gas metering and more.
+For those new to rust, the `stable` channel comes out every 6 weeks with a stable release. The `nightly` channel is the
+bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose
+APIs may change. For compiling `wasm`, you will want to use `stable`. We use `nightly` to compile the runtime
+for `wasmd`, which needs it for the singlepass compiler with gas metering and more.
 
 ## wasmd {#wasmd}
 
-`wasmd` is the backbone of CosmWasm platform. It is the implementation of a Cosmos Zone with wasm smart contracts enabled.
+`wasmd` is the backbone of CosmWasm platform. It is the implementation of a Cosmoszone with wasm smart contracts
+enabled.
 
-This code was forked from the `cosmos/gaia` repository as a basis and then added x/wasm and cleaned up many gaia-specific files. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm module.
+This code was forked from the `cosmos/gaia` repository as a basis and then added x/wasm and cleaned up many
+gaia-specific files. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm
+module.
 
 If you intend to develop or edit a contract, you need wasmd.
 
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.16.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.16.0
+# replace the v0.18.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.18.0
 make install
 
 # verify the installation
@@ -84,25 +96,6 @@ wasmd version
 `$HOME/go/bin` by default, please make sure that is set up in your `PATH` as well, which should be the case in general
 for building Go code from source.
 :::
-
-## Using Testnets {#using-testnets}
-
-A testnet called [Oysternet](https://github.com/CosmWasm/testnets/tree/master/oysternet-1) has been launched to save you of the hassle of running a local network and speed up your development.
-
-:::caution
-Use go 1.15+ for compiling `wasmd` executable
-:::
-
-```shell
-# clone wasmd repo
-git clone https://github.com/CosmWasm/wasmd.git && cd wasmd
-
-# oysternet runs on wasmd v0.16.0
-git checkout v0.16.0
-
-# build wasmd executable
-make install
-```
 
 ## Further Information on the Cosmos SDK {#further-information-on-the-cosmos-sdk}
 

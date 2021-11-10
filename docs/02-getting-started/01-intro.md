@@ -5,7 +5,7 @@ id: intro
 
 # Your First Contract
 
-Buckle up, we will now get first-hand experience with CosmWasm, by: 
+Buckle up, we will now get first-hand experience with CosmWasm, by:
 
 - Starting up our own CosmWasm-enabled blockchain (just one node for now)
 - Modifying an existing contract
@@ -31,6 +31,14 @@ to wasm byte code.
 [Interacting with Contracts](05-interact-with-contract.md) will show deploying, initializing and executing smart contracts.
 
 [Next Steps](06-next-steps.md) is the last part of the tutorial. It wraps up this section and points you in the direction of further learning.
+
+## Dev Academy
+
+[Dev Academy](../../dev-academy/intro.md) is a set of modular and step-by-step educational materials designed to
+provide a quick start for anyone awho wants to learn and get started with concepts like blockchain, smart contracts,
+DAOs and more.
+Dev Academy content can be used at workshops, university courses or at home.
+By the end, you will have a good understanding of many interesting topics including CosmWasm.
 
 ## Video Version {#video-version}
 

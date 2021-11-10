@@ -11,38 +11,41 @@ the Node.js REPL or Go CLI will work.
 
 ## Compiling and Testing Contract {#compiling-and-testing-contract}
 
-Let's download the repo in which we collect [`cosmwasm-examples`](https://github.com/CosmWasm/cw-examples). We're going
-to try out a simple escrow contract. This contract can hold native tokens, and allows an arbiter to release them to a
-pre-defined beneficiary. First, clone the repo and try to build the wasm bundle:
+Let's download the repo in which we collect
+[`cw-examples`](https://github.com/CosmWasm/cw-examples) and try out an existing simple name service
+contract where mimics a name service marketplace. Also this tutorials is the defacto cosmos-sdk entrance tutorial.
+First, clone the repo and try to build the wasm bundle:
 
 ```shell
 # get the code
-git clone https://github.com/CosmWasm/cw-examples
-cd cw-examples
+git clone https://github.com/InterWasm/cw-contracts
+cd cw-contracts
 git fetch --tags
-git checkout escrow-0.10.0
-cd escrow
+git checkout nameservice-0.11.0
+cd contracts/nameservice
 
 # compile the wasm contract with stable toolchain
 rustup default stable
 cargo wasm
 ```
 
-After this compiles, it should produce a file in `target/wasm32-unknown-unknown/release/cw_escrow.wasm`. A quick `ls -l`
-should show a file of around 2MB. This is a release build, but not stripped of all unneeded code. To produce a much
-smaller version, you can run this, which tells the compiler to strip all unused code out:
+After this compiles, it should produce a file in
+`target/wasm32-unknown-unknown/release/cw_nameservice.wasm`. A quick `ls -lh` should show around 1.7MB. This is a release
+build,
+but not stripped of all unneeded code. To produce a much smaller version, you can run this which tells the compiler to
+strip all unused code out:
 
 ```shell
 RUSTFLAGS='-C link-arg=-s' cargo wasm
 ```
 
-This produces a file about 174kB. We use this and another optimizer in the [next section](#optimized-compilation) to
-produce an optimised binary to upload to the blockchain. You don't need to worry about running this yourself (unless you
+This produces a file about 162kB. We use this and another optimizer in the next [last section](#optimized-compilation)
+to produce the final product uploaded to the blockchain. You don't need to worry about running this yourself (unless you
 are curious), but you should have an idea of the final size of your contract this way.
 
 ## Unit Tests {#unit-tests}
 
-For completeness, let's try running the unit tests:
+Let's try running the unit tests:
 
 ```shell
 RUST_BACKTRACE=1 cargo unit-test
@@ -79,3 +82,5 @@ docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
   cosmwasm/rust-optimizer:0.11.3
 ```
+
+Binary will be at `artifacts` and its size will be `137k`.

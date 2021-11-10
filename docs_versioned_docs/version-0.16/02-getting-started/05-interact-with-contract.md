@@ -9,13 +9,13 @@ We have the binary ready. Now it is time to see some wasm action. You can use [G
 
 ## Go CLI {#go-cli}
 
-We generated a wasm binary executable in the previous chapter. Let's put it into use. Now, we will upload the code to
-the blockchain. Afterwards, you can download the bytecode to verify it is proper:
+We generated a wasm binary executable in the previous chapter. Let's upload the code to the blockchain. Once that is complete, you can download the bytecode to verify it.
 
 ```shell
 # see how many codes we have now
 wasmd query wasm list-code $NODE
 
+# now we store the bytecode on chain
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
 RES=$(wasmd tx wasm store artifacts/cw_nameservice.wasm --from wallet $TXFLAG -y)
@@ -47,7 +47,9 @@ wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json
 CONTRACT=$(wasmd query wasm list-contract-by-code $CODE_ID $NODE --output json | jq -r '.contracts[-1]')
 echo $CONTRACT
 
+# we should see this contract with 50000usponge
 wasmd query wasm contract $CONTRACT $NODE
+wasmd query bank balances $CONTRACT $NODE
 
 # you can dump entire contract state
 wasmd query wasm contract-state all $CONTRACT $NODE
