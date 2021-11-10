@@ -5,6 +5,7 @@ const DefaultLocale = 'en';
 
 // const lastReleasedDocsVersion = docsVersions[0];
 const lastReleasedDocsVersion = "current";
+const lastReleasedDocsVersionLink = "1.0";
 const lastReleasedCWPlusVersion = cwplusVersions[0];
 
 (module.exports = {
@@ -215,11 +216,11 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         redirects: [
           {
             from: '/',
-            to: `/docs/${lastReleasedDocsVersion}/`,
+            to: `/docs/${lastReleasedDocsVersionLink}/`,
           },
           {
-            from: `/docs/${lastReleasedDocsVersion}/introduction/intro`,
-            to: `/docs/${lastReleasedDocsVersion}/`,
+            from: `/docs/${lastReleasedDocsVersionLink}/introduction/intro`,
+            to: `/docs/${lastReleasedDocsVersionLink}/`,
           },
         ],
         createRedirects: function (existingPath) {
@@ -254,6 +255,8 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           if (existingPath.includes('/02-testnets')) {
             let old_testnet = existingPath.split("/02-testnets/")
             let url = old_testnet.pop()
+            paths.push(`/docs/0.16/testnets/${url}.html`);
+            paths.push(`/docs/0.16/testnets/${url}`);
             paths.push(`/docs/0.14/testnets/${url}.html`);
             paths.push(`/docs/0.14/testnets/${url}`);
             paths.push(`/docs/0.13/testnets/${url}.html`);
