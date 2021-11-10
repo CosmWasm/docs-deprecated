@@ -4,7 +4,8 @@ sidebar_position: 10
 
 # Deployment
 
-When compiling is complete (it may take a while) `cd` into the `artifacts` directory. `ls` should show you binaries for the contract.
+When compiling is complete (it may take a while) `cd` into the `artifacts` directory. `ls` should show you binaries for
+the contract.
 
 In the following examples, remember to switch `<your-contract>` for the name of the binary you just compiled.
 
@@ -16,7 +17,8 @@ Using `wasmd` you can now store it on the blockchain:
 wasmd tx wasm store <your-contract>.wasm  --from <your-key> --chain-id <chain-id> --gas auto
 ```
 
-You will need the code id of the contract. For this, you can look in the JSON output for the `code_id` value. If you would prefer to capture this as a shell variable, instead the previous upload step you can instead do:
+You will need the code id of the contract. For this, you can look in the JSON output for the `code_id` value. If you
+would prefer to capture this as a shell variable, instead the previous upload step you can instead do:
 
 ```sh
 cd artifacts

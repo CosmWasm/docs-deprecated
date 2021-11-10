@@ -14,9 +14,9 @@ complex libraries. Also not requiring downloading custom schemas and ABIs just t
 The natural solution was to use JSON everywhere. It is self-describing, human-readable, and used in APIs everywhere. It
 does have some downsides, such as handling numbers over 2^53 (just use strings), no clear distinction between strings
 and base64-encoded binary, and no hard-coded schema. We auto-generate [JSON Schema](https://json-schema.org/)
-descriptors for the [public API of
-contracts](https://github.com/CosmWasm/cw-examples/tree/main/contracts/escrow/schema), which can be used to inspect the
-supported API and optionally used in client side tooling for auto-validation of messages.
+descriptors for the [public API of contracts](https://github.com/CosmWasm/cw-examples/tree/main/contracts/escrow/schema)
+, which can be used to inspect the supported API and optionally used in client side tooling for auto-validation of
+messages.
 
 The feedback when developing and debugging with this has been positive, and we are quite happy with the Developer UX
 with this. It is too early to tell if the message size and free-form schema will become a hinderance in production.

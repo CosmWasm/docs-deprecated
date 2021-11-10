@@ -9,7 +9,8 @@ We have the binary ready. Now it is time to see some wasm action. You can use [G
 
 ## Go CLI {#go-cli}
 
-We generated a wasm binary executable in the previous chapter. Let's upload the code to the blockchain. Once that is complete, you can download the bytecode to verify it.
+We generated a wasm binary executable in the previous chapter. Let's upload the code to the blockchain. Once that is
+complete, you can download the bytecode to verify it.
 
 ```shell
 # see how many codes we have now
@@ -95,6 +96,7 @@ wasmd tx wasm execute $CONTRACT "$TRANSFER" \
 ```
 
 Query record to see the new owner address:
+
 ```shell
 NAME_QUERY='{"resolve_record": {"name": "fred"}}'
 wasmd query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output json
