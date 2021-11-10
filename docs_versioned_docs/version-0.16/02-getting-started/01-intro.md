@@ -45,7 +45,7 @@ direction of further learning.
 
 ## Dev Academy
 
-[Dev Academy](../../dev-academy/intro.md) is a set of modular and step-by-step educational materials designed to provide
+[Dev Academy](/dev-academy/intro) is a set of modular and step-by-step educational materials designed to provide
 a quick start for anyone awho wants to learn and get started with concepts like blockchain, smart contracts, DAOs and
 more. Dev Academy content can be used at workshops, university courses or at home. By the end, you will have a good
 understanding of many interesting topics including CosmWasm.

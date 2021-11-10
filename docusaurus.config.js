@@ -4,7 +4,7 @@ const cwplusVersions = require('./cw_plus_versions.json');
 const DefaultLocale = 'en';
 
 // const lastReleasedDocsVersion = docsVersions[0];
-const lastReleasedDocsVersion = "0.16";
+const lastReleasedDocsVersion = "current";
 const lastReleasedCWPlusVersion = cwplusVersions[0];
 
 (module.exports = {
