@@ -13,12 +13,13 @@ To verify the testnet is currently running, make sure the following URLs are all
 TODO: add deus labs
 
 - [https://rpc.uni.deuslabs.fi/status](https://rpc.uni.deuslabs.fi/status)
-- [https://faucet.pebblenet.cosmwasm.com/status](https://faucet.pebblenet.cosmwasm.com/status)
-- [http://lcd.pebblenet.cosmwasm.com/node_info](http://lcd.pebblenet.cosmwasm.com/node_info)
+- [https://faucet.uni.deuslabs.fi/status](https://faucet.uni.deuslabs.fi/status)
+- [http://api.uni.deuslabs.com/node_info](http://api.uni.deuslabs.com/node_info)
 
-We have set up two native tokens - `STAR` (`ustar`) for becoming a validator and `SPONGE` (`upebble`) for paying fees.
+We have set up two native tokens - `STAR` (`ustar`) for becoming a validator and `SPONGE` (`ujunox`) for paying fees.
 Available frontends:
 
+// TODO: update link
 - Block Explorer: [https://block-explorer.pebblenet.cosmwasm.com](https://block-explorer.pebblenet.cosmwasm.com)
 
 You can use these to explore txs, addresses, validators and contracts. Feel free to deploy one pointing to our rpc/lcd
@@ -34,7 +35,7 @@ Let's configure the `wasmd` executable, point it to the testnet, create a wallet
 First source the **uni** network configuration in the shell:
 
 ```shell
-source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/pebblenet-1/defaults.env)
+source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/uni/defaults.env)
 ```
 
 Setup the client:
@@ -58,9 +59,9 @@ You need some tokens in your address to interact. If you are using local node yo
 from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.pebblenet.cosmwasm.com/credit
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet2) '{"denom":"upebble","address":$addr}') && curl -X POST --header
-"Content-Type: application/json" --data "$JSON" https://faucet.pebblenet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"ujunox","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.uni.deuslabs.fi/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a wallet2) '{"denom":"ujunox","address":$addr}') && curl -X POST --header
+"Content-Type: application/json" --data "$JSON" https://faucet.uni.deuslabs.fi/credit
 ```
 
 ## Export wasmd Parameters {#export-wasmd-parameters}
@@ -72,11 +73,11 @@ variables. So make sure you export these before proceeding.
 ```bash
 # bash
 export NODE="--node $RPC"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001ujunox --gas auto --gas-adjustment 1.3"
 
 # zsh
 export NODE=(--node $RPC)
-export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3)
+export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001ujunox --gas auto --gas-adjustment 1.3)
 ```
 
 If any of the commands above throws an error, this means your shell is different. If the command succeeded, then try
@@ -105,6 +106,6 @@ address
 
 client.getAccount()
 // if empty - this only works with CosmWasm
-hitFaucet(defaultFaucetUrl, address, 'STAR')
+hitFaucet(defaultFaucetUrl, address, 'JUNOX')
 client.getAccount()
 ```
