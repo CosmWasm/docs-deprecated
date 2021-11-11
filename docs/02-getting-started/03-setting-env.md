@@ -10,22 +10,21 @@ run against a local blockchain, [follow these instructions](#run-local-node-opti
 
 To verify the testnet is currently running, make sure the following URLs are all working for you:
 
-TODO: add deus labs
 
-- [https://rpc.uni.deuslabs.fi/status](https://rpc.uni.deuslabs.fi/status)
+- [https://rpc.uni.juno.deuslabs.fi/status](https://rpc.uni.juno.deuslabs.fi/status)
 - [https://faucet.uni.deuslabs.fi/status](https://faucet.uni.deuslabs.fi/status)
-- [http://api.uni.deuslabs.com/node_info](http://api.uni.deuslabs.com/node_info)
+- [https://lcd.uni.juno.deuslabs.fi/node_info](https://lcd.uni.juno.deuslabs.fi/node_info)
 
-We have set up two native tokens - `STAR` (`ustar`) for becoming a validator and `SPONGE` (`ujunox`) for paying fees.
+We have set up one native token - `JUNO` (`ujunox`) for becoming a validator and for paying fees.
 Available frontends:
 
 // TODO: update link
-- Block Explorer: [https://block-explorer.pebblenet.cosmwasm.com](https://block-explorer.pebblenet.cosmwasm.com)
+- Block Explorer: [https://uni.junoscan.com](https://uni.junoscan.com)
 
 You can use these to explore txs, addresses, validators and contracts. Feel free to deploy one pointing to our rpc/lcd
 servers and we will list it.
 
-When interacting with this network, you can either use `wasmd` which is a Go client, or the Node REPL. The Node REPL is
+When interacting with this network, you can either use `junod` which is a Go client, or the Node REPL. The Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the Shell/Go client.
 
 ## Setup Go CLI {#setup-go-cli}

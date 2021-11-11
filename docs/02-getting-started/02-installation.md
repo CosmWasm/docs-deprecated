@@ -10,7 +10,7 @@ Cosmos SDK chains.
 ## Go {#go}
 
 You can set up golang following the [official documentation](https://github.com/golang/go/wiki#working-with-go). The
-latest versions of `junod` require go version `v1.16.8`.
+latest versions of `junod` require go version `v1.17+`.
 
 ## Rust {#rust}
 
@@ -84,7 +84,7 @@ For testing cutting edge 1.0 features, we will use juno network and `junod`.
 ```shell
 git clone https://github.com/CosmosContracts/juno.git
 cd juno
-git checkout v1.0.0
+git checkout v2.0.0-beta
 make install
 
 # verify the installation
