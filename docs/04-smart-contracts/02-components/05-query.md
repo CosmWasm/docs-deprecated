@@ -31,7 +31,7 @@ pub enum QueryMsg {
 ```
 
 You can find the code for this example in context
-[here](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/msg.rs#L20).
+[here](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/msg.rs#L20).
 
 The contract then handles this in the `query` function:
 
@@ -48,4 +48,4 @@ pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
 Where `query_resolver` is just another function, and `config_read` is a helper that wraps access to the data store.
 
 The custom queries are exposed
-via [the query function](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/contract.rs#L95).
+via [the query function](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/contract.rs#L95).

@@ -149,9 +149,9 @@ pub struct Config {
 }
 ```
 
-The source is [here](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/state.rs#L13). We can
+The source is [here](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/state.rs#L13). We can
 see why this might be - these values come from
-[instantiation](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/msg.rs#L6), where the values
+[instantiation](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/msg.rs#L6), where the values
 are also `Option`:
 
 ```rust

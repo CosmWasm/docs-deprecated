@@ -99,9 +99,9 @@ if any overflow is detected. No way to opt-out of safe math.
 This involves a contract depending on complete control of it's balance. A design pattern that should be avoided in any
 contract system. In CosmWasm, contracts are not called when tokens are sent to them, but they can query their current
 balance when they are called. You can note that
-the [sample escrow contract](https://github.com/CosmWasm/cw-examples/blob/escrow-0.4.0/escrow/src/contract.rs) doesn't
+the [sample escrow contract](https://github.com/InterWasm/cw-contracts/blob/escrow-0.4.0/escrow/src/contract.rs) doesn't
 record how much was sent to it during initialization, but
-rather [releases the current balance](https://github.com/CosmWasm/cw-examples/blob/escrow-0.4.0/escrow/src/contract.rs#L83-L92)
+rather [releases the current balance](https://github.com/InterWasm/cw-contracts/blob/escrow-0.4.0/escrow/src/contract.rs#L83-L92)
 when a paying out or refunding the amount. This ensures no tokens get stuck.
 
 ### :heavy_check_mark: [Delegate Call](https://github.com/sigp/solidity-security-blog#delegatecall) {#heavy_check_mark-delegate-call}

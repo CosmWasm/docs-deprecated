@@ -152,7 +152,7 @@ CosmWasm into their custom blockchain. And we want to make it easy to build clie
 contracts.
 
 We are using JSON encoding for the CosmWasm messages to make this simple and
-export [JSON schemas](https://github.com/CosmWasm/cw-examples/tree/main/contracts/erc20/schema) for every contract to
+export [JSON schemas](https://github.com/InterWasm/cw-contracts/tree/main/contracts/erc20/schema) for every contract to
 allow auto-generation of client-side codecs. We also provide [CosmJS](https://github.com/CosmWasm/cosmjs) as a
 easy-to-use TypeScript client library allowing access to all contracts (and bank module) on a CosmWasm-based chain.
 
