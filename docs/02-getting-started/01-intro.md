@@ -20,7 +20,7 @@ contracts on a testnet without drowning in smart contract development details. W
 environment, compiling, deploying, and interacting. Then to make things a bit more interesting, we will show modifying
 the example escrow contract by adding a backdoor to it in the [Hijack Escrow tutorial](/tutorials/hijack-escrow/intro).
 It exposes an identical API to the original one, but has one hidden command added. This also shows the importance of
-verifying the source code behind any contract you run.
+verifying the source code behind any contract you run. __Always verify the source code you are running.__
 
 This is designed for programmers who are comfortable with the command-line and using Linux or MacOS. It is helpful to
 have a basic understanding of Rust and Go, but we will lead you through, so you need no prior knowledge.

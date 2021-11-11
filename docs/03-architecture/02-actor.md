@@ -27,18 +27,18 @@ contains `Vec<Msg>` and a little metadata. `store` is access to the contract's i
 global immutable context. So, just a little bit of syntax around the same design. From this basic design, a few other
 useful aspects can be derived:
 
-First, there is a **loose coupling** between Actors, limited to the format of the data packets (the recipient must
+- First, there is a **loose coupling** between Actors, limited to the format of the data packets (the recipient must
 support a superset of what you send). There is no complex API or function pointers to pass around. This is much like
 using REST or RPC calls as a boundary between services, which is a scalable way to compose systems from many vendors.
 
-Secondly, each `Actor` can effectively run on its own thread, with its own queue. This both enables concurrency (which
+- Secondly, each `Actor` can effectively run on its own thread, with its own queue. This both enables concurrency (which
 we don't make use of in CosmWasm... yet), and **serialized execution** within each actor (which we do rely upon). This
 means that it is impossible for the `Handle` method above to be executed in the middle of a previously executed `Handle`
 call. `Handle` is a synchronous call and returns before the `Actor` can process the next message. This feature is
 what [protects us from reentrancy by design](./smart-contracts#avoiding-reentrancy-attacks).
 
 Another important aspect related to CosmWasm is **locality**. That is, actors can only communicate with other actors **
-whose address they previously received**. We will go more into depth on [addresses and naming](./addresses) in the next
+whose address they previously received**. We will go more into depth on [names and addresses](./addresses) in the next
 page, but the key point is that for two actors to communicate, an external message (from the contract creator, or
 potentially a user) must be sent to the actor. This is a flexible way to set up topologies in a distributed manner. The
 only thing that must be hard-coded is the data format to pass to such addresses. Once some standard interfaces are

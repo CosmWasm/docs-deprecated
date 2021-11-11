@@ -5,9 +5,9 @@ sidebar_position: 3
 
 # Names and Addresses
 
-Blockchains (almost?) all use addresses to identify external actors via a hash of a public key, and many newer ones
+Almost all blockchains use addresses to identify external actors via a hash of a public key, and many newer ones
 extended this to identify on-chain "smart contracts" with unique addresses as well. On chain, addresses are represented
-by a use a concise, immutable binary format, typically 20 or 32 bytes long, often derived from a hashing function.
+by a use of a concise, immutable binary format, typically 20 or 32 bytes long, often derived from a hashing function.
 However, there are many human-readable representations of these binary addresses, which are shown to clients. For
 example, [Bech32](https://en.bitcoin.it/wiki/Bech32) `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9`,
 hex `0x8617E340B3D01FA5F11F306F4090FD50E238070D`
@@ -24,7 +24,7 @@ address rules; wallets, smart contracts, modules have an identifier address with
 gaia, `wasm1...` for CosmWasm testnets.
 
 For passing address to contracts, pass it as string and then validate the input to an: **
-Addr** [Addr](https://github.com/CosmWasm/cosmwasm/blob/v0.14.0/packages/std/src/addresses.rs#L31) is just a wrapper
+Addr**. [Addr](https://github.com/CosmWasm/cosmwasm/blob/v0.14.0/packages/std/src/addresses.rs#L31) is just a wrapper
 around plain string that provides useful helper functions such as string validation to an address.
 
 ## Optional: Canonical Addresses {#optional-canonical-addresses}

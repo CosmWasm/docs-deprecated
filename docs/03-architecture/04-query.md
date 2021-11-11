@@ -12,7 +12,7 @@ look at the semantics of querying via an *external client*, as well an *internal
 special attention not only to how it works practically, but also the design and security issues of executing queries
 from one contract to another.
 
-**Note** This has been updated for CosmWasm 0.8 with full support for cross-contract queries.
+**Note:** This has been updated for CosmWasm 0.8 with full support for cross-contract queries.
 
 ## Raw Queries {#raw-queries}
 

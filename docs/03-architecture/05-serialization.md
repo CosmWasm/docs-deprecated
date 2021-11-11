@@ -23,7 +23,7 @@ with this. It is too early to tell if the message size and free-form schema will
 However, please note that contracts define their own parsing logic for messages, the codec is not enforced by the
 framework. We provide first-class support for json through
 [`cosmwasm::serde`](https://github.com/CosmWasm/serde-json-wasm) and
-[`cosmwasm-template`](https://github.com/CosmWasm/cw-template), but anyone can swap this out - provided they provide
+[`cw-template`](https://github.com/CosmWasm/cw-template), but anyone can swap this out - provided they provide
 client support for the format.
 
 It is helpful to have consistency to aid client development, as well as contract-contract calls.

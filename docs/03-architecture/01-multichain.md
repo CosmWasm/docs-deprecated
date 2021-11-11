@@ -21,7 +21,7 @@ this support.
 ## Inter Blockchain Contracts {#inter-blockchain-contracts}
 
 If you have heard anything about Cosmos, it is most likely
-about [Inter-Blockchain Communication](https://cosmos.network/ibc/). The power
+about [Inter-Blockchain Communication](https://ibcprotocol.org/). The power
 of [Tendermint BFT consensus](https://tendermint.com) and
 their [novel bonded proof of stake algorithm](https://blog.cosmos.network/what-does-the-launch-of-cosmos-mean-for-the-blockchain-ecosystem-952e14f67d0d)
 are the foundation for a revolutionary protocol to allow trustless message passing semantics between blockchains. No
@@ -38,18 +38,20 @@ the [Cosmos SDK module](https://github.com/CosmWasm/wasmd/tree/master/x/wasm) th
 
 Another design goal of CosmWasm was to be more of a library than a framework. This means it has a small surface area of
 required APIs and you can opt-in to most of the code. It is there to make life easy for you, but you can easily build it
-your own way as well. This has two big benefits:
+your own way as well.
 
-The first is that it makes it easier to add support for multiple languages to write contracts in. So we can add support
-for say, [AssemblyScript](https://docs.assemblyscript.org/) or [Go](https://github.com/tinygo-org/tinygo), for those who
+This has two big benefits:
+
+- It makes it easier to add support for multiple languages to write contracts in. So we can add support
+for say, [AssemblyScript](https://www.assemblyscript.org) or [Go](https://github.com/golang/go), for those who
 prefer not to write in Rust.
 
-The second benefit is that since it makes limited demands of the host system, it can be embedded in other frameworks,
-not just the Cosmos SDK. The core runtime logic [`cosmwasm-vm`](https://github.com/CosmWasm/cosmwasm/tree/master/lib/vm)
-is in Rust, and [`go-cosmwasm`](https://github.com/CosmWasm/go-cosmwasm) provides a generic Go binding to it. As Go and
+- Since it makes limited demands of the host system, it can be embedded in other frameworks,
+not just the Cosmos SDK. The core runtime logic [`cosmwasm-vm`](https://github.com/CosmWasm/cosmwasm/tree/main/packages/vm)
+is in Rust, and [`wasmvm`](https://github.com/CosmWasm/wasmvm) provides a generic Go binding to it. As Go and
 Rust are two of the most popular languages to write blockchains, this opens the door for many integrations. Of course,
 unless your chain is running on top of [Tendermint](https://tendermint.com) or potentially another BFT Instant Finality
-Consensus algorithm like [Babble](https://babble.io/), the contracts will not be able to interact via IBC.
+Consensus algorithm like [Babble](https://github.com/mosaicnetworks/babble), the contracts will not be able to interact via IBC.
 
 ## Platform to Build On {#platform-to-build-on}
 

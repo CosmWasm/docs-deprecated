@@ -12,8 +12,8 @@ the Node.js REPL or Go CLI will work.
 ## Compiling and Testing Contract {#compiling-and-testing-contract}
 
 Let's download the repo in which we collect
-[`cw-examples`](https://github.com/CosmWasm/cw-examples) and try out an existing simple name service contract where
-mimics a name service marketplace. Also this tutorials is the defacto cosmos-sdk entrance tutorial. First, clone the
+[`cw-contracts`](https://github.com/InterWasm/cw-contracts) and try out an existing simple name service contract where
+mimics a name service marketplace. Also this tutorial is the defacto cosmos-sdk entrance tutorial. First, clone the
 repo and try to build the wasm bundle:
 
 ```shell
@@ -38,7 +38,7 @@ the compiler to strip all unused code out:
 RUSTFLAGS='-C link-arg=-s' cargo wasm
 ```
 
-This produces a file about 162kB. We use this and another optimizer in the next [last section](#optimized-compilation)
+This produces a file about 162kB. We use this and another optimizer in the [optimized compilation section](#optimized-compilation)
 to produce the final product uploaded to the blockchain. You don't need to worry about running this yourself (unless you
 are curious), but you should have an idea of the final size of your contract this way.
 
@@ -72,8 +72,8 @@ cargo flags better.
 
 To reduce gas costs, the binary size should be as small as possible. This will result in a less costly deployment, and
 lower fees on every interaction. Luckily, there is tooling to help with this. You can **optimize production code** using
-[cosmwasm/rust-optimizer](https://github.com/CosmWasm/rust-optimizer). **rust-optimizer** produces reproducible builds
-of cosmwasm smart contracts. This means third parties can verify the contract is actually the claimed code.
+[rust-optimizer](https://github.com/CosmWasm/rust-optimizer). **rust-optimizer** produces reproducible builds
+of CosmWasm smart contracts. This means third parties can verify the contract is actually the claimed code.
 
 ```shell
 docker run --rm -v "$(pwd)":/code \
