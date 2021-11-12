@@ -70,7 +70,7 @@ bleeding edge and not only is it a version or two ahead (for testing), but it al
 APIs may change. For compiling `wasm`, you will want to use `stable`. We use `nightly` to compile the runtime
 for `junod`, which needs it for the singlepass compiler with gas metering and more.
 
-## junod / junod {#wasmd}
+## junod {#wasmd}
 
 `junod` is the backbone of CosmWasm platform. It is the implementation of a Cosmoszone with wasm smart contracts
 enabled.

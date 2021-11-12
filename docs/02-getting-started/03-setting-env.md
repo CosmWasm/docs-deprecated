@@ -12,13 +12,12 @@ To verify the testnet is currently running, make sure the following URLs are all
 
 
 - [https://rpc.uni.juno.deuslabs.fi/status](https://rpc.uni.juno.deuslabs.fi/status)
-- [https://faucet.uni.deuslabs.fi/status](https://faucet.uni.deuslabs.fi/status)
+- [https://faucet.uni.juno.deuslabs.fi/status](https://faucet.uni.juno.deuslabs.fi/status)
 - [https://lcd.uni.juno.deuslabs.fi/node_info](https://lcd.uni.juno.deuslabs.fi/node_info)
 
 We have set up one native token - `JUNO` (`ujunox`) for becoming a validator and for paying fees.
 Available frontends:
 
-// TODO: update link
 - Block Explorer: [https://uni.junoscan.com](https://uni.junoscan.com)
 
 You can use these to explore txs, addresses, validators and contracts. Feel free to deploy one pointing to our rpc/lcd
@@ -29,7 +28,7 @@ recommended for contract operations, since JSON manipulation is not intuitive wi
 
 ## Setup Go CLI {#setup-go-cli}
 
-Let's configure the `wasmd` executable, point it to the testnet, create a wallet and ask for tokens from faucet:
+Let's configure the `junod` executable, point it to the testnet, create a wallet and ask for tokens from faucet:
 
 First source the **uni** network configuration in the shell:
 
@@ -41,7 +40,7 @@ Setup the client:
 
 ```shell
 # add wallets for testing
-wasmd keys add wallet
+junod keys add wallet
 >
 {
   "name": "wallet",
@@ -51,21 +50,20 @@ wasmd keys add wallet
   "mnemonic": "hobby bunker rotate piano satoshi planet network verify else market spring toward pledge turkey tip slim word jaguar congress thumb flag project chalk inspire"
 }
 
-wasmd keys add wallet2
+junod keys add wallet2
 ```
 
 You need some tokens in your address to interact. If you are using local node you can skip this step. Requesting tokens
 from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"ujunox","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.uni.deuslabs.fi/credit
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet2) '{"denom":"ujunox","address":$addr}') && curl -X POST --header
-"Content-Type: application/json" --data "$JSON" https://faucet.uni.deuslabs.fi/credit
+JSON=$(jq -n --arg addr $(junod keys show -a wallet) '{"denom":"ujunox","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.uni.juno.deuslabs.fi/credit
+JSON2=$(jq -n --arg addr $(junod keys show -a wallet2) '{"denom":"ujunox","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.uni.juno.deuslabs.fi/credit
 ```
 
-## Export wasmd Parameters {#export-wasmd-parameters}
+## Export junod Parameters {#export-junod-parameters}
 
-If you intend to use wasmd as client, we recommend you to setup these variables. Otherwise You will have to define type
+If you intend to use junod as client, we recommend you to setup these variables. Otherwise You will have to define type
 in node, chain id and gas-prices details with every command you execute. Also for this tutorial we will use these
 variables. So make sure you export these before proceeding.
 
@@ -83,7 +81,7 @@ If any of the commands above throws an error, this means your shell is different
 running:
 
 ```bash
-wasmd query bank total $NODE
+junod query bank total $NODE
 ```
 
 Beyond the standard CLI tooling, we have also produced a flexible TypeScript
