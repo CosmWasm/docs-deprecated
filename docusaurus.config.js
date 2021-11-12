@@ -69,6 +69,12 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           docsPluginId: 'ecosystem',
         },
         {
+          to: 'job-listings',
+          position: 'left',
+          label: 'Job Listings',
+          docsPluginId: 'job-listings',
+        },
+        {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,

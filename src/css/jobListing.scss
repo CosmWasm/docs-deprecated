@@ -1,0 +1,30 @@
+.job-listing-container {
+    height: 650px;
+    width: 350px;
+    border-radius: 8px;
+    border: 1px solid #EFEFEF;
+    margin-right: 30px;
+    padding: 30px;
+
+    .job-image {
+        display: flex;
+        justify-content: center;
+
+        img {
+            max-height: 150px;
+            width: auto;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+    }
+
+    .job-content {
+        .bold {
+            font-weight: bold;
+        }
+
+        .title {
+            margin-top: 10px;
+        }
+    }
+}
