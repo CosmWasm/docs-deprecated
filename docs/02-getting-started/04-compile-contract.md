@@ -20,8 +20,7 @@ repo and try to build the wasm bundle:
 # get the code
 git clone https://github.com/InterWasm/cw-contracts
 cd cw-contracts
-git fetch --tags
-git checkout nameservice-0.11.0
+git checkout main
 cd contracts/nameservice
 
 # compile the wasm contract with stable toolchain
