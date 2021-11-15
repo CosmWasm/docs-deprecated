@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "@theme/Layout";
-import JobListing from "../../components/JobListing";
-import JOBS from "../../../static/job-listings.json";
+import JobListing from "../../../components/JobListing";
+import JOBS from "../../../../static/job-listings.json";
 
 const Listings = () => {
   return (

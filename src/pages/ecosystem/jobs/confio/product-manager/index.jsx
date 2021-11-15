@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "@theme/Layout";
-import "../../../../css/jobListing.scss";
-import JOBS from "../../../../../static/job-listings.json";
-import JobListing from "../../../../components/JobListing";
+import "../../../../../css/jobListing.scss";
+import JOBS from "../../../../../../static/job-listings.json";
+import JobListing from "../../../../../components/JobListing";
 
 const JOB = JOBS[1];
 

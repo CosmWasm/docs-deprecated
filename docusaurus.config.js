@@ -71,20 +71,20 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
               label: 'Overview',
             },
             {
-              to: 'ecosystem/testnets/build-requirements',
-              label: 'Testnets',
-            },
-            {
               to: 'ecosystem/jobs',
               label: 'Jobs',
             },
             {
-              to: 'ecosystem/media/assets',
-              label: 'Media',
+              to: 'ecosystem/testnets/build-requirements',
+              label: 'Testnets',
             },
             {
-              to: 'job-listings',
-              label: 'jobs',
+              to: 'ecosystem/hall-of-fame',
+              label: 'Hall of Fame',
+            },
+            {
+              to: 'ecosystem/media/assets',
+              label: 'Media',
             },
           ],
         },
