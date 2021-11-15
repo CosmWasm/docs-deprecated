@@ -70,11 +70,11 @@ variables. So make sure you export these before proceeding.
 ```bash
 # bash
 export NODE="--node $RPC"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001ujunox --gas auto --gas-adjustment 1.3"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.025ujunox --gas auto --gas-adjustment 1.3"
 
 # zsh
 export NODE=(--node $RPC)
-export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001ujunox --gas auto --gas-adjustment 1.3)
+export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.025ujunox --gas auto --gas-adjustment 1.3)
 ```
 
 If any of the commands above throws an error, this means your shell is different. If the command succeeded, then try
