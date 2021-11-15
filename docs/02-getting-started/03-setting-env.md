@@ -6,7 +6,7 @@ sidebar_position: 3
 
 You need an environment to run contracts. You can either run your node locally or connect to an existing network. For
 easy testing, the pebblenet testnet is live. You can use this to deploy and run your contracts. If you want to setup and
-run against a local blockchain, [follow these instructions](#run-local-node-optional).
+run against a local blockchain, [follow these instructions](https://docs.junochain.com/smart-contracts/installation#running-locally).
 
 To verify the testnet is currently running, make sure the following URLs are all working for you:
 
