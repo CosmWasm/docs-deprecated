@@ -34,7 +34,10 @@ const JobListing = ({
         <div className="description">
           <span className="bold">Description: </span>
           {singleListing ? (
-            <span>{description}</span>
+            <>
+              <br />
+              <span>{description}</span>
+            </>
           ) : (
             <>
               <span>{description.slice(0, 220)}...</span>
