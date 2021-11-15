@@ -1,5 +1,5 @@
 .job-listing-container {
-    height: fit-content;
+    height: 530px;
     width: 350px;
     border-radius: 8px;
     border: 1px solid #EFEFEF;
@@ -20,19 +20,10 @@
     }
 
     .job-content {
+        padding-top: 10px;
+
         .bold {
             font-weight: bold;
-        }
-
-        .title {
-            margin-top: 10px;
-        }
-    }
-
-    .description {
-        .expand {
-            color: var(--ifm-color-primary);
-            cursor: pointer;
         }
     }
 }

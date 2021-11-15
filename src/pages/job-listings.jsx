@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "@theme/Layout";
 import JobListing from "../components/JobListing";
+import JOBS from '../../static/job-listings.json'
 
 function Listings() {
   return (
@@ -15,29 +16,17 @@ function Listings() {
       >
         <JobListing
           image="https://i.kym-cdn.com/photos/images/newsfeed/001/431/201/40f.png"
-          title="Senior Go Developer"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum."
-          company="Confio"
-          salary="60000-80000 EUR"
+          title={JOBS[0].title}
+          description={JOBS[0].description[0] + JOBS[0].description[1]}
+          company={JOBS[0].company}
+          salary={JOBS[0].salary}
         />
         <JobListing
           image="https://i.kym-cdn.com/photos/images/newsfeed/001/431/201/40f.png"
-          title="Senior Go Developer"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum."
-          company="Confio"
-          salary="60000-80000 EUR"
+          title={JOBS[1].title}
+          description={JOBS[1].description[0] + JOBS[1].description[1]}
+          company={JOBS[1].company}
+          salary={JOBS[1].salary}
         />
       </div>
     </Layout>
