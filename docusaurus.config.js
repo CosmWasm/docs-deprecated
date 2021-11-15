@@ -62,17 +62,31 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           ],
         },
         {
-          type: 'doc',
-          docId: 'overview',
           position: 'left',
           label: 'Ecosystem',
           docsPluginId: 'ecosystem',
-        },
-        {
-          to: 'job-listings',
-          position: 'left',
-          label: 'Job Listings',
-          docsPluginId: 'job-listings',
+          items: [
+            {
+              to: 'ecosystem/overview',
+              label: 'Overview',
+            },
+            {
+              to: 'ecosystem/testnets/build-requirements',
+              label: 'Testnets',
+            },
+            {
+              to: 'ecosystem/jobs',
+              label: 'Jobs',
+            },
+            {
+              to: 'ecosystem/media/assets',
+              label: 'Media',
+            },
+            {
+              to: 'job-listings',
+              label: 'jobs',
+            },
+          ],
         },
         {
           type: 'docsVersionDropdown',
