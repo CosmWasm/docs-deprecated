@@ -24,7 +24,7 @@ const JobListing = ({ image, title, company, description, salary }) => {
         <div className="description">
           <span className="bold">Description: </span>
           <span>{description.slice(0, 220)}...</span>
-          <Link to={`job-listing/${title.toLowerCase().split(' ').join('-')}`}>see more</Link>
+          <Link to={`job-listing/${company.toLowerCase()}/${title.toLowerCase().split(' ').join('-')}`}>see more</Link>
         </div>
       </div>
     </div>
