@@ -1,10 +1,11 @@
 .job-listing-container {
-    height: 650px;
+    height: fit-content;
     width: 350px;
     border-radius: 8px;
     border: 1px solid #EFEFEF;
     margin-right: 30px;
     padding: 30px;
+    margin-bottom: 30px;
 
     .job-image {
         display: flex;
@@ -25,6 +26,13 @@
 
         .title {
             margin-top: 10px;
+        }
+    }
+
+    .description {
+        .expand {
+            color: var(--ifm-color-primary);
+            cursor: pointer;
         }
     }
 }

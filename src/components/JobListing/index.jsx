@@ -4,6 +4,10 @@ import "../../css/jobListing.scss";
 const JobListing = ({ image, title, company, description, salary }) => {
   const [opened, setOpened] = useState(false);
 
+  const expandOnClick = () => {
+    setOpened(!opened)
+  }
+
   return (
     <div className="job-listing-container">
       <div className="job-image">
@@ -20,8 +24,10 @@ const JobListing = ({ image, title, company, description, salary }) => {
         </div>
         <div className="description">
           <span className="bold">Description: </span>
-          <span>{description.slice(0, 36)}...</span>
-          <span className="expand">{opened ? "see less" : "see more"}</span>
+          <span>{description.slice(0, 36)}</span>
+          {!opened && <span>...</span>}
+          {opened && <span>{description.slice(36, description.length)}</span>}
+          <span className="expand" onClick={expandOnClick}>{opened ? " see less" : " see more"}</span>
         </div>
       </div>
     </div>
