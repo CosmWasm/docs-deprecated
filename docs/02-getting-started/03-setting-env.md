@@ -58,7 +58,7 @@ from faucet:
 
 ```shell
 JSON=$(jq -n --arg addr $(junod keys show -a wallet) '{"denom":"ujunox","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.uni.juno.deuslabs.fi/credit
-JSON2=$(jq -n --arg addr $(junod keys show -a wallet2) '{"denom":"ujunox","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.uni.juno.deuslabs.fi/credit
+JSON=$(jq -n --arg addr $(junod keys show -a wallet2) '{"denom":"ujunox","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.uni.juno.deuslabs.fi/credit
 ```
 
 ## Export junod Parameters {#export-junod-parameters}
