@@ -1,10 +1,9 @@
 import React from "react";
 import "../../css/jobListing.scss";
-import Link from "@docusaurus/Link";
 
-const JobListing = ({ image, title, company, description, salary }) => {
+const JobListing = ({ image, title, company, description, salary, link }) => {
   return (
-    <div className="job-listing-container">
+    <div className="job-listing-container job-description-container">
       <div className="job-image">
         <img src={image} alt="job image" />
       </div>
@@ -23,15 +22,12 @@ const JobListing = ({ image, title, company, description, salary }) => {
         </div>
         <div className="description">
           <span className="bold">Description: </span>
-          <span>{description.slice(0, 220)}...</span>
-          <Link
-            to={`job-listings/${company.toLowerCase()}/${title
-              .toLowerCase()
-              .split(" ")
-              .join("-")}`}
-          >
-            see more
-          </Link>
+          <br />
+          <span>{description}</span>
+        </div>
+        <br />
+        <div className="job-link">
+          <a href={link} target="_blank" rel="noopener noreferrer">Go to the job post</a>
         </div>
       </div>
     </div>

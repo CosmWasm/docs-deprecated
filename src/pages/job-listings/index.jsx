@@ -3,7 +3,7 @@ import Layout from "@theme/Layout";
 import JobListing from "../../components/JobListing";
 import JOBS from "../../../static/job-listings.json";
 
-function Listings() {
+const Listings = () => {
   return (
     <Layout title="Job Listings">
       <div
@@ -14,9 +14,10 @@ function Listings() {
           padding: "20px",
         }}
       >
-        {JOBS.map((job) => {
+        {JOBS.map((job, idx) => {
           return (
             <JobListing
+              key={idx}
               image="https://i.kym-cdn.com/photos/images/newsfeed/001/431/201/40f.png"
               title={job.title}
               description={job.description[0] + job.description[1]}
@@ -28,6 +29,6 @@ function Listings() {
       </div>
     </Layout>
   );
-}
+};
 
 export default Listings;
