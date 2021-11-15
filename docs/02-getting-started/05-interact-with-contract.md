@@ -19,7 +19,7 @@ junod query wasm list-code $NODE
 # now we store the bytecode on chain
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(junod tx wasm store artifacts/cw_nameservice.wasm --from wallet $TXFLAG -y)
+RES=$(junod tx wasm store artifacts/cw_nameservice.wasm --from wallet $TXFLAG -y --output json)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[-1].attributes[0].value')
@@ -85,10 +85,10 @@ junod tx wasm execute $CONTRACT "$REGISTER" \
 # query name record
 NAME_QUERY='{"resolve_record": {"name": "fred"}}'
 junod query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output json
-# {"data":{"address":"wasm1av9uhya7ltnusvunyqay3xcv9x0nyc872cheu5"}}
+# {"data":{"address":"juno1pze5wsf0dg0fa4ysnttugn0m22ssf3t4a9yz3h"}}
 
 # buy and transfer name record to wallet2
-TRANSFER='{"transfer":{"name":"fred","to":"wasm1um2e88neq8sxzuuem5ztt9d0em033rpr5ps9tv"}}'
+TRANSFER='{"transfer":{"name":"fred","to":"juno15522nrwtvsf7mt2vhehhwuw9qpsxw2mghqzu50"}}'
 junod tx wasm execute $CONTRACT "$TRANSFER" \
     --amount 999ujunox \
     --from wallet $TXFLAG -y
@@ -99,5 +99,5 @@ Query record to see the new owner address:
 ```shell
 NAME_QUERY='{"resolve_record": {"name": "fred"}}'
 junod query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output json
-# {"data":{"address":"wasm1um2e88neq8sxzuuem5ztt9d0em033rpr5ps9tv"}}
+# {"data":{"address":"juno15522nrwtvsf7mt2vhehhwuw9qpsxw2mghqzu50"}}
 ```

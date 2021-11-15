@@ -45,8 +45,8 @@ junod keys add wallet
 {
   "name": "wallet",
   "type": "local",
-  "address": "wasm13nt9rxj7v2ly096hm8qsyfjzg5pr7vn5saqd50",
-  "pubkey": "wasmpub1addwnpepqf4n9afaefugnfztg7udk50duwr4n8p7pwcjlm9tuumtlux5vud6qvfgp9g",
+  "address": "juno1pze5wsf0dg0fa4ysnttugn0m22ssf3t4a9yz3h",
+  "pubkey": "{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A09EWZLG2oI9mNLG9SbTHjMJEZvH+DGhshjLsUKP5Ijd"}",
   "mnemonic": "hobby bunker rotate piano satoshi planet network verify else market spring toward pledge turkey tip slim word jaguar congress thumb flag project chalk inspire"
 }
 
