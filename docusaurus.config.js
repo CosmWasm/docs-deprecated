@@ -120,12 +120,16 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
               href: 'https://github.com/CosmWasm/wasmd',
             },
             {
-              label: 'CosmWasm/cosmwasm-plus',
-              href: 'https://github.com/CosmWasm/cosmwasm-plus',
+              label: 'CosmWasm/cw-plus',
+              href: 'https://github.com/CosmWasm/cw-plus',
             },
             {
-              label: 'CosmWasm/cawesome-wasm',
-              href: 'https://github.com/CosmWasm/cawesome-wasm',
+              label: 'InterWasm/cw-contracts',
+              href: 'https://github.com/InterWasm/cw-contracts',
+            },
+            {
+              label: 'InterWasm/cawesome-wasm',
+              href: 'https://github.com/InterWasm/cw-awesome',
             },
           ],
         },
@@ -143,6 +147,10 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
             {
               label: 'Twitter',
               href: 'https://twitter.com/CosmWasm',
+            },
+            {
+              label: 'InterWasm',
+              href: 'https://github.com/InterWasm',
             },
           ],
         },
