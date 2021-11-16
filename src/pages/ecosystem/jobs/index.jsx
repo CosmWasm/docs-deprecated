@@ -5,7 +5,7 @@ import JOBS from "../../../../static/job-listings.json";
 
 const Listings = () => {
   return (
-    <Layout title="Job Listings">
+    <Layout title="Jobs">
       <div
         style={{
           width: "100%",
