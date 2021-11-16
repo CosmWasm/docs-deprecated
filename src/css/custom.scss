@@ -95,7 +95,7 @@
 /* Better align header with content */
 @media (min-width: 1600px) {
   .navbar .navbar__inner {
-    margin-left: calc( -1 * var(--ifm-spacing-horizontal));
+    margin-left: calc( 1 * var(--ifm-spacing-horizontal));
     margin-right: var(--ifm-spacing-horizontal);
   }
 }
