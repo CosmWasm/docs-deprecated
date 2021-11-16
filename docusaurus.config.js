@@ -128,7 +128,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
               href: 'https://github.com/InterWasm/cw-contracts',
             },
             {
-              label: 'InterWasm/cawesome-wasm',
+              label: 'InterWasm/cw-awesome',
               href: 'https://github.com/InterWasm/cw-awesome',
             },
           ],
