@@ -42,7 +42,7 @@ const JobListing = ({
             <>
               <span>{description.slice(0, 220)}...</span>
               <Link
-                to={`job-listings/${company.toLowerCase()}/${title
+                to={`jobs/${company.toLowerCase()}/${title
                   .toLowerCase()
                   .split(" ")
                   .join("-")}`}
