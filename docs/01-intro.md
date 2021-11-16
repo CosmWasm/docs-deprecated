@@ -6,7 +6,8 @@ sidebar_position: 1
 
 # Introduction
 
-:::note Synopsis CosmWasm is a new smart contracting platform built for the Cosmos ecosystem. If you haven't yet heard
+:::info
+CosmWasm is a new smart contracting platform built for the Cosmos ecosystem. If you haven't yet heard
 of it, please [check out this intro](https://blog.cosmos.network/announcing-the-launch-of-cosmwasm-cc426ab88e12). The
 purpose of this documentation is to give a deep dive into the technology for developers who wish to try it out or
 integrate it into their product. Particularly, it is aimed at Go developers with experience with the Cosmos SDK, as well
@@ -21,11 +22,11 @@ adjusting existing logic. We also provide a sample binary of CosmWasm integrated
 [`wasmd`](https://github.com/CosmWasm/wasmd), so you can launch a new smart-contract enabled blockchain out of the box,
 using documented and tested tooling and the same security model as the Cosmos Hub.
 
-You will need a running blockchain to host your contracts and use them from an app. We will explain how to [connect to a
-testnet](/02-getting-started/03-setting-env.md#setting-up-environment) or [set up a local "dev
-net"](/02-getting-started/03-setting-env.md#run-local-node-optional) in a later section. And plan to soon release a
-hosted testnet, to which all developers can simply upload their contracts, in order to easy run a demo and to share
-their contract with others.
+You will need a running blockchain to host your contracts and use them from an app. We will explain how
+to [connect to a testnet](/02-getting-started/03-setting-env.md#setting-up-environment)
+or [set up a local "dev net"](/02-getting-started/03-setting-env.md#run-local-node-optional) in a later section. And
+plan to soon release a hosted testnet, to which all developers can simply upload their contracts, in order to easy run a
+demo and to share their contract with others.
 
 ## Sections {#sections}
 
@@ -52,7 +53,6 @@ their contract with others.
 * [Testnets](/ecosystem/testnets/build-requirements) is a good first point if you are searching for a live network to
   test and hack your smart contracts on a stable and easy to use testing environment. Also, "**We have enough validators
   joining the testnets**", said no one ever 😉
-
 
 ## Further Studies {#further-studies}
 

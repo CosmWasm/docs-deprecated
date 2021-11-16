@@ -26,30 +26,30 @@ In the namespace example contract, there are only two valid messages once the co
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum ExecuteMsg {
-    Register { name: String },
-    Transfer { name: String, to: String },
+  Register { name: String },
+  Transfer { name: String, to: String },
 }
 ```
 
 The context of this code is
-[here](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/msg.rs#L13).
+[here](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/msg.rs#L13).
 
 This can then be worked with in `contract.rs`. Each of these will be handled in the `execute` function like so:
 
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn execute(
-    deps: DepsMut,
-    env: Env,
-    info: MessageInfo,
-    msg: ExecuteMsg,
+  deps: DepsMut,
+  env: Env,
+  info: MessageInfo,
+  msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
-    match msg {
-        ExecuteMsg::Register { name } => execute_register(deps, env, info, name),
-        ExecuteMsg::Transfer { name, to } => execute_transfer(deps, env, info, name, to),
-    }
+  match msg {
+    ExecuteMsg::Register { name } => execute_register(deps, env, info, name),
+    ExecuteMsg::Transfer { name, to } => execute_transfer(deps, env, info, name, to),
+  }
 }
 ```
 
-The source code for the [execute
-function](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/contract.rs#L31).
+The source code for
+the [execute function](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/contract.rs#L31).

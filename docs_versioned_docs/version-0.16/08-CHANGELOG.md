@@ -1,4 +1,5 @@
 ---
+
 sidebar_position: 8
 ---
 
@@ -29,8 +30,7 @@ sidebar_position: 8
 
 - cosmwasm-std: Make `Uint128` inner field private ([#905])
 - cosmwasm-std: Remove `Context` - deprecated in previous release
-- cosmwasm-std: Remove `HandleResponse`, `InitResponse`, and `MigrateResponse` -
-  deprecated in previous release
+- cosmwasm-std: Remove `HandleResponse`, `InitResponse`, and `MigrateResponse` - deprecated in previous release
 - cosmwasm-crypto: Remove `ed25519::MESSAGE_MAX_LEN`, `ed25519::BATCH_MAX_LEN`
   and message length verification as this should not be a concern of
   `cosmwasm-crypto`.
@@ -39,31 +39,28 @@ sidebar_position: 8
 
 ### Changed
 
-- cosmwasm-std: Rename the `send` function parameter to `funds` in `WasmMsg` for
-  consistency with the wasmd message types.
-- cosmwasm-vm: Increase read limit of contract execution results from 100,000
-  bytes to 64 MiB. JSON deserializers should have their own limit to protect
-  against large deserializations.
-- cosmwasm-vm: Create `VmError::DeserializationLimitExceeded`; Add limit
-  argument to `from_slice`; Increase deserialization limit of contract execution
-  results from 100,000 bytes to 256 KiB. This probably only affects internal
+- cosmwasm-std: Rename the `send` function parameter to `funds` in `WasmMsg` for consistency with the wasmd message
+  types.
+- cosmwasm-vm: Increase read limit of contract execution results from 100,000 bytes to 64 MiB. JSON deserializers should
+  have their own limit to protect against large deserializations.
+- cosmwasm-vm: Create `VmError::DeserializationLimitExceeded`; Add limit argument to `from_slice`; Increase
+  deserialization limit of contract execution results from 100,000 bytes to 256 KiB. This probably only affects internal
   testing as well as integration tests of smart contracts.
-- cosmwasm-vm: More accurate error messages for op codes related to bulk memory
-  operations, reference types, SIMD and the Threads extension.
+- cosmwasm-vm: More accurate error messages for op codes related to bulk memory operations, reference types, SIMD and
+  the Threads extension.
 - cosmwasm-vm: Update `wasmer` to `2.0.0`
-- cosmwasm-vm: ED25519 message length and batch length limits are now hardcoded
-  in `cosmwasm-vm` itself instead of being imported from `cosmwasm-crypto`.
-- cosmwasm-vm: Filesystem storage layout now distinguishes clearly between state
-  and cache.
+- cosmwasm-vm: ED25519 message length and batch length limits are now hardcoded in `cosmwasm-vm` itself instead of being
+  imported from `cosmwasm-crypto`.
+- cosmwasm-vm: Filesystem storage layout now distinguishes clearly between state and cache.
 - cosmwasm-std: Add enum case `ReplyOn::Never`; Remove default implementation of
   `ReplyOn` as there is no natural default case anymore ([#961]).
 - cosmwasm-std: Merge `messages` and `submessages` into one list, using
   `ReplyOn::Never` to model the "fire and forget" semantics ([#961]).
 - cosmwasm-std: Add `SubMsg` constructors: `::new()`, `::reply_on_error()`,
-  `::reply_on_success()`, `::reply_always()`; Add `with_gas_limit` to add a gas
-  limit to any those constructors ([#961]).
-- cosmwasm-std: Change `Event`'s constructor - it no longer takes a vector of
-  attributes and instead constructs an empty one
+  `::reply_on_success()`, `::reply_always()`; Add `with_gas_limit` to add a gas limit to any those constructors ([#961])
+  .
+- cosmwasm-std: Change `Event`'s constructor - it no longer takes a vector of attributes and instead constructs an empty
+  one
 - cosmwasm-std: Rename `Event.kind` to `Event.ty`.
 - cosmwasm-std: Rename `SubcallResponse` to `SubMsgExecutionResponse`.
 - contracts: Rename `ReflectSubCall` to `ReflectSubMsg` and `SubCallResult` to
@@ -73,12 +70,12 @@ sidebar_position: 8
   `interface_version_6`.
 - cosmwasm-std: `IbcAcknowledgement` is renamed to
   `IbcAcknowledgementWithPacket` as it contains both data elements. ([#975])
-- cosmwasm-std: `IbcAcknowledgementWithPacket.acknowledgement` is no longer
-  simply `Binary`, but a new `IbcAcknowledgement` structure, which contains one
-  field - `data: Binary`. This change was made to allow us to handle future
-  changes to IBC in a non-contract-breaking way. ([#975])
+- cosmwasm-std: `IbcAcknowledgementWithPacket.acknowledgement` is no longer simply `Binary`, but a
+  new `IbcAcknowledgement` structure, which contains one field - `data: Binary`. This change was made to allow us to
+  handle future changes to IBC in a non-contract-breaking way. ([#975])
 
 [#961]: https://github.com/CosmWasm/cosmwasm/pull/961
+
 [#975]: https://github.com/CosmWasm/cosmwasm/pull/975
 
 ### Fixed
@@ -98,8 +95,8 @@ sidebar_position: 8
 
 ### Fixed
 
-- cosmwasm-std: Fix `Uint64::multiply_ratio` and `Uint128::multiply_ratio` so
-  that internal multiplication cannot cause an unnecessary overflow. ([#920])
+- cosmwasm-std: Fix `Uint64::multiply_ratio` and `Uint128::multiply_ratio` so that internal multiplication cannot cause
+  an unnecessary overflow. ([#920])
 
 [#920]: https://github.com/CosmWasm/cosmwasm/issues/920
 

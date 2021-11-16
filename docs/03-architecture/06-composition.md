@@ -99,9 +99,9 @@ The demo "reflect" contract in the standard CosmWasm repo, [shows how to use `Cu
 `CustomQuery`](https://github.com/CosmWasm/cosmwasm/blob/71f643f577184a23b2f1f122531c944f0de94c34/contracts/reflect/src/msg.rs#L30-L64)
 . You can see how the contract [uses a
 `CustomQuery`](https://github.com/CosmWasm/cosmwasm/blob/master/contracts/reflect/src/contract.rs#L94-L101) to call out
-to some "runtime-provided" code. For unit tests, we can [mock out the runtime
-querier](https://github.com/CosmWasm/cosmwasm/blob/master/contracts/reflect/src/testing.rs#L20-L37), but in a deployed
-system, this should be provided by native Go code in your Cosmos SDK application.
+to some "runtime-provided" code. For unit tests, we
+can [mock out the runtime querier](https://github.com/CosmWasm/cosmwasm/blob/master/contracts/reflect/src/testing.rs#L20-L37)
+, but in a deployed system, this should be provided by native Go code in your Cosmos SDK application.
 
 Beyond trivial cases, we are working with Terra to expose their `swap`, `oracle` and `treasury` modules to CosmWasm
 contracts on their chains. These features need to be exposed in an immutable format that will work forever on their
@@ -129,8 +129,8 @@ in the native format (be it json, amino or protobuf), and the format of native m
 break. This may mean that a staking module could never undelegate the tokens. If you think this is a theoretical issue,
 please note that every major update of the Cosmos SDK has produced such breaking changes and has migrations for them.
 Migrations that cannot be performed on immutable contracts. Thus, we need to ensure that our design provides an
-immutable API to a potentially mutable runtime, which is a primary design criteria when designing the standard [module
-interfaces](#modules).
+immutable API to a potentially mutable runtime, which is a primary design criteria when designing the
+standard [module interfaces](#modules).
 
 ### Extensibility {#extensibility}
 
@@ -151,10 +151,10 @@ the developer's perspective. This applies to both the contract authors, as well 
 CosmWasm into their custom blockchain. And we want to make it easy to build client side applications using the
 contracts.
 
-We are using JSON encoding for the CosmWasm messages to make this simple and export [JSON
-schemas](https://github.com/CosmWasm/cw-examples/tree/main/contracts/erc20/schema) for every contract to allow
-auto-generation of client-side codecs. We also provide [CosmJS](https://github.com/CosmWasm/cosmjs) as a easy-to-use
-TypeScript client library allowing access to all contracts (and bank module) on a CosmWasm-based chain.
+We are using JSON encoding for the CosmWasm messages to make this simple and
+export [JSON schemas](https://github.com/InterWasm/cw-contracts/tree/main/contracts/erc20/schema) for every contract to
+allow auto-generation of client-side codecs. We also provide [CosmJS](https://github.com/CosmWasm/cosmjs) as a
+easy-to-use TypeScript client library allowing access to all contracts (and bank module) on a CosmWasm-based chain.
 
 ### Checking for Support {#checking-for-support}
 

@@ -62,8 +62,7 @@ another form of *Address* albeit one that requires a contract query (with storag
 a pure function.
 
 This actual format and interfaces are still under discussion, and we are still working on
-a [tutorial version of a name service](/tutorials/name-service/intro). However, for sake of argument,
-imagine we agree
+a [tutorial version of a name service](/tutorials/name-service/intro). However, for sake of argument, imagine we agree
 every *Address* that begins with `:` is a name to lookup with the name service, and other ones can be resolved directly
 with the built-in blockchain resolution function. So when creating a transaction for an escrow, you could use
 either `{"arbiter": "cosmos1qqp837a4kvtgplm6uqhdge0zzu6efqgujllfst"}` or `{"arbiter": ":alice"}`, performing the

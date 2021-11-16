@@ -23,8 +23,12 @@ pub struct Msg {
 ```
 
 This is the basic model that was used to model contracts in CosmWasm. You can see the same influence in the
-function `pub fn handle<T: Storage>(store: &mut T, params: Params, msg: Vec<u8>) -> Result<Response>`. `Response`
-contains `Vec<Msg>` and a little metadata. `store` is access to the contract's internal state. And `params` is some
+function:
+
+```rust
+pub fn handle<T: Storage>(store: &mut T, params: Params, msg: Vec<u8>) -> Result<Response>
+```
+Response contains `Vec<Msg>` and a little metadata. `store` is access to the contract's internal state. And `params` is some
 global immutable context. So, just a little bit of syntax around the same design. From this basic design, a few other
 useful aspects can be derived:
 

@@ -14,13 +14,15 @@ If you're familiar with Algebraic Data types, it might be enough to say that the
 ```rust
 
 enum Option<T> {
-    Some(T), // existence
-    None, // non-existence
+  Some(T),
+  // existence
+  None, // non-existence
 }
 
 enum Result<T, E> {
-    Ok(T), // success
-    Err(E), // failure
+  Ok(T),
+  // success
+  Err(E), // failure
 }
 ```
 
@@ -47,42 +49,42 @@ the first branch, which matches `ExecuteMsg::Transfer`.
 execute_transfer(deps, env, info, recipient, amount)
 ```
 
-We might expect the match branches to call functions that are typed the same as the entry point. And [they
-are](https://github.com/CosmWasm/cw-plus/blob/main/contracts/cw20-base/src/contract.rs#L173).
+We might expect the match branches to call functions that are typed the same as the entry point.
+And [they are](https://github.com/CosmWasm/cw-plus/blob/main/contracts/cw20-base/src/contract.rs#L173).
 
 ```rust
 pub fn execute_transfer(
-    deps: DepsMut,
-    _env: Env,
-    info: MessageInfo,
-    recipient: String,
-    amount: Uint128,
+  deps: DepsMut,
+  _env: Env,
+  info: MessageInfo,
+  recipient: String,
+  amount: Uint128,
 ) -> Result<Response, ContractError> {
-    if amount == Uint128::zero() {
-        return Err(ContractError::InvalidZeroAmount {});
-    }
+  if amount == Uint128::zero() {
+    return Err(ContractError::InvalidZeroAmount {});
+  }
 
-    let rcpt_addr = deps.api.addr_validate(&recipient)?;
+  let rcpt_addr = deps.api.addr_validate(&recipient)?;
 
-    BALANCES.update(
-        deps.storage,
-        &info.sender,
-        |balance: Option<Uint128>| -> StdResult<_> {
-            Ok(balance.unwrap_or_default().checked_sub(amount)?)
-        },
-    )?;
-    BALANCES.update(
-        deps.storage,
-        &rcpt_addr,
-        |balance: Option<Uint128>| -> StdResult<_> { Ok(balance.unwrap_or_default() + amount) },
-    )?;
+  BALANCES.update(
+    deps.storage,
+    &info.sender,
+    |balance: Option<Uint128>| -> StdResult<_> {
+      Ok(balance.unwrap_or_default().checked_sub(amount)?)
+    },
+  )?;
+  BALANCES.update(
+    deps.storage,
+    &rcpt_addr,
+    |balance: Option<Uint128>| -> StdResult<_> { Ok(balance.unwrap_or_default() + amount) },
+  )?;
 
-    let res = Response::new()
-        .add_attribute("action", "transfer")
-        .add_attribute("from", info.sender)
-        .add_attribute("to", recipient)
-        .add_attribute("amount", amount);
-    Ok(res)
+  let res = Response::new()
+    .add_attribute("action", "transfer")
+    .add_attribute("from", info.sender)
+    .add_attribute("to", recipient)
+    .add_attribute("amount", amount);
+  Ok(res)
 }
 ```
 
@@ -91,17 +93,18 @@ pub fn execute_transfer(
 It's also worth being aware of `StdResult`. This is used often in `query` handlers and functions that are called from
 them.
 
-For example, in the [nameservice
-contract](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/contract.rs#L95) you can see the
+For example, in
+the [nameservice contract](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/contract.rs#L95)
+you can see the
 `StdResult`, which is like `Result`, except without a defined error branch:
 
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn query(deps: Deps, env: Env, msg: QueryMsg) -> StdResult<Binary> {
-    match msg {
-        QueryMsg::ResolveRecord { name } => query_resolver(deps, env, name),
-        QueryMsg::Config {} => to_binary(&config_read(deps.storage).load()?),
-    }
+  match msg {
+    QueryMsg::ResolveRecord { name } => query_resolver(deps, env, name),
+    QueryMsg::Config {} => to_binary(&config_read(deps.storage).load()?),
+  }
 }
 ```
 
@@ -109,15 +112,15 @@ Let's see the implementation of `query_resolver`.
 
 ```rust
 fn query_resolver(deps: Deps, _env: Env, name: String) -> StdResult<Binary> {
-    let key = name.as_bytes();
+  let key = name.as_bytes();
 
-    let address = match resolver_read(deps.storage).may_load(key)? {
-        Some(record) => Some(String::from(&record.owner)),
-        None => None,
-    };
-    let resp = ResolveRecordResponse { address };
+  let address = match resolver_read(deps.storage).may_load(key)? {
+    Some(record) => Some(String::from(&record.owner)),
+    None => None,
+  };
+  let resp = ResolveRecordResponse { address };
 
-    to_binary(&resp)
+  to_binary(&resp)
 }
 ```
 
@@ -141,21 +144,21 @@ It's useful for doing things like expressing that a value might not exist for a 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Config {
-    pub purchase_price: Option<Coin>,
-    pub transfer_price: Option<Coin>,
+  pub purchase_price: Option<Coin>,
+  pub transfer_price: Option<Coin>,
 }
 ```
 
-The source is [here](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/state.rs#L13). We can
+The source is [here](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/state.rs#L13). We can
 see why this might be - these values come from
-[instantiation](https://github.com/CosmWasm/cw-examples/blob/main/contracts/nameservice/src/msg.rs#L6), where the values
+[instantiation](https://github.com/InterWasm/cw-contracts/blob/main/contracts/nameservice/src/msg.rs#L6), where the values
 are also `Option`:
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InstantiateMsg {
-    pub purchase_price: Option<Coin>,
-    pub transfer_price: Option<Coin>,
+  pub purchase_price: Option<Coin>,
+  pub transfer_price: Option<Coin>,
 }
 ```
 
@@ -165,8 +168,8 @@ two cases:
 
 ```rust
 let address = match resolver_read(deps.storage).may_load(key)? {
-    Some(record) => Some(String::from(&record.owner)),
-    None => None,
+Some(record) => Some(String::from( & record.owner)),
+None => None,
 };
 ```
 

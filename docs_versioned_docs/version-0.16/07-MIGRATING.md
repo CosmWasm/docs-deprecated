@@ -7,6 +7,7 @@ sidebar_position: 7
 This guide explains what is needed to upgrade contracts when migrating over major releases of `cosmwasm`. Note that you
 can also view the
 [complete CHANGELOG](08-CHANGELOG.md) to understand the differences.
+
 ## 0.15 -> 0.16
 
 - Update CosmWasm dependencies in Cargo.toml (skip the ones you don't use):
@@ -23,10 +24,9 @@ can also view the
   # ...
   ```
 
-- The `attr` function now accepts arguments that implement `Into<String>` rather
-  than `ToString`. This means that "stringly" types like `&str` are still
-  accepted, but others (like numbers or booleans) have to be explicitly
-  converted to strings; you can use the `to_string` method (from the
+- The `attr` function now accepts arguments that implement `Into<String>` rather than `ToString`. This means that "
+  stringly" types like `&str` are still accepted, but others (like numbers or booleans) have to be explicitly converted
+  to strings; you can use the `to_string` method (from the
   `std::string::ToString` trait) for that.
 
   ```diff
@@ -38,19 +38,17 @@ can also view the
   It also means that `&&str` is no longer accepted.
 
 - The `iterator` feature in `cosmwasm-std`, `cosmwasm-vm` and `cosmwasm-storage`
-  is now enabled by default. If you want to use it, you don't have to explicitly
-  enable it anymore.
+  is now enabled by default. If you want to use it, you don't have to explicitly enable it anymore.
 
-  If you don't want to use it, you **have to** disable default features when
-  depending on `cosmwasm-std`. Example:
+  If you don't want to use it, you **have to** disable default features when depending on `cosmwasm-std`. Example:
 
   ```diff
   - cosmwasm-std = { version = "0.15.0" }
   + cosmwasm-std = { version = "0.16.0", default-features = false }
   ```
 
-- The `Event::attr` setter has been renamed to `Event::add_attribute` - this is
-  for consistency with other types, like `Response`.
+- The `Event::attr` setter has been renamed to `Event::add_attribute` - this is for consistency with other types,
+  like `Response`.
 
   ```diff
   - let event = Event::new("ibc").attr("channel", "connect");
@@ -133,9 +131,8 @@ can also view the
     }
   ```
 
-- For IBC-enabled contracts only: IBC entry points have different signatures.
-  Instead of accepting bare packets, channels and acknowledgements, all of those
-  are wrapped in a `Msg` type specific to the given entry point. Channels,
+- For IBC-enabled contracts only: IBC entry points have different signatures. Instead of accepting bare packets,
+  channels and acknowledgements, all of those are wrapped in a `Msg` type specific to the given entry point. Channels,
   packets and acknowledgements have to be unpacked from those.
 
   ```diff
@@ -235,9 +232,8 @@ can also view the
   # ...
   ```
 
-- Combine `messages` and `submessages` on the `Response` object. The new format
-  uses `messages: Vec<SubMsg<T>>`, so copy `submessages` content, and wrap old
-  messages using `SubMsg::new`. Here is how to change messages:
+- Combine `messages` and `submessages` on the `Response` object. The new format uses `messages: Vec<SubMsg<T>>`, so
+  copy `submessages` content, and wrap old messages using `SubMsg::new`. Here is how to change messages:
 
   ```rust
   let send = BankMsg::Send { to_address, amount };
@@ -287,8 +283,8 @@ can also view the
   res.add_submessage(msg);
   ```
 
-  Note that this means you can mix "messages" and "submessages" in any execution
-  order. You are no more restricted to doing "submessages" first.
+  Note that this means you can mix "messages" and "submessages" in any execution order. You are no more restricted to
+  doing "submessages" first.
 
 - Rename the `send` field to `funds` whenever constructing a `WasmMsg::Execute`
   or `WasmMsg::Instantiate` value.
@@ -354,8 +350,8 @@ can also view the
   }
   ```
 
-  You also need to update the constructors in test code. Below we show how to do
-  so both for JSON data as well as any custom binary format:
+  You also need to update the constructors in test code. Below we show how to do so both for JSON data as well as any
+  custom binary format:
 
   ```rust
   // before (JSON)
