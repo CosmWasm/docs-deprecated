@@ -11,6 +11,9 @@ enables a thief to steal funds.
 
 - [Videos and Workshops](/tutorials/videos-workshops): We curated some video and workshop resources you can take a look
   at.
+- [Learn](/tutorials/simple-option/intro) will demonstrate developing smart contracts from zero to production with step
+  by step explanations, code snippets, scripts and more.
+  * [Dev Academy](/dev-academy/intro) provides structured learning content for CosmWasm smart contracts and clients.
 - [Terra Academy](https://academy.terra.money/courses/cosmwasm-smart-contracts-i): is a great tutorial series apart from
   here.
 - [cw-awesome](https://github.com/InterWasm/cw-awesome): Curated CosmWasm resources.

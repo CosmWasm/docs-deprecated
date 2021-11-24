@@ -8,9 +8,8 @@ In this section we will explain how to join testnets, where to find testnet conf
 process faster.
 
 :::caution
-Oysternet validators is run by confio and not open for external validators. Musselnet is up as 2021/05/26 so
-it will become obsolote. The documentation here is for reference and will be updated when long living CosmWasm network
-is released. If you want to start practicing validator operation skills, join upcoming CosmWasm testnets. But they are
+Sandynet validators is run by confio and not open for external validators. The documentation here is for reference and
+will be updated when long living CosmWasm network is released. If you want to start practicing validator operation skills, join upcoming CosmWasm testnets. But they are
 very far from production environments. For near mainnet conditions, try validating in 30+ node networks, where network
 load is high.
 
@@ -43,29 +42,33 @@ First of all make sure you followed the installation steps in [build requirement
 should have the required binaries. If you just want to copy and execute the scripts below, make sure to set up
 environment variables:
 
-Below is the [oysternet configuration](https://github.com/CosmWasm/testnets/tree/master/oysternet-1).
+Below is the [sandynet configuration](https://github.com/CosmWasm/testnets/blob/master/sandynet-1/defaults.env).
 
 ```shell
-export CHAIN_ID="oysternet-1"
-export TESTNET_NAME="oysternet-1"
-export WASMD_VERSION="v0.16.0"
+export CHAIN_ID="sandynet-1"
+export TESTNET_NAME="sandynet-1"
+export FEE_DENOM="ubay"
+export STAKE_DENOM="umaya"
+export BECH32_HRP="wasm"
+export WASMD_VERSION="v0.21.0"
 export CONFIG_DIR=".wasmd"
 export BINARY="wasmd"
 
-export COSMJS_VERSION="v0.24.0"
-export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/config/genesis.json"
-export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/config/app.toml"
-export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/oysternet-1/config/config.toml"
+export COSMJS_VERSION="v0.26.0"
+export GENESIS_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/sandynet-1/config/genesis.json"
+export APP_CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/sandynet-1/config/app.toml"
+export CONFIG_URL="https://raw.githubusercontent.com/CosmWasm/testnets/master/sandynet-1/config/config.toml"
 
-export RPC="http://rpc.oysternet.cosmwasm.com:80"
-export LCD="http://lcd.oysternet.cosmwasm.com"
-export FAUCET="https://faucet.oysternet.cosmwasm.com"
+export RPC="https://rpc.sandynet.cosmwasm.com:443"
+export LCD="https://lcd.sandynet.cosmwasm.com"
+export FAUCET="https://faucet.sandynet.cosmwasm.com"
 
-export COSMOVISOR_VERSION=v0.42.0
+export COSMOVISOR_VERSION="v0.42.10"
 export COSMOVISOR_HOME=/root/.wasmd
 export COSMOVISOR_NAME=wasmd
 
-# export SEED_NODE="c065c5ac440d1a9ba484a9a8b25c24d264b0a1a6@49.12.67.47:26656"
+export NODE=(--node $RPC)
+export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001usandy --gas auto --gas-adjustment 1.3)
 ```
 
 For running these scripts seamlessly, We recommend you to create a directory for CosmWasm tooling:
@@ -118,13 +121,8 @@ Now you should be seeing blocks being replayed and your node is catching up with
 ### Become A Validator(optional) {#become-a-validatoroptional}
 
 :::caution
-Command below is for demonstration, oysternet is not open for external validators.
+Command below is for demonstration, sandynet is not open for external validators.
 :::
-
-In order to join the network as validator, you need some staking tokens. Please ask some
-in [discord testnets channel](https://docs.cosmwasm.com/chat)
-
-If you want to participate in active block building, you need some coins staked to your validators address.
 
 For those interested in validator stack, here is a good reading source on validator
 architectures: [certus one blog](https://kb.certus.one/)

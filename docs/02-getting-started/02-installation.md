@@ -10,7 +10,7 @@ Cosmos SDK chains.
 ## Go {#go}
 
 You can set up golang following the [official documentation](https://github.com/golang/go/wiki#working-with-go). The
-latest versions of `junod` require go version `v1.17+`.
+latest versions of `wasmd` require go version `v1.17+`.
 
 ## Rust {#rust}
 
@@ -25,7 +25,7 @@ First, [install rustup](https://rustup.rs/). Once installed, make sure you have 
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.51.0+, update
+# If this is lower than 1.53.0+, update
 rustup update stable
 
 rustup target list --installed
@@ -68,31 +68,29 @@ rustup target add wasm32-unknown-unknown
 For those new to rust, the `stable` channel comes out every 6 weeks with a stable release. The `nightly` channel is the
 bleeding edge and not only is it a version or two ahead (for testing), but it allows some extra unstable features, whose
 APIs may change. For compiling `wasm`, you will want to use `stable`. We use `nightly` to compile the runtime
-for `junod`, which needs it for the singlepass compiler with gas metering and more.
+for `wasmd`, which needs it for the singlepass compiler with gas metering and more.
 
-## junod {#wasmd}
+## wasmd {#wasmd}
 
-`junod` is the backbone of CosmWasm platform. It is the implementation of a Cosmoszone with wasm smart contracts
+`wasmd` is the backbone of CosmWasm platform. It is the implementation of a Cosmos zone with wasm smart contracts
 enabled.
 
 This code was forked from the `cosmos/gaia` repository as a basis and then added x/wasm and cleaned up many
-gaia-specific files. However, the junod binary should function just like gaiad except for the addition of the x/wasm
+gaia-specific files. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm
 module.
 
-For testing cutting edge 1.0 features, we will use juno network and `junod`.
-
 ```shell
-git clone https://github.com/CosmosContracts/juno.git
-cd juno
-git checkout v2.0.0-beta
+git clone https://github.com/CosmWasm/wasmd.git
+cd wasmd
+git checkout v0.21.1
 make install
 
 # verify the installation
-junod version
+wasmd version
 ```
 
 :::info
-If you have any problems here, check your `PATH`. `make install` will copy `junod` to
+If you have any problems here, check your `PATH`. `make install` will copy `wasmd` to
 `$HOME/go/bin` by default, please make sure that is set up in your `PATH` as well, which should be the case in general
 for building Go code from source.
 :::
@@ -100,7 +98,7 @@ for building Go code from source.
 ## Further Information on the Cosmos SDK {#further-information-on-the-cosmos-sdk}
 
 These represent an instance of a blockchain that utilizes all of the stable features of
-the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk). As such, `junod` have all the same features (plus WASM smart
+the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk). As such, `wasmd` have all the same features (plus WASM smart
 contracts obviously). If you'd like to learn more about accessing those features take a look at
 the [Gaia docs](https://github.com/cosmos/gaia/tree/main/docs/gaia-tutorials). If you'd like to learn more about getting
 started with the Cosmos SDK in general, take a look at the series of [Tutorials](https://tutorials.cosmos.network/) that
