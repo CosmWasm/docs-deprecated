@@ -154,7 +154,7 @@ pub fn config(storage: &mut dyn Storage) -> Singleton<State> {
 
 ### Execution Logic {#execution-logic}
 
-Just as `init` is the entry point for instantiating a new contract, `handle` is the entry point for executing the code.
+Just as `instantiate` is the entry point for instantiating a new contract, `execute` is the entry point for executing the code.
 Since `handle` takes an `enum` with multiple `variants`, we can't just jump into the business logic, but first start
 with loading the state, and dispatching the message:
 
