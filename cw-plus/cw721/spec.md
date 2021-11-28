@@ -6,7 +6,7 @@ sidebar_position: 1
 # CW721 Spec: Non Fungible Tokens
 
 cw721 package source
-code: [https://github.com/CosmWasm/cw-plus/blob/master/packages/cw721/README.md](https://github.com/CosmWasm/cw-plus/blob/master/packages/cw721/README.md)
+code: [https://github.com/CosmWasm/cw-nfts/blob/main/packages/cw721/README.md](https://github.com/CosmWasm/cw-nfts/blob/main/packages/cw721/README.md)
 
 cw721 is a specification for non-fungible tokens based on CosmWasm. The name and design is based on Ethereum's ERC721
 standard, with some enhancements. The types in here can be imported by contracts that wish to implement this spec, or by
