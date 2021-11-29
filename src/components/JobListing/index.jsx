@@ -35,7 +35,6 @@ const JobListing = ({
           <span className="bold">Description: </span>
           {singleListing ? (
             <>
-              <br />
               <span>{description}</span>
             </>
           ) : (
