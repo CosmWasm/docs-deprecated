@@ -11,7 +11,7 @@ const Description = () => {
     <Layout>
       <div style={{ padding: "20px" }}>
         <JobListing
-          image="https://i.kym-cdn.com/photos/images/newsfeed/001/431/201/40f.png"
+          image={JOB.logo}
           title={JOB.title}
           description={JOB.description.map((line) => {
             return (

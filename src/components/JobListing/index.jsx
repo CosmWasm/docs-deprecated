@@ -16,7 +16,7 @@ const JobListing = ({
       className={`job-listing-container ${singleListing && "single-listing"}`}
     >
       <div className="job-image">
-        <img src={image} alt="job image" />
+        <img src={`/img/${image}`} alt="job image" />
       </div>
       <div className="job-content">
         <div className="company">
