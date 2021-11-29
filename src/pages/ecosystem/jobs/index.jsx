@@ -27,7 +27,7 @@ const Listings = () => {
             return (
               <JobListing
                 key={idx}
-                image="https://i.kym-cdn.com/photos/images/newsfeed/001/431/201/40f.png"
+                image={job.logo}
                 title={job.title}
                 description={job.description[0] + job.description[1]}
                 company={job.company}
