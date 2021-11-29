@@ -16,7 +16,7 @@ module.exports = {
       },
       {
         type: 'link',
-        label: 'Job Listing',
+        label: 'Jobs',
         href: '/ecosystem/jobs',
       },
       {
