@@ -10,7 +10,7 @@ CosmWasm made contract migration a first-class experience. When instantiating a 
 
 This is where CW2 comes in. It specifies one special Singleton to be stored on disk by all contracts on instantiate. When the migrate function is called, then the new contract can read that data and see if this is an expected contract we can migrate from. And also contain extra version information if we support multiple migrate paths.
 
-Working with CW2 is quite straightforward in that, as a smart contract developer you need only perform a couple of steps. 
+Working with CW2 is quite straightforward in that, as a smart contract developer you need only perform a couple of steps.
 
 The CW2 Spec provides a `set_contract_version` which should be used in instantiate to store the original version of a contract. It is important to also set_contract_version again after a successful migration to update it.
 
@@ -34,17 +34,15 @@ pub struct ContractVersion {
 
 Performing a contract migration is a three step process. First, you must write a newer version of the contract you wish to update. Second, you can upload the new code as you did before, but don’t instantiate it. Third, you use a dedicated [MsgMigrateContract](https://github.com/CosmWasm/wasmd/blob/v0.20.0/proto/cosmwasm/wasm/v1/tx.proto#L94-L104) transaction to point this contract to use the new code. And you are done!
 
-The `migrate` fucntion itself, exposes the ability to make any granular changes needed to the State, akin to a database migration or any other things you might want to do.
+The `migrate` function itself, exposes the ability to make any granular changes needed to the State, akin to a database migration or any other things you might want to do.
 
 If the migrate function returns an error, the transaction aborts, all state changes are reverted and the migration is not performed.
 
-Provided below are a few variants on migrations you could do ranging from a very simple one, to a more restricted one by code iD and type. 
+Provided below are a few variants on migrations you could do ranging from a very simple one, to a more restricted one by code iD and type.
 
+### Basic Contract Migration
 
-
-### Basic Contract Migration 
-
-This migration will be the most common you may see. It simply is used to swap out the code of a contract. Safety checks may not be performed if you do not also use `cw2::set_contract_version`. 
+This migration will be the most common you may see. It simply is used to swap out the code of a contract. Safety checks may not be performed if you do not also use `cw2::set_contract_version`.
 
 ```rust
 const CONTRACT_NAME: &str = "crates.io:my-crate-name";
@@ -57,7 +55,7 @@ pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, Co
 }
 ```
 
-### Restricted Migration by code type 
+### Restricted Migration by code version and name
 
 This migration is a more complete and restricted example where the `cw2` package is used and the `migrate` function ensures that:
 
@@ -89,7 +87,7 @@ pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, Co
 }
 ```
 
-### Migrate which updates the verison only if newer
+### Migrate which updates the version only if newer
 
 This migration is a less restrictive example than above. In this case the `cw2` package is used and the `migrate` function ensures that:
 
@@ -141,7 +139,7 @@ impl From<semver::Error> for ContractError {
 
 ### Using migrate to update otherwise immutable state
 
-This example shows how a migration can be used to update a value that generally should not be changed. This allows for the immutable value to be changed only during a migration if that functionality is needed by your team. 
+This example shows how a migration can be used to update a value that generally should not be changed. This allows for the immutable value to be changed only during a migration if that functionality is needed by your team.
 
 ```rust
 #[entry_point]
@@ -162,7 +160,7 @@ In the above example, our `MigrateMsg` has a `verifier` field which contains the
 
 ### Using migrations to 'burn' a contract
 
-Migrations can also be used to completely abandon an old contract and burn its state. This has varying uses but in the event you need it you can find an example [here](https://github.com/CosmWasm/cosmwasm/blob/main/contracts/burner/src/contract.rs#L20): 
+Migrations can also be used to completely abandon an old contract and burn its state. This has varying uses but in the event you need it you can find an example [here](https://github.com/CosmWasm/cosmwasm/blob/main/contracts/burner/src/contract.rs#L20):
 
 ```rust
 #[entry_point]
@@ -204,7 +202,13 @@ Different chains and hubs in the Cosmos ecosystem may have some variations on ho
 
 ### Terra
 
-Terra has some specific differences in how they manage migrations. Firstly; the contract must have been set as migratable on instantiation. The contract needs to have an admin for migratability.
-Specifically migration in Terra refers to swapping out the code id for a new one that is consider 'compatible' (CW2 helps with this). [Source](https://docs.terra.money/Reference/Terra-core/Module-specifications/spec-wasm.html#interaction).
+Terra has some specific differences in how they manage migrations. Firstly; the contract must have been set as migratable on instantiation. The contract needs to have an admin for migratability similar to the standard procedure for migrations.
+Specifically migration in this case for Terra refers to swapping out the code id for a new one that is considered 'compatible' (CW2 helps with this). [Source](https://docs.terra.money/Reference/Terra-core/Module-specifications/spec-wasm.html#interaction).
 
 > Note: In Terra, it is also possible to migrate a code_id across chains (COL4->5 for example). This operation is atomic and can only be performed once. Its intention is to migrate your code to the new chain and preserve its old code ID. This process helps to prevent downstream breakages of other contracts on the new network which depend on your old code ID.
+> Example command for migrating across chains :
+>
+> ```rust
+> terrad tx wasm store ./{code.wasm} --from {keyname} \ 
+> --migrate-code-id {codeID}
+> ```
