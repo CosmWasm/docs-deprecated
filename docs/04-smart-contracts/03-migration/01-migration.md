@@ -14,6 +14,18 @@ Working with CW2 is quite straightforward in that, as a smart contract developer
 
 The CW2 Spec provides a `set_contract_version` which should be used in instantiate to store the original version of a contract. It is important to also set_contract_version again after a successful migration to update it.
 
+```rust
+const CONTRACT_NAME: &str = "crates.io:my-crate-name";
+const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
+
+
+[cfg_attr(not(feature = "library"), entry_point)]
+pub fn instantiate(deps: DepsMut, env: Env, info: MessageInfo, msg: InstantiateMsg) -> Response {
+    // Use CW2 to set the contract version, this is needed for migrations
+    set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
+}
+```
+
 Additionally, `get_contract_version` is provided in CW2 which can and should be used in the `migrate` function of the contract when you need to know the previous version of the contract. Both methods work on a `Item` data structure from `cw_storage_plus` which operates over this object:
 
 ```rust
