@@ -139,7 +139,68 @@ impl From<semver::Error> for ContractError {
 }
 ```
 
+### Using migrate to update otherwise immutable state
+
+This example shows how a migration can be used to update a value that generally should not be changed. This allows for the immutable value to be changed only during a migration if that functionality is needed by your team. 
+
+```rust
+#[entry_point]
+pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, HackError> {
+    let data = deps
+        .storage
+        .get(CONFIG_KEY)
+        .ok_or_else(|| StdError::not_found("State"))?;
+    let mut config: State = from_slice(&data)?;
+    config.verifier = deps.api.addr_validate(&msg.verifier)?;
+    deps.storage.set(CONFIG_KEY, &to_vec(&config)?);
+
+    Ok(Response::default())
+}
+```
+
+In the above example, our `MigrateMsg` has a `verifier` field which contains the new value for our contracts `verifier` field located in the State. Provided your contract does not also expose an `UpdateState` or something like `UpdateVerifier` ExecuteMsgs then this provides the only method to change the `verifier` value.
+
+### Using migrations to 'burn' a contract
+
+Migrations can also be used to completely abandon an old contract and burn its state. This has varying uses but in the event you need it you can find an example [here](https://github.com/CosmWasm/cosmwasm/blob/main/contracts/burner/src/contract.rs#L20): 
+
+```rust
+#[entry_point]
+pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> StdResult<Response> {
+    // delete all state
+    let keys: Vec<_> = deps
+        .storage
+        .range(None, None, Order::Ascending)
+        .map(|(k, _)| k)
+        .collect();
+    let count = keys.len();
+    for k in keys {
+        deps.storage.remove(&k);
+    }
+
+    // get balance and send all to recipient
+    let balance = deps.querier.query_all_balances(env.contract.address)?;
+    let send = BankMsg::Send {
+        to_address: msg.payout.clone(),
+        amount: balance,
+    };
+
+    let data_msg = format!("burnt {} keys", count).into_bytes();
+
+    Ok(Response::new()
+        .add_message(send)
+        .add_attribute("action", "burn")
+        .add_attribute("payout", msg.payout)
+        .set_data(data_msg))
+}
+
+```
+
+In the above example, when the migration occurs the State is completely deleted. Additionally all the balance of contract is send to a nominated `payout` address provided in the `MigrationMsg`. In this case all funds are drained and all state removed effectively burning the contract.
+
 ## Platform Specific Variations
+
+Different chains and hubs in the Cosmos ecosystem may have some variations on how migrations are done on their respective networks. This section will attempt to outline those.
 
 ### Terra
 
