@@ -8,7 +8,7 @@ Migration is the process through which a given smart contracts code can be swapp
 
 CosmWasm made contract migration a first-class experience. When instantiating a contract, there is an optional admin field that you can set. If it is left empty, the contract is immutable. If it is set (to an external account or governance contract), that account can trigger a migration. The admin can also change admin or even make the contract fully immutable after some time. However, when we wish to migrate from contract A to contract B, contract B needs to be aware somehow of how the state was encoded.
 
-This is where CW2 comes in. It specifies one special Singleton to be stored on disk by all contracts on instantiate. When the migrate function is called, then the new contract can read that data and see if this is an expected contract we can migrate from. And also contain extra version information if we support multiple migrate paths.
+This is where CW2 specification comes in. It specifies one special `Singleton` to be stored on disk by all contracts on instantiate. When the migrate function is called, then the new contract can read that data and see if this is an expected contract we can migrate from. And also contain extra version information if we support multiple migrate paths.
 
 Working with CW2 is quite straightforward in that, as a smart contract developer you need only perform a couple of steps.
 
