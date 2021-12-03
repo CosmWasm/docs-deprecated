@@ -34,7 +34,7 @@ diff artifacts/cw_nameservice.wasm download.wasm
 
 ### Instantiating the Contract {#instantiating-the-contract}
 
-We can now create an instance of this wasm contract. Here we first instentiate the contract and make some query operations on it.
+We can now create an instance of this wasm contract. Here we first instantiate the contract and make some query operations on it.
 
 ```shell
 # instantiate contract and verify
