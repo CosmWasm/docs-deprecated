@@ -15,9 +15,11 @@ const JobListing = ({
     <div
       className={`job-listing-container ${singleListing && "single-listing"}`}
     >
-      <div className="job-image">
-        <img src={`/img/${image}`} alt="job image" />
-      </div>
+      {image && (
+        <div className="job-image">
+          <img src={`/img/${image}`} alt="job image" />
+        </div>
+      )}
       <div className="job-content">
         <div className="company">
           <span className="bold">Company: </span>
@@ -51,7 +53,7 @@ const JobListing = ({
             </>
           )}
         </div>
-        {singleListing && (
+        {singleListing && link && (
           <div className="job-link">
             <br />
             <a href={link} target="_blank" rel="noopener noreferrer">

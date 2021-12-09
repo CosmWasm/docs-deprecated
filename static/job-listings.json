@@ -54,5 +54,13 @@
         "description": ["+ Proven work experience as a UI/UX Designer","+ Knowledge of wireframe tools, design tools (eg. Balsamiq, Figma)","+ Knowledge about the workflow when using an IDE","+ Can conduct layout adjustments based on user feedback"],
         "link": "https://orai.io/",
         "logo": "oraichain_logo.jpg"
+    },
+    {
+        "company": "Pixy",
+        "title": "Experienced Rust and React Developers",
+        "salary": "-",
+        "description": ["Pixy is a crowdfunding platform that uses principal protected NFTs to fund a new generation of digital media creators and empower users.", "We are seeking experienced RUST & REACT devs to join our growing team.", "", "This is a full time position.", "", "Please reach us out with linkedin profile and work samples. Thanks!"],
+        "link": null,
+        "logo": null
     }
 ]
