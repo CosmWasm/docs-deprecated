@@ -46,5 +46,13 @@
         "description": ["Cryptonics is expanding its security audit team and looking for more auditors!","We focus exclusively on third generation blockchains, including Cosmos SDK and Substrate chains.","","The ideal candidate will be security conscious blockchain engineer with audit experience and strong skills in the following:","- Go","- Rust","- CosmWasm","- protocol-level security","- cryptographic protocols","- blockchain interoperability \/ bridges"],
         "link": "https://cryptocurrencyjobs.co/engineering/cryptonics-blockchain-security-auditor/",
         "logo": "cryptonics_logo.png"
+    },
+    {
+        "company": "Oraichain",
+        "title": "UX-UI Designer for CosmWasm IDE",
+        "salary": "-",
+        "description": ["+ Proven work experience as a UI/UX Designer","+ Knowledge of wireframe tools, design tools (eg. Balsamiq, Figma)","+ Knowledge about the workflow when using an IDE","+ Can conduct layout adjustments based on user feedback"],
+        "link": "https://orai.io/",
+        "logo": "oraichain_logo.jpg"
     }
 ]
