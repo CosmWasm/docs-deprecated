@@ -48,14 +48,6 @@
         "logo": "cryptonics_logo.png"
     },
     {
-        "company": "Oraichain",
-        "title": "UX-UI Designer for CosmWasm IDE",
-        "salary": "-",
-        "description": ["+ Proven work experience as a UI/UX Designer","+ Knowledge of wireframe tools, design tools (eg. Balsamiq, Figma)","+ Knowledge about the workflow when using an IDE","+ Can conduct layout adjustments based on user feedback"],
-        "link": "https://orai.io/",
-        "logo": "oraichain_logo.jpg"
-    },
-    {
         "company": "Pixy",
         "title": "Experienced Rust and React Developers",
         "salary": "-",
