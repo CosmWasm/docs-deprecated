@@ -87,7 +87,7 @@ NAME_QUERY='{"resolve_record": {"name": "fred"}}'
 wasmd query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output json
 # {"data":{"address":"wasm1pze5wsf0dg0fa4ysnttugn0m22ssf3t4a9yz3h"}}
 
-# buy and transfer name record to wallet2
+# buy and transfer name record to wallet2 (change the "to" address to wallet2 generated in previous steps)
 TRANSFER='{"transfer":{"name":"fred","to":"wasm15522nrwtvsf7mt2vhehhwuw9qpsxw2mghqzu50"}}'
 wasmd tx wasm execute $CONTRACT "$TRANSFER" \
     --amount 999ubay \
