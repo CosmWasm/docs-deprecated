@@ -33,7 +33,7 @@ contract? Luckily Javascript has some nice introspection. And, we added some ext
 ```
 
 But how do I call them? What arguments do they take? You can always go look up the
-[original helper file on the web](https://github.com/CosmWasm/cw-plus/blob/master/contracts/cw20-base/helpers.ts#L151-L167)
+[original helper file on the web](https://github.com/InterWasm/cw-plus-helpers/blob/main/cw20-base.ts)
 and see all the types defined there.
 
 But why switch to a browser and get distracted by something else? There is a great `.type` operator to show you this
