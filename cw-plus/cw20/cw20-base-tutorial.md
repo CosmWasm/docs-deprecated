@@ -28,7 +28,7 @@ the following command to start up the `@cosmjs/cli` with some cw20-specific help
 (in addition to all the general helpers it has).
 
 ```shell
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/cw20-base.ts
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
 ```
 
 Once this downloads the source and starts up, you should see a bunch of yellow text (explaining what code is preloaded),
