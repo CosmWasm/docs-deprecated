@@ -29,7 +29,7 @@ allowance to spend tokens, but no permissioned message execution and vice versa.
 First, initialize node repl:
 
 ```shell
-npx @cosmjs/cli@^0.23 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/v0.3.2/contracts/cw1-subkeys/helpers.ts
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/cw1-subkeys.ts
 ```
 
 :::caution

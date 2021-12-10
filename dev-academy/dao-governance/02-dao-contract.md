@@ -25,7 +25,7 @@ On the first terminal, let us start setting up a wallet and launch the DAO.
 Launch CosmJS client:
 
 ```shell
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/master/contracts/cw4-group/helpers.ts
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/cw4-group.ts
 ```
 
 Now store and instantiate the contract:
@@ -85,7 +85,7 @@ Copy and save `contractAddress` and `codeId`.
 Now go to the second tab. And on the first tab run these commands:
 
 ```shell
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/CosmWasm/cw-plus/cw3-helper/contracts/cw3-flex-multisig/helpers.ts
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/master/cw3-flex-multisig.ts
 ```
 
 ```typescript
