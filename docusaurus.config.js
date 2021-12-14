@@ -63,11 +63,31 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           ],
         },
         {
-          type: 'doc',
-          docId: 'overview',
           position: 'left',
           label: 'Ecosystem',
           docsPluginId: 'ecosystem',
+          items: [
+            {
+              to: 'ecosystem/overview',
+              label: 'Overview',
+            },
+            {
+              to: 'ecosystem/jobs',
+              label: 'Jobs',
+            },
+            {
+              to: 'ecosystem/testnets/build-requirements',
+              label: 'Testnets',
+            },
+            {
+              to: 'ecosystem/hall-of-fame',
+              label: 'Hall of Fame',
+            },
+            {
+              to: 'ecosystem/media/assets',
+              label: 'Media',
+            },
+          ],
         },
         {
           type: 'docsVersionDropdown',
