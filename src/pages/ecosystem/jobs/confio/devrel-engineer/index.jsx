@@ -4,7 +4,7 @@ import "../../../../../css/jobListing.scss";
 import JOBS from "../../../../../../static/job-listings.json";
 import JobListing from "../../../../../components/JobListing";
 
-const JOB = JOBS[4];
+const JOB = JOBS[2];
 
 const Description = () => {
   return (
