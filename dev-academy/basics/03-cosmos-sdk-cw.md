@@ -15,7 +15,7 @@ blockchains, like the Cosmos Hub, as well as permissioned Proof-Of-Authority (Po
 the Cosmos SDK are generally referred to as application-specific blockchains.
 The goal of the Cosmos SDK is to allow developers to easily create custom blockchains from scratch that can natively
 interoperate with other blockchains. We envision the SDK as the npm-like framework to build secure blockchain
-applications on top of Tendermint (opens new window). SDK-based blockchains are built out of composable modules,
+applications on top of Tendermint. SDK-based blockchains are built out of composable modules,
 most of which are open source and readily available for any developers to use. Anyone can create a module for the
 Cosmos-SDK, and integrating already-built modules is as simple as importing them into your blockchain application.
 What's more, the Cosmos SDK is a capabilities-based system, which allows developers to better reason about the security
