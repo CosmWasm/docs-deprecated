@@ -82,7 +82,7 @@ module.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-git checkout v0.21.1
+git checkout v0.21.0
 make install
 
 # verify the installation
