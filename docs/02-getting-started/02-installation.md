@@ -79,6 +79,8 @@ This code was forked from the `cosmos/gaia` repository as a basis and then added
 gaia-specific files. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm
 module.
 
+If `make` software is not preinstalled on the OS, install [here](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows)
+
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
