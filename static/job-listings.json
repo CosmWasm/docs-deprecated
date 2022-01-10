@@ -46,5 +46,13 @@
         "description": ["", "We are looking for a full-time Medior/Senior Javascript Developer who can work on a remote team.", "Optionally based in Istanbul.", "", "Who we are", "", "What you will do", "- Develop dApps, utilities and tooling around CosmWasm and Cosmos Ecosystem.", "- Implement dApp front ends ranging from DAO dashboards to scheduled smart contract financial operation scripting.", "- Write scripts for fast prototyping and tooling.", "- Use Typescript for pretty much everything.", "", "Essential requirements", "- Minimum 2-3 years of experience in the programming field", "- Great Javascript skills (Node.js, React)", "- Motivation to keep up with news/projects in Blockchain area", "- Ability to work independently", "- Have Typescript experience", "- Fluent in English", "", "Nice to have", "- Previous experience working with blockchains", "- Open source contributions", "", "Feel free to contact us at info@deuslabs.fi"],
         "link": "https://deuslabs.fi",
         "logo": "deuslabs_logo.png"
+    },
+    {
+        "company": "deus labs",
+        "title": "CosmWasm Smart Contract Developer",
+        "salary": "-",
+        "description": ["", "We are looking for a full-time Rust Smart Contract Developer who can work on a remote team.", "You don’t need to be a CW and Rust pro. You can come join and train with us.", "", "What you will do", "- Learn and Develop rust Smart Contracts for many networks.", "- Build tooling around CW smart contracts.", "- Architecture dApps.", "- Be in the first generation of developers that built the financial and governance systems.", "- Imagine ways to apply blockchain tech to societal issues.", "", "Requirements", "If you have;", "- Functional programming skills", "- Understanding of actor model", "- Scala, Rust or Go experience", "- Blockchain basics", "You can pretty easily learn to write CosmWasm smart contracts and build the basics of the interchain future with us.", "", "Nice to have", "- Rust knowledge", "- Solidity", "- Go", "- Cosmos SDK", "", "Feel free to contact us at info@deuslabs.fi"],
+        "link": "https://deuslabs.fi",
+        "logo": "deuslabs_logo.png"
     }
 ]
