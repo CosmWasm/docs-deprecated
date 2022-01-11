@@ -43,7 +43,7 @@ const JobListing = ({
             <>
               <span>{description.slice(0, 220)}...</span>
               <Link
-                to={`jobs/${company.toLowerCase()}/${title
+                to={`jobs/${company.split(" ").join("-").toLowerCase()}/${title
                   .toLowerCase()
                   .split(" ")
                   .join("-")}`}
@@ -57,7 +57,7 @@ const JobListing = ({
           <div className="job-link">
             <br />
             <a href={link} target="_blank" rel="noopener noreferrer">
-              Go to the job post
+              Go to the website
             </a>
           </div>
         )}
