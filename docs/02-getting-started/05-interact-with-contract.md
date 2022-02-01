@@ -38,7 +38,7 @@ We can now create an instance of this wasm contract. Here we first instantiate t
 
 ```shell
 # instantiate contract and verify
-INIT='{"purchase_price":{"amount":"100","denom":"ubay"},"transfer_price":{"amount":"999","denom":"ubay"}}'
+INIT='{"purchase_price":{"amount":"100","denom":"upebble"},"transfer_price":{"amount":"999","denom":"upebble"}}'
 wasmd tx wasm instantiate $CODE_ID "$INIT" \
     --from wallet --label "awesome name service" $TXFLAG -y
 
@@ -79,7 +79,7 @@ Once contract instantiated, let's register a name and transfer it with paying it
 # execute fails if wrong person
 REGISTER='{"register":{"name":"fred"}}'
 wasmd tx wasm execute $CONTRACT "$REGISTER" \
-    --amount 100ubay \
+    --amount 100upebble \
     --from wallet $TXFLAG -y
 
 # query name record
@@ -90,7 +90,7 @@ wasmd query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output jso
 # buy and transfer name record to wallet2 (change the "to" address to wallet2 generated in previous steps)
 TRANSFER='{"transfer":{"name":"fred","to":"wasm15522nrwtvsf7mt2vhehhwuw9qpsxw2mghqzu50"}}'
 wasmd tx wasm execute $CONTRACT "$TRANSFER" \
-    --amount 999ubay \
+    --amount 999upebble \
     --from wallet $TXFLAG -y
 ```
 

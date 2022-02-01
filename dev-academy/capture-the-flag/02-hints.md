@@ -10,11 +10,11 @@ Reward vouchers are 16 character hexadecimal number (like `c0ad2205922223b2`).
 
 ## Hint 2: Endpoints
 
-RPC: https://rpc.pebblenet.cosmwasm.com:443
+RPC: https://rpc.cliffnet.cosmwasm.com:443
 
-Faucet: https://faucet.pebblenet.cosmwasm.com
+Faucet: https://faucet.cliffnet.cosmwasm.com
 
-Explorer: https://block-explorer.pebblenet.cosmwasm.com
+Explorer: https://block-explorer.cliffnet.cosmwasm.com
 
 ## Hint 3: Formats
 
@@ -22,14 +22,14 @@ Explorer: https://block-explorer.pebblenet.cosmwasm.com
 
 In this event you will see strings like: `8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C`
 This is 32 bytes, hexadecimal string. Tendermint/cosmos-sdk hashes the txs and blocks in this format.
-The hash above is a pebblenet transaction hash. These values always indexed by block explorers.
-Run a search with the hash to see it’s content: https://block-explorer.pebblenet.cosmwasm.com/transactions/8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C
+The hash above is a cliffnet transaction hash. These values always indexed by block explorers.
+Run a search with the hash to see it’s content: https://block-explorer.cliffnet.cosmwasm.com/transactions/8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C
 
 Another value: `wasm1….` strings. These strings are bech32 account addresses.
-Go ahead and see one: https://block-explorer.pebblenet.cosmwasm.com/account/wasm1k8lesl0wsspcpdfpuh8es3k4ymfsfkryydhw03
+Go ahead and see one: https://block-explorer.cliffnet.cosmwasm.com/account/wasm1k8lesl0wsspcpdfpuh8es3k4ymfsfkryydhw03
 
 Block height is a sequential unsigned integer value that indexes a block. There could be many transactions in a single block.
-Here is one: https://block-explorer.pebblenet.cosmwasm.com/blocks/334748
+Here is one: https://block-explorer.cliffnet.cosmwasm.com/blocks/334748
 
 ### Base64
 
@@ -48,13 +48,13 @@ Query and tx interfaces are very similar.
 Query block:
 
 ```bash
-wasmd query block 15 --node https://rpc.pebblenet.cosmwasm.com
+wasmd query block 15 --node https://rpc.cliffnet.cosmwasm.com
 ```
 
 Query tx:
 
 ```bash
-wasmd query tx 8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C --node https://rpc.pebblenet.cosmwasm.com
+wasmd query tx 8B74EA4E6EC2B8940E6963DF813FE158171C1FEBEAFA36B38DFE80EA0521970C --node https://rpc.cliffnet.cosmwasm.com
 ```
 
 ### Smart Query
@@ -101,15 +101,15 @@ chef sense chicken net around sting course someone question badge hand also nati
 
 ### Signing offline transactions
 
-Offline signing is a cool functionality. It is like a delayed payment, where you sign a transaction and only submit it later to the network. 
+Offline signing is a cool functionality. It is like a delayed payment, where you sign a transaction and only submit it later to the network.
 One use case: create a transaction that will send
 from account A to B and send the unsigned tx to the account A owner to approve and sign the transaction then broadcast to the chain
 
 ```bash
 # –generate-only flag creates tx and only prompts unsigned tx
-wasmd tx bank send wasm134rsdpu5xfhegdclxmdeqxn0j6gmenkmcdmpuz wasm103hx72nfk0mypwlfa3qwyx4rzvv35gvyy83ral 100upebble --memo “you found me” --chain-id pebblenet-1 --generate-only > unsigned_tx.json
+wasmd tx bank send wasm134rsdpu5xfhegdclxmdeqxn0j6gmenkmcdmpuz wasm103hx72nfk0mypwlfa3qwyx4rzvv35gvyy83ral 100upebble --memo “you found me” --chain-id cliffnet-1 --generate-only > unsigned_tx.json
 # {“body”:{“messages”:[{“@type”:”/cosmos.bank.v1beta1.MsgSend”,”from_address”:”wasm134rsdpu5xfhegdclxmdeqxn0j6gmenkmcdmpuz”,”to_address”:”wasm103hx72nfk0mypwlfa3qwyx4rzvv35gvyy83ral”,”amount”:[{“denom”:”upebble”,”amount”:”100″}]}],”memo”:”you found me”,”timeout_height”:”0″,”extension_options”:[],”non_critical_extension_options”:[]},”auth_info”:{“signer_infos”:[],”fee”:{“amount”:[],”gas_limit”:”81363″,”payer”:””,”granter”:””}},”signatures”:[]}
 
 # signs the tx and posts it to the chain
-wasmd tx sign unsigned_tx.json --from wasm134rsdpu5xfhegdclxmdeqxn0j6gmenkmcdmpuz --chain-id pebblenet-1
+wasmd tx sign unsigned_tx.json --from wasm134rsdpu5xfhegdclxmdeqxn0j6gmenkmcdmpuz --chain-id cliffnet-1
 ```

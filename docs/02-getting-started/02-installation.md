@@ -25,7 +25,7 @@ First, [install rustup](https://rustup.rs/). Once installed, make sure you have 
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.53.0+, update
+# If this is lower than 1.55.0+, update
 rustup update stable
 
 rustup target list --installed
@@ -58,7 +58,7 @@ Install the wasm32 target:
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.53.0, update
+# If this is lower than 1.55.0, update
 rustup update stable
 
 rustup target list --installed
@@ -84,7 +84,7 @@ If `make` software is not preinstalled on the OS, install [here](https://stackov
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-git checkout v0.21.0
+git checkout v0.23.0
 make install
 
 # verify the installation

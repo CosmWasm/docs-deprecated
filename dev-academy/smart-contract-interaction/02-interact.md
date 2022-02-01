@@ -5,7 +5,7 @@ sidebar_position: 2
 # Basics of Smart Contract Interactions
 
 As mentioned before, smart contracts are executable codes.
-In the next lessons, we will learn how to write one. Until then, it's best to use what's already written to keep things simple. 
+In the next lessons, we will learn how to write one. Until then, it's best to use what's already written to keep things simple.
 We will dive into two options for deploying and interacting with contracts: `wasmd` and `CosmJS`
 
 ## Where to find smart contracts?
@@ -172,7 +172,7 @@ npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus
 Now you will see a REPL client.
 
 ```js
-const [addr, client] = await useOptions(pebblenetOptions).setup('password');
+const [addr, client] = await useOptions(cliffnetOptions).setup('password');
 client.getAccount(addr);
 ```
 
@@ -196,24 +196,24 @@ fees. When it returns, you should see something like this:
 You can keep typing in the shell, or close it and run some sections later. Always start off with:
 
 ```js
-const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
+const [addr, client] = await useOptions(cliffnetOptions).setup(PASSWORD_HERE);
 ```
 
-to set up your client. `useOptions` takes the pebblenet configuration from everything from URLs to tokens to
+to set up your client. `useOptions` takes the cliffnet configuration from everything from URLs to tokens to
 bech32prefix. When you call `setup` with a password, it checks for
-`~/.pebblenet.key` and creates a new key if it is not there, otherwise it loads the key from the file. Your private key (
-actually mnemonic) is stored encrypted, and you need the same password to use it again. Try `cat ~/.pebblenet.key` to prove
+`~/.cliffnet.key` and creates a new key if it is not there, otherwise it loads the key from the file. Your private key (
+actually mnemonic) is stored encrypted, and you need the same password to use it again. Try `cat ~/.cliffnet.key` to prove
 to yourself that it is indeed encrypted, or try reloading with a different password.
 
 If you want the mnemonic, you can recover it at anytime, as long as you still have the file and the password. You could
-use this later to recover, or use the same mnemonic to import the key into the `pebblenet` cli tool.
+use this later to recover, or use the same mnemonic to import the key into the `cliffnet` cli tool.
 
 ```js
-useOptions(pebblenetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
+useOptions(cliffnetOptions).recoverMnemonic(YOUR_PASSWORD_HERE)
 ```
 
 :::caution
-This command saves the key to `~/.pebblenet.key` encrypted. If you forget the password, either delete it or pass
+This command saves the key to `~/.cliffnet.key` encrypted. If you forget the password, either delete it or pass
 a
 `filename` along with a password to create a new key.
 :::
@@ -226,14 +226,14 @@ contracts.
 ### Example: STAR {#example-star}
 
 The first contract I uploaded was STAR tokens, or "Golden Stars" to be distribute to the
-[first 3 validators](https://block-explorer.pebblenet.cosmwasm.com/validators) on the network.
+[first 3 validators](https://block-explorer.cliffnet.cosmwasm.com/validators) on the network.
 
 Please do not copy this verbatim, but look to see how such a contract is set up and deployed the first time.
 
 ```js
-const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
+const [addr, client] = await useOptions(cliffnetOptions).setup(PASSWORD_HERE);
 
-const cw20 = CW20(client, pebblenetOptions.fees);
+const cw20 = CW20(client, cliffnetOptions.fees);
 const codeId = await cw20.upload(addr);
 console.log(`CodeId: ${codeId}`);
 // output: 55
@@ -274,8 +274,8 @@ Now that we have that uploaded, we can easily make a second contract. This one, 
 field names and token amounts before entering them.
 
 ```js
-const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
-const cw20 = CW20(client, pebblenetOptions.fees);
+const [addr, client] = await useOptions(cliffnetOptions).setup(PASSWORD_HERE);
+const cw20 = CW20(client, cliffnetOptions.fees);
 
 .editor
 const initMsg = {
@@ -313,8 +313,8 @@ that you used to create the `MINE`
 tokens (or whatever better name you invented), but if you closed it down and come back, here's how to re-connect:
 
 ```js
-const [addr, client] = await useOptions(pebblenetOptions).setup(PASSWORD_HERE);
-const cw20 = CW20(client, pebblenetOptions.fees);
+const [addr, client] = await useOptions(cliffnetOptions).setup(PASSWORD_HERE);
+const cw20 = CW20(client, cliffnetOptions.fees);
 
 // if you forgot your address, but remember your label, you can find it again
 const contracts = await client.getContracts(55)
