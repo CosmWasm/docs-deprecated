@@ -19,7 +19,7 @@ wasmd query wasm list-code $NODE
 # now we store the bytecode on chain
 # gas is huge due to wasm size... but auto-zipping reduced this from 1.8M to around 600k
 # you can see the code in the result
-RES=$(wasmd tx wasm store artifacts/cw_nameservice.wasm --from wallet $TXFLAG -y --output json)
+RES=$(wasmd tx wasm store artifacts/cw_nameservice.wasm --from wallet $TXFLAG -y --output json -b block)
 
 # you can also get the code this way
 CODE_ID=$(echo $RES | jq -r '.logs[0].events[-1].attributes[0].value')
