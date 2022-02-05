@@ -45,7 +45,7 @@ It runs the [Web Assembly](https://webassembly.org/) (or Wasm) virtual machine, 
 developers to create smart contracts in various languages. Currently, it supports
 smart contracts written in Rust.
 
-## How do the Cosmos SDK, CosmWasm, and Tendermint fit togheter?
+## How do the Cosmos SDK, CosmWasm, and Tendermint fit together?
 
 
 ```
@@ -68,9 +68,9 @@ Blockchain Node |  |           Consensus           |  |
 
 ```
 
-The Cosmos SDK is built ontop of [Tendermint
+The Cosmos SDK is built on top of [Tendermint
 Core](https://docs.tendermint.com/), which handles the low-level infrastructure
-of maintaing a blockchain (e.g., transacting, consensus). It interacts with the
+of maintaining a blockchain (e.g., transacting, consensus). It interacts with the
 Cosmos SDK via the ABCI, or Application Blockchain Interface. Blockchain
 full-nodes run this entire Cosmos SDK and Tendermint "stack" to replicate the
 blockchain and validate transactions.
@@ -127,8 +127,8 @@ Transactions are passed from the ABCI to the application, which in turn routes t
 
 Compared to CosmWasm smart contracts, Cosmos SDK native modules are slightly
 faster due to the lack of virtualization. However, virtualization comes with its
-own benefits. Smart contracts can be swapped when chain is running, whereas
-restarts are requried for native modules. Also, thanks to the flexible Wasm
+own benefits. Smart contracts can be swapped when the chain is running, whereas
+restarts are required for native modules. Also, thanks to the flexible Wasm
 virtual machine, CosmWasm contracts can be written in Rust (and someday other
 languages as well).
 

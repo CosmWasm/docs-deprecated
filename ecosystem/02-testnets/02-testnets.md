@@ -27,7 +27,7 @@ on [CosmWasm/testnets](https://github.com/CosmWasm/testnets).
 
 ## Setup {#setup}
 
-Let's start rolling your node and start producing blocks in testnet environment.
+Let's start rolling your node and start producing blocks in a testnet environment.
 
 **Before starting**, you can use [CosmWasm/tesnets/devops](https://github.com/CosmWasm/testnets/tree/master/devops) that
 contains easy setup scripts for wasmd node, faucet, [block explorer](https://github.com/CosmWasm/big-dipper), lcd, nginx
@@ -152,7 +152,7 @@ With wasmd version v0.13 lcd client and node merged. To enable light client, cha
 
 :::info
 
-You need to have your address and informations defined in networks genesis file to join not yet launched
+You need to have your address and information defined in networks genesis file to join not yet launched
 testnets. Here is the script you can run to take care of it automatically.
 :::
 

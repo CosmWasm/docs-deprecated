@@ -96,7 +96,7 @@ provides the contract with its configuration as well as its initial state.
 
 On the CosmWasm, the uploading of a contract's code and the instantiation of a contract are regarded as
 separate events, unlike on Ethereum. This is to allow a small set of vetted contract archetypes to exist as
-multiple instances  sharing the same base code but configured with different parameters (imagine one canonical ERC20,
+multiple instances sharing the same base code but configured with different parameters (imagine one canonical ERC20,
 and multiple tokens that use its code).
 
 ### Example

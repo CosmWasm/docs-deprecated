@@ -10,8 +10,8 @@ In blockchain infrastructure, a frontend speaks directly with the blockchain net
 
 In blockchain infrastructure, a frontend either speaks directly to the blockchain
 network, visualizing the state of the chain, 
-or interacts with a backend which is in connection with blockchain network.
-A blockchain network needs a collection of computers to store and verify data. These computers are called nodes, which are connected and building blocks, verifying transactions. Each node has a copy of the data that has been stored on the blockchain since its inception and it gets updated as fresh blocks are confirmed and added. This decentralized
+or interacts with a backend which is in connection with the blockchain network.
+A blockchain network needs a collection of computers to store and verify data. These computers are called nodes, which are connected together building blocks and verifying transactions. Each node has a copy of the data that has been stored on the blockchain since its inception and it gets updated as fresh blocks are confirmed and added. This decentralized
 network of nodes takes the place of the database and APIs in a traditional web
 service. The blockchain itself serves as a data store, and the application (or
 state machine) that the nodes run take the place of its APIs (by ingesting
