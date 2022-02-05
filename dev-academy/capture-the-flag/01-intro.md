@@ -4,6 +4,10 @@ sidebar_position: 1
 
 # Riddles
 
+:::info
+Due to the network change, this section is not available fow now.
+:::
+
 In the past two documents, we saw interaction with a smart contract. Now, we will
 dive into mastery of Cosmos SDK client usage.
 You will solve some puzzles using CosmWasm and Cosmos SDK.

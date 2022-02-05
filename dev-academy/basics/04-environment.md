@@ -5,7 +5,7 @@ sidebar_position: 3
 # Environment Setup
 
 You need an environment to run contracts. You can either run your node locally or connect to an existing network. For
-easy testing, you can use the public testnet (pebblenet) to deploy and run your contracts.
+easy testing, you can use the public testnet (cliffnet) to deploy and run your contracts.
 
 When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. The Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the shell/Go client.
@@ -39,7 +39,7 @@ First, [install rustup](https://rustup.rs/). Once installed, make sure you have 
 ```shell
 rustup default stable
 cargo version
-# If this is lower than 1.51.0+, update
+# If this is lower than 1.55.0+, update
 rustup update stable
 
 rustup target list --installed
@@ -60,8 +60,8 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.20.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.20.0
+# replace the v0.23.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.23.0
 make install
 
 # verify the installation
@@ -78,10 +78,10 @@ for building Go code from source.
 
 Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
 
-First source the pebblenet cosmwasm public network configurations to the shell:
+First source the cliffnet cosmwasm public network configurations to the shell:
 
 ```shell
-source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/pebblenet-1/defaults.env)
+source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/cliffnet-1/defaults.env)
 ```
 
 Setup the client:
@@ -104,7 +104,7 @@ You need some tokens in your address to interact. If you are using local node yo
 from faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.pebblenet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.cliffnet.cosmwasm.com/credit
 ```
 
 ## Export wasmd Parameters {#export-wasmd-parameters}
@@ -117,7 +117,7 @@ Best way to configure `wasmd` is by setting up environment variables below:
 ```bash
 # bash
 export NODE="--node $RPC"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.025upebble --gas auto --gas-adjustment 1.3"
 ```
 or
 ```bash
@@ -161,12 +161,12 @@ npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus
 
 Now you will see an interactive shell popped up.
 
-Code below setups a client that speaks to pebblenet, generates and address and then requests tokens from faucet.
+Code below setups a client that speaks to cliffnet, generates and address and then requests tokens from faucet.
 "password" is the password of the key file.
 This key is different from wasmd key generated above
 
 ```typescript
-const [addr, client] = await useOptions(pebblenetOptions).setup("password");
+const [addr, client] = await useOptions(cliffnetOptions).setup("password");
 client.getAccount(addr);
 ```
 

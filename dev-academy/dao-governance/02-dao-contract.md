@@ -31,8 +31,8 @@ npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus
 Now store and instantiate the contract:
 
 ```typescript
-const [addr, client] = await useOptions(pebblenetOptions).setup('password', '.main.key');
-const contract = CW4Group(client, pebblenetOptions.fees);
+const [addr, client] = await useOptions(cliffnetOptions).setup('password', '.main.key');
+const contract = CW4Group(client, cliffnetOptions.fees);
 const codeId = await contract.upload(addr);
 
 // .editor
@@ -89,8 +89,8 @@ npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus
 ```
 
 ```typescript
-const [addr, client] = await useOptions(pebblenetOptions).setup('password', '.account4.key');
-const contract = CW3Flex(client, pebblenetOptions.fees);
+const [addr, client] = await useOptions(cliffnetOptions).setup('password', '.account4.key');
+const contract = CW3Flex(client, cliffnetOptions.fees);
 const codeId = <CODE_ID_HERE>
 
 // .editor
@@ -153,7 +153,7 @@ For the other users, you don't need to instantiate a contract. We will use the o
 Other tabs:
 
 ```typescript
-const [addr, client] = await useOptions(pebblenetOptions).setup('password', '.account1.key');
+const [addr, client] = await useOptions(cliffnetOptions).setup('password', '.account1.key');
 const contractAddress = "wasm10j4xn72f29v56wt9xd9dg2fgv5y8qjttrcl0mp"
 
 const instance = contract.use(contractAddress);

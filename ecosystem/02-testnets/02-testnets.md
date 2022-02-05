@@ -47,7 +47,7 @@ Below is the [sandynet configuration](https://github.com/CosmWasm/testnets/blob/
 ```shell
 export CHAIN_ID="sandynet-1"
 export TESTNET_NAME="sandynet-1"
-export FEE_DENOM="ubay"
+export FEE_DENOM="upebble"
 export STAKE_DENOM="umaya"
 export BECH32_HRP="wasm"
 export WASMD_VERSION="v0.21.0"
