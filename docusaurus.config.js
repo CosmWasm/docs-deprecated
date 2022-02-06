@@ -4,8 +4,7 @@ const cwplusVersions = require('./cw_plus_versions.json');
 const DefaultLocale = 'en';
 
 // const lastReleasedDocsVersion = docsVersions[0];
-const lastReleasedDocsVersion = "current";
-const lastReleasedDocsVersionLink = "1.0";
+const lastReleasedDocsVersion = "1.0";
 const lastReleasedCWPlusVersion = cwplusVersions[0];
 
 (module.exports = {
@@ -210,7 +209,7 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         docs: {
           editUrl: 'https://github.com/InterWasm/docs/edit/main',
           id: 'docs',
-          lastVersion: lastReleasedDocsVersion,
+          lastVersion: "current",
           routeBasePath: '/docs',
           sidebarPath: require.resolve('./sidebars/sidebars.js'),
           onlyIncludeVersions: ['current', '0.14', '0.16'],
@@ -244,11 +243,11 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
         redirects: [
           {
             from: '/',
-            to: `/docs/${lastReleasedDocsVersionLink}/`,
+            to: `/docs/${lastReleasedDocsVersion}/`,
           },
           {
-            from: `/docs/${lastReleasedDocsVersionLink}/introduction/intro`,
-            to: `/docs/${lastReleasedDocsVersionLink}/`,
+            from: `/docs/${lastReleasedDocsVersion}/introduction/intro`,
+            to: `/docs/${lastReleasedDocsVersion}/`,
           },
         ],
         createRedirects: function (existingPath) {
