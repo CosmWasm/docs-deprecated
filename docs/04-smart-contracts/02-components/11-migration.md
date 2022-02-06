@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 11
 ---
 
 # Migration
@@ -61,7 +61,7 @@ const CONTRACT_NAME: &str = "crates.io:my-crate-name";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[entry_point]
-pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, ContractError> {    
+pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, ContractError> {
     // No state migrations performed, just returned a Response
     Ok(Response::default())
 }
@@ -89,12 +89,12 @@ pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, Co
     if ver.version >= CONTRACT_VERSION {
         return Err(StdError::generic_err("Cannot upgrade from a newer version").into());
     }
-    
+
     // set the new version
     cw2::set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
-    
+
     // do any desired state migrations...
-    
+
     Ok(Response::default())
 }
 ```
@@ -221,6 +221,6 @@ Specifically migration in this case for Terra refers to swapping out the code id
 > Example command for migrating across chains :
 >
 > ```rust
-> terrad tx wasm store ./{code.wasm} --from {keyname} \ 
+> terrad tx wasm store ./{code.wasm} --from {keyname} \
 > --migrate-code-id {codeID}
 > ```
