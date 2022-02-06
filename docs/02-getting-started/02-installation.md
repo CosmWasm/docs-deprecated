@@ -102,7 +102,7 @@ for building Go code from source.
 These represent an instance of a blockchain that utilizes all of the stable features of
 the [Cosmos SDK](https://github.com/cosmos/cosmos-sdk). As such, `wasmd` have all the same features (plus WASM smart
 contracts obviously). If you'd like to learn more about accessing those features take a look at
-the [Gaia docs](https://github.com/cosmos/gaia/tree/main/docs/gaia-tutorials). If you'd like to learn more about getting
+the [Gaia docs](https://github.com/cosmos/gaia/tree/main/docs/hub-tutorials). If you'd like to learn more about getting
 started with the Cosmos SDK in general, take a look at the series of [Tutorials](https://tutorials.cosmos.network/) that
 show how to build custom modules for application-specific blockchains.
 
