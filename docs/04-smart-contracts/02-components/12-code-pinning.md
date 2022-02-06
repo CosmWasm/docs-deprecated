@@ -11,7 +11,7 @@ Code pinning is done through native chain governance.
 
 ## Proposal
 
-### **PinCodesProposal**
+### *PinCodesProposal*
 
 ```gogoproto
 // PinCodesProposal gov proposal content type to pin a set of code ids in the
@@ -36,7 +36,7 @@ You can create the proposal using client:
 wasmd tx gov submit-proposal pin-codes 1 --from wallet --title "Pin code 1" --description "Pin code 1 plss"
 ```
 
-### **UnpinCodesProposal**
+### *UnpinCodesProposal*
 
 You can unpin codes:
 
