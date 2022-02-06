@@ -265,6 +265,9 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           if (existingPath.includes(`/docs/${lastReleasedDocsVersion}/getting-started/intro`)) {
             paths.push(existingPath.replace(`/docs/${lastReleasedDocsVersion}/getting-started/intro`, `/getting-started`));
           }
+          if (existingPath.includes(`/components`)) {
+            paths.push(existingPath.replace('/components',''));
+          }
 
           /*
            * CW PLUS REDIRECTIONS
