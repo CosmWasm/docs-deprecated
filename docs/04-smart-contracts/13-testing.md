@@ -6,6 +6,8 @@ sidebar_position: 13
 
 ## Unit Testing
 
+See here for a [guide on unit testing](tutorials/simple-option/testing.md)
+
 ## Integration Testing with `cw-multi-test`
 
 The cw-multi-test package offered in the cw-plus repo provides an interesting way to test your smart contracts without going all the way to deploying them on a testnet. Before using multi-test the flow to me was to have some pipeline which would set up your contracts on a given chain (maybe testnet, maybe local) perform some tests and then if possible destroy/self-destruct the contracts.
@@ -35,18 +37,23 @@ pub fn contract_stablecoin_exchanger() -> Box<dyn Contract<Empty>>{
 ```
 
 The above is a more complex example but lets break it down real quick.
-We import the execute, instantiate, query and reply functions which are used at runtime by the contract and then make our own wrapper from them to be used in the tests. Pretty cool..
+We import the execute, instantiate, query and reply functions which are used at runtime by the contract and then make our own wrapper from them to be used in the tests. 
 
-Note the `reply` in this case is only needed if your contract uses replies for callbacks or anything like that. Usually you will only need execute, instantiate and query.
-With the above you have to more steps, storing the code and then setting up a contract from the code object. You will notice this is the exact same process for deploying to a testnet chain whereas in unit tests you work with a mocked_env, using mock_dependancies and passing in mock_info
+> To reply or not reply
+>
+>   Depending on the make up of your contract, when you go to create a ContractWrapper you may not need `with_reply` if your contract does not implement a `reply` function.
 
-Storing:
+After mocking out a contract, two more steps follow which are; storing the code and then setting up a contract from the code object. You will notice this is the exact same process for deploying to a testnet or mainnet chain whereas in unit tests you work with a mocked_env, using `mock_dependancies` and passing in `mock_info`.
+
+#### Storing:
+
+Before a contract can be instantiated in a `cw-multi-test` environment, the contract first has to be stored. Once stored the contract can be instantiated using its associated `code_id`
 
 ```rust
 let contract_code_id = router.store_code(contract_stablecoin_exchanger());
 ```
 
-Instantiating from our code object:
+Instantiating from the new code object:
 
 ```rust
 let mocked_contract_addr = router
@@ -54,20 +61,17 @@ let mocked_contract_addr = router
         .unwrap();
 ```
 
-> Note: The above are just quick examples, your best bet is to always checkout the multi test repo's README files for up to date info. Located here:
-
 All the above gives you 1 mocked contract. As you start to test you may see errors like
 
 `No ContractData`
 `Contract 'money' does not exist`
-etc
 
 If you get any of these theres a good chance you a missing a mock. When in multi test land, everything you interact with that can be considered a contract needs to be mocked out. That includes your own simple little utility contract you don't intend to test right now as well as any services your contract interacts with.
 
 Look at your contract and see if you are passing in any dummy contract addresses, thats the most likely cause. If you find any you must; mock it out with the above method; instantiate it with the above method; capture the address and pass that instead of a dummy one.
 Took me a while to get a complex contract fully mocked out but hopefully this helps you. Now for the next glaring problem I faced. Mocking other services!!
 
-### Mocking 3rd party contracts
+#### Mocking 3rd party contracts
 
 If you read the above section you will have a gist of the amount of setup work you will have to do by mocking out your contracts as your mocking and trying to progress with a test you may get caught up when you realise your contracts interact with Terraswap or Anchor. No biggie right?
 
@@ -98,4 +102,26 @@ pub fn contract_pingpong_mock() -> Box<dyn Contract<Empty>> {
 
 ```
 
-You get alot of flexibility when you are defining your own mocked contract. You can throw away things like deps, env, info with `_` if you never use them and return any responses you want for a given execute msg or query. The challenge then becomes how do I mock out all these services? I started a small testing library for Terra called [cw-terra-test-mocks](https://github.com/0xFable/cw-terra-test-mocks) which will have a couple of mocks for Anchor and Terraswap you can use. The hope over time is that can go to have a bunch of Terra protocol mocks to make all our testing lives easier :-)
+You get alot of flexibility when you are defining your own mocked contract. You can throw away things like deps, env, info with `_` if you never use them and return any responses you want for a given execute msg or query. The challenge then becomes how do I mock out all these services? See [cw-terra-test-mocks](https://github.com/0xFable/cw-terra-test-mocks) for some Terra-based mocks.
+
+## Platform Specific Variations
+
+Different chains and hubs in the Cosmos ecosystem may have some variations on how migrations are done on their respective networks. This section will attempt to outline those.
+
+### Juno 
+
+Juno uses one of the more recent editions of Cosmwasm. As a general practice it is good to keep your `cw-multi-test` version close to the Cosmwasm one but this is not required. Note if you do use different versions you may get varying experiences and things may still change in the most recent version. 
+
+### Terra
+
+#### Using a forked `cw-multi-test`
+
+For alot of use cases, `cw-multi-test` will work as-is for you and you will have a great time. When writing tests for certain contracts which are UST focused, you may run into issues either sending or querying NativeTokens. The problem here is `cw-multi-test` is a generic testing tool and Terra has some add-ons needed in order to properly mock it.
+
+In later versions of `cw-multi-test` it is possible to register your own querier so if you have the latest you could try to solve this issue yourself alternatively there is a repo here you can depend on which is simply a fork of `cw-multi-test` with a TerraQuerier added on. This allows for Terra Native coin transactions and is defined as `terra-multi-test`.
+
+To use `terra-multi-test` fork follow these steps:
+
+- Add this dep to your cargo.toml: `terra-multi-test = {git="https://github.com/astroport-fi/terra-plus", version="1.0.0", package = "terra-multi-test"}`
+- Update your tests to now use `terra_multi_test` instead of `cw_multi_test`
+- Away you go
