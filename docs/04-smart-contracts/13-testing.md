@@ -24,6 +24,18 @@ All of that can be taken away almost in preference of cw-multi-test-based integr
 There are a few main concepts to understand before you will be able to  simulate a blockchain environment in Rust and run tests that involve contract -> contract,
 and contract -> bank interactions.
 
+In this section we will take a step-by-step look through writing a test with cw-multi-test, explaining some important concepts along the way. 
+To start we need a specimen contract such as the [cw-template](https://github.com/InterWasm/cw-template/blob/main/src/contract.rs) which is a simple boilerplate contract containing two functions: `Increment` and `Reset`. While there are already unit tests for the cw-template, there is no `cw-multi-test` tests to simulate an entire run through. 
+
+We start as we always start with a new test file with a few imports: 
+
+```rust
+use cosmwasm_std::testing::{mock_env, MockApi, MockQuerier, MockStorage, MOCK_CONTRACT_ADDR};
+use cw_multi_test::{App, BankKeeper, Contract, ContractWrapper};
+```
+
+The above imports will give us a wide pallette of tools to start crafting a test from. The first import to look at here is `App` which will become the simulated blockchain environment in which our tests will be executed.
+
 ### App
 
 The main entry point to the system is called `App`, which represents a blockchain app.
@@ -87,7 +99,7 @@ We import the execute, instantiate, query and reply functions which are used at 
 
 After mocking out a contract, two more steps follow which are; storing the code and then setting up a contract from the code object. You will notice this is the exact same process for deploying to a testnet or mainnet chain whereas in unit tests you work with a mocked_env, using `mock_dependencies` and passing in `mock_info`.
 
-#### Storing:
+#### Storing and Instantiating a Contract:
 
 Before a contract can be instantiated in a `cw-multi-test` environment, the contract first has to be stored. Once stored the contract can be instantiated using its associated `code_id`
 
@@ -112,6 +124,65 @@ If you get any of these theres a good chance you a missing a mock. When in multi
 
 Look at your contract and see if you are passing in any dummy contract addresses, thats the most likely cause. If you find any you must; mock it out with the above method; instantiate it with the above method; capture the address and pass that instead of a dummy one.
 Took me a while to get a complex contract fully mocked out but hopefully this helps you. Now for the next glaring problem I faced. Mocking other services!!
+
+
+#### Putting it all together 
+
+```rust
+use cosmwasm_std::testing::{mock_env, MockApi, MockQuerier, MockStorage, MOCK_CONTRACT_ADDR};
+use cw_multi_test::{App, BankKeeper, Contract, ContractWrapper};
+use crate::contract::{execute, instantiate, query, reply};
+use crate::msg::{InstantiateMsg}
+
+fn mock_app() -> App {
+    let env = mock_env();
+    let api = Box::new(MockApi::default());
+    let bank = BankKeeper::new();
+
+    App::new(api, env.block, bank, Box::new(MockStorage::new()))
+}
+
+pub fn contract_counter() -> Box<dyn Contract<Empty>>{
+    let contract = ContractWrapper::new_with_empty(
+        execute,
+        instantiate,
+        query,
+    );
+    Box::new(contract)
+}
+
+pub fn counter_instantiate_msg(count: Uint128) -> InstantiateMsg {
+    InstantiateMsg {
+        count: count
+    }
+}
+
+#[test]
+fn counter_contract_multi_test() {
+    // Create the owner account
+    let owner = Addr::unchecked("owner");
+    let mut router = mock_app();
+
+    let counter_contract_code_id = router.store_code(contract_counter());
+    // Setup the counter contract with an initial count of zero
+    let init_msg = InstantiateMsg {
+        count: Uint128::zero()
+    }
+    // Instantiate the counter contract using its newly stored code id 
+    let mocked_contract_addr = router
+        .instantiate_contract(counter_contract_code_id, owner.clone(), &init_msg, &[], "counter", None)
+        .unwrap();
+
+    // We can now start executing actions on the contract and querying it as needed
+    // TODO: Add Execute msg to increment 
+    // TODO: Add query to verify 
+    // TODO: Add Execute msg to reset 
+    // TODO: Add query to verify 
+
+    
+}
+
+```
 
 #### Mocking 3rd party contracts
 
