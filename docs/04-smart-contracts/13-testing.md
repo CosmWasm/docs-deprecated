@@ -11,7 +11,7 @@ A great set of contracts will have a great set of tests generally divided into t
 
 ## Unit Testing
 
-See here for a [guide on unit testing](tutorials/simple-option/testing.md)
+See here for a [guide on unit testing](https://docs.cosmwasm.com/tutorials/simple-option/testing)
 
 ## Integration Testing with `cw-multi-test`
 
