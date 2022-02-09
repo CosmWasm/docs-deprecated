@@ -99,7 +99,7 @@ We import the execute, instantiate, query and reply functions which are used at 
 
 After mocking out a contract, two more steps follow which are; storing the code and then setting up a contract from the code object. You will notice this is the exact same process for deploying to a testnet or mainnet chain whereas in unit tests you work with a mocked_env, using `mock_dependencies` and passing in `mock_info`.
 
-#### Storing and Instantiating a Contract:
+### Storing and Instantiating a Contract:
 
 Before a contract can be instantiated in a `cw-multi-test` environment, the contract first has to be stored. Once stored the contract can be instantiated using its associated `code_id`
 
@@ -117,8 +117,8 @@ let mocked_contract_addr = router
 
 All the above gives you 1 mocked contract. As you start to test you may see errors like
 
-`No ContractData`
-`Contract 'money' does not exist`
++ `No ContractData`
++ `Contract '<contract>' does not exist`
 
 If you get any of these theres a good chance you a missing a mock. When in multi test land, everything you interact with that can be considered a contract needs to be mocked out. That includes your own simple little utility contract you don't intend to test right now as well as any services your contract interacts with.
 
@@ -126,13 +126,13 @@ Look at your contract and see if you are passing in any dummy contract addresses
 Took me a while to get a complex contract fully mocked out but hopefully this helps you. Now for the next glaring problem I faced. Mocking other services!!
 
 
-#### Putting it all together 
+### Putting it all together 
 
 ```rust
 use cosmwasm_std::testing::{mock_env, MockApi, MockQuerier, MockStorage, MOCK_CONTRACT_ADDR};
 use cw_multi_test::{App, BankKeeper, Contract, ContractWrapper};
 use crate::contract::{execute, instantiate, query, reply};
-use crate::msg::{InstantiateMsg}
+use crate::msg::{InstantiateMsg, QueryMsg}
 
 fn mock_app() -> App {
     let env = mock_env();
@@ -174,26 +174,55 @@ fn counter_contract_multi_test() {
         .unwrap();
 
     // We can now start executing actions on the contract and querying it as needed
-    // TODO: Add Execute msg to increment 
-    // TODO: Add query to verify 
-    // TODO: Add Execute msg to reset 
-    // TODO: Add query to verify 
+    let msg = ExecuteMsg::Increment {}
+    // Increment the counter by executing the above prepared msg on the previously setup contract
+    let _ = router.execute_contract(
+            owner.clone(),
+            mocked_contract_addr.clone(),
+            &msg,
+            &[],
+        )
+        .unwrap();
+    // Query the contract to verify the counter was incremented
+    let config_msg =  QueryMsg::Count{};
+    let count_response: CountResponse = router
+        .wrap()
+        .query_wasm_smart(mocked_contract_addr.clone(), &config_msg)
+        .unwrap();
+    asserteq!(count_response.count, 1)
 
-    
+    // Now lets reset the counter with the other ExecuteMsg
+    let msg = ExecuteMsg::Reset {}
+    let _ = router.execute_contract(
+            owner.clone(),
+            mocked_contract_addr.clone(),
+            &msg,
+            &[],
+        )
+        .unwrap();
+
+    // And again use the available contract query to verify the result 
+    // Query the contract to verify the counter was incremented
+    let config_msg =  QueryMsg::Count{};
+    let count_response: CountResponse = router
+        .wrap()
+        .query_wasm_smart(mocked_contract_addr.clone(), &config_msg)
+        .unwrap();
+    asserteq!(count_response.count, 0)
 }
 
 ```
 
 #### Mocking 3rd party contracts
 
-If you read the above section you will have a gist of the amount of setup work you will have to do by mocking out your contracts as your mocking and trying to progress with a test you may get caught up when you realise your contracts interact with Terraswap or Anchor. No biggie right?
+If you read the above section you will have a gist of the amount of setup work you will have to do by mocking out your contracts as your mocking and trying to progress with a test you may get caught up when you realise your contracts interact with Terraswap, Anchor or some other service out in the IBC. No biggie right?
 
 You'll start off just trying to mock out one of these services in the exact same way as we did above only to realise, wait, we need access to the code.. the contract code is what we import to get `execute, instantiate, query`. But then you notice protocols don't include their contract code in their rust packages! They only include what you need to interact with them i.e msgs and some helpers.
 
-When I got here I thought all hope was lost but you can still progress by trying to make a thin mock of whatever service you interact with. The process of doing so is similar to what you will do with mocking your own contracts (described above) except you will need to fill in all the functionality. This is made easier because you can also a smaller ExecuteMsg with only the func you use or a MockQuery handler with only the queries for example. Here is an example of our own mock third-party contract:
+All hope is not lost however you can still progress by trying to make a thin mock of whatever service you interact with. The process of doing so is similar to what you will do with mocking your own contracts (described above) except you will need to fill in all the functionality. This is made easier because you can also a smaller ExecuteMsg with only the func you use or a MockQuery handler with only the queries for example. Here is an example of our own mock third-party contract:
 
 ```rust
-pub fn contract_pingpong_mock() -> Box<dyn Contract<Empty>> {
+pub fn contract_ping_pong_mock() -> Box<dyn Contract<Empty>> {
     let contract = ContractWrapper::new(
         |deps, _, info, msg: MockExecuteMsg| -> StdResult<Response> {
             match msg {
