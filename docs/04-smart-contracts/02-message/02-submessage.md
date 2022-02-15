@@ -59,6 +59,34 @@ let submessage = SubMsg::reply_on_success(instantiate_message.into(), INSTANTIAT
 let response = Response::new().add_submessage(submessage);
 ```
 
+## Reply strategies
+
+Submessages offer different options for the other contract to provide a reply. There are four reply options you can choose:
+
+```rust
+pub enum ReplyOn {
+    /// Always perform a callback after SubMsg is processed
+    Always,
+    /// Only callback if SubMsg returned an error, no callback on success case
+    Error,
+    /// Only callback if SubMsg was successful, no callback on error case
+    Success,
+    /// Never make a callback - this is like the original CosmosMsg semantics
+    Never,
+}
+```
+
+In the above example, we created the submessage using the `SubMsg::reply_on_success` shorthand. However, we can also create a submessage and explicity specifying the reply strategy.
+
+```rust
+let submessage = SubMsg {
+    gas_limit: None,
+    id: INSTANTIATE_REPLY_ID,
+    reply_on: ReplyOn::Success,
+    msg: instantiate_message.into()
+}
+```
+
 ## Handling a reply
 
 In order to handle the reply from the other contract, the calling contract must implement a new entry point. Here are two examples of how to handle the replies:
@@ -77,13 +105,7 @@ pub fn reply(deps: DepsMut, _env: Env, msg: Reply) -> StdResult<Response> {
 fn handle_instantiate_reply(deps: DepsMut, msg: Reply) -> StdResult<Response> {
 	// Handle the msg data and save the contract address
 	// See: https://github.com/CosmWasm/cw-plus/blob/main/packages/utils/src/parse_reply.rs
-    let result: SubMsgExecutionResponse =
-        msg.result.into_result().map_err(StdError::generic_err)?;
-    let data = result
-        .data
-        .ok_or(StdError::generic_err(format!("Mising data in submessage response")))?;
-
-	let res = parse_instantiate_response_data(data.as_slice())?;
+	let res = parse_reply_instantiate_data(msg)?;
 
     // Save res.contract_address
 	Ok(Response::new())
