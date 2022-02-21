@@ -7,7 +7,7 @@ sidebar_position: 3
 You need an environment to run contracts. You can either run your node locally or connect to an existing network. For
 easy testing, you can use the public testnet (cliffnet) to deploy and run your contracts.
 
-When interacting with network, you can either use `wasmd` which is a Go client or Node REPL. The Node REPL is
+When interacting with a network, you can either use `wasmd` which is a Go client or the Node REPL. The Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the shell/Go client.
 
 For this course, we will be using the public testnet to make things simpler.
@@ -17,12 +17,12 @@ For this course, we will be using the public testnet to make things simpler.
 [Gitpod](https://www.gitpod.io/) is an online development environment. We have a gitpod image that you can base your
 projects on. The image contains all the requirements below. Gitpod is recommended if you have a stable internet connection.
 Add [.gitpod.yml](https://github.com/CosmWasm/cosmwasm-template/blob/master/.gitpod.yml) file to your project's root
-then push it to GitHub. After installing [gitpod extension](https://www.gitpod.io/extension-activation/), on github
-project repo, there will be `Gitpod` button which will create a workspace for you to work on.
+then push it to GitHub. After installing [gitpod extension](https://www.gitpod.io/extension-activation/), on the github
+project repo, there will be a `Gitpod` button which will create a workspace for you to work on.
 
 ## Go {#go}
 
-You can setup golang following [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest
+You can setup golang following the [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest
 versions of `wasmd`
 require go version `1.16.8+`.
 
@@ -48,11 +48,11 @@ rustup target add wasm32-unknown-unknown
 
 ## wasmd {#wasmd}
 
-`wasmd` is the backbone of CosmWasm platform. It is the implementation of a Cosmoszone with wasm smart contracts
+`wasmd` is the backbone of the CosmWasm platform. It is an implementation of a Cosmoszone with wasm smart contracts
 enabled.
 
-This code was forked from the `cosmos/gaia` repository as a basis and then added x/wasm and cleaned up many
-gaia-specific files. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm
+This code was forked from the `cosmos/gaia` repository as a base and then x/wasm was added and many
+gaia-specific files were cleaned up. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm
 module.
 
 If you intend to develop or edit a contract, you need wasmd.
@@ -76,7 +76,7 @@ for building Go code from source.
 
 ## Setup wasmd and Wallet {#setup-wasmd-and-wallet}
 
-Let's configure `wasmd` exec, point it to testnets, create wallet and ask tokens from faucet:
+Let's configure `wasmd` exec, point it to testnets, create a wallet and ask for tokens from the faucet:
 
 First source the cliffnet cosmwasm public network configurations to the shell:
 
@@ -100,8 +100,8 @@ wasmd keys add wallet
 
 ```
 
-You need some tokens in your address to interact. If you are using local node you can skip this step. Requesting tokens
-from faucet:
+You need some tokens in your address to interact. If you are using a local node you can skip this step. Requesting tokens
+from the faucet:
 
 ```shell
 JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.cliffnet.cosmwasm.com/credit
@@ -109,7 +109,7 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","addres
 
 ## Export wasmd Parameters {#export-wasmd-parameters}
 
-`wasmd` client requries setup for interacting with different testnets.
+`wasmd` client requires setup for interacting with different testnets.
 Each testnet has its own endpoints and system parameters.
 
 Best way to configure `wasmd` is by setting up environment variables below:
@@ -126,7 +126,7 @@ export NODE=(--node $RPC)
 export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3)
 ```
 
-If command above throws error, this means your shell is different. If no errors, try running this:
+If the command above throws an error, this means your shell is different. If there are no errors, try running this:
 
 ```bash
 wasmd query bank total $NODE
@@ -143,7 +143,7 @@ wasmd help
 
 ## Setup linux tools
 
-We will be using few linux tools extensively:
+We will be using a few linux tools extensively:
 ```shell
 apt install jq curl
 ```
@@ -159,11 +159,11 @@ To use it, install [node.js 12+](https://nodejs.org/en/download/) and [npx](http
 npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
 ```
 
-Now you will see an interactive shell popped up.
+Now you will see that an interactive shell popped up.
 
-Code below setups a client that speaks to cliffnet, generates and address and then requests tokens from faucet.
+Code below sets up a client that speaks to cliffnet, generates an address and then requests tokens from the faucet.
 "password" is the password of the key file.
-This key is different from wasmd key generated above
+This key is different from the wasmd key generated above
 
 ```typescript
 const [addr, client] = await useOptions(cliffnetOptions).setup("password");
@@ -183,4 +183,4 @@ You should see something similar to:
 
 ## Setting up your IDE {#setting-up-your-ide}
 
-We need a good IDE for developing rust smart contracts. We recommend Intellij with Rust Plugin.
+We need a good IDE for developing rust smart contracts. We recommend Intellij with the Rust Plugin.

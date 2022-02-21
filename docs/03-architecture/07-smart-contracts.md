@@ -52,15 +52,15 @@ A malicious actor could upload a contract that ran an infinite loop to halt the 
 the disk. Web Assembly provides a tight sandbox with no default access to the OS, so we only need to worry about
 providing tight resource limits for the smart contracts. All developers should be aware of these limits.
 
-*Memory Usage* - When instantiating a Wasm VM, it is provided by 32MB of RAM by default. This is to store the byte code
+*Memory Usage* - When instantiating a Wasm VM, it is provided 32MB of RAM by default. This is to store the byte code
 as well as all memory used by running the process (stack and heap). This should be plenty large for almost any contract,
 but maybe some complex zero knowledge circuits would hit limits there. It is also small enough to ensure that contracts
 have minimal impact of memory usage of the blockchain.
 
-*CPU Usage* - The [Wasmer Runtime](https://github.com/wasmerio/wasmer) that we use, has ability to inject metering logic
+*CPU Usage* - The [Wasmer Runtime](https://github.com/wasmerio/wasmer) that we use, has the ability to inject metering logic
 into the wasm code. It calculates prices for various operations and charges and checks limits before every jump
 statement (loop, function call, etc), to produce a deterministic gas price regardless of cpu speed, platform, etc.
-Before executing a contract, a wasm gas limit is set based on remaining Cosmos SDK gas, and gas deducted at the end of
+Before executing a contract, a wasm gas limit is set based on the remaining Cosmos SDK gas, and gas deducted at the end of
 the contract (there is a constant multiplier to convert, currently 100 wasm gas to 1 sdk gas). This puts a hard limit on
 any CPU computations as you must pay for the cycles used.
 
@@ -83,7 +83,7 @@ issues.
 ### :heavy_check_mark: [Reentrancy](https://github.com/sigp/solidity-security-blog#reentrancy) {#heavy_check_mark-reentrancy}
 
 In cosmwasm, we return messages to execute other contracts, in the same atomic operation, but *after* the contract has
-finished. This is based on the actor model and avoid the possibility of reentrancy attacks - there is never volatile
+finished. This is based on the actor model and avoids the possibility of reentrancy attacks - there is never volatile
 state when a contract is called.
 
 ### :heavy_check_mark: [Arithmetic under/overflows](https://github.com/sigp/solidity-security-blog#ouflow) {#heavy_check_mark-arithmetic-underoverflows}
@@ -102,7 +102,7 @@ balance when they are called. You can note that
 the [sample escrow contract](https://github.com/InterWasm/cw-contracts/blob/escrow-0.4.0/escrow/src/contract.rs) doesn't
 record how much was sent to it during initialization, but
 rather [releases the current balance](https://github.com/InterWasm/cw-contracts/blob/escrow-0.4.0/escrow/src/contract.rs#L83-L92)
-when a paying out or refunding the amount. This ensures no tokens get stuck.
+when paying out or refunding the amount. This ensures no tokens get stuck.
 
 ### :heavy_check_mark: [Delegate Call](https://github.com/sigp/solidity-security-blog#delegatecall) {#heavy_check_mark-delegate-call}
 
@@ -127,7 +127,7 @@ random beacon, and expose this secure source of entropy to smart contracts.
 
 **Planned Mitigation**
 
-If you call a contract with a given `HandleMsg`, this just requires the contract has the specified API, but says nothing
+If you call a contract with a given `HandleMsg`, this just requires the contract to have the specified API, but says nothing
 of the code there. I could upload malicious code with the same API as a desired contract (or a superset of the API), and
 ask you to call it - either directly or from a contract. This can be used to steal funds, and in fact
 we [demo this in the tutorial](/tutorials/hijack-escrow/hack-contract).
@@ -151,9 +151,9 @@ our type-checking json parser.
 
 ### :heavy_check_mark: [Unchecked CALL Return Values](https://github.com/sigp/solidity-security-blog#unchecked-calls) {#heavy_check_mark-unchecked-call-return-values}
 
-CosmWasm does not allow calling other contracts directly, but rather returning message to later be dispatched by a
+CosmWasm does not allow calling other contracts directly, but rather sent messages will be dispatched by a
 router. The router will check the result of all messages, and if **any** message in the chain returns an error, the
-entire transaction is aborted, and state changed rolled back. This allows you to safely focus on the success case when
+entire transaction is aborted, and state changes rolled back. This allows you to safely focus on the success case when
 scheduling calls to other contracts, knowing all state will be rolled back if it does not go as planned.
 
 ### :warning: [Race Conditions/Front Running](https://github.com/sigp/solidity-security-blog#race-conditions) {#warning-race-conditionsfront-running}
@@ -177,7 +177,7 @@ eliminate the potential of front running.
 The idea is that if the contract relies on some external user-defined input, it could be set up in a way that it would
 run out of gas processing it. Many of the cases there should not effect CosmWasm, especially as wasm runs much faster
 and cpu gas limits allow huge amounts of processing in one transaction (including ed25519 signature verification in wasm
-without a precompile). However, looping over an user-controlled number of keys in the storage will run out of gas
+without a precompile). However, looping over a user-controlled number of keys in the storage will run out of gas
 quickly.
 
 ### :heavy_check_mark: [Block Timestamp Manipulation](https://github.com/sigp/solidity-security-blog#block-timestamp) {#heavy_check_mark-block-timestamp-manipulation}

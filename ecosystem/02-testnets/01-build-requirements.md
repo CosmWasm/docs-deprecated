@@ -11,9 +11,8 @@ larger instances, especially if you want to build a static instance (recompile R
 
 Node executable may vary between networks,
 and [Option 1](#option-1-preferred-build-static-binary-using-docker-linux-only)
-might become obsolete. Network details, configuration and informations can be found
-on [CosmWasm/testnets](https://github.com/CosmWasm/testnets). Please head over to the repo and explore before starting
-setting up a node.
+might become obsolete. Network details, configuration and information can be found
+on [CosmWasm/testnets](https://github.com/CosmWasm/testnets). Please head over to the repo and explore before starting to setup up a node.
 
 ## Simplest {#simplest}
 

@@ -166,7 +166,7 @@ pub enum ExecuteMsg {
 ```
 ### Execute
 
-Depending on the message that is recieved `Execute` will either `CreatePot` or `Recieve`:
+Depending on the message that is received `Execute` will either `CreatePot` or `Receive`:
 
 ```rust
 // contract.rs

@@ -268,7 +268,7 @@ Proposal has passed, and it is ready for execution. Execute the action:
 instance.execute(addr, proposalId)
 ```
 
-Now go to cw20 terminal pane and check the bank balance of the empty cw20 address that you minted tokens to:
+Now go to the cw20 terminal pane and check the bank balance of the empty cw20 address that you minted tokens to:
 
 ```typescript
 >> contract.balance("wasm1w740h56j9nhudykkm80j5rf6ms25nhe9huuvgp")
@@ -284,6 +284,6 @@ As a challenge, you can explore other threshold parameters, setup several smart 
 Congrats! Welcome to the decentralized democracy.
 
 We have given a brief entry to the CosmWasm DAO and Governance smart contracts. We only covered a small portion of
-functionalities of cw3 and cw4 DAO contracts, I encourage you to go ahead and explore the code to learn more about
+functionalities of cw3 and cw4 DAO contracts, I encourage you to go ahead and explore the code to learn more
 capabilities.
 
