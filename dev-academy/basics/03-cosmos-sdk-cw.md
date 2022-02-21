@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## Cosmos SDK {#cosmos-sdk}
 
-> From [Cosmos SDK docs](https://docs.cosmos.network/v0.43/intro/overview.html)
+> From [Cosmos SDK docs](https://docs.cosmos.network/v0.44/intro/overview.html)
 
 :::info
 What is the SDK?
@@ -26,8 +26,8 @@ In short, Cosmos SDK is an easy-to-use blockchain framework that enables develop
 
 You can read through Cosmos SDK overview documentation for more information:
 
-- [Cosmos SDK Intro](https://docs.cosmos.network/v0.43/intro) gives a great introduction to the framework.
-- [Cosmos SDK Basics](https://docs.cosmos.network/v0.43/basics) covers basic concepts of cosmos sdk that is required
+- [Cosmos SDK Intro](https://docs.cosmos.network/v0.44/intro) gives a great introduction to the framework.
+- [Cosmos SDK Basics](https://docs.cosmos.network/v0.44/basics) covers basic concepts of cosmos sdk that is required
   for developing on cosmwasm without much cosmos-sdk knowledge.
 
 ## CosmWasm {#cosmwasm}

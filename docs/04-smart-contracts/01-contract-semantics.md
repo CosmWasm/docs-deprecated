@@ -59,9 +59,9 @@ just like a DB Transaction typically works.
 Cosmos SDK module, which processes certain messages and uses them to upload,
 instantiate, and execute smart contracts. In particular, it accepts a properly
 signed
-[`MsgExecuteContract`](https://github.com/CosmWasm/wasmd/blob/master/proto/cosmwasm/wasm/v1beta1/tx.proto#L76-L89),
+[`MsgExecuteContract`](https://github.com/CosmWasm/wasmd/blob/v0.23.0/proto/cosmwasm/wasm/v1/tx.proto#L73-L86),
 routes it to
-[`Keeper.Execute`](https://github.com/CosmWasm/wasmd/blob/master/x/wasm/keeper/keeper.go#L311-L355),
+[`Keeper.Execute`](https://github.com/CosmWasm/wasmd/blob/v0.23.0/x/wasm/keeper/keeper.go#L328-L369),
 which loads the proper smart contract and calls `execute` on it. Note that this
 method may either return a success (with data and events) or an error. In the
 case of an error here, it will revert the entire transaction in the block. This
