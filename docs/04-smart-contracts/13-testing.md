@@ -25,7 +25,7 @@ There are a few main concepts to understand before you will be able to  simulate
 and contract -> bank interactions.
 
 In this section we will take a step-by-step look through writing a test with cw-multi-test, explaining some important concepts along the way. 
-To start we need a specimen contract such as the [cw-template](https://github.com/InterWasm/cw-template/blob/main/src/contract.rs) which is a simple boilerplate contract containing two functions: `Increment` and `Reset`. While there are already unit tests for the cw-template, there is no `cw-multi-test` tests to simulate an entire run through. 
+To start we need a specimen contract such as the [cw-template](https://github.com/InterWasm/cw-template/blob/main/src/contract.rs) which is a simple boilerplate contract containing two functions: `Increment` and `Reset`.
 
 We start as we always start with a new test file with a few imports: 
 
