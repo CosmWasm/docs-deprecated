@@ -19,7 +19,7 @@ const CONTRACT_NAME: &str = "crates.io:my-crate-name";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 
-[cfg_attr(not(feature = "library"), entry_point)]
+#[cfg_attr(not(feature = "library"), entry_point)]
 pub fn instantiate(deps: DepsMut, env: Env, info: MessageInfo, msg: InstantiateMsg) -> Response {
     // Use CW2 to set the contract version, this is needed for migrations
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
