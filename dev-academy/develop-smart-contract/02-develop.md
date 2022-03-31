@@ -12,7 +12,6 @@ Here is the application logic we want:
   the token amount exceeds a specified amount.
 - Contract accepts cw20 token that is predefined by the admin.
 
-
 :::warning
 We recommend deleting boilerplate code during implementation to help with copying and pasting code.
 :::
@@ -30,7 +29,7 @@ storage during each execution. We will save this information to the storage on `
 // state.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Config {
-  pub admin: Addr,
+  pub owner: Addr,
   pub cw20_addr: Addr
 }
 
@@ -72,9 +71,7 @@ pub fn instantiate(
     let owner = msg.admin
         .and_then(|s| deps.api.addr_validate(s.as_str()).ok())
         .unwrap_or(info.sender);
-    let config = Config {
-        owner: owner.clone(),
-    };
+
     let config = Config {
         owner: owner.clone(),
         cw20_addr: deps.api.addr_validate(msg.cw20_addr.as_str())?
@@ -164,6 +161,7 @@ pub enum ExecuteMsg {
     },
 }
 ```
+
 ### Execute
 
 Depending on the message that is received `Execute` will either `CreatePot` or `Receive`:
@@ -186,6 +184,7 @@ pub fn execute(
     }
 }
 ```
+
 The example above is a great one to understand the [match](https://doc.rust-lang.org/rust-by-example/flow_control/match.html) operator.
 Now that we have added additional options to `ExecuteMsg` we will go back and update the enum.
 
@@ -205,6 +204,7 @@ pub enum ExecuteMsg {
 }
 
 ```
+
 Now that we have updated `ExecuteMsg`, we must create `execute_create_pot` which is called by the contract's `Execute` function.
 
 ```rust
@@ -249,6 +249,7 @@ Users can transfer tokens from their account to the smart contract, then execute
 allocation in the next TX. But the problem here is how to verify this token is sent from this user?
 
 One way to achieve this:
+
 1. User [increases token allowance](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw20#allowances) of the cw20-pot smart contract address.
 2. User triggers cw20-pot contract to withdraw allowed funds to its account.
 
@@ -276,6 +277,7 @@ In the signature, you will notice `contract`, `amount` and `msg`. `contract` is 
 address of the next execution, `amount` is the number of tokens and `msg` is `base64` external message.
 
 At the end of `execute_send`, you will see a `Response` with an embedded message sent back to the chain.
+
 ```rust
 let res = Response::new()
         .add_attribute("action", "send")
@@ -316,11 +318,13 @@ pub fn execute_receive(
 ```
 
 On this line, contract-defined embed receive msg is parsed from base64 binary.
+
 ```rust
   let msg: ReceiveMsg = from_binary(&wrapped.msg)?;
 ```
 
 Here is the `ReceiveMsg`:
+
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
