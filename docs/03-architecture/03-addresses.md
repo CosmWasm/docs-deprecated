@@ -11,7 +11,7 @@ by a use of a concise, immutable binary format, typically 20 or 32 bytes long, o
 However, there are many human-readable representations of these binary addresses, which are shown to clients. For
 example, [Bech32](https://en.bitcoin.it/wiki/Bech32) `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9`,
 hex `0x8617E340B3D01FA5F11F306F4090FD50E238070D`
-or [checksumned hex](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed`
+or [checksummed hex](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed`
 , and
 even [large integers](https://research.kudelskisecurity.com/2018/01/16/blockchains-how-to-steal-millions-in-264-operations/) `3040783849904107057L`
 .
