@@ -41,6 +41,11 @@ means that it is impossible for the `Handle` method above to be executed in the 
 call. `Handle` is a synchronous call and returns before the `Actor` can process the next message. This feature is
 what [protects us from reentrancy by design](./smart-contracts#avoiding-reentrancy-attacks).
 
+:::info
+Contract can actually access other contracts state directly - such technique is called raw querying. However contract
+can never write to others contracts state.
+:::
+
 Another important aspect related to CosmWasm is **locality**. That is, actors can only communicate with other actors **
 whose address they previously received**. We will go more into depth on [names and addresses](./addresses) in the next
 page, but the key point is that for two actors to communicate, an external message (from the contract creator, or
