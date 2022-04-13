@@ -1,7 +1,7 @@
 # Idea behind an Actor Model
 
 Actor model is the solution to the problem of communication between smart
-contracts. Lets take a look why this particular solution is chosen in
+contracts. Let's take a look why this particular solution is chosen in
 CosmWasm, and what are the consequences of that.
 
 ## The problem
@@ -11,12 +11,12 @@ principles it is valuable to split responsibilities between entities.
 However to split the work between contracts themselves, there is a need
 to communicate between them, so if one contract is responsible for
 management group membership, it is possible to call its functionality
-from other contract.
+from another contract.
 
 The traditional way to solve this problem in SW engineering is to
 model services as functions which would be called with some RPC
-mechanism, and return its result as a response. As this approach looks
-nice, it creates sort of problems, in particular with shared state
+mechanism, and return its result as a response. Even though this approach
+looks nice, it creates sort of problems, in particular with shared state
 consistency.
 
 The other approach which is far more popular in business level modeling
@@ -27,13 +27,13 @@ contracts can be called only after whole execution is performed. When
 
 This solution may feel unnatural, and it actually requires to kind of
 different design solutions, but it turns out working pretty good for
-smart contracts execution. In this section I will try to step by step
-how to reason about it, and how it maps to contract structure.
+smart contracts execution. I will try to explain how to reason about it,
+and how it maps to contract structure step by step.
 
 ## The Actor
 
 The most important thing in the whole model is an Actor itself. So
-who is this? The Actor is a single instantiation of a contract,
+what is this? The Actor is a single instantiation of a contract,
 which can perform several actions. When actor finishes his job,
 he prepares a summary of it, which includes the list of things
 which have to be done, to complete the whole scheduled task.
