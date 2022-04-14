@@ -1,10 +1,14 @@
+---
+title: Idea behind an Actor Model
+---
+
 # Idea behind an Actor Model
 
 Actor model is the solution to the problem of communication between smart
 contracts. Let's take a look why this particular solution is chosen in
 CosmWasm, and what are the consequences of that.
 
-## The problem
+## The problem {#problem}
 
 Smart contracts can be imagined as sandboxed microservices. Due to SOLID
 principles it is valuable to split responsibilities between entities.
@@ -30,7 +34,7 @@ different design solutions, but it turns out working pretty good for
 smart contracts execution. I will try to explain how to reason about it,
 and how it maps to contract structure step by step.
 
-## The Actor
+## The Actor {#actor}
 
 The most important thing in the whole model is an Actor itself. So
 what is this? The Actor is a single instantiation of a contract,
@@ -64,7 +68,7 @@ to environment. However it would be possible to create contract
 being chiefs dispatcher which would collect all orders from
 sellers, and balance them across chiefs for some reason.
 
-## The action
+## The action {#action}
 
 Actors are the model entities, but to properly communicate with
 them, we need some kind of protocol to communicate with them.
@@ -90,7 +94,7 @@ of what exactly to prepare. So we can say, that the action is
 the thing performed by contract itself, plus all the sub-actions it
 schedules.
 
-## Multi-stage actions
+## Multi-stage actions {#multi-stage}
 
 So as the whole idea makes some sense, there is the biggest
 problem created by actor model: what if I want to perform some
@@ -132,7 +136,7 @@ The id assigned previously is the only required information in the
 emitted, which are mostly metadata (to be observed by non-blockchain
 applications mostly), and any arbitrary data it want to pass.
 
-## State
+## State {#state}
 
 Up until this point we were considering actors as entities performing
 some job, like preparing the meal. If we are considering computer
@@ -181,7 +185,7 @@ would not be actually updated. So when in contract state is updated,
 it is actually only local copy of this state being altered, but the
 partial changes would never be visible by other contracts.
 
-## Queries
+## Queries {#queries}
 
 There is one building block in CosmWasm approach to Actor model, which
 I didn't yet covered. As I said, whole state of every contract is public
@@ -209,7 +213,7 @@ state directly - state is still public, and technique of looking at them
 directly is called `Raw Queries`. For clarity, non-raw queries are sometimes
 denoted as `Smart Queries`.
 
-## Wrapping everything together - transactional call flow
+## Wrapping everything together - transactional call flow {#flow}
 
 So we touched many things here, and I known it may be kind of confusing.
 Because of that, I would like to go through some more complicated call
@@ -272,7 +276,7 @@ There is one problem - in this model, our list is not a list of players
 which fullfilled the quest (as we wanted it to be), but the list of players
 paid out (as in transfer failure, the list is not updated). We can do better.
 
-## Different ways of handling responses
+## Different ways of handling responses {#responses}
 
 Note, that we didn't mention a `Reply` operation at all. So why it was not
 called by `MmoCurrency` on `WarriorNpc`? The reason is, that this operation
