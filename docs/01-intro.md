@@ -6,12 +6,8 @@ sidebar_position: 1
 
 # Introduction
 
-:::info
-CosmWasm is a new smart contracting platform built for the Cosmos ecosystem. If you haven't yet heard
-of it, please [check out this intro](https://blog.cosmos.network/announcing-the-launch-of-cosmwasm-cc426ab88e12). The
-purpose of this documentation is to give a deep dive into the technology for developers who wish to try it out or
-integrate it into their product. Particularly, it is aimed at Go developers with experience with the Cosmos SDK, as well
-as Rust developers looking for a blockchain platform.
+:::정보
+CosmWasm은 코스모스 생태계를 위해 구축된 새로운 스마트 컨트랙트 플랫폼이다. 이 기술에 대해 아직 들어보지 못했다면 [이 인트로를 확인해 보자](https://blog.cosmos.network/announcing-the-launch-of-cosmwasm-cc426ab88e12). 이 문서의 목적은 Cosmwasm을 사용하기를 희망하거나 그들의 상품에 적용하고자 하는 개발자를 위해 기술에 대한 상세한 정보를 제공하려는 것이다. 특히 Cosmos SDK를 사용해 본 경험이 있는 Go 개발자와 블록체인 플랫폼을 찾는 Rust 개발자를 겨냥하고 있다.
 :::
 
 ## How to use CosmWasm {#how-to-use-cosmwasm}
