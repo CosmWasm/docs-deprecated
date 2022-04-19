@@ -9,6 +9,10 @@ specific terms. However before we would dive into the code, we need to establish
 some common language, and to do so we would look at contracts from the perspective
 of external user, instead of their implementation.
 
+In this part I would use the `wasmd` binary to communicate with cliffnet testnet.
+To properly set it up, check the
+[Setting up Environment](https://docs.cosmwasm.com/docs/1.0/getting-started/setting-env).
+
 ## Blockchain as database
 
 It is kind of starting from the end, but I would start about the state part of actor
@@ -32,7 +36,7 @@ very much like money transfer, not database updates. And yes, you are kind of ri
 but I have a solution for that too. Just imagine, that for every native token (by
 "native tokens" we meant tokens handled directly by blockchain, in contradiction
 to for example cw20 tokens) there is special database bucket (or table if you prefer)
-with mapping of address to how much of a token the address posseses. You can query
+with mapping of address to how much of a token the address possess. You can query
 this table (querying for token balance), but you cannot modify it directly. To modify
 it you just send message to special build-in bank contract. And everything is still
 a database.
@@ -59,11 +63,11 @@ blokchain, but it can modify the only one he created.
 ## Contract code
 
 When the contract binary is build, the first interaction with CosmWasm is uploading
-it to the blockchain (process is described in detail in
-[Getting Started](https://docs.cosmwasm.com/docs/1.0/getting-started/intro) section:
+it to the blockchain. For this example I would use `cw4-group` contract from
+[cw-plus](https://github.com/CosmWasm/cw-plus) repository:
 
 ```bash
-wasmd tx wasm store contract.wasm --from wallet $TXFLAG
+$ wasmd tx wasm store cw4-group.wasm --from wallet
 ```
 
 As a result of such an operation you would get json output like this:
@@ -90,14 +94,140 @@ stored contract - in my case the contract code was stored in blockchain under
 id of `1068`. I can now look at the code by querying for it:
 
 ```bash
-wasmd query wasm code 1068 code.wasm --node $RPC
+$ wasmd query wasm code 1068 code.wasm
 ```
 
-And now the important thing - the contract code is not an actor. As I told
-before - the significant part of an actor is its state. Even if a state of
-a contract is empty, it should be there. So what is a contract code? I think
-that the easiest way to think about that is a `class` or a `type` in programming.
-It defines some stuff about what can be done, but the class on itself is
-in most cases not very useful, unless we create an instance of a type, on
-which we can call class methods. So now let move forward to instances of such
-contract-classes.
+And now the important thing - the contract code is not an actor. So what is a
+contract code? I think that the easiest way to think about that is a `class` or
+a `type` in programming. It defines some stuff about what can be done, but the
+class on itself is in most cases not very useful, unless we create an instance
+of a type, on which we can call class methods. So now let move forward to
+instances of such contract-classes.
+
+## Contract instance
+
+Now we have contract code, but what we want is an actual contract itself.
+To create it, we need to instantiate it. Continuing analogy to programming,
+instantiation is calling a constructor. To do that, I would send an
+instantiate message to my contract:
+
+```bash
+$ wasmd tx wasm instantiate 1068 '{"members": []}' --from wallet --label "Group 1" --no-admin $TXFLAG
+```
+
+What I do here is creating a new contract and immediately calling the
+`Instantiate` message on it. The structure of such message is different for
+every contract code. In particular, the `cw4-group` Instantiate message
+contains two fields:
+
+* `members` field which is list if initial group members
+* optional `admin` field which defines an address who can add or remove
+  group member
+
+In this case, I created an empty group with no admin - so which could never
+change! It may seems like not very useful contract, but it serves us as
+a contract example.
+
+As the result of instantiate I got json:
+
+```json
+{
+    ..,
+    "logs":[
+        {
+            "events": [
+                ..,
+                {
+                    "type":"instantiate",
+                    "attributes": [
+                        {"key":"_contract_address","value":"wasm12n3n04a6j7y4kdjg5jmlkn2v60yjsvxav2kn43ly6mwshl4mc4cscdrpsk"},
+                        {"key":"code_id","value":"1068"}
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+As you can see we again look at `logs[].events[]` field, looking for
+interesting event and extracting information from it - it is the common case.
+I will talk about events and their attributes in the future, but in general
+it is a way to notify the world that something happened. Do you remember the
+KFC example? If waiter is serving our dish, he would put tray on the bar,
+and she would yell (or put on the screen) the order number - this would be
+announcing an event, so you know some summary of operation, so you can go and
+do something useful with it.
+
+So what useful can we do with contract? We obviously can call it! But first
+I want to tell about addresses.
+
+## Addresses in CosmWasm
+
+Address in CosmWasm are way to refer entities in blockchain. There are two
+types of addresses: contract addresses, and non-contracts. The difference is,
+that you can send messages to contract addresses, as there is some smart contract
+code associated to them, and non-contract are just users of the system. In actor
+model, contract addresses represents actors, and non-contracts represents clients
+of the system.
+
+When operating with blockchain using `wasmd`, you also have an address - you
+got one when you added the key to wasmd:
+
+```bash
+# add wallets for testing
+$ wasmd keys add wallet
+{
+    ..,
+    "address": "...",
+}
+```
+
+You can always check your address:
+
+```bash
+$ wasmd keys show wallet
+```
+
+Having an address is very important, because it is preretirement to being able
+to call anything. When we send a message to a contract it always knows an address
+who send this message so it can identify it - not to mention, that this sender
+is an address which would play a gas cost.
+
+## Querying the contract
+
+So we have our contract, let try to do something with it - query would be the
+easiest thing to do. Let's do it:
+
+```bash
+$ wasmd query wasm contract-state smart wasm12n3n04a6j7y4kdjg5jmlkn2v60yjsvxav2kn43ly6mwshl4mc4cscdrpsk '{ "list_members": {} }'
+data:
+  members: []
+```
+
+The `wasm...` string is contract address, and you have to substitute it with
+your contract address. `{ "list_members": {} }` is query message we send to
+contract. Typically CW smart contract queries are in the form of single json
+object, with one field: the query name (`list_members` in our case). The value
+of this field is another object, being query parameters - if there are any.
+`list_members` query handles two parameters: `limit`, and `start_after`, which
+are both optional and which supports result pagination. However in our case of
+empty group they doesn't matter.
+
+The query result we got is in human readable text form (if we want to get the
+json from - for eg to process it further with jq, just pass the `-o json` flag).
+As you can see response contains one field: `members` which is an empty array.
+
+So can we do anything more with this contract? Not much. But let try to do
+something with new one!
+
+## Executions to perform some actions
+
+The problem with our previous contract is, that for `cw4-group` contract, the
+only one who can perform executions on it, is an admin, but our contract
+doesn't have one. So let make new group contract, but let make us an admin.
+First check our wallet address:
+
+```bash
+$ wasmd keys show wallet
+```
