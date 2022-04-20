@@ -247,3 +247,78 @@ First check our wallet address:
 ```bash
 $ wasmd keys show wallet
 ```
+
+And instantiate new group contract - this time with proper admin:
+
+```bash
+$ wasmd tx wasm instantiate 1069 '{"members": [], "admin": "wasm1um59mldkdj8ayl5gknp9pnrdlw33v40sh5l4nx"}' --from wallet --label "Group 1" --no-admin $TXFLAG -y
+..
+logs:
+- events:
+  ..
+  - attributes:
+    - key: _contract_address
+      value: wasm1n5x8hmstlzdzy5jxd70273tuptr4zsclrwx0nsqv7qns5gm4vraqeam24u
+    - key: code_id
+      value: "1069"
+    type: instantiate
+```
+
+You may ask, why we passed some kind of `--no-admin` flag, if we just said,
+we want to set an admin to the contract? The answer is sad and confusing,
+but... it is a different admin. The admin we want to set is one checked
+by contract itself and managed by him. The admin which is declined with
+`--no-admin` flag, is a wasmd-level admin, which has ability to migrate
+contract. You don't need to worry about the second one at least until you
+will learn about contracts migrations - until then you can always pass the
+`--no-admin` flag to the contract.
+
+Now let query our new contract for members list:
+
+```bash
+$ wasmd query wasm contract-state smart wasm1n5x8hmstlzdzy5jxd70273tuptr4zsclrwx0nsqv7qns5gm4vraqeam24u '{ "list_members": {} }'
+data:
+  members: []
+```
+
+Just like before - no members initially. Now let check an admin:
+
+```
+$ wasmd query wasm contract-state smart wasm1n5x8hmstlzdzy5jxd70273tuptr4zsclrwx0nsqv7qns5gm4vraqeam24u '{ "admin": {} }'
+data:
+  admin: wasm1um59mldkdj8ayl5gknp9pnrdlw33v40sh5l4nx
+```
+
+So there is an admin, seems like the one we wanted to have there. So now
+let add someone to the group - maybe us themself?
+
+```bash
+wasmd tx wasm execute wasm1n5x8hmstlzdzy5jxd70273tuptr4zsclrwx0nsqv7qns5gm4vraqeam24u '{ "update_members": { "add": [{ "addr": "wasm1um59mldkdj8ayl5gkn
+p9pnrdlw33v40sh5l4nx", "weight": 1 }], "remove": [] } }' --from wallet $TXFLAG -y
+```
+
+The message for modifying the members is `update_members` and it has two
+fields: memebers to remove, and members to add. Members to remove are
+just addresses. Members to add has a bit more complex structure: they
+are records with two fields: address and weight. Weight is not relevant
+for us now, it is just metadata stored with the every group member - for
+us it would be always 1.
+
+Let query the contract again to check if our message changed anything:
+
+```bash
+$ wasmd query wasm contract-state smart wasm1n5x8hmstlzdzy5jxd70273tuptr4zsclrwx0nsqv7qns5gm4vraqeam24u '{ "list_members": {} }'
+data:
+  members:
+  - addr: wasm1um59mldkdj8ayl5gknp9pnrdlw33v40sh5l4nx
+    weight: 1
+```
+
+As you can see, the contract updated its state. This is basically how
+it works - sending messages to contracts causes them to update state,
+and the state can be queried at any time. For now to keep things simple
+we were just interacting with contract directly by wasmd, but as described
+before - contract can communicate with each other. However to investigate
+this we need to understand how to write contracts. Next time we would look
+at contract structure and we will map it part by part to what we learned
+until now.
