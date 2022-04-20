@@ -239,7 +239,7 @@ To make the quest reasonable for longer, we would make a reward for it
 to be always between `1 mmo` and `100 mmo`, but it would be ideally
 `15%` what Warrior owns. This means, that the quest would be worth
 less for every subsequent player, until Warrior would be broke, left
-with nothing, and will no longer be able to payout players.
+with nothing, and will no longer be able to pay out players.
 
 So what would the flow look like? The first game would send a `Payout` message
 to the `WarriorNpc` contract, with info on who should get the reward. Warrior
