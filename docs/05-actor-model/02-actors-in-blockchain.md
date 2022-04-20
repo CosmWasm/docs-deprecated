@@ -60,41 +60,57 @@ reserved tables (like native tokens, code repository), with special bucket creat
 for every contract. Contract can look at every table in every bucket in whole
 blokchain, but it can modify the only one he created.
 
+## Compile the contract
+
+I will not go into the code for now, but to start with something we need compiled
+contract binary. The `cw4-group` contract from
+[cw-plus](https://github.com/CosmWasm/cw-plus) is simple enough to work with for
+now, so we will start with compiling it. Start with cloning the repository:
+
+```bash
+$ git clone git@github.com:CosmWasm/cw-plus.git
+```
+
+Then go to `cw4-group` contract and build it:
+
+```bash
+$ cd cw-plus/contracts/cw4-group
+$ cargo wasm
+```
+
+Your final binary should be located in the
+`cw-plus/target/wasm32-unknown-unknown/release` folder (`cw-plus` being where you
+cloned your repository.
+
 ## Contract code
 
 When the contract binary is build, the first interaction with CosmWasm is uploading
-it to the blockchain. For this example I would use `cw4-group` contract from
-[cw-plus](https://github.com/CosmWasm/cw-plus) repository:
+it to the blockchain (assuming you have your wasm binary in working directory):
 
 ```bash
-$ wasmd tx wasm store cw4-group.wasm --from wallet
+$ wasmd tx wasm store ./cw4-group.wasm --from wallet $TXFLAG -y
 ```
 
 As a result of such an operation you would get json output like this:
 
-```json
-{
-    ..,
-    "logs":[
-        {
-            "events":[
-                ..,
-                {
-                    "type":"store_code",
-                    "attributes":[{"key":"code_id","value":"1068"}]
-                }]
-        }
-    ]
-}
+```
+..
+logs:
+- events:
+  ..
+  - attributes:
+    - key: code_id
+      value: "1069"
+    type: store_code
 ```
 
 I ignored most of not fields as they are not relevant for now - what we actually
 care about is event emitted by blockchain with information about `code_id` of
 stored contract - in my case the contract code was stored in blockchain under
-id of `1068`. I can now look at the code by querying for it:
+id of `1069`. I can now look at the code by querying for it:
 
 ```bash
-$ wasmd query wasm code 1068 code.wasm
+$ wasmd query wasm code 1069 code.wasm
 ```
 
 And now the important thing - the contract code is not an actor. So what is a
@@ -112,7 +128,7 @@ instantiation is calling a constructor. To do that, I would send an
 instantiate message to my contract:
 
 ```bash
-$ wasmd tx wasm instantiate 1068 '{"members": []}' --from wallet --label "Group 1" --no-admin $TXFLAG
+$ wasmd tx wasm instantiate 1069 '{"members": []}' --from wallet --label "Group 1" --no-admin $TXFLAG -y
 ```
 
 What I do here is creating a new contract and immediately calling the
@@ -130,24 +146,17 @@ a contract example.
 
 As the result of instantiate I got json:
 
-```json
-{
-    ..,
-    "logs":[
-        {
-            "events": [
-                ..,
-                {
-                    "type":"instantiate",
-                    "attributes": [
-                        {"key":"_contract_address","value":"wasm12n3n04a6j7y4kdjg5jmlkn2v60yjsvxav2kn43ly6mwshl4mc4cscdrpsk"},
-                        {"key":"code_id","value":"1068"}
-                    ]
-                }
-            ]
-        }
-    ]
-}
+```
+..
+logs:
+- events:
+  ..
+  - attributes:
+    - key: _contract_address
+      value: wasm1u0grxl65reu6spujnf20ngcpz3jvjfsp5rs7lkavud3rhppnyhmqqnkcx6
+    - key: code_id
+      value: "1069"
+    type: instantiate
 ```
 
 As you can see we again look at `logs[].events[]` field, looking for
@@ -177,16 +186,23 @@ got one when you added the key to wasmd:
 ```bash
 # add wallets for testing
 $ wasmd keys add wallet
-{
-    ..,
-    "address": "...",
-}
+- name: wallet3
+  type: local
+  address: wasm1dk6sq0786m6ayg9kd0ylgugykxe0n6h0ts7d8t
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"Ap5zuScYVRr5Clz7QLzu0CJNTg07+7GdAAh3uwgdig2X"}'
+  mnemonic: ""
 ```
 
 You can always check your address:
 
 ```bash
-$ wasmd keys show wallet
+$ wasmd keys show walle
+- name: wallet
+  type: local
+  address: wasm1um59mldkdj8ayl5gknp9pnrdlw33v40sh5l4nx
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A5bBdhYS/4qouAfLUH9h9+ndRJKvK0co31w4lS4p5cTE"}'
+  mnemonic: ""
+t
 ```
 
 Having an address is very important, because it is preretirement to being able
@@ -200,7 +216,7 @@ So we have our contract, let try to do something with it - query would be the
 easiest thing to do. Let's do it:
 
 ```bash
-$ wasmd query wasm contract-state smart wasm12n3n04a6j7y4kdjg5jmlkn2v60yjsvxav2kn43ly6mwshl4mc4cscdrpsk '{ "list_members": {} }'
+$ wasmd query wasm contract-state smart wasm1u0grxl65reu6spujnf20ngcpz3jvjfsp5rs7lkavud3rhppnyhmqqnkcx6 '{ "list_members": {} }'
 data:
   members: []
 ```
