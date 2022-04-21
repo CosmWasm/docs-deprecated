@@ -13,7 +13,7 @@ In this part, I would use the `wasmd` binary to communicate with cliffnet testne
 To properly set it up, check the
 [Setting up Environment](https://docs.cosmwasm.com/docs/1.0/getting-started/setting-env).
 
-## Blockchain as a database
+## Blockchain as a database {#database}
 
 It is kind of starting from the end, but I would start with the state part of
 the actor model. Relating to traditional systems, there is one particular thing
@@ -60,7 +60,7 @@ specially reserved tables (like native tokens, code repository), with a special
 bucket created for every contract. A contract can look at every table in every
 bucket in the whole blockchain, but it can modify the only one he created.
 
-## Compile the contract
+## Compile the contract {#compile}
 
 I will not go into the code for now, but to start with something we need compiled
 contract binary. The `cw4-group` contract from
@@ -82,7 +82,7 @@ Your final binary should be located in the
 `cw-plus/target/wasm32-unknown-unknown/release` folder (`cw-plus` being where you
 cloned your repository).
 
-## Contract code
+## Contract code {#code}
 
 When the contract binary is built, the first interaction with CosmWasm is uploading
 it to the blockchain (assuming you have your wasm binary in the working directory):
@@ -121,7 +121,7 @@ class itself is in most cases not very useful unless we create an instance
 of a type, on which we can call class methods. So now let's move forward to
 instances of such contract classes.
 
-## Contract instance
+## Contract instance {#instance}
 
 Now we have a contract code, but what we want is an actual contract itself.
 To create it, we need to instantiate it. Relating to analogy to programming,
@@ -173,7 +173,7 @@ do something useful with it.
 So what use can we do with the contract? We obviously can call it! But first
 I want to tell you about addresses.
 
-## Addresses in CosmWasm
+## Addresses in CosmWasm {#address}
 
 Address in CosmWasm is a way to refer to entities in the blockchain. There are two
 types of addresses: contract addresses, and non-contracts. The difference is,
@@ -211,7 +211,7 @@ to call anything. When we send a message to a contract it always knows the addre
 who sends this message so it can identify it - not to mention, that this sender
 is an address which would play a gas cost.
 
-## Querying the contract
+## Querying the contract {#queries}
 
 So we have our contract, let try to do something with it - query would be the
 easiest thing to do. Let's do it:
@@ -239,7 +239,7 @@ an empty array.
 So can we do anything more with this contract? Not much. But let's try to do
 something with a new one!
 
-## Executions to perform some actions
+## Executions to perform some actions {#executions}
 
 The problem with our previous contract is, that for `cw4-group` contract, the
 only one who can perform executions on it, is an admin, but our contract
