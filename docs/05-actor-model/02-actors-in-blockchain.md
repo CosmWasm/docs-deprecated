@@ -80,7 +80,7 @@ $ cargo wasm
 
 Your final binary should be located in the
 `cw-plus/target/wasm32-unknown-unknown/release` folder (`cw-plus` being where you
-cloned your repository.
+cloned your repository).
 
 ## Contract code
 
@@ -96,6 +96,7 @@ As a result of such an operation you would get json output like this:
 ```
 ..
 logs:
+..
 - events:
   ..
   - attributes:
@@ -149,6 +150,7 @@ As the result of instantiating I got result:
 ```
 ..
 logs:
+..
 - events:
   ..
   - attributes:
@@ -185,7 +187,7 @@ got one when you added the key to `wasmd`:
 
 ```bash
 # add wallets for testing
-$ wasmd keys add wallet
+$ wasmd keys add wallet3
 - name: wallet3
   type: local
   address: wasm1dk6sq0786m6ayg9kd0ylgugykxe0n6h0ts7d8t
@@ -202,10 +204,9 @@ $ wasmd keys show walle
   address: wasm1um59mldkdj8ayl5gknp9pnrdlw33v40sh5l4nx
   pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A5bBdhYS/4qouAfLUH9h9+ndRJKvK0co31w4lS4p5cTE"}'
   mnemonic: ""
-t
 ```
 
-Having an address is very important because it is preretirement to being able
+Having an address is very important because it is requirement to being able
 to call anything. When we send a message to a contract it always knows the address
 who sends this message so it can identify it - not to mention, that this sender
 is an address which would play a gas cost.
@@ -242,7 +243,10 @@ something with a new one!
 
 The problem with our previous contract is, that for `cw4-group` contract, the
 only one who can perform executions on it, is an admin, but our contract
-doesn't have one. So let's make a new group contract, but this time we would
+doesn't have one. This is not a true for every smart contract, but it is a
+nature of this one.
+
+So let's make a new group contract, but this time we would
 make ourselves an admin. First, check our wallet address:
 
 ```bash
