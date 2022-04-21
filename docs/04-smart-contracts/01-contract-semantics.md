@@ -373,4 +373,4 @@ which wraps a `Querier` and exposes a lot of convenience methods that just use
 `QueryRequest` and `Querier.raw_query` under the hood.
 
 You can read a longer explanation of the
-[`Querier` design in our docs](https://docs.cosmwasm.com/0.13/architecture/query.html).
+[`Querier` design in our docs](https://docs.cosmwasm.com/docs/1.0/architecture/query).
