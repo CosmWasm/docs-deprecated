@@ -11,10 +11,10 @@ chosen in CosmWasm, and what are the consequences of that.
 ## The problem {#problem}
 
 Smart contracts can be imagined as sandboxed microservices. Due to SOLID
-principles it is valuable to split responsibilities between entities.
+principles, it is valuable to split responsibilities between entities.
 However, to split the work between contracts themselves, there is a need
 to communicate between them, so if one contract is responsible for
-management group membership, it is possible to call its functionality
+managing group membership, it is possible to call its functionality
 from another contract.
 
 The traditional way to solve this problem in SW engineering is to
@@ -71,7 +71,7 @@ sellers, and balance them across chefs for some reason.
 ## The Action {#action}
 
 Actors are the model entities, but to properly communicate with
-them, we need some kind of protocol to communicate with them.
+them, we need some kind of protocol.
 Every actor is capable of performing several actions. In my
 previous KFC example, the only action seller can do is "Charge
 payment and create order". However, it is not always the case -
@@ -102,7 +102,7 @@ finalize some steps, the contract has to make sure that some sub-action he
 scheduled are finished?
 
 Imagine, that in the previous KFC situation there is no dedicated
-Waiter, instead Seller is serving you meal when Chefs finished
+Waiter, instead the Seller is serving you a meal when the Chefs finished
 their job.
 
 This kind of pattern is so important and common, that in CosmWasm
@@ -126,7 +126,7 @@ even preparing Fries - if it is part of the bigger task (like order
 for a client), or the seller is just hungry. It is possible,
 that not only the seller is eligible to call the chef for food - possibly
 any restaurant employee can do that just for themselves. Therefore,
-we need a way, to be able to react an actor finishing his job in
+we need a way, to be able to react to an actor finishing his job in
 some universal way, to handle this situation properly in any context.
 
 It is worth noting, that the `Reply` can contain some additional data.
@@ -157,7 +157,7 @@ which would support the `Transfer` action to transfer money to another
 player. Then what would be the state of such a contract? It would be
 just a table mapping player names to the amount of currency they own. The
 contract we just invited exists in CosmWasm examples, and it
-is called `cw20-base` contract (it is a bit more complicated, but
+is called the `cw20-base` contract (it is a bit more complicated, but
 it is its core idea).
 
 And now there is a question - how is this helpful to transfer currency
@@ -174,7 +174,7 @@ the state being transactional. Any updates to the state are not applied immediat
 but only when the whole action succeeds. It is very important, as
 it guarantees that if something goes wrong in the contract, it is always
 left in some proper state. Let's consider our `MmoCurrency` case. Imagine,
-that in `Transfer` action we first increase the receiver currency amount
+that in the `Transfer` action we first increase the receiver currency amount
 (by updating the state), and only then do we decrease the sender amount.
 However, before decreasing it, we need to check if a sender
 possesses enough funds to perform the transaction. In case we realize,
@@ -186,8 +186,8 @@ partial changes would never be visible by other contracts.
 
 ## Queries {#queries}
 
-There is one building block in CosmWasm approach to the Actor model, which
-I didn't yet cover it. As I said, the whole state of every contract is public
+There is one building block in the CosmWasm approach to the Actor model, which
+I didn't yet cover. As I said, the whole state of every contract is public
 and available for everyone to look at. The problem is, that this way of
 looking at state is not very convenient - it requires users of contracts
 to know its internal structure, which kind of violates the SOLID rules
@@ -221,24 +221,24 @@ to CosmWasm contract to visualize what the "transactional state" means.
 Let's imagine two contracts:
 
 1. The `MmoCurrency` contract mentioned before, which can perform `Transfer`
-  action, allowing to transfer some `amount` of currency to some `receiver`.
+  action, allows transferring some `amount` of currency to some `receiver`.
 2. The `WarriorNpc` contract, which would have some amount of our currency,
-  and he would be used by our MMO engine to pay out the reward for some
+  and he would be used by our MMO engine to pay the reward out for some
   quest player could perform. It would be triggered by `Payout` action,
-  which can be called only by specific client (which would be our game
+  which can be called only by a specific client (which would be our game
   engine).
 
 Now here is an interesting thing - this model forces us, to make our MMO
 more realistic in terms of the economy that we traditionally see - it is
 because `WarriorNpc` has some amount of currency, and cannot create
-more out of nothing. It is not always the case (the previously mentioned
+more out of anything. It is not always the case (the previously mentioned
 `cw20` has a notion of Minting for this case), but for sake of simplicity
 let's assume this is what we want.
 
 To make the quest reasonable for longer, we would make a reward for it
 to be always between `1 mmo` and `100 mmo`, but it would be ideally
-`15%` what Warrior owns. This means, that the quest would be worth
-less for every subsequent player, until Warrior would be broke, left
+`15%` of what Warrior owns. This means, that the quest reward decreases
+for every subsequent player, until Warrior would be broke, left
 with nothing, and will no longer be able to payout players.
 
 So what would the flow look like? The first game would send a `Payout` message
@@ -254,9 +254,9 @@ the task, and schedule the `Transfer` action to be performed by `MmoCurrency`.
 
 But there is the important thing - because `Transfer` action is actually
 the part of the bigger `Payout` flow, it would not be executed on the original
-blockchain state, but on the local copy of it, which has already applied
-the player's list. So if the `MmoCurrency` would for any reason take a look
-of `WarriorNpc` internal list, it would be already updated.
+blockchain state, but on the local copy of it, which the player's list is already
+applied to. So if the `MmoCurrency` would for any reason takes a look
+at `WarriorNpc` internal list, it would be already updated.
 
 Now `MmoCurrency` is doing its job, updating the state of Warrior and
 player balance (note, that our Warrior is here just treated as another player!).
@@ -282,7 +282,7 @@ called by `MmoCurrency` on `WarriorNpc`? The reason is, that this operation
 is optional. When scheduling sub-actions on another contract we may choose
 when `Reply` how the result should be handled:
 
-1. Never call `Reply`, action succeed regardless of the result
+1. Never call `Reply`, action succeeds regardless of the result
 2. Never call `Reply`, succeed only if sub-action succeeded
 3. Call `Reply` on success
 4. Call `Reply` on failure
