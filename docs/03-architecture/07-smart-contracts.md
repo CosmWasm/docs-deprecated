@@ -26,7 +26,7 @@ execution of the contract to be *explicitly requested*.
 
 Another big difference is that we avoid all reentrancy attacks by design. This point deserves an article by itself, but
 in
-short [a large class of exploits in Ethereum is based on this trick](https://consensys.github.io/smart-contract-best-practices/known_attacks/)
+short [a large class of exploits in Ethereum is based on this trick](https://consensys.github.io/smart-contract-best-practices/attacks/reentrancy/)
 . The idea is that in the middle of execution of a function on Contract A, it calls a second contract (explicitly or
 implicitly via send). This transfers control to contract B, which can now execute code, and call into Contract A again.
 Now there are two copies of Contract A running, and unless you are very, very careful about managing state before
