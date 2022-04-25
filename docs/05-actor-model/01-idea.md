@@ -289,32 +289,28 @@ when `Reply` how the result should be handled:
 5. Always call `Reply`
 
 So if we do not request `Reply` to be called by subsequent contract, it will
-not happen. I silently assumed, that the sub-call is performed in mode `2`,
-so if the sub-call fails, the whole action would fail. But it is possible to
-just schedule some additional "optional" actions, which result doesn't
-matter so much. Obviously in case such sub call fails, only
+not happen. It is possible to just schedule some additional "optional" actions,
+which result doesn't matter so much. Obviously in case such sub call fails, only
 changes done by the original action would be stored on a blockchain, and all
 changes created by the sub-call would be rolled back (so the sub-contract
 never ends up in an improper state). It is probably a bit complicated for now,
 but I promise it would be simple when you would do some practice with that.
 
-Now let's take a look at handling results with `3`-`5` options. It is actually
-interesting, that using `3`, even if the transaction is performed by sub-call
+Now let's take a look at handling results with `2`-`4` options. It is actually
+interesting, that using `2`, even if the transaction is performed by sub-call
 succeed, we may now take a look at the data it returned with `Reply`, and
 on its final state after it finished, and we can still decide,
 that action as a whole is a failure, in which case everything would
 be rolled back - even currency transfer performed by external contract.
 
-In particular, an interesting option is `4`. So if the contract would call
+In our case, an interesting option is `3`. So if the contract would call
 `Reply` on failure, we can decide to claim success, and commit a
 transaction on the state if the sub call failed. Why it may be relevant
 for us? Possibly because our internal list was supposed to keep the list of
 players succeeding with the quest, not paid out! So if we have no more currency,
-we still want to update the list! So we can choose to use the `4` or `1` response
-handling method, to ensure that failure in the transfer would not discard
-the whole transaction.
+we still want to update the list!
 
-But if we could use `1` for that, why is `4` exist? It is useful sometimes.
+But if we could use `1` for that, why is `3` exist? It is useful sometimes.
 Probably the most common cause is that in case of failure, we want to leave
 a note about it. Also, it is possible, that we want to succeed only on
 particular types of failure, but it is a way less likely case - unfortunately
