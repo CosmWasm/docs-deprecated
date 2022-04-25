@@ -59,9 +59,8 @@ Other types of storage objects not used in group contracts are:
   by a variety of keys
 * `IndexedSnapshotMap` - `IndexedMap` and `SnapshotMap` married
 
-What is very important - every state type in the contract is created
-with some name. It is because to be fully precise, all of those
-types are not containers in any meaning. They are just accessors
+What is very important - every state type in the contract is accessed
+using some name. All of those types are not containers, just accessors
 to the state. Do you remember that I told you before, that blockchain is
 our database? And that is correct! All those types are just ORM to
 this database - when we will use them to get actual data from it,
