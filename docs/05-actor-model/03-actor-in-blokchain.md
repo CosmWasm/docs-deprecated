@@ -182,7 +182,7 @@ the last argument a message which triggered the execution of it (except for
 `reply` - I would explain it later). In addition to that, there are
 additional arguments provided by blockchain:
 
-* `Deps` or `DepsMut` object is the gateway to the external world. It allows
+* `Deps` or `DepsMut` object is the gateway to the world outside the smart contract context. It allows
   accessing the contract state, as well as querying other contracts, and
   also delivers an `Api` object with a couple of useful utility functions.
   The difference is, that `DepsMut` allows updating state, while `Deps`
