@@ -291,20 +291,20 @@ when `Reply` how the result should be handled:
 4. Always call `Reply`
 
 So if we do not request `Reply` to be called by subsequent contract, it will
-not happen. In such case if sub-call fails, the whole transaction is rolled
+not happen. In such a case if a sub-call fails, the whole transaction is rolled
 back - sub-message failure transitively causes the original message failure.
-It is probably a bit complicated for now, but I promise it would be simplewhen
-when you would do some practice with that.
+It is probably a bit complicated for now, but I promise it would be simple when
+you would do some practice with that.
 
-When handling the reply, it is important to remember, that althrough changes
-are not yet applied to the blokchcain (transaction still can be faild), the
-reply handler is already working on the copy of state with all changes made
-by submessage so far applied. In most cases it would be a good thing, but it
-has tricky consequence - if the contract is calling itself recursively, it is
-possible that subsequent call overwritten things set up in original message.
-It almost never happens, but may need special treatement in some cases - for
+When handling the reply, it is important to remember, that although changes
+are not yet applied to the blockchain (the transaction still can be failed), the
+reply handler is already working on the copy of the state with all changes made
+by sub-message so far applied. In most cases, it would be a good thing, but it
+has a tricky consequence - if the contract is calling itself recursively, it is
+possible that subsequent call overwrote things set up in the original message.
+It rarely happens, but may need special treatment in some cases - for
 now I don't want to go deeply into details, but I want you to remember about
-what to expect after state in the actors flow.
+what to expect after state in the actor's flow.
 
 Now let's take a look at handling results with `2`-`4` options. It is actually
 interesting, that using `2`, even if the transaction is performed by sub-call
