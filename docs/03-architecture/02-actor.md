@@ -96,7 +96,7 @@ And there is no room for making mistakes in the contract's error handling code.
 
 The aspects of **locality** and **loose coupling** mean that we don't even need to link to other CosmWasm contracts. We
 can send messages to anything the Dispatcher has an address for. For example, we can return a `SendMsg`, which will be
-processed by the native `x/supply` module in Cosmos SDK, moving native tokens. As we define standard interfaces for
+processed by the native `x/bank` module in Cosmos SDK, moving native tokens. As we define standard interfaces for
 composability, we can define interfaces to call into core modules (bond and unbond your stake...), and then pass in the
 address to the native module in the contract constructor.
 
