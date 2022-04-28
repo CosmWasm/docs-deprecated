@@ -131,3 +131,19 @@ There are many more editors out there and some have varying degrees of rust supp
 unless you have a strong preference to another editor (e.g. Sublime, Emacs, Vim) trying one of the two above is
 recommended, especially if you are new to rust. Once you are confident in the language, you can always use another
 editor and customize it to your liking.
+
+[CosmWasm IDE](https://github.com/oraichain/cw-vscode)
+
+CosmWasm IDE is a tool that simplifies the CosmWasm smart contract development & deployment processes. It integrates with Gitpod & Keplr to create a simple yet powerful environment to build, deploy, and interact with the CosmWasm smart contracts through default and custom networks using CosmWasm. The tool is currently maintained by Oraichain & CosmWasm.
+  
+#### Components
+
+The CosmWasm IDE consists of three sub-repositories:
+
+- [CosmWasm Gitpod](https://github.com/oraichain/cosmwasm-gitpod) serves as a Gitpod builder which automatically builds a complete development environment including Rust installation, VS Code browser, crucial VS Code extensions, and fully compatible with the Keplr wallet. With this repository, CosmWasm developers will not have to worry about spending hours installing tools & libraries, and they also feel secure when deploying contracts using Keplr.
+
+- [CosmWasm IDE extension](https://github.com/oraichain/cw-vscode) is a VS Code extension which integrates all the important functionalities related to building & deploying CosmWasm smart contracts through simple button clicks.
+
+- [CosmWasm IDE extension webview](https://github.com/oraichain/cw-ide-webview) is a React application that lies on top of the CosmWasm IDE Extension. It is responsible for connecting with the Keplr wallet and show inputs to deploy & interact with the contracts. It also allows adding custom networks.
+
+For more information, please visit their repositories to read more. You can also read the CosmWasm IDE's tutorial [here](https://docs.cosmwasm.com/docs/1.0/tutorials/cosmwasm-ide)
