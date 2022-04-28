@@ -20,7 +20,7 @@ look in the contract's `schema` folder. In here you will see at least two releva
 Some contracts with large API areas have many more schema files, so explore them to find the message or command you're
 looking for.
 
-In the namespace example contract, there are only two valid messages once the contract has been instantiated:
+In the nameservice example contract, there are only two valid messages once the contract has been instantiated:
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
