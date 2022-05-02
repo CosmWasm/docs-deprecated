@@ -73,7 +73,7 @@ pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, Co
 
 This migration is a more complete and restricted example where the `cw2` package is used and the `migrate` function ensures that:
 
-- We are migration from the same type of contract; checking its name
+- We are migrating from the same type of contract; checking its name
 - We are upgrading from an older version of the contract; checking its version
 
 ```rust
