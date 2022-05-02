@@ -12,7 +12,7 @@ This is where CW2 specification comes in. It specifies one special `Singleton` t
 
 Working with CW2 is quite straightforward in that, as a smart contract developer you need only perform a couple of steps.
 
-The CW2 Spec provides a `set_contract_version` which should be used in instantiate to store the original version of a contract. It is important to also set_contract_version again after a successful migration to update it.
+The CW2 Spec provides a `set_contract_version` which should be used in instantiate to store the original version of a contract. It is important to also `set_contract_version` as a part of the `pub fn migrate(...)` logic this time (as opposed to `instantiate`) for the contract version to be updated after a succesful migration. 
 
 ```rust
 const CONTRACT_NAME: &str = "crates.io:my-crate-name";
