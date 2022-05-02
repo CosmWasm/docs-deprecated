@@ -46,7 +46,7 @@ pub struct ContractVersion {
 
 Performing a contract migration is a three step process. First, you must write a newer version of the contract you wish to update. Second, you can upload the new code as you did before, but don’t instantiate it. Third, you use a dedicated [MsgMigrateContract](https://github.com/CosmWasm/wasmd/blob/v0.20.0/proto/cosmwasm/wasm/v1/tx.proto#L94-L104) transaction to point this contract to use the new code. And you are done!
 
-During the migration process, the `migrate` function defined on the new code is executed, never the one from the old code. Both the old and the new code has to have a `mgrate` function defined however and properly exported as a library `entry_point`.
+During the migration process, the `migrate` function defined on the new code is executed, never the one from the old code. Only the new code has to have a `mgrate` function defined and properly exported as an `entry_point`.
 
 The `migrate` function itself, exposes the ability to make any granular changes needed to the State, akin to a database migration or any other things you might want to do.
 
