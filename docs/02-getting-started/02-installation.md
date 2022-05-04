@@ -134,7 +134,7 @@ editor and customize it to your liking.
 
 [CosmWasm IDE](https://github.com/oraichain/cw-vscode)
 
-CosmWasm IDE is a tool that simplifies the CosmWasm smart contract development & deployment processes. It integrates with Gitpod & Keplr to create a simple yet powerful environment to build, deploy, and interact with the CosmWasm smart contracts through default and custom networks using CosmWasm. The tool is currently maintained by Oraichain & CosmWasm.
+CosmWasm IDE is a tool that simplifies the CosmWasm smart contract development & deployment processes. It integrates with Gitpod & Keplr to create a simple yet powerful environment to build, deploy, and interact with the CosmWasm smart contracts through default and custom networks using CosmWasm. With Gitpod, CosmWasm developers can develop the smart contracts on the browser, and it is well maintained.  The tool is currently maintained by Oraichain & CosmWasm.
   
 #### Components
 
