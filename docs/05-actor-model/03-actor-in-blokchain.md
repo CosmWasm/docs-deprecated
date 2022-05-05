@@ -13,6 +13,10 @@ This will not be a step-by-step guide on contract creation, as it is a topic
 for the series itself. It would be going through contract elements roughly to
 visualize how to handle architecture in the actor model.
 
+An explanation how are CosmWasm execution performed can be found in
+[SEMANTICS.md](https://github.com/CosmWasm/cosmwasm/blob/main/SEMANTICS.md),
+here I will try to explain it step by step.
+
 ## The state {#state}
 
 As before we would start with the state. Previously we were working with
@@ -187,10 +191,11 @@ additional arguments provided by blockchain:
   The difference is, that `DepsMut` allows updating state, while `Deps`
   allows only to look at it.
 * `Env` object delivers information about the blockchain state in the
-  moment of execution - its height, and the timestamp of execution.
+  moment of execution - its height, the timestamp of executionm and information
+  about the executing contract itself.
 * `MessageInfo` object is information about the contract call - it
-  contains the address which sends the message, and the address of the contract
-  executing message itself.
+  contains the address which sends the message, and the funds send with the
+  message.
 
 Keep in mind, that the signatures of those functions are fixed (except
 the messages type), so you cannot interchange `Deps` with `DepsMut` to
@@ -333,7 +338,7 @@ requested to reply, the contract is called with an entry point:
 
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn reply(&self, deps: DepsMut, env: Env, msg: Reply) -> Result<Response, ContractError> {
+pub fn reply(deps: DepsMut, env: Env, msg: Reply) -> Result<Response, ContractError> {
     // ...
 }
 ```
@@ -397,7 +402,7 @@ This is the purpose of the `migration` entry point. It looks like this:
 
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn migrate(&self, deps: DepsMut, env: Env, msg: MigrateMsg) -> Result<Response<T>, ContracError> {
+pub fn migrate(deps: DepsMut, env: Env, msg: MigrateMsg) -> Result<Response<T>, ContracError> {
     // ..
 }
 ```
@@ -429,7 +434,7 @@ of `sudo` looks like:
 
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn sudo(&self, deps: DepsMut, env: Env, msg: SudoMsg) -> Result<Response, ContractError> {
+pub fn sudo(deps: DepsMut, env: Env, msg: SudoMsg) -> Result<Response, ContractError> {
     // ..
 }
 ```

@@ -10,7 +10,8 @@ chosen in CosmWasm, and what are the consequences of that.
 
 ## The problem {#problem}
 
-Smart contracts can be imagined as sandboxed microservices. Due to SOLID
+Smart contracts can be imagined as sandboxed microservices. Due to
+[SOLID](https://en.wikipedia.org/wiki/SOLID)
 principles, it is valuable to split responsibilities between entities.
 However, to split the work between contracts themselves, there is a need
 to communicate between them, so if one contract is responsible for
@@ -157,7 +158,9 @@ which would support the `Transfer` action to transfer money to another
 player. Then what would be the state of such a contract? It would be
 just a table mapping player names to the amount of currency they own. The
 contract we just invited exists in CosmWasm examples, and it
-is called the `cw20-base` contract (it is a bit more complicated, but
+is called the
+[`cw20-base` contract](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw20-base)
+(it is a bit more complicated, but
 it is its core idea).
 
 And now there is a question - how is this helpful to transfer currency
@@ -282,19 +285,26 @@ called by `MmoCurrency` on `WarriorNpc`? The reason is, that this operation
 is optional. When scheduling sub-actions on another contract we may choose
 when `Reply` how the result should be handled:
 
-1. Never call `Reply`, action succeeds regardless of the result
-2. Never call `Reply`, succeed only if sub-action succeeded
-3. Call `Reply` on success
-4. Call `Reply` on failure
-5. Always call `Reply`
+1. Never call `Reply`, action fails if sub-message fails
+2. Call `Reply` on success
+3. Call `Reply` on failure
+4. Always call `Reply`
 
 So if we do not request `Reply` to be called by subsequent contract, it will
-not happen. It is possible to just schedule some additional "optional" actions,
-which result doesn't matter so much. Obviously in case such sub call fails, only
-changes done by the original action would be stored on a blockchain, and all
-changes created by the sub-call would be rolled back (so the sub-contract
-never ends up in an improper state). It is probably a bit complicated for now,
-but I promise it would be simple when you would do some practice with that.
+not happen. In such a case if a sub-call fails, the whole transaction is rolled
+back - sub-message failure transitively causes the original message failure.
+It is probably a bit complicated for now, but I promise it would be simple when
+you would do some practice with that.
+
+When handling the reply, it is important to remember, that although changes
+are not yet applied to the blockchain (the transaction still can be failed), the
+reply handler is already working on the copy of the state with all changes made
+by sub-message so far applied. In most cases, it would be a good thing, but it
+has a tricky consequence - if the contract is calling itself recursively, it is
+possible that subsequent call overwrote things set up in the original message.
+It rarely happens, but may need special treatment in some cases - for
+now I don't want to go deeply into details, but I want you to remember about
+what to expect after state in the actor's flow.
 
 Now let's take a look at handling results with `2`-`4` options. It is actually
 interesting, that using `2`, even if the transaction is performed by sub-call
@@ -310,13 +320,12 @@ for us? Possibly because our internal list was supposed to keep the list of
 players succeeding with the quest, not paid out! So if we have no more currency,
 we still want to update the list!
 
-But if we could use `1` for that, why is `3` exist? It is useful sometimes.
-Probably the most common cause is that in case of failure, we want to leave
-a note about it. Also, it is possible, that we want to succeed only on
-particular types of failure, but it is a way less likely case - unfortunately
-failure of the contract is denoted in CosmWasm only by some arbitrary string,
-so distinguishing failure reason would require parsing this string,
-and it would be difficult to maintain this kind of contract.
+The most common way to use the replies (option `2` in particular)  is to
+instantiate another contract, managed by the called one. The idea is, that
+in those use cases, the creator contract wants to keep the address of created
+contract in its state. To do so it has to create an `Instantiate` sub-message,
+and subscribe for its success response, which contains an address of freshly
+created contract.
 
 In the end, you can see, that performing actions in CosmWasm is built
 with hierarchical state change transactions. The sub-transaction can be
@@ -324,3 +333,10 @@ applied to the blockchain only if everything succeeds, but in case that
 sub-transaction failed, only its part may be rolled back, end other
 changes may be applied. It is very similar to how most database
 systems work.
+
+## Conclusion {#conclusion}
+
+Now you have seen the power of the actor model to avoid reentrancy, properly
+handle errors, and safely sandbox contracts. This helps us provide the solid
+security guarantees of the CosmWasm platform. Let’s get started playing around
+with real contracts in the `wasmd` blockchain.
