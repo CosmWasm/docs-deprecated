@@ -71,10 +71,6 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
               label: 'Overview',
             },
             {
-              to: 'ecosystem/jobs',
-              label: 'Jobs',
-            },
-            {
               to: 'ecosystem/testnets/build-requirements',
               label: 'Testnets',
             },
