@@ -40,17 +40,27 @@ Setup the client:
 ```shell
 # add wallets for testing
 wasmd keys add wallet
->
-{
-  "name": "wallet",
-  "type": "local",
-  "address": "wasm1pze5wsf0dg0fa4ysnttugn0m22ssf3t4a9yz3h",
-  "pubkey": "{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A09EWZLG2oI9mNLG9SbTHjMJEZvH+DGhshjLsUKP5Ijd"}",
-  "mnemonic": "hobby bunker rotate piano satoshi planet network verify else market spring toward pledge turkey tip slim word jaguar congress thumb flag project chalk inspire"
-}
 
 wasmd keys add wallet2
 ```
+
+:::info
+
+When you run the commands above, wasmd will prompt you all the information related to that wallet in YAML (.yml) format. 
+```
+- name: wallet
+  type: local
+  address: wasm1evvnsrte3rdghy506vu4c87x0s5wx0hpppqdd6
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"A2aKoMPLbUnXkN2zJF/q4lIH/34ybelQSRTg3d9Js86T"}'
+  mnemonic: ""
+
+
+**Important** write this mnemonic phrase in a safe place.
+It is the only way to recover your account if you ever forget your password.
+
+table shell potato spike paddle very asthma raise glare noodle vibrant chuckle indicate spell perfect craft step net radio yellow minor deal blur hybrid
+```
+:::
 
 You need some tokens in your address to interact. If you are using local node you can skip this step. Requesting tokens
 from faucet:
