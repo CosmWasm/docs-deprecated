@@ -12,7 +12,7 @@ This is where CW2 specification comes in. It specifies one special `Singleton` t
 
 Working with CW2 is quite straightforward in that, as a smart contract developer you need only perform a couple of steps.
 
-The CW2 Spec provides a `set_contract_version` which should be used in instantiate to store the original version of a contract. It is important to also set_contract_version again after a successful migration to update it.
+The CW2 Spec provides a `set_contract_version` which should be used in instantiate to store the original version of a contract. It is important to also `set_contract_version` as a part of the `pub fn migrate(...)` logic this time (as opposed to `instantiate`) for the contract version to be updated after a succesful migration. 
 
 ```rust
 const CONTRACT_NAME: &str = "crates.io:my-crate-name";
@@ -46,6 +46,8 @@ pub struct ContractVersion {
 
 Performing a contract migration is a three step process. First, you must write a newer version of the contract you wish to update. Second, you can upload the new code as you did before, but don’t instantiate it. Third, you use a dedicated [MsgMigrateContract](https://github.com/CosmWasm/wasmd/blob/v0.20.0/proto/cosmwasm/wasm/v1/tx.proto#L94-L104) transaction to point this contract to use the new code. And you are done!
 
+During the migration process, the migrate function defined on the new code is executed, never the one from the old code. Both the source and the destination `code_id`'s may be migratable, but it is necessary that the new code has a `migrate` function defined and properly exported as an `entry_point`: #[cfg_attr(not(feature = "library"), entry_point)]. 
+
 The `migrate` function itself, exposes the ability to make any granular changes needed to the State, akin to a database migration or any other things you might want to do.
 
 If the migrate function returns an error, the transaction aborts, all state changes are reverted and the migration is not performed.
@@ -71,7 +73,7 @@ pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, Co
 
 This migration is a more complete and restricted example where the `cw2` package is used and the `migrate` function ensures that:
 
-- We are migration from the same type of contract; checking its name
+- We are migrating from the same type of contract; checking its name
 - We are upgrading from an older version of the contract; checking its version
 
 ```rust
