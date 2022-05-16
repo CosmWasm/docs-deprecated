@@ -24,10 +24,10 @@ allowfullscreen></iframe>
 
 This channel is a first stop for blockchain learners. I highly recommend you explore other videos.
 
-In our context, CosmWasm is the framework provides code and tooling to develop smart contracts and infrastructure to
+In our context, CosmWasm is the framework that provides code and tooling to develop smart contracts and infrastructure to
 run it on chain. For now smart contracts are written using Rust.
 
-Here is a short code showing the smart contract execution logic to help to understand.
+Here is a short code snippet showing the smart contract execution logic to help to understand.
 
 ```rust
 /// This logic is used to transfer tokens/cash from one account to another
