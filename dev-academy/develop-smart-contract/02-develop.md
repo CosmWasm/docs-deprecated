@@ -68,18 +68,18 @@ pub fn instantiate(
 ) -> Result<Response, ContractError> {
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
 
-    let owner = msg.admin
+    let owner = msg
+        .admin
         .and_then(|s| deps.api.addr_validate(s.as_str()).ok())
         .unwrap_or(info.sender);
-
     let config = Config {
         owner: owner.clone(),
-        cw20_addr: deps.api.addr_validate(msg.cw20_addr.as_str())?
+        cw20_addr: deps.api.addr_validate(msg.cw20_addr.as_str())?,
     };
-    CONFIG.save(deps.storage, &config);
+    CONFIG.save(deps.storage, &config)?;
 
     // init pot sequence
-    POT_SEQ.save(deps.storage, &Uint128::new(0))?;
+    POT_SEQ.save(deps.storage, &0u64)?;
 
     Ok(Response::new()
         .add_attribute("method", "instantiate")
@@ -123,9 +123,9 @@ pub struct Pot {
 }
 
 /// POT_SEQ holds the last pot ID
-pub const POT_SEQ: Item<Uint128> = Item::new("pot_seq");
+pub const POT_SEQ: Item<u64> = Item::new("pot_seq");
 /// POTS are indexed my an auto incremented integer number.
-pub const POTS: Map<U128Key, Pot> = Map::new("pot");
+pub const POTS: Map<u64, Pot> = Map::new("pot");
 ```
 
 We can use a `save_pot` helper to auto-increment seq and use it as an index for pot.
@@ -136,11 +136,11 @@ pub fn save_pot(deps: DepsMut, pot: &Pot) -> StdResult<()> {
   // increment id if exists, or return 1
   let id = POT_SEQ.load(deps.storage)?;
   // checks for overflow
-  let id = id.checked_add(Uint128::new(1))?;
+   let id = Uint64::new(id).checked_add(Uint64::new(1))?.u64();
   POT_SEQ.save(deps.storage, &id)?;
 
   // save pot with id
-  POTS.save(deps.storage, id.u128().into(), pot)
+  POTS.save(deps.storage, id, pot)
 }
 ```
 
@@ -330,7 +330,7 @@ Here is the `ReceiveMsg`:
 #[serde(rename_all = "snake_case")]
 pub enum ReceiveMsg {
     // Send sends token to an id with defined pot
-    Send { id: Uint128 },
+    Send { id: Uint64 },
 }
 ```
 
@@ -341,16 +341,16 @@ And the smart contract runs this logic:
 ```rust
 pub fn receive_send(
     deps: DepsMut,
-    pot_id: Uint128,
+    pot_id: Uint64,
     amount: Uint128,
     cw20_addr: Addr,
 ) -> Result<Response, ContractError> {
     // load pot
-    let mut pot = POTS.load(deps.storage, pot_id.u128().into())?;
+    let mut pot = POTS.load(deps.storage, pot_id.u64())?;
 
     pot.collected += amount;
 
-    POTS.save(deps.storage, pot_id.u128().into(), &pot)?;
+    POTS.save(deps.storage, pot_id.u64(), &pot)?;
 
     let mut res = Response::new()
         .add_attribute("action", "receive_send")
@@ -358,7 +358,6 @@ pub fn receive_send(
         .add_attribute("collected", pot.collected)
         .add_attribute("threshold", pot.threshold);
 
-    // if collected exceeds threshold prepare a cw20 message
     if pot.collected >= pot.threshold {
         // Cw20Contract is a function helper that provides several queries and message builder.
         let cw20 = Cw20Contract(cw20_addr);
