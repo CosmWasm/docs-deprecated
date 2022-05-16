@@ -35,10 +35,10 @@ complex contracts, where the "ERC20" interface is only a small subset of their f
 
 To enable custom queries, we allow each contract to expose a `query` function, that can access its data store in
 read-only mode. It can load any data it wishes and even perform calculations on it. This method is exposed
-as `query_custom` to call callers (external and internal). The data format (both query and response) is anything the
+as `query_custom` to all callers (external and internal). The data format (both query and response) is anything the
 contract desires, and should be documented in the public schema, along with `HandleMsg` and `InitMsg`.
 
-Note that executing a contract may consume an unbounded amount gas. Whereas `query_raw` will read one key and has a
+Note that executing a contract may consume an unbounded amount of gas. Whereas `query_raw` will read one key and has a
 small, mostly fixed cost, we need to enforce a gas limit on these queries. This is done differently for external and
 internal calls and discussed below.
 
@@ -51,7 +51,7 @@ This functionality is generally not exposed on validating nodes. The query funct
 hard coded, and has execution time limits designed by the developers. This limits abuse. But what about someone
 uploading a wasm contract with an infinite loop, and then using that to DoS any public RPC node that exposes querying?
 
-To avoid such issues, we need to define some fixed gas limit for all `query_custom` transaction called externally. This
+To avoid such issues, we need to define some fixed gas limit for all `query_custom` transactions called externally. This
 will not charge a fee, but is used to limit abuse. However, it is difficult to define a standard value, for a free
 public node would prefer a small amount, but I may want to sync my own archive node and perform complex queries. Thus, a
 gas limit for all `query_custom` calls can be defined in an app-specific configuration file, which can be customized by
@@ -64,7 +64,7 @@ snapshot of the state after the last committed block.
 
 ## Internal Queries {#internal-queries}
 
-While many interactions between contracts can easily be modelled by sending messages, there are some cases where we
+While many interactions between contracts can easily be modeled by sending messages, there are some cases where we
 would like to synchronously query other modules, without altering their state. For example, if I want to resolve a name
 to a [Address](03-addresses.md), or if I want to check KYC status of some account (in another contract) before enabling
 an action. One could model this as a series of messages, but it is quite complex and makes such simple use-cases almost
@@ -94,3 +94,5 @@ extra work here. All storage reads and data processing performed as part of a qu
 as the rest of the transaction, and thus limit processing time. We consider adding explicit guards against re-entrancy
 or max query depth, but have not enforced them yet in `wasmd`. As more work on cross-contract queries comes to fruition,
 this is another place to investigate.
+
+
