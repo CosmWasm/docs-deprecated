@@ -7,7 +7,7 @@ sidebar_position: 7
 The math functions used by cosmwasm are based upon standard rust, but helper functions are provided for u128, u64 and
 decimals.
 
-## Unit128
+## Uint128
 
 A thin wrapper around u128 that is using strings for JSON encoding/decoding, such that the full u128 range can be used
 for clients that convert JSON numbers to floats, like JavaScript and jq.
@@ -41,7 +41,7 @@ saturating_pow
 
 All the wrapping math functions work with Unit128 variables: wrapping_add, wrapping_sub, wrapping_mul, wrapping_pow
 
-## Unit64
+## Uint64
 
 A thin wrapper around u64 that is using strings for JSON encoding/decoding, such that the full u64 range can be used for
 clients that convert JSON numbers to floats, like JavaScript and jq.
