@@ -217,7 +217,7 @@ Different chains and hubs in the Cosmos ecosystem may have some variations on ho
 ### Terra
 
 Terra has some specific differences in how they manage migrations. Firstly; the contract must have been set as migratable on instantiation. The contract needs to have an admin for migratability similar to the standard procedure for migrations.
-Specifically migration in this case for Terra refers to swapping out the code id for a new one that is considered 'compatible' (CW2 helps with this). [Source](https://docs.terra.money/Reference/Terra-core/Module-specifications/spec-wasm.html#interaction).
+Specifically migration in this case for Terra refers to swapping out the code id for a new one that is considered 'compatible' (CW2 helps with this). [Source](https://github.com/terra-money/terrain#migrating-cosmwasm-contracts-on-terra).
 
 > Note: In Terra, it is also possible to migrate a code_id across chains (COL4->5 for example). This operation is atomic and can only be performed once. Its intention is to migrate your code to the new chain and preserve its old code ID. This process helps to prevent downstream breakages of other contracts on the new network which depend on your old code ID.
 > Example command for migrating across chains :
