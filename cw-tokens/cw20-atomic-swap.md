@@ -18,5 +18,3 @@ See the [IOV atomic swap spec](https://github.com/iov-one/iov-core/blob/master/d
 
 Token types
 Currently native tokens are supported; an upcoming version will support CW20 tokens.
-
-
