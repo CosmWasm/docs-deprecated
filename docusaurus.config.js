@@ -62,29 +62,6 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
           ],
         },
         {
-          position: 'left',
-          label: 'Ecosystem',
-          docsPluginId: 'ecosystem',
-          items: [
-            {
-              to: 'ecosystem/overview',
-              label: 'Overview',
-            },
-            {
-              to: 'ecosystem/testnets/build-requirements',
-              label: 'Testnets',
-            },
-            {
-              to: 'ecosystem/hall-of-fame',
-              label: 'Hall of Fame',
-            },
-            {
-              to: 'ecosystem/media/assets',
-              label: 'Media',
-            },
-          ],
-        },
-        {
           type: 'docsVersionDropdown',
           position: 'right',
           dropdownActiveClassDisabled: true,
@@ -166,6 +143,10 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
             {
               label: 'InterWasm',
               href: 'https://github.com/InterWasm',
+            },
+            {
+              label: 'Media',
+              href: '/media',
             },
           ],
         },
@@ -301,9 +282,9 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'ecosystem',
-        path: 'ecosystem',
-        routeBasePath: 'ecosystem',
+        id: 'media',
+        path: 'media',
+        routeBasePath: 'media',
         editUrl: 'https://github.com/InterWasm/docs/edit/main/',
         sidebarPath: require.resolve('./sidebars/sidebarsCommunity.js'),
       },
