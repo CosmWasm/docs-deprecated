@@ -1,13 +1,14 @@
 ---
 id: intro
+title: Media
 slug: /
-sidebar_position: 1
+displayed_sidebar: null
 ---
 
-# Brand guidelines
+## Brand guidelines
 
-Guideline pdf: [link](/CosmWasm_Brand_Guidelines.pdf)
+The guidelines can be viewed in .pdf format following this [link](/CosmWasm_Brand_Guidelines.pdf).
 
-# Logos
+## Logos
 
-You can find the logos in PNG and SVG format in this [link](/logos.tar.gz)
+You can download the logos in PNG and SVG format by clicking on this [link](/logos.tar.gz).
