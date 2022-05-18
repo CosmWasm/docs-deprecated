@@ -19,8 +19,8 @@ files: [
   },
   # Ecosystem Markdown files
   {
-    source: '/ecosystem/**/*',
-    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-ecosystem/**/%original_file_name%',
+    source: '/media/**/*',
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs-media/**/%original_file_name%',
   },
   # CWPLUS Markdown files
   {
