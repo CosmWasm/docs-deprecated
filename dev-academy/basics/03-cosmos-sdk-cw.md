@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Basics of Cosmos SDK and CosmWasm
@@ -22,13 +22,12 @@ What's more, the Cosmos SDK is a capabilities-based system, which allows develop
 of interactions between modules.
 :::
 
-In short, Cosmos SDK is an easy-to-use blockchain framework that enables developers to build application-specific blockchains without delving into the implementation details of low-level blockchain infrastructure (like byzantine fault tolerance).
+In short, Cosmos SDK is an easy-to-use blockchain framework that enables developers to build application-specific blockchains without delving into the implementation details of low-level blockchain infrastructure (e.g., Byzantine fault tolerance).
 
-You can read through Cosmos SDK overview documentation for more information:
+You can read through Cosmos SDK documentation for more information:
 
-- [Cosmos SDK Intro](https://docs.cosmos.network/v0.44/intro) gives a great introduction to the framework.
-- [Cosmos SDK Basics](https://docs.cosmos.network/v0.44/basics) covers basic concepts of cosmos sdk that is required
-  for developing on cosmwasm without much cosmos-sdk knowledge.
+- [Cosmos SDK Intro](https://docs.cosmos.network/main/intro/) gives a great introduction to the framework.
+- [Cosmos SDK Basics](https://docs.cosmos.network/main/basics) covers the basics of Cosmos SDK concepts that are required for developing on CosmWasm with minimal Cosmos SDK knowledge.
 
 ## CosmWasm {#cosmwasm}
 
