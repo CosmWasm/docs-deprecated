@@ -16,7 +16,7 @@ at [CosmWasm/cw-plus](https://github.com/CosmWasm/cw-plus).
 - [cw20](cw20/spec.md) is a specification for fungible tokens.
 - [cw3](cw3/spec.md) is a specification for multisig/voting contracts.
 - [cw4](cw4/spec.md) is a specification for group member contracts.
-- [cw721](cw721/spec.md) is a specification for non fungible tokens.
+- [cw1155](cw1155/spec.md) is a specification for managing multiple tokens.
 
 ## Contribution {#contribution}
 
