@@ -14,10 +14,6 @@ spec, or by contracts that call to any standard cw20 contract.
 The specification is split into multiple sections, a contract may only implement some of this functionality, but must
 implement the base.
 
-:::info This section contains cw20 spec implementation details. If you are around to play with the contract, skip this
-section and go to the [next page](cw20-base-tutorial.md)
-:::
-
 ## Base {#base}
 
 This handles balances and transfers. Note that all amounts are handled as `Uint128` (128 bit integers with JSON string
