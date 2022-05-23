@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # Environment Setup
@@ -15,9 +15,9 @@ For this course, we will be using the public testnet to make things simpler.
 ## Gitpod
 
 [Gitpod](https://www.gitpod.io/) is an online development environment. We have a gitpod image that you can base your
-projects on. The image contains all the requirements below. Gitpod is recommended if you have a stable internet connection.
+projects on. The image contains all the requirements below. Gitpod is only recommended if you have a stable internet connection.
 Add [.gitpod.yml](https://github.com/CosmWasm/cosmwasm-template/blob/master/.gitpod.yml) file to your project's root
-then push it to GitHub. After installing [gitpod extension](https://www.gitpod.io/extension-activation/), on the github
+then push it to GitHub. After installing the [gitpod extension](https://www.gitpod.io/extension-activation/), on the GitHub
 project repo, there will be a `Gitpod` button which will create a workspace for you to work on.
 
 ## Go {#go}
@@ -69,16 +69,15 @@ wasmd version
 ```
 
 :::info
-If you have any problems here, check your `PATH`. `make install` will copy `wasmd` to
-`$HOME/go/bin` by default, please make sure that is set up in your `PATH` as well, which should be the case in general
-for building Go code from source.
+`make install` will copy `wasmd` to `$HOME/go/bin`
+ by default. If you have any problem with the installation of `wasmd`, check your `PATH` and make sure it includes `$HOME/go/bin`. 
 :::
 
 ## Setup wasmd and Wallet {#setup-wasmd-and-wallet}
 
-Let's configure `wasmd` exec, point it to testnets, create a wallet and ask for tokens from the faucet:
+Let's configure the `wasmd` executable, point it to testnets, create a wallet and ask for tokens from the faucet:
 
-First source the cliffnet cosmwasm public network configurations to the shell:
+First, source the cliffnet cosmwasm public network configuration to the shell:
 
 ```shell
 source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/cliffnet-1/defaults.env)
@@ -89,18 +88,24 @@ Setup the client:
 ```shell
 # add wallets for testing
 wasmd keys add wallet
->
-{
-  "name": "wallet",
-  "type": "local",
-  "address": "wasm13nt9rxj7v2ly096hm8qsyfjzg5pr7vn5saqd50",
-  "pubkey": "wasmpub1addwnpepqf4n9afaefugnfztg7udk50duwr4n8p7pwcjlm9tuumtlux5vud6qvfgp9g",
-  "mnemonic": "hobby bunker rotate piano satoshi planet network verify else market spring toward pledge turkey tip slim word jaguar congress thumb flag project chalk inspire"
-}
-
 ```
+:::info
+Running the command above will add an encrypted private key to the wasmd keyring and display its attributes as follows: 
+```
+- name: wallet
+  type: local
+  address: wasm16ew79ekmhkvulym6auxu3prdhejm646de8d575
+  pubkey: '{"@type":"/cosmos.crypto.secp256k1.PubKey","key":"AoUq0+iYyYY9FmCx3vZF2EHhvCq1zDQxIXAH8lEsjOPZ"}'
+  mnemonic: ""
 
-You need some tokens in your address to interact. If you are using a local node you can skip this step. Requesting tokens
+**Important** write this mnemonic phrase in a safe place.
+It is the only way to recover your account if you ever forget your password.
+
+share rhythm physical enrich merry female advance wrist mule mistake measure road pupil spell hollow eternal insect blast quit simple kid tooth drastic anger
+```
+:::
+
+You need some tokens in your address to interact with the network. If you are using a local node you can skip this step. Requesting tokens
 from the faucet:
 
 ```shell
@@ -109,10 +114,10 @@ JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","addres
 
 ## Export wasmd Parameters {#export-wasmd-parameters}
 
-`wasmd` client requires setup for interacting with different testnets.
+`wasmd` client requires to be further configured in order to interact with different testnets.
 Each testnet has its own endpoints and system parameters.
 
-Best way to configure `wasmd` is by setting up environment variables below:
+An effective way to configure `wasmd` is to define the following environment variables, making use of the network configuration parameters we sourced earlier.
 
 ```bash
 # bash
@@ -126,61 +131,52 @@ export NODE=(--node $RPC)
 export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3)
 ```
 
-If the command above throws an error, this means your shell is different. If there are no errors, try running this:
+If the command above throws an error, it means you are utilizing a different type of shell. If there are no errors, try executing the following command:
 
 ```bash
 wasmd query bank total $NODE
 ```
-It means that you can now interact with the node you have configured. You can check that your faucet request has been successful by checking the balance of your wallet bank account by trying the command:
+A response that is similar to the one below means that you can now interact with the node you have configured.
+```shell
+pagination:
+  total: "2"
+supply:
+- amount: "14499899999800"
+  denom: upebble
+- amount: "15075884463468"
+  denom: urock
+```
+ You can check that your faucet request has been successful by checking the balance of your wallet bank account by trying the command:
 ```bash
 wasmd query bank balances $(wasmd keys show -a wallet) $NODE
 ```
-and you can look at the various commands by exploring
+and you can explore the details about various other commands by running
 ```bash
 wasmd help
 ```
 
 
-## Setup linux tools
+## Setup command-line tools
 
-We will be using a few linux tools extensively:
+We will be using a few command-line tools extensively:
 ```shell
 apt install jq curl
 ```
 
-## Setup JS CLI client
+## Setup CosmJS CLI client
 
-Other way to use and interact with on-chain contracts is CosmJS interactive client
+Another way to utilize and interact with on-chain contracts is using the CosmJS interactive client
 [@cosmjs/cli](https://github.com/cosmos/cosmjs/tree/main/packages/cli)
 
-To use it, install [node.js 12+](https://nodejs.org/en/download/) and [npx](https://www.npmjs.com/package/npx)
+To use it, install [node.js 12+](https://nodejs.org/en/download/) and [npx](https://www.npmjs.com/package/npx) first.
+
+Then,
 
 ```shell
 npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
 ```
 
-Now you will see that an interactive shell popped up.
-
-Code below sets up a client that speaks to cliffnet, generates an address and then requests tokens from the faucet.
-"password" is the password of the key file.
-This key is different from the wasmd key generated above
-
-```typescript
-const [addr, client] = await useOptions(cliffnetOptions).setup("password");
-client.getAccount(addr);
-```
-
-You should see something similar to:
-```json
-{
-  address: 'wasm1kfaqnxcsz6pwxyv0h468594g6g2drwxfrrwslv',
-  pubkey: null,
-  accountNumber: 326,
-  sequence: 0
-}
-```
-
-
+With that, you should observe the initialization of an interactive session.
 ## Setting up your IDE {#setting-up-your-ide}
 
-We need a good IDE for developing rust smart contracts. We recommend Intellij with the Rust Plugin.
+We need a good IDE for developing smart contracts with Rust. We recommend [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (the community edition will do) coupled with the Rust Plugin.
