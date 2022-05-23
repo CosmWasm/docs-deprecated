@@ -8,7 +8,6 @@ title: CW20 Merkle Airdrop
 
 Source code is at [cw20-merkle-airdrop](https://github.com/CosmWasm/cw-tokens/tree/main/contracts/cw20-merkle-airdrop).
 
-
 This is a merkle airdrop smart contract that works with cw20 token specification Mass airdrop distributions made cheap
 and efficient.
 
