@@ -73,7 +73,7 @@ wasmd version
  by default. If you have any problem with the installation of `wasmd`, check your `PATH` and make sure it includes `$HOME/go/bin`. 
 :::
 
-## Setup wasmd and Wallet {#setup-wasmd-and-wallet}
+## Setting up wasmd and Wallet {#setup-wasmd-and-wallet}
 
 Let's configure the `wasmd` executable, point it to testnets, create a wallet and ask for tokens from the faucet:
 
@@ -156,14 +156,14 @@ wasmd help
 ```
 
 
-## Setup command-line tools
+## Setting up command-line tools
 
 We will be using a few command-line tools extensively:
 ```shell
 apt install jq curl
 ```
 
-## Setup CosmJS CLI client
+## Setting up the CosmJS CLI client
 
 Another way to utilize and interact with on-chain contracts is using the CosmJS interactive client
 [@cosmjs/cli](https://github.com/cosmos/cosmjs/tree/main/packages/cli)
