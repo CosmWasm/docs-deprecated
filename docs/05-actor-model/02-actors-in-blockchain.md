@@ -1,5 +1,5 @@
 ---
-title: Actors in blokchain
+title: Actors in blockchain
 ---
 
 # Actors in blockchain
