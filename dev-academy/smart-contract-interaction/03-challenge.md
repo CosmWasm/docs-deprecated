@@ -4,4 +4,4 @@ sidebar_position: 3
 
 # Challenge
 
-Try deploying a cw20 token with few friends(or addresses you created) as initial balance owners to recent testnet.
+Try deploying the cw20 binary to the testnet again and instantiate a new cw20 contract with the wallet addresses of your friends (or randomly created addresses) designated as initial balance owners.

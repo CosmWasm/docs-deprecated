@@ -11,8 +11,8 @@ The objectives of smart contracts are the reduction of need in trusted intermedi
 costs, fraud losses, as well as the reduction of malicious and accidental exceptions.
 :::
 
-In short: smart contracts are executable logic run on chain. On chain and decentralized execution makes the logic
-unstoppable, unbreakable and irreversible. This makes the execution trusted thus validity secured by cryptography.
+In short, smart contracts are executable logic run on chain. Decentralized and on-chain execution makes the logic
+unstoppable, unbreakable and irreversible. This makes the execution trusted and the validity secured by means of cryptography.
 
 Smart contracts can represent generalized logic ranging from financial applications to organisational structures.
 
@@ -22,12 +22,12 @@ Here is a great video explanation:
 frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 allowfullscreen></iframe>
 
-This channel is a first stop for blockchain learners. I highly recommend you explore other videos.
+This channel is a first stop for blockchain learners. It is highly recommended that you explore the rest of [the playlist](https://www.youtube.com/watch?v=FkUn86bH34M&list=PLzvRQMJ9HDiQF_5bEErheiAawrJ-2zQoI).
 
 In our context, CosmWasm is the framework that provides code and tooling to develop smart contracts and infrastructure to
-run it on chain. For now smart contracts are written using Rust.
+run them on chain. For now smart contracts are written using Rust.
 
-Here is a short code snippet showing the smart contract execution logic to help to understand.
+Here is a short code snippet exemplifying the smart contract execution logic to help understand the concept better.
 
 ```rust
 /// This logic is used to transfer tokens/cash from one account to another
@@ -71,11 +71,11 @@ pub fn execute_transfer(
 
 As you can see smart contracts are not magic. They are very similar to any other programmed logic.
 
-Differences from any backend development are new concepts from cryptography and other disciplines:
-  - [hash](https://www.investopedia.com/terms/h/hash.asp)
-  - [address](https://www.techslang.com/definition/what-is-a-blockchain-address/)
-  - [merkle root](https://www.investopedia.com/terms/m/merkle-root-cryptocurrency.asp)
-  - [key-value database](https://www.wikiwand.com/en/Key%E2%80%93value_database)
+Differences from traditional back-end development are fundamental concepts from cryptography and other disciplines, such as: 
+  [hash](https://www.investopedia.com/terms/h/hash.asp),
+  [address](https://www.techslang.com/definition/what-is-a-blockchain-address/),
+  [merkle root](https://www.investopedia.com/terms/m/merkle-root-cryptocurrency.asp),
+  [key-value database](https://www.wikiwand.com/en/Key%E2%80%93value_database).
 
-Of course, there are other concepts: consensus, network security, message
-propagation. But these are advanced topics and will not be covered here.
+Of course, there are other differences—consensus, network security and message
+propagation to name a few. However, these are more advanced topics and will not be covered here.
