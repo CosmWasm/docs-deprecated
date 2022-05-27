@@ -185,7 +185,7 @@ The line `#[serde(rename_all = "snake_case")]` performs a snake_case conversion 
 At this point, our template contract can accept the following two types of execute messages in JSON format, embedded in a `MsgExecuteContract` message:
 #### Increment
 
-An address can utilize the Increment function to increment the current count by 1.
+Any address can utilize the Increment function to increment the current count by 1.
 
 ```json
 {
