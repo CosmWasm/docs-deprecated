@@ -30,7 +30,7 @@ run them on chain. For now smart contracts are written using Rust.
 Here is a short code snippet exemplifying the smart contract execution logic to help understand the concept better.
 
 ```rust
-/// This logic is used to transfer tokens/cash from one account to another
+/// This logic is used to transfer tokens/coins from one account to another
 pub fn execute_transfer(
     deps: DepsMut,
     _env: Env,
@@ -38,14 +38,14 @@ pub fn execute_transfer(
     recipient: String,
     amount: Uint128,
 ) -> Result<Response, ContractError> {
-    // here is a validation of amount
+    // Amount validation
     if amount == Uint128::zero() {
         return Err(ContractError::InvalidZeroAmount {});
     }
 
     let rcpt_addr = deps.api.addr_validate(&recipient)?;
 
-    // balances updated in store
+    // Update the stored balances
     BALANCES.update(
         deps.storage,
         &info.sender,
@@ -59,7 +59,7 @@ pub fn execute_transfer(
         |balance: Option<Uint128>| -> StdResult<_> { Ok(balance.unwrap_or_default() + amount) },
     )?;
 
-    // response returned back to indicate execution is successful and further execution
+    // Returning a response back to indicate the execution is successful
     let res = Response::new()
         .add_attribute("action", "transfer")
         .add_attribute("from", info.sender)
