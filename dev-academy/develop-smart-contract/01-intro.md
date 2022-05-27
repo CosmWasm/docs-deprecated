@@ -204,7 +204,7 @@ The owner of the contract can reset the count to an arbitrary number. The check 
 }
 ```
 ### Execution Logic
-Defined in the file `/src/contract.rs`, the `execute()` function uses Rust's pattern matching to route the received `ExecuteMsg` to the appropriate handling logic, either dispatching a `try_increment()` or a `try_reset()` function call depending on the type of message received.
+Defined in the file `/src/contract.rs`, the `execute()` function uses Rust's pattern matching to route the received `ExecuteMsg` to the appropriate handling logic, by either routing to the function `try_increment()` or  `try_reset()` depending on the type of message received.
 
 ```rust
 // src/contract.rs
@@ -340,7 +340,7 @@ You will need [Docker](https://www.docker.com) installed to run this command.
 You will need to make sure the output WASM binary is as small as possible in order to minimize fees and stay under the size limit for the blockchain. Run the following command in the root directory of your Rust smart contract's project folder.
 
 ```sh
-sudo docker run --rm -v "$(pwd)":/code \
+docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
   cosmwasm/rust-optimizer:0.12.6
@@ -364,7 +364,7 @@ Add the script in `Cargo.toml`
 
 ```toml
 [package.metadata.scripts]
-optimize = """sudo docker run --rm -v "$(pwd)":/code \
+optimize = """docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
   cosmwasm/rust-optimizer:0.12.6
