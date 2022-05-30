@@ -191,7 +191,7 @@ additional arguments provided by blockchain:
   The difference is, that `DepsMut` allows updating state, while `Deps`
   allows only to look at it.
 * `Env` object delivers information about the blockchain state in the
-  moment of execution - its height, the timestamp of executionm and information
+  moment of execution - its height, the timestamp of execution and information
   about the executing contract itself.
 * `MessageInfo` object is information about the contract call - it
   contains the address which sends the message, and the funds send with the
