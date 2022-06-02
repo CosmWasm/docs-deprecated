@@ -322,13 +322,13 @@ Once the .wasm binary is built and optimized, we can deploy the contract to the 
 :::note
 For the deployment process to be successful, we'll need to set up `wasmd` and have a wallet address with sufficient funds to deploy the contract. You can find the required instructions [here](/dev-academy/basics/environment#wasmd).
 
-You may ignore this step if you have already set up `wasmd` and requested some upebbles for your wallet address from the faucet.
+You may ignore this step if you have already set up `wasmd` and requested some `umlg`s for your wallet address from the faucet.
 :::
 
 Open up a terminal window and navigate to the `/artifacts` folder located in the project root directory.
 ```bash
 #Deploy the contract to the testnet
-RES=$(wasmd tx wasm store cw_to_do_list.wasm --from wallet --node https://rpc.cliffnet.cosmwasm.com:443 --chain-id cliffnet-1 --gas-prices 0.025upebble --gas auto --gas-adjustment 1.3 -y --output json -b block)
+RES=$(wasmd tx wasm store cw_to_do_list.wasm --from wallet --node https://rpc.malaga-420.cosmwasm.com:443 --chain-id malaga-420 --gas-prices 0.25umlg --gas auto --gas-adjustment 1.3 -y --output json -b block)
 
 #Get the Code Id
 echo $RES | jq -r '.logs[0].events[-1].attributes[0].value'
@@ -346,16 +346,16 @@ Let us import the necessary `StdFee` interface and generate/load a wallet addres
 ```js
 import { StdFee } from "@cosmjs/stargate";
 
-const [addr, client] = await useOptions(cliffnetOptions).setup("password");
+const [addr, client] = await useOptions(malagaOptions).setup("password");
 
 //Display the wallet address
 client.getAccount(addr);
 //Display the account balance
-client.getBalance(addr,"upebble")
+client.getBalance(addr,"umlg")
 ```
 Define a `defaultFee` to be passed into instantiation and execution functions later on:
 ```js
-const defaultFee: StdFee = { amount: [{amount: "200000", denom: "upebble",},], gas: "200000",};
+const defaultFee: StdFee = { amount: [{amount: "200000", denom: "umlg",},], gas: "200000",};
 ```
 We can now instantiate the contract and create a To-Do List instance using the code id we have received upon deployment. Notice that the instantiation message is empty (i.e., `{}`) and does not specify an `owner` address. In this case, the contract will be instantiated with our wallet address assigned as the contract `owner`.
 ```js
@@ -376,7 +376,7 @@ The `contractAddress` is the address of the contract instance that we have creat
 For the remainder of this section, the contract address will be passed into the execute() and query() functions as `instantiateResponse.contractAddress`. If you want to access the same contract instance in the future, it is recommended that you note the contract address down so that the next time you initialize a CosmJS CLI session, you can store the address in a variable (e.g., `const myOldContract = "The contract address you noted down"`) and use that variable instead of `instantiateResponse.contractAddress` as a function parameter to target this particular contract instance without the need of re-instantiating a new one.
 :::
 
-The `transactionHash` can be carried over to the [Cliffnet Block Explorer](https://block-explorer.cliffnet.cosmwasm.com/) to examine the transaction for the instantiation in detail.
+The `transactionHash` can be carried over to the [Malaga-420 Block Explorer](https://block-explorer.malaga-420.cosmwasm.com/) to examine the transaction for the instantiation in detail.
 
 The `logs`, among other details, include the attributes we've added to the `instantiate()` function response in the contract code.
 ```rust
@@ -422,7 +422,7 @@ The executeResponse should look similar to the one below.
   transactionHash: '591830F0805C620336CC9E1A66DBCF34BA5ECF5415C4B41EC21112EEDF513510'
 }
 ```
-The `transactionHash` can again be carried over to the [Cliffnet Block Explorer](https://block-explorer.cliffnet.cosmwasm.com/) to examine the transaction for the execution in detail.
+The `transactionHash` can again be carried over to the [Malaga-420 Block Explorer](https://block-explorer.malaga-420.cosmwasm.com/) to examine the transaction for the execution in detail.
 
 Now, let us query the To-Do List contract and examine the response.
 
@@ -567,7 +567,7 @@ Do not exit the CosmJS CLI session yet, so that we can create a different wallet
 Now, running the command below will create a new key file containing an encrypted mnemonic in your `HOME` directory (i.e., ~/.another.key) and generate a new wallet address.
 
 ```js
-const [another_addr, another_client] = await useOptions(cliffnetOptions).setup("password", ".another.key" );
+const [another_addr, another_client] = await useOptions(malagaOptions).setup("password", ".another.key" );
 ```
 You may compare the wallet addresses at hand with the following commands:
 ```js
