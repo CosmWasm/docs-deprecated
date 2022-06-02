@@ -564,20 +564,10 @@ With that, we've covered the basic functionality of our To-Do List contract.
 
 Do not exit the CosmJS CLI session yet, so that we can create a different wallet address (i.e., one that is not the owner of our contract instance) and try to append a new entry to our To-Do list.
 
-Navigate to your `HOME` directory and temporarily rename the file `~/.cliffnet.key` to `~/.old_cliffnet.key`.
-:::tip
-`~/.cliffnet.key` is a hidden file and will not be displayed on your file manager UI by default. If you are on a Mac you can press `Cmd + Shift + .` and if you are on a Linux machine you can press `Ctrl + H` to toggle the visibility of hidden files.
-
-An alternative is to open up a new Terminal window and rename the file with the following command:
-```bash
-mv ~/.cliffnet.key ~/.old_cliffnet.key
-```
-:::
-
-Now, running the command below will re-create the `~/.cliffnet.key` file in your `HOME` directory and generate a new wallet address.
+Now, running the command below will create a new key file containing an encrypted mnemonic in your `HOME` directory (i.e., ~/.another.key) and generate a new wallet address.
 
 ```js
-const [another_addr, another_client] = await useOptions(cliffnetOptions).setup("password");
+const [another_addr, another_client] = await useOptions(cliffnetOptions).setup("password", ".another.key" );
 ```
 You may compare the wallet addresses at hand with the following commands:
 ```js
@@ -627,4 +617,11 @@ Result<Response, ContractError> {
     ...
 }
 ```
-You may now exit the CosmJS CLI with the command `.exit` and rename the file `~/.old_cliffnet.key` back to `~/.cliffnet.key` if you are planning to interact with the previous contract instance as the contract owner on future CosmJS CLI sessions.
+You may now exit the CosmJS CLI session with the command `.exit`.
+## Challenge
+Modify the To-Do List contract so that the contract owner is able to 
+
+* transfer the ownership of the contract to another address.
+
+* set a due date for each To-Do List entry.
+  
