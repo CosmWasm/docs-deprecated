@@ -2,61 +2,78 @@
 sidebar_position: 2
 ---
 
-# Develop Contract
+# Developing a Smart Contract
 
-In this session, we will build on top of the template we generated on the previous [page](01-intro.md).
-
-Here is the application logic we want:
-
-- Collected tokens in smart contract's balance are released to a target address after
-  the token amount exceeds a specified amount.
-- Contract accepts cw20 token that is predefined by the admin.
-
-:::warning
-We recommend deleting boilerplate code during implementation to help with copying and pasting code.
+In this section, we will build on top of the template that was generated [previously](01-intro.md), and develop a smart contract that will function as a To-Do List.
+:::tip Reminder
+The template contract is only being utilized to provide the initial structure. The various functions, messages and data structures that are defined in the template contract will need to be repurposed, replaced or removed in accordance with the needs of our new contract.
 :::
 
-:::info
-You can find the full version of this contract at [cw-contracts/cw20-pot](https://github.com/InterWasm/cw-contracts/tree/main/contracts)
-:::
+Here is the application logic:
+- The owner of the To-Do List contract can add new entries, update existing ones or delete them.  
+- The contract can be queried to return individual entries as well as a subset of the whole list. 
 
-## Config
+You can find the full version of this contract by clicking on the following link:
+* [cw-contracts/cw-to-do-list](https://github.com/InterWasm/cw-contracts/tree/main/contracts)
+## Contract Config & State
 
-`admin` information which determines who has pot creation address must be persisted on contract
-storage during each execution. We will save this information to the storage on `Instantiate` phase.
+Each instance of the To-Do List contract should have an `owner` with entry manipulation rights. In order to be able to check whether a function call is authorized or not, the address of the owner must be persisted on contract storage following the instantiation.
 
 ```rust
-// state.rs
+//state.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Config {
   pub owner: Addr,
-  pub cw20_addr: Addr
 }
 
 pub const CONFIG: Item<Config> = Item::new("config");
+//Item stores a single variable of a given type, identified by a string storage key.
 ```
+A To-Do List consists of entries, each of which is identified by a unique `id`. The `id` of the latest entry on the list is stored as `ENTRY_SEQ`, an Item that holds an integer value. The value stored in `ENTRY_SEQ` is incremented every time a new entry is appended to the list.
 
-`Item` is used since this data will be a singleton.
+The attributes `status` and `priority` are defined as enums to provide uniformity among different entries.
 
+The list of entries as a whole is persisted as the `LIST`, a Map that holds a collection of `id` to `Entry` pairs.
+
+```rust
+//state.rs
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct Entry {
+    pub id: Uint64,
+    pub description: String,
+    pub status: Status,
+    pub priority: Priority,
+}
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub enum Status {
+    ToDo,
+    InProgress,
+    Done,
+    Cancelled
+}
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub enum Priority {
+    None,
+    Low,
+    Medium,
+    High
+}
+
+pub const ENTRY_SEQ: Item<Uint64> = Item::new("entry_seq");
+pub const LIST: Map<u64, Entry> = Map::new("list");
+```
 ## Instantiate
 
-### Msg
-
+### Message Definition
 ```rust
 // msg.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InstantiateMsg {
-    pub admin: Option<String>,
-    /// cw20_addr is the address of the allowed cw20 token
-    pub cw20_addr: String
+    pub owner: Option<String>,
 }
 ```
-
-`admin` is defined as `Option` because if `None`, `info.sender` will be set as admin.
-The accepted cw20 address is set here.
-
-### Instantiate
-
+`owner` is defined as an optional attribute. If no owner information is provided in the `InstantiateMsg` received, the address that instantiates the contract will be assigned as the owner by default.
+### Instantiation Logic
 ```rust
 //contract.rs
 #[cfg_attr(not(feature = "library"), entry_point)]
@@ -69,105 +86,58 @@ pub fn instantiate(
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
 
     let owner = msg
-        .admin
-        .and_then(|s| deps.api.addr_validate(s.as_str()).ok())
+        .owner
+        .and_then(|addr_string| deps.api.addr_validate(addr_string.as_str()).ok())
         .unwrap_or(info.sender);
+    // If the instantiation message contains an owner address, validate the address and use it.
+    // Otherwise, the owner is the address that instantiates the contract.    
+
     let config = Config {
-        owner: owner.clone(),
-        cw20_addr: deps.api.addr_validate(msg.cw20_addr.as_str())?,
+        owner: owner.clone()
     };
     CONFIG.save(deps.storage, &config)?;
+    //Save the owner address to contract storage.
 
-    // init pot sequence
-    POT_SEQ.save(deps.storage, &0u64)?;
+    ENTRY_SEQ.save(deps.storage, &Uint64::zero())?;
+    //Save the entry sequence to contract storage, starting from 0.
 
     Ok(Response::new()
         .add_attribute("method", "instantiate")
-        .add_attribute("owner", owner)
-        .add_attribute("cw20_addr", msg.cw20_addr))
+        .add_attribute("owner", owner))
 }
 ```
-
-The logic above is for if the owner is `Some` validate, if not use `info.sender` and store configuration,
-then return `Response` with attributes.
-
+Once again, the logic above dictates that if the `owner` in the instantiation message is `Some`, validate and use it; if not, use `info.sender` instead and store the configuration before returning a `Response` with the relevant attributes.
+:::info
 ```rust
-let owner = msg.admin
-    .and_then(|s| deps.api.addr_validate(s.as_str()).ok())
+let owner = msg.owner
+    .and_then(|addr_string| deps.api.addr_validate(addr_string.as_str()).ok())
     .unwrap_or(info.sender);
 ```
+The example above is a great one to understand the concept of method chaining.
 
-The example above is a great one to understand method chaining.
-Great read: [Rust Combinator](https://doc.rust-lang.org/rust-by-example/error/option_unwrap/and_then.html)
+A great read on the subject: [Rust Combinators: and_then](https://doc.rust-lang.org/rust-by-example/error/option_unwrap/and_then.html)
+:::
 
-### Tests
+## Execute
 
-I leave this part to you as a challenge ;)
-
-## Create Pot
-
-`admin` can create pots to collect money in with a given threshold.
-
-### State
+### Message Definition
+The owner of the To-Do List contract should be able to add new entries to the list, update existing ones or delete the entries on the list. Therefore, the ExecuteMsg enum should include a struct for each of these actions to later route a received execution message to the appropriate handling logic.
 
 ```rust
-// state.rs
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct Pot {
-  /// target_addr is the address that will receive the pot
-  pub target_addr: Addr,
-  /// threshold_amount is the token threshold amount
-  pub threshold_amount: Uint128,
-  /// collected keeps information on how much is collected for this pot.
-  pub collected: Uint128,
-}
-
-/// POT_SEQ holds the last pot ID
-pub const POT_SEQ: Item<u64> = Item::new("pot_seq");
-/// POTS are indexed my an auto incremented integer number.
-pub const POTS: Map<u64, Pot> = Map::new("pot");
-```
-
-We can use a `save_pot` helper to auto-increment seq and use it as an index for pot.
-
-```rust
-// state.rs
-pub fn save_pot(deps: DepsMut, pot: &Pot) -> StdResult<()> {
-  // increment id if exists, or return 1
-  let id = POT_SEQ.load(deps.storage)?;
-  // checks for overflow
-   let id = Uint64::new(id).checked_add(Uint64::new(1))?.u64();
-  POT_SEQ.save(deps.storage, &id)?;
-
-  // save pot with id
-  POTS.save(deps.storage, id, pot)
-}
-```
-
-### Msg
-
-`ExecuteMsg` becomes this:
-
-```rust
-// msg.rs
+//msg.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum ExecuteMsg {
-    CreatePot {
-        /// target_addr will receive tokens when token amount threshold is met.
-        target_addr: String,
-        /// threshold is the token amount for releasing tokens.
-        threshold: Uint128
-    },
+    NewEntry {description: String, priority: Option<Priority>},
+    UpdateEntry { id: Uint64, description: Option<String>, status: Option<Status>, priority: Option<Priority> },
+    DeleteEntry { id: Uint64 }
 }
 ```
+### Execution Logic
 
-### Execute
-
-Depending on the message that is received `Execute` will either `CreatePot` or `Receive`:
-
+The `execute()` function [match](https://doc.rust-lang.org/rust-by-example/flow_control/match.html)es the received `ExecuteMsg` with one of the structs defined in the file `/src/msg.rs` and routes it to the corresponding handler function. 
 ```rust
-// contract.rs
+//contract.rs
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn execute(
     deps: DepsMut,
@@ -176,211 +146,485 @@ pub fn execute(
     msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
     match msg {
-        ExecuteMsg::CreatePot {
-            target_addr,
-            threshold,
-        } => execute_create_pot(deps, info, target_addr, threshold),
-        ExecuteMsg::Receive(msg) => execute_receive(deps, info, msg),
+        ExecuteMsg::NewEntry {description, priority} => create_new_entry(deps, info, description, priority),
+        ExecuteMsg::UpdateEntry {id, description, status, priority } => update_entry(deps, info, id, description, status, priority),
+        ExecuteMsg::DeleteEntry {id} => delete_entry(deps, info, id)
     }
 }
 ```
 
-The example above is a great one to understand the [match](https://doc.rust-lang.org/rust-by-example/flow_control/match.html) operator.
-Now that we have added additional options to `ExecuteMsg` we will go back and update the enum.
+The function `create_new_entry()` handles the creation of a new entry on the list. 
+* Before creating the new entry, the function checks if the message sender is the owner of the contract. If not, it returns an error and the new entry creation fails to be performed.
+* In order to generate a unique `id` for the new entry, the function increments the entry sequence and saves it to the contract storage with `ENTRY_SEQ.update()`.
+* The new entry is defined with the received `description` and `priority` attributes. The `status` of the new entry is set to `ToDo` by default. Notice that `priority` is an optional parameter. If not provided, the default value will be `None`.
+* The function finally saves the new entry to the `LIST` with the matching `id` and returns a `Response` with the relevant attributes. 
+
+```rust
+//contract.rs
+pub fn create_new_entry(deps: DepsMut, info: MessageInfo, description: String, priority: Option<Priority>) -> Result<Response, ContractError> {
+    let owner = CONFIG.load(deps.storage)?.owner;
+    if info.sender != owner {
+        return Err(ContractError::Unauthorized {});
+    }
+    let id = ENTRY_SEQ.update::<_, cosmwasm_std::StdError>(deps.storage, |id| {
+        Ok(id.add(Uint64::new(1)))
+    })?;
+    let new_entry = Entry {
+        id,
+        description,
+        priority: priority.unwrap_or(Priority::None),
+        status: Status::ToDo
+    };
+    LIST.save(deps.storage, id.u64(), &new_entry)?;
+    Ok(Response::new().add_attribute("method", "create_new_entry")
+                      .add_attribute("New Entry Id: ", id))
+}
+```
+The function `update_entry()` handles the update of an existing entry on the list. 
+* Before carrying on with the new update, the function checks if the message sender is the owner of the contract. If not, it returns an error and the update fails to be performed.
+* The entry with the matching `id` is loaded from the `LIST`.
+* Sharing the same id, an updated version of the entry is defined with the received values for `description`, `status` and `priority`. These are optional parameters and if any one of them is not provided, the function defaults back to the corresponding value from the entry loaded.
+* The function saves the updated entry to the `LIST` with the matching `id` and returns a `Response` with the relevant attributes. 
+
+```rust
+//contract.rs
+pub fn update_entry(deps: DepsMut, info: MessageInfo, id: Uint64, description: Option<String>, status: Option<Status>, priority: Option<Priority>) -> Result<Response, ContractError> {
+    let owner = CONFIG.load(deps.storage)?.owner;
+    if info.sender != owner {
+        return Err(ContractError::Unauthorized {});
+    }
+
+    let entry = LIST.load(deps.storage, id.u64())?;
+    let updated_entry = Entry {
+        id,
+        description: description.unwrap_or(entry.description),
+        status: status.unwrap_or(entry.status),
+        priority: priority.unwrap_or(entry.priority),
+    };
+    LIST.save(deps.storage, id.u64(), &updated_entry)?;
+    Ok(Response::new().add_attribute("method", "update_entry")
+                      .add_attribute("Updated Entry Id: ", id))
+}
+```
+The function `delete_entry()` handles the removal of an existing entry from the list.
+* Before carrying on with the removal, the function checks if the message sender is the owner of the contract. If not, it returns an error and the deletion fails to be performed.
+* The entry with the matching `id` is removed from the `LIST`.
+* The function returns a `Response` with the relevant attributes.
+
+```rust
+//contract.rs
+pub fn delete_entry(deps: DepsMut, info: MessageInfo, id: Uint64) -> Result<Response, ContractError> {
+    let owner = CONFIG.load(deps.storage)?.owner;
+    if info.sender != owner {
+        return Err(ContractError::Unauthorized {});
+    }
+
+    LIST.remove(deps.storage, id.u64());
+    Ok(Response::new().add_attribute("method", "delete_entry")
+                      .add_attribute("Deleted Entry Id: ", id))
+}
+```
+
+## Query
+
+### Message Definition
+Upon creating and populating the list with entries, querying individual entries or a subset of the whole list should be possible. Therefore, the file `/src/msg.rs` should include a `QueryMsg` enum that defines a struct for each query type to be received, along with the corresponding response message definition for each query type.
 
 ```rust
 //msg.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
-pub enum ExecuteMsg {
-    CreatePot {
-        /// target_addr will receive tokens when token amount threshold is met.
-        target_addr: String,
-        /// threshold is the token amount for releasing tokens.
-        threshold: Uint128,
-    },
-    /// Receive forwards received cw20 tokens to an execution logic
-    Receive(Cw20ReceiveMsg),
+pub enum QueryMsg {
+    QueryEntry {id: Uint64},
+    QueryList {start_after: Option<u64>, limit: Option<u32>},
 }
 
+// A custom struct is defined for each query response
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct EntryResponse {
+    pub id: Uint64,
+    pub description: String,
+    pub status: Status,
+    pub priority: Priority,
+}
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct ListResponse {
+    pub entries: Vec<Entry>,
+}
 ```
-
-Now that we have updated `ExecuteMsg`, we must create `execute_create_pot` which is called by the contract's `Execute` function.
+### Query Logic
+The `query()` function matches the received `QueryMsg` with one of the structs defined in the file /src/msg.rs, routes it to the corresponding handler function and returns a query response in byte-array format.
+```rust
+//contract.rs
+#[cfg_attr(not(feature = "library"), entry_point)]
+pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
+    match msg {
+        QueryMsg::QueryEntry { id } => to_binary(&query_entry(deps, id)?),
+        QueryMsg::QueryList {start_after, limit} => to_binary(&query_list(deps, start_after, limit)?),
+    }
+}
+```
+The function `query_entry()` handles the query of an individual existing entry on the list.
+* The entry with the matching `id` is loaded from the `LIST`.
+* An `EntryResponse` is formed with the attributes of the loaded entry and returned.
 
 ```rust
-// contract.rs
-pub fn execute_create_pot(
-    deps: DepsMut,
-    info: MessageInfo,
-    target_addr: String,
-    threshold: Uint128,
-) -> Result<Response, ContractError> {
-    // owner authentication
-    let config = CONFIG.load(deps.storage)?;
-    if config.owner != info.sender {
+fn query_entry(deps: Deps, id: Uint64) -> StdResult<EntryResponse> {
+    let entry = LIST.load(deps.storage, id.u64())?;
+    Ok(EntryResponse { id: entry.id, description: entry.description, status: entry.status, priority: entry.priority })
+}
+```
+The function `query_list()` handles the queries that demand a subset of the whole list. Making use of [Map](https://docs.rs/cw-storage-plus/0.13.2/cw_storage_plus/struct.Map.html)'s `range()` function, custom range queries are possible on the stored list of entries.  
+
+* The optional parameters `start_after` and `limit` are used to define the subset of the list in order to limit the number of entries returned.
+* `start_after` serves as the lower index bound for the `range()` function.
+* The function `take(limit)` determines the maximum number of entries to be returned. 
+    * If a `limit` is not provided, the function defaults to return a maximum of 10 entries. 
+    * If a `limit` is provided, the `limit` gets compared with the `MAX_LIMIT` and the smaller of the two is used as the maximum number of entries to be returned.
+* The `range().take(limit).collect()` method-chain outputs the result as a vector of (id, Entry) tuples.
+* The output is then mapped into an Entry-only vector in order to prepare the `ListResponse` struct that will be returned as the query response.
+ 
+```rust
+//contract.rs
+// Limits for the custom range query
+const MAX_LIMIT: u32 = 30;
+const DEFAULT_LIMIT: u32 = 10;
+
+fn query_list(deps: Deps,
+              start_after: Option<u64>,
+              limit: Option<u32>,
+) -> StdResult<ListResponse> {
+    let limit = limit.unwrap_or(DEFAULT_LIMIT).min(MAX_LIMIT) as usize;
+    let start = start_after.map(Bound::exclusive);
+    let entries: StdResult<Vec<_>> = LIST
+        .range(deps.storage, start, None, Order::Ascending)
+        .take(limit)
+        .collect();
+    let result = ListResponse {
+        entries: entries?.into_iter().map(|l| l.1.into()).collect(),
+    };
+    Ok(result)
+}
+```
+## Contract Deployment
+Now that the main components of the smart contract are defined, the next step is to build and deploy our To-Do List contract to the chain.
+
+### Build
+In order to build the contract and optimize the .wasm binary before deployment, we can follow [the instructions](/dev-academy/develop-smart-contract/intro#building-the-contract) that was included in the previous chapter.
+
+:::tip Reminder
+Because we've used the template contract as a starting point, there might be remnants of the template code that interfere with the build process causing compilation warnings and errors (e.g., unresolved imports) which should be trivial to solve. Still, if you are having problems at this point, please refer to the full version of the contract code [here](https://github.com/InterWasm/cw-contracts/tree/main/contracts) for a working example.
+:::
+
+### Deploy
+Once the .wasm binary is built and optimized, we can deploy the contract to the testnet.
+
+:::note
+For the deployment process to be successful, we'll need to set up `wasmd` and have a wallet address with sufficient funds to deploy the contract. You can find the required instructions [here](/dev-academy/basics/environment#wasmd).
+
+You may ignore this step if you have already set up `wasmd` and requested some upebbles for your wallet address from the faucet.
+:::
+
+Open up a terminal window and navigate to the `/artifacts` folder located in the project root directory.
+```bash
+#Deploy the contract to the testnet
+RES=$(wasmd tx wasm store cw_to_do_list.wasm --from wallet --node https://rpc.cliffnet.cosmwasm.com:443 --chain-id cliffnet-1 --gas-prices 0.025upebble --gas auto --gas-adjustment 1.3 -y --output json -b block)
+
+#Get the Code Id
+echo $RES | jq -r '.logs[0].events[-1].attributes[0].value'
+```
+Using this Code Id, any address can instantiate the contract and create their own To-Do List instance.
+## Contract Interaction
+Now that the contract is deployed to the testnet with a Code Id, it is time to instantiate the contract and interact with our own To-Do List contract instance.
+
+Run the following command to initialize a CosmJS CLI session.
+```bash
+npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts
+```
+
+Let us import the necessary `StdFee` interface and generate/load a wallet address.
+```js
+import { StdFee } from "@cosmjs/stargate";
+
+const [addr, client] = await useOptions(cliffnetOptions).setup("password");
+
+//Display the wallet address
+client.getAccount(addr);
+//Display the account balance
+client.getBalance(addr,"upebble")
+```
+Define a `defaultFee` to be passed into instantiation and execution functions later on:
+```js
+const defaultFee: StdFee = { amount: [{amount: "200000", denom: "upebble",},], gas: "200000",};
+```
+We can now instantiate the contract and create a To-Do List instance using the code id we have received upon deployment. Notice that the instantiation message is empty (i.e., `{}`) and does not specify an `owner` address. In this case, the contract will be instantiated with our wallet address assigned as the contract `owner`.
+```js
+const codeId = 1345 //Replace the Code Id with the one you have received earlier
+const instantiateResponse = await client.instantiate(addr, codeId, {}, "To Do List", defaultFee)
+console.log(instantiateResponse)
+```
+The instantiation should succeed and we should have a response similar to the one below.
+```js
+{
+  contractAddress: 'wasm1mls5039qaptduck4c33h39f4nvl603dkx6xxetclnefdderf2ngsta4tuf',
+  logs: [ { msg_index: 0, log: '', events: [Array] } ],
+  transactionHash: '8CF7CFFDF83EF3553561675AAC49331FB16CAF74A85841D8E7CF8B60DBB5EEBA'
+}
+```
+The `contractAddress` is the address of the contract instance that we have created. We can now include this address in execute and query messages in order to target this specific To-Do List instance.
+:::note
+For the remainder of this section, the contract address will be passed into the execute() and query() functions as `instantiateResponse.contractAddress`. If you want to access the same contract instance in the future, it is recommended that you note the contract address down so that the next time you initialize a CosmJS CLI session, you can store the address in a variable (e.g., `const myOldContract = "The contract address you noted down"`) and use that variable instead of `instantiateResponse.contractAddress` as a function parameter to target this particular contract instance without the need of re-instantiating a new one.
+:::
+
+The `transactionHash` can be carried over to the [Cliffnet Block Explorer](https://block-explorer.cliffnet.cosmwasm.com/) to examine the transaction for the instantiation in detail.
+
+The `logs`, among other details, include the attributes we've added to the `instantiate()` function response in the contract code.
+```rust
+//contract.rs
+Ok(Response::new()
+        .add_attribute("method", "instantiate")
+        .add_attribute("owner", owner))
+```
+At this point the `owner` address can be extracted from the `logs` and should match your wallet address. 
+```js
+console.log(instantiateResponse.logs[0].events[2].attributes[2])
+//Outputs the address of the contract owner
+
+client.getAccount(addr);
+//Outputs your wallet details
+```
+Now, let us create a new To-Do List entry. Notice that the execute() function targets the contract address we've received upon instantiation and the message inside matches the struct `ExecuteMsg::NewEntry` that was defined in the contract code under `/src/msg.rs`.
+```js
+//Enable REPL editor mode to edit multiple lines of code
+.editor
+
+const executeResponse = await client.execute(
+         addr, 
+         instantiateResponse.contractAddress,
+         {
+           new_entry: {
+             description: "A new entry.",
+             priority: "Medium"
+           }
+         },
+         defaultFee,
+       )
+
+//Exit editor using `^D` to execute the code entered
+^D
+
+console.log(executeResponse)
+```
+The executeResponse should look similar to the one below.
+```js
+{
+  logs: [ { msg_index: 0, log: '', events: [Array] } ],
+  transactionHash: '591830F0805C620336CC9E1A66DBCF34BA5ECF5415C4B41EC21112EEDF513510'
+}
+```
+The `transactionHash` can again be carried over to the [Cliffnet Block Explorer](https://block-explorer.cliffnet.cosmwasm.com/) to examine the transaction for the execution in detail.
+
+Now, let us query the To-Do List contract and examine the response.
+
+Notice that the message inside the query() function matches the struct `QueryMsg::QueryList` that was defined in the contract code under `/src/msg.rs`. We are not utilizing the optional `start_after` and `limit` parameters as we do not need to paginate a list that only has a single entry at this point.
+
+```js
+const queryResult = await client.queryContractSmart(instantiateResponse.contractAddress, { query_list: {} })
+
+console.log(queryResult)
+```
+The query result should be as follows:
+```js
+{
+  entries: [
+    {
+      id: '1',
+      description: 'A new entry.',
+      status: 'ToDo',
+      priority: 'Medium'
+    }
+  ]
+}
+```
+Create another entry by calling the execute() function again with the message inside matching the `ExecuteMsg:NewEntry` struct.
+
+```js
+//Enable REPL editor mode to edit multiple lines of code
+.editor
+
+const executeResponse_2 = await client.execute(
+         addr, 
+         instantiateResponse.contractAddress,
+         {
+           new_entry: {
+             description: "Another entry.",
+             priority: "Low"
+           }
+         },
+         defaultFee,
+       )
+
+//Exit editor using `^D` to execute the code entered
+^D
+```
+If we query the list, we should now see two entries.
+```js
+const queryResult_2 = await client.queryContractSmart(instantiateResponse.contractAddress, { query_list: {} })
+
+console.log(queryResult_2)
+```
+
+```js
+{
+  entries: [
+    {
+      id: '1',
+      description: 'A new entry.',
+      status: 'ToDo',
+      priority: 'Medium'
+    },
+    {
+      id: '2',
+      description: 'Another entry.',
+      status: 'ToDo',
+      priority: 'Low'
+    }
+  ]
+}
+```
+Let us update the second entry now. Notice that the message inside the execute() function matches the `ExecuteMsg:UpdateEntry` struct that was defined in `/src/msg.rs`.
+
+```js
+.editor
+const executeResponse_3 = await client.execute(
+         addr,
+         instantiateResponse.contractAddress,
+         {
+           update_entry: {
+            id: "2",
+            description: "Updated entry.",
+            priority: "High",
+            status: "InProgress"
+          }
+         },
+         defaultFee,
+       )
+//Exit editor using `^D` to execute the code entered
+^D       
+```
+Query the second entry individually and see the changes. Notice that the message inside the query() function now matches the struct `QueryMsg::QueryEntry` that was defined in the contract code under `/src/msg.rs`.
+```js
+const queryResult_3 = await client.queryContractSmart(instantiateResponse.contractAddress, {query_entry: {id: "2"} })
+
+console.log(queryResult_3)
+```
+```js
+{
+  id: '2',
+  description: 'Updated entry.',
+  status: 'InProgress',
+  priority: 'High'
+}
+```
+Now, let us delete the first entry. Notice that the message inside the execute() function now matches the `ExecuteMsg:DeleteEntry` struct that was defined in `/src/msg.rs`.
+```js
+.editor
+const executeResponse_4 = await client.execute(
+         addr,
+         instantiateResponse.contractAddress,
+         {
+           delete_entry: {
+            id: "1"
+          }
+         },
+         defaultFee,
+       )
+//Exit editor using `^D` to execute the code entered
+^D
+```
+Query the list again and see that the first entry has been deleted.
+```js   
+const queryResult_4 = await client.queryContractSmart(instantiateResponse.contractAddress, { query_list: {} })
+
+console.log(queryResult_4)
+```
+```js
+{
+  entries: [
+    {
+      id: '2',
+      description: 'Updated entry.',
+      status: 'InProgress',
+      priority: 'High'
+    }
+  ]
+}
+```
+With that, we've covered the basic functionality of our To-Do List contract.
+
+Do not exit the CosmJS CLI session yet, so that we can create a different wallet address (i.e., one that is not the owner of our contract instance) and try to append a new entry to our To-Do list.
+
+Navigate to your `HOME` directory and temporarily rename the file `~/.cliffnet.key` to `~/.old_cliffnet.key`.
+:::tip
+`~/.cliffnet.key` is a hidden file and will not be displayed on your file manager UI by default. If you are on a Mac you can press `Cmd + Shift + .` and if you are on a Linux machine you can press `Ctrl + H` to toggle the visibility of hidden files.
+
+An alternative is to open up a new Terminal window and rename the file with the following command:
+```bash
+mv ~/.cliffnet.key ~/.old_cliffnet.key
+```
+:::
+
+Now, running the command below will re-create the `~/.cliffnet.key` file in your `HOME` directory and generate a new wallet address.
+
+```js
+const [another_addr, another_client] = await useOptions(cliffnetOptions).setup("password");
+```
+You may compare the wallet addresses at hand with the following commands:
+```js
+//The original wallet address for the contract owner
+client.getAccount(addr)
+
+//The new wallet address that is not the contract owner
+another_client.getAccount(another_addr)
+```
+
+Now, we can try and create a new entry. Notice that, although the target contract address remains the same, we are now utilizing `another_client` to call the execute() function with `another_addr` as the sender address.
+```js
+//Enable REPL editor mode to edit multiple lines of code
+.editor
+
+const executeResponse_5 = await another_client.execute(
+         another_addr, 
+         instantiateResponse.contractAddress,
+         {
+           new_entry: {
+             description: "A new entry attempt from a wallet address that is not the contract owner.",
+             priority: "Medium"
+           }
+         },
+         defaultFee,
+       )
+
+//Exit editor using `^D` to execute the code entered
+^D
+```
+The response is expected to be similar to the one below:
+
+```bash
+Error: Error when broadcasting tx EA5DFED64B966CDF839E2FAA8310CB4B7D541368BB1AAF8E7F68CEA4A9BE0BE2  at height 1995608. 
+Code: 5; Raw log: failed to execute message; message index: 0: Unauthorized: execute wasm contract failed
+```
+
+Because `another_addr` is not the owner of our contract instance, the following portion of our contract code returns the error message that corresponds to `ContractError::Unauthorized {}` defined in the file `/src/error.rs`.
+```rust
+//contract.rs
+pub fn create_new_entry(deps: DepsMut, info: MessageInfo, description: String, priority: Option<Priority>) -> 
+Result<Response, ContractError> {
+    let owner = CONFIG.load(deps.storage)?.owner;
+    if info.sender != owner {
         return Err(ContractError::Unauthorized {});
     }
-    // create and save pot
-    let pot = Pot {
-        target_addr: deps.api.addr_validate(target_addr.as_str())?,
-        threshold,
-        collected: Uint128::zero(),
-    };
-    save_pot(deps, &pot)?;
-
-    Ok(Response::new()
-        .add_attribute("action", "execute_create_pot")
-        .add_attribute("target_addr", target_addr)
-        .add_attribute("threshold_amount", threshold))
+    ...
 }
 ```
-
-## Collect Tokens
-
-This is the important part that this document tries to teach: Interaction with an external contract.
-The smart contract will collect cw20 tokens. After cw20 token is sent, this contract will operate on this information.
-
-But how?
-
-CosmWasm smart contracts work as message-sending actors. Each contract execute other via sending a message
-back to the context.
-
-Users can transfer tokens from their account to the smart contract, then execute the smart contract to save this token
-allocation in the next TX. But the problem here is how to verify this token is sent from this user?
-
-One way to achieve this:
-
-1. User [increases token allowance](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw20#allowances) of the cw20-pot smart contract address.
-2. User triggers cw20-pot contract to withdraw allowed funds to its account.
-
-This operation requires two transactions.
-
-There is a better and elegant way: [cw20 Receiver Interface](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw20#receiver).
-
-Works like this, the user creates a message for sending cw20 tokens to cw20-pot contract with an embedded message inside
-to trigger cw20-pot execution.
-
-If you check [cw20-base/contracts.rs#execute_send](https://github.com/CosmWasm/cw-plus/blob/main/contracts/cw20-base/src/contract.rs#L318)
-
-```rust
-pub fn execute_send(
-  deps: DepsMut,
-  _env: Env,
-  info: MessageInfo,
-  contract: String,
-  amount: Uint128,
-  msg: Binary,
-) -> Result<Response, ContractError> {
-```
-
-In the signature, you will notice `contract`, `amount` and `msg`. `contract` is the recipient of the token and also
-address of the next execution, `amount` is the number of tokens and `msg` is `base64` external message.
-
-At the end of `execute_send`, you will see a `Response` with an embedded message sent back to the chain.
-
-```rust
-let res = Response::new()
-        .add_attribute("action", "send")
-        .add_attribute("from", &info.sender)
-        .add_attribute("to", &contract)
-        .add_attribute("amount", amount)
-        .add_message(
-            Cw20ReceiveMsg {
-                sender: info.sender.into(),
-                amount,
-                msg,
-            }
-            .into_cosmos_msg(contract)?,
-        );
-    Ok(res)
-```
-
-As you can see `msg` is wrapped in a `Cw20ReceiveMsg` and for contract-cw20 interaction, your contract accept
-`Cw20ReceiveMsg`.
-
-```rust
-pub fn execute_receive(
-  deps: DepsMut,
-  info: MessageInfo,
-  wrapped: Cw20ReceiveMsg,
-) -> Result<Response, ContractError> {
-  // cw20 address authentication
-  let config = CONFIG.load(deps.storage)?;
-  if config.cw20_addr != info.sender {
-    return Err(ContractError::Unauthorized {});
-  }
-
-  let msg: ReceiveMsg = from_binary(&wrapped.msg)?;
-  match msg {
-    ReceiveMsg::Send { id } => receive_send(deps, id, wrapped.amount, info.sender),
-  }
-}
-```
-
-On this line, contract-defined embed receive msg is parsed from base64 binary.
-
-```rust
-  let msg: ReceiveMsg = from_binary(&wrapped.msg)?;
-```
-
-Here is the `ReceiveMsg`:
-
-```rust
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
-pub enum ReceiveMsg {
-    // Send sends token to an id with defined pot
-    Send { id: Uint64 },
-}
-```
-
-It creates a second depth branch inside `execute`.
-
-And the smart contract runs this logic:
-
-```rust
-pub fn receive_send(
-    deps: DepsMut,
-    pot_id: Uint64,
-    amount: Uint128,
-    cw20_addr: Addr,
-) -> Result<Response, ContractError> {
-    // load pot
-    let mut pot = POTS.load(deps.storage, pot_id.u64())?;
-
-    pot.collected += amount;
-
-    POTS.save(deps.storage, pot_id.u64(), &pot)?;
-
-    let mut res = Response::new()
-        .add_attribute("action", "receive_send")
-        .add_attribute("pot_id", pot_id)
-        .add_attribute("collected", pot.collected)
-        .add_attribute("threshold", pot.threshold);
-
-    if pot.collected >= pot.threshold {
-        // Cw20Contract is a function helper that provides several queries and message builder.
-        let cw20 = Cw20Contract(cw20_addr);
-        // Build a cw20 transfer send msg, that send collected funds to target address
-        let msg = cw20.call(Cw20ExecuteMsg::Transfer {
-            recipient: pot.target_addr.into_string(),
-            amount: pot.collected,
-        })?;
-        res = res.add_message(msg);
-    }
-
-    Ok(res)
-}
-```
-
-After the execution, if the threshold is passed, the collected amount is sent to the target.
-
-## Summary
-
-In this section, we showed you contract to contract interaction and cw20 contract interaction.
-This should give you some insight to message passing, Actor model, and contract development.
-
-## Challenge
-
-As a challenge, you can try to implement a contract that extends [cw-plus](https://github.com/CosmWasm/cosmwasm-plus/)
-or [cw-nfts](https://github.com/CosmWasm/cw-nfts).
+You may now exit the CosmJS CLI with the command `.exit` and rename the file `~/.old_cliffnet.key` back to `~/.cliffnet.key` if you are planning to interact with the previous contract instance as the contract owner on future CosmJS CLI sessions.
