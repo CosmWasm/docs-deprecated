@@ -337,9 +337,9 @@ Using this Code Id, any address can instantiate the contract and create their ow
 ## Contract Interaction
 Now that the contract is deployed to the testnet with a Code Id, it is time to instantiate the contract and interact with our own To-Do List contract instance.
 
-Run the following command to initialize a CosmJS CLI session.
+Open up a new Terminal window and run the following command to initialize a CosmJS CLI session.
 ```bash
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts
+npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts
 ```
 
 Let us import the necessary `StdFee` interface and generate/load a wallet address.
@@ -359,7 +359,7 @@ const defaultFee: StdFee = { amount: [{amount: "200000", denom: "umlg",},], gas:
 ```
 We can now instantiate the contract and create a To-Do List instance using the code id we have received upon deployment. Notice that the instantiation message is empty (i.e., `{}`) and does not specify an `owner` address. In this case, the contract will be instantiated with our wallet address assigned as the contract `owner`.
 ```js
-const codeId = 1345 //Replace the Code Id with the one you have received earlier
+const codeId = 1 //Replace the Code Id with the one you have received earlier
 const instantiateResponse = await client.instantiate(addr, codeId, {}, "To Do List", defaultFee)
 console.log(instantiateResponse)
 ```
