@@ -60,6 +60,8 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
+# If you are updating wasmd, first update your local repository by fetching the remote tags available
+git fetch --tags
 # replace the v0.27.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
 git checkout v0.27.0
 make install
