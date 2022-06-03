@@ -34,7 +34,7 @@ The response should be something similar to:
   sequence: 0
 }
 ```
-Check to see if the wallet address has *umlg*s in it.
+Check to see if the wallet address has `umlg`s in it.
 ```typescript
 client.getBalance(senderAddress,"umlg");
 ```

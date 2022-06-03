@@ -51,7 +51,7 @@ rustup target add wasm32-unknown-unknown
 `wasmd` is the backbone of the CosmWasm platform. It is an implementation of a Cosmoszone with wasm smart contracts
 enabled.
 
-This code was forked from the `cosmos/gaia` repository as a base and then x/wasm was added and many
+This code was forked from the `cosmos/gaia` repository as a base, then x/wasm was added and many
 gaia-specific files were cleaned up. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm
 module.
 
@@ -174,7 +174,7 @@ To use it, install [node.js 12+](https://nodejs.org/en/download/) and [npx](http
 Then,
 
 ```shell
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
+npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
 ```
 
 With that, you should observe the initialization of an interactive session.
