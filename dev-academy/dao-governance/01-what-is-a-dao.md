@@ -37,22 +37,22 @@ There are contracts in [cw-plus](https://github.com/CosmWasm/cw-plus/) that you 
   - [cw3-fixed-multisig](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw3-fixed-multisig): This is a
   simple implementation of the cw3 spec. It is a multisig with a fixed set of addresses created upon instantiation.
     Each address may have the same weight (K of N), or some may have extra voting power
-  - [cw3-flex-multisig](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw3-flex-multisig) has builds on
+  - [cw3-flex-multisig](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw3-flex-multisig) builds on
   cw3-fixed-multisig with a more powerful implementation of the cw3 spec. It is a multisig contract that is backed by
     a cw4 (group) contract, which independently maintains the voter set.
 - [cw4](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw4): CW4 is a spec for storing group membership, which
   can be combined with CW3 multisigs. The purpose is to store a set of members/voters that can be accessed to determine
   permissions in another section.
-  - [cw4-group](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw4-group) It stores a set of members along with
+  - [cw4-group](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw4-group) stores a set of members along with
     an admin, and allows the admin to update the state
-  - [cw4-stake](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw4-stake) It provides a similar API
-    to [cw4-group] (which handles elected membership), but rather than appointing members (by admin or multisig), their
-    membership and weight are based on the number of tokens they have staked. This is similar to many DAOs.
+  - [cw4-stake](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw4-stake) provides a similar API
+    to `cw4-group` (which handles elected membership), but rather than appointing members (by admin or multisig), their
+    membership and weight are based on the number of tokens they have staked. This is similar to the way many DAOs function.
 
-There are other DAO projects that are developed in the community. For now, we will stick to these for simplicity.
+The scope of this section will be limited to introducing the contracts maintained in the [cw-plus](https://github.com/CosmWasm/cw-plus/) repository. However, there are other DAO projects and governance protocols that are developed by the community.
 
 ## DAO Governed Smart Contracts
 
-Every wallet and smart contract has addresses and any execution from them is considered the same. This means a smart
-contract can assign another smart contract as admin, owner or privileged. In this episode, we will set up a DAO with
-multiple participants and a CW20 contract that is managed by the DAO.
+Every wallet and smart contract has an address and any execution from them is considered the same. This means a smart
+contract can assign another smart contract as an admin, owner or a privileged member. In the next section, we will set up a DAO with
+multiple participants along with a CW20 contract that is managed by the DAO.
