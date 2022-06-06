@@ -177,7 +177,7 @@ pub fn create_new_entry(deps: DepsMut, info: MessageInfo, description: String, p
     };
     LIST.save(deps.storage, id.u64(), &new_entry)?;
     Ok(Response::new().add_attribute("method", "create_new_entry")
-                      .add_attribute("New Entry Id: ", id))
+                      .add_attribute("new_entry_id: ", id))
 }
 ```
 The function `update_entry()` handles the update of an existing entry on the list. 
@@ -203,7 +203,7 @@ pub fn update_entry(deps: DepsMut, info: MessageInfo, id: Uint64, description: O
     };
     LIST.save(deps.storage, id.u64(), &updated_entry)?;
     Ok(Response::new().add_attribute("method", "update_entry")
-                      .add_attribute("Updated Entry Id: ", id))
+                      .add_attribute("updated_entry_id: ", id))
 }
 ```
 The function `delete_entry()` handles the removal of an existing entry from the list.
@@ -221,7 +221,7 @@ pub fn delete_entry(deps: DepsMut, info: MessageInfo, id: Uint64) -> Result<Resp
 
     LIST.remove(deps.storage, id.u64());
     Ok(Response::new().add_attribute("method", "delete_entry")
-                      .add_attribute("Deleted Entry Id: ", id))
+                      .add_attribute("deleted_entry_id: ", id))
 }
 ```
 
