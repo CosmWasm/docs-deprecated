@@ -146,4 +146,4 @@ The CosmWasm IDE consists of three sub-repositories:
 
 - [CosmWasm IDE extension webview](https://github.com/oraichain/cw-ide-webview) is a React application that lies on top of the CosmWasm IDE Extension. It is responsible for connecting with the Keplr wallet and show inputs to deploy & interact with the contracts. It also allows adding custom networks.
 
-For more information, please visit their repositories to read more. You can also read the CosmWasm IDE's tutorial [here](https://docs.cosmwasm.com/docs/1.0/tutorials/cosmwasm-ide)
+For more information, please visit their repositories to read more. You can also read the CosmWasm IDE's tutorial [here](https://docs.cosmwasm.com/docs/1.0/tutorials/cosmwasm-ide) or through the official [Oraichain documentation site](https://docs.orai.io/developers/cosmwasm-ide/tutorial-01)
