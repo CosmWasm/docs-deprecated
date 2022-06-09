@@ -39,7 +39,7 @@ The list of entries as a whole is persisted as the `LIST`, a Map that holds a co
 //state.rs
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Entry {
-    pub id: Uint64,
+    pub id: u64,
     pub description: String,
     pub status: Status,
     pub priority: Priority,
@@ -59,7 +59,7 @@ pub enum Priority {
     High
 }
 
-pub const ENTRY_SEQ: Item<Uint64> = Item::new("entry_seq");
+pub const ENTRY_SEQ: Item<u64> = Item::new("entry_seq");
 pub const LIST: Map<u64, Entry> = Map::new("list");
 ```
 ## Instantiate
@@ -98,7 +98,7 @@ pub fn instantiate(
     CONFIG.save(deps.storage, &config)?;
     //Save the owner address to contract storage.
 
-    ENTRY_SEQ.save(deps.storage, &Uint64::zero())?;
+    ENTRY_SEQ.save(deps.storage, &0u64)?;
     //Save the entry sequence to contract storage, starting from 0.
 
     Ok(Response::new()
@@ -129,8 +129,8 @@ The owner of the To-Do List contract should be able to add new entries to the li
 #[serde(rename_all = "snake_case")]
 pub enum ExecuteMsg {
     NewEntry {description: String, priority: Option<Priority>},
-    UpdateEntry { id: Uint64, description: Option<String>, status: Option<Status>, priority: Option<Priority> },
-    DeleteEntry { id: Uint64 }
+    UpdateEntry { id: u64, description: Option<String>, status: Option<Status>, priority: Option<Priority> },
+    DeleteEntry { id: u64 }
 }
 ```
 ### Execution Logic
@@ -167,7 +167,7 @@ pub fn create_new_entry(deps: DepsMut, info: MessageInfo, description: String, p
         return Err(ContractError::Unauthorized {});
     }
     let id = ENTRY_SEQ.update::<_, cosmwasm_std::StdError>(deps.storage, |id| {
-        Ok(id.add(Uint64::new(1)))
+        Ok(id.add(1))
     })?;
     let new_entry = Entry {
         id,
@@ -175,35 +175,35 @@ pub fn create_new_entry(deps: DepsMut, info: MessageInfo, description: String, p
         priority: priority.unwrap_or(Priority::None),
         status: Status::ToDo
     };
-    LIST.save(deps.storage, id.u64(), &new_entry)?;
+    LIST.save(deps.storage, id, &new_entry)?;
     Ok(Response::new().add_attribute("method", "create_new_entry")
-                      .add_attribute("new_entry_id: ", id))
+        .add_attribute("new_entry_id", id.to_string()))
 }
 ```
 The function `update_entry()` handles the update of an existing entry on the list. 
-* Before carrying on with the new update, the function checks if the message sender is the owner of the contract. If not, it returns an error and the update fails to be performed.
+* Before continuing with the new update, the function checks if the message sender is the owner of the contract. If not, it returns an error and the update fails to be performed.
 * The entry with the matching `id` is loaded from the `LIST`.
 * Sharing the same id, an updated version of the entry is defined with the received values for `description`, `status` and `priority`. These are optional parameters and if any one of them is not provided, the function defaults back to the corresponding value from the entry loaded.
 * The function saves the updated entry to the `LIST` with the matching `id` and returns a `Response` with the relevant attributes. 
 
 ```rust
 //contract.rs
-pub fn update_entry(deps: DepsMut, info: MessageInfo, id: Uint64, description: Option<String>, status: Option<Status>, priority: Option<Priority>) -> Result<Response, ContractError> {
+pub fn update_entry(deps: DepsMut, info: MessageInfo, id: u64, description: Option<String>, status: Option<Status>, priority: Option<Priority>) -> Result<Response, ContractError> {
     let owner = CONFIG.load(deps.storage)?.owner;
     if info.sender != owner {
         return Err(ContractError::Unauthorized {});
     }
 
-    let entry = LIST.load(deps.storage, id.u64())?;
+    let entry = LIST.load(deps.storage, id)?;
     let updated_entry = Entry {
         id,
         description: description.unwrap_or(entry.description),
         status: status.unwrap_or(entry.status),
         priority: priority.unwrap_or(entry.priority),
     };
-    LIST.save(deps.storage, id.u64(), &updated_entry)?;
+    LIST.save(deps.storage, id, &updated_entry)?;
     Ok(Response::new().add_attribute("method", "update_entry")
-                      .add_attribute("updated_entry_id: ", id))
+                      .add_attribute("updated_entry_id", id.to_string()))
 }
 ```
 The function `delete_entry()` handles the removal of an existing entry from the list.
@@ -213,15 +213,15 @@ The function `delete_entry()` handles the removal of an existing entry from the 
 
 ```rust
 //contract.rs
-pub fn delete_entry(deps: DepsMut, info: MessageInfo, id: Uint64) -> Result<Response, ContractError> {
+pub fn delete_entry(deps: DepsMut, info: MessageInfo, id: u64) -> Result<Response, ContractError> {
     let owner = CONFIG.load(deps.storage)?.owner;
     if info.sender != owner {
         return Err(ContractError::Unauthorized {});
     }
 
-    LIST.remove(deps.storage, id.u64());
+    LIST.remove(deps.storage, id);
     Ok(Response::new().add_attribute("method", "delete_entry")
-                      .add_attribute("deleted_entry_id: ", id))
+                      .add_attribute("deleted_entry_id", id.to_string()))
 }
 ```
 
@@ -235,18 +235,19 @@ Upon creating and populating the list with entries, querying individual entries 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum QueryMsg {
-    QueryEntry {id: Uint64},
+    QueryEntry {id: u64},
     QueryList {start_after: Option<u64>, limit: Option<u32>},
 }
 
 // A custom struct is defined for each query response
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct EntryResponse {
-    pub id: Uint64,
+    pub id: u64,
     pub description: String,
     pub status: Status,
     pub priority: Priority,
 }
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct ListResponse {
     pub entries: Vec<Entry>,
@@ -269,8 +270,8 @@ The function `query_entry()` handles the query of an individual existing entry o
 * An `EntryResponse` is formed with the attributes of the loaded entry and returned.
 
 ```rust
-fn query_entry(deps: Deps, id: Uint64) -> StdResult<EntryResponse> {
-    let entry = LIST.load(deps.storage, id.u64())?;
+fn query_entry(deps: Deps, id: u64) -> StdResult<EntryResponse> {
+    let entry = LIST.load(deps.storage, id)?;
     Ok(EntryResponse { id: entry.id, description: entry.description, status: entry.status, priority: entry.priority })
 }
 ```
@@ -501,7 +502,7 @@ const executeResponse_3 = await client.execute(
          instantiateResponse.contractAddress,
          {
            update_entry: {
-            id: "2",
+            id: 2,
             description: "Updated entry.",
             priority: "High",
             status: "InProgress"
@@ -514,7 +515,7 @@ const executeResponse_3 = await client.execute(
 ```
 Query the second entry individually and see the changes. Notice that the message inside the query() function now matches the struct `QueryMsg::QueryEntry` that was defined in the contract code under `/src/msg.rs`.
 ```js
-const queryResult_3 = await client.queryContractSmart(instantiateResponse.contractAddress, {query_entry: {id: "2"} })
+const queryResult_3 = await client.queryContractSmart(instantiateResponse.contractAddress, {query_entry:{id: 2}})
 
 console.log(queryResult_3)
 ```
@@ -534,7 +535,7 @@ const executeResponse_4 = await client.execute(
          instantiateResponse.contractAddress,
          {
            delete_entry: {
-            id: "1"
+            id: 1
           }
          },
          defaultFee,
