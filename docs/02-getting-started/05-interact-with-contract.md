@@ -10,7 +10,7 @@ We have the wasm binary ready. Now it is time to deploy it to the testnet and st
 
 We generated a wasm binary executable in the previous chapter. Let's upload the code to the blockchain. Once that is complete, you can download the bytecode to verify it.
 
-See the list of codes we that was uploaded to the testnet previously.
+See the list of codes that was uploaded to the testnet previously.
 ```shell
 wasmd query wasm list-code $NODE
 # Here is an alternative if you haven't set up the environment variables to interact with the testnet previously:
