@@ -4,18 +4,18 @@ sidebar_position: 1
 
 # What are Multi-Chain Contracts?
 
-CosmWasm is designed and built from the ground-up to be a multi-chain solution for smart contracts. As it comes from the
+CosmWasm is designed and built from the ground up to be a multi-chain solution for smart contracts. As it comes from the
 Cosmos ecosystem, it is designed for networks of blockchains, rather than siloed chains. But what exactly do we mean by
 multi-chain?
 
 ## Different Chain, Same Contract {#different-chain-same-contract}
 
-Since we make little requirements of the host application, it is easy for any Cosmos SDK app to embed the `wasm` module
-and customize the permissioning or fees as they wish. All code is designed to be agnostic to the details of the
+Since we make a few requirements of the host application, it is easy for any Cosmos SDK app to embed the `wasm` module
+and customize the permissions or fees as they wish. All code is designed to be agnostic to the details of the
 underlying chain, so just by writing a CosmWasm contract, you will soon be able to run on different chains on the Cosmos
 ecosystem.
 
-[Regen Network](https://regen.network) plans to include CosmWasm support at launch. A number of other chains are adding
+[Regen Network](https://regen.network) plans to include CosmWasm support at launch. Several other chains are adding
 this support.
 
 ## Inter Blockchain Contracts {#inter-blockchain-contracts}
@@ -24,13 +24,13 @@ If you have heard anything about Cosmos, it is most likely
 about [Inter-Blockchain Communication](https://ibcprotocol.org/). The power
 of [Tendermint BFT consensus](https://tendermint.com) and
 their [novel bonded proof of stake algorithm](https://blog.cosmos.network/what-does-the-launch-of-cosmos-mean-for-the-blockchain-ecosystem-952e14f67d0d)
-are the foundation for a revolutionary protocol to allow trustless message passing semantics between blockchains. No
+are the foundation for a revolutionary protocol to allow trustless message-passing semantics between blockchains. No
 middleman, no timing issue, full security.
 
 The potential means code on one chain can execute a transaction on another chain. But the code must be designed around a
 message-passing idiom. CosmWasm fully embraces the [actor model](./actor) and lends itself to IBC use. Messages are
 fire-and-forget, rather than awaiting a promise and worrying about race conditions and reentrancy attacks. As IBC
-stabilizes, we will be adding first class support for IBC primitives into
+stabilizes, we will be adding first-class support for IBC primitives into
 the [CosmWasm](https://github.com/CosmWasm/cosmwasm) libraries, as well as
 the [Cosmos SDK module](https://github.com/CosmWasm/wasmd/tree/master/x/wasm) that hosts it.
 
@@ -46,7 +46,7 @@ This has two big benefits:
 for say, [AssemblyScript](https://www.assemblyscript.org) or [Go](https://github.com/golang/go), for those who
 prefer not to write in Rust.
 
-- Since it makes limited demands of the host system, it can be embedded in other frameworks,
+- Since it makes limited demands on the host system, it can be embedded in other frameworks,
 not just the Cosmos SDK. The core runtime logic [`cosmwasm-vm`](https://github.com/CosmWasm/cosmwasm/tree/main/packages/vm)
 is in Rust, and [`wasmvm`](https://github.com/CosmWasm/wasmvm) provides a generic Go binding to it. As Go and
 Rust are two of the most popular languages to write blockchains, this opens the door for many integrations. Of course,
