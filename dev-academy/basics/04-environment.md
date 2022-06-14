@@ -5,7 +5,7 @@ sidebar_position: 4
 # Environment Setup
 
 You need an environment to run contracts. You can either run your node locally or connect to an existing network. For
-easy testing, you can use the public testnet (cliffnet) to deploy and run your contracts.
+easy testing, you can use the public testnet (Malaga-420) to deploy and run your contracts.
 
 When interacting with a network, you can either use `wasmd` which is a Go client or the Node REPL. The Node REPL is
 recommended for contract operations, since JSON manipulation is not intuitive with the shell/Go client.
@@ -24,7 +24,7 @@ project repo, there will be a `Gitpod` button which will create a workspace for 
 
 You can setup golang following the [official documentation](https://github.com/golang/go/wiki#working-with-go). The latest
 versions of `wasmd`
-require go version `1.16.8+`.
+require go version `1.18.2+`.
 
 ## Rust {#rust}
 
@@ -51,7 +51,7 @@ rustup target add wasm32-unknown-unknown
 `wasmd` is the backbone of the CosmWasm platform. It is an implementation of a Cosmoszone with wasm smart contracts
 enabled.
 
-This code was forked from the `cosmos/gaia` repository as a base and then x/wasm was added and many
+This code was forked from the `cosmos/gaia` repository as a base, then x/wasm was added and many
 gaia-specific files were cleaned up. However, the wasmd binary should function just like gaiad except for the addition of the x/wasm
 module.
 
@@ -60,8 +60,10 @@ If you intend to develop or edit a contract, you need wasmd.
 ```shell
 git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
-# replace the v0.23.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
-git checkout v0.23.0
+# If you are updating wasmd, first update your local repository by fetching the remote tags available
+git fetch --tags
+# replace the v0.27.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+git checkout v0.27.0
 make install
 
 # verify the installation
@@ -75,12 +77,12 @@ wasmd version
 
 ## Setting up wasmd and Wallet {#setup-wasmd-and-wallet}
 
-Let's configure the `wasmd` executable, point it to testnets, create a wallet and ask for tokens from the faucet:
+Let's configure the `wasmd` executable, point it to the testnet, create a wallet and ask for tokens from the faucet:
 
-First, source the cliffnet cosmwasm public network configuration to the shell:
+First, source the Malaga cosmwasm public network configuration to the shell:
 
 ```shell
-source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/cliffnet-1/defaults.env)
+source <(curl -sSL https://raw.githubusercontent.com/CosmWasm/testnets/master/malaga-420/defaults.env)
 ```
 
 Setup the client:
@@ -109,7 +111,7 @@ You need some tokens in your address to interact with the network. If you are us
 from the faucet:
 
 ```shell
-JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"upebble","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.cliffnet.cosmwasm.com/credit
+JSON=$(jq -n --arg addr $(wasmd keys show -a wallet) '{"denom":"umlg","address":$addr}') && curl -X POST --header "Content-Type: application/json" --data "$JSON" https://faucet.malaga-420.cosmwasm.com/credit
 ```
 
 ## Export wasmd Parameters {#export-wasmd-parameters}
@@ -122,13 +124,13 @@ An effective way to configure `wasmd` is to define the following environment var
 ```bash
 # bash
 export NODE="--node $RPC"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.025upebble --gas auto --gas-adjustment 1.3"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.25umlg --gas auto --gas-adjustment 1.3"
 ```
 or
 ```bash
 # zsh
 export NODE=(--node $RPC)
-export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.001upebble --gas auto --gas-adjustment 1.3)
+export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.25umlg --gas auto --gas-adjustment 1.3)
 ```
 
 If the command above throws an error, it means you are utilizing a different type of shell. If there are no errors, try executing the following command:
@@ -139,12 +141,13 @@ wasmd query bank total $NODE
 A response that is similar to the one below means that you can now interact with the node you have configured.
 ```shell
 pagination:
+  next_key: null
   total: "2"
 supply:
-- amount: "14499899999800"
-  denom: upebble
-- amount: "15075884463468"
-  denom: urock
+- amount: "10006916235913"
+  denom: uand
+- amount: "10000000000000"
+  denom: umlg
 ```
  You can check that your faucet request has been successful by checking the balance of your wallet bank account by trying the command:
 ```bash
@@ -173,7 +176,7 @@ To use it, install [node.js 12+](https://nodejs.org/en/download/) and [npx](http
 Then,
 
 ```shell
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
+npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
 ```
 
 With that, you should observe the initialization of an interactive session.
