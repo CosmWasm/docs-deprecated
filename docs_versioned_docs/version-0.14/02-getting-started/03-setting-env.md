@@ -118,7 +118,7 @@ If you are interested in running your local network you can use the script below
 ```shell
 # default home is ~/.wasmd
 # if you want to setup multiple apps on your local make sure to change this value
-APP_HOME="~/.wasmd"
+APP_HOME="$HOME/.wasmd"
 RPC="http://localhost:26657"
 CHAIN_ID="localnet"
 # initialize wasmd configuration files
