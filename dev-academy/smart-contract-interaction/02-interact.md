@@ -20,12 +20,12 @@ Now, let us download a pre-built smart contract developed by the CosmWasm team. 
 Please don't pay attention to cw20-base details for now, just focus on getting a contract on the testnet first.
 ## Deployment
 
-We will deploy the code using the `wasmd` CLI that was installed [earlier](/dev-academy/basics/environment#wasmd). Please make sure you've set up a wallet and requested some upebbles from the faucet beforehand.
+We will deploy the code using the `wasmd` CLI that was installed [earlier](/dev-academy/basics/environment#wasmd). Please make sure you've set up a wallet and requested some `umlg`s from the faucet beforehand.
 
 Open a new terminal window and make sure the present working directory contains the cw20_base.wasm binary.
 ```sh
 # Setting up the correct parameters
-export TXFLAG="--node https://rpc.cliffnet.cosmwasm.com:443 --chain-id cliffnet-1 --gas-prices 0.025upebble --gas auto --gas-adjustment 1.3 -y --output json -b block"
+export TXFLAG="--node https://rpc.malaga-420.cosmwasm.com:443 --chain-id malaga-420 --gas-prices 0.25umlg --gas auto --gas-adjustment 1.3 -y --output json -b block"
 
 # Storing the binary on chain
 RES=$(wasmd tx wasm store cw20_base.wasm --from wallet $TXFLAG)
@@ -37,7 +37,7 @@ CODE_ID=$(echo $RES | jq -r '.logs[0].events[1].attributes[0].value')
 echo $CODE_ID
 
 # Querying the list of contracts instantiated with the code id above
-wasmd query wasm list-contract-by-code $CODE_ID --node https://rpc.cliffnet.cosmwasm.com:443 --output json
+wasmd query wasm list-contract-by-code $CODE_ID --node https://rpc.malaga-420.cosmwasm.com:443 --output json
 
 # This should return an empty list, for now.
 ```
@@ -121,7 +121,7 @@ You will see an output that is similar to the one below, indicating that the ins
 ```
 This command from before should now output the instantiated contract address.
 ```sh
-wasmd query wasm list-contract-by-code $CODE_ID --node https://rpc.cliffnet.cosmwasm.com:443 --output json
+wasmd query wasm list-contract-by-code $CODE_ID --node https://rpc.malaga-420.cosmwasm.com:443 --output json
 ```
 ```json
 {
@@ -143,17 +143,17 @@ For this tutorial, we will mainly explore the CosmWasm related capabilities of C
 The first step should be to ensure that we can create an account and connect to the chain. You can always use the following command to start up the `@cosmjs/cli` with some cw20-specific helpers preloaded
 (along with the generic ones).
 
-```shell
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
+```bash
+npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts
 ```
 Now, the REPL client will be initialized.
 
 ```js
-const [addr, client] = await useOptions(cliffnetOptions).setup('password');
+const [addr, client] = await useOptions(malagaOptions).setup('password');
 client.getAccount(addr);
 ```
 
-This will take a few seconds as credits are requested from the faucet, in order to ensure that you have some upebbles in your account to pay
+This will take a few seconds as credits are requested from the faucet, in order to ensure that you have some `umlg`s in your account to pay
 fees with. When it returns, the output should be similar to the one below:
 
 ```json
@@ -172,22 +172,22 @@ fees with. When it returns, the output should be similar to the one below:
 You can keep the current session active, or close and get back to it again some time later. As long as you run the following line with the same password, you can always use the same wallet address:
 
 ```js
-const [addr, client] = await useOptions(cliffnetOptions).setup("password");
+const [addr, client] = await useOptions(malagaOptions).setup("password");
 ```
-`useOptions()` with `cliffnetOptions` passed in handles everything that we manually had to specify before, using the `wasmd` CLI. When the function `setup` is called with a password, it checks for the file `~/.cliffnet.key` and loads the key from the file. In case the `~/.cliffnet.key` file is missing, a new one is created to encrypt and store your randomly-generated private key (actually mnemonic). During future sessions, you will need to use the same password to gain access to your private key again. Try `cat ~/.cliffnet.key` to prove yourself that it is indeed encrypted, or try running the line above with a different password and see how it fails.
+`useOptions()` with `malagaOptions` passed in handles everything that we manually had to specify before, using the `wasmd` CLI. When the function `setup` is called with a password, it checks for the file `~/.malaga.key` and loads the key from the file. In case the `~/.malaga.key` file is missing, a new one is created to encrypt and store your randomly-generated private key (actually mnemonic). During future sessions, you will need to use the same password to gain access to your private key again. Try `cat ~/.malaga.key` to prove yourself that it is indeed encrypted, or try running the line above with a different password and see how it fails.
 
 :::caution
-The line above encrypts and stores the key in the `~/.cliffnet.key` file. If you forget the password, either delete the `~/.cliffnet.key` file or pass a `filename` along with the password to create a new key as below:
+The line above encrypts and stores the key in the `~/.malaga.key` file. If you forget the password, either delete the `~/.malaga.key` file or pass a `filename` along with the password to create a new key as below:
 ```js
-const [addr, client] = await useOptions(cliffnetOptions).setup("password","new_file_path_and_name");
+const [addr, client] = await useOptions(malagaOptions).setup("password","new_file_path_and_name");
 ```
 
 :::
 
-If you want the mnemonic, you can recover it anytime, as long as you still have the `~/.cliffnet.key` file and the correct password. This option can later be used to recover and use the same mnemonic to import the key into the `wasmd` CLI.
+If you want the mnemonic, you can recover it anytime, as long as you still have the `~/.malaga.key` file and the correct password. This option can later be used to recover and use the same mnemonic to import the key into the `wasmd` CLI.
 
 ```js
-useOptions(cliffnetOptions).recoverMnemonic("password");
+useOptions(malagaOptions).recoverMnemonic("password");
 ```
 Now that you feel a bit more secure about your keys (and the ability to load them later), we can start interacting with smart contracts using CosmJS CLI.
 
@@ -198,18 +198,18 @@ The example below is not meant to be copied verbatim, but to show how such a con
 :::
 
 If you haven't initialized one already, initialize a CosmJS CLI session with the following command:
-```js
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts 
+```bash
+npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts 
 ```
 
 ```js
 //Generate a wallet address or load an existing one
-const [addr, client] = await useOptions(cliffnetOptions).setup("password");
+const [addr, client] = await useOptions(malagaOptions).setup("password");
 
 //Create a new cw20 contract
-const cw20 = CW20(client, cliffnetOptions);
+const cw20 = CW20(client, malagaOptions);
 //Deploy the contract
-const codeId = await cw20.upload(addr, cliffnetOptions);
+const codeId = await cw20.upload(addr, malagaOptions);
 //Print the Code Id
 console.log(`CodeId: ${codeId}`);
 //Make sure to note the Code Id down, you will need it to interact with the binary later on
@@ -236,7 +236,7 @@ const initMsg = {
 //Exit editor using `^D` to execute the code entered
 ^D
 
-const contract = await cw20.instantiate(addr, codeId, initMsg, "STAR", cliffnetOptions);
+const contract = await cw20.instantiate(addr, codeId, initMsg, "STAR", malagaOptions);
 console.log(`Contract: ${contract.contractAddress}`);
 // Contract: wasm1etfpx2smcwualafpld2mn2prnrc3yyed084a083g5p2vcht79n9qck6h55
 
@@ -262,14 +262,14 @@ console.log(await contract.minter());
 Now that the binary is uploaded and has a Code Id, we can easily instantiate a second contract. Again, please do go through the example below and feel free to customize the values before executing the code.
 
 Initialize a new CosmJS CLI session with the following command:
-```js
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts 
+```bash
+npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts 
 ```
 ```js
 //Generate a wallet address or load an existing one
-const [addr, client] = await useOptions(cliffnetOptions).setup("password");
+const [addr, client] = await useOptions(malagaOptions).setup("password");
 //Create a new cw20 contract instance
-const cw20 = CW20(client, cliffnetOptions);
+const cw20 = CW20(client, malagaOptions);
 
 //Enable REPL editor mode to edit multiple lines of code
 .editor
@@ -293,7 +293,7 @@ const initMsg = {
 //Enter the Code Id for the binary you have uploaded previously
 const codeId = 55;
 //Instantiate a new contract with the given Code Id and instantiation message parameters
-const mine = await cw20.instantiate(addr, codeId, initMsg, "MINE", cliffnetOptions);
+const mine = await cw20.instantiate(addr, codeId, initMsg, "MINE", malagaOptions);
 console.log(`Contract: ${mine.contractAddress}`);
 // Contract: wasm1al2jl5kmhume74hdj6lspadmymz4attqpp9xuj6keqdgjwe9xalqlkle2h
 
@@ -324,13 +324,13 @@ Now, it's time to go beyond instantiating a contract.
 This section will focus on utilizing the query and execute functions provided by our newly constructed token.
 
 Let's re-initialize the CosmJS CLI session first.
-```js
-npx @cosmjs/cli@^0.26 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts 
+```bash
+npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/base.ts --init https://raw.githubusercontent.com/InterWasm/cw-plus-helpers/main/cw20-base.ts 
 ```
 
 ```js
-const [addr, client] = await useOptions(cliffnetOptions).setup("password");
-const cw20 = CW20(client, cliffnetOptions);
+const [addr, client] = await useOptions(malagaOptions).setup("password");
+const cw20 = CW20(client, malagaOptions);
 
 // List of instantiated contracts with a given Code Id
 // You may pass in the Code Id you noted down earlier to get the list of contracts you instantiated
@@ -370,7 +370,7 @@ mine.tokenInfo()
 
 // Minting some tokens for some_address_
 mine.mint(addr, some_address, "999888000")
-// The output should be the transaction hash, which can be carried over to https://block-explorer.cliffnet.cosmwasm.com/ to observe the details of the transaction
+// The output should be the transaction hash, which can be carried over to https://block-explorer.malaga-420.cosmwasm.com/ to observe the details of the transaction
 // e.g., "07236649C79D259B8F4CEE81E789F4798D18D14C911F8E77D10474FCFFC0FE71"
 
 // See the updated balances
@@ -381,7 +381,7 @@ mine.tokenInfo()
 
 //Now, let us transfer some tokens instead of minting, before checking the balances again
 mine.transfer(addr, another_address, "4567000");
-// The output should be another transaction hash, which, again, can be carried over to https://block-explorer.cliffnet.cosmwasm.com/ to observe the details of the transaction
+// The output should be another transaction hash, which, again, can be carried over to https://block-explorer.malaga-420.cosmwasm.com/ to observe the details of the transaction
 // e.g., "434FF36D79E2D92F0F29E38C478DD75F6829AB0E9EFE274218250E7EC9F7CD4C"
 
 // See the updated balances
