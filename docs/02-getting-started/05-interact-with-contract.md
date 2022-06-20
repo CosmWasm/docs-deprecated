@@ -64,7 +64,7 @@ wasmd query bank balances $CONTRACT $NODE
 
 # Upon instantiation the cw_nameservice contract will store the instatiation message data in the contract's storage with the storage key "config".
 # Query the entire contract state
-wasmd query wasm contract-state all $CONTRACT $
+wasmd query wasm contract-state all $CONTRACT $NODE
 ```
 ```json
 models:
