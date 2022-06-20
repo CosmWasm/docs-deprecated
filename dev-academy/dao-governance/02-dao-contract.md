@@ -122,6 +122,7 @@ console.log(codeId);
 //The property "group_addr" holds the address of the cw4-group contract that was instantiated earlier
 //Make sure to replace the group address with address of the cw4-group contract instance
 //Make sure to replace the member addresses with the ones generated earlier for each member
+
 const initMsg = {
     group_addr: "wasm1vguuxez2h5ekltfj9gjd62fs5k4rl2zy5hfrncasykzw08rezpfskn7x0n",
     threshold: { absolute_percentage: { percentage: "0.5" }},

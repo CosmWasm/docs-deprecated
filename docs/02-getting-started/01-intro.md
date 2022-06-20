@@ -5,51 +5,37 @@ id: intro
 
 # Your First Contract
 
-Buckle up, we will now get first-hand experience with CosmWasm, by:
+What follows within the Getting Started section is a tour of the fundamental aspects of CosmWasm Smart Contracts. Although having a basic understanding of Rust and Go would be helpful, the content is intended for all learners, no matter their experience. The goal is to provide easy-to-follow instructions and to offer firsthand experience for first-time users by going through a step-by-step guide covering the topics below:
 
-- Starting up our own CosmWasm-enabled blockchain (just one node for now)
+- Setting up environment
+- Deploying a smart contract to the blockchain testnet
+- Executing smart contract functions via the CLI
 - Modifying an existing contract
-- Deploying it to our system
-- Executing it via the cli
 
-If you are more of a *research first, then get your hands dirty second* person, you should go ahead
-to [Architecture](/03-architecture/01-multichain.md). Read it first and then head back here.
+In the case that you want to start your journey by getting an idea of what goes on behind the scenes or dive right into more detailed documentation first, you can jump straight to the [Architecture](/03-architecture/01-multichain.md) section for a quick overview before returning back here.
 
-We will not dive into smart contract development in this section. You can follow the steps here to test out smart
-contracts on a testnet without drowning in smart contract development details. We will demonstrate setting up
-environment, compiling, deploying, and interacting. Then to make things a bit more interesting, we will show modifying
-the example escrow contract by adding a backdoor to it in the [Hijack Escrow tutorial](/tutorials/hijack-escrow/intro).
-It exposes an identical API to the original one, but has one hidden command added. This also shows the importance of
-verifying the source code behind any contract you run. __Always verify the source code you are running.__
+You might have noticed that developing smart contracts is not in the the scope of this section. The Getting Started section has deliberately been tailored to be as easy-to-follow as possible, avoiding the risk of getting tangled in the intricacies of smart contract development, which will be covered in other sections. 
 
-This is designed for programmers who are comfortable with the command-line and using Linux or MacOS. It is helpful to
-have a basic understanding of Rust and Go, but we will lead you through, so you need no prior knowledge.
-The [next tutorial, name service](/tutorials/name-service/intro) will assume knowledge of these basics. And it will show
-all the development flow from zero to production.
+Once we are finished with setting up environment, deploying a smart contract to the testnet and interacting with it, we will be modifying the example Escrow Contract by adding a backdoor in the [Hijack Escrow tutorial](/tutorials/hijack-escrow/intro) in order to make things a bit more interesting. The modification will expose an identical API to the original one, except for the addition of a single hidden command. The idea behind making such a modification is twofold; one, familiarizing ourselves with what constitutes a smart contract, and the other is to manifest the importance of verifying the source code behind any contract you interact with.
 
 ## Sections {#sections}
 
-[Installation](02-installation.md) will show you how to setup the required software tooling for CosmWasm.
+[Installing Prerequisites](02-installation.md) will show you how to setup the required software tooling for CosmWasm.
 
 [Setting up Environment](03-setting-env.md) will show you how to setup the client environment, and interact with the
 faucet.
 
-[Downloading and Compiling Contract](04-compile-contract.md) will demonstrate downloading and compiling smart contract
-code to wasm byte code.
+[Downloading and Compiling a Contract](04-compile-contract.md) will demonstrate downloading and compiling smart contract
+code into wasm byte code.
 
-[Interacting with Contracts](05-interact-with-contract.md) will show deploying, initializing and executing smart
-contracts.
+[Deployment and Interaction](05-interact-with-contract.md) will show you how to deploy a contract to the testnet, instantiate it and execute smart contract functions.
 
-[Next Steps](06-next-steps.md) is the last part of the tutorial. It wraps up this section and points you in the
-direction of further learning.
+[Next Steps](06-next-steps.md) is the last part of the tutorial. It wraps up the Getting Started section and points you in the direction of further learning.
 
 ## Dev Academy
 
 [Dev Academy](/dev-academy/intro) is a set of modular and step-by-step educational materials designed to
-provide
-a quick start for anyone who wants to learn and get started with concepts like blockchain, smart contracts, DAOs and
-more. Dev Academy content can be used at workshops, university courses or at home. By the end, you will have a good
-understanding of many interesting topics including CosmWasm.
+provide a quick start for anyone who wants to learn and get started with concepts like blockchain, smart contracts, DAOs and more. Dev Academy content can be used at workshops, university courses or at home. By the end, you will have a good understanding of many interesting topics including CosmWasm.
 
 ## Video Version {#video-version}
 
