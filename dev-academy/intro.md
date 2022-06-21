@@ -12,7 +12,7 @@ By the end, you will have a good understanding of many interesting topics includ
 ## Content {#content}
 
 - [What is Blockchain?](basics/01-what-is-blockchain.md)
-- [Blockchain Infrasturcture](basics/02-infra.md)
+- [Blockchain Infrastructure](basics/02-infra.md)
 - [Cosmos SDK and CosmWasm Basics](basics/03-cosmos-sdk-cw.md)
 - [Setting Up Environment](basics/04-environment.md)
 - [Challenge](basics/05-challenge.md)
