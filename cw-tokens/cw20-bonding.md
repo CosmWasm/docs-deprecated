@@ -1,21 +1,12 @@
 ---
-title: cw20-bonding Spec
-sidebar_position: 4
+id: cw20-bonding
+sidebar_position: 3
+title: CW20 Bonding
 ---
 
-# CW20 Bonding curve
+# CW20 Bonding
 
-cw20-bonding-curve source
-code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-bonding](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-bonding)
-
-This builds on the [Basic cw20 interface](spec.md)
-as implemented in [`cw20-base`](cw20-base-spec.md)
-
-This serves three purposes:
-
-* A usable and extensible contract for arbitrary bonding curves
-* A demonstration of how to extend `cw20-base` to add extra functionality
-* A demonstration of the [Receiver interface](spec.md#receiver)
+Source code is at [cw20-bonding](https://github.com/CosmWasm/cw-tokens/tree/main/contracts/cw20-bonding).
 
 ## Design {#design}
 

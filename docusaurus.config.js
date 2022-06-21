@@ -59,6 +59,10 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
               to: `cw-plus/${lastReleasedCWPlusVersion}/overview`,
               label: 'cw-plus',
             },
+            {
+              to: `cw-tokens/overview`,
+              label: 'cw-tokens',
+            },
           ],
         },
         {
@@ -114,6 +118,10 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
             {
               label: 'CosmWasm/cw-plus',
               href: 'https://github.com/CosmWasm/cw-plus',
+            },
+            {
+              label: 'CosmWasm/cw-tokens',
+              href: 'https://github.com/CosmWasm/cw-tokens',
             },
             {
               label: 'InterWasm/cw-contracts',
@@ -329,6 +337,16 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
             path: lastReleasedCWPlusVersion
           }
         }
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cw-tokens',
+        path: 'cw-tokens',
+        routeBasePath: 'cw-tokens',
+        editUrl: 'https://github.com/InterWasm/docs/edit/main/',
+        sidebarPath: require.resolve('./sidebars/sidebarsCwTokens.js'),
       },
     ],
   ],

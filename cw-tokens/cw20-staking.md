@@ -1,12 +1,13 @@
 ---
-title: cw20-staking Spec
-sidebar_position: 6
+id: cw20-staking
+sidebar_position: 5
+title: CW20 Staking
 ---
 
-# CW20 Staking Derivates
+# CW20 Staking
 
-cw20-staking source
-code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-escrow](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-escrow)
+Source code is at [cw20-staking](https://github.com/CosmWasm/cw-tokens/tree/main/contracts/cw20-staking).
+
 This is a sample contract that releases a minimal form of staking derivatives. This is to be used for integration tests
 and as a foundation for other to build more complex logic upon.
 

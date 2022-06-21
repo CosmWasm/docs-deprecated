@@ -1,12 +1,13 @@
 ---
-title: cw20-escrow Spec
-sidebar_position: 5
+id: cw20-escrow
+sidebar_position: 3
+title: CW20 Escrow
 ---
 
 # CW20 Escrow
 
-cw20-escrow source
-code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-escrow](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw20-escrow)
+Source code is at [cw20-escrow](https://github.com/CosmWasm/cw-tokens/tree/main/contracts/cw20-escrow).
+
 
 This is an escrow meta-contract that allows multiple users to create independent escrows. Each escrow has a sender,
 recipient, and arbiter. It also has a unique id (for future calls to reference it)
@@ -25,5 +26,4 @@ demonstrate how the same calls can be fed native tokens (via typical `HandleMsg`
 interface).
 
 Both `create` and `top_up` can be called directly (with a payload of native tokens), or from a cw20 contract using
-the [Receiver Interface](spec.md#receiver). This means we can load the escrow with any number of native or cw20 tokens (
-or a mix), allow of which get released when the arbiter decides.
+the `Receiver` interface. This means we can load the escrow with any number of native or cw20 tokens (or a mix), allow of which get released when the arbiter decides.
