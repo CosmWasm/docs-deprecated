@@ -26,7 +26,7 @@ internal).
 ## Custom Queries {#custom-queries}
 
 There are many cases where it is undesirable to couple tightly to *implementation*, and we would rather depend on an *
-interface*. For example, we will define a standard for "ERC20" `HandleMsg` for calling the contract and we would want to
+interface*. For example, we will define a standard for "ERC20" `ExecuteMsg` for calling the contract and we would want to
 define such a standard for a `QueryMsg`. For example, query balance by address, query allowance via granter + grantee,
 query token info (ticker, decimals, etc). By defining a standard *interface*, we allow many implementations, including
 complex contracts, where the "ERC20" interface is only a small subset of their functionality.
@@ -34,7 +34,7 @@ complex contracts, where the "ERC20" interface is only a small subset of their f
 To enable custom queries, we allow each contract to expose a `query` function, that can access its data store in
 read-only mode. It can load any data it wishes and even performs calculations on it. This method is exposed
 as `query_custom` to all callers (external and internal). The data format (both query and response) is anything the
-contract desires and should be documented in the public schema, along with `HandleMsg` and `InitMsg`.
+contract desires and should be documented in the public schema, along with `ExecuteMsg` and `InitMsg`.
 
 Note that executing a contract may consume an unbounded amount of gas. Whereas `query_raw` will read one key and has a
 small, mostly fixed cost, we need to enforce a gas limit on these queries. This is done differently for external and

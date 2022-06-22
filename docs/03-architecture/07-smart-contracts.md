@@ -127,7 +127,7 @@ random beacon and expose this secure source of entropy to smart contracts.
 
 **Planned Mitigation**
 
-If you call a contract with a given `HandleMsg`, this just requires the contract to have the specified API but says nothing
+If you call a contract with a given `ExecuteMsg`, this just requires the contract to have the specified API but says nothing
 of the code there. I could upload malicious code with the same API as the desired contract (or a superset of the API), and
 ask you to call it - either directly or from a contract. This can be used to steal funds and in fact
 we [demo this in the tutorial](/tutorials/hijack-escrow/hack-contract).
