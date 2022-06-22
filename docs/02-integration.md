@@ -13,11 +13,12 @@ them to any chain-specific contract.
 ## Prerequisites
 
 The pre-requisites of integrating `x/wasm` into your custom app is to be using
-a compatible version of the Cosmos SDK, and to accept some limits to the
-hardware it runs on.
+a compatible version of the Cosmos SDK, and to accept some limits to the hardware it runs on.
 
 | wasmd  | Cosmos SDK  |
 |:------:|:-----------:|
+| v0.24  |   v0.45.0   |
+| v0.23  |   v0.45.0   |
 | v0.22  |   v0.45.0   |
 | v0.21  |   v0.42.x   |
 | v0.20  |   v0.42.x   |
@@ -60,14 +61,14 @@ You should try one of the methods below.
 
 ## Integrating wasmd
 
-### As external module
+### As an external module
 
 The simplest way to use `wasmd` is just to import `x/wasm` and wire it up
-in `app.go`.  You now have access to the whole module and you custom modules
+in `app.go`.  You now have access to the whole module and your custom modules
 running side by side. (But the CosmWasm contracts will only have access
 to `bank` and `staking`... more below on [customization](#Adding-Custom-Hooks)).
 
-The requirement here is that you have imported the standard sdk modules
+The requirement here is that you have imported the standard SDK modules
 from the Cosmos SDK, and enabled them in `app.go`. If so, you can just look
 at [`wasmd/app/app.go`](https://github.com/CosmWasm/wasmd/blob/master/app/app.go#)
 for how to do so (just search there for lines with `wasm`).
@@ -79,7 +80,7 @@ ante handler into the `ante handler chain` as in: [`app/ante.go`](https://github
 ### Copied into your app
 
 Sometimes, however, you will need to copy `x/wasm` into your app. This should
-be in limited cases, and makes upgrading more difficult, so please take the
+be in limited cases and makes upgrading more difficult, so please take the
 above path if possible. This is required if you have either disabled some key
 SDK modules in your app (eg. using PoA not staking and need to disable those
 callbacks and feature support), or if you have copied in the core `x/*` modules
@@ -117,14 +118,14 @@ power without forking either CosmWasm or `wasmd`.
 This is perhaps the easiest part. Let's say your native exchange module
 wants to call into a token that lives as a CosmWasm module. You need to
 pass the `wasm.Keeper` into your `exchange.Keeper`. If you know the format
-for sending messages and querying the contract (exported as json schema
+for sending messages and querying the contract (exported as JSON schema
 from each contract), and have a way of configuring addresses of supported
 token contracts, your exchange code can simply call `wasm.Keeper.Execute`
 with a properly formatted message to move funds, or `wasm.Keeper.SmartQuery`
 to check balances.
 
 If you look at the unit tests in [`x/wasm/keeper`](https://github.com/CosmWasm/wasmd/tree/master/x/wasm/keeper),
-it should be pretty straight forward.
+it should be pretty straightforward.
 
 ### Extending the Contract Interface
 
@@ -136,7 +137,7 @@ variants. You can see an example of the [bindings for Terra](https://github.com/
 Once you have those bindings, use them to build a
 [simple contact using much of the API](https://github.com/CosmWasm/terra-contracts/tree/master/contracts/maker).
 Don't worry too much about the details, this should be usable, but mainly
-you will want to upload it to your chain and use for integration tests
+you will want to upload it to your chain and use it for integration tests
 with your native Cosmos SDK modules. Once that is solid, then add more
 and more complex contracts.
 
@@ -146,7 +147,7 @@ the contracts (provide static data for exchange rates when your contracts
 query it). You can see an example of [mocks for Terra contracts](https://github.com/CosmWasm/terra-contracts/tree/master/packages/mocks).
 
 What these three steps provide is basically a chain-specific extension to the CosmWasm contract SDK.
-Any CosmWasm contract can import you library (bindings and mocks) and easily get started using
+Any CosmWasm contract can import your library (bindings and mocks) and easily get started using
 your custom, chain-specific extensions just as easily as using the standard CosmWasm interfaces.
 What is left is actually wiring them up in your chain so they work as desired.
 
@@ -160,7 +161,7 @@ to your binding library to add the requirement to any contract that imports your
 
 ### Calling into the SDK
 
-Before I show how this works, I want to remind you, if you have copied `x/wasm`,
+Before I show how this works, I want to remind you, that if you have copied `x/wasm`,
 please **do not make these changes to `x/wasm`**.
 
 We will add a new module, eg. `x/contracts`, that will contain custom
@@ -174,7 +175,7 @@ which allows you to convert the `CosmosMsg::Custom(YourMessage)` types to `[]sdk
 Writing stubs for these is rather simple. You can look at the `reflect_test.go` file to see this in action.
 In particular, here [we define a `CustomQuerier`](https://github.com/CosmWasm/wasmd/blob/v0.8.0-rc1/x/wasm/internal/keeper/reflect_test.go#L355-L385),
 and here [we define a `CustomHandler`](https://github.com/CosmWasm/wasmd/blob/v0.8.0-rc1/x/wasm/internal/keeper/reflect_test.go#L303-L353).
-This code is responsible to take `json.RawMessage` from the raw bytes serialized from your custom types in rust and parse it into
+This code is responsible to take `json.RawMessage` from the raw bytes serialized from your custom types in rust and parsing it into
 Go structs. Then take these go structs and properly convert them for your custom SDK modules.
 
 You can look at the implementations for the `staking` module to see how to build these for non-trivial
@@ -189,7 +190,7 @@ should properly name the JSON fields and use the `omitempty` keyword if Rust exp
 
 ### Wiring it all together
 
-Once you have writen and tested these custom callbacks for your module, you need to enable it in your application.
+Once you have written and tested these custom callbacks for your module, you need to enable them in your application.
 The first step is to write an integration test with a contract compiled with your custom SDK to ensure it works properly,
 then you need to configure this in `app.go`.
 
