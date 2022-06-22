@@ -6,37 +6,37 @@ sidebar_position: 3
 # Names and Addresses
 
 Almost all blockchains use addresses to identify external actors via a hash of a public key, and many newer ones
-extended this to identify on-chain "smart contracts" with unique addresses as well. On chain, addresses are represented
-by a use of a concise, immutable binary format, typically 20 or 32 bytes long, often derived from a hashing function.
-However, there are many human-readable representations of these binary addresses, which are shown to clients. For
-example, [Bech32](https://en.bitcoin.it/wiki/Bech32) `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9`,
-hex `0x8617E340B3D01FA5F11F306F4090FD50E238070D`
-or [checksummed hex](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed`
-, and
-even [large integers](https://research.kudelskisecurity.com/2018/01/16/blockchains-how-to-steal-millions-in-264-operations/) `3040783849904107057L`
+extended this to identify on-chain "smart contracts" with unique addresses as well. 
+
+On-chain addresses are represented
+by the use of a concise, immutable binary format, typically 20 or 32 bytes long, often derived from a hashing function.
+However, there are many human-readable representations of these binary addresses, which are shown to clients. 
+
+For example, 
+* [Bech32](https://en.bitcoin.it/wiki/Bech32) `bc1qc7slrfxkknqcq2jevvvkdgvrt8080852dfjewde450xdlk4ugp7szw5tk9`, hex `0x8617E340B3D01FA5F11F306F4090FD50E238070D`,
+* [checksummed hex](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) `0x5aAeb6053F3E94C9b9A09f33669435E7Ef1BeAed`,
+* and even [large integers](https://research.kudelskisecurity.com/2018/01/16/blockchains-how-to-steal-millions-in-264-operations/) `3040783849904107057L`
 .
 
 ## Addr {#addr}
 
-Addresses in Cosmos SDK are 20 character long strings, and contain security checks - such as chain-prefix in Bech32, and
-checksums in Bech32 and checksummed hex (EIP55). Since CosmWasm is an extension of Cosmos SDK, it follows the same
-address rules; wallets, smart contracts, modules have an identifier address with defined prefix. `cosmos1...` for
+Addresses in Cosmos SDK are 20-character long strings and contain security checks - such as chain-prefix in Bech32, 
+checksums in Bech32, and checksummed hex (EIP55). Since CosmWasm is an extension of Cosmos SDK, it follows the same
+address rules; wallets, smart contracts, and modules have an identifier address with a defined prefix. `cosmos1...` for
 gaia, `wasm1...` for CosmWasm testnets.
 
-For passing address to contracts, pass it as string and then validate the input to an: **
+For passing address to contracts, pass it as a string and then validate the input to an: **
 Addr**. [Addr](https://github.com/CosmWasm/cosmwasm/blob/v0.14.0/packages/std/src/addresses.rs#L31) is just a wrapper
-around plain string that provides useful helper functions such as string validation to an address.
+around a plain string that provides useful helper functions such as string validation to an address.
 
-## Optional: Canonical Addresses {#optional-canonical-addresses}
-
-There is another representation of an address that tackles the case of change of human representation, but this is rare.
+There is another representation of an address, called *Canonical Addresses*, that tackles the case of change in human representation, but this is rare.
 
 For example Bitcoin [moved from Base58 to Bech32](https://en.bitcoin.it/wiki/BIP_0173) encoding along with SegWit, and
 Rise is also [moving from Lisk format to Bech32](https://medium.com/rise-vision/introducing-rise-v2-521a58e1e9de#41d5)
 in the v2 upgrade.
 
 This means that if `message.signer` is always the string address that signed the transaction and I use it to look up
-your account balance, if this encoding ever changed, then you lose access to your account. We clearly need a stable
+your account balance, if this encoding ever changed, then you lose access to your account. We need a stable
 identifier to work with internally.
 
 This is where we define a *Canonical Address*. This is defined to be stable and unique. That is, for one given account,
@@ -66,9 +66,9 @@ a [tutorial version of a name service](/tutorials/name-service/intro). However, 
 every *Address* that begins with `:` is a name to lookup with the name service, and other ones can be resolved directly
 with the built-in blockchain resolution function. So when creating a transaction for an escrow, you could use
 either `{"arbiter": "cosmos1qqp837a4kvtgplm6uqhdge0zzu6efqgujllfst"}` or `{"arbiter": ":alice"}`, performing the
-resolution inside the contract rather than only in the client. Of course we would need a standard query format for name
+resolution inside the contract rather than only in the client. Of course, we would need a standard query format for name
 service, and the calling contract would need to somehow know the address of the canonical name service contract to
-resolve with, which is why this feature is still under discussion.
+resolve, which is why this feature is still under discussion.
 
 ### DIDs {#dids}
 
@@ -79,7 +79,7 @@ not just use a reference to resolve a user address, but resolve a contract as we
 an "ERC20" token contract not by its name, but by its *uniquely registered token ticker*. We would soon need to use some
 way to distinguish the scope or context of a name. This is
 where [Decentralized Identifiers (DIDs)](https://www.w3.org/TR/did-core/) could come in. Imagine the following message
-format, that could be used either by a end-client or by a smart contract "actor":
+format, that could be used either by an end client or by a smart contract "actor":
 
 ```json
 {
@@ -95,5 +95,4 @@ format, that could be used either by a end-client or by a smart contract "actor"
 ```
 
 This would not be some spec to be resolved client-side, but the actual interchange format used on the blockchain. So one
-smart contract could also dispatch such a message in the course of execution. Do you like this idea?
-Comments? [Please add your thoughts on github](https://github.com/CosmWasm/cosmwasm/issues/80).
+smart contract could also dispatch such a message in the course of execution.
