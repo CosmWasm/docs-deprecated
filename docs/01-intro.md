@@ -18,7 +18,7 @@ CosmWasm is a smart contracting platform built for the Cosmos ecosystem. Simply 
 
 CosmWasm is written as a module that can plug into the Cosmos SDK. This means that anyone currently building a blockchain using the Cosmos SDK can quickly and easily add CosmWasm smart contracting support to their chain, without adjusting existing logic.
 
-Rust is the most heavily used programming language for CosmWasm but any language that can compile into WebAssembly can be used if supported.
+[Rust](https://www.rust-lang.org/) is currently the most used programming language for CosmWasm, in the future, it is possible to have different programming languages like [AssemblyScript](https://www.assemblyscript.org/)
 
 The purpose of this documentation is to give a deep dive into the technology for developers who wish to try it out or
 integrate it into their products. Particularly, it is aimed at Go developers with experience with the Cosmos SDK, as well
