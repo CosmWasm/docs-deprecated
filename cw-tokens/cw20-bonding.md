@@ -13,8 +13,8 @@ Source code is at [cw20-bonding](https://github.com/CosmWasm/cw-tokens/tree/main
 There are two variants - accepting native tokens and accepting cw20 tokens as the *reserve* token (this is the token
 that is input to the bonding curve).
 
-Minting: When the input is sent to the contract (either via `HandleMsg::Buy{}`
-with native tokens, or via `HandleMsg::Receive{}` with cw20 tokens), those tokens remain on the contract and it issues
+Minting: When the input is sent to the contract (either via `ExecuteMsg::Buy{}`
+with native tokens, or via `ExecuteMsg::Receive{}` with cw20 tokens), those tokens remain on the contract and it issues
 it's own token to the sender's account (known as *supply* token).
 
 Burning: We override the burn function to not only burn the requested tokens, but also release a proper number of the

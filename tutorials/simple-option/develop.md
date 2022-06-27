@@ -89,14 +89,14 @@ using macros. More read [Rust docs / Derive](https://doc.rust-lang.org/stable/ru
 * _counter_offer_ is [strike price](https://www.investopedia.com/terms/s/strikeprice.asp).
   :::
 
-### HandleMsg {#handlemsg}
+### ExecuteMsg {#ExecuteMsg}
 
-Contract execution is branched using `HandleMsg` enum. Each field defines a message and content of that message.
+Contract execution is branched using `ExecuteMsg` enum. Each field defines a message and content of that message.
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
-pub enum HandleMsg {
+pub enum ExecuteMsg {
   /// Owner can transfer to a new owner
   Transfer { recipient: HumanAddr },
   /// Owner can post counter_offer on unexpired option to execute and get the collateral
@@ -243,12 +243,12 @@ pub fn handle(
   deps: DepsMut,
   env: Env,
   info: MessageInfo,
-  msg: HandleMsg,
+  msg: ExecuteMsg,
 ) -> Result<HandleResponse, ContractError> {
   match msg {
-    HandleMsg::Transfer { recipient } => handle_transfer(deps, env, info, recipient),
-    HandleMsg::Execute {} => handle_execute(deps, env, info),
-    HandleMsg::Burn {} => handle_burn(deps, env, info),
+    ExecuteMsg::Transfer { recipient } => handle_transfer(deps, env, info, recipient),
+    ExecuteMsg::Execute {} => handle_execute(deps, env, info),
+    ExecuteMsg::Burn {} => handle_burn(deps, env, info),
   }
 }
 
