@@ -8,7 +8,7 @@ Repo
 link: [https://github.com/CosmWasm/cw-plus/tree/master/packages/cw2](https://github.com/CosmWasm/cw-plus/tree/master/packages/cw2)
 
 Most of the CW* specs are focused on the *public interfaces*
-of the contract. The APIs used for `HandleMsg` or `QueryMsg`. However, when we wish to migrate from contract A to
+of the contract. The APIs used for `ExecuteMsg` or `QueryMsg`. However, when we wish to migrate from contract A to
 contract B, contract B needs to be aware somehow of how the *state was encoded*.
 
 Generally we use Singletons and Buckets to store the state, but if I upgrade to a `cw20-with-bonding-curve` contract, it

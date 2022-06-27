@@ -22,7 +22,7 @@ We also add a function called "top_up", which allows anyone to add more funds to
 ## Token types {#token-types}
 
 This contract is meant not just to be functional, but also to work as a simple example of an cw20 "Receiver". And
-demonstrate how the same calls can be fed native tokens (via typical `HandleMsg` route), or cw20 tokens (via `Receiver`
+demonstrate how the same calls can be fed native tokens (via typical `ExecuteMsg` route), or cw20 tokens (via `Receiver`
 interface).
 
 Both `create` and `top_up` can be called directly (with a payload of native tokens), or from a cw20 contract using
