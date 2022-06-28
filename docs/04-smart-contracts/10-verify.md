@@ -14,7 +14,7 @@ Let's go over real case. There is a live contract on chain that you want to dete
 Our case contract address is `juno1unclk8rny4s8he4v2j826rattnc7qhmhwlv3wm9qlc2gamhad0usxl7jnd` on juno uni
 testing network.
 
-[CW2 Spec](cw-plus/cw2/spec) defines contract information to be stored on state. We can query the
+[CW2 Spec](https://crates.io/crates/cw2) defines contract information to be stored on state. We can query the
 contract information using command:
 
 ```shell
@@ -24,6 +24,9 @@ junod query wasm contract-state raw juno1unclk8rny4s8he4v2j826rattnc7qhmhwlv3wm9
   "version": "0.10.3"
 }
 ```
+What is 636F6E74726163745F696E666F?
+
+ContractInfo is must be stored under "contract_info" key which translates to "636F6E74726163745F696E666F" in hex format. As documented [here](https://crates.io/crates/cw2).
 
 Now we found out this code is a cw20-base and the version is `0.10.3`.
 
