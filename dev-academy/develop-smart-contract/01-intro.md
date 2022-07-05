@@ -346,6 +346,14 @@ docker run --rm -v "$(pwd)":/code \
   cosmwasm/rust-optimizer:0.12.6
 ```
 
+On Windows, you can run the following command instead from the root of your smart contract's project folder.
+```powershell
+docker run --rm -v ${pwd}:/code `
+ --mount type=volume,source="$("$(Split-Path -Path $pwd -Leaf)")_cache",target=/code/target `
+ --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
+ cosmwasm/rust-optimizer:0.12.6
+```
+
 This will result in an optimized .wasm binary under the folder `/artifacts` in your project directory.
 
 :::note optional
