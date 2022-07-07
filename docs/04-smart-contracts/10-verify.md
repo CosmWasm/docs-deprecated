@@ -26,7 +26,7 @@ junod query wasm contract-state raw juno1unclk8rny4s8he4v2j826rattnc7qhmhwlv3wm9
 ```
 What is 636F6E74726163745F696E666F?
 
-ContractInfo is must be stored under "contract_info" key which translates to "636F6E74726163745F696E666F" in hex format. As documented [here](https://crates.io/crates/cw2).
+ContractInfo is stored under "contract_info" key which translates to "636F6E74726163745F696E666F" in hex format as documented [here](https://crates.io/crates/cw2).
 
 Now we found out this code is a cw20-base and the version is `0.10.3`.
 
