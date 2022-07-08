@@ -115,13 +115,13 @@ wasmd query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output jso
 
 # Transfer the ownership of the name record to wallet2 (change the "to" address to wallet2 generated during environment setup)
 wasmd keys list
-TRANSFER='{"transfer":{"name":"fred","to":"wasm15522nrwtvsf7mt2vhehhwuw9qpsxw2mghqzu50"}}'
+TRANSFER='{"transfer":{"name":"fred","to":"wasm1lwcrr9ktsmn2f7fej6gywxcm8uvxlzz5ch40hm"}}'
 wasmd tx wasm execute $CONTRACT "$TRANSFER" --amount 999umlg --from wallet $TXFLAG -y
 
 # Query the record owner again to see the new owner address:
 NAME_QUERY='{"resolve_record": {"name": "fred"}}'
 wasmd query wasm contract-state smart $CONTRACT "$NAME_QUERY" $NODE --output json
-# {"data":{"address":"wasm15522nrwtvsf7mt2vhehhwuw9qpsxw2mghqzu50"}}
+# {"data":{"address":"wasm1lwcrr9ktsmn2f7fej6gywxcm8uvxlzz5ch40hm"}}
 ```
 
 ## CosmJS Node Console {#node-console}
