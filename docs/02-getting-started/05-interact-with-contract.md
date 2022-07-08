@@ -234,7 +234,7 @@ const [anotherAddress, anotherClient] = await useOptions(malagaOptions).setup("p
 //Enable REPL editor mode to edit multiple lines of code
 .editor
 
-const executeResponse = await client.execute(
+const executeResponse_2 = await client.execute(
          addr, 
          instantiateResponse.contractAddress,
          {
