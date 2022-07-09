@@ -33,12 +33,12 @@ From `state.rs`:
 
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct Config {
+  pub struct Config {
     pub arbiter: Addr,
     pub recipient: Addr,
     pub source: Addr,
     pub expiration: Option<Expiration>,
-}
+  }
 ```
 
 From `msg.rs`:
@@ -46,15 +46,15 @@ From `msg.rs`:
 ```rust
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct InstantiateMsg {
-    pub arbiter: String,
-    pub recipient: String,
-    /// When expiration height is set and block height exceeds this value, the escrow is expired.
-    /// Once an escrow is expired, it can be returned to the original funder (via "refund").
-    ///
-    /// When expiration time (in nanoseconds since epoch 00:00:00 UTC on 1 January 1970) is set and
-    /// block time exceeds this value, the escrow is expired.
-    /// Once an escrow is expired, it can be returned to the original funder (via "refund").
-    pub expiration: Option<Expiration>,
+  pub arbiter: String,
+  pub recipient: String,
+  /// When expiration height is set and block height exceeds this value, the escrow is expired.
+  /// Once an escrow is expired, it can be returned to the original funder (via "refund").
+  ///
+  /// When expiration time (in nanoseconds since epoch 00:00:00 UTC on 1 January 1970) is set and
+  /// block time exceeds this value, the escrow is expired.
+  /// Once an escrow is expired, it can be returned to the original funder (via "refund").
+  pub expiration: Option<Expiration>,
 }
 ```
 
@@ -67,11 +67,11 @@ Moving to the `ExecuteMsg` and `QueryMsg` types, which define the different cont
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 pub enum ExecuteMsg {
-    Approve {
-        // release some coins - if quantity is None, release all coins in balance
-        quantity: Option<Vec<Coin>>,
-    },
-    Refund {},
+  Approve {
+    // release some coins - if quantity is None, release all coins in balance
+    quantity: Option<Vec<Coin>>,
+  },
+  Refund {},
 }
 ```
 You can see another directive here (`#[serde(rename_all = "snake_case")]`). This ensures the json looks
@@ -89,25 +89,25 @@ The `instantiate` function will be called exactly once, before the contract is e
 
 ```rust
 pub fn instantiate(
-    deps: DepsMut,
-    env: Env,
-    info: MessageInfo,
-    msg: InstantiateMsg,
+  deps: DepsMut,
+  env: Env,
+  info: MessageInfo,
+  msg: InstantiateMsg,
 ) -> Result<Response, ContractError> {
-    let config = Config {
-        arbiter: deps.api.addr_validate(&msg.arbiter)?,
-        recipient: deps.api.addr_validate(&msg.recipient)?,
-        source: info.sender,
-        expiration: msg.expiration,
-    };
+  let config = Config {
+    arbiter: deps.api.addr_validate(&msg.arbiter)?,
+    recipient: deps.api.addr_validate(&msg.recipient)?,
+    source: info.sender,
+    expiration: msg.expiration,
+  };
 
-    if let Some(expiration) = msg.expiration {
-        if expiration.is_expired(&env.block) {
-            return Err(ContractError::Expired { expiration });
-        }
+  if let Some(expiration) = msg.expiration {
+    if expiration.is_expired(&env.block) {
+        return Err(ContractError::Expired { expiration });
     }
-    CONFIG.save(deps.storage, &config)?;
-    Ok(Response::default())
+  }
+  CONFIG.save(deps.storage, &config)?;
+  Ok(Response::default())
 }
 ```
 
@@ -127,15 +127,15 @@ Since `execute` takes an `enum` with multiple `variants`, we can't just jump int
 ```rust
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn execute(
-    deps: DepsMut,
-    env: Env,
-    info: MessageInfo,
-    msg: ExecuteMsg,
+  deps: DepsMut,
+  env: Env,
+  info: MessageInfo,
+  msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
-    match msg {
-        ExecuteMsg::Approve { quantity } => execute_approve(deps, env, info, quantity),
-        ExecuteMsg::Refund {} => execute_refund(deps, env, info),
-    }
+  match msg {
+    ExecuteMsg::Approve { quantity } => execute_approve(deps, env, info, quantity),
+    ExecuteMsg::Refund {} => execute_refund(deps, env, info),
+  }
 }
 ```
 In both cases, we pass in `deps` to give the handler functions access to runtime callbacks, which provide blockchain-specific logic. In particular, we currently use `deps.api` to validate `String` to `Addr` in a blockchain-specific manner, or verify cryptographic signatures with `secp256k1_verify, ed25519_verify`. We also use `deps.querier` to query the current balance of the contract.
@@ -152,32 +152,32 @@ to [the standard `cosmwasm` types](https://github.com/CosmWasm/cosmwasm/blob/v0.
 
 ```rust
 fn execute_approve(
-    deps: DepsMut,
-    env: Env,
-    info: MessageInfo,
-    quantity: Option<Vec<Coin>>,
+  deps: DepsMut,
+  env: Env,
+  info: MessageInfo,
+  quantity: Option<Vec<Coin>>,
 ) -> Result<Response, ContractError> {
-    let config = CONFIG.load(deps.storage)?;
-    if info.sender != config.arbiter {
-        return Err(ContractError::Unauthorized {});
-    }
+  let config = CONFIG.load(deps.storage)?;
+  if info.sender != config.arbiter {
+    return Err(ContractError::Unauthorized {});
+  }
 
-    // throws error if the contract is expired
-    if let Some(expiration) = config.expiration {
-        if expiration.is_expired(&env.block) {
-            return Err(ContractError::Expired { expiration });
-        }
+  // throws error if the contract is expired
+  if let Some(expiration) = config.expiration {
+    if expiration.is_expired(&env.block) {
+        return Err(ContractError::Expired { expiration });
     }
+  }
 
-    let amount = if let Some(quantity) = quantity {
-        quantity
-    } else {
-        // release everything
-        // Querier guarantees to return up-to-date data, including funds sent in this handle message
-        // https://github.com/CosmWasm/wasmd/blob/master/x/wasm/internal/keeper/keeper.go#L185-L192
-        deps.querier.query_all_balances(&env.contract.address)?
-    };
-    Ok(send_tokens(config.recipient, amount, "approve"))
+  let amount = if let Some(quantity) = quantity {
+    quantity
+  } else {
+    // release everything
+    // Querier guarantees to return up-to-date data, including funds sent in this handle message
+    // https://github.com/CosmWasm/wasmd/blob/master/x/wasm/internal/keeper/keeper.go#L185-L192
+    deps.querier.query_all_balances(&env.contract.address)?
+  };
+  Ok(send_tokens(config.recipient, amount, "approve"))
 }
 ```
 At the end, on success, we want to send some tokens. Cosmwasm contracts cannot call other contracts directly, instead, we create a message to represent our request (`BankMsg::Send`) and return it as our contract ends.
@@ -186,13 +186,13 @@ This will be parsed by the `wasm` module in go and it will execute and define ac
 ```rust
 // this is a helper to send the tokens so the business logic is easy to read
 fn send_tokens(to_address: Addr, amount: Vec<Coin>, action: &str) -> Response {
-    Response::new()
-        .add_message(BankMsg::Send {
-            to_address: to_address.clone().into(),
-            amount,
-        })
-        .add_attribute("action", action)
-        .add_attribute("to", to_address)
+  Response::new()
+    .add_message(BankMsg::Send {
+        to_address: to_address.clone().into(),
+        amount,
+    })
+    .add_attribute("action", action)
+    .add_attribute("to", to_address)
 }
 ```
 ## Adding a New Message {#adding-a-new-message}
