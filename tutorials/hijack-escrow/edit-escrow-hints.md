@@ -113,8 +113,8 @@ fn handle_steal() {
   assert_eq!(
     msg.msg,
     CosmosMsg::Bank(BankMsg::Send {
-        to_address: "changeme".into(),
-        amount: coins(1000, "earth"),
+      to_address: "changeme".into(),
+      amount: coins(1000, "earth"),
     })
   );
 }

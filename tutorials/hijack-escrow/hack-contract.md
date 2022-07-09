@@ -103,7 +103,7 @@ pub fn instantiate(
 
   if let Some(expiration) = msg.expiration {
     if expiration.is_expired(&env.block) {
-        return Err(ContractError::Expired { expiration });
+      return Err(ContractError::Expired { expiration });
     }
   }
   CONFIG.save(deps.storage, &config)?;
@@ -188,8 +188,8 @@ This will be parsed by the `wasm` module in go and it will execute and define ac
 fn send_tokens(to_address: Addr, amount: Vec<Coin>, action: &str) -> Response {
   Response::new()
     .add_message(BankMsg::Send {
-        to_address: to_address.clone().into(),
-        amount,
+      to_address: to_address.clone().into(),
+      amount,
     })
     .add_attribute("action", action)
     .add_attribute("to", to_address)
