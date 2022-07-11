@@ -4,9 +4,10 @@ sidebar_position: 3
 
 # Hints
 
-**!! SPOILER ALERT !!**
+:::danger **SPOILER ALERT**
 
-This sections contains solutions to previous section's questions.
+This section contains solutions to the questions presented in the [Hack the Contract](./hack-contract.md) section.
+:::
 
 ## ExecuteMsg {#executemsg}
 
@@ -38,17 +39,17 @@ const THIEF: &str = "changeme";
 Update the `match` statement in `execute`:
 
 ```rust
-    match msg {
-ExecuteMsg::Approve { quantity } => try_approve(deps, env, state, info, quantity),
-ExecuteMsg::Refund {} => try_refund(deps, env, info, state),
-ExecuteMsg::Steal { destination } => try_steal(deps, env, info, destination),
+match msg {
+  ExecuteMsg::Approve { quantity } => execute_approve(deps, env, info, quantity),
+  ExecuteMsg::Refund {} => execute_refund(deps, env, info),
+  ExecuteMsg::Steal { destination } => execute_steal(deps, env, info, destination),
 }
 ```
 
-Implement `try_steal`:
+Implement `execute_steal`:
 
 ```rust
-fn try_steal(
+fn execute_steal(
   deps: DepsMut,
   env: Env,
   info: MessageInfo,
@@ -69,11 +70,11 @@ fn try_steal(
 ```rust
 #[test]
 fn handle_steal() {
-  let mut deps = mock_dependencies(&[]);
+  let mut deps = mock_dependencies();
 
   // initialize the store
   let init_amount = coins(1000, "earth");
-  let msg = init_msg_expire_by_height(1000);
+  let msg = init_msg_expire_by_height(Some(Expiration::AtHeight(1000)));
   let mut env = mock_env();
   env.block.height = 876;
   let info = mock_info("creator", &init_amount);
@@ -110,8 +111,8 @@ fn handle_steal() {
   assert_eq!(1, execute_res.messages.len());
   let msg = execute_res.messages.get(0).expect("no message");
   assert_eq!(
-    msg,
-    &CosmosMsg::Bank(BankMsg::Send {
+    msg.msg,
+    CosmosMsg::Bank(BankMsg::Send {
       to_address: "changeme".into(),
       amount: coins(1000, "earth"),
     })
