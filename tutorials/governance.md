@@ -10,7 +10,7 @@ One of the promises of CosmWasm is to enable flexible smart contract execution o
 network participants can propose to deploy smart contracts, vote in governance to enable them.
 
 In this section you will learn all the knowledge required to experience smart contract on the hub. If you are interested
-in smart contract development, digest the [Getting Started](https://docs.cosmwasm.com/0.14/getting-started/intro)
+in smart contract development, digest the [Getting Started](https://docs.cosmwasm.com/docs/1.0/getting-started/intro)
 documentation.
 
 ## Wasmd Authorization Settings {#wasmd-authorization-settings}
