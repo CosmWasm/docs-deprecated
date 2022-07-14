@@ -5,7 +5,7 @@ sidebar_position: 3
 # CW3 Flexible Multisig
 
 cw3-flex-multisig source
-code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw3-flex-multisig](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw3-flex-multisig)
+code: [https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw3-flex-multisig](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw3-flex-multisig)
 
 This builds on [cw3-fixed-multisig](cw3-fixed-spec.md) with a more powerful implementation of the [cw3 spec](spec.md).
 It is a multisig contract that is backed by a

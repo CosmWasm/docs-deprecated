@@ -5,7 +5,7 @@ sidebar_position: 1
 # CW20 Spec: Fungible Tokens
 
 cw20 package source
-code: [https://github.com/CosmWasm/cw-plus/tree/master/packages/cw20](https://github.com/CosmWasm/cw-plus/tree/master/packages/cw20)
+code: [https://github.com/CosmWasm/cw-plus/tree/main/packages/cw20](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw20)
 
 cw20 is a specification for fungible tokens based on CosmWasm. The name and design is loosely based on Ethereum's ERC20
 standard, but many changes have been made. The types in here can be imported by contracts that wish to implement this

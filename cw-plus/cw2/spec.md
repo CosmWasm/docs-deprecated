@@ -5,7 +5,7 @@ title: CW2 Spec
 # CW2 Spec: Contract Info for Migration
 
 Repo
-link: [https://github.com/CosmWasm/cw-plus/tree/master/packages/cw2](https://github.com/CosmWasm/cw-plus/tree/master/packages/cw2)
+link: [https://github.com/CosmWasm/cw-plus/tree/main/packages/cw2](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw2)
 
 Most of the CW* specs are focused on the *public interfaces*
 of the contract. The APIs used for `ExecuteMsg` or `QueryMsg`. However, when we wish to migrate from contract A to

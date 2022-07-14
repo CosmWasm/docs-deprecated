@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # CW1 Whitelist
 
-[cw1 Whitelist](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw1-whitelist) may be the simplest
+[cw1 Whitelist](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw1-whitelist) may be the simplest
 implementation of cw1, a whitelist of addresses. It contains a set of admins that are defined upon creation. Any of
 those admins may `Execute` any message via the contract, per the cw1 spec.
 
