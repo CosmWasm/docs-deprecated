@@ -5,7 +5,7 @@ sidebar_position: 3
 # CW4 Stake
 
 cw4-stake source
-code: [https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw4-stake](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw4-stake)
+code: [https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw4-stake](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw4-stake)
 
 This is a second implementation of the [cw4 spec](spec.md). It fulfills all elements of the spec, including the raw
 query lookups, and is designed to be used as a backing storage for

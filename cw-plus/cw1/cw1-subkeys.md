@@ -8,7 +8,7 @@ this document is out of date
 
 # CW1 Subkeys
 
-[cw1 Subkeys](https://github.com/CosmWasm/cw-plus/tree/master/contracts/cw1-subkeys)
+[cw1 Subkeys](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw1-subkeys)
 is inspired
 by [Cosmos SDK feature proposal](https://forum.cosmos.network/t/proposal-adding-subkey-feature-to-cosmos-sdk-and-apply-it-to-the-hub/2358)
 .
