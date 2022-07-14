@@ -6,7 +6,7 @@ sidebar_position: 6
 
 Most entry point functions return a type of `Result<Response, ContractError>`.
 
-Within this, `Response` is a wrapper around [Events](https://docs.cosmos.network/v0.42/core/events.html) in the Cosmos
+Within this, `Response` is a wrapper around [Events](https://docs.cosmos.network/main/core/events.html) in the Cosmos
 SDK.
 
 The `Response` type should be returned as the successful result of a contract entry point (i.e. `instantiate`
