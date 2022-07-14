@@ -65,7 +65,7 @@ CosmWasm extends Cosmos SDK governance module to enable deployment of smart cont
 There are two options to get the sample contract:
 
 1. Download [source code](https://github.com/CosmWasm/cw-plus/tree/v0.1.1/contracts/cw20-base),
-   and [compile](https://docs.cosmwasm.com/getting-started/compile-contract) it your self.
+   and [compile](https://docs.cosmwasm.com/docs/1.0/getting-started/compile-contract/#compiling-and-testing-contract) it your self.
 
 2. Download [pre-compiled binary](https://github.com/CosmWasm/cw-plus/releases/download/v0.1.1/cw20_base.wasm).
 
