@@ -14,7 +14,7 @@ Let's go over real case. There is a live contract on chain that you want to dete
 Our case contract address is `juno1unclk8rny4s8he4v2j826rattnc7qhmhwlv3wm9qlc2gamhad0usxl7jnd` on juno uni
 testing network.
 
-[CW2 Spec](https://crates.io/crates/cw2) defines contract information to be stored on state. We can query the
+[CW2 Spec](https://github.com/CosmWasm/cw-plus/tree/main/packages/cw2#cw2-spec-contract-info) defines contract information to be stored on state. We can query the
 contract information using command:
 
 ```shell
