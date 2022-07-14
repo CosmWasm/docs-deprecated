@@ -10,7 +10,7 @@ One of the promises of CosmWasm is to enable flexible smart contract execution o
 network participants can propose to deploy smart contracts, vote in governance to enable them.
 
 In this section you will learn all the knowledge required to experience smart contract on the hub. If you are interested
-in smart contract development, digest the [Getting Started](https://docs.cosmwasm.com/0.14/getting-started/intro)
+in smart contract development, digest the [Getting Started](https://docs.cosmwasm.com/docs/1.0/getting-started/intro)
 documentation.
 
 ## Wasmd Authorization Settings {#wasmd-authorization-settings}
@@ -65,7 +65,7 @@ CosmWasm extends Cosmos SDK governance module to enable deployment of smart cont
 There are two options to get the sample contract:
 
 1. Download [source code](https://github.com/CosmWasm/cw-plus/tree/v0.1.1/contracts/cw20-base),
-   and [compile](https://docs.cosmwasm.com/getting-started/compile-contract) it your self.
+   and [compile](https://docs.cosmwasm.com/docs/1.0/getting-started/compile-contract/#compiling-and-testing-contract) it your self.
 
 2. Download [pre-compiled binary](https://github.com/CosmWasm/cw-plus/releases/download/v0.1.1/cw20_base.wasm).
 
@@ -75,13 +75,13 @@ Deployment command is down below:
 
 ```shell
 wasmcli tx gov submit-proposal wasm-store cw1-subkeys.wasm \
- --source “https://github.com/CosmWasm/cw-plus" \
- —-builder “cosmwasm/workspace-optimizer:0.10.3” \
- —-title “Enable cw1-subkeys functionality” \
- —-description “DAO and DSOs need this!” \
- —-instantiate-everybody “true” \
+ --source "https://github.com/CosmWasm/cw-plus" \
+ —-builder "cosmwasm/workspace-optimizer:0.10.3" \
+ —-title "Enable cw1-subkeys functionality" \
+ —-description "DAO and DSOs need this!" \
+ —-instantiate-everybody "true" \
  —-run-as $(wasmcli keys show -a account)
- —-deposit “10000umuon”
+ —-deposit "10000umuon"
  --from account
 ```
 
@@ -111,9 +111,9 @@ wasmcli tx gov vote [proposal-id] yes --from account
 After the proposal passes the code will be deployed. Now you can instantiate the contract.
 
 ```shell
-INIT=’{“admins”: [“cosmos12at9uplen85jt2vrfc5fs36s9ed4ahgduclk5a”,”cosmos1v7mjgfyxvlqt7tzj2j9fwee82fh6ra0jvhrxyp”,”cosmos18rkzfn65485wq68p3ylv4afhgguq904djepfkk”,”cosmos1xxkueklal9vejv9unqu80w9vptyepfa95pd53u”], “mutable”: true}’
-wasmcli tx wasm instantiate [code_id] “$INIT” \
- --label “UP-101 Funding Account”
+INIT='{"admins": ["cosmos12at9uplen85jt2vrfc5fs36s9ed4ahgduclk5a","cosmos1v7mjgfyxvlqt7tzj2j9fwee82fh6ra0jvhrxyp","cosmos18rkzfn65485wq68p3ylv4afhgguq904djepfkk","cosmos1xxkueklal9vejv9unqu80w9vptyepfa95pd53u"], "mutable": true}'
+wasmcli tx wasm instantiate [code_id] "$INIT" \
+ --label "UP-101 Funding Account"
  —-amount 2000000uatom
  --from account
 ```
@@ -123,14 +123,14 @@ wasmcli tx wasm instantiate [code_id] “$INIT” \
 If you have admin access to the contract you can add or remove admins by running the command:
 
 ```
-export UPDATE_ADMINS_MSG=’{“update_admins”: {“admins”:[“cosmos1u3nufc2kjslj2t3pugxhjv4zc8adw5thuwu0tm”, “cosmos1fp9qlazkm8kgq304kalev6e69pyp5kmdd5pcgj”]}}’
-wasmcli tx wasm execute $CONTRACT_ADDRESS “$UPDATE_ADMINS_MSG” \
+export UPDATE_ADMINS_MSG='{"update_admins": {"admins":["cosmos1u3nufc2kjslj2t3pugxhjv4zc8adw5thuwu0tm", "cosmos1fp9qlazkm8kgq304kalev6e69pyp5kmdd5pcgj"]}}'
+wasmcli tx wasm execute $CONTRACT_ADDRESS "$UPDATE_ADMINS_MSG" \
 --from account
 ```
 
 Subkey allowances can execute send token transaction using the command:
 
 ```
-export SEND_MSG=’{“execute”:{“msgs”:[{“bank”:{“send”:{“amount”:[{“denom”:”umuon”,”amount”:”1000"}],”from_address”:”cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",”to_address”:”cosmos1cs63ehtq6lw86vc87t42cnhcmydtnrffzdjhkz”}}}]}}’
-wasmcli tx wasm execute $CONTRACT_ADDRESS “$SEND_MSG” --from account
+export SEND_MSG='{"execute":{"msgs":[{"bank":{"send":{"amount":[{"denom":"umuon","amount":"1000"}],"from_address":"cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5","to_address":"cosmos1cs63ehtq6lw86vc87t42cnhcmydtnrffzdjhkz"}}}]}}'
+wasmcli tx wasm execute $CONTRACT_ADDRESS "$SEND_MSG" --from account
 ```
