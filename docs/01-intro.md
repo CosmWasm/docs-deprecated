@@ -53,7 +53,7 @@ or [set up a local devnet](/02-getting-started/03-setting-env.md#run-local-node-
 
 * **Learn** demonstrates developing smart contracts from zero to production with step
   by step explanations, code snippets, scripts and more.
-  * [Dev Academy](/dev-academy/intro) provides structured learning content starting from basics of blockchains and smart contracts to Cosmos SDK, CosmWasm smart conracts and clients.
+  * [Dev Academy](/dev-academy/intro) provides structured learning content starting from basics of blockchains and smart contracts to Cosmos SDK, CosmWasm smart contracts and clients.
   * [Tutorials](/tutorials/hijack-escrow/intro) demonstrates developing smart contracts from zero to production with step by step explanations, code snippets, scripts, and more.
   
 * [Workshops](/tutorials/videos-workshops) has a great collection of demonstrations and verbal explanations of CosmWasm
