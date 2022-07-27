@@ -74,11 +74,11 @@ If you intend to use wasmd as your preferred client, we recommend you to set up 
 ```bash
 # bash
 export NODE="--node $RPC"
-export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.25umlg --gas auto --gas-adjustment 1.3"
+export TXFLAG="${NODE} --chain-id ${CHAIN_ID} --gas-prices 0.25${FEE_DENOM} --gas auto --gas-adjustment 1.3"
 
 # zsh
 export NODE=(--node $RPC)
-export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.25umlg --gas auto --gas-adjustment 1.3)
+export TXFLAG=($NODE --chain-id $CHAIN_ID --gas-prices 0.25$FEE_DENOM --gas auto --gas-adjustment 1.3)
 ```
 
 If the commands above throws an error, it means you are utilizing a different type of shell. If there are no errors, try executing the following command:
@@ -123,7 +123,7 @@ npx @cosmjs/cli@^0.28.1 --init https://raw.githubusercontent.com/InterWasm/cw-pl
 
 With that, you should observe the initialization of an interactive session.
 
-Now, let us create a new wallet account, display the address and check the account balance. 
+Now, let us create a new wallet account, display the address and check the account balance.
 
 ```js
 // Create or load account
