@@ -14,7 +14,7 @@ See the list of codes that was uploaded to the testnet previously.
 ```shell
 wasmd query wasm list-code $NODE
 # Here is an alternative if you haven't set up the environment variables to interact with the testnet previously:
-wasmd query wasm list-code --node https://rpc.malaga-420.cosmwasm.com
+wasmd query wasm list-code --node https://rpc.malaga-420.cosmwasm.com:443
 ```
 Now let us store the bytecode on chain and acquire the Code Id. The Code Id will later be used to create an instance of the cw_namespace contract.
 ```shell
