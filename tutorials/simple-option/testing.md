@@ -77,7 +77,7 @@ pub fn mock_dependencies(
 }
 ```
 
-`mock_deps` is for mocking storage, api, and querier.
+`mock_dependencies` is for mocking storage, api, and querier.
 
 ```rust
 /// Returns a default enviroment with height, time, chain_id, and contract address
