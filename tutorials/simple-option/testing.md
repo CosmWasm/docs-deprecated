@@ -60,7 +60,7 @@ and do different tweaks. Check cosmwasm-plus for more.
 
 ### Mock Dependencies, Environment, and Message Info {#mock-dependencies-environment-and-message-info}
 
-There are two three mocking tools we should improve on:
+There are three mocking tools we should improve on:
 
 ```rust
 /// All external requirements that can be injected for unit tests.
@@ -77,7 +77,7 @@ pub fn mock_dependencies(
 }
 ```
 
-This sets up dependencies for testing such as storage, api, and querier.
+`mock_dependencies` is for mocking storage, api, and querier.
 
 ```rust
 /// Returns a default enviroment with height, time, chain_id, and contract address
