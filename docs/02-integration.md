@@ -120,9 +120,10 @@ wants to call into a token that lives as a CosmWasm module. You need to
 pass the `wasm.Keeper` into your `exchange.Keeper`. If you know the format
 for sending messages and querying the contract (exported as JSON schema
 from each contract), and have a way of configuring addresses of supported
-token contracts, your exchange code can simply call `wasm.Keeper.Execute`
-with a properly formatted message to move funds, or `wasm.Keeper.SmartQuery`
-to check balances.
+token contracts, your code can simply call `wasm.Keeper.Execute` with a 
+properly formatted message to move funds, or `wasm.Keeper.QuerySmart` to 
+query the contract instance via it's interface or `wasm.Keeper.QueryRaw`
+to query storage directly.
 
 If you look at the unit tests in [`x/wasm/keeper`](https://github.com/CosmWasm/wasmd/tree/master/x/wasm/keeper),
 it should be pretty straightforward.
