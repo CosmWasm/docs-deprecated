@@ -410,6 +410,14 @@ docker run --rm -v "$(pwd)":/code \
   cosmwasm/rust-optimizer:0.10.7
 ```
 
+On Windows, you can use the following command instead
+```powershell
+docker run --rm -v ${pwd}:/code `
+ --mount type=volume,source="$("$(Split-Path -Path $pwd -Leaf)")_cache",target=/code/target `
+ --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
+ cosmwasm/rust-optimizer:0.10.7
+```
+
 You want to use the command above before deploying to the chain.
 
 ### Schema {#schema}

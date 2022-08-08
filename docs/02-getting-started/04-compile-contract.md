@@ -84,4 +84,12 @@ docker run --rm -v "$(pwd)":/code \
   cosmwasm/rust-optimizer:0.12.6
 ```
 
+On Windows, you can use the following command instead
+```powershell
+docker run --rm -v ${pwd}:/code `
+ --mount type=volume,source="$("$(Split-Path -Path $pwd -Leaf)")_cache",target=/code/target `
+ --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
+ cosmwasm/rust-optimizer:0.12.6
+```
+
 The binary will be under the folder `artifacts` and its size will be `138 kB`.
