@@ -14,7 +14,7 @@ What follows within the Getting Started section is a tour of the fundamental asp
 
 In the case that you want to start your journey by getting an idea of what goes on behind the scenes or dive right into more detailed documentation first, you can jump straight to the [Architecture](/03-architecture/01-multichain.md) section for a quick overview before returning back here.
 
-You might have noticed that developing smart contracts is not in the the scope of this section. The Getting Started section has deliberately been tailored to be as easy-to-follow as possible, avoiding the risk of getting tangled in the intricacies of smart contract development, which will be covered in other sections. 
+You might have noticed that developing smart contracts is not in the scope of this section. The Getting Started section has deliberately been tailored to be as easy-to-follow as possible, avoiding the risk of getting tangled in the intricacies of smart contract development, which will be covered in other sections. 
 
 Once we are finished with setting up environment, deploying a smart contract to the testnet and interacting with it, we will be modifying the example Escrow Contract by adding a backdoor in the [Hijack Escrow tutorial](/tutorials/hijack-escrow/intro) in order to make things a bit more interesting. The modification will expose an identical API to the original one, except for the addition of a single hidden command. The idea behind making such a modification is twofold; one, familiarizing ourselves with what constitutes a smart contract, and the other is to manifest the importance of verifying the source code behind any contract you interact with.
 
