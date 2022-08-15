@@ -418,7 +418,7 @@ Let's sue one example of `IndexedMap` definition and usage, originally taken fro
 
 ```rust
 pub struct TokenIndexes<'a> {
-  pub owner: MultiIndex<'a, Addr, TokenInfo>,
+  pub owner: MultiIndex<'a, Addr, TokenInfo, String>,
 }
 
 impl<'a> IndexList<TokenInfo> for TokenIndexes<'a> {
