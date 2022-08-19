@@ -10,7 +10,7 @@ To showcase the previously explained utilities, we'll create the balance checker
 
 To make the app your own, feel free to modify the `name` field in `package.json` and/or update the `README.md` file.
 
-Also modify the `routes/Login/index.tsx` file to look like this:
+Also modify the `balance-checker/src/App/routes/Login/index.tsx` file to look like this:
 
 ```jsx
 import {Login as LoginDesign} from "@cosmicdapp/design";
