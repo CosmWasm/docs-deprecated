@@ -157,7 +157,7 @@ do that, by creating the contract we would call `MmoCurrency`,
 which would support the `Transfer` action to transfer money to another
 player. Then what would be the state of such a contract? It would be
 just a table mapping player names to the amount of currency they own. The
-contract we just invited exists in CosmWasm examples, and it
+contract we just invented exists in CosmWasm examples, and it
 is called the
 [`cw20-base` contract](https://github.com/CosmWasm/cw-plus/tree/main/contracts/cw20-base)
 (it is a bit more complicated, but

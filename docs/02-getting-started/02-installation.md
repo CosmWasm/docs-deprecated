@@ -62,7 +62,7 @@ git clone https://github.com/CosmWasm/wasmd.git
 cd wasmd
 # If you are updating wasmd, first update your local repository by fetching the remote tags available
 git fetch --tags
-# replace the v0.27.0 with the most stable version on https://github.com/CosmWasm/wasmd/releases
+# replace the v0.27.0 with the most stable version on https://github.com/CosmWasm/wasmd/tags (or look at `git tag`)
 git checkout v0.27.0
 make install
 
@@ -82,7 +82,7 @@ apt install jq curl
 ## Setting up your IDE {#setting-up-your-ide}
 We will need a good IDE for developing smart contracts with Rust. The following development environments are highly recommended and coupling them with the corresponding Rust plugins will help you learn the syntax, especially if you have no prior experience.
 
-* [VSCode](https://code.visualstudio.com/download) is the best supported environment for RLS (Rust Language Server) and coupled with the [RLS for VSCode](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust) plugin, it makes use of the rust compiler to type-check all your code on each save. This gives the same error messages as the actual compiler would and highlights the errors, but it can be a bit slow to respond (as it runs the compiler). It is a solid option, particularly if you are used to VSCode.
+* [VSCode](https://code.visualstudio.com/download) is the best supported environment for RLS (Rust Language Server) and coupled with the Use the [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) extension instead (The previous plugin, [RLS for VSCode](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust), is deprecated.), it makes use of the rust compiler to type-check all your code on each save. This gives the same error messages as the actual compiler would and highlights the errors, but it can be a bit slow to respond (as it runs the compiler). It is a solid option, particularly if you are used to VSCode.
 
 * The other option is [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/) along with the [IntelliJ Rust](https://intellij-rust.github.io/) plugin, which has fast support for inline language features. In particular, it shows the inferred types of variables, which can be very helpful, especially when working with (nested) generics. It catches most syntax errors very quickly, but not all of them. This means sometimes you have to look at compile failures to find the errors. It is highly recommended, more so, if you are coming from another IntelliJ product (eg. Goland).
 
