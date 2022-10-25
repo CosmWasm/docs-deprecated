@@ -15,7 +15,7 @@ Working with CW2 is quite straightforward in that, as a smart contract developer
 The CW2 Spec provides a `set_contract_version` which should be used in instantiate to store the original version of a contract. It is important to also `set_contract_version` as a part of the `pub fn migrate(...)` logic this time (as opposed to `instantiate`) for the contract version to be updated after a succesful migration. 
 
 ```rust
-const CONTRACT_NAME: &str = "crates.io:my-crate-name";
+const CONTRACT_NAME: &str = env!("CARGO_PKG_NAME");
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 
@@ -59,7 +59,7 @@ Provided below are a few variants on migrations you could do ranging from a very
 This migration will be the most common you may see. It simply is used to swap out the code of a contract. Safety checks may not be performed if you do not also use `cw2::set_contract_version`.
 
 ```rust
-const CONTRACT_NAME: &str = "crates.io:my-crate-name";
+const CONTRACT_NAME: &str = env!("CARGO_PKG_NAME");
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[entry_point]
@@ -77,7 +77,7 @@ This migration is a more complete and restricted example where the `cw2` package
 - We are upgrading from an older version of the contract; checking its version
 
 ```rust
-const CONTRACT_NAME: &str = "crates.io:my-crate-name";
+const CONTRACT_NAME: &str = env!("CARGO_PKG_NAME");
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[entry_point]
@@ -88,6 +88,7 @@ pub fn migrate(deps: DepsMut, _env: Env, msg: MigrateMsg) -> Result<Response, Co
         return Err(StdError::generic_err("Can only upgrade from same type").into());
     }
     // note: better to do proper semver compare, but string compare *usually* works
+    #[allow(clippy::cmp_owned)]
     if ver.version >= CONTRACT_VERSION {
         return Err(StdError::generic_err("Cannot upgrade from a newer version").into());
     }
@@ -109,7 +110,7 @@ This migration is a less restrictive example than above. In this case the `cw2` 
 - Uses Semver instead of String compare
 
 ```rust
-const CONTRACT_NAME: &str = "crates.io:my-crate-name";
+const CONTRACT_NAME: &str = env!("CARGO_PKG_NAME");
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[entry_point]
