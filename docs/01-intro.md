@@ -6,12 +6,6 @@ sidebar_position: 1
 
 # Introduction
 
-:::caution
-This documentation is currently being refactored. Some parts may be outdated or broken.
-
-Feel free to contribute through [GitHub repo](https://github.com/InterWasm/docs) or contact us through the **cw-docs-work-group** channel in the [CosmWasm discord](https://discord.gg/ksZw5ReW)
-:::
-
 ## What is CosmWasm?
 
 CosmWasm is a smart contracting platform built for the Cosmos ecosystem. Simply put, it's the Cosmos (Cosm) way of using WebAssembly (Wasm) hence the name.  
