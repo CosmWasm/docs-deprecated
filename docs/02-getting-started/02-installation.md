@@ -22,6 +22,13 @@ rustup target list --installed
 rustup target add wasm32-unknown-unknown
 ```
 
+:::info
+*wasm32-unknown-unknown* states the target specification, and is called "target triple" consisting of three strings separated by hyphens. Strings represent **architecture**, **vendor**, and **operating system** respectively.
+
+Read the [rust docs](https://rust-lang.github.io/rfcs/0131-target-specification.html#detailed-design) for a more detailed explanation.
+:::
+
+
 ### Installing Rust in Windows 10 {#installing-rust-in-windows-10}
 First, download and execute `rustup-init.exe` from [rustup.rs](https://rustup.rs/)
 or [rust-lang.org](https://www.rust-lang.org/tools/install).
@@ -72,7 +79,7 @@ wasmd version
 :::info
 * If you are on a Windows machine and `make` software is not preinstalled in the OS, install it following the instructions [here](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows).
 
-* `make install` will copy `wasmd` to `$HOME/go/bin` by default. Still, if you have any problems with the installation of `wasmd`, check your `PATH` and make sure it includes `$HOME/go/bin`. 
+* `make install` will copy `wasmd` to `$HOME/go/bin` by default. Still, if you have any problems with the installation of `wasmd`, check your `PATH` and make sure it includes `$HOME/go/bin`.
 :::
 ## Setting up command-line tools {#setting-up-command-line-tools}
 We will be using a few command-line tools extensively:
@@ -91,7 +98,7 @@ There are other editors out there with varying degrees of Rust support. However,
 [CosmWasm IDE](https://github.com/oraichain/cw-vscode)
 
 CosmWasm IDE is a tool that simplifies CosmWasm smart contract development & deployment processes. It integrates with Gitpod & Keplr to create a simple yet powerful environment to build, deploy, and interact with CosmWasm smart contracts through default and custom networks using CosmWasm. With Gitpod, CosmWasm developers can develop smart contracts on the browser, and it is well maintained. The tool is currently maintained by Oraichain & CosmWasm.
-  
+
 #### Components
 
 The CosmWasm IDE consists of three sub-repositories:
