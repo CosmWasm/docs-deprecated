@@ -23,7 +23,7 @@ rustup target add wasm32-unknown-unknown
 ```
 
 :::info
-*wasm32-unknown-unknown* states the target specification, and is called "target triple" consisting of three strings separated by hyphens. Strings represent **architecture**, **vendor**, and **operating system** respectively.
+*wasm32-unknown-unknown* states the target specification, and is called "target triple" consisting of three strings separated by hyphens. Strings represent **architecture**, **vendor**, and **operating system** respectively. *unknown* means there is no specifications for the target and the application is more flexible.
 
 Read the [rust docs](https://rust-lang.github.io/rfcs/0131-target-specification.html#detailed-design) for a more detailed explanation.
 :::
