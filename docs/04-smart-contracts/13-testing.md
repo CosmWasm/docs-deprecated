@@ -125,6 +125,12 @@ If you get any of these theres a good chance you a missing a mock. When in multi
 Look at your contract and see if you are passing in any dummy contract addresses, thats the most likely cause. If you find any you must; mock it out with the above method; instantiate it with the above method; capture the address and pass that instead of a dummy one.
 Took me a while to get a complex contract fully mocked out but hopefully this helps you. Now for the next glaring problem I faced. Mocking other services!!
 
+:::info
+
+An address must be lowercase alphanumeric to be considered valid. For example, "owner" is valid but "OWNER" is not.
+
+:::
+
 
 ### Putting it all together
 
