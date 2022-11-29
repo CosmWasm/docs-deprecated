@@ -75,8 +75,6 @@ Deployment command is down below:
 
 ```shell
 wasmcli tx gov submit-proposal wasm-store cw1-subkeys.wasm \
- --source "https://github.com/CosmWasm/cw-plus" \
- —-builder "cosmwasm/workspace-optimizer:0.10.3" \
  —-title "Enable cw1-subkeys functionality" \
  —-description "DAO and DSOs need this!" \
  —-instantiate-everybody "true" \
