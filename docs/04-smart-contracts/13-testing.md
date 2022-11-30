@@ -6,7 +6,7 @@ sidebar_position: 13
 
 At some point in Smart Contract development, everyone will arrive at tests. Tests are what give you and your protocol sleep at night and ensure changes can be rapidly deployed to the contracts codebase without breaking everything else.
 
-A great set of contracts will have a great set of tests generally divided into two areas of testing. Unit testing and Integration testing. 
+A great set of contracts will have a great set of tests generally divided into two areas of testing. Unit testing and Integration testing.
 
 
 ## Unit Testing
@@ -24,10 +24,10 @@ All of that can be taken away almost in preference of cw-multi-test-based integr
 There are a few main concepts to understand before you will be able to  simulate a blockchain environment in Rust and run tests that involve contract -> contract,
 and contract -> bank interactions.
 
-In this section we will take a step-by-step look through writing a test with cw-multi-test, explaining some important concepts along the way. 
+In this section we will take a step-by-step look through writing a test with cw-multi-test, explaining some important concepts along the way.
 To start we need a specimen contract such as the [cw-template](https://github.com/InterWasm/cw-template/blob/main/src/contract.rs) which is a simple boilerplate contract containing two functions: `Increment` and `Reset`.
 
-We start as we always start with a new test file with a few imports: 
+We start as we always start with a new test file with a few imports:
 
 ```rust
 use cosmwasm_std::testing::{mock_env, MockApi, MockQuerier, MockStorage, MOCK_CONTRACT_ADDR};
@@ -91,7 +91,7 @@ pub fn contract_stablecoin_exchanger() -> Box<dyn Contract<Empty>>{
 ```
 
 The above is a more complex example but lets break it down real quick.
-We import the execute, instantiate, query and reply functions which are used at runtime by the contract and then make our own wrapper from them to be used in the tests. 
+We import the execute, instantiate, query and reply functions which are used at runtime by the contract and then make our own wrapper from them to be used in the tests.
 
 > To reply or not reply
 >
@@ -125,8 +125,14 @@ If you get any of these theres a good chance you a missing a mock. When in multi
 Look at your contract and see if you are passing in any dummy contract addresses, thats the most likely cause. If you find any you must; mock it out with the above method; instantiate it with the above method; capture the address and pass that instead of a dummy one.
 Took me a while to get a complex contract fully mocked out but hopefully this helps you. Now for the next glaring problem I faced. Mocking other services!!
 
+:::info
 
-### Putting it all together 
+An address must be lowercase alphanumeric to be considered valid. For example, "owner" is valid but "OWNER" is not.
+
+:::
+
+
+### Putting it all together
 
 ```rust
 use cosmwasm_std::testing::{mock_env, MockApi, MockQuerier, MockStorage, MOCK_CONTRACT_ADDR};
@@ -168,7 +174,7 @@ fn counter_contract_multi_test() {
     let init_msg = InstantiateMsg {
         count: Uint128::zero()
     }
-    // Instantiate the counter contract using its newly stored code id 
+    // Instantiate the counter contract using its newly stored code id
     let mocked_contract_addr = router
         .instantiate_contract(counter_contract_code_id, owner.clone(), &init_msg, &[], "counter", None)
         .unwrap();
@@ -201,7 +207,7 @@ fn counter_contract_multi_test() {
         )
         .unwrap();
 
-    // And again use the available contract query to verify the result 
+    // And again use the available contract query to verify the result
     // Query the contract to verify the counter was incremented
     let config_msg =  QueryMsg::Count{};
     let count_response: CountResponse = router
@@ -250,9 +256,9 @@ You get a lot of flexibility when you are defining your own mocked contract. You
 
 Different chains and hubs in the Cosmos ecosystem may have some variations on how migrations are done on their respective networks. This section will attempt to outline those.
 
-### Juno 
+### Juno
 
-Juno uses one of the more recent editions of CosmWasm. As a general practice it is good to keep your `cw-multi-test` version close to the CosmWasm one but this is not required. Note if you do use different versions you may get varying experiences and things may still change in the most recent version. 
+Juno uses one of the more recent editions of CosmWasm. As a general practice it is good to keep your `cw-multi-test` version close to the CosmWasm one but this is not required. Note if you do use different versions you may get varying experiences and things may still change in the most recent version.
 
 ### Terra
 
