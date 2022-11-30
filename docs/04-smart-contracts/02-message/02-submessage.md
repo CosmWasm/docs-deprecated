@@ -16,7 +16,7 @@ Read more about the [semantics of submessages and how submessage execution is or
 
 ## Creating a submessage
 
-A submessage wraps a `CosmMsg` in a `SubMsg` struct. The `SubMsg` struct has the following fields.
+A submessage wraps a `CosmosMsg` in a `SubMsg` struct. The `SubMsg` struct has the following fields.
 
 ```rust
 pub struct SubMsg<T> {
