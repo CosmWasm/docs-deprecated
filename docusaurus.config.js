@@ -184,7 +184,11 @@ const lastReleasedCWPlusVersion = cwplusVersions[0];
       contextualSearch: true,
       appId: 'BH4D9OD16A',
     },
-    hideableSidebar: true
+    docs: {
+      sidebar: {
+        hideable: false,
+      },
+    },
   },
   presets: [
     [
