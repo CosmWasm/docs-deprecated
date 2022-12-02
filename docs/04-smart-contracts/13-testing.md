@@ -254,22 +254,4 @@ You get a lot of flexibility when you are defining your own mocked contract. You
 
 ## Platform Specific Variations
 
-Different chains and hubs in the Cosmos ecosystem may have some variations on how migrations are done on their respective networks. This section will attempt to outline those.
-
-### Juno
-
-Juno uses one of the more recent editions of CosmWasm. As a general practice it is good to keep your `cw-multi-test` version close to the CosmWasm one but this is not required. Note if you do use different versions you may get varying experiences and things may still change in the most recent version.
-
-### Terra
-
-#### Using a forked `cw-multi-test`
-
-For a lot of use cases, `cw-multi-test` will work as-is for you and you will have a great time. When writing tests for certain contracts which are UST focused, you may run into issues either sending or querying NativeTokens. The problem here is `cw-multi-test` is a generic testing tool and Terra has some add-ons needed in order to properly mock it.
-
-In later versions of `cw-multi-test` it is possible to register your own querier so if you have the latest you could try to solve this issue yourself alternatively there is a repo here you can depend on which is simply a fork of `cw-multi-test` with a TerraQuerier added on. This allows for Terra Native coin transactions and is defined as `terra-multi-test`.
-
-To use `terra-multi-test` fork follow these steps:
-
-- Add this dep to your cargo.toml: `terra-multi-test = {git="https://github.com/astroport-fi/terra-plus", version="1.0.0", package = "terra-multi-test"}`
-- Update your tests to now use `terra_multi_test` instead of `cw_multi_test`
-- Away you go
+Different chains and hubs in the Cosmos ecosystem may have some variations on how migrations are done on their respective networks. Refer to their respective pages and discord for more information.
