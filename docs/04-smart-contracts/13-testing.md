@@ -15,9 +15,9 @@ See here for a [guide on unit testing](https://docs.cosmwasm.com/tutorials/simpl
 
 ## Integration Testing with `cw-multi-test`
 
-The cw-multi-test package offered in the cw-plus repo provides an interesting way to test your smart contracts without going all the way to deploying them on a testnet. Before using multi-test the flow to me was to have some pipeline which would set up your contracts on a given chain (maybe testnet, maybe local) perform some tests and then if possible destroy/self-destruct the contracts.
+The cw-multi-test package offered in the cw-plus repo provides an interesting way to test your smart contracts without going all the way to deploying them on a testnet. Before using multi-test the flow to me was to have some pipeline that would set up your contracts on a given chain (maybe testnet, maybe local) perform some tests, and then if possible destroy/self-destruct the contracts.
 
-All of that can be taken away almost in preference of cw-multi-test-based integration tests which enable you to test the flows and interactions between smart contracts. There is still a place for the flow described above but I have had a better experience writing these integration tests once you figure out the intricacies of multi-test. I hope to clear some of those intricacies up here with some tips, resources and steps.
+All of that can be taken away almost in preference for cw-multi-test-based integration tests which enable you to test the flows and interactions between smart contracts. There is still a place for the flow described above but I have had a better experience writing these integration tests once you figure out the intricacies of multi-test. I hope to clear some of those intricacies up here with some tips, resources, and steps.
 
 ## `cw-multi-test` concepts
 
@@ -34,7 +34,7 @@ use cosmwasm_std::testing::{mock_env, MockApi, MockQuerier, MockStorage, MOCK_CO
 use cw_multi_test::{App, BankKeeper, Contract, ContractWrapper};
 ```
 
-The above imports will give us a wide pallette of tools to start crafting a test from. The first import to look at here is `App` which will become the simulated blockchain environment in which our tests will be executed.
+The above imports will give us a wide palette of tools to start crafting a test. The first import to look at here is `App` which will become the simulated blockchain environment in which our tests will be executed.
 
 ### App
 
@@ -48,15 +48,15 @@ and it wraps it as an atomic transaction. That is, only if `execute` returns suc
 be committed. It returns the data and a list of Events on successful execution or an `Err(String)`
 on error. There are some helper methods tied to the `Executor` trait that create the `CosmosMsg` for
 you to provide a less verbose API. `instantiate_contract`,`execute_contract`, and `send_tokens` are exposed
-for your convenience in writing tests. Each execute one `CosmosMsg` atomically as if it was submitted by a user.
-(You can also use `execute_multi` if you wish to run multiple message together that revert all state if any fail).
+for your convenience in writing tests. Each executes one `CosmosMsg` atomically as if it was submitted by a user.
+(You can also use `execute_multi` if you wish to run multiple messages together that revert all state if any fail).
 
 The other key entry point to `App` is the `Querier` interface that it implements. In particular, you
 can use `App.wrap()` to get a `QuerierWrapper`, which provides all kinds of nice APIs to query the
 blockchain, like `all_balances` and `query_wasm_smart`. Putting this together, you have one `Storage` wrapped
 into an application, where you can execute contracts and bank, query them easily, and update the current
-`BlockInfo`, in an API that is not very verbose or cumbersome. Under the hood it will process all messages
-returned from contracts, move "bank" tokens and call into other contracts.
+`BlockInfo`, in an API that is not very verbose or cumbersome. Under the hood, it will process all messages
+returned from contracts, move "bank" tokens, and call into other contracts.
 
 You can create an App for use in your test code like:
 
@@ -74,7 +74,7 @@ fn mock_app() -> App {
 
 Mocking your contracts is one of the mantras of multi-test but also one of the main obstacles to getting yourself a working test. First consider that whatever contract you want to test needs to be either mocked or wrapped up. `cw-multi-test` provides the `ContractWrapper` which allows you to wrap up the logical pieces of your contract (instantiate, executors, queries) and deploy it to a mocked network.
 
-Mocking all your contracts and then testing one can be done in a scripting fashion but for maintainability I recommend trying to define all your wrapped contracts a functions so you can reuse them:
+Mocking all your contracts and then testing one can be done in a scripting fashion but for maintainability, I recommend trying to define all your wrapped contracts as functions so you can reuse them:
 
 ```rust
 use crate::contract::{execute, instantiate, query, reply};
@@ -90,12 +90,12 @@ pub fn contract_stablecoin_exchanger() -> Box<dyn Contract<Empty>>{
 }
 ```
 
-The above is a more complex example but lets break it down real quick.
-We import the execute, instantiate, query and reply functions which are used at runtime by the contract and then make our own wrapper from them to be used in the tests.
+The above is a more complex example but let's break it down real quick.
+We import the execute, instantiate, query, and reply functions that are used at runtime by the contract and then make our wrapper from them to be used in the tests.
 
 > To reply or not reply
 >
->   Depending on the make up of your contract, when you go to create a ContractWrapper you may not need `with_reply` if your contract does not implement a `reply` function.
+>   Depending on the makeup of your contract, when you go to create a ContractWrapper you may not need `with_reply` if your contract does not implement a `reply` function.
 
 After mocking out a contract, two more steps follow which are; storing the code and then setting up a contract from the code object. You will notice this is the exact same process for deploying to a testnet or mainnet chain whereas in unit tests you work with a mocked_env, using `mock_dependencies` and passing in `mock_info`.
 
@@ -120,10 +120,10 @@ All the above gives you 1 mocked contract. As you start to test you may see erro
 + `No ContractData`
 + `Contract '<contract>' does not exist`
 
-If you get any of these theres a good chance you a missing a mock. When in multi test land, everything you interact with that can be considered a contract needs to be mocked out. That includes your own simple little utility contract you don't intend to test right now as well as any services your contract interacts with.
+If you get any of these there's a good chance you a missing a mock. When in multi-test land, everything you interact with that can be considered a contract needs to be mocked out. That includes your own simple little utility contract you don't intend to test right now as well as any services your contract interacts with.
 
-Look at your contract and see if you are passing in any dummy contract addresses, thats the most likely cause. If you find any you must; mock it out with the above method; instantiate it with the above method; capture the address and pass that instead of a dummy one.
-Took me a while to get a complex contract fully mocked out but hopefully this helps you. Now for the next glaring problem I faced. Mocking other services!!
+Look at your contract and see if you are passing in any dummy contract addresses, that's the most likely cause. If you find any you must; mock it out with the above method; instantiate it with the above method; capture the address and pass that instead of a dummy one.
+Took me a while to get a complex contract fully mocked out but hopefully, this helps you. Now for the next glaring problem I faced. Mocking other services!!
 
 :::info
 
@@ -181,7 +181,7 @@ fn counter_contract_multi_test() {
 
     // We can now start executing actions on the contract and querying it as needed
     let msg = ExecuteMsg::Increment {}
-    // Increment the counter by executing the above prepared msg on the previously setup contract
+    // Increment the counter by executing the prepared msg above on the previously setup contract
     let _ = router.execute_contract(
             owner.clone(),
             mocked_contract_addr.clone(),
@@ -197,7 +197,7 @@ fn counter_contract_multi_test() {
         .unwrap();
     asserteq!(count_response.count, 1)
 
-    // Now lets reset the counter with the other ExecuteMsg
+    // Now let's reset the counter with the other ExecuteMsg
     let msg = ExecuteMsg::Reset {}
     let _ = router.execute_contract(
             owner.clone(),
@@ -221,11 +221,11 @@ fn counter_contract_multi_test() {
 
 #### Mocking 3rd party contracts
 
-If you read the above section you will have a gist of the amount of setup work you will have to do by mocking out your contracts as your mocking and trying to progress with a test you may get caught up when you realise your contracts interact with Terraswap, Anchor or some other service out in the IBC. No biggie right?
+If you read the above section you will have a gist of the amount of setup work you will have to do by mocking out your contracts as your mocking and trying to progress with a test you may get caught up when you realize your contracts interact with Terraswap, Anchor or some other service out in the IBC. No biggie right?
 
-You'll start off just trying to mock out one of these services in the exact same way as we did above only to realise, wait, we need access to the code.. the contract code is what we import to get `execute, instantiate, query`. But then you notice protocols don't include their contract code in their rust packages! They only include what you need to interact with them i.e msgs and some helpers.
+You'll start just trying to mock out one of these services in the exact same way as we did above only to realize, wait, we need access to the code.. the contract code is what we import to get `execute, instantiate, query`. But then you notice protocols don't include their contract code in their rust packages! They only include what you need to interact with them i.e msgs and some helpers.
 
-All hope is not lost however you can still progress by trying to make a thin mock of whatever service you interact with. The process of doing so is similar to what you will do with mocking your own contracts (described above) except you will need to fill in all the functionality. This is made easier because you can also a smaller ExecuteMsg with only the func you use or a MockQuery handler with only the queries for example. Here is an example of our own mock third-party contract:
+All hope is not lost however you can still progress by trying to make a thin mock of whatever service you interact with. The process of doing so is similar to what you will do with mocking your contracts (described above) except you will need to fill in all the functionality. This is made easier because you can also a smaller ExecuteMsg with only the func you use or a MockQuery handler with only the queries for example. Here is an example of our mock third-party contract:
 
 ```rust
 pub fn contract_ping_pong_mock() -> Box<dyn Contract<Empty>> {
@@ -254,22 +254,4 @@ You get a lot of flexibility when you are defining your own mocked contract. You
 
 ## Platform Specific Variations
 
-Different chains and hubs in the Cosmos ecosystem may have some variations on how migrations are done on their respective networks. This section will attempt to outline those.
-
-### Juno
-
-Juno uses one of the more recent editions of CosmWasm. As a general practice it is good to keep your `cw-multi-test` version close to the CosmWasm one but this is not required. Note if you do use different versions you may get varying experiences and things may still change in the most recent version.
-
-### Terra
-
-#### Using a forked `cw-multi-test`
-
-For a lot of use cases, `cw-multi-test` will work as-is for you and you will have a great time. When writing tests for certain contracts which are UST focused, you may run into issues either sending or querying NativeTokens. The problem here is `cw-multi-test` is a generic testing tool and Terra has some add-ons needed in order to properly mock it.
-
-In later versions of `cw-multi-test` it is possible to register your own querier so if you have the latest you could try to solve this issue yourself alternatively there is a repo here you can depend on which is simply a fork of `cw-multi-test` with a TerraQuerier added on. This allows for Terra Native coin transactions and is defined as `terra-multi-test`.
-
-To use `terra-multi-test` fork follow these steps:
-
-- Add this dep to your cargo.toml: `terra-multi-test = {git="https://github.com/astroport-fi/terra-plus", version="1.0.0", package = "terra-multi-test"}`
-- Update your tests to now use `terra_multi_test` instead of `cw_multi_test`
-- Away you go
+Different chains and hubs in the Cosmos ecosystem may have some variations on how migrations are done on their respective networks. Refer to their respective pages and discord for more information.
