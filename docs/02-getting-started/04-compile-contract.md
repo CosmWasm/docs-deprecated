@@ -81,7 +81,7 @@ Navigate to the project root and run the following command:
 docker run --rm -v "$(pwd)":/code \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  cosmwasm/rust-optimizer:0.12.6
+  cosmwasm/rust-optimizer:0.12.11
 ```
 
 On Windows, you can use the following command instead
@@ -89,7 +89,7 @@ On Windows, you can use the following command instead
 docker run --rm -v ${pwd}:/code `
  --mount type=volume,source="$("$(Split-Path -Path $pwd -Leaf)")_cache",target=/code/target `
  --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry `
- cosmwasm/rust-optimizer:0.12.6
+ cosmwasm/rust-optimizer:0.12.11
 ```
 
 The binary will be under the folder `artifacts` and its size will be `138 kB`.
