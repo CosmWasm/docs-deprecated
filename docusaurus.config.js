@@ -119,6 +119,22 @@
         ],
     ],
     plugins: [
+        [
+            '@docusaurus/plugin-client-redirects',
+            {
+                fromExtensions: ['html'],
+                toExtensions: ['html'],
+                redirects: [
+                    {
+                        from: '/',
+                        to: `/deprecated`,
+                    },
+                ],
+                createRedirects: function() {
+                    return ["/deprecated"];
+                }
+            },
+        ],
         'docusaurus-plugin-sass',
     ],
     i18n: {
